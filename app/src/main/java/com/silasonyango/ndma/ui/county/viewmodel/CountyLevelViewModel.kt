@@ -1,4 +1,4 @@
-package com.silasonyango.ndma.ui.county
+package com.silasonyango.ndma.ui.county.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

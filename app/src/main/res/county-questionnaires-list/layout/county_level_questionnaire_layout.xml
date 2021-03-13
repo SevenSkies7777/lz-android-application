@@ -15,6 +15,14 @@
 
 <!--        B. Livelihood Zone Definition-->
         <include layout="@layout/lz_definitions_layout"
+            android:id="@+id/lzDefinitionsLayout"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="22dp"/>
+
+<!--        C. Location and Population-->
+        <include layout="@layout/location_and_population_question_layout"
+            android:id="@+id/locationAndPopulationLayout"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginTop="22dp"/>

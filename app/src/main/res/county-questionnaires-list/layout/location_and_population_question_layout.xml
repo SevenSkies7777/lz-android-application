@@ -9,7 +9,7 @@
     android:paddingEnd="24dp">
 
     <TextView
-        android:text="B. Livelihood Zone Definition"
+        android:text="C. Location and Population"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_bold"
@@ -18,8 +18,9 @@
         android:textColor="#000000"
         android:lineSpacingExtra="9sp"/>
 
+
     <TextView
-        android:text="@string/lz_definition_question"
+        android:text="@string/location_and_population_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_regular"
@@ -30,34 +31,6 @@
         android:lineHeight="24sp"
         android:layout_marginTop="27dp"
         android:gravity="start"/>
-
-    <CheckBox
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="7dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="agro-pastoral" />
-
-    <CheckBox
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="7dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="agro-pastoral" />
-
-    <CheckBox
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="7dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="agro-pastoral" />
-
-    <CheckBox
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="7dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="agro-pastoral" />
 
     <RelativeLayout
         android:layout_width="match_parent"

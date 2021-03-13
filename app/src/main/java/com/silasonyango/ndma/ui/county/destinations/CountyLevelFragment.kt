@@ -1,21 +1,21 @@
-package com.silasonyango.ndma.ui.county
+package com.silasonyango.ndma.ui.county.destinations
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.silasonyango.ndma.R
+import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
+import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
 
 class CountyLevelFragment : DialogFragment() {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
+    private lateinit var binding: CountyLevelQuestionnaireLayoutBinding
+
     companion object {
-        private const val SELECTED_CARD = "selectedCard"
 
         @JvmStatic
         fun newInstance() =
@@ -25,8 +25,6 @@ class CountyLevelFragment : DialogFragment() {
 
                             }
                         }
-
-        const val TAG = "Card Details"
     }
 
     override fun onCreateView(
@@ -36,8 +34,20 @@ class CountyLevelFragment : DialogFragment() {
     ): View? {
         countyLevelViewModel =
                 ViewModelProvider(this).get(CountyLevelViewModel::class.java)
-        val root = inflater.inflate(R.layout.county_level_questionnaire_layout, container, false)
-        return root
+        binding = CountyLevelQuestionnaireLayoutBinding.inflate(inflater, container, false)
+        defineViews()
+        return binding.root
+    }
+
+    private fun defineViews() {
+        binding.apply {
+            lzDefinitionsLayout.apply {
+                lzDefinitionsNextButton.setOnClickListener {
+                    lzDefinitionsLayout.root.visibility = View.GONE
+                    locationAndPopulationLayout.root.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     override fun onStart() {
