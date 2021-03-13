@@ -29,11 +29,6 @@ class HomeFragment : Fragment() {
             textView.text = it
         })
 
-        homeViewModel.addQuestionnaireType(QuestionnaireTypesEntity(
-            0,
-            "By Wealth Group",
-            1
-        ))
         return root
     }
 
@@ -42,8 +37,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun registerObservers() {
-        homeViewModel.allQuestionnaireTypesLiveData.observe(viewLifecycleOwner) {
-            System.out.println()
-        }
+        homeViewModel.allQuestionnaireTypesLiveData.observe(viewLifecycleOwner, Observer {
+
+        })
     }
 }

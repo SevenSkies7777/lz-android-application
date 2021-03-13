@@ -5,14 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.silasonyango.ndma.R
 
-class GalleryFragment : Fragment() {
+class GalleryFragment : DialogFragment() {
 
     private lateinit var galleryViewModel: GalleryViewModel
+
+    companion object {
+        private const val SELECTED_CARD = "selectedCard"
+
+        @JvmStatic
+        fun newInstance() =
+                GalleryFragment()
+                        .apply {
+                            arguments = Bundle().apply {
+
+                            }
+                        }
+
+        const val TAG = "Card Details"
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -27,5 +43,14 @@ class GalleryFragment : Fragment() {
             textView.text = it
         })
         return root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        dialog?.apply {
+            val matchParent = ViewGroup.LayoutParams.MATCH_PARENT
+            window?.setLayout(matchParent, matchParent)
+            window?.setBackgroundDrawable(null)
+        }
     }
 }
