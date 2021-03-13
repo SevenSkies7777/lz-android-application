@@ -36,11 +36,7 @@ class CountyLevelFragment : DialogFragment() {
     ): View? {
         countyLevelViewModel =
                 ViewModelProvider(this).get(CountyLevelViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_gallery, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
-        countyLevelViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        val root = inflater.inflate(R.layout.county_level_questionnaire_layout, container, false)
         return root
     }
 
