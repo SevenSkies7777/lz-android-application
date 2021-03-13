@@ -24,7 +24,6 @@ class SubLocationLzAssignmentRecyclerViewAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-
         init {
 
         }

@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
+import com.silasonyango.ndma.ui.county.adapters.SubLocationLzAssignmentRecyclerViewAdapter
+import com.silasonyango.ndma.ui.county.model.SubLocationModel
 import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
 
-class CountyLevelFragment : DialogFragment() {
+class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerViewAdapter.SubLocationLzAssignmentRecyclerViewAdapterCallback {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -41,11 +44,42 @@ class CountyLevelFragment : DialogFragment() {
 
     private fun defineViews() {
         binding.apply {
+
             lzDefinitionsLayout.apply {
                 lzDefinitionsNextButton.setOnClickListener {
                     lzDefinitionsLayout.root.visibility = View.GONE
                     locationAndPopulationLayout.root.visibility = View.VISIBLE
                 }
+            }
+
+
+            val sublocationList: MutableList<SubLocationModel> = ArrayList()
+            sublocationList.add(SubLocationModel(1,"Samburu","008"))
+            sublocationList.add(SubLocationModel(1,"Samburu","008"))
+            sublocationList.add(SubLocationModel(1,"Samburu","008"))
+            sublocationList.add(SubLocationModel(1,"Samburu","008"))
+            sublocationList.add(SubLocationModel(1,"Samburu","008"))
+            populateLocationAndPopulationRV(sublocationList)
+
+        }
+    }
+
+    private fun populateLocationAndPopulationRV(subLocationsList: MutableList<SubLocationModel>) {
+        binding.apply {
+            locationAndPopulationLayout.apply {
+                val subLocationsRecyclerViewAdapter =
+                    activity?.let {
+                        SubLocationLzAssignmentRecyclerViewAdapter(
+                            it,
+                            subLocationsList,
+                            this@CountyLevelFragment
+                        )
+                    }
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                sublocationLzAssignmentRV.layoutManager = gridLayoutManager
+                sublocationLzAssignmentRV.hasFixedSize()
+                sublocationLzAssignmentRV.adapter =
+                    subLocationsRecyclerViewAdapter
             }
         }
     }
