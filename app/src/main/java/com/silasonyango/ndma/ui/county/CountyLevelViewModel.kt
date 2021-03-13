@@ -1,10 +1,10 @@
-package com.silasonyango.ndma.ui.gallery
+package com.silasonyango.ndma.ui.county
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class GalleryViewModel : ViewModel() {
+class CountyLevelViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is gallery Fragment"

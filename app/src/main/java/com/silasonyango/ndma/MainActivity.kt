@@ -3,7 +3,6 @@ package com.silasonyango.ndma
 import android.os.Bundle
 import android.view.Menu
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -13,7 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.silasonyango.ndma.ui.gallery.GalleryFragment
+import com.silasonyango.ndma.ui.county.CountyLevelFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
-            val countyLevelDialogFragment = GalleryFragment.newInstance()
+            val countyLevelDialogFragment = CountyLevelFragment.newInstance()
             countyLevelDialogFragment.show(this.supportFragmentManager, "CountyLevel")
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
