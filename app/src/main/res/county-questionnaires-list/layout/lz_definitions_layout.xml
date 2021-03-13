@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="24dp"
+    android:paddingStart="24dp"
+    android:paddingRight="24dp"
+    android:paddingEnd="24dp">
+
+    <TextView
+        android:text="B. Livelihood Zone Definition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="9sp"/>
+
+    <TextView
+        android:text="@string/lz_definition_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_regular"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:lineHeight="24sp"
+        android:layout_marginTop="27dp"
+        android:gravity="start"/>
+
+    <CheckBox
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="agro-pastoral" />
+
+    <CheckBox
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="agro-pastoral" />
+
+    <CheckBox
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="agro-pastoral" />
+
+    <CheckBox
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="agro-pastoral" />
+
+</LinearLayout>
