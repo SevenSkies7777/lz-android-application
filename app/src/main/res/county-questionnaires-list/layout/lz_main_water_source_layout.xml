@@ -1,0 +1,1090 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="24dp"
+    android:paddingStart="24dp"
+    android:paddingRight="24dp"
+    android:paddingEnd="24dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="E. Main Sources of Water"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="9sp"/>
+
+
+    <TextView
+        android:text="@string/lz_water_source_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_regular"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:lineHeight="24sp"
+        android:layout_marginTop="27dp"
+        android:gravity="start"/>
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Water Source"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight=".4"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Percent of total population"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Wet Season"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Dry Season"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Rivers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Traditional river wells"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Natural ponds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Pans and dams"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Shallow wells"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Boreholes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Springs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Lakes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Rock catchments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Piped water systems"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Water trucking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Roof catchments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Other Specify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="TOTAL INCOME"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+
+    </TableLayout>
+
+</LinearLayout>

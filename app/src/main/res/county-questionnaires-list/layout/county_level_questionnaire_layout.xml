@@ -34,6 +34,13 @@
             android:layout_width="match_parent"
             android:layout_marginTop="22dp"/>
 
+        <!--        E. Main Sources of Water-->
+        <include layout="@layout/lz_main_water_source_layout"
+            android:id="@+id/mainWaterSource"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="22dp"/>
+
 
 
     </LinearLayout>
