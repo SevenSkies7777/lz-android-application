@@ -8,11 +8,13 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
+import com.silasonyango.ndma.ui.county.adapters.LzCropProductionRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.adapters.SubLocationLzAssignmentRecyclerViewAdapter
+import com.silasonyango.ndma.ui.county.model.CropModel
 import com.silasonyango.ndma.ui.county.model.SubLocationModel
 import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
 
-class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerViewAdapter.SubLocationLzAssignmentRecyclerViewAdapterCallback {
+class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerViewAdapter.SubLocationLzAssignmentRecyclerViewAdapterCallback, LzCropProductionRecyclerViewAdapter.LzCropProductionRecyclerViewAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -61,6 +63,16 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
             sublocationList.add(SubLocationModel(1,"Samburu","008"))
             populateLocationAndPopulationRV(sublocationList)
 
+
+            val cropModelList: MutableList<CropModel> = ArrayList()
+            cropModelList.add(CropModel("Maize",1))
+            cropModelList.add(CropModel("Beans",2))
+            cropModelList.add(CropModel("Potatoes",3))
+            cropModelList.add(CropModel("Tomatoes",4))
+            cropModelList.add(CropModel("Cassava",5))
+            cropModelList.add(CropModel("Rice",6))
+            cropModelList.add(CropModel("Mango",7))
+            populateCropProductionRecyclerView(cropModelList)
         }
     }
 
@@ -80,6 +92,26 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
                 sublocationLzAssignmentRV.hasFixedSize()
                 sublocationLzAssignmentRV.adapter =
                     subLocationsRecyclerViewAdapter
+            }
+        }
+    }
+
+    private fun populateCropProductionRecyclerView(cropModelList: MutableList<CropModel>) {
+        binding.apply {
+            cropProductionLayout.apply {
+                val lzCropProductionRecyclerViewAdapter =
+                        activity?.let {
+                            LzCropProductionRecyclerViewAdapter(
+                                    it,
+                                    cropModelList,
+                                    this@CountyLevelFragment
+                            )
+                        }
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                lzCropProductionRV.layoutManager = gridLayoutManager
+                lzCropProductionRV.hasFixedSize()
+                lzCropProductionRV.adapter =
+                        lzCropProductionRecyclerViewAdapter
             }
         }
     }

@@ -27,6 +27,13 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="22dp"/>
 
+        <!--        D. Crop Production-->
+        <include layout="@layout/lz_crop_production_layout"
+            android:id="@+id/cropProductionLayout"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="22dp"/>
+
 
 
     </LinearLayout>
