@@ -8,4 +8,6 @@
     <string name="lz_water_source_question">In the table below, estimate the percentage of the total population in the livelihood zone depending on the listed water sources</string>
     <string name="lz_hunger_patterns">In the space provided, in how many years in the last ten years have the majority of people experienced hunger, or required food assistance to avert widespread hunger?</string>
     <string name="lz_hazards_question">In the table below, provide information on the main hazards in the LZ, i.e., the factors that have created the most human suffering in terms of mortality, hunger, morbidity and economic hardship. Rank them in importance from 1 (most important, highest risk) to 20 (least important, lowest impact) and estimate how many times they have occurred in the last 10 years.</string>
+    <string name="lz_markets_question">Enter the names of the main markets used by people living in the livelihood zone, the name of the nearest town or village and county/subcounty where the market is located. Indicate which types of product are traded, by circling ‘yes’ or ‘no’. Include markets in other counties, if these are used.</string>
+
 </resources>

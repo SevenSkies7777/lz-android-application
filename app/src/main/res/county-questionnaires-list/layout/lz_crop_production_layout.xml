@@ -68,4 +68,50 @@
     </LinearLayout>
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginEnd="24dp">
+
+        <TextView
+            android:id="@+id/cropProductionBackButton"
+            android:text="BACK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#00569c"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/cropProductionNextButton"
+            android:text="NEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#00569c"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
 </LinearLayout>

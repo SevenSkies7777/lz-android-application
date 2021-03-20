@@ -336,6 +336,7 @@
         android:layout_marginBottom="18dp">
 
         <TextView
+            android:id="@+id/locationBackButton"
             android:text="BACK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -352,7 +353,7 @@
             android:layout_centerVertical="true"/>
 
         <TextView
-            android:id="@+id/lzDefinitionsNextButton"
+            android:id="@+id/locationNextButton"
             android:text="NEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

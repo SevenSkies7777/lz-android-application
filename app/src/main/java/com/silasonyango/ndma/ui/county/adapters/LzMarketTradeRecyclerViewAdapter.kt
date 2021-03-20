@@ -10,17 +10,15 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.silasonyango.ndma.R
 import com.silasonyango.ndma.ui.county.model.CropModel
-import com.silasonyango.ndma.ui.county.model.SubLocationModel
+import com.silasonyango.ndma.ui.county.model.MarketModel
 
-class LzCropProductionRecyclerViewAdapter(
+class LzMarketTradeRecyclerViewAdapter(
         private val context: Context,
-        private val cropModelList: MutableList<CropModel>,
-        val lzCropProductionRecyclerViewAdapter: LzCropProductionRecyclerViewAdapter.LzCropProductionRecyclerViewAdapterCallBack
-) : RecyclerView.Adapter<LzCropProductionRecyclerViewAdapter.ViewHolder>() {
+        private val marketModelList: MutableList<MarketModel>,
+        val lzCropProductionRecyclerViewAdapter: LzMarketTradeRecyclerViewAdapter.LzMarketTradeRecyclerViewAdapterCallBack
+) : RecyclerView.Adapter<LzMarketTradeRecyclerViewAdapter.ViewHolder>() {
 
-    interface LzCropProductionRecyclerViewAdapterCallBack {
-
-    }
+    interface LzMarketTradeRecyclerViewAdapterCallBack {}
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val cropName: TextView
@@ -46,7 +44,7 @@ class LzCropProductionRecyclerViewAdapter(
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.cropName.text = cropModelList.get(position).cropName
+        viewHolder.cropName.text = marketModelList.get(position).marketName
         viewHolder.itemView.setOnClickListener {
             viewHolder.tvAccordionIcon.text = if (viewHolder.tvAccordionIcon.text == "+") "-" else "+"
             viewHolder.accordionStroke.visibility = if (viewHolder.accordionStroke.visibility == View.VISIBLE) View.GONE else View.VISIBLE
@@ -54,5 +52,5 @@ class LzCropProductionRecyclerViewAdapter(
         }
     }
 
-    override fun getItemCount() = cropModelList.size
+    override fun getItemCount() = marketModelList.size
 }
