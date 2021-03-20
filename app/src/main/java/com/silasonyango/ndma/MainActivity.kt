@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
+import android.widget.EditText
 import android.widget.TextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -18,7 +19,11 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.silasonyango.ndma.appStore.AppStore
+import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaire
+import com.silasonyango.ndma.appStore.model.QuestionnaireType
 import com.silasonyango.ndma.ui.county.destinations.CountyLevelFragment
+import com.silasonyango.ndma.util.Util
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,14 +64,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun inflateQuestionnaireMenuModal() {
+        lateinit var selectedQuestionnaireType: QuestionnaireType
         val inflater = this?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.questionnaire_menu_layout, null)
         val countyLevelMenuItem: View = v.findViewById(R.id.countyLevelWrapper)
         val tvModalMessage: View = v.findViewById(R.id.wealthGroupWrapper)
+        val menuContent: View = v.findViewById(R.id.menuWrapper)
+        val questionnaireNameWrapper: View = v.findViewById(R.id.questionnaireName)
+        val modalTitle: TextView = v.findViewById(R.id.modalTitle)
+        val submitButton: TextView = v.findViewById(R.id.submit)
+        val etQuestionnaireName: EditText = v.findViewById(R.id.etQuestionnaireName)
 
         countyLevelMenuItem.setOnClickListener {
-            val countyLevelDialogFragment = CountyLevelFragment.newInstance()
-            countyLevelDialogFragment.show(this.supportFragmentManager, "CountyLevel")
+            menuContent.visibility = View.GONE
+            questionnaireNameWrapper.visibility = View.VISIBLE
+            modalTitle.text = "Questionnaire Name"
+            selectedQuestionnaireType = QuestionnaireType.COUNTY_LEVEL_QUESTIONNAIRE
+        }
+
+        submitButton.setOnClickListener {
+            if (selectedQuestionnaireType == QuestionnaireType.COUNTY_LEVEL_QUESTIONNAIRE) {
+                val questionnaireId = Util.generateUniqueId()
+                AppStore.getInstance().questionnairesList.add(CountyLevelQuestionnaire(
+                        questionnaireId,
+                        etQuestionnaireName.text.toString()
+                ))
+                val countyLevelDialogFragment = CountyLevelFragment.newInstance(questionnaireId)
+                countyLevelDialogFragment.show(this.supportFragmentManager, "CountyLevel")
+            }
+
         }
         openQuestionnaireMenuModal(v)
     }

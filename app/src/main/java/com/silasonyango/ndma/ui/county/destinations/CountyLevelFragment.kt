@@ -31,16 +31,27 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
 
     private lateinit var binding: CountyLevelQuestionnaireLayoutBinding
 
+    var questionnaireId: String? = null
+
     companion object {
 
+        private const val QUESTIONNAIRE_ID = "questionnaireId"
+
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(questionnaireId: String) =
                 CountyLevelFragment()
                         .apply {
                             arguments = Bundle().apply {
-
+                                putString(QUESTIONNAIRE_ID,questionnaireId)
                             }
                         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            questionnaireId = it.getString(QUESTIONNAIRE_ID)
+        }
     }
 
     override fun onCreateView(

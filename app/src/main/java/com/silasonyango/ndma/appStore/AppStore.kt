@@ -3,10 +3,15 @@ package com.silasonyango.ndma.appStore
 import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaire
 
 class AppStore {
-    private val appStore: AppStore = AppStore()
-    private lateinit var questionnairesList: MutableList<CountyLevelQuestionnaire>
+    var questionnairesList: MutableList<CountyLevelQuestionnaire> = ArrayList()
 
-    fun getInstance(): AppStore {
-        return appStore
+    companion object {
+
+        private val appStore: AppStore = AppStore()
+
+        @JvmStatic
+        fun getInstance(): AppStore {
+            return appStore
+        }
     }
 }
