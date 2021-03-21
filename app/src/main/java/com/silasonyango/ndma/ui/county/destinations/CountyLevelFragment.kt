@@ -14,16 +14,15 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.silasonyango.ndma.R
+import com.silasonyango.ndma.appStore.AppStore
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.ui.county.adapters.LzCropProductionRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.adapters.LzMarketTradeRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.adapters.SubCountiesSpinnerAdapter
 import com.silasonyango.ndma.ui.county.adapters.SubLocationLzAssignmentRecyclerViewAdapter
-import com.silasonyango.ndma.ui.county.model.CropModel
-import com.silasonyango.ndma.ui.county.model.MarketModel
-import com.silasonyango.ndma.ui.county.model.SubCountyModel
-import com.silasonyango.ndma.ui.county.model.SubLocationModel
+import com.silasonyango.ndma.ui.county.model.*
 import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
+import com.silasonyango.ndma.util.Util
 
 class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerViewAdapter.SubLocationLzAssignmentRecyclerViewAdapterCallback, LzCropProductionRecyclerViewAdapter.LzCropProductionRecyclerViewAdapterCallBack, LzMarketTradeRecyclerViewAdapter.LzMarketTradeRecyclerViewAdapterCallBack {
 
@@ -134,6 +133,7 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
     }
 
     private fun defineLzMarketsLayouts() {
+        var currentlySelectedSubCounty: SubCountyModel? = null
         binding.apply {
             lzMarkets.apply {
                 val subCounties: MutableList<SubCountyModel> = ArrayList()
@@ -158,7 +158,7 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
                                     position: Int,
                                     id: Long
                             ) {
-                                val selectedSubCounty = parent.getItemAtPosition(position)
+                                currentlySelectedSubCounty = parent.getItemAtPosition(position) as SubCountyModel
 
                             }
 
@@ -173,13 +173,28 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
                     villageEditTextContainer.addView(etMarketName)
                 }
 
-                val marketList: MutableList<MarketModel> = ArrayList()
-
-                marketBackButton.setOnClickListener {
-                    for (i in 0..villageEditTextContainer.size) {
-                        var text = (villageEditTextContainer.get(i) as EditText).text.toString()
-
+                submitMarkets.setOnClickListener {
+                    val countyLevelQuestionnaire = AppStore.getInstance().countyLevelQuestionnairesList.filter {
+                        it.uniqueId == questionnaireId
                     }
+
+                    val nearestVillageOrTown = NearestVillageOrTown(Util.generateUniqueId(),etNearestVillageOrTown.text.toString())
+
+                    val marketList: MutableList<MarketModel> = ArrayList()
+
+                    for (i in 1..villageEditTextContainer.size) {
+                        var text = (villageEditTextContainer.get(i) as EditText).text.toString()
+                        marketList.add(MarketModel(text,nearestVillageOrTown.townUniqueId,currentlySelectedSubCounty!!.subCountyCode))
+                    }
+
+                    countyLevelQuestionnaire.get(0).subCountyMarkets?.marketModelList?.addAll(marketList)
+                    System.out.println()
+                }
+
+
+
+                marketNextButton.setOnClickListener {
+
                 }
 
             }

@@ -22,7 +22,9 @@ import androidx.appcompat.widget.Toolbar
 import com.silasonyango.ndma.appStore.AppStore
 import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaire
 import com.silasonyango.ndma.appStore.model.QuestionnaireType
+import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
 import com.silasonyango.ndma.ui.county.destinations.CountyLevelFragment
+import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
 import com.silasonyango.ndma.util.Util
 
 class MainActivity : AppCompatActivity() {
@@ -68,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         val inflater = this?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.questionnaire_menu_layout, null)
         val countyLevelMenuItem: View = v.findViewById(R.id.countyLevelWrapper)
+        val wealthGroupMenuItem: View = v.findViewById(R.id.wealthGroupWrapper)
         val tvModalMessage: View = v.findViewById(R.id.wealthGroupWrapper)
         val menuContent: View = v.findViewById(R.id.menuWrapper)
         val questionnaireNameWrapper: View = v.findViewById(R.id.questionnaireName)
@@ -82,17 +85,33 @@ class MainActivity : AppCompatActivity() {
             selectedQuestionnaireType = QuestionnaireType.COUNTY_LEVEL_QUESTIONNAIRE
         }
 
+        wealthGroupMenuItem.setOnClickListener {
+            menuContent.visibility = View.GONE
+            questionnaireNameWrapper.visibility = View.VISIBLE
+            modalTitle.text = "Questionnaire Name"
+            selectedQuestionnaireType = QuestionnaireType.WEALTH_GROUP_QUESTIONNAIRE
+        }
+
         submitButton.setOnClickListener {
             if (selectedQuestionnaireType == QuestionnaireType.COUNTY_LEVEL_QUESTIONNAIRE) {
                 val questionnaireId = Util.generateUniqueId()
-                AppStore.getInstance().questionnairesList.add(CountyLevelQuestionnaire(
+                AppStore.getInstance().countyLevelQuestionnairesList.add(CountyLevelQuestionnaire(
                         questionnaireId,
                         etQuestionnaireName.text.toString()
                 ))
                 val countyLevelDialogFragment = CountyLevelFragment.newInstance(questionnaireId)
                 countyLevelDialogFragment.show(this.supportFragmentManager, "CountyLevel")
+            } else {
+                val questionnaireId = Util.generateUniqueId()
+                AppStore.getInstance().wealthGroupQuestionnaireList.add(WealthGroupQuestionnaire(
+                        questionnaireId,
+                        etQuestionnaireName.text.toString()
+                ))
+                val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(questionnaireId)
+                wealthGroupDialogFragment.show(this.supportFragmentManager, "CountyLevel")
             }
 
+            (questionnaireMenuDialog as android.app.AlertDialog).dismiss()
         }
         openQuestionnaireMenuModal(v)
     }
