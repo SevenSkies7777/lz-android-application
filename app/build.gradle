@@ -32,7 +32,8 @@ android {
     }
 
     sourceSets["main"].res.srcDirs(
-            "src/main/res/county-questionnaires-list"
+            "src/main/res/county-level",
+            "src/main/res/wealth-group"
     )
     kotlinOptions {
         jvmTarget = '1.8'
