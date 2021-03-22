@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="food_income_source_question">In the table below, estimate the percentage of cash income that comes on average for families in the livelihood zone from each of the cash income sources listed.</string>
+    <string name="percent_food_consumption_question">In the table below, for each broad type of food, estimate the percentage of the food that comes from each of the four sources for an average for family in a normal/typical year.</string>
+
 </resources>

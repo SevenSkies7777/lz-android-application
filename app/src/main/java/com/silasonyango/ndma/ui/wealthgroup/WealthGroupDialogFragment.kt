@@ -49,6 +49,7 @@ class WealthGroupDialogFragment : DialogFragment() {
         wealthGroupViewModel =
                 ViewModelProvider(this).get(WealthGroupViewModel::class.java)
         binding = WealthGroupQuestionnaireLayoutBinding.inflate(inflater, container, false)
+        defineViews()
         return binding.root
     }
 
@@ -58,6 +59,21 @@ class WealthGroupDialogFragment : DialogFragment() {
             val matchParent = ViewGroup.LayoutParams.MATCH_PARENT
             window?.setLayout(matchParent, matchParent)
             window?.setBackgroundDrawable(null)
+        }
+    }
+
+    private fun defineViews() {
+        defineIncomeandFoodSource()
+    }
+
+    private fun defineIncomeandFoodSource() {
+        binding.apply {
+            wgIncomeAndFoodSources.apply {
+                foodSourcesNextButton.setOnClickListener {
+                    wgIncomeAndFoodSources.root.visibility = View.GONE
+                    wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
+                }
+            }
         }
     }
 }
