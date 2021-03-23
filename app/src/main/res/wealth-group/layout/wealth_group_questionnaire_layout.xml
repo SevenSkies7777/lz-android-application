@@ -60,6 +60,14 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="22dp"/>
 
+        <!--        G. Settlement and Migration Patterns of the Inhabitants of the Livelihood Zone-->
+        <include layout="@layout/migration_patterns"
+            android:visibility="gone"
+            android:id="@+id/wgMigrationPatterns"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="22dp"/>
+
 
     </LinearLayout>
 

@@ -136,6 +136,11 @@ class WealthGroupDialogFragment : DialogFragment() {
                     wgLabourPatterns.root.visibility = View.VISIBLE
                     wgExpenditurePatterns.root.visibility = View.GONE
                 }
+
+                expenditurePatternsNextButton.setOnClickListener {
+                    wgMigrationPatterns.root.visibility = View.VISIBLE
+                    wgExpenditurePatterns.root.visibility = View.GONE
+                }
             }
         }
     }
