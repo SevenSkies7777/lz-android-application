@@ -52,6 +52,14 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="22dp"/>
 
+        <!--        F. Expenditure Patterns-->
+        <include layout="@layout/expenditure_patterns"
+            android:visibility="gone"
+            android:id="@+id/wgExpenditurePatterns"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="22dp"/>
+
 
     </LinearLayout>
 

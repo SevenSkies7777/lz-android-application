@@ -124,8 +124,17 @@ class WealthGroupDialogFragment : DialogFragment() {
                 }
 
                 labourPatternsNextButton.setOnClickListener {
-                    wgLivestockPoultryContribution.root.visibility = View.VISIBLE
+                    wgExpenditurePatterns.root.visibility = View.VISIBLE
                     wgLabourPatterns.root.visibility = View.GONE
+                }
+            }
+
+
+            /*Expenditure patterns navigation */
+            wgExpenditurePatterns.apply {
+                expenditurePatternsBackButton.setOnClickListener {
+                    wgLabourPatterns.root.visibility = View.VISIBLE
+                    wgExpenditurePatterns.root.visibility = View.GONE
                 }
             }
         }
