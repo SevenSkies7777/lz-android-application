@@ -68,6 +68,14 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="22dp"/>
 
+        <!--        H. Constraints to Main Economic Activities-->
+        <include layout="@layout/wg_constraints_layout"
+            android:visibility="gone"
+            android:id="@+id/wgConstraints"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="22dp"/>
+
 
     </LinearLayout>
 

@@ -142,6 +142,29 @@ class WealthGroupDialogFragment : DialogFragment() {
                     wgExpenditurePatterns.root.visibility = View.GONE
                 }
             }
+
+
+            /*Migration patterns */
+            wgMigrationPatterns.apply {
+                migrationPatternsBackButton.setOnClickListener {
+                    wgExpenditurePatterns.root.visibility = View.VISIBLE
+                    wgMigrationPatterns.root.visibility = View.GONE
+                }
+
+                migrationPatternsNextButton.setOnClickListener {
+                    wgConstraints.root.visibility = View.VISIBLE
+                    wgMigrationPatterns.root.visibility = View.GONE
+                }
+            }
+
+
+            /*Constraints navigation */
+            wgConstraints.apply {
+                constraintsBackButton.setOnClickListener {
+                    wgMigrationPatterns.root.visibility = View.VISIBLE
+                    wgConstraints.root.visibility = View.GONE
+                }
+            }
         }
     }
 }
