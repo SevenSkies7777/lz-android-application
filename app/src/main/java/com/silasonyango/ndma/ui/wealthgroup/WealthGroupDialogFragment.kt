@@ -63,15 +63,58 @@ class WealthGroupDialogFragment : DialogFragment() {
     }
 
     private fun defineViews() {
+        defineNavigation()
         defineIncomeandFoodSource()
     }
 
     private fun defineIncomeandFoodSource() {
         binding.apply {
             wgIncomeAndFoodSources.apply {
+
+            }
+        }
+    }
+
+    private fun defineNavigation() {
+        binding.apply {
+
+            /*Income and food sources navigation*/
+            wgIncomeAndFoodSources.apply {
                 foodSourcesNextButton.setOnClickListener {
                     wgIncomeAndFoodSources.root.visibility = View.GONE
                     wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
+                }
+            }
+
+            /*Income and food sources percentages navigation
+            * todo: Change this navigation to crop production question
+            * */
+
+            wgPercentFoodConsumptionIncome.apply {
+                foodSourcesPercentNextButton.setOnClickListener {
+                    wgPercentFoodConsumptionIncome.root.visibility = View.GONE
+                    wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
+                }
+
+                foodSourcesPercentBackButton.setOnClickListener {
+                    wgPercentFoodConsumptionIncome.root.visibility = View.GONE
+                    wgIncomeAndFoodSources.root.visibility = View.VISIBLE
+                }
+            }
+
+
+            /*Livestock and poultry navigation
+            * */
+
+            wgLivestockPoultryNumbers.apply {
+                livestockPoultryNumbertsBackButton.setOnClickListener {
+                    wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
+                    wgLivestockPoultryNumbers.root.visibility = View.GONE
+                }
+
+                livestockPoultryNumbertsNextButton.setOnClickListener {
+                    wgLivestockPoultryContribution.root.visibility = View.VISIBLE
+                    wgLivestockPoultryNumbers.root.visibility = View.GONE
                 }
             }
         }

@@ -1,36 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="24dp"
+    android:orientation="vertical"
     android:paddingStart="24dp"
-    android:paddingRight="24dp"
+    android:paddingLeft="24dp"
     android:paddingEnd="24dp"
-    android:orientation="vertical">
+    android:paddingRight="24dp">
 
     <TextView
-        android:text="B(ii). Percent of total food consumption from each source"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_bold"
-        android:textStyle="bold"
+        android:lineSpacingExtra="9sp"
+        android:text="D(ii). Livestock and Poultry Contributions"
+        android:textColor="#000000"
         android:textSize="18sp"
-        android:textColor="#000000"
-        android:lineSpacingExtra="9sp"/>
-
-
-    <TextView
-        android:text="@string/food_income_source_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/lato_regular"
-        android:textStyle="normal"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:lineSpacingExtra="8sp"
-        android:lineHeight="24sp"
-        android:layout_marginTop="27dp"
-        android:gravity="start"/>
+        android:textStyle="bold" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -39,36 +25,38 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight=".3"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="TYPE OF FOOD"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="Own Farm Productions %"
+                    android:text="TYPE OF ANIMAL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight=".4"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Contribution to Cash Income from animal sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -81,14 +69,14 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight=".2"
+                android:layout_height="70dp"
+                android:layout_weight=".4"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="Market Food Purchase %"
+                    android:text="Contribution to Food Consumption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -99,61 +87,36 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="Gifts &amp; Food Aid %"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight=".1"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="Total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".3"
+                android:layout_height="140dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="Maize and posho"
+                    android:text="Rank: 1=most important"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -166,80 +129,82 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="140dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:text="Approx percent of cash income"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="140dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:text="Rank: 1=most important"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="140dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:text="Approx percent of consumption"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:layout_weight=".1"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
+
                 <TextView
-                    android:text="100"
+                    android:text="Cattle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -248,23 +213,116 @@
                     android:textColor="#FF3F51B5"
                     android:layout_gravity="start|center_vertical"/>
 
+
             </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".3"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
+
                 <TextView
-                    android:text="Wheat, barley, rye and bread"
+                    android:text="Goats"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -273,11 +331,13 @@
                     android:textColor="#FF3F51B5"
                     android:layout_gravity="start|center_vertical"/>
 
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -299,7 +359,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -321,7 +381,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -343,39 +403,44 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".1"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
+
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".3"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
+
                 <TextView
-                    android:text="Sorghum, millets and products"
+                    android:text="Sheep"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -384,11 +449,13 @@
                     android:textColor="#FF3F51B5"
                     android:layout_gravity="start|center_vertical"/>
 
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -410,7 +477,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -432,7 +499,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -454,39 +521,44 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".1"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
+
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".3"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
+
                 <TextView
-                    android:text="Rice and products"
+                    android:text="Donkeys"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -495,11 +567,13 @@
                     android:textColor="#FF3F51B5"
                     android:layout_gravity="start|center_vertical"/>
 
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -521,7 +595,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -543,7 +617,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -565,39 +639,44 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".1"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
+
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".3"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
+
                 <TextView
-                    android:text="Beans"
+                    android:text="Camels"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -606,11 +685,13 @@
                     android:textColor="#FF3F51B5"
                     android:layout_gravity="start|center_vertical"/>
 
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -632,7 +713,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -654,7 +735,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -676,39 +757,44 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".1"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
+
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".3"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
+
                 <TextView
-                    android:text="Other Pulses, seeds and nuts (green grams, dried peas, cowpeas etc)"
+                    android:text="Pigs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -717,11 +803,13 @@
                     android:textColor="#FF3F51B5"
                     android:layout_gravity="start|center_vertical"/>
 
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -743,7 +831,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -765,7 +853,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -787,39 +875,44 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".1"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
+
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".3"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
+
                 <TextView
-                    android:text="Vegetables (including wild)"
+                    android:text="Chickens"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -828,11 +921,13 @@
                     android:textColor="#FF3F51B5"
                     android:layout_gravity="start|center_vertical"/>
 
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -854,7 +949,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -876,7 +971,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -898,39 +993,44 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".1"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
+
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".3"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
+
                 <TextView
-                    android:text="Fruits and berries (including wild"
+                    android:text="Ducks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -939,11 +1039,13 @@
                     android:textColor="#FF3F51B5"
                     android:layout_gravity="start|center_vertical"/>
 
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -965,7 +1067,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -987,7 +1089,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -1009,39 +1111,44 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".1"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
+
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="240dp"
-                android:layout_weight=".3"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
+
                 <TextView
-                    android:text="White Roots, and Tubers  and Plantain (including wild)  (irish and sweet potatoes, cassava, turnip, arrow root, cooked or roasted bananas etc)"
+                    android:text="Beehives"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -1050,11 +1157,13 @@
                     android:textColor="#FF3F51B5"
                     android:layout_gravity="start|center_vertical"/>
 
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="240dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -1076,7 +1185,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="240dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -1098,7 +1207,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="240dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -1120,39 +1229,44 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="240dp"
-                android:layout_weight=".1"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
+
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".3"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
+
                 <TextView
-                    android:text="Meat (including wild animals and poultry)"
+                    android:text="Fish Ponds"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -1161,11 +1275,13 @@
                     android:textColor="#FF3F51B5"
                     android:layout_gravity="start|center_vertical"/>
 
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -1187,7 +1303,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -1209,7 +1325,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_height="50dp"
                 android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
@@ -1231,584 +1347,30 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".1"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
+                <EditText
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
+
 
         </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".3"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="Milk and dairy products"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".1"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".3"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="Fish and sea food"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".1"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".3"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="Eggs"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".1"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".3"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="Cooking fats and oils"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight=".1"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".3"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="Spices, condiments and beverages (chili, hot sauce, coffee, tea etc) "
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_weight=".1"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-        </TableRow>
-
 
     </TableLayout>
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -1817,7 +1379,7 @@
         android:layout_marginBottom="18dp">
 
         <TextView
-            android:id="@+id/foodSourcesPercentBackButton"
+            android:id="@+id/livestockPoultryNumbertsBackButton"
             android:text="BACK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -1834,7 +1396,7 @@
             android:layout_centerVertical="true"/>
 
         <TextView
-            android:id="@+id/foodSourcesPercentNextButton"
+            android:id="@+id/livestockPoultryNumbertsNextButton"
             android:text="NEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

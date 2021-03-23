@@ -13,7 +13,7 @@
         <!--        Top bar-->
         <include layout="@layout/wealth_group_top_bar"/>
 
-        <!--        B. Livelihood Zone Definition-->
+        <!--        B. Main Sources of Income and Food-->
         <include layout="@layout/wg_income_and_food_sources_layout"
             android:id="@+id/wgIncomeAndFoodSources"
             android:layout_height="wrap_content"
@@ -24,6 +24,22 @@
         <include layout="@layout/wg_percent_food_consumption_layout"
             android:visibility="gone"
             android:id="@+id/wgPercentFoodConsumptionIncome"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="22dp"/>
+
+        <!--        D. Livestock and Poultry Ownership-->
+        <include layout="@layout/wg_livestock_and_poultry"
+            android:visibility="gone"
+            android:id="@+id/wgLivestockPoultryNumbers"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="22dp"/>
+
+        <!--        D. Livestock and Poultry Contribution-->
+        <include layout="@layout/livestock_poultry_contribution"
+            android:visibility="gone"
+            android:id="@+id/wgLivestockPoultryContribution"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginTop="22dp"/>
