@@ -3,4 +3,5 @@
     <string name="food_income_source_question">In the table below, estimate the percentage of cash income that comes on average for families in the livelihood zone from each of the cash income sources listed.</string>
     <string name="percent_food_consumption_question">In the table below, for each broad type of food, estimate the percentage of the food that comes from each of the four sources for an average for family in a normal/typical year.</string>
     <string name="livestock_poultry_question">In the table below, enter the approximate number of animals of each type held on average by households in the livelihood zone. For the contribution to cash income and food consumption, provide the ranks (from 1 most important) and the approximate shares for a normal year (not unusually good or unusually bad)</string>
+    <string name="labour_patterns">Roughly what percentage of the adult working age population of the area is engaged in the activities listed below as their main activity during weekdays? Answer for men and women. </string>
 </resources>

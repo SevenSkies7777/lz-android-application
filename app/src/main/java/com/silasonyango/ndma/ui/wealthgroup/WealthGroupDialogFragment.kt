@@ -103,9 +103,7 @@ class WealthGroupDialogFragment : DialogFragment() {
             }
 
 
-            /*Livestock and poultry navigation
-            * */
-
+            /*Livestock and poultry navigation*/
             wgLivestockPoultryNumbers.apply {
                 livestockPoultryNumbertsBackButton.setOnClickListener {
                     wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
@@ -113,8 +111,21 @@ class WealthGroupDialogFragment : DialogFragment() {
                 }
 
                 livestockPoultryNumbertsNextButton.setOnClickListener {
-                    wgLivestockPoultryContribution.root.visibility = View.VISIBLE
+                    wgLabourPatterns.root.visibility = View.VISIBLE
                     wgLivestockPoultryNumbers.root.visibility = View.GONE
+                }
+            }
+
+            /*Labour patterns navigation */
+            wgLabourPatterns.apply {
+                labourPatternsBackButton.setOnClickListener {
+                    wgLivestockPoultryContribution.root.visibility = View.VISIBLE
+                    wgLabourPatterns.root.visibility = View.GONE
+                }
+
+                labourPatternsNextButton.setOnClickListener {
+                    wgLivestockPoultryContribution.root.visibility = View.VISIBLE
+                    wgLabourPatterns.root.visibility = View.GONE
                 }
             }
         }

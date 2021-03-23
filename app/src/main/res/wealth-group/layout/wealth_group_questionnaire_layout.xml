@@ -44,6 +44,14 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="22dp"/>
 
+        <!--        E. Labour Patterns-->
+        <include layout="@layout/labour_patterns"
+            android:visibility="gone"
+            android:id="@+id/wgLabourPatterns"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="22dp"/>
+
 
     </LinearLayout>
 
