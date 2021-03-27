@@ -13,6 +13,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import com.silasonyango.ndma.MainActivity
+import com.silasonyango.ndma.appStore.AppStore
 import com.silasonyango.ndma.config.EndPoints
 import com.silasonyango.ndma.databinding.ActivityLoginBinding
 import com.silasonyango.ndma.login.model.LoginRequestModel
@@ -64,20 +65,21 @@ class Login : AppCompatActivity() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
+                        AppStore.getInstance().sessionDetails = resource.data
                         val i = Intent(this@Login, MainActivity::class.java)
                         startActivity(i)
                     }
                     Status.ERROR -> {
-                        System.out.println()
+
                     }
                     Status.LOADING -> {
 
                     }
                     Status.UNAUTHORISED -> {
-                        System.out.println()
+
                     }
                     Status.UNPROCESSABLE_ENTITY -> {
-                        System.out.println()
+
                     }
                 }
             }

@@ -2,9 +2,10 @@ package com.silasonyango.ndma.appStore
 
 import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaire
 import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
+import com.silasonyango.ndma.login.model.LoginResponseModel
 
 class AppStore {
-    var accessToken: String = ""
+    var sessionDetails: LoginResponseModel? = null
     var countyLevelQuestionnairesList: MutableList<CountyLevelQuestionnaire> = ArrayList()
 
     var wealthGroupQuestionnaireList: MutableList<WealthGroupQuestionnaire> = ArrayList()

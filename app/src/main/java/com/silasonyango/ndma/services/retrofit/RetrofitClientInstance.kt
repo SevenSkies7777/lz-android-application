@@ -13,7 +13,6 @@ object RetrofitClientInstance {
             OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
         httpClient.addInterceptor { chain ->
             val request = chain.request().newBuilder()
-                .addHeader("Authorization", "Bearer " + AppStore.getInstance().accessToken)
                 .build()
             chain.proceed(request)
         }
