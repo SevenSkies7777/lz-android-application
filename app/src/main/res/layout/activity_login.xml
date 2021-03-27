@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".login.ui.activity.Login">
 
     <ImageView
         android:id="@+id/img1"
@@ -40,7 +40,7 @@
             android:layout_gravity="start"/>
 
         <TextView
-            android:text="Enter username"
+            android:text="Enter email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_bold"
@@ -55,11 +55,13 @@
             android:layout_marginTop="5dp">
 
             <EditText
+                android:id="@+id/etEmail"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
                 android:layout_gravity="center"
+                android:textColor="#000c37"
                 android:fontFamily="@font/lato_regular"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
@@ -84,12 +86,15 @@
             android:layout_marginTop="5dp">
 
             <EditText
+                android:id="@+id/etPassword"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
                 android:layout_gravity="center"
+                android:inputType="textPassword"
                 android:fontFamily="@font/lato_regular"
+                android:textColor="#000c37"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:textSize="16sp"/>
@@ -98,11 +103,32 @@
         
         
         <FrameLayout
+            android:id="@+id/loginButton"
             android:background="@drawable/bg_button"
             android:layout_width="match_parent"
             android:layout_height="33dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="85dp">
+
+            <TextView
+                android:id="@+id/loginText"
+                android:text="Login"
+                android:layout_gravity="center"
+                android:fontFamily="@font/lato_bold"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ProgressBar
+                android:layout_gravity="center"
+                android:id="@+id/loginProgressBar"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_centerVertical="true"
+                android:theme="@style/progressBarBlack"
+                android:translationZ="10dp"
+                android:visibility="gone" />
 
         </FrameLayout>
 
