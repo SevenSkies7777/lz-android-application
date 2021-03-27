@@ -22,14 +22,14 @@ import com.silasonyango.ndma.ui.county.adapters.LzMarketTradeRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.adapters.SubCountiesSpinnerAdapter
 import com.silasonyango.ndma.ui.county.adapters.SubLocationLzAssignmentRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.model.*
-import com.silasonyango.ndma.ui.county.responses.HungerPatternsResponses
-import com.silasonyango.ndma.ui.county.responses.WaterDependenceResponseItem
-import com.silasonyango.ndma.ui.county.responses.WaterSourcesResponses
-import com.silasonyango.ndma.ui.county.responses.WealthGroupResponse
+import com.silasonyango.ndma.ui.county.responses.*
 import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
 import com.silasonyango.ndma.util.Util
 
-class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerViewAdapter.SubLocationLzAssignmentRecyclerViewAdapterCallback, LzCropProductionRecyclerViewAdapter.LzCropProductionRecyclerViewAdapterCallBack, LzMarketTradeRecyclerViewAdapter.LzMarketTradeRecyclerViewAdapterCallBack {
+class CountyLevelFragment : DialogFragment(),
+    SubLocationLzAssignmentRecyclerViewAdapter.SubLocationLzAssignmentRecyclerViewAdapterCallback,
+    LzCropProductionRecyclerViewAdapter.LzCropProductionRecyclerViewAdapterCallBack,
+    LzMarketTradeRecyclerViewAdapter.LzMarketTradeRecyclerViewAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -49,13 +49,13 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
 
         @JvmStatic
         fun newInstance(questionnaireId: String, questionnaireName: String) =
-                CountyLevelFragment()
-                        .apply {
-                            arguments = Bundle().apply {
-                                putString(QUESTIONNAIRE_ID,questionnaireId)
-                                putString(QUESTIONNAIRE_NAME,questionnaireName)
-                            }
-                        }
+            CountyLevelFragment()
+                .apply {
+                    arguments = Bundle().apply {
+                        putString(QUESTIONNAIRE_ID, questionnaireId)
+                        putString(QUESTIONNAIRE_NAME, questionnaireName)
+                    }
+                }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,20 +67,23 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
         }
 
         countyLevelQuestionnaire =
-            questionnaireId?.let { questionnaireName?.let { it1 ->
-                CountyLevelQuestionnaire(it,
-                    it1
-                )
-            } }!!
+            questionnaireId?.let {
+                questionnaireName?.let { it1 ->
+                    CountyLevelQuestionnaire(
+                        it,
+                        it1
+                    )
+                }
+            }!!
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         countyLevelViewModel =
-                ViewModelProvider(this).get(CountyLevelViewModel::class.java)
+            ViewModelProvider(this).get(CountyLevelViewModel::class.java)
         binding = CountyLevelQuestionnaireLayoutBinding.inflate(inflater, container, false)
         defineViews()
         return binding.root
@@ -117,18 +120,18 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
         binding.apply {
             locationAndPopulationLayout.apply {
                 val subLocationsRecyclerViewAdapter =
-                        activity?.let {
-                            SubLocationLzAssignmentRecyclerViewAdapter(
-                                    it,
-                                    subLocationsList,
-                                    this@CountyLevelFragment
-                            )
-                        }
+                    activity?.let {
+                        SubLocationLzAssignmentRecyclerViewAdapter(
+                            it,
+                            subLocationsList,
+                            this@CountyLevelFragment
+                        )
+                    }
                 val gridLayoutManager = GridLayoutManager(activity, 1)
                 sublocationLzAssignmentRV.layoutManager = gridLayoutManager
                 sublocationLzAssignmentRV.hasFixedSize()
                 sublocationLzAssignmentRV.adapter =
-                        subLocationsRecyclerViewAdapter
+                    subLocationsRecyclerViewAdapter
             }
         }
     }
@@ -137,18 +140,18 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
         binding.apply {
             cropProductionLayout.apply {
                 val lzCropProductionRecyclerViewAdapter =
-                        activity?.let {
-                            LzCropProductionRecyclerViewAdapter(
-                                    it,
-                                    cropModelList,
-                                    this@CountyLevelFragment
-                            )
-                        }
+                    activity?.let {
+                        LzCropProductionRecyclerViewAdapter(
+                            it,
+                            cropModelList,
+                            this@CountyLevelFragment
+                        )
+                    }
                 val gridLayoutManager = GridLayoutManager(activity, 1)
                 lzCropProductionRV.layoutManager = gridLayoutManager
                 lzCropProductionRV.hasFixedSize()
                 lzCropProductionRV.adapter =
-                        lzCropProductionRecyclerViewAdapter
+                    lzCropProductionRecyclerViewAdapter
             }
         }
     }
@@ -166,27 +169,33 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
                 subCounties.add(SubCountyModel("Laikipia", 0))
 
                 val spinnerAdapter = context?.let {
-                    SubCountiesSpinnerAdapter(it, R.layout.spinner_item_layout, R.id.tvSpinnerItemText, subCounties)
+                    SubCountiesSpinnerAdapter(
+                        it,
+                        R.layout.spinner_item_layout,
+                        R.id.tvSpinnerItemText,
+                        subCounties
+                    )
                 }
 
 
                 subCountySpinner.adapter = spinnerAdapter
                 subCountySpinner.onItemSelectedListener =
-                        object : AdapterView.OnItemSelectedListener {
-                            override fun onItemSelected(
-                                    parent: AdapterView<*>,
-                                    view: View,
-                                    position: Int,
-                                    id: Long
-                            ) {
-                                currentlySelectedSubCounty = parent.getItemAtPosition(position) as SubCountyModel
+                    object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>,
+                            view: View,
+                            position: Int,
+                            id: Long
+                        ) {
+                            currentlySelectedSubCounty =
+                                parent.getItemAtPosition(position) as SubCountyModel
 
-                            }
-
-                            override fun onNothingSelected(parent: AdapterView<*>) {
-
-                            }
                         }
+
+                        override fun onNothingSelected(parent: AdapterView<*>) {
+
+                        }
+                    }
 
                 addEditText.setOnClickListener {
                     val etMarketName = EditText(context)
@@ -195,17 +204,27 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
                 }
 
                 submitMarkets.setOnClickListener {
-                    val countyLevelQuestionnaire = AppStore.getInstance().countyLevelQuestionnairesList.filter {
-                        it.uniqueId == questionnaireId
-                    }
+                    val countyLevelQuestionnaire =
+                        AppStore.getInstance().countyLevelQuestionnairesList.filter {
+                            it.uniqueId == questionnaireId
+                        }
 
-                    val nearestVillageOrTown = NearestVillageOrTown(Util.generateUniqueId(),etNearestVillageOrTown.text.toString())
+                    val nearestVillageOrTown = NearestVillageOrTown(
+                        Util.generateUniqueId(),
+                        etNearestVillageOrTown.text.toString()
+                    )
 
                     val marketList: MutableList<MarketModel> = ArrayList()
 
                     for (i in 1..villageEditTextContainer.size) {
                         var text = (villageEditTextContainer.get(i) as EditText).text.toString()
-                        marketList.add(MarketModel(text,nearestVillageOrTown.townUniqueId,currentlySelectedSubCounty!!.subCountyCode))
+                        marketList.add(
+                            MarketModel(
+                                text,
+                                nearestVillageOrTown.townUniqueId,
+                                currentlySelectedSubCounty!!.subCountyCode
+                            )
+                        )
                     }
 
 //                    countyLevelQuestionnaire.get(0).subCountyMarkets?.marketModelList?.addAll(marketList)
@@ -228,18 +247,18 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
         binding.apply {
             lzMarketTransactions.apply {
                 val lzMarketTradeRecyclerViewAdapter =
-                        activity?.let {
-                            LzMarketTradeRecyclerViewAdapter(
-                                    it,
-                                    marketList,
-                                    this@CountyLevelFragment
-                            )
-                        }
+                    activity?.let {
+                        LzMarketTradeRecyclerViewAdapter(
+                            it,
+                            marketList,
+                            this@CountyLevelFragment
+                        )
+                    }
                 val gridLayoutManager = GridLayoutManager(activity, 1)
                 lzMarketTradeRV.layoutManager = gridLayoutManager
                 lzMarketTradeRV.hasFixedSize()
                 lzMarketTradeRV.adapter =
-                        lzMarketTradeRecyclerViewAdapter
+                    lzMarketTradeRecyclerViewAdapter
             }
         }
     }
@@ -377,6 +396,139 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
                     )
                     lzHazards.root.visibility = View.VISIBLE
                     lzHungerPatterns.root.visibility = View.GONE
+                }
+            }
+
+
+            /*Hazards navigation*/
+            lzHazards.apply {
+                hazardBackButton.setOnClickListener {
+                    mainWaterSource.root.visibility = View.VISIBLE
+                    lzHazards.root.visibility = View.GONE
+                }
+                hazardNextButton.setOnClickListener {
+
+                    val hazardResponses = HazardResponses()
+
+                    hazardResponses.animalRustling = HazardResponseItem(
+                        animalRustlingRank.text.toString().toInt(),
+                        animalRustlingNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.banditry = HazardResponseItem(
+                        banditryRank.text.toString().toInt(),
+                        banditryNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.terrorism = HazardResponseItem(
+                        terrorismRank.text.toString().toInt(),
+                        terrorismNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.ethnicConflict = HazardResponseItem(
+                        ethicConflictRank.text.toString().toInt(),
+                        ethicConflictNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.politicalViolence = HazardResponseItem(
+                        politicalViolenceRank.text.toString().toInt(),
+                        politicalViolenceNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.livestockPestsAndDiseases = HazardResponseItem(
+                        pestAndDiseaseRank.text.toString().toInt(),
+                        pestAndDiseaseNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.hailstormsOrFrost = HazardResponseItem(
+                        hailstormsOrFrostRank.text.toString().toInt(),
+                        hailstormsOrFrostNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.flooding = HazardResponseItem(
+                        floodingRank.text.toString().toInt(),
+                        floodingNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.landslides = HazardResponseItem(
+                        landslidesRank.text.toString().toInt(),
+                        landslidesNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.highWindsOrCyclones = HazardResponseItem(
+                        windsOrCycloneRank.text.toString().toInt(),
+                        windsOrCycloneNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.bushFires = HazardResponseItem(
+                        bushFiresRank.text.toString().toInt(),
+                        bushFiresRank.text.toString().toDouble()
+                    )
+
+                    hazardResponses.cropPests = HazardResponseItem(
+                        cropPestsRank.text.toString().toInt(),
+                        cropPestsNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.locustInvasion = HazardResponseItem(
+                        locustInvasionRank.text.toString().toInt(),
+                        locustInvasionNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.cropDiseases = HazardResponseItem(
+                        cropDiseasesRank.text.toString().toInt(),
+                        cropDiseasesNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.terminalIllnesses = HazardResponseItem(
+                        terminalIllnessRank.text.toString().toInt(),
+                        terminalIllnessNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.malariaPowerOutBreak = HazardResponseItem(
+                        malariaOutbreakRank.text.toString().toInt(),
+                        malariaOutbreakNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.malariaPowerOutBreak = HazardResponseItem(
+                        waterBorneDiseaseRank.text.toString().toInt(),
+                        waterBorneDiseaseNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.waterBornDiseases = HazardResponseItem(
+                        humanWildlifeConflictRank.text.toString().toInt(),
+                        humanWildlifeConflictNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.humanWildlifeConflict = HazardResponseItem(
+                        humanWildlifeConflictRank.text.toString().toInt(),
+                        humanWildlifeConflictNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.highFoodPrices = HazardResponseItem(
+                        highFoodPriceRank.text.toString().toInt(),
+                        highFoodPriceNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.marketFoodShortages = HazardResponseItem(
+                        foodShortageRank.text.toString().toInt(),
+                        foodShortageNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.drinkingWaterShortages = HazardResponseItem(
+                        drinkingWaterShortageRank.text.toString().toInt(),
+                        drinkingWaterShortageNoOfYears.text.toString().toDouble()
+                    )
+
+                    hazardResponses.others = HazardResponseItem(
+                        othersRank.text.toString().toInt(),
+                        othersNoOfYears.text.toString().toDouble()
+                    )
+
+                    countyLevelQuestionnaire.hazardResponses = hazardResponses
+
+                    locationAndPopulationLayout.root.visibility = View.VISIBLE
+                    lzHazards.root.visibility = View.GONE
                 }
             }
         }

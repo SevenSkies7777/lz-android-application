@@ -89,7 +89,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="No of Yrs of Widespread Hunger (Out of 10)"
+                    android:text="No of Years Experienced in last 10 Years"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -133,6 +133,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/animalRustlingRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -155,6 +156,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/animalRustlingNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -201,6 +203,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/banditryRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -223,6 +226,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/banditryNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -269,6 +273,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/terrorismRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -291,6 +296,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/terrorismNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -337,6 +343,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/ethicConflictRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -359,6 +366,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/ethicConflictNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -405,6 +413,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/politicalViolenceRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -427,6 +436,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/politicalViolenceNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -473,6 +483,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/pestAndDiseaseRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -495,6 +506,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/pestAndDiseaseNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -541,6 +553,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/hailstormsOrFrostRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -563,6 +576,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/hailstormsOrFrostNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -609,6 +623,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/floodingRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -631,6 +646,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/floodingNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -677,6 +693,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/landslidesRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -699,6 +716,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/landslidesNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -745,6 +763,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/windsOrCycloneRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -767,6 +786,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/windsOrCycloneNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -813,6 +833,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/bushFiresRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -835,6 +856,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/bushFiresNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -881,6 +903,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/cropPestsRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -903,6 +926,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/cropPestsNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -949,6 +973,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/locustInvasionRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -971,6 +996,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/locustInvasionNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1017,6 +1043,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/cropDiseasesRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1039,6 +1066,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/cropDiseasesNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1085,6 +1113,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/terminalIllnessRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1107,6 +1136,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/terminalIllnessNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1153,6 +1183,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/malariaOutbreakRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1175,6 +1206,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/malariaOutbreakNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1221,6 +1253,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/waterBorneDiseaseRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1243,6 +1276,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/waterBorneDiseaseNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1289,6 +1323,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/humanWildlifeConflictRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1311,6 +1346,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/humanWildlifeConflictNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1357,6 +1393,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/highFoodPriceRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1379,6 +1416,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/highFoodPriceNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1425,6 +1463,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/foodShortageRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1447,6 +1486,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/foodShortageNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1493,6 +1533,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/drinkingWaterShortageRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1515,6 +1556,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/drinkingWaterShortageNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1561,6 +1603,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/othersRank"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1583,6 +1626,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/othersNoOfYears"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1599,5 +1643,48 @@
 
 
     </TableLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="18dp">
+
+        <TextView
+            android:id="@+id/hazardBackButton"
+            android:text="BACK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#00569c"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/hazardNextButton"
+            android:text="NEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#00569c"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
