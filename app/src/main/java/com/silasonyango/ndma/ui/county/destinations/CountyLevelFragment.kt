@@ -22,6 +22,7 @@ import com.silasonyango.ndma.ui.county.adapters.LzMarketTradeRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.adapters.SubCountiesSpinnerAdapter
 import com.silasonyango.ndma.ui.county.adapters.SubLocationLzAssignmentRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.model.*
+import com.silasonyango.ndma.ui.county.responses.HungerPatternsResponses
 import com.silasonyango.ndma.ui.county.responses.WaterDependenceResponseItem
 import com.silasonyango.ndma.ui.county.responses.WaterSourcesResponses
 import com.silasonyango.ndma.ui.county.responses.WealthGroupResponse
@@ -356,7 +357,26 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
                     countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
 
                     mainWaterSource.root.visibility = View.GONE
-                    lzMarkets.root.visibility = View.VISIBLE
+                    lzHungerPatterns.root.visibility = View.VISIBLE
+                }
+            }
+
+
+            /*Crop Production navigation buttons*/
+            lzHungerPatterns.apply {
+                hungerPatternsBackButton.setOnClickListener {
+                    mainWaterSource.root.visibility = View.VISIBLE
+                    lzHungerPatterns.root.visibility = View.GONE
+                }
+                hungerPatternsNextButton.setOnClickListener {
+                    countyLevelQuestionnaire.hungerPatternsResponses = HungerPatternsResponses(
+                        etLongRainsHungerPeriod.text.toString().toDouble(),
+                        etEndLongBeginShortRainsHungerPeriod.text.toString().toDouble(),
+                        etShortRainsHungerPeriod.text.toString().toDouble(),
+                        etEndShortBeginLongRainsHungerPeriod.text.toString().toDouble()
+                    )
+                    lzHazards.root.visibility = View.VISIBLE
+                    lzHungerPatterns.root.visibility = View.GONE
                 }
             }
         }

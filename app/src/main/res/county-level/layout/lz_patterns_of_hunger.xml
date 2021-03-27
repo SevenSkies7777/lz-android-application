@@ -112,6 +112,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/etLongRainsHungerPeriod"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -138,7 +139,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="Long Rains Season (MAM)"
+                    android:text="Between the end of Long rains and begin of Short Rains Season"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -158,6 +159,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/etEndLongBeginShortRainsHungerPeriod"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -184,7 +186,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="Long Rains Season (MAM)"
+                    android:text="Short Rains Season (OND)"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -204,6 +206,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/etShortRainsHungerPeriod"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -230,7 +233,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="Long Rains Season (MAM)"
+                    android:text="Between the end of short rains and beginning of long rains"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -250,6 +253,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/etEndShortBeginLongRainsHungerPeriod"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -265,5 +269,47 @@
         </TableRow>
 
     </TableLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="18dp">
+
+        <TextView
+            android:id="@+id/hungerPatternsBackButton"
+            android:text="BACK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#00569c"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/hungerPatternsNextButton"
+            android:text="NEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#00569c"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
