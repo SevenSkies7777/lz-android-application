@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                         questionnaireId,
                         etQuestionnaireName.text.toString()
                 ))
-                val countyLevelDialogFragment = CountyLevelFragment.newInstance(questionnaireId)
+                val countyLevelDialogFragment = CountyLevelFragment.newInstance(questionnaireId,etQuestionnaireName.text.toString())
                 countyLevelDialogFragment.show(this.supportFragmentManager, "CountyLevel")
             } else {
                 val questionnaireId = Util.generateUniqueId()

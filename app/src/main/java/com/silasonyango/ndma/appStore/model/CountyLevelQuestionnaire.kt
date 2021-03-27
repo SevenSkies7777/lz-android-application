@@ -1,7 +1,10 @@
 package com.silasonyango.ndma.appStore.model
 
-import com.silasonyango.ndma.ui.county.model.SubCountyMarkets
+import com.silasonyango.ndma.ui.county.responses.WaterSourcesResponses
+import com.silasonyango.ndma.ui.county.responses.WealthGroupResponse
 
 class CountyLevelQuestionnaire(val uniqueId: String,val questionnaireName: String){
-    var subCountyMarkets: SubCountyMarkets? = null
+    lateinit var wealthGroupResponse: WealthGroupResponse
+
+    lateinit var waterSourceResponses: WaterSourcesResponses
 }

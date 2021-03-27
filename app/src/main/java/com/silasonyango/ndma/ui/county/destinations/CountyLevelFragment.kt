@@ -15,12 +15,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.silasonyango.ndma.R
 import com.silasonyango.ndma.appStore.AppStore
+import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaire
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.ui.county.adapters.LzCropProductionRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.adapters.LzMarketTradeRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.adapters.SubCountiesSpinnerAdapter
 import com.silasonyango.ndma.ui.county.adapters.SubLocationLzAssignmentRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.model.*
+import com.silasonyango.ndma.ui.county.responses.WaterDependenceResponseItem
+import com.silasonyango.ndma.ui.county.responses.WaterSourcesResponses
+import com.silasonyango.ndma.ui.county.responses.WealthGroupResponse
 import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
 import com.silasonyango.ndma.util.Util
 
@@ -30,18 +34,25 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
 
     private lateinit var binding: CountyLevelQuestionnaireLayoutBinding
 
+    private lateinit var countyLevelQuestionnaire: CountyLevelQuestionnaire
+
     var questionnaireId: String? = null
+
+    var questionnaireName: String? = null
 
     companion object {
 
         private const val QUESTIONNAIRE_ID = "questionnaireId"
 
+        private const val QUESTIONNAIRE_NAME = "questionnaireName"
+
         @JvmStatic
-        fun newInstance(questionnaireId: String) =
+        fun newInstance(questionnaireId: String, questionnaireName: String) =
                 CountyLevelFragment()
                         .apply {
                             arguments = Bundle().apply {
                                 putString(QUESTIONNAIRE_ID,questionnaireId)
+                                putString(QUESTIONNAIRE_NAME,questionnaireName)
                             }
                         }
     }
@@ -50,7 +61,16 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
         super.onCreate(savedInstanceState)
         arguments?.let {
             questionnaireId = it.getString(QUESTIONNAIRE_ID)
+
+            questionnaireName = it.getString(QUESTIONNAIRE_NAME)
         }
+
+        countyLevelQuestionnaire =
+            questionnaireId?.let { questionnaireName?.let { it1 ->
+                CountyLevelQuestionnaire(it,
+                    it1
+                )
+            } }!!
     }
 
     override fun onCreateView(
@@ -187,8 +207,8 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
                         marketList.add(MarketModel(text,nearestVillageOrTown.townUniqueId,currentlySelectedSubCounty!!.subCountyCode))
                     }
 
-                    countyLevelQuestionnaire.get(0).subCountyMarkets?.marketModelList?.addAll(marketList)
-                    System.out.println()
+//                    countyLevelQuestionnaire.get(0).subCountyMarkets?.marketModelList?.addAll(marketList)
+//                    System.out.println()
                 }
 
 
@@ -236,6 +256,13 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
             /*Location and population navigation buttons*/
             locationAndPopulationLayout.apply {
                 locationNextButton.setOnClickListener {
+                    val wealthGroupResponse = WealthGroupResponse(
+                        etVerPoorResponse.text.toString().toDouble(),
+                        etPoorResponse.text.toString().toDouble(),
+                        etMediumResponse.text.toString().toDouble(),
+                        etBetterOffResponse.text.toString().toDouble()
+                    )
+                    countyLevelQuestionnaire.wealthGroupResponse = wealthGroupResponse
                     locationAndPopulationLayout.root.visibility = View.GONE
                     cropProductionLayout.root.visibility = View.VISIBLE
                 }
@@ -264,6 +291,70 @@ class CountyLevelFragment : DialogFragment(), SubLocationLzAssignmentRecyclerVie
                     cropProductionLayout.root.visibility = View.VISIBLE
                 }
                 waterSourceNextButton.setOnClickListener {
+
+                    val waterSourceResponses = WaterSourcesResponses()
+                    waterSourceResponses.rivers = WaterDependenceResponseItem(
+                        riversWetSeason.text.toString().toDouble(),
+                        riversDrySeason.text.toString().toDouble()
+                    )
+
+                    waterSourceResponses.traditionalRiversWells = WaterDependenceResponseItem(
+                        traditionalRiversWellsWetSeason.text.toString().toDouble(),
+                        traditionalRiversWellsDrySeason.text.toString().toDouble()
+                    )
+
+                    waterSourceResponses.naturalPonds = WaterDependenceResponseItem(
+                        naturalPondsWetSeason.text.toString().toDouble(),
+                        naturalPondsDrySeason.text.toString().toDouble()
+                    )
+
+                    waterSourceResponses.pansAndDams = WaterDependenceResponseItem(
+                        pansAndDamsWetSeason.text.toString().toDouble(),
+                        pansAndDamsDrySeason.text.toString().toDouble()
+                    )
+
+                    waterSourceResponses.shallowWells = WaterDependenceResponseItem(
+                        shallowWellsWetSeason.text.toString().toDouble(),
+                        shallowWellsDrySeason.text.toString().toDouble()
+                    )
+
+                    waterSourceResponses.boreholes = WaterDependenceResponseItem(
+                        boreHolesWetSeason.text.toString().toDouble(),
+                        boreHolesDrySeason.text.toString().toDouble()
+                    )
+
+                    waterSourceResponses.springs = WaterDependenceResponseItem(
+                        springsWetSeason.text.toString().toDouble(),
+                        springsDrySeason.text.toString().toDouble()
+                    )
+
+                    waterSourceResponses.lakes = WaterDependenceResponseItem(
+                        lakesWetSeason.text.toString().toDouble(),
+                        lakesDrySeason.text.toString().toDouble()
+                    )
+
+                    waterSourceResponses.rockCatchments = WaterDependenceResponseItem(
+                        rockCatchmentWetSeason.text.toString().toDouble(),
+                        rockCatchmentDrySeason.text.toString().toDouble()
+                    )
+
+                    waterSourceResponses.pipedWater = WaterDependenceResponseItem(
+                        pipedWaterWetSeason.text.toString().toDouble(),
+                        pipedWaterDrySeason.text.toString().toDouble()
+                    )
+
+                    waterSourceResponses.waterTrucking = WaterDependenceResponseItem(
+                        waterTruckingWetSeason.text.toString().toDouble(),
+                        waterTruckingDrySeason.text.toString().toDouble()
+                    )
+
+                    waterSourceResponses.roofCatchments = WaterDependenceResponseItem(
+                        roofCatchmentWetSeason.text.toString().toDouble(),
+                        roofCatchmentDrySeason.text.toString().toDouble()
+                    )
+
+                    countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
+
                     mainWaterSource.root.visibility = View.GONE
                     lzMarkets.root.visibility = View.VISIBLE
                 }

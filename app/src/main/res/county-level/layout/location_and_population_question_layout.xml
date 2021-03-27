@@ -132,6 +132,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/etVerPoorResponse"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -177,6 +178,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/etPoorResponse"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -223,6 +225,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/etMediumResponse"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -269,6 +272,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/etBetterOffResponse"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"

@@ -167,6 +167,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/riversWetSeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -189,6 +190,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/riversDrySeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -235,6 +237,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/traditionalRiversWellsWetSeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -257,6 +260,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/traditionalRiversWellsDrySeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -304,6 +308,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/naturalPondsWetSeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -326,6 +331,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/naturalPondsDrySeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -372,6 +378,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/pansAndDamsWetSeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -394,6 +401,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/pansAndDamsDrySeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -440,6 +448,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/shallowWellsWetSeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -462,6 +471,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/shallowWellsDrySeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -508,6 +518,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/boreHolesWetSeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -530,6 +541,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/boreHolesDrySeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -576,6 +588,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/springsWetSeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -598,6 +611,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/springsDrySeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -644,6 +658,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/lakesWetSeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -666,6 +681,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/lakesDrySeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -712,6 +728,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/rockCatchmentWetSeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -734,6 +751,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/rockCatchmentDrySeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -780,6 +798,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/pipedWaterWetSeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -802,6 +821,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/pipedWaterDrySeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -848,6 +868,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/waterTruckingWetSeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -870,6 +891,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/waterTruckingDrySeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -916,6 +938,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/roofCatchmentWetSeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -938,6 +961,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/roofCatchmentDrySeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
