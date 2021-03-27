@@ -403,7 +403,7 @@ class CountyLevelFragment : DialogFragment(),
             /*Hazards navigation*/
             lzHazards.apply {
                 hazardBackButton.setOnClickListener {
-                    mainWaterSource.root.visibility = View.VISIBLE
+                    lzHungerPatterns.root.visibility = View.VISIBLE
                     lzHazards.root.visibility = View.GONE
                 }
                 hazardNextButton.setOnClickListener {
