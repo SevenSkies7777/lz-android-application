@@ -3,6 +3,7 @@ package com.silasonyango.ndma
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -19,11 +20,15 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.google.gson.Gson
 import com.silasonyango.ndma.appStore.AppStore
 import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaire
+import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaireListObject
 import com.silasonyango.ndma.appStore.model.QuestionnaireType
 import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
+import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.ui.county.destinations.CountyLevelFragment
+import com.silasonyango.ndma.ui.county.model.CropModel
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
 import com.silasonyango.ndma.util.Util
 
@@ -37,6 +42,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
+        val sharedPreferences: SharedPreferences? = baseContext?.applicationContext?.getSharedPreferences("MyPref", Context.MODE_PRIVATE)
+        val editor:SharedPreferences.Editor? =  sharedPreferences?.edit()
+        val gson = Gson()
+
+        if (sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null).isNullOrEmpty()) {
+            val countyLevelQuestionnaireListObject = CountyLevelQuestionnaireListObject()
+
+            val responsesJson: String = gson.toJson(countyLevelQuestionnaireListObject)
+            editor?.putString(Constants.QUESTIONNAIRES_LIST_OBJECT, responsesJson)
+            editor?.commit()
+        }
+
+//        val cropModel = CropModel("casava",1)
+//        val testJson: String = gson.toJson(cropModel)
+//        editor?.putString("crop", testJson)
+//        editor?.commit()
+//
+//        val returnedCropString = sharedPreferences?.getString("crop", null)
+//
+//        val returnedCrop: CropModel =
+//            gson.fromJson(returnedCropString, CropModel::class.java)
+
         setSupportActionBar(toolbar)
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
