@@ -566,15 +566,6 @@ class CountyLevelFragment : DialogFragment(),
                     editor?.putString(Constants.QUESTIONNAIRES_LIST_OBJECT, newQuestionnaireObjectString)
                     editor?.commit()
 
-
-//                    val testString =
-//                        sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null)
-//                    val testObject: CountyLevelQuestionnaireListObject =
-//                        gson.fromJson(
-//                            testString,
-//                            CountyLevelQuestionnaireListObject::class.java
-//                        )
-
                 }
             }
         }
