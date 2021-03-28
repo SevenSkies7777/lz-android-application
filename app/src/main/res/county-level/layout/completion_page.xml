@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="77dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:paddingBottom="40dp">
+
+    <TextView
+        android:text="You have successfully completed the questionnaire."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_regular"
+        android:textFontWeight="600"
+        android:textSize="32sp"
+        android:textColor="#041333"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
+    
+    <View
+        android:background="@drawable/ic_success"
+        android:layout_width="217dp"
+        android:layout_height="144dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="62dp"/>
+
+    <TextView
+        android:text="The questionnaire has been saved to your dashboard"
+        android:layout_marginTop="75dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_light"
+        android:textFontWeight="300"
+        android:textSize="26sp"
+        android:textColor="#041333"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
+    
+    
+    <TextView
+        android:text="CLOSE"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:fontFamily="@font/lato_bold"
+        android:textSize="16sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/bg_completion_button"
+        android:layout_marginTop="32dp"
+        android:gravity="center"/>
+
+</LinearLayout>

@@ -1,5 +1,7 @@
 package com.silasonyango.ndma.ui.county.destinations
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
@@ -40,6 +42,9 @@ class CountyLevelFragment : DialogFragment(),
     var questionnaireId: String? = null
 
     var questionnaireName: String? = null
+
+    val sharedPreferences: SharedPreferences? = context?.getSharedPreferences("MyPref", Context.MODE_PRIVATE)
+    val editor:SharedPreferences.Editor? =  sharedPreferences?.edit()
 
     companion object {
 
