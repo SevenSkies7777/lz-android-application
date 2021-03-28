@@ -1,81 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
-<!--    Main div-->
+    <!--    Main div-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-<!--        Top bar-->
-        <include layout="@layout/top_bar"/>
+        <!--        Top bar-->
+        <include layout="@layout/top_bar" />
 
-<!--        B. Livelihood Zone Definition-->
-        <include layout="@layout/lz_definitions_layout"
+        <!--        B. Livelihood Zone Definition-->
+        <include
             android:id="@+id/lzDefinitionsLayout"
-            android:layout_height="wrap_content"
+            layout="@layout/lz_definitions_layout"
             android:layout_width="wrap_content"
-            android:layout_marginTop="22dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp" />
 
-<!--        C. Location and Population-->
-        <include layout="@layout/location_and_population_question_layout"
-            android:visibility="gone"
+        <!--        C. Location and Population-->
+        <include
             android:id="@+id/locationAndPopulationLayout"
-            android:layout_height="wrap_content"
+            layout="@layout/location_and_population_question_layout"
             android:layout_width="wrap_content"
-            android:layout_marginTop="22dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
 
         <!--        D. Crop Production-->
-        <include layout="@layout/lz_crop_production_layout"
-            android:visibility="gone"
+        <include
             android:id="@+id/cropProductionLayout"
-            android:layout_height="wrap_content"
+            layout="@layout/lz_crop_production_layout"
             android:layout_width="match_parent"
-            android:layout_marginTop="22dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
 
         <!--        E. Main Sources of Water-->
-        <include layout="@layout/lz_main_water_source_layout"
-            android:visibility="gone"
+        <include
             android:id="@+id/mainWaterSource"
-            android:layout_height="wrap_content"
+            layout="@layout/lz_main_water_source_layout"
             android:layout_width="match_parent"
-            android:layout_marginTop="22dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
 
         <!--        F. Markets Serving the Livelihood Zone-->
-        <include layout="@layout/lz_markets_layout"
-            android:visibility="gone"
+        <include
             android:id="@+id/lzMarkets"
-            android:layout_height="wrap_content"
+            layout="@layout/lz_markets_layout"
             android:layout_width="match_parent"
-            android:layout_marginTop="22dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
 
         <!--        F(ii). Market Transactions-->
-        <include layout="@layout/lz_market_transactions"
-            android:visibility="gone"
+        <include
             android:id="@+id/lzMarketTransactions"
-            android:layout_height="wrap_content"
+            layout="@layout/lz_market_transactions"
             android:layout_width="match_parent"
-            android:layout_marginTop="22dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
 
         <!--        H. Patterns of Hunger-->
-        <include layout="@layout/lz_patterns_of_hunger"
-            android:visibility="gone"
+        <include
             android:id="@+id/lzHungerPatterns"
-            android:layout_height="wrap_content"
+            layout="@layout/lz_patterns_of_hunger"
             android:layout_width="match_parent"
-            android:layout_marginTop="22dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
 
         <!--        I. Hazards-->
-        <include layout="@layout/lz_hazards_layout"
-            android:visibility="gone"
+        <include
             android:id="@+id/lzHazards"
-            android:layout_height="wrap_content"
+            layout="@layout/lz_hazards_layout"
             android:layout_width="match_parent"
-            android:layout_marginTop="22dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
 
+        <!--        Completion Page-->
+        <include
+            android:id="@+id/lzCompletionPage"
+            layout="@layout/completion_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
 
 
     </LinearLayout>

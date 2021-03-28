@@ -3,21 +3,23 @@ package com.silasonyango.ndma.ui.county.destinations
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.EditText
 import androidx.core.view.get
 import androidx.core.view.size
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.gson.Gson
 import com.silasonyango.ndma.R
 import com.silasonyango.ndma.appStore.AppStore
 import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaire
+import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaireListObject
+import com.silasonyango.ndma.config.Constants
+import com.silasonyango.ndma.database.questionnaires.entity.QuestionnaireTypesEntity
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.ui.county.adapters.LzCropProductionRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.adapters.LzMarketTradeRecyclerViewAdapter
@@ -26,7 +28,9 @@ import com.silasonyango.ndma.ui.county.adapters.SubLocationLzAssignmentRecyclerV
 import com.silasonyango.ndma.ui.county.model.*
 import com.silasonyango.ndma.ui.county.responses.*
 import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
+import com.silasonyango.ndma.ui.home.HomeViewModel
 import com.silasonyango.ndma.util.Util
+
 
 class CountyLevelFragment : DialogFragment(),
     SubLocationLzAssignmentRecyclerViewAdapter.SubLocationLzAssignmentRecyclerViewAdapterCallback,
@@ -43,8 +47,6 @@ class CountyLevelFragment : DialogFragment(),
 
     var questionnaireName: String? = null
 
-    val sharedPreferences: SharedPreferences? = context?.getSharedPreferences("MyPref", Context.MODE_PRIVATE)
-    val editor:SharedPreferences.Editor? =  sharedPreferences?.edit()
 
     companion object {
 
@@ -89,6 +91,7 @@ class CountyLevelFragment : DialogFragment(),
     ): View? {
         countyLevelViewModel =
             ViewModelProvider(this).get(CountyLevelViewModel::class.java)
+
         binding = CountyLevelQuestionnaireLayoutBinding.inflate(inflater, container, false)
         defineViews()
         return binding.root
@@ -532,8 +535,37 @@ class CountyLevelFragment : DialogFragment(),
 
                     countyLevelQuestionnaire.hazardResponses = hazardResponses
 
-                    locationAndPopulationLayout.root.visibility = View.VISIBLE
+                    lzCompletionPage.root.visibility = View.VISIBLE
                     lzHazards.root.visibility = View.GONE
+                }
+            }
+
+            /*LzCompletion page navigation*/
+            lzCompletionPage.apply {
+                closeButton.setOnClickListener {
+                    val gson = Gson()
+                    val sharedPreferences: SharedPreferences? =
+                        context?.applicationContext?.getSharedPreferences(
+                            "MyPref",
+                            Context.MODE_PRIVATE
+                        )
+                    val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+
+
+                    val questionnairesListString =
+                        sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null)
+                    val questionnairesListObject: CountyLevelQuestionnaireListObject =
+                        gson.fromJson(
+                            questionnairesListString,
+                            CountyLevelQuestionnaireListObject::class.java
+                        )
+                    questionnairesListObject.addQuestionnaire(countyLevelQuestionnaire)
+                    editor?.remove(Constants.QUESTIONNAIRES_LIST_OBJECT)
+
+                    val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
+                    editor?.putString(Constants.QUESTIONNAIRES_LIST_OBJECT, newQuestionnaireObjectString)
+                    editor?.commit()
+
                 }
             }
         }
