@@ -6,6 +6,7 @@ import com.silasonyango.ndma.database.AppDatabase
 import com.silasonyango.ndma.database.questionnaires.entity.QuestionnaireTypesEntity
 import com.silasonyango.ndma.database.questionnaires.repository.QuestionnaireTypeRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
@@ -17,6 +18,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     val allQuestionnaireTypesLiveData: LiveData<List<QuestionnaireTypesEntity>>
     private val questionnaireTypeRepository: QuestionnaireTypeRepository
+    val questionnaires: LiveData<List<QuestionnaireTypesEntity>> = MutableLiveData(null)
 
     init {
         val questionnaireTypesDao = AppDatabase.getDatabase(application).questionnaireTypesDao()
@@ -29,4 +31,15 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             questionnaireTypeRepository.addQuestionnaireType(questionnaireTypesEntity)
         }
     }
+
+//    fun fetchAllQuestionnaires() {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            questionnaireTypeRepository.fetchAllQuestionnaires()
+//                .collect { commitAllQuestionnaires(it) }
+//        }
+//    }
+//
+//    fun commitAllQuestionnaires(questionnaireTypesEntityList: LiveData<List<QuestionnaireTypesEntity>>) {
+//        (this.questionnaires as MutableLiveData).value = questionnaireTypesEntityList.value
+//    }
 }

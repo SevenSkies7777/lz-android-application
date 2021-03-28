@@ -29,11 +29,12 @@ class HomeFragment : Fragment() {
             textView.text = it
         })
 
+
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        registerObservers()
+        //registerObservers()
     }
 
     private fun registerObservers() {

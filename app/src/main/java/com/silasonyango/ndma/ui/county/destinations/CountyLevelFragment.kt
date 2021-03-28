@@ -48,7 +48,6 @@ class CountyLevelFragment : DialogFragment(),
     var questionnaireName: String? = null
 
 
-
     companion object {
 
         private const val QUESTIONNAIRE_ID = "questionnaireId"
@@ -553,10 +552,28 @@ class CountyLevelFragment : DialogFragment(),
                     val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
 
 
-                    val questionnaireString: String = gson.toJson(countyLevelQuestionnaire)
-                    editor?.putString(countyLevelQuestionnaire.uniqueId, questionnaireString)
+                    val questionnairesListString =
+                        sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null)
+                    val questionnairesListObject: CountyLevelQuestionnaireListObject =
+                        gson.fromJson(
+                            questionnairesListString,
+                            CountyLevelQuestionnaireListObject::class.java
+                        )
+                    questionnairesListObject.addQuestionnaire(countyLevelQuestionnaire)
+                    editor?.remove(Constants.QUESTIONNAIRES_LIST_OBJECT)
+
+                    val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
+                    editor?.putString(Constants.QUESTIONNAIRES_LIST_OBJECT, newQuestionnaireObjectString)
                     editor?.commit()
 
+
+//                    val testString =
+//                        sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null)
+//                    val testObject: CountyLevelQuestionnaireListObject =
+//                        gson.fromJson(
+//                            testString,
+//                            CountyLevelQuestionnaireListObject::class.java
+//                        )
 
                 }
             }
