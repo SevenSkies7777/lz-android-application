@@ -173,6 +173,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/maizeOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -195,6 +196,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/maizeMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -217,6 +219,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/maizeGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -284,6 +287,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/wheatOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -306,6 +310,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/wheatMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -328,6 +333,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/wheatGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -395,6 +401,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/sorghumOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -417,6 +424,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/sorghumMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -439,6 +447,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/sorghumGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -506,6 +515,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/riceOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -528,6 +538,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/riceMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -550,6 +561,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/riceGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -617,6 +629,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/beansOwnfarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -639,6 +652,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/beansMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -661,6 +675,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/beansGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -728,6 +743,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/pulsesOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -750,6 +766,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/pulsesMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -772,6 +789,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/pulsesGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -839,6 +857,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/vegetablesOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -861,6 +880,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/vegetablesMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -883,6 +903,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/vegetablesGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -950,6 +971,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fruitsOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -972,6 +994,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fruitsMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -994,6 +1017,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fruitsGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1061,6 +1085,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/whiteRootsOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1083,6 +1108,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/whiteRootsMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1105,6 +1131,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/whiteRootsGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1172,6 +1199,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/meatOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1194,6 +1222,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/meatMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1216,6 +1245,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/meatGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1283,6 +1313,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/milkOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1305,6 +1336,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/milkMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1327,6 +1359,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/milkGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1394,6 +1427,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fishOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1416,6 +1450,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fishOwnMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1438,6 +1473,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fishGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1505,6 +1541,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/eggsOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1527,6 +1564,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/eggsMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1549,6 +1587,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/eggsGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1616,6 +1655,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/cookingFatOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1638,6 +1678,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/cookingFatMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1660,6 +1701,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/cookingFatGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1727,6 +1769,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/spicesOwnFarm"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1749,6 +1792,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/spicesMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1771,6 +1815,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/spicesGift"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"

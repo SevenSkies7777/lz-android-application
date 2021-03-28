@@ -12,6 +12,8 @@ import com.silasonyango.ndma.R
 import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.databinding.WealthGroupQuestionnaireLayoutBinding
+import com.silasonyango.ndma.ui.wealthgroup.responses.FoodConsumptionResponseItem
+import com.silasonyango.ndma.ui.wealthgroup.responses.FoodConsumptionResponses
 import com.silasonyango.ndma.ui.wealthgroup.responses.IncomeAndFoodSourceResponses
 
 class WealthGroupDialogFragment : DialogFragment() {
@@ -103,7 +105,7 @@ class WealthGroupDialogFragment : DialogFragment() {
             wgIncomeAndFoodSources.apply {
                 foodSourcesNextButton.setOnClickListener {
 
-                    var incomeAndFoodSourceResponses = IncomeAndFoodSourceResponses()
+                    val incomeAndFoodSourceResponses = IncomeAndFoodSourceResponses()
 
                     incomeAndFoodSourceResponses.livestockProduction =
                         livestockProduction.text.toString().toDouble()
@@ -150,6 +152,8 @@ class WealthGroupDialogFragment : DialogFragment() {
                     incomeAndFoodSourceResponses.other =
                         other.text.toString().toDouble()
 
+                    wealthGroupQuestionnaire.incomeAndFoodSourceResponses = incomeAndFoodSourceResponses
+
                     wgIncomeAndFoodSources.root.visibility = View.GONE
                     wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
                 }
@@ -161,6 +165,100 @@ class WealthGroupDialogFragment : DialogFragment() {
 
             wgPercentFoodConsumptionIncome.apply {
                 foodSourcesPercentNextButton.setOnClickListener {
+
+                    val foodConsumptionResponses = FoodConsumptionResponses()
+
+                    foodConsumptionResponses.maizeAndPosho = FoodConsumptionResponseItem(
+                        maizeOwnFarm.text.toString().toDouble(),
+                        maizeMarket.text.toString().toDouble(),
+                        maizeGift.text.toString().toDouble()
+                    )
+
+                    foodConsumptionResponses.wheatOrBarley = FoodConsumptionResponseItem(
+                        wheatOwnFarm.text.toString().toDouble(),
+                        wheatMarket.text.toString().toDouble(),
+                        wheatGift.text.toString().toDouble()
+                    )
+
+
+                    foodConsumptionResponses.sorghumOrMillet = FoodConsumptionResponseItem(
+                        sorghumOwnFarm.text.toString().toDouble(),
+                        sorghumMarket.text.toString().toDouble(),
+                        sorghumGift.text.toString().toDouble()
+                    )
+
+                    foodConsumptionResponses.rice = FoodConsumptionResponseItem(
+                        riceOwnFarm.text.toString().toDouble(),
+                        riceMarket.text.toString().toDouble(),
+                        riceGift.text.toString().toDouble()
+                    )
+
+                    foodConsumptionResponses.beans = FoodConsumptionResponseItem(
+                        beansOwnfarm.text.toString().toDouble(),
+                        beansMarket.text.toString().toDouble(),
+                        beansGift.text.toString().toDouble()
+                    )
+
+                    foodConsumptionResponses.pulses = FoodConsumptionResponseItem(
+                        pulsesOwnFarm.text.toString().toDouble(),
+                        pulsesMarket.text.toString().toDouble(),
+                        pulsesGift.text.toString().toDouble()
+                    )
+
+                    foodConsumptionResponses.vegetables = FoodConsumptionResponseItem(
+                        vegetablesOwnFarm.text.toString().toDouble(),
+                        vegetablesMarket.text.toString().toDouble(),
+                        vegetablesGift.text.toString().toDouble()
+                    )
+
+                    foodConsumptionResponses.fruits = FoodConsumptionResponseItem(
+                        fruitsOwnFarm.text.toString().toDouble(),
+                        fruitsMarket.text.toString().toDouble(),
+                        fruitsGift.text.toString().toDouble()
+                    )
+
+                    foodConsumptionResponses.whiteRoots = FoodConsumptionResponseItem(
+                        whiteRootsOwnFarm.text.toString().toDouble(),
+                        whiteRootsMarket.text.toString().toDouble(),
+                        whiteRootsGift.text.toString().toDouble()
+                    )
+
+                    foodConsumptionResponses.meat = FoodConsumptionResponseItem(
+                        meatOwnFarm.text.toString().toDouble(),
+                        meatMarket.text.toString().toDouble(),
+                        meatGift.text.toString().toDouble()
+                    )
+
+                    foodConsumptionResponses.milk = FoodConsumptionResponseItem(
+                        milkOwnFarm.text.toString().toDouble(),
+                        milkMarket.text.toString().toDouble(),
+                        milkGift.text.toString().toDouble()
+                    )
+
+                    foodConsumptionResponses.fish = FoodConsumptionResponseItem(
+                        fishOwnFarm.text.toString().toDouble(),
+                        fishOwnMarket.text.toString().toDouble(),
+                        fishGift.text.toString().toDouble()
+                    )
+
+                    foodConsumptionResponses.eggs = FoodConsumptionResponseItem(
+                        eggsOwnFarm.text.toString().toDouble(),
+                        eggsMarket.text.toString().toDouble(),
+                        eggsGift.text.toString().toDouble()
+                    )
+
+                    foodConsumptionResponses.cookingFats = FoodConsumptionResponseItem(
+                        cookingFatOwnFarm.text.toString().toDouble(),
+                        cookingFatMarket.text.toString().toDouble(),
+                        cookingFatGift.text.toString().toDouble()
+                    )
+
+                    foodConsumptionResponses.spices = FoodConsumptionResponseItem(
+                        spicesOwnFarm.text.toString().toDouble(),
+                        spicesMarket.text.toString().toDouble(),
+                        spicesGift.text.toString().toDouble()
+                    )
+
                     wgPercentFoodConsumptionIncome.root.visibility = View.GONE
                     wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
                 }
