@@ -14,18 +14,26 @@
         <include layout="@layout/wealth_group_top_bar"/>
 
         <!--        B. Main Sources of Income and Food-->
+        <include layout="@layout/geographic_configuration_layout"
+            android:id="@+id/wgGeography"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="22dp"/>
+
+        <!--        B. Main Sources of Income and Food-->
         <include layout="@layout/wg_income_and_food_sources_layout"
             android:id="@+id/wgIncomeAndFoodSources"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="22dp"/>
+            android:layout_width="match_parent"
+            android:layout_marginTop="22dp"
+            android:visibility="gone"/>
 
         <!--        B(ii). Percent of total food consumption from each source-->
         <include layout="@layout/wg_percent_food_consumption_layout"
             android:visibility="gone"
             android:id="@+id/wgPercentFoodConsumptionIncome"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_marginTop="22dp"/>
 
         <!--        D. Livestock and Poultry Ownership-->
@@ -33,7 +41,7 @@
             android:visibility="gone"
             android:id="@+id/wgLivestockPoultryNumbers"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_marginTop="22dp"/>
 
         <!--        D. Livestock and Poultry Contribution-->
@@ -41,7 +49,7 @@
             android:visibility="gone"
             android:id="@+id/wgLivestockPoultryContribution"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_marginTop="22dp"/>
 
         <!--        E. Labour Patterns-->
@@ -49,7 +57,7 @@
             android:visibility="gone"
             android:id="@+id/wgLabourPatterns"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_marginTop="22dp"/>
 
         <!--        F. Expenditure Patterns-->
@@ -57,7 +65,7 @@
             android:visibility="gone"
             android:id="@+id/wgExpenditurePatterns"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_marginTop="22dp"/>
 
         <!--        G. Settlement and Migration Patterns of the Inhabitants of the Livelihood Zone-->
@@ -65,7 +73,7 @@
             android:visibility="gone"
             android:id="@+id/wgMigrationPatterns"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_marginTop="22dp"/>
 
         <!--        H. Constraints to Main Economic Activities-->
@@ -73,7 +81,7 @@
             android:visibility="gone"
             android:id="@+id/wgConstraints"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_marginTop="22dp"/>
 
         <!--        Completion Page-->

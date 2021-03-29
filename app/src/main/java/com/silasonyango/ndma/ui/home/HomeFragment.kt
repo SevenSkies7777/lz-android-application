@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.gson.Gson
 import com.silasonyango.ndma.R
 import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaireListObject
+import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
 import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaireListObject
 import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.database.questionnaires.entity.QuestionnaireTypesEntity
@@ -108,5 +109,9 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
             wealthGroupRV.adapter =
                 wealthGroupAdapter
         }
+    }
+
+    override fun onQuestionnaireItemClicked(wealthGroupQuestionnaire: WealthGroupQuestionnaire) {
+        homeViewModel.submitWealthGroupQuestionnaire(wealthGroupQuestionnaire)
     }
 }

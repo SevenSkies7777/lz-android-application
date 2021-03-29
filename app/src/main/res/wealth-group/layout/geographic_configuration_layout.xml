@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="A. Geography"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:layout_marginStart="24dp"
+        android:lineSpacingExtra="9sp"/>
+
+    <LinearLayout
+        android:background="@drawable/bg_geography"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="27dp"
+        android:paddingLeft="19dp"
+        android:paddingRight="19dp"
+        android:paddingTop="29dp"
+        android:paddingBottom="26dp">
+
+
+<!--        SubCounty Drop-Down-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Sub-County"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="7sp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:text="Select Sub-County..."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#737373"
+                android:layout_toLeftOf="@+id/icDropDown"
+                android:layout_marginRight="8dp"
+                android:layout_centerVertical="true"/>
+
+            <View
+                android:id="@+id/icDropDown"
+                android:background="@drawable/ic_drop_down"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+
+            <View
+                android:background="#44d7b6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/icDropDown"
+                android:layout_marginTop="7dp"/>
+
+        </RelativeLayout>
+
+
+<!--        Ward Drop-Down-->
+        <RelativeLayout
+            android:layout_marginTop="23dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Ward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="7sp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:text="Select Ward..."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#737373"
+                android:layout_toLeftOf="@+id/icWardDropDown"
+                android:layout_marginRight="8dp"
+                android:layout_centerVertical="true"/>
+
+            <View
+                android:id="@+id/icWardDropDown"
+                android:background="@drawable/ic_drop_down"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+
+            <View
+                android:background="#44d7b6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/icWardDropDown"
+                android:layout_marginTop="7dp"/>
+
+        </RelativeLayout>
+
+<!--        Sub-Location Drop-Down-->
+        <RelativeLayout
+            android:layout_marginTop="23dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Sub-Location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="7sp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:text="Select Sub-Location..."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#737373"
+                android:layout_toLeftOf="@+id/icSubLocationDropDown"
+                android:layout_marginRight="8dp"
+                android:layout_centerVertical="true"/>
+
+            <View
+                android:id="@+id/icSubLocationDropDown"
+                android:background="@drawable/ic_drop_down"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+
+            <View
+                android:background="#44d7b6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/icSubLocationDropDown"
+                android:layout_marginTop="7dp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

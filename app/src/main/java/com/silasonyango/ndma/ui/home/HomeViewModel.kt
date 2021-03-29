@@ -2,9 +2,14 @@ package com.silasonyango.ndma.ui.home
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
 import com.silasonyango.ndma.database.AppDatabase
 import com.silasonyango.ndma.database.questionnaires.entity.QuestionnaireTypesEntity
 import com.silasonyango.ndma.database.questionnaires.repository.QuestionnaireTypeRepository
+import com.silasonyango.ndma.services.model.Resource
+import com.silasonyango.ndma.ui.model.QuestionnaireApiResponse
+import com.silasonyango.ndma.ui.wealthgroup.repository.WealthGroupRepository
+import com.silasonyango.ndma.ui.wealthgroup.repository.WealthGroupService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -14,7 +19,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
     }
-    val text: LiveData<String> = _text
+    val questionnaireApiResponse: LiveData<Resource<QuestionnaireApiResponse?>> = MutableLiveData(null)
 
     val allQuestionnaireTypesLiveData: LiveData<List<QuestionnaireTypesEntity>>
     private val questionnaireTypeRepository: QuestionnaireTypeRepository
@@ -42,4 +47,17 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 //    fun commitAllQuestionnaires(questionnaireTypesEntityList: LiveData<List<QuestionnaireTypesEntity>>) {
 //        (this.questionnaires as MutableLiveData).value = questionnaireTypesEntityList.value
 //    }
+
+
+
+    fun submitWealthGroupQuestionnaire(wealthGroupQuestionnaire: WealthGroupQuestionnaire) {
+        viewModelScope.launch {
+            WealthGroupRepository(WealthGroupService()).submitWealthGroupQuestionnaire(wealthGroupQuestionnaire)
+                .collect { commitQuestionnaireApiResponse(it) }
+        }
+    }
+
+    fun commitQuestionnaireApiResponse(questionnaireApiResponse: Resource<QuestionnaireApiResponse?>) {
+        (this.questionnaireApiResponse as MutableLiveData).value = questionnaireApiResponse
+    }
 }

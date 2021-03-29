@@ -17,7 +17,7 @@ class WealthGroupQuestionnaireAdapter(
 ) : RecyclerView.Adapter<WealthGroupQuestionnaireAdapter.ViewHolder>() {
 
     interface WealthGroupQuestionnaireAdapterCallBack {
-
+        fun onQuestionnaireItemClicked(wealthGroupQuestionnaire: WealthGroupQuestionnaire)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -36,6 +36,9 @@ class WealthGroupQuestionnaireAdapter(
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.tvQuestionnaireName.text = wealthGroupQuestionnairesList.get(position).questionnaireName
+        viewHolder.itemView.setOnClickListener {
+            wealthGroupQuestionnaireAdapterCallBack.onQuestionnaireItemClicked(wealthGroupQuestionnairesList.get(position))
+        }
     }
 
     override fun getItemCount() = wealthGroupQuestionnairesList.size

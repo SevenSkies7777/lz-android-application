@@ -1,6 +1,7 @@
 package com.silasonyango.ndma.ui.wealthgroup.repository
 
 import com.google.gson.Gson
+import com.silasonyango.ndma.appStore.AppStore
 import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
 import com.silasonyango.ndma.config.EndPoints
 import com.silasonyango.ndma.login.model.LoginRequestModel
@@ -26,6 +27,7 @@ class WealthGroupService {
             val request = Request.Builder()
                 .url("$baseUrl$path")
                 .header("Accepts", "application/json")
+                .header("Authorization", "Bearer "+ AppStore.getInstance().sessionDetails?.accessToken)
                 .post(body)
                 .build()
 
