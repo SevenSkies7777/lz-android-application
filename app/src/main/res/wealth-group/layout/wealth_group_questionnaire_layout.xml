@@ -76,6 +76,15 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="22dp"/>
 
+        <!--        Completion Page-->
+        <include
+            android:id="@+id/wgCompletionPage"
+            layout="@layout/completion_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
+
 
     </LinearLayout>
 

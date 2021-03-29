@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.gson.Gson
 import com.silasonyango.ndma.R
 import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaireListObject
+import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaireListObject
 import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.database.questionnaires.entity.QuestionnaireTypesEntity
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
@@ -38,6 +39,7 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
             ViewModelProvider(this).get(HomeViewModel::class.java)
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         populateQuestionnairesList()
+        populateWealthGroupQuestionnairesList()
 
 
 
@@ -74,5 +76,36 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
             countyLevelRV.adapter =
                 countyQuestionnaireAdapter
         }
+    }
+
+
+    private fun populateWealthGroupQuestionnairesList() {
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.WEALTH_GROUP_LIST_OBJECT, null)
+        val questionnairesListObject: WealthGroupQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                WealthGroupQuestionnaireListObject::class.java
+            )
+
+        System.out.println()
+
+//        binding.apply {
+//            val countyQuestionnaireAdapter = CountyQuestionnaireAdapter(
+//                questionnairesListObject.questionnaireList,
+//                this@HomeFragment
+//            )
+//            val gridLayoutManager = GridLayoutManager(activity, 1)
+//            countyLevelRV.layoutManager = gridLayoutManager
+//            countyLevelRV.hasFixedSize()
+//            countyLevelRV.adapter =
+//                countyQuestionnaireAdapter
+//        }
     }
 }

@@ -22,10 +22,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.gson.Gson
 import com.silasonyango.ndma.appStore.AppStore
-import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaire
-import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaireListObject
-import com.silasonyango.ndma.appStore.model.QuestionnaireType
-import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
+import com.silasonyango.ndma.appStore.model.*
 import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.ui.county.destinations.CountyLevelFragment
 import com.silasonyango.ndma.ui.county.model.CropModel
@@ -51,6 +48,14 @@ class MainActivity : AppCompatActivity() {
 
             val responsesJson: String = gson.toJson(countyLevelQuestionnaireListObject)
             editor?.putString(Constants.QUESTIONNAIRES_LIST_OBJECT, responsesJson)
+            editor?.commit()
+        }
+
+        if (sharedPreferences?.getString(Constants.WEALTH_GROUP_LIST_OBJECT, null).isNullOrEmpty()) {
+            val wealthGroupQuestionnaireListObject = WealthGroupQuestionnaireListObject()
+
+            val responsesJson: String = gson.toJson(wealthGroupQuestionnaireListObject)
+            editor?.putString(Constants.WEALTH_GROUP_LIST_OBJECT, responsesJson)
             editor?.commit()
         }
 
@@ -134,7 +139,7 @@ class MainActivity : AppCompatActivity() {
                         questionnaireId,
                         etQuestionnaireName.text.toString()
                 ))
-                val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(questionnaireId)
+                val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(questionnaireId,etQuestionnaireName.text.toString())
                 wealthGroupDialogFragment.show(this.supportFragmentManager, "CountyLevel")
             }
 

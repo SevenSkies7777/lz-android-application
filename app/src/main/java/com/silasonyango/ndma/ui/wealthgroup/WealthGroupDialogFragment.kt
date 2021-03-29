@@ -1,5 +1,7 @@
 package com.silasonyango.ndma.ui.wealthgroup
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +10,12 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.Gson
 import com.silasonyango.ndma.R
+import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaireListObject
 import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
+import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaireListObject
+import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.databinding.WealthGroupQuestionnaireLayoutBinding
 import com.silasonyango.ndma.ui.wealthgroup.responses.FoodConsumptionResponseItem
@@ -330,6 +336,41 @@ class WealthGroupDialogFragment : DialogFragment() {
                 constraintsBackButton.setOnClickListener {
                     wgMigrationPatterns.root.visibility = View.VISIBLE
                     wgConstraints.root.visibility = View.GONE
+                }
+
+                constraintsNextButton.setOnClickListener {
+                    wgCompletionPage.root.visibility = View.VISIBLE
+                    wgConstraints.root.visibility = View.GONE
+                }
+            }
+
+
+            /*wgCompletion page navigation*/
+            wgCompletionPage.apply {
+                closeButton.setOnClickListener {
+                    val gson = Gson()
+                    val sharedPreferences: SharedPreferences? =
+                        context?.applicationContext?.getSharedPreferences(
+                            "MyPref",
+                            Context.MODE_PRIVATE
+                        )
+                    val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+
+
+                    val questionnairesListString =
+                        sharedPreferences?.getString(Constants.WEALTH_GROUP_LIST_OBJECT, null)
+                    val questionnairesListObject: WealthGroupQuestionnaireListObject =
+                        gson.fromJson(
+                            questionnairesListString,
+                            WealthGroupQuestionnaireListObject::class.java
+                        )
+                    questionnairesListObject.addQuestionnaire(wealthGroupQuestionnaire)
+                    editor?.remove(Constants.WEALTH_GROUP_LIST_OBJECT)
+
+                    val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
+                    editor?.putString(Constants.WEALTH_GROUP_LIST_OBJECT, newQuestionnaireObjectString)
+                    editor?.commit()
+
                 }
             }
         }
