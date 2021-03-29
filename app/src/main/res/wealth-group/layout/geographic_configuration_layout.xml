@@ -2,6 +2,9 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_modal_background"
+    android:paddingTop="32dp"
+    android:paddingBottom="140dp"
     android:orientation="vertical">
 
     <TextView
@@ -31,6 +34,7 @@
 
 <!--        SubCounty Drop-Down-->
         <RelativeLayout
+            android:id="@+id/subCountyDropDown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

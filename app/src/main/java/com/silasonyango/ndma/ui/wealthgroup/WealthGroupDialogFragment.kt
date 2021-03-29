@@ -1,12 +1,17 @@
 package com.silasonyango.ndma.ui.wealthgroup
 
+
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -33,6 +38,8 @@ class WealthGroupDialogFragment : DialogFragment() {
     var questionnaireId: String? = null
 
     var questionnaireName: String? = null
+
+    private var subContyDialog: AlertDialog? = null
 
     companion object {
 
@@ -68,6 +75,8 @@ class WealthGroupDialogFragment : DialogFragment() {
                     }
                 }!!
         }
+
+        inflateSubCountyModal()
     }
 
     override fun onCreateView(
@@ -374,5 +383,28 @@ class WealthGroupDialogFragment : DialogFragment() {
                 }
             }
         }
+    }
+
+    private fun inflateSubCountyModal() {
+        val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.geographic_configuration_layout, null)
+
+        openSubCountyModal(v)
+    }
+
+    private fun openSubCountyModal(v: View) {
+        val builder: AlertDialog.Builder = activity?.let { AlertDialog.Builder(it) }!!
+        builder.setView(v)
+        builder.setCancelable(true)
+        subContyDialog = builder.create()
+        (subContyDialog as AlertDialog).setCancelable(true)
+        (subContyDialog as AlertDialog).setCanceledOnTouchOutside(true)
+        (subContyDialog as AlertDialog).window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        (subContyDialog as AlertDialog).show()
+        val window = (subContyDialog as AlertDialog).window
+        window?.setLayout(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
     }
 }

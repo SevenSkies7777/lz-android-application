@@ -20,20 +20,29 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.silasonyango.ndma.appStore.AppStore
 import com.silasonyango.ndma.appStore.model.*
 import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.ui.county.destinations.CountyLevelFragment
 import com.silasonyango.ndma.ui.county.model.CropModel
+import com.silasonyango.ndma.ui.county.model.SubCountyModel
+import com.silasonyango.ndma.ui.home.adapters.CountyQuestionnaireAdapter
+import com.silasonyango.ndma.ui.home.adapters.SubCountyAdapter
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
 import com.silasonyango.ndma.util.Util
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallBack {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     private var questionnaireMenuDialog: android.app.AlertDialog? = null
+
+    private var geographyDialog: android.app.AlertDialog? = null
+
+    private var subCountyDialog: android.app.AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -139,8 +148,9 @@ class MainActivity : AppCompatActivity() {
                         questionnaireId,
                         etQuestionnaireName.text.toString()
                 ))
-                val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(questionnaireId,etQuestionnaireName.text.toString())
-                wealthGroupDialogFragment.show(this.supportFragmentManager, "CountyLevel")
+                inflateGeographyDialog()
+//                val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(questionnaireId,etQuestionnaireName.text.toString())
+//                wealthGroupDialogFragment.show(this.supportFragmentManager, "CountyLevel")
             }
 
             (questionnaireMenuDialog as android.app.AlertDialog).dismiss()
@@ -173,5 +183,94 @@ class MainActivity : AppCompatActivity() {
             gravity = Gravity.BOTTOM
         }
         window?.attributes = wlp
+    }
+
+    fun dialogCenter(dialog: Dialog) {
+        val window = dialog.window
+        val wlp = window?.attributes?.apply {
+            gravity = Gravity.CENTER
+        }
+        window?.attributes = wlp
+    }
+
+
+    private fun inflateGeographyDialog() {
+        val inflater = this?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.geographic_configuration_layout, null)
+
+        val subCountyDropDown = v.findViewById<View>(R.id.subCountyDropDown)
+
+        val subCounties: MutableList<SubCountyModel> = ArrayList()
+        subCounties.add(SubCountyModel("Laikipia", 0))
+        subCounties.add(SubCountyModel("Laikipia", 0))
+        subCounties.add(SubCountyModel("Laikipia", 0))
+        subCounties.add(SubCountyModel("Laikipia", 0))
+        subCounties.add(SubCountyModel("Laikipia", 0))
+        subCounties.add(SubCountyModel("Laikipia", 0))
+        subCountyDropDown.setOnClickListener {
+            inflateSubCountyModal(subCounties)
+        }
+
+        openGeographyModal(v)
+    }
+
+    private fun openGeographyModal(v: View) {
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+        builder.setView(v)
+        builder.setCancelable(true)
+        geographyDialog = builder.create()
+        (geographyDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            dialogBottom(geographyDialog as AlertDialog)
+            window?.setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
+        }
+
+    }
+
+    private fun inflateSubCountyModal(subCounties: MutableList<SubCountyModel>) {
+        val inflater = this?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
+
+        val listRecyclerView = v.findViewById<RecyclerView>(R.id.listRv)
+
+        val countyQuestionnaireAdapter = SubCountyAdapter(
+            subCounties,
+            this
+        )
+        val gridLayoutManager = GridLayoutManager(this, 1)
+        listRecyclerView.layoutManager = gridLayoutManager
+        listRecyclerView.hasFixedSize()
+        listRecyclerView.adapter =
+            countyQuestionnaireAdapter
+
+        openSubCountyModal(v)
+    }
+
+    private fun openSubCountyModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+        builder.setView(v)
+        builder.setCancelable(true)
+        subCountyDialog = builder.create()
+        (subCountyDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            dialogCenter(subCountyDialog as AlertDialog)
+            window?.setLayout(
+                width,
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
+        }
+
     }
 }
