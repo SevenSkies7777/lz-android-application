@@ -4,6 +4,7 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.silasonyango.ndma.R
@@ -21,9 +22,7 @@ class WealthGroupQuestionnaireAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        init {
-
-        }
+        var tvQuestionnaireName: TextView = view.findViewById<TextView>(R.id.questionnaireName)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -36,7 +35,7 @@ class WealthGroupQuestionnaireAdapter(
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-
+        viewHolder.tvQuestionnaireName.text = wealthGroupQuestionnairesList.get(position).questionnaireName
     }
 
     override fun getItemCount() = wealthGroupQuestionnairesList.size

@@ -44,18 +44,16 @@ class Login : AppCompatActivity() {
             loginButton.setOnClickListener {
                 loginText.visibility = View.GONE
                 loginProgressBar.visibility = View.VISIBLE
-                val handler = Handler()
-                handler.postDelayed({
-                    loginProgressBar.visibility = View.GONE
-                    binding.apply {
-                        loginViewModel.signin(
-                            LoginRequestModel(
-                                etEmail.text.toString(),
-                                etPassword.text.toString()
-                            )
+
+                binding.apply {
+                    loginViewModel.signin(
+                        LoginRequestModel(
+                            etEmail.text.toString(),
+                            etPassword.text.toString()
                         )
-                    }
-                }, 2000)
+                    )
+                }
+
             }
         }
     }
@@ -65,6 +63,7 @@ class Login : AppCompatActivity() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
+                        binding.loginProgressBar.visibility = View.GONE
                         AppStore.getInstance().sessionDetails = resource.data
                         val i = Intent(this@Login, MainActivity::class.java)
                         startActivity(i)

@@ -24,9 +24,7 @@ class CountyQuestionnaireAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        init {
-
-        }
+        var tvQuestionnaireName: TextView = view.findViewById<TextView>(R.id.questionnaireName)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -39,7 +37,7 @@ class CountyQuestionnaireAdapter(
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-
+        viewHolder.tvQuestionnaireName.text = countLevelQuestionnaireList.get(position).questionnaireName
     }
 
     override fun getItemCount() = countLevelQuestionnaireList.size
