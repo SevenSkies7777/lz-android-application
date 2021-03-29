@@ -22,8 +22,9 @@ import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.databinding.FragmentHomeBinding
 import com.silasonyango.ndma.ui.county.adapters.LzCropProductionRecyclerViewAdapter
 import com.silasonyango.ndma.ui.home.adapters.CountyQuestionnaireAdapter
+import com.silasonyango.ndma.ui.home.adapters.WealthGroupQuestionnaireAdapter
 
-class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireAdapterCallBack {
+class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireAdapterCallBack, WealthGroupQuestionnaireAdapter.WealthGroupQuestionnaireAdapterCallBack {
 
     private lateinit var homeViewModel: HomeViewModel
 
@@ -96,16 +97,16 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
 
         System.out.println()
 
-//        binding.apply {
-//            val countyQuestionnaireAdapter = CountyQuestionnaireAdapter(
-//                questionnairesListObject.questionnaireList,
-//                this@HomeFragment
-//            )
-//            val gridLayoutManager = GridLayoutManager(activity, 1)
-//            countyLevelRV.layoutManager = gridLayoutManager
-//            countyLevelRV.hasFixedSize()
-//            countyLevelRV.adapter =
-//                countyQuestionnaireAdapter
-//        }
+        binding.apply {
+            val wealthGroupAdapter = WealthGroupQuestionnaireAdapter(
+                questionnairesListObject.questionnaireList,
+                this@HomeFragment
+            )
+            val gridLayoutManager = GridLayoutManager(activity, 1)
+            wealthGroupRV.layoutManager = gridLayoutManager
+            wealthGroupRV.hasFixedSize()
+            wealthGroupRV.adapter =
+                wealthGroupAdapter
+        }
     }
 }

@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textAlignment="textEnd"
-                        android:text="+KES 200.00"
+                        android:text="Completed"
                         android:textColor="#000"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -76,5 +76,12 @@
 
 
     </LinearLayout>
+
+    <View
+        android:layout_marginTop="17dp"
+        android:layout_gravity="bottom"
+        android:background="#F2F2F2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
 </LinearLayout>
