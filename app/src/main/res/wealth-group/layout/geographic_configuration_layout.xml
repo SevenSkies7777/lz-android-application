@@ -176,6 +176,55 @@
 
         </RelativeLayout>
 
+
+<!--        Wealth Group DropDown-->
+        <RelativeLayout
+            android:id="@+id/wealthGroupDropDown"
+            android:layout_marginTop="23dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Wealth Group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="7sp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:text="Select Wealth Group..."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#737373"
+                android:layout_toLeftOf="@+id/icWealthGroupDropDown"
+                android:layout_marginRight="8dp"
+                android:layout_centerVertical="true"/>
+
+            <View
+                android:id="@+id/icWealthGroupDropDown"
+                android:background="@drawable/ic_drop_down"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+
+            <View
+                android:background="#44d7b6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/icWealthGroupDropDown"
+                android:layout_marginTop="7dp"/>
+
+        </RelativeLayout>
+
     </LinearLayout>
 
 

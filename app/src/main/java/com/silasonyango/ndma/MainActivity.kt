@@ -27,18 +27,12 @@ import com.silasonyango.ndma.appStore.AppStore
 import com.silasonyango.ndma.appStore.model.*
 import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.ui.county.destinations.CountyLevelFragment
-import com.silasonyango.ndma.ui.county.model.CropModel
-import com.silasonyango.ndma.ui.county.model.SubCountyModel
-import com.silasonyango.ndma.ui.county.model.SubLocationModel
-import com.silasonyango.ndma.ui.county.model.WardModel
-import com.silasonyango.ndma.ui.home.adapters.CountyQuestionnaireAdapter
-import com.silasonyango.ndma.ui.home.adapters.SubCountyAdapter
-import com.silasonyango.ndma.ui.home.adapters.SubLocationAdapter
-import com.silasonyango.ndma.ui.home.adapters.WardAdapter
+import com.silasonyango.ndma.ui.county.model.*
+import com.silasonyango.ndma.ui.home.adapters.*
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
 import com.silasonyango.ndma.util.Util
 
-class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallBack, WardAdapter.WardAdapterCallBack, SubLocationAdapter.SubLocationAdapterCallBack {
+class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallBack, WardAdapter.WardAdapterCallBack, SubLocationAdapter.SubLocationAdapterCallBack, WealthGroupAdapter.WealthGroupAdapterCallBack {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -51,6 +45,8 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
     private var wardDialog: android.app.AlertDialog? = null
 
     private var subLocationDialog: android.app.AlertDialog? = null
+
+    private var wealthGroupDialog: android.app.AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -209,6 +205,7 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         val subCountyDropDown = v.findViewById<View>(R.id.subCountyDropDown)
         val wardDropDown = v.findViewById<View>(R.id.wardDropDown)
         val subLocationDropDown = v.findViewById<View>(R.id.subLocationDropDown)
+        val wealthGroupDropDown = v.findViewById<View>(R.id.wealthGroupDropDown)
 
         val subCounties: MutableList<SubCountyModel> = ArrayList()
         subCounties.add(SubCountyModel("Laikipia", 0))
@@ -237,6 +234,13 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         sublocationList.add(SubLocationModel("Samburu", 9))
         sublocationList.add(SubLocationModel( "Samburu", 0))
 
+
+        val wealthGroupModelList: MutableList<WealthGroupModel> = ArrayList()
+        wealthGroupModelList.add(WealthGroupModel("Very Poor",1))
+        wealthGroupModelList.add(WealthGroupModel("Poor",2))
+        wealthGroupModelList.add(WealthGroupModel("Medium",3))
+        wealthGroupModelList.add(WealthGroupModel("Better Off",4))
+
         subCountyDropDown.setOnClickListener {
             inflateSubCountyModal(subCounties)
         }
@@ -247,6 +251,10 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
         subLocationDropDown.setOnClickListener {
             inflateSubLocationModal(sublocationList)
+        }
+
+        wealthGroupDropDown.setOnClickListener {
+            inflateWealthGroupModal(wealthGroupModelList)
         }
 
         openGeographyModal(v)
@@ -392,6 +400,49 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             show()
             dialogCenter(subLocationDialog as AlertDialog)
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
+    }
+
+
+    private fun inflateWealthGroupModal(wealthGroupModelList: MutableList<WealthGroupModel>) {
+        val inflater = this?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
+
+        val listRecyclerView = v.findViewById<RecyclerView>(R.id.listRv)
+
+        val wealthGroupAdapter = WealthGroupAdapter(
+            wealthGroupModelList,
+            this
+        )
+        val gridLayoutManager = GridLayoutManager(this, 1)
+        listRecyclerView.layoutManager = gridLayoutManager
+        listRecyclerView.hasFixedSize()
+        listRecyclerView.adapter = wealthGroupAdapter
+
+        openWealthGroupModal(v)
+    }
+
+    private fun openWealthGroupModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+        builder.setView(v)
+        builder.setCancelable(true)
+        wealthGroupDialog = builder.create()
+        (wealthGroupDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            dialogCenter(wealthGroupDialog as AlertDialog)
             window?.setLayout(
                 width,
                 height
