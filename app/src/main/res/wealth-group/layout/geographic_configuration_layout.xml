@@ -225,6 +225,21 @@
 
         </RelativeLayout>
 
+
+        <TextView
+            android:background="@drawable/bg_green_button"
+            android:text="Submit"
+            android:layout_width="130dp"
+            android:layout_height="28dp"
+            android:fontFamily="@font/lato_bold"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="12sp"
+            android:gravity="center"
+            android:layout_gravity="end"
+            android:layout_marginTop="27dp"/>
+
     </LinearLayout>
 
 
