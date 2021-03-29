@@ -29,14 +29,16 @@ import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.ui.county.destinations.CountyLevelFragment
 import com.silasonyango.ndma.ui.county.model.CropModel
 import com.silasonyango.ndma.ui.county.model.SubCountyModel
+import com.silasonyango.ndma.ui.county.model.SubLocationModel
 import com.silasonyango.ndma.ui.county.model.WardModel
 import com.silasonyango.ndma.ui.home.adapters.CountyQuestionnaireAdapter
 import com.silasonyango.ndma.ui.home.adapters.SubCountyAdapter
+import com.silasonyango.ndma.ui.home.adapters.SubLocationAdapter
 import com.silasonyango.ndma.ui.home.adapters.WardAdapter
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
 import com.silasonyango.ndma.util.Util
 
-class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallBack, WardAdapter.WardAdapterCallBack {
+class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallBack, WardAdapter.WardAdapterCallBack, SubLocationAdapter.SubLocationAdapterCallBack {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -47,6 +49,8 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
     private var subCountyDialog: android.app.AlertDialog? = null
 
     private var wardDialog: android.app.AlertDialog? = null
+
+    private var subLocationDialog: android.app.AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -204,6 +208,7 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
         val subCountyDropDown = v.findViewById<View>(R.id.subCountyDropDown)
         val wardDropDown = v.findViewById<View>(R.id.wardDropDown)
+        val subLocationDropDown = v.findViewById<View>(R.id.subLocationDropDown)
 
         val subCounties: MutableList<SubCountyModel> = ArrayList()
         subCounties.add(SubCountyModel("Laikipia", 0))
@@ -224,12 +229,24 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         wardModelList.add(WardModel("Kisumu",0))
         wardModelList.add(WardModel("Kisumu",0))
         wardModelList.add(WardModel("Kisumu",0))
+
+        val sublocationList: MutableList<SubLocationModel> = ArrayList()
+        sublocationList.add(SubLocationModel("Samburu", 1))
+        sublocationList.add(SubLocationModel( "Samburu", 8))
+        sublocationList.add(SubLocationModel( "Samburu", 8))
+        sublocationList.add(SubLocationModel("Samburu", 9))
+        sublocationList.add(SubLocationModel( "Samburu", 0))
+
         subCountyDropDown.setOnClickListener {
             inflateSubCountyModal(subCounties)
         }
 
         wardDropDown.setOnClickListener {
             inflateWardModal(wardModelList)
+        }
+
+        subLocationDropDown.setOnClickListener {
+            inflateSubLocationModal(sublocationList)
         }
 
         openGeographyModal(v)
@@ -332,6 +349,49 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             show()
             dialogCenter(wardDialog as AlertDialog)
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
+    }
+
+
+    private fun inflateSubLocationModal(subLocationModalList: MutableList<SubLocationModel>) {
+        val inflater = this?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
+
+        val listRecyclerView = v.findViewById<RecyclerView>(R.id.listRv)
+
+        val subLocationAdapter = SubLocationAdapter(
+            subLocationModalList,
+            this
+        )
+        val gridLayoutManager = GridLayoutManager(this, 1)
+        listRecyclerView.layoutManager = gridLayoutManager
+        listRecyclerView.hasFixedSize()
+        listRecyclerView.adapter = subLocationAdapter
+
+        openSubLocationModal(v)
+    }
+
+    private fun openSubLocationModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+        builder.setView(v)
+        builder.setCancelable(true)
+        subLocationDialog = builder.create()
+        (subLocationDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            dialogCenter(subLocationDialog as AlertDialog)
             window?.setLayout(
                 width,
                 height

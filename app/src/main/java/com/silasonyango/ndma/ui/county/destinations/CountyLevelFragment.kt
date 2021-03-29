@@ -104,11 +104,11 @@ class CountyLevelFragment : DialogFragment(),
 
 
             val sublocationList: MutableList<SubLocationModel> = ArrayList()
-            sublocationList.add(SubLocationModel(1, "Samburu", "008"))
-            sublocationList.add(SubLocationModel(1, "Samburu", "008"))
-            sublocationList.add(SubLocationModel(1, "Samburu", "008"))
-            sublocationList.add(SubLocationModel(1, "Samburu", "008"))
-            sublocationList.add(SubLocationModel(1, "Samburu", "008"))
+            sublocationList.add(SubLocationModel("Samburu", 1))
+            sublocationList.add(SubLocationModel( "Samburu", 8))
+            sublocationList.add(SubLocationModel( "Samburu", 8))
+            sublocationList.add(SubLocationModel("Samburu", 9))
+            sublocationList.add(SubLocationModel( "Samburu", 0))
             populateLocationAndPopulationRV(sublocationList)
 
 
