@@ -23,6 +23,7 @@ import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaireListObject
 import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.databinding.WealthGroupQuestionnaireLayoutBinding
+import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
 import com.silasonyango.ndma.ui.wealthgroup.responses.FoodConsumptionResponseItem
 import com.silasonyango.ndma.ui.wealthgroup.responses.FoodConsumptionResponses
 import com.silasonyango.ndma.ui.wealthgroup.responses.IncomeAndFoodSourceResponses
@@ -39,6 +40,8 @@ class WealthGroupDialogFragment : DialogFragment() {
 
     var questionnaireName: String? = null
 
+    var questionnaireSessionLocation: QuestionnaireSessionLocation? = null
+
     private var subContyDialog: AlertDialog? = null
 
     companion object {
@@ -47,13 +50,16 @@ class WealthGroupDialogFragment : DialogFragment() {
 
         private const val QUESTIONNAIRE_NAME = "questionnaireName"
 
+        private const val QUESTIONNAIRE_SESSION_LOCATION = "sessionLocation"
+
         @JvmStatic
-        fun newInstance(questionnaireId: String, questionnaireName: String) =
+        fun newInstance(questionnaireId: String, questionnaireName: String, questionnaireSessionLocation: QuestionnaireSessionLocation) =
             WealthGroupDialogFragment()
                 .apply {
                     arguments = Bundle().apply {
                         putString(QUESTIONNAIRE_ID, questionnaireId)
                         putString(QUESTIONNAIRE_NAME, questionnaireName)
+                        putParcelable(QUESTIONNAIRE_SESSION_LOCATION, questionnaireSessionLocation)
                     }
                 }
     }
@@ -65,6 +71,8 @@ class WealthGroupDialogFragment : DialogFragment() {
 
             questionnaireName = it.getString(QUESTIONNAIRE_NAME)
 
+            questionnaireSessionLocation = it.getParcelable<QuestionnaireSessionLocation>(QUESTIONNAIRE_SESSION_LOCATION)
+
             wealthGroupQuestionnaire =
                 questionnaireId?.let { it1 ->
                     questionnaireName?.let { it2 ->
@@ -74,6 +82,8 @@ class WealthGroupDialogFragment : DialogFragment() {
                         )
                     }
                 }!!
+
+            wealthGroupQuestionnaire.questionnaireGeography = this!!.questionnaireSessionLocation!!
         }
 
         inflateSubCountyModal()

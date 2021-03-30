@@ -17,7 +17,7 @@ class WealthGroupAdapter(
 ) : RecyclerView.Adapter<WealthGroupAdapter.ViewHolder>() {
 
     interface WealthGroupAdapterCallBack {
-
+        fun onWealthGroupItemClicked(selectedWealthGroup: WealthGroupModel)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -39,6 +39,9 @@ class WealthGroupAdapter(
         viewHolder.tvOption.text = wealthGroupModelList.get(position).wealthGroupName
         if (position == wealthGroupModelList.size - 1) {
             viewHolder.stroke.visibility = View.GONE
+        }
+        viewHolder.itemView.setOnClickListener {
+            wealthGroupAdapterCallBack.onWealthGroupItemClicked(wealthGroupModelList.get(position))
         }
     }
 

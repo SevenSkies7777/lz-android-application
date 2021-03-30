@@ -26,13 +26,16 @@ import com.google.gson.Gson
 import com.silasonyango.ndma.appStore.AppStore
 import com.silasonyango.ndma.appStore.model.*
 import com.silasonyango.ndma.config.Constants
+import com.silasonyango.ndma.login.model.GeographyObject
 import com.silasonyango.ndma.ui.county.destinations.CountyLevelFragment
 import com.silasonyango.ndma.ui.county.model.*
 import com.silasonyango.ndma.ui.home.adapters.*
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
 import com.silasonyango.ndma.util.Util
 
-class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallBack, WardAdapter.WardAdapterCallBack, SubLocationAdapter.SubLocationAdapterCallBack, WealthGroupAdapter.WealthGroupAdapterCallBack {
+class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallBack,
+    WardAdapter.WardAdapterCallBack, SubLocationAdapter.SubLocationAdapterCallBack,
+    WealthGroupAdapter.WealthGroupAdapterCallBack {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -48,15 +51,32 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
     private var wealthGroupDialog: android.app.AlertDialog? = null
 
+    var questionnaireSessionLocation: QuestionnaireSessionLocation = QuestionnaireSessionLocation()
+
+    lateinit var selectedSubCountyText: TextView
+
+    lateinit var selectedWardText: TextView
+
+    lateinit var selectedSubLocationText: TextView
+
+    lateinit var selectedWealthGroupText: TextView
+
+    lateinit var questionnaireId: String
+
+    lateinit var questionnaireName: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
-        val sharedPreferences: SharedPreferences? = baseContext?.applicationContext?.getSharedPreferences("MyPref", Context.MODE_PRIVATE)
-        val editor:SharedPreferences.Editor? =  sharedPreferences?.edit()
+        val sharedPreferences: SharedPreferences? =
+            baseContext?.applicationContext?.getSharedPreferences("MyPref", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
         val gson = Gson()
 
-        if (sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null).isNullOrEmpty()) {
+        if (sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null)
+                .isNullOrEmpty()
+        ) {
             val countyLevelQuestionnaireListObject = CountyLevelQuestionnaireListObject()
 
             val responsesJson: String = gson.toJson(countyLevelQuestionnaireListObject)
@@ -64,7 +84,9 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
             editor?.commit()
         }
 
-        if (sharedPreferences?.getString(Constants.WEALTH_GROUP_LIST_OBJECT, null).isNullOrEmpty()) {
+        if (sharedPreferences?.getString(Constants.WEALTH_GROUP_LIST_OBJECT, null)
+                .isNullOrEmpty()
+        ) {
             val wealthGroupQuestionnaireListObject = WealthGroupQuestionnaireListObject()
 
             val responsesJson: String = gson.toJson(wealthGroupQuestionnaireListObject)
@@ -93,8 +115,11 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+            ), drawerLayout
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
@@ -140,21 +165,29 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         submitButton.setOnClickListener {
             if (selectedQuestionnaireType == QuestionnaireType.COUNTY_LEVEL_QUESTIONNAIRE) {
                 val questionnaireId = Util.generateUniqueId()
-                AppStore.getInstance().countyLevelQuestionnairesList.add(CountyLevelQuestionnaire(
+                AppStore.getInstance().countyLevelQuestionnairesList.add(
+                    CountyLevelQuestionnaire(
                         questionnaireId,
                         etQuestionnaireName.text.toString()
-                ))
-                val countyLevelDialogFragment = CountyLevelFragment.newInstance(questionnaireId,etQuestionnaireName.text.toString())
+                    )
+                )
+                val countyLevelDialogFragment = CountyLevelFragment.newInstance(
+                    questionnaireId,
+                    etQuestionnaireName.text.toString()
+                )
                 countyLevelDialogFragment.show(this.supportFragmentManager, "CountyLevel")
             } else {
                 val questionnaireId = Util.generateUniqueId()
-                AppStore.getInstance().wealthGroupQuestionnaireList.add(WealthGroupQuestionnaire(
+                AppStore.getInstance().wealthGroupQuestionnaireList.add(
+                    WealthGroupQuestionnaire(
                         questionnaireId,
                         etQuestionnaireName.text.toString()
-                ))
+                    )
+                )
+                this.questionnaireId = questionnaireId
+                this.questionnaireName = etQuestionnaireName.text.toString()
                 inflateGeographyDialog()
-//                val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(questionnaireId,etQuestionnaireName.text.toString())
-//                wealthGroupDialogFragment.show(this.supportFragmentManager, "CountyLevel")
+
             }
 
             (questionnaireMenuDialog as android.app.AlertDialog).dismiss()
@@ -174,8 +207,8 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
             show()
             dialogBottom(questionnaireMenuDialog as AlertDialog)
             window?.setLayout(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.WRAP_CONTENT
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT
             )
         }
 
@@ -199,6 +232,20 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
 
     private fun inflateGeographyDialog() {
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            this.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+        val geographyString =
+            sharedPreferences?.getString(Constants.GEOGRAPHY_OBJECT, null)
+        val geographyObject: GeographyObject =
+            gson.fromJson(
+                geographyString,
+                GeographyObject::class.java
+            )
         val inflater = this?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.geographic_configuration_layout, null)
 
@@ -206,55 +253,42 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         val wardDropDown = v.findViewById<View>(R.id.wardDropDown)
         val subLocationDropDown = v.findViewById<View>(R.id.subLocationDropDown)
         val wealthGroupDropDown = v.findViewById<View>(R.id.wealthGroupDropDown)
-
-        val subCounties: MutableList<SubCountyModel> = ArrayList()
-        subCounties.add(SubCountyModel("Laikipia", 0))
-        subCounties.add(SubCountyModel("Laikipia", 0))
-        subCounties.add(SubCountyModel("Laikipia", 0))
-        subCounties.add(SubCountyModel("Laikipia", 0))
-        subCounties.add(SubCountyModel("Laikipia", 0))
-        subCounties.add(SubCountyModel("Laikipia", 0))
-        subCounties.add(SubCountyModel("Laikipia", 0))
-        subCounties.add(SubCountyModel("Laikipia", 0))
-        subCounties.add(SubCountyModel("Laikipia", 0))
-        subCounties.add(SubCountyModel("Laikipia", 0))
-        subCounties.add(SubCountyModel("Laikipia", 0))
-        subCounties.add(SubCountyModel("Laikipia", 0))
-
-        val wardModelList: MutableList<WardModel> = ArrayList()
-        wardModelList.add(WardModel("Kisumu",0))
-        wardModelList.add(WardModel("Kisumu",0))
-        wardModelList.add(WardModel("Kisumu",0))
-        wardModelList.add(WardModel("Kisumu",0))
-
-        val sublocationList: MutableList<SubLocationModel> = ArrayList()
-        sublocationList.add(SubLocationModel("Samburu", 1))
-        sublocationList.add(SubLocationModel( "Samburu", 8))
-        sublocationList.add(SubLocationModel( "Samburu", 8))
-        sublocationList.add(SubLocationModel("Samburu", 9))
-        sublocationList.add(SubLocationModel( "Samburu", 0))
+        val submitButton = v.findViewById<TextView>(R.id.geographySubmitButton)
+        selectedSubCountyText = v.findViewById<TextView>(R.id.subCountyText)
+        selectedWardText = v.findViewById<TextView>(R.id.wardText)
+        selectedSubLocationText = v.findViewById<TextView>(R.id.subLocationText)
+        selectedWealthGroupText = v.findViewById<TextView>(R.id.wealthGroupText)
 
 
         val wealthGroupModelList: MutableList<WealthGroupModel> = ArrayList()
-        wealthGroupModelList.add(WealthGroupModel("Very Poor",1))
-        wealthGroupModelList.add(WealthGroupModel("Poor",2))
-        wealthGroupModelList.add(WealthGroupModel("Medium",3))
-        wealthGroupModelList.add(WealthGroupModel("Better Off",4))
+        wealthGroupModelList.add(WealthGroupModel("Very Poor", 1))
+        wealthGroupModelList.add(WealthGroupModel("Poor", 2))
+        wealthGroupModelList.add(WealthGroupModel("Medium", 3))
+        wealthGroupModelList.add(WealthGroupModel("Better Off", 4))
 
         subCountyDropDown.setOnClickListener {
-            inflateSubCountyModal(subCounties)
+            inflateSubCountyModal(geographyObject.subCounties as MutableList<SubCountyModel>)
         }
 
         wardDropDown.setOnClickListener {
-            inflateWardModal(wardModelList)
+            inflateWardModal(geographyObject.wards as MutableList<WardModel>)
         }
 
         subLocationDropDown.setOnClickListener {
-            inflateSubLocationModal(sublocationList)
+            inflateSubLocationModal(geographyObject.subLocations as MutableList<SubLocationModel>)
         }
 
         wealthGroupDropDown.setOnClickListener {
             inflateWealthGroupModal(wealthGroupModelList)
+        }
+
+        submitButton.setOnClickListener {
+            val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(
+                questionnaireId,
+                questionnaireName,
+                questionnaireSessionLocation
+            )
+            wealthGroupDialogFragment.show(this.supportFragmentManager, "CountyLevel")
         }
 
         openGeographyModal(v)
@@ -449,5 +483,29 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
             )
         }
 
+    }
+
+    override fun onSubCountyItemClicked(selectedSubCounty: SubCountyModel) {
+        questionnaireSessionLocation.selectedSubCounty = selectedSubCounty
+        selectedSubCountyText.text = selectedSubCounty.subCountyName
+        (subCountyDialog as android.app.AlertDialog).dismiss()
+    }
+
+    override fun onWardItemClicked(selectedWard: WardModel) {
+        questionnaireSessionLocation.selectedWard = selectedWard
+        selectedWardText.text = selectedWard.wardName
+        (wardDialog as android.app.AlertDialog).dismiss()
+    }
+
+    override fun onSubLocationItemClicked(selectedSubLocation: SubLocationModel) {
+        questionnaireSessionLocation.selectedSubLocation = selectedSubLocation
+        selectedSubLocationText.text = selectedSubLocation.subLocationName
+        (subLocationDialog as android.app.AlertDialog).dismiss()
+    }
+
+    override fun onWealthGroupItemClicked(selectedWealthGroup: WealthGroupModel) {
+        questionnaireSessionLocation.selectedWealthGroup = selectedWealthGroup
+        selectedWealthGroupText.text = selectedWealthGroup.wealthGroupName
+        (wealthGroupDialog as android.app.AlertDialog).dismiss()
     }
 }

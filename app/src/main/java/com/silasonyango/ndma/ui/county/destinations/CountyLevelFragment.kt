@@ -104,11 +104,7 @@ class CountyLevelFragment : DialogFragment(),
 
 
             val sublocationList: MutableList<SubLocationModel> = ArrayList()
-            sublocationList.add(SubLocationModel("Samburu", 1))
-            sublocationList.add(SubLocationModel( "Samburu", 8))
-            sublocationList.add(SubLocationModel( "Samburu", 8))
-            sublocationList.add(SubLocationModel("Samburu", 9))
-            sublocationList.add(SubLocationModel( "Samburu", 0))
+
             populateLocationAndPopulationRV(sublocationList)
 
 
@@ -169,12 +165,12 @@ class CountyLevelFragment : DialogFragment(),
         binding.apply {
             lzMarkets.apply {
                 val subCounties: MutableList<SubCountyModel> = ArrayList()
-                subCounties.add(SubCountyModel("Laikipia", 0))
-                subCounties.add(SubCountyModel("Laikipia", 0))
-                subCounties.add(SubCountyModel("Laikipia", 0))
-                subCounties.add(SubCountyModel("Laikipia", 0))
-                subCounties.add(SubCountyModel("Laikipia", 0))
-                subCounties.add(SubCountyModel("Laikipia", 0))
+//                subCounties.add(SubCountyModel("Laikipia", 0))
+//                subCounties.add(SubCountyModel("Laikipia", 0))
+//                subCounties.add(SubCountyModel("Laikipia", 0))
+//                subCounties.add(SubCountyModel("Laikipia", 0))
+//                subCounties.add(SubCountyModel("Laikipia", 0))
+//                subCounties.add(SubCountyModel("Laikipia", 0))
 
                 val spinnerAdapter = context?.let {
                     SubCountiesSpinnerAdapter(

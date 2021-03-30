@@ -17,7 +17,7 @@ class SubLocationAdapter(
 ) : RecyclerView.Adapter<SubLocationAdapter.ViewHolder>() {
 
     interface SubLocationAdapterCallBack {
-
+        fun onSubLocationItemClicked(selectedSubLocation: SubLocationModel)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -39,6 +39,9 @@ class SubLocationAdapter(
         viewHolder.tvOption.text = sublocationModelList.get(position).subLocationName
         if (position == sublocationModelList.size - 1) {
             viewHolder.stroke.visibility = View.GONE
+        }
+        viewHolder.itemView.setOnClickListener {
+            subLocationAdapterCallBack.onSubLocationItemClicked(sublocationModelList.get(position))
         }
     }
 

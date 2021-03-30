@@ -13,20 +13,13 @@
         <!--        Top bar-->
         <include layout="@layout/wealth_group_top_bar"/>
 
-        <!--        B. Main Sources of Income and Food-->
-        <include layout="@layout/geographic_configuration_layout"
-            android:id="@+id/wgGeography"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginTop="22dp"/>
 
         <!--        B. Main Sources of Income and Food-->
         <include layout="@layout/wg_income_and_food_sources_layout"
             android:id="@+id/wgIncomeAndFoodSources"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginTop="22dp"
-            android:visibility="gone"/>
+            android:layout_marginTop="22dp"/>
 
         <!--        B(ii). Percent of total food consumption from each source-->
         <include layout="@layout/wg_percent_food_consumption_layout"

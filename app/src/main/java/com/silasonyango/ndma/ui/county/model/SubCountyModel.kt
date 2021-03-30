@@ -1,3 +1,8 @@
 package com.silasonyango.ndma.ui.county.model
 
-class SubCountyModel(val subCountyName: String, val subCountyCode: Int)
+class SubCountyModel(
+    val subCountyId: Int,
+    val countyId: Int,
+    val subCountyName: String,
+    val subCountyCode: Int
+)

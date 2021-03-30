@@ -17,7 +17,7 @@ class WardAdapter(
 ) : RecyclerView.Adapter<WardAdapter.ViewHolder>() {
 
     interface WardAdapterCallBack {
-
+        fun onWardItemClicked(selectedWard: WardModel)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -39,6 +39,9 @@ class WardAdapter(
         viewHolder.tvOption.text = wardModelList.get(position).wardName
         if (position == wardModelList.size - 1) {
             viewHolder.stroke.visibility = View.GONE
+        }
+        viewHolder.itemView.setOnClickListener {
+            wardAdapterCallBack.onWardItemClicked(wardModelList.get(position))
         }
     }
 

@@ -1,7 +1,9 @@
 package com.silasonyango.ndma.login.ui.activity
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -12,11 +14,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
+import com.google.gson.Gson
 import com.silasonyango.ndma.MainActivity
 import com.silasonyango.ndma.appStore.AppStore
+import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaireListObject
+import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.config.EndPoints
 import com.silasonyango.ndma.databinding.ActivityLoginBinding
 import com.silasonyango.ndma.login.model.LoginRequestModel
+import com.silasonyango.ndma.login.model.LoginResponseModel
 import com.silasonyango.ndma.login.repository.LoginApiHelper
 import com.silasonyango.ndma.login.repository.LoginRepository
 import com.silasonyango.ndma.login.repository.LoginService
@@ -65,6 +71,19 @@ class Login : AppCompatActivity() {
                     Status.SUCCESS -> {
                         binding.loginProgressBar.visibility = View.GONE
                         AppStore.getInstance().sessionDetails = resource.data
+
+                        val sharedPreferences: SharedPreferences? = baseContext?.applicationContext?.getSharedPreferences("MyPref", Context.MODE_PRIVATE)
+                        val editor: SharedPreferences.Editor? =  sharedPreferences?.edit()
+                        val gson = Gson()
+
+                        if (!sharedPreferences?.getString(Constants.GEOGRAPHY_OBJECT, null).isNullOrEmpty()) {
+                            editor?.remove(Constants.GEOGRAPHY_OBJECT)
+                        }
+                        val loginResponseModel: LoginResponseModel? = resource.data
+                        val responsesJson: String = gson.toJson(loginResponseModel?.geography)
+                        editor?.putString(Constants.GEOGRAPHY_OBJECT, responsesJson)
+                        editor?.commit()
+
                         val i = Intent(this@Login, MainActivity::class.java)
                         startActivity(i)
                     }

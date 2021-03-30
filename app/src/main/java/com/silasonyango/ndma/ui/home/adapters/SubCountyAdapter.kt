@@ -17,7 +17,7 @@ class SubCountyAdapter(
 ) : RecyclerView.Adapter<SubCountyAdapter.ViewHolder>() {
 
     interface SubCountyAdapterCallBack {
-
+        fun onSubCountyItemClicked(selectedSubCounty: SubCountyModel)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -39,6 +39,9 @@ class SubCountyAdapter(
         viewHolder.tvOption.text = subCountyModelList.get(position).subCountyName
         if (position == subCountyModelList.size - 1) {
             viewHolder.stroke.visibility = View.GONE
+        }
+        viewHolder.itemView.setOnClickListener {
+            subCountyAdapterCallBack.onSubCountyItemClicked(subCountyModelList.get(position))
         }
     }
 

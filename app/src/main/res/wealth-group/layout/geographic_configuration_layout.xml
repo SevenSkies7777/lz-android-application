@@ -51,6 +51,7 @@
                 android:layout_centerVertical="true"/>
 
             <TextView
+                android:id="@+id/subCountyText"
                 android:text="Select Sub-County..."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,6 +101,7 @@
                 android:layout_centerVertical="true"/>
 
             <TextView
+                android:id="@+id/wardText"
                 android:text="Select Ward..."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -148,6 +150,7 @@
                 android:layout_centerVertical="true"/>
 
             <TextView
+                android:id="@+id/subLocationText"
                 android:text="Select Sub-Location..."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -197,6 +200,7 @@
                 android:layout_centerVertical="true"/>
 
             <TextView
+                android:id="@+id/wealthGroupText"
                 android:text="Select Wealth Group..."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -227,6 +231,7 @@
 
 
         <TextView
+            android:id="@+id/geographySubmitButton"
             android:background="@drawable/bg_green_button"
             android:text="Submit"
             android:layout_width="130dp"
