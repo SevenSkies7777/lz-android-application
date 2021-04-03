@@ -35,7 +35,9 @@ import com.silasonyango.ndma.util.Util
 
 class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallBack,
     WardAdapter.WardAdapterCallBack, SubLocationAdapter.SubLocationAdapterCallBack,
-    WealthGroupAdapter.WealthGroupAdapterCallBack, LivelihoodZonesAdapter.LivelihoodZonesAdapterCallBack {
+    WealthGroupAdapter.WealthGroupAdapterCallBack,
+    LivelihoodZonesAdapter.LivelihoodZonesAdapterCallBack,
+    WgQuestionnaireTypeAdapter.WgQuestionnaireTypeAdapterCallBack {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -64,6 +66,10 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
     lateinit var selectedSubLocationText: TextView
 
     lateinit var selectedWealthGroupText: TextView
+
+    lateinit var questionnaireTypeText: TextView
+
+    lateinit var livelihoodZoneText: TextView
 
     lateinit var questionnaireId: String
 
@@ -259,10 +265,13 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         val wealthGroupDropDown = v.findViewById<View>(R.id.wealthGroupDropDown)
         val submitButton = v.findViewById<TextView>(R.id.geographySubmitButton)
         val livelihoodZoneDropDown = v.findViewById<View>(R.id.livelihoodZoneDropDown)
+        val questionnaireTypeDropDown = v.findViewById<View>(R.id.questionnaireTypeDropDown)
         selectedSubCountyText = v.findViewById<TextView>(R.id.subCountyText)
         selectedWardText = v.findViewById<TextView>(R.id.wardText)
         selectedSubLocationText = v.findViewById<TextView>(R.id.subLocationText)
         selectedWealthGroupText = v.findViewById<TextView>(R.id.wealthGroupText)
+        questionnaireTypeText = v.findViewById<TextView>(R.id.questionnaireTypeText)
+        livelihoodZoneText = v.findViewById<TextView>(R.id.livelihoodZoneText)
 
 
         val wealthGroupModelList: MutableList<WealthGroupModel> = ArrayList()
@@ -270,6 +279,10 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         wealthGroupModelList.add(WealthGroupModel("Poor", 2))
         wealthGroupModelList.add(WealthGroupModel("Medium", 3))
         wealthGroupModelList.add(WealthGroupModel("Better Off", 4))
+
+        val wgQuestionnaireTypesList: MutableList<WgQuestionnaireTypeModel> = ArrayList()
+        wgQuestionnaireTypesList.add(WgQuestionnaireTypeModel("Summarized questionnaire",1))
+        wgQuestionnaireTypesList.add(WgQuestionnaireTypeModel("Raw data questionnaire",2))
 
         subCountyDropDown.setOnClickListener {
             inflateSubCountyModal(geographyObject.subCounties as MutableList<SubCountyModel>)
@@ -285,6 +298,10 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
         wealthGroupDropDown.setOnClickListener {
             inflateWealthGroupModal(wealthGroupModelList)
+        }
+
+        questionnaireTypeDropDown.setOnClickListener {
+            inflateWgQuestionnaireTypeModal(wgQuestionnaireTypesList)
         }
 
         livelihoodZoneDropDown.setOnClickListener {
@@ -537,6 +554,49 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
     }
 
+
+    private fun inflateWgQuestionnaireTypeModal(wgQuestionnaireTypeList: MutableList<WgQuestionnaireTypeModel>) {
+        val inflater = this?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
+
+        val listRecyclerView = v.findViewById<RecyclerView>(R.id.listRv)
+
+        val lzAdapter = WgQuestionnaireTypeAdapter(
+            wgQuestionnaireTypeList,
+            this
+        )
+        val gridLayoutManager = GridLayoutManager(this, 1)
+        listRecyclerView.layoutManager = gridLayoutManager
+        listRecyclerView.hasFixedSize()
+        listRecyclerView.adapter = lzAdapter
+
+        openWgQuestionnaireTypeModal(v)
+    }
+
+    private fun openWgQuestionnaireTypeModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+        builder.setView(v)
+        builder.setCancelable(true)
+        questionnaireTypeAlertDialog = builder.create()
+        (questionnaireTypeAlertDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            dialogCenter(questionnaireTypeAlertDialog as AlertDialog)
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
+    }
+
     override fun onSubCountyItemClicked(selectedSubCounty: SubCountyModel) {
         questionnaireSessionLocation.selectedSubCounty = selectedSubCounty
         selectedSubCountyText.text = selectedSubCounty.subCountyName
@@ -563,7 +623,13 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
     override fun onLivelihoodZoneItemClicked(selectedLivelihoodZone: LivelihoodZoneModel) {
         questionnaireSessionLocation.selectedLivelihoodZone = selectedLivelihoodZone
-        selectedWealthGroupText.text = selectedLivelihoodZone.livelihoodZoneName
+        livelihoodZoneText.text = selectedLivelihoodZone.livelihoodZoneName
         (livelihoodZoneAlertDialog as android.app.AlertDialog).dismiss()
+    }
+
+    override fun onWgQuestionnaireTypeItemClicked(selectedWgQuestionnaireType: WgQuestionnaireTypeModel) {
+        questionnaireSessionLocation.selectedWgQuestionnaireType = selectedWgQuestionnaireType
+        questionnaireTypeText.text = selectedWgQuestionnaireType.questionnaireTypeName
+        (questionnaireTypeAlertDialog as android.app.AlertDialog).dismiss()
     }
 }
