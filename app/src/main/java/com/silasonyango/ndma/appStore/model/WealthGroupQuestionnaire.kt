@@ -5,6 +5,8 @@ import com.silasonyango.ndma.ui.wealthgroup.responses.IncomeAndFoodSourceRespons
 
 
 class WealthGroupQuestionnaire(val uniqueId: String,val questionnaireName: String){
+    lateinit var questionnaireStartDate: String
+    lateinit var questionnaireEndDate: String
     lateinit var questionnaireGeography: QuestionnaireSessionLocation
     lateinit var incomeAndFoodSourceResponses: IncomeAndFoodSourceResponses
 }

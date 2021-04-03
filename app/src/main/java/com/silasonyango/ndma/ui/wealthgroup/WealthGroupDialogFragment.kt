@@ -5,12 +5,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
@@ -27,6 +29,7 @@ import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
 import com.silasonyango.ndma.ui.wealthgroup.responses.FoodConsumptionResponseItem
 import com.silasonyango.ndma.ui.wealthgroup.responses.FoodConsumptionResponses
 import com.silasonyango.ndma.ui.wealthgroup.responses.IncomeAndFoodSourceResponses
+import com.silasonyango.ndma.util.Util
 
 class WealthGroupDialogFragment : DialogFragment() {
 
@@ -64,6 +67,7 @@ class WealthGroupDialogFragment : DialogFragment() {
                 }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -83,12 +87,14 @@ class WealthGroupDialogFragment : DialogFragment() {
                     }
                 }!!
 
-            wealthGroupQuestionnaire.questionnaireGeography = this!!.questionnaireSessionLocation!!
+            wealthGroupQuestionnaire.questionnaireGeography = this.questionnaireSessionLocation!!
+            wealthGroupQuestionnaire.questionnaireStartDate = Util.getNow()
         }
 
         inflateSubCountyModal()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -110,6 +116,7 @@ class WealthGroupDialogFragment : DialogFragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun defineViews() {
         defineNavigation()
         defineIncomeandFoodSource()
@@ -123,6 +130,7 @@ class WealthGroupDialogFragment : DialogFragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun defineNavigation() {
         binding.apply {
 
@@ -367,6 +375,7 @@ class WealthGroupDialogFragment : DialogFragment() {
             /*wgCompletion page navigation*/
             wgCompletionPage.apply {
                 closeButton.setOnClickListener {
+                    wealthGroupQuestionnaire.questionnaireEndDate = Util.getNow()
                     val gson = Gson()
                     val sharedPreferences: SharedPreferences? =
                         context?.applicationContext?.getSharedPreferences(
