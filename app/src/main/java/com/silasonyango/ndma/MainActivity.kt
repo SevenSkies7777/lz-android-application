@@ -281,8 +281,8 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         wealthGroupModelList.add(WealthGroupModel("Better Off", 4))
 
         val wgQuestionnaireTypesList: MutableList<WgQuestionnaireTypeModel> = ArrayList()
-        wgQuestionnaireTypesList.add(WgQuestionnaireTypeModel("Summarized questionnaire",1))
-        wgQuestionnaireTypesList.add(WgQuestionnaireTypeModel("Raw data questionnaire",2))
+        wgQuestionnaireTypesList.add(WgQuestionnaireTypeModel(0,"Summarized questionnaire",1))
+        wgQuestionnaireTypesList.add(WgQuestionnaireTypeModel(0,"Raw data questionnaire",2))
 
         subCountyDropDown.setOnClickListener {
             inflateSubCountyModal(geographyObject.subCounties as MutableList<SubCountyModel>)
@@ -629,7 +629,7 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
     override fun onWgQuestionnaireTypeItemClicked(selectedWgQuestionnaireType: WgQuestionnaireTypeModel) {
         questionnaireSessionLocation.selectedWgQuestionnaireType = selectedWgQuestionnaireType
-        questionnaireTypeText.text = selectedWgQuestionnaireType.questionnaireTypeName
+        questionnaireTypeText.text = selectedWgQuestionnaireType.wgQuestionnaireTypeDescription
         (questionnaireTypeAlertDialog as android.app.AlertDialog).dismiss()
     }
 }

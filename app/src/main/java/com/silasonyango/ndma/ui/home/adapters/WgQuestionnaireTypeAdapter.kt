@@ -35,7 +35,7 @@ class WgQuestionnaireTypeAdapter(
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.tvOption.text = wgQuestionnaireTypeModelList.get(position).questionnaireTypeName
+        viewHolder.tvOption.text = wgQuestionnaireTypeModelList.get(position).wgQuestionnaireTypeDescription
         if (position == wgQuestionnaireTypeModelList.size - 1) {
             viewHolder.stroke.visibility = View.GONE
         }

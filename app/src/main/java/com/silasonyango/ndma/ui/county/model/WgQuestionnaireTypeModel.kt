@@ -1,3 +1,3 @@
 package com.silasonyango.ndma.ui.county.model
 
-data class WgQuestionnaireTypeModel(val questionnaireTypeName: String, val questionnaireTypeCode: Int)
+data class WgQuestionnaireTypeModel(val wgQuestionnaireTypeId: Int, val wgQuestionnaireTypeDescription: String, val wgQuestionnaireTypeCode: Int)
