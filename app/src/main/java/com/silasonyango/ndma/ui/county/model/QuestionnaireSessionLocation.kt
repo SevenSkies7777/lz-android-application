@@ -8,6 +8,7 @@ class QuestionnaireSessionLocation(): Parcelable {
     lateinit var selectedWard: WardModel
     lateinit var selectedSubLocation: SubLocationModel
     lateinit var selectedWealthGroup: WealthGroupModel
+    lateinit var selectedLivelihoodZone: LivelihoodZoneModel
 
     constructor(parcel: Parcel) : this() {
 

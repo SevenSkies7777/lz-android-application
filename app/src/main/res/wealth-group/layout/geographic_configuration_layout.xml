@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:text="A. Geography"
+        android:text="A. Configuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_bold"
@@ -32,10 +32,60 @@
         android:paddingBottom="26dp">
 
 
+<!--        Livelihood Zone DrpDown-->
+        <RelativeLayout
+            android:id="@+id/livelihoodZoneDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Livelihood Zone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="7sp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/livelihoodZoneText"
+                android:text="Select Livelihood Zone..."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#737373"
+                android:layout_toLeftOf="@+id/icLivelihoodZoneDropDown"
+                android:layout_marginRight="8dp"
+                android:layout_centerVertical="true"/>
+
+            <View
+                android:id="@+id/icLivelihoodZoneDropDown"
+                android:background="@drawable/ic_drop_down"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+
+            <View
+                android:background="#44d7b6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/icLivelihoodZoneDropDown"
+                android:layout_marginTop="7dp"/>
+
+        </RelativeLayout>
+
+
 <!--        SubCounty Drop-Down-->
         <RelativeLayout
             android:id="@+id/subCountyDropDown"
             android:layout_width="match_parent"
+            android:layout_marginTop="23dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -225,6 +275,56 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_below="@+id/icWealthGroupDropDown"
+                android:layout_marginTop="7dp"/>
+
+        </RelativeLayout>
+
+
+<!--        Questionnaire Type dropDown-->
+        <RelativeLayout
+            android:id="@+id/questionnaireTypeDropDown"
+            android:layout_marginTop="23dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Questionnaire Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="7sp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/questionnaireTypeText"
+                android:text="Select Questionnaire Type..."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#737373"
+                android:layout_toLeftOf="@+id/icQuestionnaireTypeDropDown"
+                android:layout_marginRight="8dp"
+                android:layout_centerVertical="true"/>
+
+            <View
+                android:id="@+id/icQuestionnaireTypeDropDown"
+                android:background="@drawable/ic_drop_down"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+
+            <View
+                android:background="#44d7b6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/icQuestionnaireTypeDropDown"
                 android:layout_marginTop="7dp"/>
 
         </RelativeLayout>

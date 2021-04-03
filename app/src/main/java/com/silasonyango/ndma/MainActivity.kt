@@ -35,7 +35,7 @@ import com.silasonyango.ndma.util.Util
 
 class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallBack,
     WardAdapter.WardAdapterCallBack, SubLocationAdapter.SubLocationAdapterCallBack,
-    WealthGroupAdapter.WealthGroupAdapterCallBack {
+    WealthGroupAdapter.WealthGroupAdapterCallBack, LivelihoodZonesAdapter.LivelihoodZonesAdapterCallBack {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -50,6 +50,10 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
     private var subLocationDialog: android.app.AlertDialog? = null
 
     private var wealthGroupDialog: android.app.AlertDialog? = null
+
+    private var livelihoodZoneAlertDialog: android.app.AlertDialog? = null
+
+    private var questionnaireTypeAlertDialog: android.app.AlertDialog? = null
 
     var questionnaireSessionLocation: QuestionnaireSessionLocation = QuestionnaireSessionLocation()
 
@@ -254,6 +258,7 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         val subLocationDropDown = v.findViewById<View>(R.id.subLocationDropDown)
         val wealthGroupDropDown = v.findViewById<View>(R.id.wealthGroupDropDown)
         val submitButton = v.findViewById<TextView>(R.id.geographySubmitButton)
+        val livelihoodZoneDropDown = v.findViewById<View>(R.id.livelihoodZoneDropDown)
         selectedSubCountyText = v.findViewById<TextView>(R.id.subCountyText)
         selectedWardText = v.findViewById<TextView>(R.id.wardText)
         selectedSubLocationText = v.findViewById<TextView>(R.id.subLocationText)
@@ -280,6 +285,10 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
         wealthGroupDropDown.setOnClickListener {
             inflateWealthGroupModal(wealthGroupModelList)
+        }
+
+        livelihoodZoneDropDown.setOnClickListener {
+            inflateLivelihoodZoneModal(geographyObject.livelihoodZones)
         }
 
         submitButton.setOnClickListener {
@@ -485,6 +494,49 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
     }
 
+
+    private fun inflateLivelihoodZoneModal(livelihoodZoneModelList: MutableList<LivelihoodZoneModel>) {
+        val inflater = this?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
+
+        val listRecyclerView = v.findViewById<RecyclerView>(R.id.listRv)
+
+        val lzAdapter = LivelihoodZonesAdapter(
+            livelihoodZoneModelList,
+            this
+        )
+        val gridLayoutManager = GridLayoutManager(this, 1)
+        listRecyclerView.layoutManager = gridLayoutManager
+        listRecyclerView.hasFixedSize()
+        listRecyclerView.adapter = lzAdapter
+
+        openLivelihoodZoneModal(v)
+    }
+
+    private fun openLivelihoodZoneModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+        builder.setView(v)
+        builder.setCancelable(true)
+        livelihoodZoneAlertDialog = builder.create()
+        (livelihoodZoneAlertDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            dialogCenter(livelihoodZoneAlertDialog as AlertDialog)
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
+    }
+
     override fun onSubCountyItemClicked(selectedSubCounty: SubCountyModel) {
         questionnaireSessionLocation.selectedSubCounty = selectedSubCounty
         selectedSubCountyText.text = selectedSubCounty.subCountyName
@@ -507,5 +559,11 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         questionnaireSessionLocation.selectedWealthGroup = selectedWealthGroup
         selectedWealthGroupText.text = selectedWealthGroup.wealthGroupName
         (wealthGroupDialog as android.app.AlertDialog).dismiss()
+    }
+
+    override fun onLivelihoodZoneItemClicked(selectedLivelihoodZone: LivelihoodZoneModel) {
+        questionnaireSessionLocation.selectedLivelihoodZone = selectedLivelihoodZone
+        selectedWealthGroupText.text = selectedLivelihoodZone.livelihoodZoneName
+        (livelihoodZoneAlertDialog as android.app.AlertDialog).dismiss()
     }
 }

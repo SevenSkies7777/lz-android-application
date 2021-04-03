@@ -60,7 +60,7 @@ class WealthGroupService {
                     } else if (resp.code == 422) {
                         continuation.resume(
                             Resource.unprocessableEntity(
-                                "User does not exist",
+                                "Duplicate questionnaire",
                                 null
                             )
                         )

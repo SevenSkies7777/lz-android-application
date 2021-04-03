@@ -1,6 +1,7 @@
 package com.silasonyango.ndma.login.model
 
 import com.silasonyango.ndma.ui.county.model.CountyModel
+import com.silasonyango.ndma.ui.county.model.LivelihoodZoneModel
 
 data class LoginResponseModel(
     var accessToken: String, var authenticationStatus: String,
