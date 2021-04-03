@@ -1,11 +1,14 @@
 package com.silasonyango.ndma
 
+import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.location.Location
 import android.os.Bundle
 import android.view.*
 import android.widget.EditText
@@ -20,6 +23,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -31,6 +35,7 @@ import com.silasonyango.ndma.ui.county.destinations.CountyLevelFragment
 import com.silasonyango.ndma.ui.county.model.*
 import com.silasonyango.ndma.ui.home.adapters.*
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
+import com.silasonyango.ndma.util.GpsTracker
 import com.silasonyango.ndma.util.Util
 
 class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallBack,
@@ -75,6 +80,8 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
     lateinit var questionnaireName: String
 
+    val WRITE_STORAGE_PERMISSION_CODE: Int = 100
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -103,16 +110,6 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
             editor?.putString(Constants.WEALTH_GROUP_LIST_OBJECT, responsesJson)
             editor?.commit()
         }
-
-//        val cropModel = CropModel("casava",1)
-//        val testJson: String = gson.toJson(cropModel)
-//        editor?.putString("crop", testJson)
-//        editor?.commit()
-//
-//        val returnedCropString = sharedPreferences?.getString("crop", null)
-//
-//        val returnedCrop: CropModel =
-//            gson.fromJson(returnedCropString, CropModel::class.java)
 
         setSupportActionBar(toolbar)
 
@@ -281,8 +278,8 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         wealthGroupModelList.add(WealthGroupModel("Better Off", 4))
 
         val wgQuestionnaireTypesList: MutableList<WgQuestionnaireTypeModel> = ArrayList()
-        wgQuestionnaireTypesList.add(WgQuestionnaireTypeModel(0,"Summarized questionnaire",1))
-        wgQuestionnaireTypesList.add(WgQuestionnaireTypeModel(0,"Raw data questionnaire",2))
+        wgQuestionnaireTypesList.add(WgQuestionnaireTypeModel(0, "Summarized questionnaire", 1))
+        wgQuestionnaireTypesList.add(WgQuestionnaireTypeModel(0, "Raw data questionnaire", 2))
 
         subCountyDropDown.setOnClickListener {
             inflateSubCountyModal(geographyObject.subCounties as MutableList<SubCountyModel>)
@@ -309,12 +306,21 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         }
 
         submitButton.setOnClickListener {
-            val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(
-                questionnaireId,
-                questionnaireName,
-                questionnaireSessionLocation
-            )
-            wealthGroupDialogFragment.show(this.supportFragmentManager, "CountyLevel")
+            var latitude: Double = 0.0
+            var longitude: Double = 0.0
+            val gpsTracker: GpsTracker = GpsTracker(this)
+            if (isStoragePermissionGranted()) {
+                latitude = gpsTracker.latitude
+                longitude = gpsTracker.longitude
+                questionnaireSessionLocation.latitude = latitude
+                questionnaireSessionLocation.longitude = longitude
+                val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(
+                    questionnaireId,
+                    questionnaireName,
+                    questionnaireSessionLocation
+                )
+                wealthGroupDialogFragment.show(this.supportFragmentManager, "CountyLevel")
+            }
         }
 
         openGeographyModal(v)
@@ -632,4 +638,53 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         questionnaireTypeText.text = selectedWgQuestionnaireType.wgQuestionnaireTypeDescription
         (questionnaireTypeAlertDialog as android.app.AlertDialog).dismiss()
     }
+
+    private fun isStoragePermissionGranted(): Boolean {
+        val scopedActivity = this
+
+        val isPermissionGranted = ContextCompat.checkSelfPermission(
+            scopedActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
+
+        return if (isPermissionGranted) {
+            true
+        } else {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ),
+                WRITE_STORAGE_PERMISSION_CODE
+            )
+            false
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == WRITE_STORAGE_PERMISSION_CODE && grantResults.isNotEmpty()
+            && grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) {
+            var latitude: Double = 0.0
+            var longitude: Double = 0.0
+            val gpsTracker: GpsTracker = GpsTracker(this)
+
+            latitude = gpsTracker.latitude
+            longitude = gpsTracker.longitude
+            questionnaireSessionLocation.latitude = latitude
+            questionnaireSessionLocation.longitude = longitude
+            val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(
+                questionnaireId,
+                questionnaireName,
+                questionnaireSessionLocation
+            )
+            wealthGroupDialogFragment.show(this.supportFragmentManager, "CountyLevel")
+
+        }
+    }
+
+
 }

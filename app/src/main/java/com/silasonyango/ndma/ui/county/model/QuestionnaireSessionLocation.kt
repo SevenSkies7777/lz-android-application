@@ -4,6 +4,8 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class QuestionnaireSessionLocation(): Parcelable {
+    var latitude: Double = 0.0
+    var longitude: Double = 0.0
     lateinit var selectedSubCounty: SubCountyModel
     lateinit var selectedWard: WardModel
     lateinit var selectedSubLocation: SubLocationModel
