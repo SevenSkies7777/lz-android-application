@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_marginTop="22dp"/>
 
-        <!--        D. Livestock and Poultry Contribution-->
+        <!--        D(ii). Livestock and Poultry Contribution-->
         <include layout="@layout/livestock_poultry_contribution"
             android:visibility="gone"
             android:id="@+id/wgLivestockPoultryContribution"

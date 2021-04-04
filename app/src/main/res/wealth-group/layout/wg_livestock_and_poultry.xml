@@ -115,6 +115,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/cattleNumbers"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -163,6 +164,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/goatNumbers"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -211,6 +213,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/sheepNumbers"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -259,6 +262,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/donkeyNumbers"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -307,6 +311,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/camelNumbers"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -355,6 +360,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/pigNumbers"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -403,6 +409,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/chickenNumbers"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -451,6 +458,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/duckNumbers"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -499,6 +507,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/beeHiveNumbers"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -547,6 +556,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fishPondNumbers"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"

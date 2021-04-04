@@ -1379,7 +1379,7 @@
         android:layout_marginBottom="18dp">
 
         <TextView
-            android:id="@+id/livestockPoultryNumbertsBackButton"
+            android:id="@+id/livestockPoultryContributionBackButton"
             android:text="BACK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -1396,7 +1396,7 @@
             android:layout_centerVertical="true"/>
 
         <TextView
-            android:id="@+id/livestockPoultryNumbertsNextButton"
+            android:id="@+id/livestockPoultryContributionNextButton"
             android:text="NEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

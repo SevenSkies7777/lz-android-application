@@ -29,6 +29,7 @@ import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
 import com.silasonyango.ndma.ui.wealthgroup.responses.FoodConsumptionResponseItem
 import com.silasonyango.ndma.ui.wealthgroup.responses.FoodConsumptionResponses
 import com.silasonyango.ndma.ui.wealthgroup.responses.IncomeAndFoodSourceResponses
+import com.silasonyango.ndma.ui.wealthgroup.responses.LivestockPoultryOwnershipResponses
 import com.silasonyango.ndma.util.Util
 
 class WealthGroupDialogFragment : DialogFragment() {
@@ -292,6 +293,8 @@ class WealthGroupDialogFragment : DialogFragment() {
                         spicesGift.text.toString().toDouble()
                     )
 
+                    wealthGroupQuestionnaire.foodConsumptionResponses = foodConsumptionResponses
+
                     wgPercentFoodConsumptionIncome.root.visibility = View.GONE
                     wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
                 }
@@ -311,8 +314,36 @@ class WealthGroupDialogFragment : DialogFragment() {
                 }
 
                 livestockPoultryNumbertsNextButton.setOnClickListener {
-                    wgLabourPatterns.root.visibility = View.VISIBLE
+
+                    val livestockPoultryOwnershipResponses = LivestockPoultryOwnershipResponses()
+                    livestockPoultryOwnershipResponses.cattle = cattleNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.goats = goatNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.sheep = sheepNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.donkeys = donkeyNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.camels = camelNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.pigs = pigNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.chicken = chickenNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.ducks = duckNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.beeHives = beeHiveNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.fishPonds = fishPondNumbers.text.toString().toDouble()
+
+                    wealthGroupQuestionnaire.livestockPoultryOwnershipResponses = livestockPoultryOwnershipResponses
+                    wgLivestockPoultryContribution.root.visibility = View.VISIBLE
                     wgLivestockPoultryNumbers.root.visibility = View.GONE
+                }
+            }
+
+
+            /*Livestock and poultry contribution navigation*/
+            wgLivestockPoultryContribution.apply {
+                livestockPoultryContributionBackButton.setOnClickListener {
+                    wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
+                    wgLivestockPoultryContribution.root.visibility = View.GONE
+                }
+
+                livestockPoultryContributionNextButton.setOnClickListener {
+                    wgLabourPatterns.root.visibility = View.VISIBLE
+                    wgLivestockPoultryContribution.root.visibility = View.GONE
                 }
             }
 
