@@ -26,10 +26,7 @@ import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.databinding.WealthGroupQuestionnaireLayoutBinding
 import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
-import com.silasonyango.ndma.ui.wealthgroup.responses.FoodConsumptionResponseItem
-import com.silasonyango.ndma.ui.wealthgroup.responses.FoodConsumptionResponses
-import com.silasonyango.ndma.ui.wealthgroup.responses.IncomeAndFoodSourceResponses
-import com.silasonyango.ndma.ui.wealthgroup.responses.LivestockPoultryOwnershipResponses
+import com.silasonyango.ndma.ui.wealthgroup.responses.*
 import com.silasonyango.ndma.util.Util
 
 class WealthGroupDialogFragment : DialogFragment() {
@@ -342,6 +339,81 @@ class WealthGroupDialogFragment : DialogFragment() {
                 }
 
                 livestockPoultryContributionNextButton.setOnClickListener {
+
+                    val livestockContributionResponses = LivestockContributionResponses()
+
+                    livestockContributionResponses.cattle = LivestockContributionResponseItem(
+                        cattleIncomeRank.text.toString().toInt(),
+                        cattleCashPercentage.text.toString().toDouble(),
+                        cattleFoodRank.text.toString().toInt(),
+                        cattleFoodPercentage.text.toString().toDouble()
+                    )
+
+                    livestockContributionResponses.goats = LivestockContributionResponseItem(
+                        goatsIncomeRank.text.toString().toInt(),
+                        goatsIncomePercentage.text.toString().toDouble(),
+                        goatsCashRank.text.toString().toInt(),
+                        goatsCashPercentage.text.toString().toDouble()
+                    )
+
+                    livestockContributionResponses.sheep = LivestockContributionResponseItem(
+                        sheepCashRank.text.toString().toInt(),
+                        sheepCashPercentage.text.toString().toDouble(),
+                        sheepFoodRank.text.toString().toInt(),
+                        sheepFoodPercentage.text.toString().toDouble()
+                    )
+
+                    livestockContributionResponses.donkeys = LivestockContributionResponseItem(
+                        donkeysCahRank.text.toString().toInt(),
+                        donkeysCashPercentage.text.toString().toDouble(),
+                        donkeysFoodRank.text.toString().toInt(),
+                        donkeysFoodPercentage.text.toString().toDouble()
+                    )
+
+                    livestockContributionResponses.pigs = LivestockContributionResponseItem(
+                        pigscashRank.text.toString().toInt(),
+                        pigsCashPercentage.text.toString().toDouble(),
+                        pigsFoodrank.text.toString().toInt(),
+                        pigsFoodPercentage.text.toString().toDouble()
+                    )
+
+                    livestockContributionResponses.chicken = LivestockContributionResponseItem(
+                        chickenCashRank.text.toString().toInt(),
+                        chickenCashPaercentage.text.toString().toDouble(),
+                        chickenFooRank.text.toString().toInt(),
+                        chickenFoodPercentage.text.toString().toDouble()
+                    )
+
+                    livestockContributionResponses.camels = LivestockContributionResponseItem(
+                        camelsCashRank.text.toString().toInt(),
+                        camelsCashPercentage.text.toString().toDouble(),
+                        camelsFoodRank.text.toString().toInt(),
+                        camelsFoodPercentage.text.toString().toDouble()
+                    )
+
+                    livestockContributionResponses.ducks = LivestockContributionResponseItem(
+                        ducksCashRank.text.toString().toInt(),
+                        duckscashPercentage.text.toString().toDouble(),
+                        ducksFoodRank.text.toString().toInt(),
+                        ducksFoodPercentage.text.toString().toDouble()
+                    )
+
+                    livestockContributionResponses.beeHives = LivestockContributionResponseItem(
+                        beeHivesCashRank.text.toString().toInt(),
+                        beeHivesCashPercentage.text.toString().toDouble(),
+                        beeHivesFoodrank.text.toString().toInt(),
+                        beeHivesFoodPercentage.text.toString().toDouble()
+                    )
+
+                    livestockContributionResponses.fishPonds = LivestockContributionResponseItem(
+                        fishPondsCashRank.text.toString().toInt(),
+                        fishPondscashPercentage.text.toString().toDouble(),
+                        fishPondsFoodRank.text.toString().toInt(),
+                        fishPondsFoodPercentage.text.toString().toDouble()
+                    )
+
+                    wealthGroupQuestionnaire.livestockContributionResponses = livestockContributionResponses
+
                     wgLabourPatterns.root.visibility = View.VISIBLE
                     wgLivestockPoultryContribution.root.visibility = View.GONE
                 }
