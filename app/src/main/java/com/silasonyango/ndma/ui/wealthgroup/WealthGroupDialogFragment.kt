@@ -54,7 +54,11 @@ class WealthGroupDialogFragment : DialogFragment() {
         private const val QUESTIONNAIRE_SESSION_LOCATION = "sessionLocation"
 
         @JvmStatic
-        fun newInstance(questionnaireId: String, questionnaireName: String, questionnaireSessionLocation: QuestionnaireSessionLocation) =
+        fun newInstance(
+            questionnaireId: String,
+            questionnaireName: String,
+            questionnaireSessionLocation: QuestionnaireSessionLocation
+        ) =
             WealthGroupDialogFragment()
                 .apply {
                     arguments = Bundle().apply {
@@ -73,7 +77,8 @@ class WealthGroupDialogFragment : DialogFragment() {
 
             questionnaireName = it.getString(QUESTIONNAIRE_NAME)
 
-            questionnaireSessionLocation = it.getParcelable<QuestionnaireSessionLocation>(QUESTIONNAIRE_SESSION_LOCATION)
+            questionnaireSessionLocation =
+                it.getParcelable<QuestionnaireSessionLocation>(QUESTIONNAIRE_SESSION_LOCATION)
 
             wealthGroupQuestionnaire =
                 questionnaireId?.let { it1 ->
@@ -183,7 +188,8 @@ class WealthGroupDialogFragment : DialogFragment() {
                     incomeAndFoodSourceResponses.other =
                         other.text.toString().toDouble()
 
-                    wealthGroupQuestionnaire.incomeAndFoodSourceResponses = incomeAndFoodSourceResponses
+                    wealthGroupQuestionnaire.incomeAndFoodSourceResponses =
+                        incomeAndFoodSourceResponses
 
                     wgIncomeAndFoodSources.root.visibility = View.GONE
                     wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
@@ -313,18 +319,28 @@ class WealthGroupDialogFragment : DialogFragment() {
                 livestockPoultryNumbertsNextButton.setOnClickListener {
 
                     val livestockPoultryOwnershipResponses = LivestockPoultryOwnershipResponses()
-                    livestockPoultryOwnershipResponses.cattle = cattleNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.goats = goatNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.sheep = sheepNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.donkeys = donkeyNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.camels = camelNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.cattle =
+                        cattleNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.goats =
+                        goatNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.sheep =
+                        sheepNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.donkeys =
+                        donkeyNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.camels =
+                        camelNumbers.text.toString().toDouble()
                     livestockPoultryOwnershipResponses.pigs = pigNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.chicken = chickenNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.ducks = duckNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.beeHives = beeHiveNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.fishPonds = fishPondNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.chicken =
+                        chickenNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.ducks =
+                        duckNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.beeHives =
+                        beeHiveNumbers.text.toString().toDouble()
+                    livestockPoultryOwnershipResponses.fishPonds =
+                        fishPondNumbers.text.toString().toDouble()
 
-                    wealthGroupQuestionnaire.livestockPoultryOwnershipResponses = livestockPoultryOwnershipResponses
+                    wealthGroupQuestionnaire.livestockPoultryOwnershipResponses =
+                        livestockPoultryOwnershipResponses
                     wgLivestockPoultryContribution.root.visibility = View.VISIBLE
                     wgLivestockPoultryNumbers.root.visibility = View.GONE
                 }
@@ -412,7 +428,8 @@ class WealthGroupDialogFragment : DialogFragment() {
                         fishPondsFoodPercentage.text.toString().toDouble()
                     )
 
-                    wealthGroupQuestionnaire.livestockContributionResponses = livestockContributionResponses
+                    wealthGroupQuestionnaire.livestockContributionResponses =
+                        livestockContributionResponses
 
                     wgLabourPatterns.root.visibility = View.VISIBLE
                     wgLivestockPoultryContribution.root.visibility = View.GONE
@@ -515,6 +532,59 @@ class WealthGroupDialogFragment : DialogFragment() {
                 }
 
                 expenditurePatternsNextButton.setOnClickListener {
+
+                    val expenditurePatternsResponses = ExpenditurePatternsResponses()
+
+                    expenditurePatternsResponses.maizeAndMaizeFlour =
+                        maizeAndMaizeFlour.text.toString().toDouble()
+                    expenditurePatternsResponses.otherCereals =
+                        otherCereals.text.toString().toDouble()
+                    expenditurePatternsResponses.pulses = pulses.text.toString().toDouble()
+                    expenditurePatternsResponses.rootsAndTubers =
+                        rootsAndTubers.text.toString().toDouble()
+                    expenditurePatternsResponses.vegetablesAndFruits =
+                        vegetablesAndFruits.text.toString().toDouble()
+                    expenditurePatternsResponses.fishandSeaFood =
+                        fishandseaFood.text.toString().toDouble()
+                    expenditurePatternsResponses.meat = meat.text.toString().toDouble()
+                    expenditurePatternsResponses.milk = milk.text.toString().toDouble()
+                    expenditurePatternsResponses.eggs = eggs.text.toString().toDouble()
+                    expenditurePatternsResponses.oilsAndFats = oilAndFats.text.toString().toDouble()
+                    expenditurePatternsResponses.otherFoods = otherFoods.text.toString().toDouble()
+                    expenditurePatternsResponses.schoolFees = schoolFees.text.toString().toDouble()
+                    expenditurePatternsResponses.drugsAndMedicalCare =
+                        drugsAndMedicalCare.text.toString().toDouble()
+                    expenditurePatternsResponses.clothingAndBeautyProducts =
+                        clothingAndBeautyProducts.text.toString().toDouble()
+                    expenditurePatternsResponses.houseRent = houseRent.text.toString().toDouble()
+                    expenditurePatternsResponses.communicationExpenses =
+                        communicationExpense.text.toString().toDouble()
+                    expenditurePatternsResponses.farmInputs = farmInputs.text.toString().toDouble()
+                    expenditurePatternsResponses.livestockDrugs =
+                        livestockDrugs.text.toString().toDouble()
+                    expenditurePatternsResponses.waterPurchase =
+                        waterPurchase.text.toString().toDouble()
+                    expenditurePatternsResponses.soaps = soaps.text.toString().toDouble()
+                    expenditurePatternsResponses.farmLabour = farrmLabour.text.toString().toDouble()
+                    expenditurePatternsResponses.travelRelatedExpenses =
+                        travelRelatedExpense.text.toString().toDouble()
+                    expenditurePatternsResponses.leisureAndEntertainment =
+                        entertainment.text.toString().toDouble()
+                    expenditurePatternsResponses.electricityBills =
+                        electricityBill.text.toString().toDouble()
+                    expenditurePatternsResponses.socialObligation =
+                        socialObligation.text.toString().toDouble()
+                    expenditurePatternsResponses.millingCosts =
+                        millingCost.text.toString().toDouble()
+                    expenditurePatternsResponses.cookingFuel =
+                        cookingFuel.text.toString().toDouble()
+                    expenditurePatternsResponses.savingsAndInvestments =
+                        savingsAndInvestment.text.toString().toDouble()
+                    expenditurePatternsResponses.loanRepayments =
+                        loanRepayments.text.toString().toDouble()
+
+                    wealthGroupQuestionnaire.expenditurePatternsResponses = expenditurePatternsResponses
+
                     wgMigrationPatterns.root.visibility = View.VISIBLE
                     wgExpenditurePatterns.root.visibility = View.GONE
                 }
@@ -573,7 +643,10 @@ class WealthGroupDialogFragment : DialogFragment() {
                     editor?.remove(Constants.WEALTH_GROUP_LIST_OBJECT)
 
                     val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
-                    editor?.putString(Constants.WEALTH_GROUP_LIST_OBJECT, newQuestionnaireObjectString)
+                    editor?.putString(
+                        Constants.WEALTH_GROUP_LIST_OBJECT,
+                        newQuestionnaireObjectString
+                    )
                     editor?.commit()
 
                 }

@@ -114,6 +114,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/maizeAndMaizeFlour"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -161,6 +162,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/otherCereals"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -208,6 +210,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/pulses"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -255,6 +258,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/rootsAndTubers"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -302,6 +306,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/vegetablesAndFruits"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -349,6 +354,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fishandseaFood"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -396,6 +402,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/meat"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -443,6 +450,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/milk"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -490,6 +498,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/eggs"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -537,6 +546,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/oilAndFats"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -584,6 +594,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/otherFoods"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -631,6 +642,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/schoolFees"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -678,6 +690,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/drugsAndMedicalCare"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -725,6 +738,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/clothingAndBeautyProducts"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -772,6 +786,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/houseRent"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -819,6 +834,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/communicationExpense"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -866,6 +882,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/farmInputs"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -913,6 +930,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/livestockDrugs"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -960,6 +978,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/waterPurchase"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1007,6 +1026,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/soaps"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1054,53 +1074,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".8"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="Purchase of water"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
+                    android:id="@+id/farrmLabour"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1148,6 +1122,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/travelRelatedExpense"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1195,6 +1170,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/entertainment"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1242,6 +1218,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/electricityBill"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1289,6 +1266,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/socialObligation"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1336,6 +1314,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/millingCost"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1383,6 +1362,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/cookingFuel"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1430,6 +1410,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/savingsAndInvestment"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1477,6 +1458,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/loanRepayments"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
