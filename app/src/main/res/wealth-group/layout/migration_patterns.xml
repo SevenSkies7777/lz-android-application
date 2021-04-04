@@ -115,6 +115,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fullyNomadic"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -162,6 +163,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/semiNomadic"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -209,6 +211,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/occasionalNomadic"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -256,6 +259,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/outMigrantLabour"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -303,6 +307,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/inMigrantLabour"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -350,6 +355,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fullySettled"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -397,6 +403,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/internallyDisplaced"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"

@@ -14,4 +14,5 @@ class WealthGroupQuestionnaire(val uniqueId: String,val questionnaireName: Strin
     lateinit var livestockContributionResponses: LivestockContributionResponses
     lateinit var labourPatternResponses: LabourPatternResponse
     lateinit var expenditurePatternsResponses: ExpenditurePatternsResponses
+    lateinit var migrationPatternResponses: MigrationPatternResponses
 }

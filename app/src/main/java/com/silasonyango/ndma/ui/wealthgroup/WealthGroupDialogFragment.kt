@@ -599,6 +599,19 @@ class WealthGroupDialogFragment : DialogFragment() {
                 }
 
                 migrationPatternsNextButton.setOnClickListener {
+
+                    val migrationPatternResponses = MigrationPatternResponses()
+
+                    migrationPatternResponses.fullyNomadic = fullyNomadic.text.toString().toDouble()
+                    migrationPatternResponses.semiNomadic = semiNomadic.text.toString().toDouble()
+                    migrationPatternResponses.occasionalNomadic = occasionalNomadic.text.toString().toDouble()
+                    migrationPatternResponses.outMigrantLabour = outMigrantLabour.text.toString().toDouble()
+                    migrationPatternResponses.inMigrantLabour = inMigrantLabour.text.toString().toDouble()
+                    migrationPatternResponses.fullysettled = fullySettled.text.toString().toDouble()
+                    migrationPatternResponses.internallyDisplaced = internallyDisplaced.text.toString().toDouble()
+
+                    wealthGroupQuestionnaire.migrationPatternResponses = migrationPatternResponses
+
                     wgConstraints.root.visibility = View.VISIBLE
                     wgMigrationPatterns.root.visibility = View.GONE
                 }
