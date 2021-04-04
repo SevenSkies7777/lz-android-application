@@ -427,6 +427,80 @@ class WealthGroupDialogFragment : DialogFragment() {
                 }
 
                 labourPatternsNextButton.setOnClickListener {
+
+                    val labourPatternResponse = LabourPatternResponse()
+                    labourPatternResponse.ownFarmCropProduction = LabourPatternResponseItem(
+                        ownFarmWomen.text.toString().toDouble(),
+                        ownFarmmen.text.toString().toDouble()
+                    )
+
+                    labourPatternResponse.livestockHusbandry = LabourPatternResponseItem(
+                        livestockHusbandryWomen.text.toString().toDouble(),
+                        livestockHusbandrymen.text.toString().toDouble()
+                    )
+
+                    labourPatternResponse.wagedLabourOnFarms = LabourPatternResponseItem(
+                        wagedLabourWomen.text.toString().toDouble(),
+                        wagedLabourmen.text.toString().toDouble()
+                    )
+
+                    labourPatternResponse.lowSkilledNonFarmLabour = LabourPatternResponseItem(
+                        lowSkilledNonFarmWomen.text.toString().toDouble(),
+                        lowSkilledNonFarmmen.text.toString().toDouble()
+                    )
+
+                    labourPatternResponse.skilledLabour = LabourPatternResponseItem(
+                        skilledLabourWomen.text.toString().toDouble(),
+                        skilledLabourmen.text.toString().toDouble()
+                    )
+
+                    labourPatternResponse.formalEmployment = LabourPatternResponseItem(
+                        formalEmploymentWomen.text.toString().toDouble(),
+                        formalEmploymentmen.text.toString().toDouble()
+                    )
+
+                    labourPatternResponse.huntingAndGathering = LabourPatternResponseItem(
+                        huntingAndGatheringWomen.text.toString().toDouble(),
+                        huntingAndGatheringmen.text.toString().toDouble()
+                    )
+
+                    labourPatternResponse.fishing = LabourPatternResponseItem(
+                        fishingWomen.text.toString().toDouble(),
+                        fishingmen.text.toString().toDouble()
+                    )
+
+                    labourPatternResponse.trading = LabourPatternResponseItem(
+                        tradingWomen.text.toString().toDouble(),
+                        tradingmen.text.toString().toDouble()
+                    )
+
+                    labourPatternResponse.domesticUnpaidWork = LabourPatternResponseItem(
+                        domesticUnpaidWorkWomen.text.toString().toDouble(),
+                        domesticUnpaidWorkmen.text.toString().toDouble()
+                    )
+
+                    labourPatternResponse.leisure = LabourPatternResponseItem(
+                        leisureWomen.text.toString().toDouble(),
+                        leisuremen.text.toString().toDouble()
+                    )
+
+                    labourPatternResponse.commercialSexWork = LabourPatternResponseItem(
+                        sexWorkWomen.text.toString().toDouble(),
+                        sexWorkmen.text.toString().toDouble()
+                    )
+
+                    labourPatternResponse.begging = LabourPatternResponseItem(
+                        beggingWomen.text.toString().toDouble(),
+                        beggingmen.text.toString().toDouble()
+                    )
+
+                    labourPatternResponse.inactivity = LabourPatternResponseItem(
+                        inactivityWomen.text.toString().toDouble(),
+                        inactivitymen.text.toString().toDouble()
+                    )
+
+                    wealthGroupQuestionnaire.labourPatternResponses = labourPatternResponse
+
                     wgExpenditurePatterns.root.visibility = View.VISIBLE
                     wgLabourPatterns.root.visibility = View.GONE
                 }

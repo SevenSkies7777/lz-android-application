@@ -133,6 +133,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/ownFarmWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -155,6 +156,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/ownFarmmen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -202,6 +204,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/livestockHusbandryWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -224,6 +227,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/livestockHusbandrymen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -271,6 +275,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/wagedLabourWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -293,6 +298,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/wagedLabourmen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -340,6 +346,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/lowSkilledNonFarmWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -362,6 +369,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/lowSkilledNonFarmmen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -409,6 +417,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/skilledLabourWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -431,6 +440,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/skilledLabourmen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -478,6 +488,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/formalEmploymentWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -500,6 +511,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/formalEmploymentmen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -547,6 +559,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/huntingAndGatheringWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -569,6 +582,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/huntingAndGatheringmen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -616,6 +630,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fishingWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -638,6 +653,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fishingmen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -685,6 +701,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/tradingWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -707,6 +724,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/tradingmen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -754,6 +772,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/domesticUnpaidWorkWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -776,6 +795,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/domesticUnpaidWorkmen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -823,6 +843,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/leisureWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -845,6 +866,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/leisuremen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -892,6 +914,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/sexWorkWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -914,75 +937,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".6"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:text="Commercial sex work"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".2"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
+                    android:id="@+id/sexWorkmen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1030,6 +985,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/beggingWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1052,6 +1008,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/beggingmen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1099,6 +1056,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/inactivityWomen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1121,6 +1079,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/inactivitymen"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"

@@ -1,10 +1,7 @@
 package com.silasonyango.ndma.appStore.model
 
 import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
-import com.silasonyango.ndma.ui.wealthgroup.responses.FoodConsumptionResponses
-import com.silasonyango.ndma.ui.wealthgroup.responses.IncomeAndFoodSourceResponses
-import com.silasonyango.ndma.ui.wealthgroup.responses.LivestockContributionResponses
-import com.silasonyango.ndma.ui.wealthgroup.responses.LivestockPoultryOwnershipResponses
+import com.silasonyango.ndma.ui.wealthgroup.responses.*
 
 
 class WealthGroupQuestionnaire(val uniqueId: String,val questionnaireName: String){
@@ -15,4 +12,5 @@ class WealthGroupQuestionnaire(val uniqueId: String,val questionnaireName: Strin
     lateinit var foodConsumptionResponses: FoodConsumptionResponses
     lateinit var livestockPoultryOwnershipResponses: LivestockPoultryOwnershipResponses
     lateinit var livestockContributionResponses: LivestockContributionResponses
+    lateinit var labourPatternResponses: LabourPatternResponse
 }
