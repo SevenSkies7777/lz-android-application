@@ -1,18 +1,27 @@
 package com.silasonyango.ndma.ui.county.destinations
 
+import android.Manifest
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.EditText
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.core.view.size
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.silasonyango.ndma.R
 import com.silasonyango.ndma.appStore.AppStore
@@ -21,6 +30,7 @@ import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaireListObject
 import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.database.questionnaires.entity.QuestionnaireTypesEntity
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
+import com.silasonyango.ndma.login.model.GeographyObject
 import com.silasonyango.ndma.ui.county.adapters.LzCropProductionRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.adapters.LzMarketTradeRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.adapters.SubCountiesSpinnerAdapter
@@ -29,13 +39,19 @@ import com.silasonyango.ndma.ui.county.model.*
 import com.silasonyango.ndma.ui.county.responses.*
 import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
 import com.silasonyango.ndma.ui.home.HomeViewModel
+import com.silasonyango.ndma.ui.home.adapters.LivelihoodZonesAdapter
+import com.silasonyango.ndma.ui.home.adapters.LzSelectionAdapter
+import com.silasonyango.ndma.ui.home.adapters.WgQuestionnaireTypeAdapter
+import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
+import com.silasonyango.ndma.util.GpsTracker
 import com.silasonyango.ndma.util.Util
 
 
 class CountyLevelFragment : DialogFragment(),
     SubLocationLzAssignmentRecyclerViewAdapter.SubLocationLzAssignmentRecyclerViewAdapterCallback,
     LzCropProductionRecyclerViewAdapter.LzCropProductionRecyclerViewAdapterCallBack,
-    LzMarketTradeRecyclerViewAdapter.LzMarketTradeRecyclerViewAdapterCallBack {
+    LzMarketTradeRecyclerViewAdapter.LzMarketTradeRecyclerViewAdapterCallBack,
+    LivelihoodZonesAdapter.LivelihoodZonesAdapterCallBack, LzSelectionAdapter.LzSelectionAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -43,9 +59,15 @@ class CountyLevelFragment : DialogFragment(),
 
     private lateinit var countyLevelQuestionnaire: CountyLevelQuestionnaire
 
+    lateinit var geographyObject: GeographyObject
+
+    private var livelihoodZoneAlertDialog: android.app.AlertDialog? = null
+
     var questionnaireId: String? = null
 
     var questionnaireName: String? = null
+
+    val WRITE_STORAGE_PERMISSION_CODE: Int = 100
 
 
     companion object {
@@ -84,6 +106,7 @@ class CountyLevelFragment : DialogFragment(),
             }!!
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -97,7 +120,22 @@ class CountyLevelFragment : DialogFragment(),
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun defineViews() {
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+        val geographyString =
+            sharedPreferences?.getString(Constants.GEOGRAPHY_OBJECT, null)
+        geographyObject =
+            gson.fromJson(
+                geographyString,
+                GeographyObject::class.java
+            )
         defineLzMarketsLayouts()
         defineNavigation()
         binding.apply {
@@ -117,6 +155,51 @@ class CountyLevelFragment : DialogFragment(),
             cropModelList.add(CropModel("Rice", 6))
             cropModelList.add(CropModel("Mango", 7))
             populateCropProductionRecyclerView(cropModelList)
+
+            countyConfiguration.apply {
+
+                livelihoodZoneDropDown.setOnClickListener {
+                    inflateLivelihoodZoneModal(geographyObject.livelihoodZones)
+                }
+
+                configurationSubmitButton.setOnClickListener {
+                    var latitude: Double = 0.0
+                    var longitude: Double = 0.0
+                    val gpsTracker: GpsTracker = GpsTracker(context)
+                    if (isStoragePermissionGranted()) {
+                        latitude = gpsTracker.latitude
+                        longitude = gpsTracker.longitude
+                        countyLevelQuestionnaire.latitude = latitude
+                        countyLevelQuestionnaire.longitude = longitude
+
+                        countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
+
+                        prepareLivelihoodSelectionLayout()
+                        countyConfiguration.root.visibility = View.GONE
+                        livelihoodZoneSelection.root.visibility = View.VISIBLE
+                    }
+                }
+            }
+
+        }
+    }
+
+    private fun prepareLivelihoodSelectionLayout() {
+        binding.apply {
+
+            livelihoodZoneSelection.apply {
+
+                val lzSelectionAdapter = LzSelectionAdapter(
+                    geographyObject.livelihoodZones,
+                    this@CountyLevelFragment
+                )
+                val gridLayoutManager = GridLayoutManager(context, 1)
+                lzList.layoutManager = gridLayoutManager
+                lzList.hasFixedSize()
+                lzList.adapter = lzSelectionAdapter
+
+            }
+
         }
     }
 
@@ -267,13 +350,19 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun defineNavigation() {
         binding.apply {
 
-            lzDefinitionsLayout.apply {
-                lzDefinitionsNextButton.setOnClickListener {
-                    lzDefinitionsLayout.root.visibility = View.GONE
-                    locationAndPopulationLayout.root.visibility = View.VISIBLE
+            /* Livelihood Zone Selection navigation */
+            livelihoodZoneSelection.apply {
+                lzSelectionBackButton.setOnClickListener {
+                    countyConfiguration.root.visibility = View.VISIBLE
+                    livelihoodZoneSelection.root.visibility = View.GONE
+                }
+
+                lzSelectionNextButton.setOnClickListener {
+
                 }
             }
 
@@ -292,7 +381,7 @@ class CountyLevelFragment : DialogFragment(),
                 }
                 locationBackButton.setOnClickListener {
                     locationAndPopulationLayout.root.visibility = View.GONE
-                    lzDefinitionsLayout.root.visibility = View.VISIBLE
+                    countyConfiguration.root.visibility = View.VISIBLE
                 }
             }
 
@@ -539,6 +628,7 @@ class CountyLevelFragment : DialogFragment(),
             /*LzCompletion page navigation*/
             lzCompletionPage.apply {
                 closeButton.setOnClickListener {
+                    countyLevelQuestionnaire.questionnaireEndDate = Util.getNow()
                     val gson = Gson()
                     val sharedPreferences: SharedPreferences? =
                         context?.applicationContext?.getSharedPreferences(
@@ -559,11 +649,56 @@ class CountyLevelFragment : DialogFragment(),
                     editor?.remove(Constants.QUESTIONNAIRES_LIST_OBJECT)
 
                     val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
-                    editor?.putString(Constants.QUESTIONNAIRES_LIST_OBJECT, newQuestionnaireObjectString)
+                    editor?.putString(
+                        Constants.QUESTIONNAIRES_LIST_OBJECT,
+                        newQuestionnaireObjectString
+                    )
                     editor?.commit()
 
                 }
             }
+        }
+
+    }
+
+
+    private fun inflateLivelihoodZoneModal(livelihoodZoneModelList: MutableList<LivelihoodZoneModel>) {
+        val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
+
+        val listRecyclerView = v.findViewById<RecyclerView>(R.id.listRv)
+
+        val lzAdapter = LivelihoodZonesAdapter(
+            livelihoodZoneModelList,
+            this
+        )
+        val gridLayoutManager = GridLayoutManager(activity, 1)
+        listRecyclerView.layoutManager = gridLayoutManager
+        listRecyclerView.hasFixedSize()
+        listRecyclerView.adapter = lzAdapter
+
+        openLivelihoodZoneModal(v)
+    }
+
+    private fun openLivelihoodZoneModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(activity)
+        builder.setView(v)
+        builder.setCancelable(true)
+        livelihoodZoneAlertDialog = builder.create()
+        (livelihoodZoneAlertDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            window?.setLayout(
+                width,
+                height
+            )
         }
 
     }
@@ -575,5 +710,70 @@ class CountyLevelFragment : DialogFragment(),
             window?.setLayout(matchParent, matchParent)
             window?.setBackgroundDrawable(null)
         }
+    }
+
+    override fun onLivelihoodZoneItemClicked(selectedLivelihoodZone: LivelihoodZoneModel) {
+        countyLevelQuestionnaire.selectedLivelihoodZone = selectedLivelihoodZone
+        (livelihoodZoneAlertDialog as android.app.AlertDialog).dismiss()
+        binding.apply {
+            countyConfiguration.apply {
+                livelihoodZoneText.text = selectedLivelihoodZone.livelihoodZoneName
+            }
+        }
+
+    }
+
+
+    private fun isStoragePermissionGranted(): Boolean {
+        val scopedActivity = context
+
+        val isPermissionGranted = scopedActivity?.let {
+            ContextCompat.checkSelfPermission(
+                it, Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+        } == PackageManager.PERMISSION_GRANTED
+
+        return if (isPermissionGranted) {
+            true
+        } else {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ),
+                WRITE_STORAGE_PERMISSION_CODE
+            )
+            false
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == WRITE_STORAGE_PERMISSION_CODE && grantResults.isNotEmpty()
+            && grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) {
+            var latitude: Double = 0.0
+            var longitude: Double = 0.0
+            val gpsTracker: GpsTracker = GpsTracker(context)
+
+            latitude = gpsTracker.latitude
+            longitude = gpsTracker.longitude
+            countyLevelQuestionnaire.latitude = latitude
+            countyLevelQuestionnaire.longitude = longitude
+
+            prepareLivelihoodSelectionLayout()
+            binding.apply {
+                countyConfiguration.root.visibility = View.GONE
+                livelihoodZoneSelection.root.visibility = View.VISIBLE
+            }
+
+        }
+    }
+
+    override fun onLivelihoodZoneItemSelectedFromSelectionList(selectedLivelihoodZone: LivelihoodZoneModel) {
+        countyLevelQuestionnaire.countyLivelihoodZones.add(selectedLivelihoodZone)
     }
 }

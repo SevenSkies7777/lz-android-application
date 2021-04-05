@@ -13,12 +13,21 @@
         <!--        Top bar-->
         <include layout="@layout/top_bar" />
 
-        <!--        B. Livelihood Zone Definition-->
+        <!--        A. County Configuration-->
         <include
-            android:id="@+id/lzDefinitionsLayout"
-            layout="@layout/lz_definitions_layout"
-            android:layout_width="wrap_content"
+            android:id="@+id/countyConfiguration"
+            layout="@layout/county_level_configuration"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="22dp" />
+
+        <!--        B. Livelihood Zone in the county-->
+        <include
+            android:id="@+id/livelihoodZoneSelection"
+            layout="@layout/livelihood_zone_selection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginTop="22dp" />
 
         <!--        C. Location and Population-->
