@@ -39,7 +39,7 @@ class LzSelectionAdapter(
             lzSelectionAdapterCallBack.onLivelihoodZoneItemSelectedFromSelectionList(
                 livelihoodZoneModelList.get(position)
             )
-            viewHolder.highlightIcon.visibility = View.VISIBLE
+            viewHolder.highlightIcon.visibility = if (viewHolder.highlightIcon.visibility == View.VISIBLE) View.GONE else View.VISIBLE
         }
     }
 

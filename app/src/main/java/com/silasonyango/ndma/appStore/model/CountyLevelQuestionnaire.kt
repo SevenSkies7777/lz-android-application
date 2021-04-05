@@ -9,7 +9,7 @@ import com.silasonyango.ndma.ui.county.responses.WealthGroupResponse
 class CountyLevelQuestionnaire(val uniqueId: String,val questionnaireName: String){
     lateinit var selectedLivelihoodZone: LivelihoodZoneModel
 
-    val countyLivelihoodZones: MutableList<LivelihoodZoneModel> = ArrayList()
+    var countyLivelihoodZones: MutableList<LivelihoodZoneModel> = ArrayList()
 
     var latitude: Double = 0.0
 

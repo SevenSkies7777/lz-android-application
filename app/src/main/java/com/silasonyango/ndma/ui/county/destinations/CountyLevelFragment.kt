@@ -774,6 +774,19 @@ class CountyLevelFragment : DialogFragment(),
     }
 
     override fun onLivelihoodZoneItemSelectedFromSelectionList(selectedLivelihoodZone: LivelihoodZoneModel) {
-        countyLevelQuestionnaire.countyLivelihoodZones.add(selectedLivelihoodZone)
+
+        if (isLzAlreadySelected(selectedLivelihoodZone)) {
+            countyLevelQuestionnaire.countyLivelihoodZones = removeItemFromLzList(selectedLivelihoodZone) as MutableList<LivelihoodZoneModel>
+        } else {
+            countyLevelQuestionnaire.countyLivelihoodZones.add(selectedLivelihoodZone)
+        }
+    }
+
+    fun removeItemFromLzList(itemToBeRemoved: LivelihoodZoneModel): List<LivelihoodZoneModel> {
+        return countyLevelQuestionnaire.countyLivelihoodZones.filter { s -> s.livelihoodZoneId != itemToBeRemoved.livelihoodZoneId}
+    }
+
+    fun isLzAlreadySelected(selectedItem: LivelihoodZoneModel): Boolean {
+        return countyLevelQuestionnaire.countyLivelihoodZones.filter { s -> s.livelihoodZoneId == selectedItem.livelihoodZoneId}.size > 0
     }
 }
