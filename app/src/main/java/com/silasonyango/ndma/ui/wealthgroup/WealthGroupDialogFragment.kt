@@ -626,6 +626,8 @@ class WealthGroupDialogFragment : DialogFragment() {
                 }
 
                 constraintsNextButton.setOnClickListener {
+
+
                     wgCompletionPage.root.visibility = View.VISIBLE
                     wgConstraints.root.visibility = View.GONE
                 }
