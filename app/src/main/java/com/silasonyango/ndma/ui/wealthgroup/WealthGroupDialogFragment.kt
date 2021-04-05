@@ -627,6 +627,79 @@ class WealthGroupDialogFragment : DialogFragment() {
 
                 constraintsNextButton.setOnClickListener {
 
+                    val constraintResponses = ConstraintsResponses()
+
+                    val wagedLabourIncomeConstraintsResponses = WagedLabourIncomeConstraintsResponses()
+
+                    wagedLabourIncomeConstraintsResponses.lowEducation = labourLowEducation.toString().toInt()
+                    wagedLabourIncomeConstraintsResponses.poorHealth = labourPoorHealth.toString().toInt()
+                    wagedLabourIncomeConstraintsResponses.fewJobs = labourFewJobs.toString().toInt()
+                    wagedLabourIncomeConstraintsResponses.tooMuchFarmTime = labourFarmTime.toString().toInt()
+                    wagedLabourIncomeConstraintsResponses.lowAverageWageRates = labourLowWageRates.toString().toInt()
+
+                    constraintResponses.wagedLabourIncomeConstraintsResponses = wagedLabourIncomeConstraintsResponses
+
+
+                    val cropProductionIncomeConstraintsResponses = CropProductionIncomeConstraintsResponses()
+
+                    cropProductionIncomeConstraintsResponses.smallLandHoldings = consumptionHoldings.toString().toInt()
+                    cropProductionIncomeConstraintsResponses.lackOfCredit = consumptionLackOfCredit.toString().toInt()
+                    cropProductionIncomeConstraintsResponses.highInputCost = consumptionHighInputs.toString().toInt()
+                    cropProductionIncomeConstraintsResponses.lowLandFertility = consumptionLowFertility.toString().toInt()
+                    cropProductionIncomeConstraintsResponses.lackOfReliableWater = consumptionUnreliableWater.toString().toInt()
+                    cropProductionIncomeConstraintsResponses.lowTechnicalSkills = consumptionLowTechnicalSkills.toString().toInt()
+                    cropProductionIncomeConstraintsResponses.lowQualitySeed = consumptionLowSeedQuality.toString().toInt()
+                    cropProductionIncomeConstraintsResponses.lackOfMarketAccess = consumptionMarketAccess.toString().toInt()
+                    cropProductionIncomeConstraintsResponses.endemicCropPests = consumptionCropPests.toString().toInt()
+
+                    constraintResponses.cropProductionIncomeConstraintsResponses = cropProductionIncomeConstraintsResponses
+
+                    val livestockProductionIncomeConstraintsResponses = LivestockProductionIncomeConstraintsResponses()
+
+                    livestockProductionIncomeConstraintsResponses.lackOfPasture = livestockProductionPasture.toString().toInt()
+                    livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater = livestockProductionDrinkingWater.toString().toInt()
+                    livestockProductionIncomeConstraintsResponses.lowYieldingAnimal = livestockProductionLowYieldingAnimal.toString().toInt()
+                    livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs = livestockProductionVeterinaryDrugs.toString().toInt()
+                    livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases = livestockProductionPests.toString().toInt()
+                    livestockProductionIncomeConstraintsResponses.lackofMarket = livestockProductionMarket.toString().toInt()
+                    livestockProductionIncomeConstraintsResponses.insecurity = livestockProductionInsecurity.toString().toInt()
+
+                    constraintResponses.livestockProductionIncomeConstraintsResponses = livestockProductionIncomeConstraintsResponses
+
+
+                    val fishingIncomeConstraintsResponses = FishingIncomeConstraintsResponses()
+
+                    fishingIncomeConstraintsResponses.lowFishStocks = fishingLowStocks.toString().toInt()
+                    fishingIncomeConstraintsResponses.poorMarket = fishingPoorMarket.toString().toInt()
+                    fishingIncomeConstraintsResponses.lackOfEquipment = fishingLackOfEquipment.toString().toInt()
+                    fishingIncomeConstraintsResponses.extremeCompetition = fishingCompetition.toString().toInt()
+                    fishingIncomeConstraintsResponses.lackOfExpertise = fishingLackOfExpertise.toString().toInt()
+                    fishingIncomeConstraintsResponses.fishingRightsRestrictions = fishingFishingRights.toString().toInt()
+
+                    constraintResponses.fishingIncomeConstraintsResponses = fishingIncomeConstraintsResponses
+
+                    val naturalResourceIncomeConstraintsResponses = NaturalResourceIncomeConstraintsResponses()
+
+                    naturalResourceIncomeConstraintsResponses.decliningNaturalResources = resourceDecline.toString().toInt()
+                    naturalResourceIncomeConstraintsResponses.populationPressure = resourcePopulationPressure.toString().toInt()
+                    naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights = resourceRights.toString().toInt()
+                    naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts = resourceLowValue.toString().toInt()
+
+                    constraintResponses.naturalResourceIncomeConstraintsResponses = naturalResourceIncomeConstraintsResponses
+
+                    val smallEnterpriseIncomeConstraintsResponses = SmallEnterpriseIncomeConstraintsResponses()
+
+                    smallEnterpriseIncomeConstraintsResponses.lackOfCapital = enterpriseLackOfCapital.toString().toInt()
+                    smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape = enterpriseRedTape.toString().toInt()
+                    smallEnterpriseIncomeConstraintsResponses.tooManyTaxes = enterpriseTaxes.toString().toInt()
+                    smallEnterpriseIncomeConstraintsResponses.tooManyTaxes = enterpriseTaxes.toString().toInt()
+                    smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket = enterpriseMarketAccess.toString().toInt()
+                    smallEnterpriseIncomeConstraintsResponses.lackOfExpertise = enterpriseExpertise.toString().toInt()
+
+                    constraintResponses.smallEnterpriseIncomeConstraintsResponses = smallEnterpriseIncomeConstraintsResponses
+
+                    wealthGroupQuestionnaire.constraintsResponses = constraintResponses
+
 
                     wgCompletionPage.root.visibility = View.VISIBLE
                     wgConstraints.root.visibility = View.GONE

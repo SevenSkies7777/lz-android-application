@@ -128,6 +128,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/labourLowEducation"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -175,6 +176,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/labourPoorHealth"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -222,6 +224,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/labourFewJobs"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -269,6 +272,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/labourFarmTime"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -316,6 +320,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/labourLowWageRates"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -384,14 +389,17 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:text="Rank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
+                <EditText
+                    android:id="@+id/consumptionHoldings"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:textColor="#FF3F51B5"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -430,6 +438,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/consumptionLackOfCredit"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -477,6 +486,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/consumptionHighInputs"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -524,6 +534,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/consumptionLowFertility"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -571,6 +582,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/consumptionUnreliableWater"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -618,6 +630,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/consumptionLowTechnicalSkills"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -665,6 +678,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/consumptionLowSeedQuality"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -712,6 +726,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/consumptionMarketAccess"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -759,6 +774,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/consumptionCropPests"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -872,6 +888,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/livestockProductionPasture"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -919,6 +936,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/livestockProductionDrinkingWater"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -966,6 +984,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/livestockProductionLowYieldingAnimal"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1013,6 +1032,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/livestockProductionVeterinaryDrugs"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1060,6 +1080,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/livestockProductionPests"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1107,6 +1128,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/livestockProductionMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1154,6 +1176,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/livestockProductionInsecurity"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1267,6 +1290,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fishingLowStocks"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1314,6 +1338,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fishingPoorMarket"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1361,6 +1386,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fishingLackOfEquipment"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1408,6 +1434,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fishingCompetition"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1455,6 +1482,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fishingLackOfExpertise"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1502,6 +1530,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/fishingFishingRights"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1616,6 +1645,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/resourceDecline"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1663,6 +1693,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/resourcePopulationPressure"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1710,6 +1741,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/resourceRights"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1757,6 +1789,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/resourceLowValue"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1870,6 +1903,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/enterpriseLackOfCapital"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1917,6 +1951,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/enterpriseRedTape"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1964,6 +1999,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/enterpriseTaxes"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -2011,6 +2047,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/enterpriseMarketAccess"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -2058,6 +2095,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/enterpriseExpertise"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
