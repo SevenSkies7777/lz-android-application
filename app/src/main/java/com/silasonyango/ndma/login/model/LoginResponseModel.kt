@@ -12,6 +12,5 @@ data class LoginResponseModel(
     var surname: String,
     var userEmail: String,
     var roles: List<Roles>,
-    var county: CountyModel,
     var geography: GeographyObject
 )

@@ -4,5 +4,6 @@ class SubCountyModel(
     val subCountyId: Int,
     val countyId: Int,
     val subCountyName: String,
-    val subCountyCode: Int
+    val subCountyCode: Int,
+    val wards: MutableList<WardModel>
 )

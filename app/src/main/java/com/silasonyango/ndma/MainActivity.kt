@@ -80,6 +80,10 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
     lateinit var questionnaireName: String
 
+    lateinit var selectedSubCounty: SubCountyModel
+
+    lateinit var selectedWard: WardModel
+
     val WRITE_STORAGE_PERMISSION_CODE: Int = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -282,15 +286,15 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         wgQuestionnaireTypesList.add(WgQuestionnaireTypeModel(0, "Raw data questionnaire", 2))
 
         subCountyDropDown.setOnClickListener {
-            inflateSubCountyModal(geographyObject.subCounties as MutableList<SubCountyModel>)
+            inflateSubCountyModal(geographyObject.county.subCounties)
         }
 
         wardDropDown.setOnClickListener {
-            inflateWardModal(geographyObject.wards as MutableList<WardModel>)
+            inflateWardModal(selectedSubCounty.wards)
         }
 
         subLocationDropDown.setOnClickListener {
-            inflateSubLocationModal(geographyObject.subLocations as MutableList<SubLocationModel>)
+            inflateSubLocationModal(selectedWard.subLocations)
         }
 
         wealthGroupDropDown.setOnClickListener {
@@ -606,12 +610,14 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
     override fun onSubCountyItemClicked(selectedSubCounty: SubCountyModel) {
         questionnaireSessionLocation.selectedSubCounty = selectedSubCounty
         selectedSubCountyText.text = selectedSubCounty.subCountyName
+        this.selectedSubCounty = selectedSubCounty
         (subCountyDialog as android.app.AlertDialog).dismiss()
     }
 
     override fun onWardItemClicked(selectedWard: WardModel) {
         questionnaireSessionLocation.selectedWard = selectedWard
         selectedWardText.text = selectedWard.wardName
+        this.selectedWard = selectedWard
         (wardDialog as android.app.AlertDialog).dismiss()
     }
 
