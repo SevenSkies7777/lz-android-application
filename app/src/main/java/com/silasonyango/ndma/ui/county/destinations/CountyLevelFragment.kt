@@ -41,6 +41,7 @@ import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
 import com.silasonyango.ndma.ui.home.HomeViewModel
 import com.silasonyango.ndma.ui.home.adapters.LivelihoodZonesAdapter
 import com.silasonyango.ndma.ui.home.adapters.LzSelectionAdapter
+import com.silasonyango.ndma.ui.home.adapters.SubLocationZoneAssignmentAdapter
 import com.silasonyango.ndma.ui.home.adapters.WgQuestionnaireTypeAdapter
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
 import com.silasonyango.ndma.util.GpsTracker
@@ -51,7 +52,7 @@ class CountyLevelFragment : DialogFragment(),
     SubLocationLzAssignmentRecyclerViewAdapter.SubLocationLzAssignmentRecyclerViewAdapterCallback,
     LzCropProductionRecyclerViewAdapter.LzCropProductionRecyclerViewAdapterCallBack,
     LzMarketTradeRecyclerViewAdapter.LzMarketTradeRecyclerViewAdapterCallBack,
-    LivelihoodZonesAdapter.LivelihoodZonesAdapterCallBack, LzSelectionAdapter.LzSelectionAdapterCallBack {
+    LivelihoodZonesAdapter.LivelihoodZonesAdapterCallBack, LzSelectionAdapter.LzSelectionAdapterCallBack, SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -363,6 +364,35 @@ class CountyLevelFragment : DialogFragment(),
 
                 lzSelectionNextButton.setOnClickListener {
 
+                    val subLocationZoneAssignmentModelList: MutableList<SubLocationZoneAssignmentModel> = ArrayList()
+
+                    for (currentSubLocation in geographyObject.subLocations) {
+                        subLocationZoneAssignmentModelList.add(
+                            SubLocationZoneAssignmentModel(
+                                currentSubLocation,
+                                0
+                        )
+                        )
+                    }
+
+                    lzSubLocationAssignment.apply {
+                        val subLocationassignmentAdapter = activity?.let { it1 ->
+                            SubLocationZoneAssignmentAdapter(
+                                subLocationZoneAssignmentModelList,
+                                this@CountyLevelFragment,
+                                geographyObject.livelihoodZones,
+                                it1
+                            )
+                        }
+
+                        val gridLayoutManager = GridLayoutManager(activity, 1)
+                        listRv.layoutManager = gridLayoutManager
+                        listRv.hasFixedSize()
+                        listRv.adapter =
+                            subLocationassignmentAdapter
+                    }
+                    lzSubLocationAssignment.root.visibility = View.VISIBLE
+                    livelihoodZoneSelection.root.visibility = View.GONE
                 }
             }
 
@@ -788,5 +818,9 @@ class CountyLevelFragment : DialogFragment(),
 
     fun isLzAlreadySelected(selectedItem: LivelihoodZoneModel): Boolean {
         return countyLevelQuestionnaire.countyLivelihoodZones.filter { s -> s.livelihoodZoneId == selectedItem.livelihoodZoneId}.size > 0
+    }
+
+    override fun onLivelihoodZoneSelected(selectedSubLocationZoneAssignment: SubLocationZoneAssignmentModel) {
+        countyLevelQuestionnaire.subLocationZoneAllocationList.add(selectedSubLocationZoneAssignment)
     }
 }

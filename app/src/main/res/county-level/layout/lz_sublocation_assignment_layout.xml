@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingStart="24dp"
     android:paddingLeft="24dp"
+    android:paddingStart="24dp"
+    android:paddingRight="24dp"
     android:paddingEnd="24dp"
-    android:paddingRight="24dp">
+    android:orientation="vertical">
 
     <TextView
+        android:text="C(i). Sub-Location Livelihoodzones assignment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_bold"
-        android:lineSpacingExtra="9sp"
-        android:text="A. Livelihood Zones in the County"
-        android:textColor="#000000"
+        android:textStyle="bold"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textColor="#000000"
+        android:lineSpacingExtra="9sp"/>
 
     <TextView
-        android:text="Click to select all the livelihood zones applicable in the county"
+        android:text="@string/lz_sublocation_assignment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_regular"
@@ -31,12 +31,14 @@
         android:layout_marginTop="27dp"
         android:gravity="start"/>
 
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="27dp"
-        android:id="@+id/lzList"
+        android:layout_marginTop="32dp"
+        android:id="@+id/listRv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -45,7 +47,7 @@
         android:layout_marginBottom="18dp">
 
         <TextView
-            android:id="@+id/lzSelectionBackButton"
+            android:id="@+id/labourPatternsBackButton"
             android:text="BACK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +64,7 @@
             android:layout_centerVertical="true"/>
 
         <TextView
-            android:id="@+id/lzSelectionNextButton"
+            android:id="@+id/labourPatternsNextButton"
             android:text="NEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
