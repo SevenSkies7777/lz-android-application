@@ -105,6 +105,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/livestockProductionWrapper"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -120,6 +121,7 @@
                     android:textColor="#000000"
                     android:lineSpacingExtra="8sp"
                     android:lineHeight="24sp"
+                    android:inputType="numberDecimal"
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -153,6 +155,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/poultryProductionWrapper"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -166,6 +169,7 @@
                     android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
+                    android:inputType="numberDecimal"
                     android:lineSpacingExtra="8sp"
                     android:lineHeight="24sp"
                     android:background="@android:color/transparent"
@@ -201,6 +205,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/cashCropProductionWrapper"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -215,6 +220,7 @@
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:lineSpacingExtra="8sp"
+                    android:inputType="numberDecimal"
                     android:lineHeight="24sp"
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
@@ -249,6 +255,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/foodCropProductionWrapper"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -263,6 +270,7 @@
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:lineSpacingExtra="8sp"
+                    android:inputType="numberDecimal"
                     android:lineHeight="24sp"
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
@@ -297,6 +305,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/casualOrWagedLabourWrapper"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -310,6 +319,7 @@
                     android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
+                    android:inputType="numberDecimal"
                     android:lineSpacingExtra="8sp"
                     android:lineHeight="24sp"
                     android:background="@android:color/transparent"
@@ -345,6 +355,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/formalWagedLabourWrapper"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -359,6 +370,7 @@
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:lineSpacingExtra="8sp"
+                    android:inputType="numberDecimal"
                     android:lineHeight="24sp"
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
@@ -393,6 +405,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fishingWrapper"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -406,6 +419,7 @@
                     android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
+                    android:inputType="numberDecimal"
                     android:lineSpacingExtra="8sp"
                     android:lineHeight="24sp"
                     android:background="@android:color/transparent"
@@ -441,6 +455,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/huntingAndGatheringWrapper"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -455,6 +470,7 @@
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:lineSpacingExtra="8sp"
+                    android:inputType="numberDecimal"
                     android:lineHeight="24sp"
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
@@ -490,6 +506,7 @@ Brokerage services/ middlemen, beer etc"
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/smallBusinessWrapper"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -503,6 +520,7 @@ Brokerage services/ middlemen, beer etc"
                     android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
+                    android:inputType="numberDecimal"
                     android:lineSpacingExtra="8sp"
                     android:lineHeight="24sp"
                     android:background="@android:color/transparent"
@@ -538,6 +556,7 @@ Brokerage services/ middlemen, beer etc"
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/firewoodOrCharcoalWrapper"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -551,6 +570,7 @@ Brokerage services/ middlemen, beer etc"
                     android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
+                    android:inputType="numberDecimal"
                     android:lineSpacingExtra="8sp"
                     android:lineHeight="24sp"
                     android:background="@android:color/transparent"
@@ -586,6 +606,7 @@ Brokerage services/ middlemen, beer etc"
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/pettyTradingWrapper"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -599,6 +620,7 @@ Brokerage services/ middlemen, beer etc"
                     android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
+                    android:inputType="numberDecimal"
                     android:lineSpacingExtra="8sp"
                     android:lineHeight="24sp"
                     android:background="@android:color/transparent"
@@ -634,6 +656,7 @@ Brokerage services/ middlemen, beer etc"
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/remittanceWrapper"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -645,6 +668,7 @@ Brokerage services/ middlemen, beer etc"
                     android:id="@+id/remittance"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
+                    android:inputType="numberDecimal"
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:lineSpacingExtra="8sp"
@@ -682,6 +706,7 @@ Brokerage services/ middlemen, beer etc"
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/bodabodaWrapper"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -695,6 +720,7 @@ Brokerage services/ middlemen, beer etc"
                     android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
+                    android:inputType="numberDecimal"
                     android:lineSpacingExtra="8sp"
                     android:lineHeight="24sp"
                     android:background="@android:color/transparent"
@@ -730,6 +756,7 @@ Brokerage services/ middlemen, beer etc"
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/beeKeepingWrapper"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -742,6 +769,7 @@ Brokerage services/ middlemen, beer etc"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
+                    android:inputType="numberDecimal"
                     android:textColor="#000000"
                     android:lineSpacingExtra="8sp"
                     android:lineHeight="24sp"
@@ -778,6 +806,7 @@ Brokerage services/ middlemen, beer etc"
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sandHarvestingWrapper"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -791,6 +820,7 @@ Brokerage services/ middlemen, beer etc"
                     android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
+                    android:inputType="numberDecimal"
                     android:lineSpacingExtra="8sp"
                     android:lineHeight="24sp"
                     android:background="@android:color/transparent"
@@ -826,6 +856,7 @@ Brokerage services/ middlemen, beer etc"
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/otherWrapper"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -839,6 +870,7 @@ Brokerage services/ middlemen, beer etc"
                     android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
+                    android:inputType="numberDecimal"
                     android:lineSpacingExtra="8sp"
                     android:lineHeight="24sp"
                     android:background="@android:color/transparent"
