@@ -1,6 +1,7 @@
 package com.silasonyango.ndma.appStore.model
 
 import com.silasonyango.ndma.ui.county.model.CropModel
+import com.silasonyango.ndma.ui.county.model.EthnicGroupModel
 import com.silasonyango.ndma.ui.county.model.LivelihoodZoneModel
 import com.silasonyango.ndma.ui.county.model.SubLocationZoneAssignmentModel
 import com.silasonyango.ndma.ui.county.responses.HazardResponses
@@ -14,6 +15,8 @@ class CountyLevelQuestionnaire(val uniqueId: String,val questionnaireName: Strin
     var countyLivelihoodZones: MutableList<LivelihoodZoneModel> = ArrayList()
 
     var livelihoodZoneCrops: MutableList<CropModel> = ArrayList()
+
+    var livelihoodZoneEthnicGroups: MutableList<EthnicGroupModel> = ArrayList()
 
     var latitude: Double = 0.0
 

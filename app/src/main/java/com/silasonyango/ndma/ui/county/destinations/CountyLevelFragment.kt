@@ -52,7 +52,8 @@ class CountyLevelFragment : DialogFragment(),
     LivelihoodZonesAdapter.LivelihoodZonesAdapterCallBack,
     LzSelectionAdapter.LzSelectionAdapterCallBack,
     SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack,
-    CropSelectionAdapter.CropSelectionAdapterCallBack {
+    CropSelectionAdapter.CropSelectionAdapterCallBack,
+    TribeSelectionAdapter.TribeSelectionAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -554,16 +555,51 @@ class CountyLevelFragment : DialogFragment(),
 
                     countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
 
+
+                    val ethnicGroupList: MutableList<EthnicGroupModel> = ArrayList()
+                    ethnicGroupList.add(EthnicGroupModel(0, "Luo", 0))
+                    ethnicGroupList.add(EthnicGroupModel(0, "Kikuyu", 0))
+                    ethnicGroupList.add(EthnicGroupModel(0, "Kamba", 0))
+                    ethnicGroupList.add(EthnicGroupModel(0, "Lughya", 0))
+                    ethnicGroupList.add(EthnicGroupModel(0, "Swahili", 0))
+
+                    val tribeSelectionAdapter =
+                        TribeSelectionAdapter(ethnicGroupList, this@CountyLevelFragment)
+                    val gridLayoutManager = GridLayoutManager(activity, 1)
+
+                    ethnicGroupSelection.apply {
+                        tribeList.layoutManager = gridLayoutManager
+                        tribeList.hasFixedSize()
+                        tribeList.adapter =
+                            tribeSelectionAdapter
+                    }
+
                     mainWaterSource.root.visibility = View.GONE
-                    lzHungerPatterns.root.visibility = View.VISIBLE
+                    ethnicGroupSelection.root.visibility = View.VISIBLE
                 }
             }
 
 
-            /*Crop Production navigation buttons*/
+            /* Ethnic Group Selection navigation */
+            ethnicGroupSelection.apply {
+
+                tribeSelectionBackButton.setOnClickListener {
+                    mainWaterSource.root.visibility = View.VISIBLE
+                    ethnicGroupSelection.root.visibility = View.GONE
+                }
+
+                tribeSelectionNextButton.setOnClickListener {
+                    ethnicGroupSelection.root.visibility = View.GONE
+                    lzHungerPatterns.root.visibility = View.VISIBLE
+                }
+
+            }
+
+
+            /*Hunger patterns navigation buttons*/
             lzHungerPatterns.apply {
                 hungerPatternsBackButton.setOnClickListener {
-                    mainWaterSource.root.visibility = View.VISIBLE
+                    ethnicGroupSelection.root.visibility = View.VISIBLE
                     lzHungerPatterns.root.visibility = View.GONE
                 }
                 hungerPatternsNextButton.setOnClickListener {
@@ -892,5 +928,9 @@ class CountyLevelFragment : DialogFragment(),
 
     override fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel) {
         countyLevelQuestionnaire.livelihoodZoneCrops.add(selectedCrop)
+    }
+
+    override fun onTribeItemSelectedFromSelectionList(selectedTribe: EthnicGroupModel) {
+        countyLevelQuestionnaire.livelihoodZoneEthnicGroups.add(selectedTribe)
     }
 }
