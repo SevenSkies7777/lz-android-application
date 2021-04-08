@@ -53,7 +53,7 @@ class CountyLevelFragment : DialogFragment(),
     LzSelectionAdapter.LzSelectionAdapterCallBack,
     SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack,
     CropSelectionAdapter.CropSelectionAdapterCallBack,
-    TribeSelectionAdapter.TribeSelectionAdapterCallBack {
+    TribeSelectionAdapter.TribeSelectionAdapterCallBack, EthnicityAdapter.EthnicityAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -589,7 +589,45 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
                 tribeSelectionNextButton.setOnClickListener {
+
+                    val ethnicGroupResponseList: MutableList<EthnicityResponseItem> = ArrayList()
+                    for (currentEthnicGroup: EthnicGroupModel in countyLevelQuestionnaire.livelihoodZoneEthnicGroups) {
+                        ethnicGroupResponseList.add(
+                            EthnicityResponseItem(
+                                currentEthnicGroup,
+                                0.0
+                            )
+                        )
+                    }
+
+                    val ethnicPopulationAdapter =
+                        EthnicityAdapter(ethnicGroupResponseList, this@CountyLevelFragment)
+                    val gridLayoutManager = GridLayoutManager(activity, 1)
+
+                    ethnicGroupPopulation.apply {
+                        ethnicityTable.layoutManager = gridLayoutManager
+                        ethnicityTable.hasFixedSize()
+                        ethnicityTable.adapter =
+                            ethnicPopulationAdapter
+                    }
+
                     ethnicGroupSelection.root.visibility = View.GONE
+                    ethnicGroupPopulation.root.visibility = View.VISIBLE
+                }
+
+            }
+
+
+            /* Ethnic group percentage */
+            ethnicGroupPopulation.apply {
+
+                ethnicBackButton.setOnClickListener {
+                    ethnicGroupPopulation.root.visibility = View.GONE
+                    ethnicGroupSelection.root.visibility = View.VISIBLE
+                }
+
+                ethnicNextButton.setOnClickListener {
+                    ethnicGroupPopulation.root.visibility = View.GONE
                     lzHungerPatterns.root.visibility = View.VISIBLE
                 }
 
@@ -599,7 +637,7 @@ class CountyLevelFragment : DialogFragment(),
             /*Hunger patterns navigation buttons*/
             lzHungerPatterns.apply {
                 hungerPatternsBackButton.setOnClickListener {
-                    ethnicGroupSelection.root.visibility = View.VISIBLE
+                    ethnicGroupPopulation.root.visibility = View.VISIBLE
                     lzHungerPatterns.root.visibility = View.GONE
                 }
                 hungerPatternsNextButton.setOnClickListener {

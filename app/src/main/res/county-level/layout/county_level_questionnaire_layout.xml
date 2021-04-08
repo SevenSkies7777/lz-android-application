@@ -107,6 +107,16 @@
             android:visibility="gone" />
 
 
+        <!--        G(ii). Ethnic Group population-->
+        <include
+            android:id="@+id/ethnicGroupPopulation"
+            layout="@layout/ethnic_groups_percentage_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
+
+
         <!--        H. Patterns of Hunger-->
         <include
             android:id="@+id/lzHungerPatterns"
