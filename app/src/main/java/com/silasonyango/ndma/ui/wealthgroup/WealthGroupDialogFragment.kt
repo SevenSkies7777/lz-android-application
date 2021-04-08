@@ -894,6 +894,8 @@ class WealthGroupDialogFragment : DialogFragment() {
                     )
                     editor?.commit()
 
+                    this@WealthGroupDialogFragment.dismiss()
+
                 }
             }
         }

@@ -396,14 +396,31 @@ class CountyLevelFragment : DialogFragment(),
                 }
             }
 
+
+            /* Lz Sublocation assignment navigation */
+            lzSubLocationAssignment.apply {
+
+                lzAllocationBackButton.setOnClickListener {
+                    lzSubLocationAssignment.root.visibility = View.GONE
+                    livelihoodZoneSelection.root.visibility = View.VISIBLE
+                }
+
+                lzAllocationNextButton.setOnClickListener {
+                    lzSubLocationAssignment.root.visibility = View.GONE
+                    locationAndPopulationLayout.root.visibility = View.VISIBLE
+                }
+
+            }
+
             /*Location and population navigation buttons*/
             locationAndPopulationLayout.apply {
                 locationNextButton.setOnClickListener {
+
                     val wealthGroupResponse = WealthGroupResponse(
-                        etVerPoorResponse.text.toString().toDouble(),
-                        etPoorResponse.text.toString().toDouble(),
-                        etMediumResponse.text.toString().toDouble(),
-                        etBetterOffResponse.text.toString().toDouble()
+                        returnZeroStringIfEmpty(etVerPoorResponse.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(etPoorResponse.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(etMediumResponse.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(etBetterOffResponse.text.toString()).toDouble()
                     )
                     countyLevelQuestionnaire.wealthGroupResponse = wealthGroupResponse
                     locationAndPopulationLayout.root.visibility = View.GONE
@@ -411,7 +428,7 @@ class CountyLevelFragment : DialogFragment(),
                 }
                 locationBackButton.setOnClickListener {
                     locationAndPopulationLayout.root.visibility = View.GONE
-                    countyConfiguration.root.visibility = View.VISIBLE
+                    lzSubLocationAssignment.root.visibility = View.VISIBLE
                 }
             }
 
@@ -437,63 +454,63 @@ class CountyLevelFragment : DialogFragment(),
 
                     val waterSourceResponses = WaterSourcesResponses()
                     waterSourceResponses.rivers = WaterDependenceResponseItem(
-                        riversWetSeason.text.toString().toDouble(),
-                        riversDrySeason.text.toString().toDouble()
+                        returnZeroStringIfEmpty(riversWetSeason.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(riversDrySeason.text.toString()).toDouble()
                     )
 
                     waterSourceResponses.traditionalRiversWells = WaterDependenceResponseItem(
-                        traditionalRiversWellsWetSeason.text.toString().toDouble(),
-                        traditionalRiversWellsDrySeason.text.toString().toDouble()
+                        returnZeroStringIfEmpty(traditionalRiversWellsWetSeason.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(traditionalRiversWellsDrySeason.text.toString()).toDouble()
                     )
 
                     waterSourceResponses.naturalPonds = WaterDependenceResponseItem(
-                        naturalPondsWetSeason.text.toString().toDouble(),
-                        naturalPondsDrySeason.text.toString().toDouble()
+                        returnZeroStringIfEmpty(naturalPondsWetSeason.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(naturalPondsDrySeason.text.toString()).toDouble()
                     )
 
                     waterSourceResponses.pansAndDams = WaterDependenceResponseItem(
-                        pansAndDamsWetSeason.text.toString().toDouble(),
-                        pansAndDamsDrySeason.text.toString().toDouble()
+                        returnZeroStringIfEmpty(pansAndDamsWetSeason.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(pansAndDamsDrySeason.text.toString()).toDouble()
                     )
 
                     waterSourceResponses.shallowWells = WaterDependenceResponseItem(
-                        shallowWellsWetSeason.text.toString().toDouble(),
-                        shallowWellsDrySeason.text.toString().toDouble()
+                        returnZeroStringIfEmpty(shallowWellsWetSeason.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(shallowWellsDrySeason.text.toString()).toDouble()
                     )
 
                     waterSourceResponses.boreholes = WaterDependenceResponseItem(
-                        boreHolesWetSeason.text.toString().toDouble(),
-                        boreHolesDrySeason.text.toString().toDouble()
+                        returnZeroStringIfEmpty(boreHolesWetSeason.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(boreHolesDrySeason.text.toString()).toDouble()
                     )
 
                     waterSourceResponses.springs = WaterDependenceResponseItem(
-                        springsWetSeason.text.toString().toDouble(),
-                        springsDrySeason.text.toString().toDouble()
+                        returnZeroStringIfEmpty(springsWetSeason.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(springsDrySeason.text.toString()).toDouble()
                     )
 
                     waterSourceResponses.lakes = WaterDependenceResponseItem(
-                        lakesWetSeason.text.toString().toDouble(),
-                        lakesDrySeason.text.toString().toDouble()
+                        returnZeroStringIfEmpty(lakesWetSeason.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(lakesDrySeason.text.toString()).toDouble()
                     )
 
                     waterSourceResponses.rockCatchments = WaterDependenceResponseItem(
-                        rockCatchmentWetSeason.text.toString().toDouble(),
-                        rockCatchmentDrySeason.text.toString().toDouble()
+                        returnZeroStringIfEmpty(rockCatchmentWetSeason.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(rockCatchmentDrySeason.text.toString()).toDouble()
                     )
 
                     waterSourceResponses.pipedWater = WaterDependenceResponseItem(
-                        pipedWaterWetSeason.text.toString().toDouble(),
-                        pipedWaterDrySeason.text.toString().toDouble()
+                        returnZeroStringIfEmpty(pipedWaterWetSeason.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(pipedWaterDrySeason.text.toString()).toDouble()
                     )
 
                     waterSourceResponses.waterTrucking = WaterDependenceResponseItem(
-                        waterTruckingWetSeason.text.toString().toDouble(),
-                        waterTruckingDrySeason.text.toString().toDouble()
+                        returnZeroStringIfEmpty(waterTruckingWetSeason.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(waterTruckingDrySeason.text.toString()).toDouble()
                     )
 
                     waterSourceResponses.roofCatchments = WaterDependenceResponseItem(
-                        roofCatchmentWetSeason.text.toString().toDouble(),
-                        roofCatchmentDrySeason.text.toString().toDouble()
+                        returnZeroStringIfEmpty(roofCatchmentWetSeason.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(roofCatchmentDrySeason.text.toString()).toDouble()
                     )
 
                     countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
@@ -512,10 +529,10 @@ class CountyLevelFragment : DialogFragment(),
                 }
                 hungerPatternsNextButton.setOnClickListener {
                     countyLevelQuestionnaire.hungerPatternsResponses = HungerPatternsResponses(
-                        etLongRainsHungerPeriod.text.toString().toDouble(),
-                        etEndLongBeginShortRainsHungerPeriod.text.toString().toDouble(),
-                        etShortRainsHungerPeriod.text.toString().toDouble(),
-                        etEndShortBeginLongRainsHungerPeriod.text.toString().toDouble()
+                        returnZeroStringIfEmpty(etLongRainsHungerPeriod.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(etEndLongBeginShortRainsHungerPeriod.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(etShortRainsHungerPeriod.text.toString()).toDouble(),
+                        returnZeroStringIfEmpty(etEndShortBeginLongRainsHungerPeriod.text.toString()).toDouble()
                     )
                     lzHazards.root.visibility = View.VISIBLE
                     lzHungerPatterns.root.visibility = View.GONE
@@ -534,118 +551,118 @@ class CountyLevelFragment : DialogFragment(),
                     val hazardResponses = HazardResponses()
 
                     hazardResponses.animalRustling = HazardResponseItem(
-                        animalRustlingRank.text.toString().toInt(),
-                        animalRustlingNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(animalRustlingRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(animalRustlingNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.banditry = HazardResponseItem(
-                        banditryRank.text.toString().toInt(),
-                        banditryNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(banditryRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(banditryNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.terrorism = HazardResponseItem(
-                        terrorismRank.text.toString().toInt(),
-                        terrorismNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(terrorismRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(terrorismNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.ethnicConflict = HazardResponseItem(
-                        ethicConflictRank.text.toString().toInt(),
-                        ethicConflictNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(ethicConflictRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(ethicConflictNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.politicalViolence = HazardResponseItem(
-                        politicalViolenceRank.text.toString().toInt(),
-                        politicalViolenceNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(politicalViolenceRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(politicalViolenceNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.livestockPestsAndDiseases = HazardResponseItem(
-                        pestAndDiseaseRank.text.toString().toInt(),
-                        pestAndDiseaseNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(pestAndDiseaseRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(pestAndDiseaseNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.hailstormsOrFrost = HazardResponseItem(
-                        hailstormsOrFrostRank.text.toString().toInt(),
-                        hailstormsOrFrostNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(hailstormsOrFrostRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(hailstormsOrFrostNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.flooding = HazardResponseItem(
-                        floodingRank.text.toString().toInt(),
-                        floodingNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(floodingRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(floodingNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.landslides = HazardResponseItem(
-                        landslidesRank.text.toString().toInt(),
-                        landslidesNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(landslidesRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(landslidesNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.highWindsOrCyclones = HazardResponseItem(
-                        windsOrCycloneRank.text.toString().toInt(),
-                        windsOrCycloneNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(windsOrCycloneRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(windsOrCycloneNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.bushFires = HazardResponseItem(
-                        bushFiresRank.text.toString().toInt(),
-                        bushFiresRank.text.toString().toDouble()
+                        returnZeroStringIfEmpty(bushFiresRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(bushFiresRank.text.toString()).toDouble()
                     )
 
                     hazardResponses.cropPests = HazardResponseItem(
-                        cropPestsRank.text.toString().toInt(),
-                        cropPestsNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(cropPestsRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(cropPestsNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.locustInvasion = HazardResponseItem(
-                        locustInvasionRank.text.toString().toInt(),
-                        locustInvasionNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(locustInvasionRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(locustInvasionNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.cropDiseases = HazardResponseItem(
-                        cropDiseasesRank.text.toString().toInt(),
-                        cropDiseasesNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(cropDiseasesRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(cropDiseasesNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.terminalIllnesses = HazardResponseItem(
-                        terminalIllnessRank.text.toString().toInt(),
-                        terminalIllnessNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(terminalIllnessRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(terminalIllnessNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.malariaPowerOutBreak = HazardResponseItem(
-                        malariaOutbreakRank.text.toString().toInt(),
-                        malariaOutbreakNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(malariaOutbreakRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(malariaOutbreakNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.malariaPowerOutBreak = HazardResponseItem(
-                        waterBorneDiseaseRank.text.toString().toInt(),
-                        waterBorneDiseaseNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(waterBorneDiseaseRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(waterBorneDiseaseNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.waterBornDiseases = HazardResponseItem(
-                        humanWildlifeConflictRank.text.toString().toInt(),
-                        humanWildlifeConflictNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(humanWildlifeConflictRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(humanWildlifeConflictNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.humanWildlifeConflict = HazardResponseItem(
-                        humanWildlifeConflictRank.text.toString().toInt(),
-                        humanWildlifeConflictNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(humanWildlifeConflictRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(humanWildlifeConflictNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.highFoodPrices = HazardResponseItem(
-                        highFoodPriceRank.text.toString().toInt(),
-                        highFoodPriceNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(highFoodPriceRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(highFoodPriceNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.marketFoodShortages = HazardResponseItem(
-                        foodShortageRank.text.toString().toInt(),
-                        foodShortageNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(foodShortageRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(foodShortageNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.drinkingWaterShortages = HazardResponseItem(
-                        drinkingWaterShortageRank.text.toString().toInt(),
-                        drinkingWaterShortageNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(drinkingWaterShortageRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(drinkingWaterShortageNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.others = HazardResponseItem(
-                        othersRank.text.toString().toInt(),
-                        othersNoOfYears.text.toString().toDouble()
+                        returnZeroStringIfEmpty(othersRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(othersNoOfYears.text.toString()).toDouble()
                     )
 
                     countyLevelQuestionnaire.hazardResponses = hazardResponses
@@ -685,10 +702,19 @@ class CountyLevelFragment : DialogFragment(),
                     )
                     editor?.commit()
 
+                    this@CountyLevelFragment.dismiss()
+
                 }
             }
         }
 
+    }
+
+    private fun returnZeroStringIfEmpty(inputString: String): String {
+        if (inputString.isNullOrEmpty()) {
+            return "0"
+        }
+        return inputString
     }
 
 

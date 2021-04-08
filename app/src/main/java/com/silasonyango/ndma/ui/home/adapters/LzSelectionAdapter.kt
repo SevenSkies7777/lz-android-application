@@ -22,6 +22,7 @@ class LzSelectionAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var tvOption: TextView = view.findViewById<TextView>(R.id.tvOption)
         var highlightIcon: View = view.findViewById<View>(R.id.highlightIcon)
+        var uncheckedIcon: View = view.findViewById<View>(R.id.uncheckedIcon)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -40,6 +41,7 @@ class LzSelectionAdapter(
                 livelihoodZoneModelList.get(position)
             )
             viewHolder.highlightIcon.visibility = if (viewHolder.highlightIcon.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+            viewHolder.uncheckedIcon.visibility = if (viewHolder.highlightIcon.visibility == View.VISIBLE) View.GONE else View.VISIBLE
         }
     }
 

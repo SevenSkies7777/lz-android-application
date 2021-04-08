@@ -160,49 +160,63 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         val etQuestionnaireName: EditText = v.findViewById(R.id.etQuestionnaireName)
 
         countyLevelMenuItem.setOnClickListener {
-            menuContent.visibility = View.GONE
-            questionnaireNameWrapper.visibility = View.VISIBLE
-            modalTitle.text = "Questionnaire Name"
-            selectedQuestionnaireType = QuestionnaireType.COUNTY_LEVEL_QUESTIONNAIRE
+            val questionnaireId = Util.generateUniqueId()
+            AppStore.getInstance().countyLevelQuestionnairesList.add(
+                CountyLevelQuestionnaire(
+                    questionnaireId,
+                    "none"
+                )
+            )
+            val countyLevelDialogFragment = CountyLevelFragment.newInstance(
+                questionnaireId,
+                "none"
+            )
+            countyLevelDialogFragment.show(this.supportFragmentManager, "CountyLevel")
         }
 
         wealthGroupMenuItem.setOnClickListener {
-            menuContent.visibility = View.GONE
-            questionnaireNameWrapper.visibility = View.VISIBLE
-            modalTitle.text = "Questionnaire Name"
-            selectedQuestionnaireType = QuestionnaireType.WEALTH_GROUP_QUESTIONNAIRE
-        }
-
-        submitButton.setOnClickListener {
-            if (selectedQuestionnaireType == QuestionnaireType.COUNTY_LEVEL_QUESTIONNAIRE) {
-                val questionnaireId = Util.generateUniqueId()
-                AppStore.getInstance().countyLevelQuestionnairesList.add(
-                    CountyLevelQuestionnaire(
-                        questionnaireId,
-                        etQuestionnaireName.text.toString()
-                    )
-                )
-                val countyLevelDialogFragment = CountyLevelFragment.newInstance(
+            val questionnaireId = Util.generateUniqueId()
+            AppStore.getInstance().wealthGroupQuestionnaireList.add(
+                WealthGroupQuestionnaire(
                     questionnaireId,
-                    etQuestionnaireName.text.toString()
+                    "none"
                 )
-                countyLevelDialogFragment.show(this.supportFragmentManager, "CountyLevel")
-            } else {
-                val questionnaireId = Util.generateUniqueId()
-                AppStore.getInstance().wealthGroupQuestionnaireList.add(
-                    WealthGroupQuestionnaire(
-                        questionnaireId,
-                        etQuestionnaireName.text.toString()
-                    )
-                )
-                this.questionnaireId = questionnaireId
-                this.questionnaireName = etQuestionnaireName.text.toString()
-                inflateGeographyDialog()
-
-            }
-
-            (questionnaireMenuDialog as android.app.AlertDialog).dismiss()
+            )
+            this.questionnaireId = questionnaireId
+            this.questionnaireName = "none"
+            inflateGeographyDialog()
         }
+
+//        submitButton.setOnClickListener {
+//            if (selectedQuestionnaireType == QuestionnaireType.COUNTY_LEVEL_QUESTIONNAIRE) {
+//                val questionnaireId = Util.generateUniqueId()
+//                AppStore.getInstance().countyLevelQuestionnairesList.add(
+//                    CountyLevelQuestionnaire(
+//                        questionnaireId,
+//                        etQuestionnaireName.text.toString()
+//                    )
+//                )
+//                val countyLevelDialogFragment = CountyLevelFragment.newInstance(
+//                    questionnaireId,
+//                    etQuestionnaireName.text.toString()
+//                )
+//                countyLevelDialogFragment.show(this.supportFragmentManager, "CountyLevel")
+//            } else {
+//                val questionnaireId = Util.generateUniqueId()
+//                AppStore.getInstance().wealthGroupQuestionnaireList.add(
+//                    WealthGroupQuestionnaire(
+//                        questionnaireId,
+//                        etQuestionnaireName.text.toString()
+//                    )
+//                )
+//                this.questionnaireId = questionnaireId
+//                this.questionnaireName = etQuestionnaireName.text.toString()
+//                inflateGeographyDialog()
+//
+//            }
+//
+//            (questionnaireMenuDialog as android.app.AlertDialog).dismiss()
+//        }
         openQuestionnaireMenuModal(v)
     }
 

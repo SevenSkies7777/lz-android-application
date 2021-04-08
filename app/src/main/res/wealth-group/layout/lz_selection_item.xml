@@ -26,23 +26,40 @@
             android:layout_centerVertical="true"/>
 
 
-        <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/highlightIcon"
-            android:background="@drawable/check_background"
-            android:layout_width="20dp"
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_height="20dp">
+            android:layout_centerVertical="true">
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/highlightIcon"
+                android:background="@drawable/check_background"
+                android:layout_width="20dp"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="20dp">
+
+                <View
+                    android:background="@drawable/ic_white_check"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp" />
+
+            </LinearLayout>
+
 
             <View
-                android:background="@drawable/ic_white_check"
-                android:layout_width="10dp"
-                android:layout_height="10dp" />
+                android:visibility="visible"
+                android:id="@+id/uncheckedIcon"
+                android:background="@drawable/bg_unchecked"
+                android:layout_width="20dp"
+                android:layout_gravity="center"
+                android:layout_height="20dp"/>
 
-        </LinearLayout>
+        </FrameLayout>
 
     </RelativeLayout>
 

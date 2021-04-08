@@ -58,6 +58,12 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
         registerObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        populateQuestionnairesList()
+        populateWealthGroupQuestionnairesList()
+    }
+
     private fun populateQuestionnairesList() {
         val gson = Gson()
         val sharedPreferences: SharedPreferences? =
