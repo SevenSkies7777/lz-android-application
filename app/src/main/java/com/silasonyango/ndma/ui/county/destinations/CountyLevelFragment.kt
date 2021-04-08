@@ -147,17 +147,6 @@ class CountyLevelFragment : DialogFragment(),
 
             populateLocationAndPopulationRV(sublocationList)
 
-
-            val cropModelList: MutableList<CropModel> = ArrayList()
-            cropModelList.add(CropModel(0, "Maize", 1))
-            cropModelList.add(CropModel(0, "Beans", 2))
-            cropModelList.add(CropModel(0, "Potatoes", 3))
-            cropModelList.add(CropModel(0, "Tomatoes", 4))
-            cropModelList.add(CropModel(0, "Cassava", 5))
-            cropModelList.add(CropModel(0, "Rice", 6))
-            cropModelList.add(CropModel(0, "Mango", 7))
-            populateCropProductionRecyclerView(cropModelList)
-
             countyConfiguration.apply {
 
                 livelihoodZoneDropDown.setOnClickListener {
@@ -426,17 +415,9 @@ class CountyLevelFragment : DialogFragment(),
                     )
                     countyLevelQuestionnaire.wealthGroupResponse = wealthGroupResponse
 
-                    val cropModelList: MutableList<CropModel> = ArrayList()
-                    cropModelList.add(CropModel(0, "Maize", 1))
-                    cropModelList.add(CropModel(0, "Beans", 2))
-                    cropModelList.add(CropModel(0, "Potatoes", 3))
-                    cropModelList.add(CropModel(0, "Tomatoes", 4))
-                    cropModelList.add(CropModel(0, "Cassava", 5))
-                    cropModelList.add(CropModel(0, "Rice", 6))
-                    cropModelList.add(CropModel(0, "Mango", 7))
 
                     val cropSelectionAdapter =
-                        CropSelectionAdapter(cropModelList, this@CountyLevelFragment)
+                        CropSelectionAdapter(geographyObject.crops, this@CountyLevelFragment)
                     val gridLayoutManager = GridLayoutManager(activity, 1)
 
                     cropSelectionLayout.apply {
@@ -466,6 +447,7 @@ class CountyLevelFragment : DialogFragment(),
 
 
                 cropSelectionNextButton.setOnClickListener {
+                    populateCropProductionRecyclerView(countyLevelQuestionnaire.livelihoodZoneCrops)
                     cropSelectionLayout.root.visibility = View.GONE
                     cropProductionLayout.root.visibility = View.VISIBLE
                 }
@@ -556,15 +538,8 @@ class CountyLevelFragment : DialogFragment(),
                     countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
 
 
-                    val ethnicGroupList: MutableList<EthnicGroupModel> = ArrayList()
-                    ethnicGroupList.add(EthnicGroupModel(0, "Luo", 0))
-                    ethnicGroupList.add(EthnicGroupModel(0, "Kikuyu", 0))
-                    ethnicGroupList.add(EthnicGroupModel(0, "Kamba", 0))
-                    ethnicGroupList.add(EthnicGroupModel(0, "Lughya", 0))
-                    ethnicGroupList.add(EthnicGroupModel(0, "Swahili", 0))
-
                     val tribeSelectionAdapter =
-                        TribeSelectionAdapter(ethnicGroupList, this@CountyLevelFragment)
+                        TribeSelectionAdapter(geographyObject.ethnicGroups, this@CountyLevelFragment)
                     val gridLayoutManager = GridLayoutManager(activity, 1)
 
                     ethnicGroupSelection.apply {
