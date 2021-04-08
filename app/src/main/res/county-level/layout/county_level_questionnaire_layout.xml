@@ -49,7 +49,18 @@
             android:layout_marginTop="22dp"
             android:visibility="gone" />
 
-        <!--        D. Crop Production-->
+
+        <!--        D(i). Crop selection-->
+        <include
+            android:id="@+id/cropSelectionLayout"
+            layout="@layout/crop_selection_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
+
+
+        <!--        D(ii). Crop Production-->
         <include
             android:id="@+id/cropProductionLayout"
             layout="@layout/lz_crop_production_layout"

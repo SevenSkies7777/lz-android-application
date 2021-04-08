@@ -39,10 +39,7 @@ import com.silasonyango.ndma.ui.county.model.*
 import com.silasonyango.ndma.ui.county.responses.*
 import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
 import com.silasonyango.ndma.ui.home.HomeViewModel
-import com.silasonyango.ndma.ui.home.adapters.LivelihoodZonesAdapter
-import com.silasonyango.ndma.ui.home.adapters.LzSelectionAdapter
-import com.silasonyango.ndma.ui.home.adapters.SubLocationZoneAssignmentAdapter
-import com.silasonyango.ndma.ui.home.adapters.WgQuestionnaireTypeAdapter
+import com.silasonyango.ndma.ui.home.adapters.*
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
 import com.silasonyango.ndma.util.GpsTracker
 import com.silasonyango.ndma.util.Util
@@ -52,7 +49,10 @@ class CountyLevelFragment : DialogFragment(),
     SubLocationLzAssignmentRecyclerViewAdapter.SubLocationLzAssignmentRecyclerViewAdapterCallback,
     LzCropProductionRecyclerViewAdapter.LzCropProductionRecyclerViewAdapterCallBack,
     LzMarketTradeRecyclerViewAdapter.LzMarketTradeRecyclerViewAdapterCallBack,
-    LivelihoodZonesAdapter.LivelihoodZonesAdapterCallBack, LzSelectionAdapter.LzSelectionAdapterCallBack, SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack {
+    LivelihoodZonesAdapter.LivelihoodZonesAdapterCallBack,
+    LzSelectionAdapter.LzSelectionAdapterCallBack,
+    SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack,
+    CropSelectionAdapter.CropSelectionAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -148,13 +148,13 @@ class CountyLevelFragment : DialogFragment(),
 
 
             val cropModelList: MutableList<CropModel> = ArrayList()
-            cropModelList.add(CropModel("Maize", 1))
-            cropModelList.add(CropModel("Beans", 2))
-            cropModelList.add(CropModel("Potatoes", 3))
-            cropModelList.add(CropModel("Tomatoes", 4))
-            cropModelList.add(CropModel("Cassava", 5))
-            cropModelList.add(CropModel("Rice", 6))
-            cropModelList.add(CropModel("Mango", 7))
+            cropModelList.add(CropModel(0, "Maize", 1))
+            cropModelList.add(CropModel(0, "Beans", 2))
+            cropModelList.add(CropModel(0, "Potatoes", 3))
+            cropModelList.add(CropModel(0, "Tomatoes", 4))
+            cropModelList.add(CropModel(0, "Cassava", 5))
+            cropModelList.add(CropModel(0, "Rice", 6))
+            cropModelList.add(CropModel(0, "Mango", 7))
             populateCropProductionRecyclerView(cropModelList)
 
             countyConfiguration.apply {
@@ -364,14 +364,15 @@ class CountyLevelFragment : DialogFragment(),
 
                 lzSelectionNextButton.setOnClickListener {
 
-                    val subLocationZoneAssignmentModelList: MutableList<SubLocationZoneAssignmentModel> = ArrayList()
+                    val subLocationZoneAssignmentModelList: MutableList<SubLocationZoneAssignmentModel> =
+                        ArrayList()
 
                     for (currentSubLocation in geographyObject.subLocations) {
                         subLocationZoneAssignmentModelList.add(
                             SubLocationZoneAssignmentModel(
                                 currentSubLocation,
                                 0
-                        )
+                            )
                         )
                     }
 
@@ -423,13 +424,51 @@ class CountyLevelFragment : DialogFragment(),
                         returnZeroStringIfEmpty(etBetterOffResponse.text.toString()).toDouble()
                     )
                     countyLevelQuestionnaire.wealthGroupResponse = wealthGroupResponse
+
+                    val cropModelList: MutableList<CropModel> = ArrayList()
+                    cropModelList.add(CropModel(0, "Maize", 1))
+                    cropModelList.add(CropModel(0, "Beans", 2))
+                    cropModelList.add(CropModel(0, "Potatoes", 3))
+                    cropModelList.add(CropModel(0, "Tomatoes", 4))
+                    cropModelList.add(CropModel(0, "Cassava", 5))
+                    cropModelList.add(CropModel(0, "Rice", 6))
+                    cropModelList.add(CropModel(0, "Mango", 7))
+
+                    val cropSelectionAdapter =
+                        CropSelectionAdapter(cropModelList, this@CountyLevelFragment)
+                    val gridLayoutManager = GridLayoutManager(activity, 1)
+
+                    cropSelectionLayout.apply {
+                        cropsList.layoutManager = gridLayoutManager
+                        cropsList.hasFixedSize()
+                        cropsList.adapter =
+                            cropSelectionAdapter
+                    }
+
                     locationAndPopulationLayout.root.visibility = View.GONE
-                    cropProductionLayout.root.visibility = View.VISIBLE
+                    cropSelectionLayout.root.visibility = View.VISIBLE
                 }
                 locationBackButton.setOnClickListener {
                     locationAndPopulationLayout.root.visibility = View.GONE
                     lzSubLocationAssignment.root.visibility = View.VISIBLE
                 }
+            }
+
+
+            /* Crop selection navigation button */
+            cropSelectionLayout.apply {
+
+                cropSelectionBackButton.setOnClickListener {
+                    cropSelectionLayout.root.visibility = View.GONE
+                    locationAndPopulationLayout.root.visibility = View.VISIBLE
+                }
+
+
+                cropSelectionNextButton.setOnClickListener {
+                    cropSelectionLayout.root.visibility = View.GONE
+                    cropProductionLayout.root.visibility = View.VISIBLE
+                }
+
             }
 
             /*Crop Production navigation buttons*/
@@ -439,7 +478,7 @@ class CountyLevelFragment : DialogFragment(),
                     cropProductionLayout.root.visibility = View.GONE
                 }
                 cropProductionBackButton.setOnClickListener {
-                    locationAndPopulationLayout.root.visibility = View.VISIBLE
+                    cropSelectionLayout.root.visibility = View.VISIBLE
                     cropProductionLayout.root.visibility = View.GONE
                 }
             }
@@ -832,21 +871,26 @@ class CountyLevelFragment : DialogFragment(),
     override fun onLivelihoodZoneItemSelectedFromSelectionList(selectedLivelihoodZone: LivelihoodZoneModel) {
 
         if (isLzAlreadySelected(selectedLivelihoodZone)) {
-            countyLevelQuestionnaire.countyLivelihoodZones = removeItemFromLzList(selectedLivelihoodZone) as MutableList<LivelihoodZoneModel>
+            countyLevelQuestionnaire.countyLivelihoodZones =
+                removeItemFromLzList(selectedLivelihoodZone) as MutableList<LivelihoodZoneModel>
         } else {
             countyLevelQuestionnaire.countyLivelihoodZones.add(selectedLivelihoodZone)
         }
     }
 
     fun removeItemFromLzList(itemToBeRemoved: LivelihoodZoneModel): List<LivelihoodZoneModel> {
-        return countyLevelQuestionnaire.countyLivelihoodZones.filter { s -> s.livelihoodZoneId != itemToBeRemoved.livelihoodZoneId}
+        return countyLevelQuestionnaire.countyLivelihoodZones.filter { s -> s.livelihoodZoneId != itemToBeRemoved.livelihoodZoneId }
     }
 
     fun isLzAlreadySelected(selectedItem: LivelihoodZoneModel): Boolean {
-        return countyLevelQuestionnaire.countyLivelihoodZones.filter { s -> s.livelihoodZoneId == selectedItem.livelihoodZoneId}.size > 0
+        return countyLevelQuestionnaire.countyLivelihoodZones.filter { s -> s.livelihoodZoneId == selectedItem.livelihoodZoneId }.size > 0
     }
 
     override fun onLivelihoodZoneSelected(selectedSubLocationZoneAssignment: SubLocationZoneAssignmentModel) {
         countyLevelQuestionnaire.subLocationZoneAllocationList.add(selectedSubLocationZoneAssignment)
+    }
+
+    override fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel) {
+        countyLevelQuestionnaire.livelihoodZoneCrops.add(selectedCrop)
     }
 }
