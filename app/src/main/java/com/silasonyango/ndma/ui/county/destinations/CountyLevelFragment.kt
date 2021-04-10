@@ -832,6 +832,96 @@ class CountyLevelFragment : DialogFragment(),
                     inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LEGUMES_HARVESTING)
                 }
 
+
+                /* Livestock production responses */
+                livestockInMigration.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LIVESTOCK_IN_MIGRATION)
+                }
+                livestockOutMigration.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LIVESTOCK_OUT_MIGRATION)
+                }
+                milkHigh.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_MILK_PRODUCTION)
+                }
+                milkLow.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_MILK_PRODUCTION)
+                }
+                calvingHigh.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_CALVING)
+                }
+                calvingLow.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_CALVING)
+                }
+                kiddingHigh.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_KIDDING)
+                }
+                kiddingLow.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_KIDDING)
+                }
+                foodPricesHigh.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_FOOD_PRICES)
+                }
+                foodPricesLow.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_FOOD_PRICES)
+                }
+                livestockPricesHigh.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_LIVESTOCK_PRICES)
+                }
+                livestockPricesLow.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_LIVESTOCK_PRICES)
+                }
+                casualLabourAvailabilityHigh.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_CASUAL_LABOUR_AVAILABILITY)
+                }
+                casualLabourAvailabilityLow.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_CASUAL_LABOUR_AVAILABILITY)
+                }
+                casualLabourWagesHigh.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_CASUAL_LABOUR_WAGES)
+                }
+                casualLabourWagesLow.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_CASUAL_LABOUR_WAGES)
+                }
+                remittancesHigh.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_REMITTANCES)
+                }
+                remittancesLow.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_REMITTANCES)
+                }
+                fishingHigh.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_FISHING)
+                }
+                fishingLow.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_FISHING)
+                }
+                marketAccessHigh.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_MARKET_ACCESS)
+                }
+                marketAccessLow.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_MARKET_ACCESS)
+                }
+                diseaseOutbreakHigh.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_DISEASE_OUTBREAK)
+                }
+                diseaseOutbreakLow.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_DISEASE_OUTBREAK)
+                }
+                waterStressMonth.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.WATER_STRESS)
+                }
+                conflictRiskMonth.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.CONFLICT_RISK)
+                }
+                ceremoniesMonth.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.CEREMONIES)
+                }
+                leanSeasonsMonth.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LEAN_SEASONS)
+                }
+                foodSecurityMonth.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.FOOD_SECURITY_ASSESSMENTS)
+                }
+
             }
 
             /*LzCompletion page navigation*/
