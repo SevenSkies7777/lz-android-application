@@ -1,0 +1,1102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="24dp"
+    android:paddingStart="24dp"
+    android:paddingRight="24dp"
+    android:paddingEnd="24dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="J. Seasonal Calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="9sp"/>
+
+
+    <TextView
+        android:text="In which month(s) do(es) the following events and activities take place?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_regular"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:lineHeight="24sp"
+        android:layout_marginTop="27dp"
+        android:gravity="start"/>
+
+
+    <TextView
+        android:text="Seasons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:lineHeight="24sp"
+        android:layout_marginTop="27dp"
+        android:gravity="start"/>
+
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="SEASONS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="MONTH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Dry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/dryMonth"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Long rains"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/longRainMonth"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Short rains"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/shortRainMonth"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+
+    <TextView
+        android:text="Crop production"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:lineHeight="24sp"
+        android:layout_marginTop="54dp"
+        android:gravity="start"/>
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Land Preparation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Maize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/landPrepMaize"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Cassava"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/landPrepCassava"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Rice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/landPrepRice"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Sorghum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/landPrepSorghum"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Legumes (Beans etc)"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/landPrepLegumes"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="PLANTING"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="MONTH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Maize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/plantingMaize"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Cassava"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/plantingCassava"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Rice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/plantingRice"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Sorghum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/plantingSorghum"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Legumes (Beans etc)"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/plantingLegumes"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="HARVESTING"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="MONTH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Maize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/harvestingMaize"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Cassava"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/harvestingCassava"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Rice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/harvestingRice"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Sorghum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/harvestingSorghum"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Legumes (Beans etc)"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/harvestingLegumes"
+                    android:text="Select month..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#737373"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

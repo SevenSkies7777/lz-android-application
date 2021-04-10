@@ -7,5 +7,6 @@ data class GeographyObject(
     var livelihoodZones: MutableList<LivelihoodZoneModel>,
     val subLocations: MutableList<SubLocationModel>,
     val crops: MutableList<CropModel>,
-    val ethnicGroups: MutableList<EthnicGroupModel>
+    val ethnicGroups: MutableList<EthnicGroupModel>,
+    val months: MutableList<MonthsModel>
 )

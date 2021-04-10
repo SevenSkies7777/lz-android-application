@@ -4,10 +4,7 @@ import com.silasonyango.ndma.ui.county.model.CropModel
 import com.silasonyango.ndma.ui.county.model.EthnicGroupModel
 import com.silasonyango.ndma.ui.county.model.LivelihoodZoneModel
 import com.silasonyango.ndma.ui.county.model.SubLocationZoneAssignmentModel
-import com.silasonyango.ndma.ui.county.responses.HazardResponses
-import com.silasonyango.ndma.ui.county.responses.HungerPatternsResponses
-import com.silasonyango.ndma.ui.county.responses.WaterSourcesResponses
-import com.silasonyango.ndma.ui.county.responses.WealthGroupResponse
+import com.silasonyango.ndma.ui.county.responses.*
 
 class CountyLevelQuestionnaire(val uniqueId: String,val questionnaireName: String){
     lateinit var selectedLivelihoodZone: LivelihoodZoneModel
@@ -35,4 +32,6 @@ class CountyLevelQuestionnaire(val uniqueId: String,val questionnaireName: Strin
     lateinit var hungerPatternsResponses: HungerPatternsResponses
 
     lateinit var hazardResponses: HazardResponses
+
+    lateinit var livelihoodZoneSeasonsResponses: LzSeasonsResponses
 }

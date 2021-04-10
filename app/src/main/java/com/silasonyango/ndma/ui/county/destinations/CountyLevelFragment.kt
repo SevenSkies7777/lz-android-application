@@ -53,7 +53,8 @@ class CountyLevelFragment : DialogFragment(),
     LzSelectionAdapter.LzSelectionAdapterCallBack,
     SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack,
     CropSelectionAdapter.CropSelectionAdapterCallBack,
-    TribeSelectionAdapter.TribeSelectionAdapterCallBack, EthnicityAdapter.EthnicityAdapterCallBack {
+    TribeSelectionAdapter.TribeSelectionAdapterCallBack, EthnicityAdapter.EthnicityAdapterCallBack,
+    MonthsAdapter.MonthsAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -65,11 +66,15 @@ class CountyLevelFragment : DialogFragment(),
 
     private var livelihoodZoneAlertDialog: android.app.AlertDialog? = null
 
+    private var seasonCalendarDialog: android.app.AlertDialog? = null
+
     var questionnaireId: String? = null
 
     var questionnaireName: String? = null
 
     val WRITE_STORAGE_PERMISSION_CODE: Int = 100
+
+    val lzSeasonsResponses = LzSeasonsResponses()
 
 
     companion object {
@@ -539,7 +544,10 @@ class CountyLevelFragment : DialogFragment(),
 
 
                     val tribeSelectionAdapter =
-                        TribeSelectionAdapter(geographyObject.ethnicGroups, this@CountyLevelFragment)
+                        TribeSelectionAdapter(
+                            geographyObject.ethnicGroups,
+                            this@CountyLevelFragment
+                        )
                     val gridLayoutManager = GridLayoutManager(activity, 1)
 
                     ethnicGroupSelection.apply {
@@ -755,9 +763,75 @@ class CountyLevelFragment : DialogFragment(),
 
                     countyLevelQuestionnaire.hazardResponses = hazardResponses
 
-                    lzCompletionPage.root.visibility = View.VISIBLE
+                    lzSeasonsCalendar.root.visibility = View.VISIBLE
                     lzHazards.root.visibility = View.GONE
                 }
+            }
+
+
+            lzSeasonsCalendar.apply {
+
+                /* Seasons responses */
+                dryMonth.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.SEASONS_DRY)
+                }
+                longRainMonth.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.SEASONS_LONG_RAINS)
+                }
+                shortRainMonth.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.SEASONS_SHORT_RAINS)
+                }
+
+
+                /* Crop production responses */
+                landPrepMaize.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.MAIZE_LAND_PREPARATION)
+                }
+                landPrepCassava.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.CASSAVA_LAND_PREPARATION)
+                }
+                landPrepRice.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.RICE_LAND_PREPARATION)
+                }
+                landPrepSorghum.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.SORGHUM_LAND_PREPARATION)
+                }
+                landPrepLegumes.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LEGUMES_LAND_PREPARATION)
+                }
+
+                plantingMaize.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.MAIZE_PLANTING)
+                }
+                plantingCassava.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.CASSAVA_PLANTING)
+                }
+                plantingRice.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.RICE_PLANTING)
+                }
+                plantingSorghum.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.SORGHUM_PLANTING)
+                }
+                plantingLegumes.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LEGUMES_PLANTING)
+                }
+
+                harvestingMaize.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.MAIZE_HARVESTING)
+                }
+                harvestingCassava.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.CASSAVA_HARVESTING)
+                }
+                harvestingRice.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.RICE_HARVESTING)
+                }
+                harvestingSorghum.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.SORGHUM_HARVESTING)
+                }
+                harvestingLegumes.setOnClickListener {
+                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LEGUMES_HARVESTING)
+                }
+
             }
 
             /*LzCompletion page navigation*/
@@ -917,6 +991,50 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
+
+    private fun inflateSeasonCalendarModal(months: MutableList<MonthsModel>, seasonsResponsesEnum: SeasonsResponsesEnum) {
+        val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
+
+        val listRecyclerView = v.findViewById<RecyclerView>(R.id.listRv)
+
+        val monthsAdapter = MonthsAdapter(
+            months,
+            this,
+            seasonsResponsesEnum
+        )
+        val gridLayoutManager = GridLayoutManager(activity, 1)
+        listRecyclerView.layoutManager = gridLayoutManager
+        listRecyclerView.hasFixedSize()
+        listRecyclerView.adapter = monthsAdapter
+
+        openSeasonCalendarModal(v)
+    }
+
+    private fun openSeasonCalendarModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(activity)
+        builder.setView(v)
+        builder.setCancelable(true)
+        seasonCalendarDialog = builder.create()
+        (seasonCalendarDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
+    }
+
+
     override fun onLivelihoodZoneItemSelectedFromSelectionList(selectedLivelihoodZone: LivelihoodZoneModel) {
 
         if (isLzAlreadySelected(selectedLivelihoodZone)) {
@@ -945,5 +1063,100 @@ class CountyLevelFragment : DialogFragment(),
 
     override fun onTribeItemSelectedFromSelectionList(selectedTribe: EthnicGroupModel) {
         countyLevelQuestionnaire.livelihoodZoneEthnicGroups.add(selectedTribe)
+    }
+
+    override fun onMonthSelected(
+        selectedMonth: MonthsModel,
+        seasonsResponsesEnum: SeasonsResponsesEnum
+    ) {
+
+        binding.apply {
+            lzSeasonsCalendar.apply {
+
+                /* Seasons responses */
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.SEASONS_DRY) {
+                    lzSeasonsResponses.dry = selectedMonth
+                    dryMonth.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.SEASONS_LONG_RAINS) {
+                    lzSeasonsResponses.longRains = selectedMonth
+                    longRainMonth.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.SEASONS_SHORT_RAINS) {
+                    lzSeasonsResponses.shortRains = selectedMonth
+                    shortRainMonth.text = selectedMonth.monthName
+                }
+
+
+                /* Crop production responses */
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.MAIZE_LAND_PREPARATION) {
+                    lzSeasonsResponses.maizeLandPreparation = selectedMonth
+                    landPrepMaize.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.CASSAVA_LAND_PREPARATION) {
+                    lzSeasonsResponses.cassavaLandPreparation = selectedMonth
+                    landPrepCassava.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.RICE_LAND_PREPARATION) {
+                    lzSeasonsResponses.riceLandPreparation = selectedMonth
+                    landPrepRice.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.SORGHUM_LAND_PREPARATION) {
+                    lzSeasonsResponses.sorghumLandPreparation = selectedMonth
+                    landPrepSorghum.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LEGUMES_LAND_PREPARATION) {
+                    lzSeasonsResponses.legumesLandPreparation = selectedMonth
+                    landPrepLegumes.text = selectedMonth.monthName
+                }
+
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.MAIZE_PLANTING) {
+                    lzSeasonsResponses.maizePlanting = selectedMonth
+                    plantingMaize.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.CASSAVA_PLANTING) {
+                    lzSeasonsResponses.cassavaPlanting = selectedMonth
+                    plantingCassava.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.RICE_PLANTING) {
+                    lzSeasonsResponses.ricePlanting = selectedMonth
+                    plantingRice.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.SORGHUM_PLANTING) {
+                    lzSeasonsResponses.sorghumPlanting = selectedMonth
+                    plantingSorghum.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LEGUMES_PLANTING) {
+                    lzSeasonsResponses.legumesPlanting = selectedMonth
+                    plantingLegumes.text = selectedMonth.monthName
+                }
+
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.MAIZE_HARVESTING) {
+                    lzSeasonsResponses.maizeHarvesting = selectedMonth
+                    harvestingMaize.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.CASSAVA_HARVESTING) {
+                    lzSeasonsResponses.cassavaHarvesting = selectedMonth
+                    plantingCassava.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.RICE_HARVESTING) {
+                    lzSeasonsResponses.riceHarvesting = selectedMonth
+                    harvestingRice.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.SORGHUM_HARVESTING) {
+                    lzSeasonsResponses.sorghumHarvesting = selectedMonth
+                    harvestingSorghum.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LEGUMES_HARVESTING) {
+                    lzSeasonsResponses.legumesHarvesting = selectedMonth
+                    harvestingLegumes.text = selectedMonth.monthName
+                }
+            }
+        }
+
+
+
+        (seasonCalendarDialog as android.app.AlertDialog).dismiss()
+        countyLevelQuestionnaire.livelihoodZoneSeasonsResponses = lzSeasonsResponses
     }
 }
