@@ -1151,6 +1151,128 @@ class CountyLevelFragment : DialogFragment(),
                     lzSeasonsResponses.legumesHarvesting = selectedMonth
                     harvestingLegumes.text = selectedMonth.monthName
                 }
+
+
+                /* Livestock production responses */
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LIVESTOCK_IN_MIGRATION) {
+                    lzSeasonsResponses.livestockInMigration = selectedMonth
+                    livestockInMigration.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LIVESTOCK_OUT_MIGRATION) {
+                    lzSeasonsResponses.livestockOutMigration = selectedMonth
+                    livestockOutMigration.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_MILK_PRODUCTION) {
+                    lzSeasonsResponses.highMilkProduction = selectedMonth
+                    milkHigh.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_MILK_PRODUCTION) {
+                    lzSeasonsResponses.lowMilkProduction = selectedMonth
+                    milkLow.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_CALVING) {
+                    lzSeasonsResponses.highCalving = selectedMonth
+                    calvingHigh.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_CALVING) {
+                    lzSeasonsResponses.lowCalving = selectedMonth
+                    calvingLow.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_KIDDING) {
+                    lzSeasonsResponses.highKidding = selectedMonth
+                    kiddingHigh.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_KIDDING) {
+                    lzSeasonsResponses.lowKidding = selectedMonth
+                    kiddingLow.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_FOOD_PRICES) {
+                    lzSeasonsResponses.highFoodPrices = selectedMonth
+                    foodPricesHigh.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_FOOD_PRICES) {
+                    lzSeasonsResponses.lowFoodPrices = selectedMonth
+                    foodPricesLow.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_LIVESTOCK_PRICES) {
+                    lzSeasonsResponses.highLivestockPrices = selectedMonth
+                    livestockPricesHigh.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_LIVESTOCK_PRICES) {
+                    lzSeasonsResponses.lowLivestockPrices = selectedMonth
+                    livestockPricesLow.text = selectedMonth.monthName
+                }
+
+
+                /* Others */
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_CASUAL_LABOUR_AVAILABILITY) {
+                    lzSeasonsResponses.highCasualLabourAvailability = selectedMonth
+                    casualLabourAvailabilityHigh.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_CASUAL_LABOUR_AVAILABILITY) {
+                    lzSeasonsResponses.lowCasualLabourAvailability = selectedMonth
+                    casualLabourAvailabilityLow.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_CASUAL_LABOUR_WAGES) {
+                    lzSeasonsResponses.highCasualLabourWages = selectedMonth
+                    casualLabourWagesHigh.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_CASUAL_LABOUR_WAGES) {
+                    lzSeasonsResponses.lowCasualLabourWages = selectedMonth
+                    casualLabourWagesLow.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_REMITTANCES) {
+                    lzSeasonsResponses.highRemittances = selectedMonth
+                    remittancesHigh.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_REMITTANCES) {
+                    lzSeasonsResponses.lowRemittances = selectedMonth
+                    remittancesLow.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_FISHING) {
+                    lzSeasonsResponses.highFish = selectedMonth
+                    fishingHigh.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_FISHING) {
+                    lzSeasonsResponses.lowFish = selectedMonth
+                    fishingLow.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_MARKET_ACCESS) {
+                    lzSeasonsResponses.highMarketAccess = selectedMonth
+                    marketAccessHigh.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_MARKET_ACCESS) {
+                    lzSeasonsResponses.lowMarketAccess = selectedMonth
+                    marketAccessLow.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_DISEASE_OUTBREAK) {
+                    lzSeasonsResponses.highDiseaseOutbreak = selectedMonth
+                    diseaseOutbreakHigh.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_DISEASE_OUTBREAK) {
+                    lzSeasonsResponses.lowDiseaseOutbreak = selectedMonth
+                    diseaseOutbreakLow.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.WATER_STRESS) {
+                    lzSeasonsResponses.waterStress = selectedMonth
+                    waterStressMonth.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.CONFLICT_RISK) {
+                    lzSeasonsResponses.conflictRisks = selectedMonth
+                    conflictRiskMonth.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.CEREMONIES) {
+                    lzSeasonsResponses.ceremonies = selectedMonth
+                    ceremoniesMonth.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.LEAN_SEASONS) {
+                    lzSeasonsResponses.leanSeasons = selectedMonth
+                    leanSeasonsMonth.text = selectedMonth.monthName
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.FOOD_SECURITY_ASSESSMENTS) {
+                    lzSeasonsResponses.foodSecurityAssessments = selectedMonth
+                    foodSecurityMonth.text = selectedMonth.monthName
+                }
             }
         }
 

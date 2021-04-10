@@ -27,4 +27,35 @@ class LzSeasonsResponses() {
     lateinit var riceHarvesting: MonthsModel
     lateinit var sorghumHarvesting: MonthsModel
     lateinit var legumesHarvesting: MonthsModel
+
+    /* Livestock production responses */
+    lateinit var livestockInMigration: MonthsModel
+    lateinit var livestockOutMigration: MonthsModel
+    lateinit var highMilkProduction: MonthsModel
+    lateinit var lowMilkProduction: MonthsModel
+    lateinit var highCalving: MonthsModel
+    lateinit var lowCalving: MonthsModel
+    lateinit var highKidding: MonthsModel
+    lateinit var lowKidding: MonthsModel
+    lateinit var highFoodPrices: MonthsModel
+    lateinit var lowFoodPrices: MonthsModel
+    lateinit var highLivestockPrices: MonthsModel
+    lateinit var lowLivestockPrices: MonthsModel
+    lateinit var highCasualLabourAvailability: MonthsModel
+    lateinit var lowCasualLabourAvailability: MonthsModel
+    lateinit var highCasualLabourWages: MonthsModel
+    lateinit var lowCasualLabourWages: MonthsModel
+    lateinit var highRemittances: MonthsModel
+    lateinit var lowRemittances: MonthsModel
+    lateinit var highFish: MonthsModel
+    lateinit var lowFish: MonthsModel
+    lateinit var highMarketAccess: MonthsModel
+    lateinit var lowMarketAccess: MonthsModel
+    lateinit var highDiseaseOutbreak: MonthsModel
+    lateinit var lowDiseaseOutbreak: MonthsModel
+    lateinit var waterStress: MonthsModel
+    lateinit var conflictRisks: MonthsModel
+    lateinit var ceremonies: MonthsModel
+    lateinit var leanSeasons: MonthsModel
+    lateinit var foodSecurityAssessments: MonthsModel
 }
