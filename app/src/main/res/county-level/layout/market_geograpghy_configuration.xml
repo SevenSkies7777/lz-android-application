@@ -77,6 +77,8 @@
 
             </LinearLayout>
 
+
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="80dp"
@@ -86,7 +88,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="SUB-COUNTY"
+                    android:text="NEAREST VILLAGE/TOWN"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -106,7 +108,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="NEAREST VILLAGE/TOWN"
+                    android:text="SUB-COUNTY"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -145,25 +147,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".33"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:id="@+id/oneSubCounty"
-                    android:text="Select Sub-County..."
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_regular"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -184,6 +167,27 @@
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/oneSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -216,25 +220,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".33"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:id="@+id/twoSubCounty"
-                    android:text="Select Sub-County..."
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_regular"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -259,6 +245,27 @@
 
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/twoSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
         </TableRow>
 
         <TableRow
@@ -274,6 +281,30 @@
 
                 <EditText
                     android:id="@+id/threeMarketName"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/threeNearestVillageOrTown"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -307,29 +338,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".33"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <EditText
-                    android:id="@+id/threeNearestVillageOrTown"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
         </TableRow>
 
         <TableRow
@@ -358,25 +366,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".33"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
-                <TextView
-                    android:id="@+id/fourSubCounty"
-                    android:text="Select Sub-County..."
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_regular"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -397,6 +386,27 @@
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/fourSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -437,26 +447,6 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:id="@+id/fiveSubCounty"
-                    android:text="Select Sub-County..."
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_regular"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".33"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
                 <EditText
                     android:id="@+id/fiveNearestVillageOrTown"
                     android:fontFamily="@font/lato_regular"
@@ -468,6 +458,27 @@
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/fiveSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -500,25 +511,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".33"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:id="@+id/sixSubCounty"
-                    android:text="Select Sub-County..."
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_regular"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -539,6 +532,27 @@
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/sixSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -579,26 +593,6 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:id="@+id/sevenSubCounty"
-                    android:text="Select Sub-County..."
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_regular"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".33"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
                 <EditText
                     android:id="@+id/sevenNearestVillageOrTown"
                     android:fontFamily="@font/lato_regular"
@@ -610,6 +604,27 @@
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/sevenSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -650,26 +665,6 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:id="@+id/eightSubCounty"
-                    android:text="Select Sub-County..."
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_regular"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".33"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
                 <EditText
                     android:id="@+id/eightNearestVillageOrTown"
                     android:fontFamily="@font/lato_regular"
@@ -681,6 +676,27 @@
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/eightSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -721,26 +737,6 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:id="@+id/nineSubCounty"
-                    android:text="Select Sub-County..."
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_regular"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".33"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
                 <EditText
                     android:id="@+id/nineNearestVillageOrTown"
                     android:fontFamily="@font/lato_regular"
@@ -752,6 +748,27 @@
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/nineSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -792,26 +809,6 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <TextView
-                    android:id="@+id/tenSubCounty"
-                    android:text="Select Sub-County..."
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_regular"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:layout_gravity="start|center_vertical"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight=".33"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
                 <EditText
                     android:id="@+id/tenNearestVillageOrTown"
                     android:fontFamily="@font/lato_regular"
@@ -823,6 +820,27 @@
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/tenSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>

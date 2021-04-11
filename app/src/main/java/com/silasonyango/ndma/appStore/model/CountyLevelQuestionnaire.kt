@@ -14,6 +14,8 @@ class CountyLevelQuestionnaire(val uniqueId: String,val questionnaireName: Strin
 
     var definedMarkets: MutableList<DefinedMarketModel> = ArrayList()
 
+    var marketTransactionItems: MutableList<MarketTransactionsItem> = ArrayList()
+
     var latitude: Double = 0.0
 
     var longitude: Double = 0.0

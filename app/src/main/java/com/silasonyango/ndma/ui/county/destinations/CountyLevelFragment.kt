@@ -56,7 +56,8 @@ class CountyLevelFragment : DialogFragment(),
     CropSelectionAdapter.CropSelectionAdapterCallBack,
     TribeSelectionAdapter.TribeSelectionAdapterCallBack, EthnicityAdapter.EthnicityAdapterCallBack,
     MonthsAdapter.MonthsAdapterCallBack,
-    MarketSubCountySelectionAdapter.MarketSubCountySelectionAdapterCallBack {
+    MarketSubCountySelectionAdapter.MarketSubCountySelectionAdapterCallBack,
+    MarketTransactionsAdapter.MarketTransactionsAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -69,6 +70,8 @@ class CountyLevelFragment : DialogFragment(),
     private var livelihoodZoneAlertDialog: android.app.AlertDialog? = null
 
     private var seasonCalendarDialog: android.app.AlertDialog? = null
+
+    private var marketSubCountyDialog: android.app.AlertDialog? = null
 
     var questionnaireId: String? = null
 
@@ -240,25 +243,6 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
-    private fun populateLzMarketTradeRecyclerViewAdapter(marketList: MutableList<MarketModel>) {
-        binding.apply {
-            lzMarketTransactions.apply {
-                val lzMarketTradeRecyclerViewAdapter =
-                    activity?.let {
-                        LzMarketTradeRecyclerViewAdapter(
-                            it,
-                            marketList,
-                            this@CountyLevelFragment
-                        )
-                    }
-                val gridLayoutManager = GridLayoutManager(activity, 1)
-                lzMarketTradeRV.layoutManager = gridLayoutManager
-                lzMarketTradeRV.hasFixedSize()
-                lzMarketTradeRV.adapter =
-                    lzMarketTradeRecyclerViewAdapter
-            }
-        }
-    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun defineNavigation() {
@@ -486,8 +470,45 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
                 marketGeographyNextButton.setOnClickListener {
-                    ethnicGroupSelection.root.visibility = View.VISIBLE
+                    lzMarketTransactions.root.visibility = View.VISIBLE
                     marketGeographyConfiguration.root.visibility = View.GONE
+
+                    val marketTransactionItems: MutableList<MarketTransactionsItem> = ArrayList()
+
+
+                    for (currentDefinedMarket in countyLevelQuestionnaire.definedMarkets) {
+                        marketTransactionItems.add(
+                            MarketTransactionsItem(
+                                currentDefinedMarket.marketUniqueId,
+                                currentDefinedMarket.marketName,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            )
+                        )
+                    }
+
+                    countyLevelQuestionnaire.marketTransactionItems = marketTransactionItems
+
+                    val marketTransactionsAdapter =
+                        MarketTransactionsAdapter(
+                            marketTransactionItems,
+                            this@CountyLevelFragment
+                        )
+                    val gridLayoutManager = GridLayoutManager(activity, 1)
+
+                    lzMarketTransactions.apply {
+
+                        marketTransactionsList.layoutManager = gridLayoutManager
+                        marketTransactionsList.hasFixedSize()
+                        marketTransactionsList.adapter =
+                            marketTransactionsAdapter
+
+                    }
+
                 }
 
 
@@ -552,6 +573,22 @@ class CountyLevelFragment : DialogFragment(),
                     )
                 }
 
+
+            }
+
+
+            /* Market transactions navigation */
+            lzMarketTransactions.apply {
+
+                marketTransactionBackButton.setOnClickListener {
+                    marketGeographyConfiguration.root.visibility = View.VISIBLE
+                    lzMarketTransactions.root.visibility = View.GONE
+                }
+
+                marketTransactionNextButton.setOnClickListener {
+                    ethnicGroupSelection.root.visibility = View.VISIBLE
+                    lzMarketTransactions.root.visibility = View.GONE
+                }
 
             }
 
@@ -1293,8 +1330,8 @@ class CountyLevelFragment : DialogFragment(),
         val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(activity)
         builder.setView(v)
         builder.setCancelable(true)
-        seasonCalendarDialog = builder.create()
-        (seasonCalendarDialog as android.app.AlertDialog).apply {
+        marketSubCountyDialog = builder.create()
+        (marketSubCountyDialog as android.app.AlertDialog).apply {
             setCancelable(true)
             setCanceledOnTouchOutside(true)
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -1569,7 +1606,8 @@ class CountyLevelFragment : DialogFragment(),
                         DefinedMarketModel(
                             oneMarketName.text.toString(),
                             selectedSubCounty,
-                            oneNearestVillageOrTown.text.toString()
+                            oneNearestVillageOrTown.text.toString(),
+                            Util.generateUniqueId()
                         )
                     )
                 }
@@ -1578,7 +1616,8 @@ class CountyLevelFragment : DialogFragment(),
                         DefinedMarketModel(
                             twoMarketName.text.toString(),
                             selectedSubCounty,
-                            twoNearestVillageOrTown.text.toString()
+                            twoNearestVillageOrTown.text.toString(),
+                            Util.generateUniqueId()
                         )
                     )
                 }
@@ -1587,7 +1626,8 @@ class CountyLevelFragment : DialogFragment(),
                         DefinedMarketModel(
                             threeMarketName.text.toString(),
                             selectedSubCounty,
-                            threeNearestVillageOrTown.text.toString()
+                            threeNearestVillageOrTown.text.toString(),
+                            Util.generateUniqueId()
                         )
                     )
                 }
@@ -1596,7 +1636,8 @@ class CountyLevelFragment : DialogFragment(),
                         DefinedMarketModel(
                             threeMarketName.text.toString(),
                             selectedSubCounty,
-                            threeNearestVillageOrTown.text.toString()
+                            threeNearestVillageOrTown.text.toString(),
+                            Util.generateUniqueId()
                         )
                     )
                 }
@@ -1605,7 +1646,8 @@ class CountyLevelFragment : DialogFragment(),
                         DefinedMarketModel(
                             fourMarketName.text.toString(),
                             selectedSubCounty,
-                            fourNearestVillageOrTown.text.toString()
+                            fourNearestVillageOrTown.text.toString(),
+                            Util.generateUniqueId()
                         )
                     )
                 }
@@ -1614,7 +1656,8 @@ class CountyLevelFragment : DialogFragment(),
                         DefinedMarketModel(
                             fiveMarketName.text.toString(),
                             selectedSubCounty,
-                            fiveNearestVillageOrTown.text.toString()
+                            fiveNearestVillageOrTown.text.toString(),
+                            Util.generateUniqueId()
                         )
                     )
                 }
@@ -1623,7 +1666,8 @@ class CountyLevelFragment : DialogFragment(),
                         DefinedMarketModel(
                             sixMarketName.text.toString(),
                             selectedSubCounty,
-                            sixNearestVillageOrTown.text.toString()
+                            sixNearestVillageOrTown.text.toString(),
+                            Util.generateUniqueId()
                         )
                     )
                 }
@@ -1632,7 +1676,8 @@ class CountyLevelFragment : DialogFragment(),
                         DefinedMarketModel(
                             sevenMarketName.text.toString(),
                             selectedSubCounty,
-                            sevenNearestVillageOrTown.text.toString()
+                            sevenNearestVillageOrTown.text.toString(),
+                            Util.generateUniqueId()
                         )
                     )
                 }
@@ -1641,7 +1686,8 @@ class CountyLevelFragment : DialogFragment(),
                         DefinedMarketModel(
                             eightMarketName.text.toString(),
                             selectedSubCounty,
-                            eightNearestVillageOrTown.text.toString()
+                            eightNearestVillageOrTown.text.toString(),
+                            Util.generateUniqueId()
                         )
                     )
                 }
@@ -1650,7 +1696,8 @@ class CountyLevelFragment : DialogFragment(),
                         DefinedMarketModel(
                             nineMarketName.text.toString(),
                             selectedSubCounty,
-                            nineNearestVillageOrTown.text.toString()
+                            nineNearestVillageOrTown.text.toString(),
+                            Util.generateUniqueId()
                         )
                     )
                 }
@@ -1659,7 +1706,8 @@ class CountyLevelFragment : DialogFragment(),
                         DefinedMarketModel(
                             tenMarketName.text.toString(),
                             selectedSubCounty,
-                            tenNearestVillageOrTown.text.toString()
+                            tenNearestVillageOrTown.text.toString(),
+                            Util.generateUniqueId()
                         )
                     )
                 }
@@ -1667,6 +1715,80 @@ class CountyLevelFragment : DialogFragment(),
             }
         }
 
+        (marketSubCountyDialog as android.app.AlertDialog).dismiss()
 
+
+    }
+
+    override fun onLivestockMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
+        val currentMarketingTransactionItem = countyLevelQuestionnaire.marketTransactionItems.first {
+            it.marketUniqueId == marketUniqueId
+        }
+        currentMarketingTransactionItem.livestockTrade = isTradeHappening
+        val tempList: List<MarketTransactionsItem> = countyLevelQuestionnaire.marketTransactionItems.filter {
+            it.marketUniqueId != marketUniqueId
+        }
+        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
+        countyLevelQuestionnaire.marketTransactionItems = tempList
+    }
+
+    override fun onPoultryMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
+        val currentMarketingTransactionItem = countyLevelQuestionnaire.marketTransactionItems.first {
+            it.marketUniqueId == marketUniqueId
+        }
+        currentMarketingTransactionItem.poultryTrade = isTradeHappening
+        val tempList: List<MarketTransactionsItem> = countyLevelQuestionnaire.marketTransactionItems.filter {
+            it.marketUniqueId != marketUniqueId
+        }
+        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
+        countyLevelQuestionnaire.marketTransactionItems = tempList
+    }
+
+    override fun onFarmProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
+        val currentMarketingTransactionItem = countyLevelQuestionnaire.marketTransactionItems.first {
+            it.marketUniqueId == marketUniqueId
+        }
+        currentMarketingTransactionItem.farmProduceTrade = isTradeHappening
+        val tempList: List<MarketTransactionsItem> = countyLevelQuestionnaire.marketTransactionItems.filter {
+            it.marketUniqueId != marketUniqueId
+        }
+        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
+        countyLevelQuestionnaire.marketTransactionItems = tempList
+    }
+
+    override fun onFoodProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
+        val currentMarketingTransactionItem = countyLevelQuestionnaire.marketTransactionItems.first {
+            it.marketUniqueId == marketUniqueId
+        }
+        currentMarketingTransactionItem.foodProduceRetail = isTradeHappening
+        val tempList: List<MarketTransactionsItem> = countyLevelQuestionnaire.marketTransactionItems.filter {
+            it.marketUniqueId != marketUniqueId
+        }
+        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
+        countyLevelQuestionnaire.marketTransactionItems = tempList
+    }
+
+    override fun onFarmInputsTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
+        val currentMarketingTransactionItem = countyLevelQuestionnaire.marketTransactionItems.first {
+            it.marketUniqueId == marketUniqueId
+        }
+        currentMarketingTransactionItem.retailFarmInput = isTradeHappening
+        val tempList: List<MarketTransactionsItem> = countyLevelQuestionnaire.marketTransactionItems.filter {
+            it.marketUniqueId != marketUniqueId
+        }
+        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
+        countyLevelQuestionnaire.marketTransactionItems = tempList
+    }
+
+    override fun onLabourExchangeTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
+        val currentMarketingTransactionItem = countyLevelQuestionnaire.marketTransactionItems.first {
+            it.marketUniqueId == marketUniqueId
+        }
+        currentMarketingTransactionItem.labourExchange = isTradeHappening
+        val tempList: List<MarketTransactionsItem> = countyLevelQuestionnaire.marketTransactionItems.filter {
+            it.marketUniqueId != marketUniqueId
+        }
+        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
+        countyLevelQuestionnaire.marketTransactionItems = tempList
     }
 }

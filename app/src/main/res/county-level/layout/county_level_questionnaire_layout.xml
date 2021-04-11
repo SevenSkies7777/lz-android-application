@@ -90,7 +90,7 @@
         <!--        F(ii). Market Transactions-->
         <include
             android:id="@+id/lzMarketTransactions"
-            layout="@layout/lz_market_transactions"
+            layout="@layout/market_transactions_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
