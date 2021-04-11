@@ -43,6 +43,7 @@ import com.silasonyango.ndma.ui.home.adapters.*
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
 import com.silasonyango.ndma.util.GpsTracker
 import com.silasonyango.ndma.util.Util
+import kotlinx.android.synthetic.main.market_geograpghy_configuration.*
 
 
 class CountyLevelFragment : DialogFragment(),
@@ -54,7 +55,8 @@ class CountyLevelFragment : DialogFragment(),
     SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack,
     CropSelectionAdapter.CropSelectionAdapterCallBack,
     TribeSelectionAdapter.TribeSelectionAdapterCallBack, EthnicityAdapter.EthnicityAdapterCallBack,
-    MonthsAdapter.MonthsAdapterCallBack {
+    MonthsAdapter.MonthsAdapterCallBack,
+    MarketSubCountySelectionAdapter.MarketSubCountySelectionAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -143,7 +145,6 @@ class CountyLevelFragment : DialogFragment(),
                 geographyString,
                 GeographyObject::class.java
             )
-        defineLzMarketsLayouts()
         defineNavigation()
         binding.apply {
 
@@ -236,93 +237,6 @@ class CountyLevelFragment : DialogFragment(),
                 lzCropProductionRV.adapter =
                     lzCropProductionRecyclerViewAdapter
             }
-        }
-    }
-
-    private fun defineLzMarketsLayouts() {
-        var currentlySelectedSubCounty: SubCountyModel? = null
-        binding.apply {
-            lzMarkets.apply {
-                val subCounties: MutableList<SubCountyModel> = ArrayList()
-//                subCounties.add(SubCountyModel("Laikipia", 0))
-//                subCounties.add(SubCountyModel("Laikipia", 0))
-//                subCounties.add(SubCountyModel("Laikipia", 0))
-//                subCounties.add(SubCountyModel("Laikipia", 0))
-//                subCounties.add(SubCountyModel("Laikipia", 0))
-//                subCounties.add(SubCountyModel("Laikipia", 0))
-
-                val spinnerAdapter = context?.let {
-                    SubCountiesSpinnerAdapter(
-                        it,
-                        R.layout.spinner_item_layout,
-                        R.id.tvSpinnerItemText,
-                        subCounties
-                    )
-                }
-
-
-                subCountySpinner.adapter = spinnerAdapter
-                subCountySpinner.onItemSelectedListener =
-                    object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(
-                            parent: AdapterView<*>,
-                            view: View,
-                            position: Int,
-                            id: Long
-                        ) {
-                            currentlySelectedSubCounty =
-                                parent.getItemAtPosition(position) as SubCountyModel
-
-                        }
-
-                        override fun onNothingSelected(parent: AdapterView<*>) {
-
-                        }
-                    }
-
-                addEditText.setOnClickListener {
-                    val etMarketName = EditText(context)
-                    etMarketName.hint = "Market Name"
-                    villageEditTextContainer.addView(etMarketName)
-                }
-
-                submitMarkets.setOnClickListener {
-                    val countyLevelQuestionnaire =
-                        AppStore.getInstance().countyLevelQuestionnairesList.filter {
-                            it.uniqueId == questionnaireId
-                        }
-
-                    val nearestVillageOrTown = NearestVillageOrTown(
-                        Util.generateUniqueId(),
-                        etNearestVillageOrTown.text.toString()
-                    )
-
-                    val marketList: MutableList<MarketModel> = ArrayList()
-
-                    for (i in 1..villageEditTextContainer.size) {
-                        var text = (villageEditTextContainer.get(i) as EditText).text.toString()
-                        marketList.add(
-                            MarketModel(
-                                text,
-                                nearestVillageOrTown.townUniqueId,
-                                currentlySelectedSubCounty!!.subCountyCode
-                            )
-                        )
-                    }
-
-//                    countyLevelQuestionnaire.get(0).subCountyMarkets?.marketModelList?.addAll(marketList)
-//                    System.out.println()
-                }
-
-
-
-                marketNextButton.setOnClickListener {
-
-                }
-
-            }
-
-
         }
     }
 
@@ -558,8 +472,87 @@ class CountyLevelFragment : DialogFragment(),
                     }
 
                     mainWaterSource.root.visibility = View.GONE
-                    ethnicGroupSelection.root.visibility = View.VISIBLE
+                    marketGeographyConfiguration.root.visibility = View.VISIBLE
                 }
+            }
+
+
+            /* Market serving the livelihoodzone */
+            marketGeographyConfiguration.apply {
+
+                marketGeographyBackButton.setOnClickListener {
+                    mainWaterSource.root.visibility = View.VISIBLE
+                    marketGeographyConfiguration.root.visibility = View.GONE
+                }
+
+                marketGeographyNextButton.setOnClickListener {
+                    ethnicGroupSelection.root.visibility = View.VISIBLE
+                    marketGeographyConfiguration.root.visibility = View.GONE
+                }
+
+
+                oneSubCounty.setOnClickListener {
+                    inflateMarketCountySelectionModal(
+                        geographyObject.subCounties,
+                        MarketCountySelectionEnum.MARKET_ONE
+                    )
+                }
+                twoSubCounty.setOnClickListener {
+                    inflateMarketCountySelectionModal(
+                        geographyObject.subCounties,
+                        MarketCountySelectionEnum.MARKET_TWO
+                    )
+                }
+                threeSubCounty.setOnClickListener {
+                    inflateMarketCountySelectionModal(
+                        geographyObject.subCounties,
+                        MarketCountySelectionEnum.MARKET_THREE
+                    )
+                }
+                fourSubCounty.setOnClickListener {
+                    inflateMarketCountySelectionModal(
+                        geographyObject.subCounties,
+                        MarketCountySelectionEnum.MARKET_FOUR
+                    )
+                }
+                fiveSubCounty.setOnClickListener {
+                    inflateMarketCountySelectionModal(
+                        geographyObject.subCounties,
+                        MarketCountySelectionEnum.MARKET_FIVE
+                    )
+                }
+                sixSubCounty.setOnClickListener {
+                    inflateMarketCountySelectionModal(
+                        geographyObject.subCounties,
+                        MarketCountySelectionEnum.MARKET_SIX
+                    )
+                }
+                sevenSubCounty.setOnClickListener {
+                    inflateMarketCountySelectionModal(
+                        geographyObject.subCounties,
+                        MarketCountySelectionEnum.MARKET_SEVEN
+                    )
+                }
+                eightSubCounty.setOnClickListener {
+                    inflateMarketCountySelectionModal(
+                        geographyObject.subCounties,
+                        MarketCountySelectionEnum.MARKET_EIGHT
+                    )
+                }
+                nineSubCounty.setOnClickListener {
+                    inflateMarketCountySelectionModal(
+                        geographyObject.subCounties,
+                        MarketCountySelectionEnum.MARKET_NINE
+                    )
+                }
+                tenSubCounty.setOnClickListener {
+                    inflateMarketCountySelectionModal(
+                        geographyObject.subCounties,
+                        MarketCountySelectionEnum.MARKET_TEN
+                    )
+                }
+
+
             }
 
 
@@ -773,153 +766,294 @@ class CountyLevelFragment : DialogFragment(),
 
                 /* Seasons responses */
                 dryMonth.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.SEASONS_DRY)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.SEASONS_DRY
+                    )
                 }
                 longRainMonth.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.SEASONS_LONG_RAINS)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.SEASONS_LONG_RAINS
+                    )
                 }
                 shortRainMonth.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.SEASONS_SHORT_RAINS)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.SEASONS_SHORT_RAINS
+                    )
                 }
 
 
                 /* Crop production responses */
                 landPrepMaize.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.MAIZE_LAND_PREPARATION)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.MAIZE_LAND_PREPARATION
+                    )
                 }
                 landPrepCassava.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.CASSAVA_LAND_PREPARATION)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.CASSAVA_LAND_PREPARATION
+                    )
                 }
                 landPrepRice.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.RICE_LAND_PREPARATION)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.RICE_LAND_PREPARATION
+                    )
                 }
                 landPrepSorghum.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.SORGHUM_LAND_PREPARATION)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.SORGHUM_LAND_PREPARATION
+                    )
                 }
                 landPrepLegumes.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LEGUMES_LAND_PREPARATION)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LEGUMES_LAND_PREPARATION
+                    )
                 }
 
                 plantingMaize.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.MAIZE_PLANTING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.MAIZE_PLANTING
+                    )
                 }
                 plantingCassava.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.CASSAVA_PLANTING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.CASSAVA_PLANTING
+                    )
                 }
                 plantingRice.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.RICE_PLANTING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.RICE_PLANTING
+                    )
                 }
                 plantingSorghum.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.SORGHUM_PLANTING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.SORGHUM_PLANTING
+                    )
                 }
                 plantingLegumes.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LEGUMES_PLANTING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LEGUMES_PLANTING
+                    )
                 }
 
                 harvestingMaize.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.MAIZE_HARVESTING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.MAIZE_HARVESTING
+                    )
                 }
                 harvestingCassava.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.CASSAVA_HARVESTING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.CASSAVA_HARVESTING
+                    )
                 }
                 harvestingRice.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.RICE_HARVESTING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.RICE_HARVESTING
+                    )
                 }
                 harvestingSorghum.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.SORGHUM_HARVESTING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.SORGHUM_HARVESTING
+                    )
                 }
                 harvestingLegumes.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LEGUMES_HARVESTING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LEGUMES_HARVESTING
+                    )
                 }
 
 
                 /* Livestock production responses */
                 livestockInMigration.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LIVESTOCK_IN_MIGRATION)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LIVESTOCK_IN_MIGRATION
+                    )
                 }
                 livestockOutMigration.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LIVESTOCK_OUT_MIGRATION)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LIVESTOCK_OUT_MIGRATION
+                    )
                 }
                 milkHigh.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_MILK_PRODUCTION)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.HIGH_MILK_PRODUCTION
+                    )
                 }
                 milkLow.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_MILK_PRODUCTION)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LOW_MILK_PRODUCTION
+                    )
                 }
                 calvingHigh.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_CALVING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.HIGH_CALVING
+                    )
                 }
                 calvingLow.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_CALVING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LOW_CALVING
+                    )
                 }
                 kiddingHigh.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_KIDDING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.HIGH_KIDDING
+                    )
                 }
                 kiddingLow.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_KIDDING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LOW_KIDDING
+                    )
                 }
                 foodPricesHigh.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_FOOD_PRICES)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.HIGH_FOOD_PRICES
+                    )
                 }
                 foodPricesLow.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_FOOD_PRICES)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LOW_FOOD_PRICES
+                    )
                 }
                 livestockPricesHigh.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_LIVESTOCK_PRICES)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.HIGH_LIVESTOCK_PRICES
+                    )
                 }
                 livestockPricesLow.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_LIVESTOCK_PRICES)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LOW_LIVESTOCK_PRICES
+                    )
                 }
                 casualLabourAvailabilityHigh.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_CASUAL_LABOUR_AVAILABILITY)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.HIGH_CASUAL_LABOUR_AVAILABILITY
+                    )
                 }
                 casualLabourAvailabilityLow.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_CASUAL_LABOUR_AVAILABILITY)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LOW_CASUAL_LABOUR_AVAILABILITY
+                    )
                 }
                 casualLabourWagesHigh.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_CASUAL_LABOUR_WAGES)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.HIGH_CASUAL_LABOUR_WAGES
+                    )
                 }
                 casualLabourWagesLow.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_CASUAL_LABOUR_WAGES)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LOW_CASUAL_LABOUR_WAGES
+                    )
                 }
                 remittancesHigh.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_REMITTANCES)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.HIGH_REMITTANCES
+                    )
                 }
                 remittancesLow.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_REMITTANCES)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LOW_REMITTANCES
+                    )
                 }
                 fishingHigh.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_FISHING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.HIGH_FISHING
+                    )
                 }
                 fishingLow.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_FISHING)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LOW_FISHING
+                    )
                 }
                 marketAccessHigh.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_MARKET_ACCESS)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.HIGH_MARKET_ACCESS
+                    )
                 }
                 marketAccessLow.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_MARKET_ACCESS)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LOW_MARKET_ACCESS
+                    )
                 }
                 diseaseOutbreakHigh.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.HIGH_DISEASE_OUTBREAK)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.HIGH_DISEASE_OUTBREAK
+                    )
                 }
                 diseaseOutbreakLow.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LOW_DISEASE_OUTBREAK)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LOW_DISEASE_OUTBREAK
+                    )
                 }
                 waterStressMonth.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.WATER_STRESS)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.WATER_STRESS
+                    )
                 }
                 conflictRiskMonth.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.CONFLICT_RISK)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.CONFLICT_RISK
+                    )
                 }
                 ceremoniesMonth.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.CEREMONIES)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.CEREMONIES
+                    )
                 }
                 leanSeasonsMonth.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.LEAN_SEASONS)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.LEAN_SEASONS
+                    )
                 }
                 foodSecurityMonth.setOnClickListener {
-                    inflateSeasonCalendarModal(geographyObject.months,SeasonsResponsesEnum.FOOD_SECURITY_ASSESSMENTS)
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.FOOD_SECURITY_ASSESSMENTS
+                    )
                 }
 
             }
@@ -1082,7 +1216,10 @@ class CountyLevelFragment : DialogFragment(),
     }
 
 
-    private fun inflateSeasonCalendarModal(months: MutableList<MonthsModel>, seasonsResponsesEnum: SeasonsResponsesEnum) {
+    private fun inflateSeasonCalendarModal(
+        months: MutableList<MonthsModel>,
+        seasonsResponsesEnum: SeasonsResponsesEnum
+    ) {
         val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
 
@@ -1102,6 +1239,52 @@ class CountyLevelFragment : DialogFragment(),
     }
 
     private fun openSeasonCalendarModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(activity)
+        builder.setView(v)
+        builder.setCancelable(true)
+        seasonCalendarDialog = builder.create()
+        (seasonCalendarDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
+    }
+
+
+    private fun inflateMarketCountySelectionModal(
+        subCounties: MutableList<SubCountyModel>,
+        marketSubCountySelectionEnum: MarketCountySelectionEnum
+    ) {
+        val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
+
+        val listRecyclerView = v.findViewById<RecyclerView>(R.id.listRv)
+
+        val marketSubCountySelectionAdapter = MarketSubCountySelectionAdapter(
+            subCounties,
+            this,
+            marketSubCountySelectionEnum
+        )
+        val gridLayoutManager = GridLayoutManager(activity, 1)
+        listRecyclerView.layoutManager = gridLayoutManager
+        listRecyclerView.hasFixedSize()
+        listRecyclerView.adapter = marketSubCountySelectionAdapter
+
+        openMarketCountySelectionModal(v)
+    }
+
+    private fun openMarketCountySelectionModal(v: View) {
         val width =
             (resources.displayMetrics.widthPixels * 0.75).toInt()
         val height =
@@ -1370,5 +1553,120 @@ class CountyLevelFragment : DialogFragment(),
 
         (seasonCalendarDialog as android.app.AlertDialog).dismiss()
         countyLevelQuestionnaire.livelihoodZoneSeasonsResponses = lzSeasonsResponses
+    }
+
+    override fun onMarketSubCountyItemClicked(
+        selectedSubCounty: SubCountyModel,
+        marketCountySelectionEnum: MarketCountySelectionEnum
+    ) {
+
+        binding.apply {
+
+            marketGeographyConfiguration.apply {
+
+                if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_ONE) {
+                    countyLevelQuestionnaire.definedMarkets.add(
+                        DefinedMarketModel(
+                            oneMarketName.text.toString(),
+                            selectedSubCounty,
+                            oneNearestVillageOrTown.text.toString()
+                        )
+                    )
+                }
+                if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_TWO) {
+                    countyLevelQuestionnaire.definedMarkets.add(
+                        DefinedMarketModel(
+                            twoMarketName.text.toString(),
+                            selectedSubCounty,
+                            twoNearestVillageOrTown.text.toString()
+                        )
+                    )
+                }
+                if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_THREE) {
+                    countyLevelQuestionnaire.definedMarkets.add(
+                        DefinedMarketModel(
+                            threeMarketName.text.toString(),
+                            selectedSubCounty,
+                            threeNearestVillageOrTown.text.toString()
+                        )
+                    )
+                }
+                if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_FOUR) {
+                    countyLevelQuestionnaire.definedMarkets.add(
+                        DefinedMarketModel(
+                            threeMarketName.text.toString(),
+                            selectedSubCounty,
+                            threeNearestVillageOrTown.text.toString()
+                        )
+                    )
+                }
+                if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_FOUR) {
+                    countyLevelQuestionnaire.definedMarkets.add(
+                        DefinedMarketModel(
+                            fourMarketName.text.toString(),
+                            selectedSubCounty,
+                            fourNearestVillageOrTown.text.toString()
+                        )
+                    )
+                }
+                if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_FIVE) {
+                    countyLevelQuestionnaire.definedMarkets.add(
+                        DefinedMarketModel(
+                            fiveMarketName.text.toString(),
+                            selectedSubCounty,
+                            fiveNearestVillageOrTown.text.toString()
+                        )
+                    )
+                }
+                if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_SIX) {
+                    countyLevelQuestionnaire.definedMarkets.add(
+                        DefinedMarketModel(
+                            sixMarketName.text.toString(),
+                            selectedSubCounty,
+                            sixNearestVillageOrTown.text.toString()
+                        )
+                    )
+                }
+                if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_SEVEN) {
+                    countyLevelQuestionnaire.definedMarkets.add(
+                        DefinedMarketModel(
+                            sevenMarketName.text.toString(),
+                            selectedSubCounty,
+                            sevenNearestVillageOrTown.text.toString()
+                        )
+                    )
+                }
+                if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_EIGHT) {
+                    countyLevelQuestionnaire.definedMarkets.add(
+                        DefinedMarketModel(
+                            eightMarketName.text.toString(),
+                            selectedSubCounty,
+                            eightNearestVillageOrTown.text.toString()
+                        )
+                    )
+                }
+                if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_NINE) {
+                    countyLevelQuestionnaire.definedMarkets.add(
+                        DefinedMarketModel(
+                            nineMarketName.text.toString(),
+                            selectedSubCounty,
+                            nineNearestVillageOrTown.text.toString()
+                        )
+                    )
+                }
+                if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_TEN) {
+                    countyLevelQuestionnaire.definedMarkets.add(
+                        DefinedMarketModel(
+                            tenMarketName.text.toString(),
+                            selectedSubCounty,
+                            tenNearestVillageOrTown.text.toString()
+                        )
+                    )
+                }
+
+            }
+        }
+
+
     }
 }

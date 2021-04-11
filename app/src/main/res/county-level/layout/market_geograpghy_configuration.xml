@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="24dp"
+    android:paddingStart="24dp"
+    android:paddingRight="24dp"
+    android:paddingEnd="24dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="F(i). Markets Serving the Livelihood Zone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="9sp"/>
+
+
+    <TextView
+        android:text="Enter the names of the main markets used by people living in the livelihood zone, the name of the nearest town or village and county/subcounty where the market is located. Indicate which types of product are traded, by circling ‘yes’ or ‘no’. Include markets in other counties, if these are used."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_regular"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:lineHeight="24sp"
+        android:layout_marginTop="27dp"
+        android:gravity="start"/>
+
+
+    <!--    Seasons-->
+    <TextView
+        android:text="Name all the markets in the livelihood Zone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:lineHeight="24sp"
+        android:layout_marginTop="27dp"
+        android:gravity="start"/>
+
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="MARKET"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="SUB-COUNTY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="NEAREST VILLAGE/TOWN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/oneMarketName"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/oneSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/oneNearestVillageOrTown"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/twoMarketName"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/twoSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/twoNearestVillageOrTown"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/threeMarketName"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/threeSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/threeNearestVillageOrTown"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/fourMarketName"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/fourSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/fourNearestVillageOrTown"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/fiveMarketName"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/fiveSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/fiveNearestVillageOrTown"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/sixMarketName"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/sixSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/sixNearestVillageOrTown"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/sevenMarketName"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/sevenSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/sevenNearestVillageOrTown"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/eightMarketName"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/eightSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/eightNearestVillageOrTown"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/nineMarketName"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/nineSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/nineNearestVillageOrTown"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/tenMarketName"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/tenSubCounty"
+                    android:text="Select Sub-County..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".33"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/tenNearestVillageOrTown"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginEnd="24dp">
+
+        <TextView
+            android:id="@+id/marketGeographyBackButton"
+            android:text="BACK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#00569c"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/marketGeographyNextButton"
+            android:text="NEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#00569c"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

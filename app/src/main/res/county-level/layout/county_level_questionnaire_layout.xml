@@ -80,8 +80,8 @@
 
         <!--        F. Markets Serving the Livelihood Zone-->
         <include
-            android:id="@+id/lzMarkets"
-            layout="@layout/lz_markets_layout"
+            android:id="@+id/marketGeographyConfiguration"
+            layout="@layout/market_geograpghy_configuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
