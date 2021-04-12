@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="37dp"
+    android:paddingStart="38dp"
+    android:paddingEnd="38dp"
+    android:background="@drawable/bg_rounded_corner_modal"
+    android:paddingBottom="23dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/icon"
+            android:background="@drawable/bg_red_oval"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:gravity="center"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true">
+
+            <View
+                android:background="@drawable/ic_white_ex"
+                android:layout_width="26dp"
+                android:layout_height="26dp"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_marginLeft="11.5dp"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_regular"
+        android:textStyle="normal"
+        android:textSize="14sp"
+        android:textColor="#737373"
+        android:lineSpacingExtra="7sp"
+        android:gravity="start"
+        android:layout_marginTop="23dp"/>
+
+    <TextView
+        android:id="@+id/close"
+        android:text="Close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_regular"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="#00beaf"
+        android:lineSpacingExtra="8sp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"/>
+
+</LinearLayout>

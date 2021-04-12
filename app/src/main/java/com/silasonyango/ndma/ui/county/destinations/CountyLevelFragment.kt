@@ -9,11 +9,16 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.EditText
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
@@ -68,6 +73,8 @@ class CountyLevelFragment : DialogFragment(),
     lateinit var geographyObject: GeographyObject
 
     private var livelihoodZoneAlertDialog: android.app.AlertDialog? = null
+
+    private var errorDialog: android.app.AlertDialog? = null
 
     private var seasonCalendarDialog: android.app.AlertDialog? = null
 
@@ -308,6 +315,45 @@ class CountyLevelFragment : DialogFragment(),
 
             /*Location and population navigation buttons*/
             locationAndPopulationLayout.apply {
+                val textWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            val totalEntry =
+                                returnZeroStringIfEmpty(etVerPoorResponse.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    etPoorResponse.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(etMediumResponse.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    etBetterOffResponse.text.toString()
+                                ).toDouble()
+
+                            if (totalEntry > 100) {
+                                inflateErrorModal("Percentage error", "Entries cannot exceed 100%")
+                            }
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+                }
+                etVerPoorResponse.addTextChangedListener(textWatcher)
+                etPoorResponse.addTextChangedListener(textWatcher)
+                etMediumResponse.addTextChangedListener(textWatcher)
+                etBetterOffResponse.addTextChangedListener(textWatcher)
                 locationNextButton.setOnClickListener {
 
                     val wealthGroupResponse = WealthGroupResponse(
@@ -1721,74 +1767,125 @@ class CountyLevelFragment : DialogFragment(),
     }
 
     override fun onLivestockMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
-        val currentMarketingTransactionItem = countyLevelQuestionnaire.marketTransactionItems.first {
-            it.marketUniqueId == marketUniqueId
-        }
+        val currentMarketingTransactionItem =
+            countyLevelQuestionnaire.marketTransactionItems.first {
+                it.marketUniqueId == marketUniqueId
+            }
         currentMarketingTransactionItem.livestockTrade = isTradeHappening
-        val tempList: List<MarketTransactionsItem> = countyLevelQuestionnaire.marketTransactionItems.filter {
-            it.marketUniqueId != marketUniqueId
-        }
+        val tempList: List<MarketTransactionsItem> =
+            countyLevelQuestionnaire.marketTransactionItems.filter {
+                it.marketUniqueId != marketUniqueId
+            }
         (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
         countyLevelQuestionnaire.marketTransactionItems = tempList
     }
 
     override fun onPoultryMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
-        val currentMarketingTransactionItem = countyLevelQuestionnaire.marketTransactionItems.first {
-            it.marketUniqueId == marketUniqueId
-        }
+        val currentMarketingTransactionItem =
+            countyLevelQuestionnaire.marketTransactionItems.first {
+                it.marketUniqueId == marketUniqueId
+            }
         currentMarketingTransactionItem.poultryTrade = isTradeHappening
-        val tempList: List<MarketTransactionsItem> = countyLevelQuestionnaire.marketTransactionItems.filter {
-            it.marketUniqueId != marketUniqueId
-        }
+        val tempList: List<MarketTransactionsItem> =
+            countyLevelQuestionnaire.marketTransactionItems.filter {
+                it.marketUniqueId != marketUniqueId
+            }
         (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
         countyLevelQuestionnaire.marketTransactionItems = tempList
     }
 
     override fun onFarmProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
-        val currentMarketingTransactionItem = countyLevelQuestionnaire.marketTransactionItems.first {
-            it.marketUniqueId == marketUniqueId
-        }
+        val currentMarketingTransactionItem =
+            countyLevelQuestionnaire.marketTransactionItems.first {
+                it.marketUniqueId == marketUniqueId
+            }
         currentMarketingTransactionItem.farmProduceTrade = isTradeHappening
-        val tempList: List<MarketTransactionsItem> = countyLevelQuestionnaire.marketTransactionItems.filter {
-            it.marketUniqueId != marketUniqueId
-        }
+        val tempList: List<MarketTransactionsItem> =
+            countyLevelQuestionnaire.marketTransactionItems.filter {
+                it.marketUniqueId != marketUniqueId
+            }
         (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
         countyLevelQuestionnaire.marketTransactionItems = tempList
     }
 
     override fun onFoodProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
-        val currentMarketingTransactionItem = countyLevelQuestionnaire.marketTransactionItems.first {
-            it.marketUniqueId == marketUniqueId
-        }
+        val currentMarketingTransactionItem =
+            countyLevelQuestionnaire.marketTransactionItems.first {
+                it.marketUniqueId == marketUniqueId
+            }
         currentMarketingTransactionItem.foodProduceRetail = isTradeHappening
-        val tempList: List<MarketTransactionsItem> = countyLevelQuestionnaire.marketTransactionItems.filter {
-            it.marketUniqueId != marketUniqueId
-        }
+        val tempList: List<MarketTransactionsItem> =
+            countyLevelQuestionnaire.marketTransactionItems.filter {
+                it.marketUniqueId != marketUniqueId
+            }
         (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
         countyLevelQuestionnaire.marketTransactionItems = tempList
     }
 
     override fun onFarmInputsTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
-        val currentMarketingTransactionItem = countyLevelQuestionnaire.marketTransactionItems.first {
-            it.marketUniqueId == marketUniqueId
-        }
+        val currentMarketingTransactionItem =
+            countyLevelQuestionnaire.marketTransactionItems.first {
+                it.marketUniqueId == marketUniqueId
+            }
         currentMarketingTransactionItem.retailFarmInput = isTradeHappening
-        val tempList: List<MarketTransactionsItem> = countyLevelQuestionnaire.marketTransactionItems.filter {
-            it.marketUniqueId != marketUniqueId
-        }
+        val tempList: List<MarketTransactionsItem> =
+            countyLevelQuestionnaire.marketTransactionItems.filter {
+                it.marketUniqueId != marketUniqueId
+            }
         (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
         countyLevelQuestionnaire.marketTransactionItems = tempList
     }
 
     override fun onLabourExchangeTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
-        val currentMarketingTransactionItem = countyLevelQuestionnaire.marketTransactionItems.first {
-            it.marketUniqueId == marketUniqueId
-        }
+        val currentMarketingTransactionItem =
+            countyLevelQuestionnaire.marketTransactionItems.first {
+                it.marketUniqueId == marketUniqueId
+            }
         currentMarketingTransactionItem.labourExchange = isTradeHappening
-        val tempList: List<MarketTransactionsItem> = countyLevelQuestionnaire.marketTransactionItems.filter {
-            it.marketUniqueId != marketUniqueId
-        }
+        val tempList: List<MarketTransactionsItem> =
+            countyLevelQuestionnaire.marketTransactionItems.filter {
+                it.marketUniqueId != marketUniqueId
+            }
         (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
         countyLevelQuestionnaire.marketTransactionItems = tempList
+    }
+
+
+    private fun inflateErrorModal(errorTitle: String, errorMessage: String) {
+        val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.error_message_layout, null)
+        val title = v.findViewById<TextView>(R.id.title)
+        val message = v.findViewById<TextView>(R.id.message)
+        val close = v.findViewById<TextView>(R.id.close)
+        title.text = errorTitle
+        message.text = errorMessage
+        close.setOnClickListener {
+            (errorDialog as android.app.AlertDialog).cancel()
+        }
+
+        openErrorModal(v)
+    }
+
+    private fun openErrorModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(activity)
+        builder.setView(v)
+        builder.setCancelable(true)
+        errorDialog = builder.create()
+        (errorDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
     }
 }
