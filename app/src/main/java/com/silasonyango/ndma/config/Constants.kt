@@ -6,4 +6,6 @@ object Constants {
     val WEALTH_GROUP_LIST_OBJECT = "wealthGroupListObject"
 
     val GEOGRAPHY_OBJECT = "geographyObject"
+
+    val QUESTIONNAIRE_COMPLETED = "QUESTIONNAIRE_COMPLETED"
 }

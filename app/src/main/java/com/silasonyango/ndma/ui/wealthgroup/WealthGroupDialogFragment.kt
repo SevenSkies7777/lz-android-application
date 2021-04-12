@@ -2,6 +2,7 @@ package com.silasonyango.ndma.ui.wealthgroup
 
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -893,6 +894,11 @@ class WealthGroupDialogFragment : DialogFragment() {
                         newQuestionnaireObjectString
                     )
                     editor?.commit()
+
+                    val intent = Intent()
+                    intent.action = Constants.QUESTIONNAIRE_COMPLETED
+                    intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
+                    activity?.sendBroadcast(intent)
 
                     this@WealthGroupDialogFragment.dismiss()
 

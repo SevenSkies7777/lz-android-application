@@ -19,7 +19,7 @@ class CountyQuestionnaireAdapter(
 ) : RecyclerView.Adapter<CountyQuestionnaireAdapter.ViewHolder>() {
 
     interface CountyQuestionnaireAdapterCallBack {
-
+        fun onCountyLevelQuestionnaireItemClicked(countyLevelQuestionnaire: CountyLevelQuestionnaire)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -38,6 +38,9 @@ class CountyQuestionnaireAdapter(
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.tvQuestionnaireName.text = countLevelQuestionnaireList.get(position).questionnaireName
+        viewHolder.itemView.setOnClickListener {
+            countyQuestionnaireAdapterCallBack.onCountyLevelQuestionnaireItemClicked(countLevelQuestionnaireList.get(position))
+        }
     }
 
     override fun getItemCount() = countLevelQuestionnaireList.size

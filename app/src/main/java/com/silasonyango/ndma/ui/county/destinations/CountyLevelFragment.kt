@@ -3,6 +3,7 @@ package com.silasonyango.ndma.ui.county.destinations
 import android.Manifest
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -33,6 +34,7 @@ import com.silasonyango.ndma.appStore.AppStore
 import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaire
 import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaireListObject
 import com.silasonyango.ndma.config.Constants
+import com.silasonyango.ndma.config.Constants.QUESTIONNAIRE_COMPLETED
 import com.silasonyango.ndma.database.questionnaires.entity.QuestionnaireTypesEntity
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.login.model.GeographyObject
@@ -106,6 +108,7 @@ class CountyLevelFragment : DialogFragment(),
                 }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -123,6 +126,7 @@ class CountyLevelFragment : DialogFragment(),
                     )
                 }
             }!!
+        countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -1139,6 +1143,17 @@ class CountyLevelFragment : DialogFragment(),
                     )
                 }
 
+
+                seasonCalendarBackButton.setOnClickListener {
+                    lzSeasonsCalendar.root.visibility = View.GONE
+                    lzHazards.root.visibility = View.VISIBLE
+                }
+
+                seasonCalendarNextButton.setOnClickListener {
+                    lzSeasonsCalendar.root.visibility = View.GONE
+                    lzCompletionPage.root.visibility = View.VISIBLE
+                }
+
             }
 
             /*LzCompletion page navigation*/
@@ -1170,6 +1185,12 @@ class CountyLevelFragment : DialogFragment(),
                         newQuestionnaireObjectString
                     )
                     editor?.commit()
+
+
+                    val intent = Intent()
+                    intent.action = QUESTIONNAIRE_COMPLETED
+                    intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
+                    activity?.sendBroadcast(intent)
 
                     this@CountyLevelFragment.dismiss()
 

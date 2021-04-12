@@ -2,11 +2,14 @@ package com.silasonyango.ndma.ui.home
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaire
 import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
 import com.silasonyango.ndma.database.AppDatabase
 import com.silasonyango.ndma.database.questionnaires.entity.QuestionnaireTypesEntity
 import com.silasonyango.ndma.database.questionnaires.repository.QuestionnaireTypeRepository
 import com.silasonyango.ndma.services.model.Resource
+import com.silasonyango.ndma.ui.county.repository.CountyRepository
+import com.silasonyango.ndma.ui.county.repository.CountyService
 import com.silasonyango.ndma.ui.model.QuestionnaireApiResponse
 import com.silasonyango.ndma.ui.wealthgroup.repository.WealthGroupRepository
 import com.silasonyango.ndma.ui.wealthgroup.repository.WealthGroupService
@@ -53,6 +56,13 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     fun submitWealthGroupQuestionnaire(wealthGroupQuestionnaire: WealthGroupQuestionnaire) {
         viewModelScope.launch {
             WealthGroupRepository(WealthGroupService()).submitWealthGroupQuestionnaire(wealthGroupQuestionnaire)
+                .collect { commitQuestionnaireApiResponse(it) }
+        }
+    }
+
+    fun submitCountyLevelQuestionnaire(countyLevelQuestionnaire: CountyLevelQuestionnaire) {
+        viewModelScope.launch {
+            CountyRepository(CountyService()).submitCountyQuestionnaire(countyLevelQuestionnaire)
                 .collect { commitQuestionnaireApiResponse(it) }
         }
     }
