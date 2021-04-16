@@ -1,5 +1,6 @@
 package com.silasonyango.ndma.ui.home.adapters
 
+import android.content.Context
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,8 @@ import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
 
 class WealthGroupQuestionnaireAdapter(
     private val wealthGroupQuestionnairesList: MutableList<WealthGroupQuestionnaire>,
-    val wealthGroupQuestionnaireAdapterCallBack: WealthGroupQuestionnaireAdapter.WealthGroupQuestionnaireAdapterCallBack
+    val wealthGroupQuestionnaireAdapterCallBack: WealthGroupQuestionnaireAdapter.WealthGroupQuestionnaireAdapterCallBack,
+    val context: Context
 ) : RecyclerView.Adapter<WealthGroupQuestionnaireAdapter.ViewHolder>() {
 
     interface WealthGroupQuestionnaireAdapterCallBack {
@@ -23,6 +25,7 @@ class WealthGroupQuestionnaireAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         var tvQuestionnaireName: TextView = view.findViewById<TextView>(R.id.questionnaireName)
+        var icon: View = view.findViewById<View>(R.id.icon)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -35,6 +38,11 @@ class WealthGroupQuestionnaireAdapter(
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val currentQuestionnaire = wealthGroupQuestionnairesList.get(position)
+
+        if (currentQuestionnaire.hasBeenSubmitted) {
+            viewHolder.icon.background = context.resources.getDrawable(R.drawable.ic_synced_tool)
+        }
         viewHolder.tvQuestionnaireName.text = wealthGroupQuestionnairesList.get(position).questionnaireName
         viewHolder.itemView.setOnClickListener {
             wealthGroupQuestionnaireAdapterCallBack.onQuestionnaireItemClicked(wealthGroupQuestionnairesList.get(position))

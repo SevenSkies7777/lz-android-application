@@ -182,8 +182,10 @@ class CountyLevelFragment : DialogFragment(),
                         longitude = gpsTracker.longitude
                         countyLevelQuestionnaire.latitude = latitude
                         countyLevelQuestionnaire.longitude = longitude
-
                         countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
+                        countyLevelQuestionnaire.questionnaireName = AppStore.getInstance().sessionDetails?.geography?.county?.countyName + "county "+
+                            countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + "Livelihood Zone questionnaire"
+
 
                         prepareLivelihoodSelectionLayout()
                         countyConfiguration.root.visibility = View.GONE
@@ -1293,6 +1295,7 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
@@ -1309,6 +1312,9 @@ class CountyLevelFragment : DialogFragment(),
             longitude = gpsTracker.longitude
             countyLevelQuestionnaire.latitude = latitude
             countyLevelQuestionnaire.longitude = longitude
+            countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
+            countyLevelQuestionnaire.questionnaireName = AppStore.getInstance().sessionDetails?.geography?.county?.countyName + "county "+
+                    countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + "Livelihood Zone questionnaire"
 
             prepareLivelihoodSelectionLayout()
             binding.apply {
@@ -1677,6 +1683,7 @@ class CountyLevelFragment : DialogFragment(),
                             Util.generateUniqueId()
                         )
                     )
+                    oneSubCounty.text = selectedSubCounty.subCountyName
                 }
                 if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_TWO) {
                     countyLevelQuestionnaire.definedMarkets.add(
@@ -1687,6 +1694,7 @@ class CountyLevelFragment : DialogFragment(),
                             Util.generateUniqueId()
                         )
                     )
+                    twoSubCounty.text = selectedSubCounty.subCountyName
                 }
                 if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_THREE) {
                     countyLevelQuestionnaire.definedMarkets.add(
@@ -1697,16 +1705,7 @@ class CountyLevelFragment : DialogFragment(),
                             Util.generateUniqueId()
                         )
                     )
-                }
-                if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_FOUR) {
-                    countyLevelQuestionnaire.definedMarkets.add(
-                        DefinedMarketModel(
-                            threeMarketName.text.toString(),
-                            selectedSubCounty,
-                            threeNearestVillageOrTown.text.toString(),
-                            Util.generateUniqueId()
-                        )
-                    )
+                    threeSubCounty.text = selectedSubCounty.subCountyName
                 }
                 if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_FOUR) {
                     countyLevelQuestionnaire.definedMarkets.add(
@@ -1717,6 +1716,7 @@ class CountyLevelFragment : DialogFragment(),
                             Util.generateUniqueId()
                         )
                     )
+                    fourSubCounty.text = selectedSubCounty.subCountyName
                 }
                 if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_FIVE) {
                     countyLevelQuestionnaire.definedMarkets.add(
@@ -1727,6 +1727,7 @@ class CountyLevelFragment : DialogFragment(),
                             Util.generateUniqueId()
                         )
                     )
+                    fiveSubCounty.text = selectedSubCounty.subCountyName
                 }
                 if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_SIX) {
                     countyLevelQuestionnaire.definedMarkets.add(
@@ -1737,6 +1738,7 @@ class CountyLevelFragment : DialogFragment(),
                             Util.generateUniqueId()
                         )
                     )
+                    sixSubCounty.text = selectedSubCounty.subCountyName
                 }
                 if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_SEVEN) {
                     countyLevelQuestionnaire.definedMarkets.add(
@@ -1747,6 +1749,7 @@ class CountyLevelFragment : DialogFragment(),
                             Util.generateUniqueId()
                         )
                     )
+                    sevenSubCounty.text = selectedSubCounty.subCountyName
                 }
                 if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_EIGHT) {
                     countyLevelQuestionnaire.definedMarkets.add(
@@ -1757,6 +1760,7 @@ class CountyLevelFragment : DialogFragment(),
                             Util.generateUniqueId()
                         )
                     )
+                    eightSubCounty.text = selectedSubCounty.subCountyName
                 }
                 if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_NINE) {
                     countyLevelQuestionnaire.definedMarkets.add(
@@ -1767,6 +1771,7 @@ class CountyLevelFragment : DialogFragment(),
                             Util.generateUniqueId()
                         )
                     )
+                    nineSubCounty.text = selectedSubCounty.subCountyName
                 }
                 if (marketCountySelectionEnum == MarketCountySelectionEnum.MARKET_TEN) {
                     countyLevelQuestionnaire.definedMarkets.add(
@@ -1777,6 +1782,7 @@ class CountyLevelFragment : DialogFragment(),
                             Util.generateUniqueId()
                         )
                     )
+                    tenSubCounty.text = selectedSubCounty.subCountyName
                 }
 
             }

@@ -21,6 +21,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.silasonyango.ndma.R
+import com.silasonyango.ndma.appStore.AppStore
 import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaireListObject
 import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
 import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaireListObject
@@ -94,6 +95,8 @@ class WealthGroupDialogFragment : DialogFragment() {
 
             wealthGroupQuestionnaire.questionnaireGeography = this.questionnaireSessionLocation!!
             wealthGroupQuestionnaire.questionnaireStartDate = Util.getNow()
+            wealthGroupQuestionnaire.questionnaireName = AppStore.getInstance().sessionDetails?.geography?.county?.countyName + "county "+
+                wealthGroupQuestionnaire.questionnaireGeography.selectedLivelihoodZone.livelihoodZoneName + "Livelihood Zone " + wealthGroupQuestionnaire.questionnaireGeography.selectedWealthGroup.wealthGroupName + "questionnaire"
         }
 
         inflateSubCountyModal()
@@ -147,98 +150,178 @@ class WealthGroupDialogFragment : DialogFragment() {
 
                     if (livestockProduction.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        livestockProductionWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for livestock production field", Toast.LENGTH_SHORT).show();
+                        livestockProductionWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for livestock production field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (poultryProduction.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        poultryProductionWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for poultry production field", Toast.LENGTH_SHORT).show();
+                        poultryProductionWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for poultry production field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (cashCropProduction.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        cashCropProductionWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for cash crop production field", Toast.LENGTH_SHORT).show();
+                        cashCropProductionWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for cash crop production field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (foodCropProduction.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        foodCropProductionWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for food crop production field", Toast.LENGTH_SHORT).show();
+                        foodCropProductionWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for food crop production field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (casualOrWagedLabour.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        casualOrWagedLabourWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for casual/waged labour field", Toast.LENGTH_SHORT).show();
+                        casualOrWagedLabourWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for casual/waged labour field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (formalWagedLabour.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        formalWagedLabourWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for formal/waged labour field", Toast.LENGTH_SHORT).show();
+                        formalWagedLabourWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for formal/waged labour field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (fishing.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        fishingWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for fishing field", Toast.LENGTH_SHORT).show();
+                        fishingWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for fishing field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (huntingAndGathering.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        huntingAndGatheringWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for hunting and gathering field", Toast.LENGTH_SHORT).show();
+                        huntingAndGatheringWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for hunting and gathering field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (smallBusiness.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        smallBusinessWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for small business field", Toast.LENGTH_SHORT).show();
+                        smallBusinessWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for small business field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (firewoodOrCharcoal.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        firewoodOrCharcoalWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for firewood/charcoal field", Toast.LENGTH_SHORT).show();
+                        firewoodOrCharcoalWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for firewood/charcoal field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (pettyTrading.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        pettyTradingWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for petty trading field", Toast.LENGTH_SHORT).show();
+                        pettyTradingWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for petty trading field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (remittance.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        remittanceWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for remittance field", Toast.LENGTH_SHORT).show();
+                        remittanceWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for remittance field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (bodaboda.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        bodabodaWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for bodaboda field", Toast.LENGTH_SHORT).show();
+                        bodabodaWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for bodaboda field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (beeKeeping.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        beeKeepingWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for bee keeping field", Toast.LENGTH_SHORT).show();
+                        beeKeepingWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for bee keeping field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (sandHarvesting.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        sandHarvestingWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for sand harvesting field", Toast.LENGTH_SHORT).show();
+                        sandHarvestingWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for sand harvesting field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (other.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        otherWrapper.background = context?.resources?.getDrawable(R.drawable.error_cell)
-                        Toast.makeText(context, "No data provided for other field", Toast.LENGTH_SHORT).show();
+                        otherWrapper.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell)
+                        Toast.makeText(
+                            context,
+                            "No data provided for other field",
+                            Toast.LENGTH_SHORT
+                        ).show();
                     }
 
                     if (hasNoValidationError) {
@@ -272,7 +355,8 @@ class WealthGroupDialogFragment : DialogFragment() {
                         incomeAndFoodSourceResponses.smallBusiness =
                             smallBusiness.text.toString().toDouble()
 
-                        incomeAndFoodSourceResponses.firewoodOrCharcoal = firewoodOrCharcoal.text.toString().toDouble()
+                        incomeAndFoodSourceResponses.firewoodOrCharcoal =
+                            firewoodOrCharcoal.text.toString().toDouble()
 
                         incomeAndFoodSourceResponses.pettyTrading =
                             pettyTrading.text.toString().toDouble()

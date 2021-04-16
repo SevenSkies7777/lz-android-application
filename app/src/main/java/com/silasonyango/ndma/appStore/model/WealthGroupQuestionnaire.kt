@@ -4,7 +4,8 @@ import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
 import com.silasonyango.ndma.ui.wealthgroup.responses.*
 
 
-class WealthGroupQuestionnaire(val uniqueId: String,val questionnaireName: String){
+class WealthGroupQuestionnaire(val uniqueId: String, var questionnaireName: String){
+    var hasBeenSubmitted: Boolean = false
     lateinit var questionnaireStartDate: String
     lateinit var questionnaireEndDate: String
     lateinit var questionnaireGeography: QuestionnaireSessionLocation

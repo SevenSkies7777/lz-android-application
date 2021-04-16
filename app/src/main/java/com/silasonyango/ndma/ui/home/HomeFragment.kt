@@ -116,10 +116,13 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
             )
 
         binding.apply {
-            val countyQuestionnaireAdapter = CountyQuestionnaireAdapter(
-                questionnairesListObject.questionnaireList,
-                this@HomeFragment
-            )
+            val countyQuestionnaireAdapter = activity?.let {
+                CountyQuestionnaireAdapter(
+                    questionnairesListObject.questionnaireList,
+                    this@HomeFragment,
+                    it
+                )
+            }
             val gridLayoutManager = GridLayoutManager(activity, 1)
             countyLevelRV.layoutManager = gridLayoutManager
             countyLevelRV.hasFixedSize()
@@ -147,10 +150,13 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
         System.out.println()
 
         binding.apply {
-            val wealthGroupAdapter = WealthGroupQuestionnaireAdapter(
-                questionnairesListObject.questionnaireList,
-                this@HomeFragment
-            )
+            val wealthGroupAdapter = activity?.let {
+                WealthGroupQuestionnaireAdapter(
+                    questionnairesListObject.questionnaireList,
+                    this@HomeFragment,
+                    it
+                )
+            }
             val gridLayoutManager = GridLayoutManager(activity, 1)
             wealthGroupRV.layoutManager = gridLayoutManager
             wealthGroupRV.hasFixedSize()
@@ -166,6 +172,8 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
                 when (resource.status) {
                     Status.SUCCESS -> {
                         Toast.makeText(activity, "Questionnaire submitted succesfully", Toast.LENGTH_SHORT).show()
+                        populateQuestionnairesList()
+                        populateWealthGroupQuestionnairesList()
                     }
                     Status.ERROR -> {
 

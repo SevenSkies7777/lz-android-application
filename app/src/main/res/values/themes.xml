@@ -31,4 +31,7 @@
     <style name="progressBarBlack" parent="@style/Theme.AppCompat">
         <item name="colorAccent">#000000</item>
     </style>
+    <style name="progressBarGreen" parent="@style/Theme.AppCompat">
+        <item name="colorAccent">#006960</item>
+    </style>
 </resources>

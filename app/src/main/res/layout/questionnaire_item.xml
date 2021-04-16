@@ -16,11 +16,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/transactionImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_checkout"/>
+        <View
+            android:id="@+id/icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:visibility="visible"
+            android:background="@drawable/ic_checkout"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_centerVertical="true"
+            android:theme="@style/progressBarGreen"
+            android:translationZ="10dp"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_marginStart="14dp"
@@ -28,7 +38,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/student_name"
+                android:id="@+id/collectionDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
@@ -56,14 +66,14 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/transaction_amount"
+                        android:id="@+id/icSend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textAlignment="textEnd"
-                        android:text="Completed"
-                        android:textColor="#000"
-                        android:textSize="12sp"
+                        android:text="@string/ic_send"
+                        android:textColor="#0091ff"
+                        android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -79,7 +89,7 @@
 
     <View
         android:layout_marginTop="17dp"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center_vertical"
         android:background="#F2F2F2"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>

@@ -31,7 +31,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="Welcome to the NDMA data collection tool."
+            android:text="Welcome to the Livelihood Zone data collection tool."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_bold"

@@ -3,7 +3,9 @@ package com.silasonyango.ndma.appStore.model
 import com.silasonyango.ndma.ui.county.model.*
 import com.silasonyango.ndma.ui.county.responses.*
 
-class CountyLevelQuestionnaire(val uniqueId: String,val questionnaireName: String){
+class CountyLevelQuestionnaire(val uniqueId: String, var questionnaireName: String){
+    var hasBeenSubmitted: Boolean = false
+
     lateinit var selectedLivelihoodZone: LivelihoodZoneModel
 
     var countyLivelihoodZones: MutableList<LivelihoodZoneModel> = ArrayList()
