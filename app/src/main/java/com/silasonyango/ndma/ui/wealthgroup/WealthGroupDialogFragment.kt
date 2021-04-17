@@ -427,7 +427,7 @@ class WealthGroupDialogFragment : DialogFragment() {
                     if (totalEntry < 100) {
                         hasNoValidationError = false
                         val remainingPercentage = 100 - totalEntry
-                        inflateErrorModal("Percentage error", "Entries are less than 100% by $remainingPercentage")
+                        inflateErrorModal("Percentage error", "Entries are less than 100% by $remainingPercentage %")
                     }
 
                     if (hasNoValidationError) {
@@ -499,103 +499,335 @@ class WealthGroupDialogFragment : DialogFragment() {
             wgPercentFoodConsumptionIncome.apply {
                 foodSourcesPercentNextButton.setOnClickListener {
 
-                    val foodConsumptionResponses = FoodConsumptionResponses()
+                    var hasNoValidationError: Boolean = true
 
-                    foodConsumptionResponses.maizeAndPosho = FoodConsumptionResponseItem(
-                        maizeOwnFarm.text.toString().toDouble(),
-                        maizeMarket.text.toString().toDouble(),
-                        maizeGift.text.toString().toDouble()
-                    )
+                    if (maizeOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        maizeOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (maizeMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        maizeMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (maizeGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        maizeGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (wheatOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        wheatOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (wheatMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        wheatMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (wheatGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        wheatGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (sorghumOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        sorghumOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (sorghumMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        sorghumMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (sorghumGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        sorghumMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (riceOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        riceOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (riceMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        riceMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (riceGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        riceGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (beansOwnfarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        beansOwnfarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (beansMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        beansMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (beansGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        beansGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (pulsesOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        pulsesOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (pulsesMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        pulsesMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (pulsesGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        pulsesGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (vegetablesOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        vegetablesOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (vegetablesMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        vegetablesMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (vegetablesGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        vegetablesGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (fruitsOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fruitsOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (fruitsMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fruitsMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (fruitsGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fruitsGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (whiteRootsOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        whiteRootsOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (whiteRootsMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        whiteRootsMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (whiteRootsGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        whiteRootsGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (meatOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        meatOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (meatMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        meatMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (meatGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        meatGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (milkOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        milkOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (milkMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        milkMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (milkGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        milkGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (fishOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fishOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (fishOwnMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fishOwnMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (fishGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fishGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (eggsOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        eggsOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (eggsMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        eggsMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (eggsGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        eggsGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (cookingFatOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        cookingFatOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (cookingFatMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        cookingFatMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (cookingFatGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        cookingFatGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (spicesOwnFarm.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        spicesOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (spicesMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        spicesMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (spicesGift.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        spicesGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
 
-                    foodConsumptionResponses.wheatOrBarley = FoodConsumptionResponseItem(
-                        wheatOwnFarm.text.toString().toDouble(),
-                        wheatMarket.text.toString().toDouble(),
-                        wheatGift.text.toString().toDouble()
-                    )
+                    if (hasNoValidationError) {
+
+                        val foodConsumptionResponses = FoodConsumptionResponses()
+
+                        foodConsumptionResponses.maizeAndPosho = FoodConsumptionResponseItem(
+                            maizeOwnFarm.text.toString().toDouble(),
+                            maizeMarket.text.toString().toDouble(),
+                            maizeGift.text.toString().toDouble()
+                        )
+
+                        foodConsumptionResponses.wheatOrBarley = FoodConsumptionResponseItem(
+                            wheatOwnFarm.text.toString().toDouble(),
+                            wheatMarket.text.toString().toDouble(),
+                            wheatGift.text.toString().toDouble()
+                        )
 
 
-                    foodConsumptionResponses.sorghumOrMillet = FoodConsumptionResponseItem(
-                        sorghumOwnFarm.text.toString().toDouble(),
-                        sorghumMarket.text.toString().toDouble(),
-                        sorghumGift.text.toString().toDouble()
-                    )
+                        foodConsumptionResponses.sorghumOrMillet = FoodConsumptionResponseItem(
+                            sorghumOwnFarm.text.toString().toDouble(),
+                            sorghumMarket.text.toString().toDouble(),
+                            sorghumGift.text.toString().toDouble()
+                        )
 
-                    foodConsumptionResponses.rice = FoodConsumptionResponseItem(
-                        riceOwnFarm.text.toString().toDouble(),
-                        riceMarket.text.toString().toDouble(),
-                        riceGift.text.toString().toDouble()
-                    )
+                        foodConsumptionResponses.rice = FoodConsumptionResponseItem(
+                            riceOwnFarm.text.toString().toDouble(),
+                            riceMarket.text.toString().toDouble(),
+                            riceGift.text.toString().toDouble()
+                        )
 
-                    foodConsumptionResponses.beans = FoodConsumptionResponseItem(
-                        beansOwnfarm.text.toString().toDouble(),
-                        beansMarket.text.toString().toDouble(),
-                        beansGift.text.toString().toDouble()
-                    )
+                        foodConsumptionResponses.beans = FoodConsumptionResponseItem(
+                            beansOwnfarm.text.toString().toDouble(),
+                            beansMarket.text.toString().toDouble(),
+                            beansGift.text.toString().toDouble()
+                        )
 
-                    foodConsumptionResponses.pulses = FoodConsumptionResponseItem(
-                        pulsesOwnFarm.text.toString().toDouble(),
-                        pulsesMarket.text.toString().toDouble(),
-                        pulsesGift.text.toString().toDouble()
-                    )
+                        foodConsumptionResponses.pulses = FoodConsumptionResponseItem(
+                            pulsesOwnFarm.text.toString().toDouble(),
+                            pulsesMarket.text.toString().toDouble(),
+                            pulsesGift.text.toString().toDouble()
+                        )
 
-                    foodConsumptionResponses.vegetables = FoodConsumptionResponseItem(
-                        vegetablesOwnFarm.text.toString().toDouble(),
-                        vegetablesMarket.text.toString().toDouble(),
-                        vegetablesGift.text.toString().toDouble()
-                    )
+                        foodConsumptionResponses.vegetables = FoodConsumptionResponseItem(
+                            vegetablesOwnFarm.text.toString().toDouble(),
+                            vegetablesMarket.text.toString().toDouble(),
+                            vegetablesGift.text.toString().toDouble()
+                        )
 
-                    foodConsumptionResponses.fruits = FoodConsumptionResponseItem(
-                        fruitsOwnFarm.text.toString().toDouble(),
-                        fruitsMarket.text.toString().toDouble(),
-                        fruitsGift.text.toString().toDouble()
-                    )
+                        foodConsumptionResponses.fruits = FoodConsumptionResponseItem(
+                            fruitsOwnFarm.text.toString().toDouble(),
+                            fruitsMarket.text.toString().toDouble(),
+                            fruitsGift.text.toString().toDouble()
+                        )
 
-                    foodConsumptionResponses.whiteRoots = FoodConsumptionResponseItem(
-                        whiteRootsOwnFarm.text.toString().toDouble(),
-                        whiteRootsMarket.text.toString().toDouble(),
-                        whiteRootsGift.text.toString().toDouble()
-                    )
+                        foodConsumptionResponses.whiteRoots = FoodConsumptionResponseItem(
+                            whiteRootsOwnFarm.text.toString().toDouble(),
+                            whiteRootsMarket.text.toString().toDouble(),
+                            whiteRootsGift.text.toString().toDouble()
+                        )
 
-                    foodConsumptionResponses.meat = FoodConsumptionResponseItem(
-                        meatOwnFarm.text.toString().toDouble(),
-                        meatMarket.text.toString().toDouble(),
-                        meatGift.text.toString().toDouble()
-                    )
+                        foodConsumptionResponses.meat = FoodConsumptionResponseItem(
+                            meatOwnFarm.text.toString().toDouble(),
+                            meatMarket.text.toString().toDouble(),
+                            meatGift.text.toString().toDouble()
+                        )
 
-                    foodConsumptionResponses.milk = FoodConsumptionResponseItem(
-                        milkOwnFarm.text.toString().toDouble(),
-                        milkMarket.text.toString().toDouble(),
-                        milkGift.text.toString().toDouble()
-                    )
+                        foodConsumptionResponses.milk = FoodConsumptionResponseItem(
+                            milkOwnFarm.text.toString().toDouble(),
+                            milkMarket.text.toString().toDouble(),
+                            milkGift.text.toString().toDouble()
+                        )
 
-                    foodConsumptionResponses.fish = FoodConsumptionResponseItem(
-                        fishOwnFarm.text.toString().toDouble(),
-                        fishOwnMarket.text.toString().toDouble(),
-                        fishGift.text.toString().toDouble()
-                    )
+                        foodConsumptionResponses.fish = FoodConsumptionResponseItem(
+                            fishOwnFarm.text.toString().toDouble(),
+                            fishOwnMarket.text.toString().toDouble(),
+                            fishGift.text.toString().toDouble()
+                        )
 
-                    foodConsumptionResponses.eggs = FoodConsumptionResponseItem(
-                        eggsOwnFarm.text.toString().toDouble(),
-                        eggsMarket.text.toString().toDouble(),
-                        eggsGift.text.toString().toDouble()
-                    )
+                        foodConsumptionResponses.eggs = FoodConsumptionResponseItem(
+                            eggsOwnFarm.text.toString().toDouble(),
+                            eggsMarket.text.toString().toDouble(),
+                            eggsGift.text.toString().toDouble()
+                        )
 
-                    foodConsumptionResponses.cookingFats = FoodConsumptionResponseItem(
-                        cookingFatOwnFarm.text.toString().toDouble(),
-                        cookingFatMarket.text.toString().toDouble(),
-                        cookingFatGift.text.toString().toDouble()
-                    )
+                        foodConsumptionResponses.cookingFats = FoodConsumptionResponseItem(
+                            cookingFatOwnFarm.text.toString().toDouble(),
+                            cookingFatMarket.text.toString().toDouble(),
+                            cookingFatGift.text.toString().toDouble()
+                        )
 
-                    foodConsumptionResponses.spices = FoodConsumptionResponseItem(
-                        spicesOwnFarm.text.toString().toDouble(),
-                        spicesMarket.text.toString().toDouble(),
-                        spicesGift.text.toString().toDouble()
-                    )
+                        foodConsumptionResponses.spices = FoodConsumptionResponseItem(
+                            spicesOwnFarm.text.toString().toDouble(),
+                            spicesMarket.text.toString().toDouble(),
+                            spicesGift.text.toString().toDouble()
+                        )
 
-                    wealthGroupQuestionnaire.foodConsumptionResponses = foodConsumptionResponses
+                        wealthGroupQuestionnaire.foodConsumptionResponses = foodConsumptionResponses
 
-                    wgPercentFoodConsumptionIncome.root.visibility = View.GONE
-                    wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
+                        wgPercentFoodConsumptionIncome.root.visibility = View.GONE
+                        wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
+
+                    }
                 }
 
                 foodSourcesPercentBackButton.setOnClickListener {

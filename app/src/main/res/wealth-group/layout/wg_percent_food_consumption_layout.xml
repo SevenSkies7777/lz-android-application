@@ -165,6 +165,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/maizeOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -188,6 +189,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/maizeMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -211,6 +213,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/maizeGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -279,6 +282,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/wheatOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -302,6 +306,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/wheatMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -325,6 +330,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/wheatGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -393,6 +399,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sorghumOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -416,6 +423,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sorghumMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -439,6 +447,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sorghumGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -507,6 +516,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/riceOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -530,6 +540,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/riceMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -553,6 +564,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/riceGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -621,6 +633,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/beansOwnfarmCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -644,6 +657,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/beansMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -667,6 +681,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/beansGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -735,6 +750,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/pulsesOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -758,6 +774,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/pulsesMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -781,6 +798,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/pulsesGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -849,6 +867,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/vegetablesOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -872,6 +891,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/vegetablesMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -895,6 +915,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/vegetablesGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -963,6 +984,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fruitsOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -986,6 +1008,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fruitsMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -1009,6 +1032,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fruitsGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -1077,6 +1101,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/whiteRootsOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="240dp"
                 android:layout_weight=".2"
@@ -1100,6 +1125,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/whiteRootsMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="240dp"
                 android:layout_weight=".2"
@@ -1123,6 +1149,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/whiteRootsGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="240dp"
                 android:layout_weight=".2"
@@ -1191,6 +1218,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/meatOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -1214,6 +1242,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/meatMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -1237,6 +1266,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/meatGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -1305,6 +1335,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/milkOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -1328,6 +1359,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/milkMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -1351,6 +1383,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/milkGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -1419,6 +1452,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fishOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -1442,6 +1476,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fishOwnMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -1465,6 +1500,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fishGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -1533,6 +1569,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/eggsOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -1556,6 +1593,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/eggsMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -1579,6 +1617,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/eggsGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -1647,6 +1686,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/cookingFatOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -1670,6 +1710,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/cookingFatMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -1693,6 +1734,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/cookingFatGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -1761,6 +1803,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/spicesOwnFarmCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -1784,6 +1827,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/spicesMarketCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
@@ -1807,6 +1851,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/spicesGiftCell"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_weight=".2"
