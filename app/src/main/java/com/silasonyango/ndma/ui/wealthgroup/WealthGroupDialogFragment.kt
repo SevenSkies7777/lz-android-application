@@ -405,6 +405,31 @@ class WealthGroupDialogFragment : DialogFragment() {
                         ).show();
                     }
 
+                    val totalEntry =
+                        returnZeroStringIfEmpty(livestockProduction.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            poultryProduction.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(cashCropProduction.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            foodCropProduction.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(casualOrWagedLabour.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            formalWagedLabour.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(fishing.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            huntingAndGathering.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(smallBusiness.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            firewoodOrCharcoal.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(pettyTrading.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            remittance.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(bodaboda.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            beeKeeping.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(sandHarvesting.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            other.text.toString()
+                        ).toDouble()
+
+                    if (totalEntry < 100) {
+                        hasNoValidationError = false
+                        val remainingPercentage = 100 - totalEntry
+                        inflateErrorModal("Percentage error", "Entries are less than 100% by $remainingPercentage")
+                    }
+
                     if (hasNoValidationError) {
 
                         val incomeAndFoodSourceResponses = IncomeAndFoodSourceResponses()
