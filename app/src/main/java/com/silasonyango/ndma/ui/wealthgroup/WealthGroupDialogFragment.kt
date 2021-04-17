@@ -8,6 +8,10 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +51,8 @@ class WealthGroupDialogFragment : DialogFragment() {
     var questionnaireSessionLocation: QuestionnaireSessionLocation? = null
 
     private var subContyDialog: AlertDialog? = null
+
+    private var errorDialog: android.app.AlertDialog? = null
 
     companion object {
 
@@ -95,8 +101,9 @@ class WealthGroupDialogFragment : DialogFragment() {
 
             wealthGroupQuestionnaire.questionnaireGeography = this.questionnaireSessionLocation!!
             wealthGroupQuestionnaire.questionnaireStartDate = Util.getNow()
-            wealthGroupQuestionnaire.questionnaireName = AppStore.getInstance().sessionDetails?.geography?.county?.countyName + "county "+
-                wealthGroupQuestionnaire.questionnaireGeography.selectedLivelihoodZone.livelihoodZoneName + "Livelihood Zone " + wealthGroupQuestionnaire.questionnaireGeography.selectedWealthGroup.wealthGroupName + "questionnaire"
+            wealthGroupQuestionnaire.questionnaireName =
+                AppStore.getInstance().sessionDetails?.geography?.county?.countyName + "county " +
+                        wealthGroupQuestionnaire.questionnaireGeography.selectedLivelihoodZone.livelihoodZoneName + "Livelihood Zone " + wealthGroupQuestionnaire.questionnaireGeography.selectedWealthGroup.wealthGroupName + "questionnaire"
         }
 
         inflateSubCountyModal()
@@ -144,6 +151,80 @@ class WealthGroupDialogFragment : DialogFragment() {
 
             /*Income and food sources navigation*/
             wgIncomeAndFoodSources.apply {
+
+                val textWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            val totalEntry =
+                                returnZeroStringIfEmpty(livestockProduction.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    poultryProduction.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(cashCropProduction.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    foodCropProduction.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(casualOrWagedLabour.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    formalWagedLabour.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(fishing.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    huntingAndGathering.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(smallBusiness.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    firewoodOrCharcoal.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(pettyTrading.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    remittance.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(bodaboda.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    beeKeeping.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(sandHarvesting.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    other.text.toString()
+                                ).toDouble()
+
+                            if (totalEntry > 100) {
+                                errorDialog?.isShowing?.let { isDialogShowing ->
+                                    if (isDialogShowing) {
+                                        return@postDelayed
+                                    }
+                                }
+
+                                inflateErrorModal("Percentage error", "Entries cannot exceed 100%")
+
+                            }
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+                }
+
+                livestockProduction.addTextChangedListener(textWatcher)
+                poultryProduction.addTextChangedListener(textWatcher)
+                cashCropProduction.addTextChangedListener(textWatcher)
+                foodCropProduction.addTextChangedListener(textWatcher)
+                casualOrWagedLabour.addTextChangedListener(textWatcher)
+                formalWagedLabour.addTextChangedListener(textWatcher)
+                fishing.addTextChangedListener(textWatcher)
+                huntingAndGathering.addTextChangedListener(textWatcher)
+                smallBusiness.addTextChangedListener(textWatcher)
+                firewoodOrCharcoal.addTextChangedListener(textWatcher)
+                pettyTrading.addTextChangedListener(textWatcher)
+                remittance.addTextChangedListener(textWatcher)
+                bodaboda.addTextChangedListener(textWatcher)
+                beeKeeping.addTextChangedListener(textWatcher)
+                sandHarvesting.addTextChangedListener(textWatcher)
+                other.addTextChangedListener(textWatcher)
+
+
                 foodSourcesNextButton.setOnClickListener {
 
                     var hasNoValidationError: Boolean = true
@@ -827,184 +908,184 @@ class WealthGroupDialogFragment : DialogFragment() {
                     if (labourLowEducation.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         labourLowEducationCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (labourPoorHealth.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         labourPoorHealthCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (labourFewJobs.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         labourFewJobsCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (labourFarmTime.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         labourFarmTimeCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (labourLowWageRates.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         labourLowWageRatesCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
 
                     if (consumptionHoldings.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         consumptionHoldingsCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (consumptionLackOfCredit.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         consumptionLackOfCreditCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
 
                     if (consumptionHighInputs.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         consumptionHighInputsCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (consumptionLowFertility.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         consumptionLowFertilityCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (consumptionUnreliableWater.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         consumptionUnreliableWaterCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (consumptionLowTechnicalSkills.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         consumptionLowTechnicalSkillsCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (consumptionLowSeedQuality.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         consumptionLowSeedQualityCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (consumptionMarketAccess.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         consumptionMarketAccessCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (consumptionCropPests.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         consumptionCropPestsCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (livestockProductionPasture.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         livestockProductionPastureCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (livestockProductionDrinkingWater.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         livestockProductionDrinkingWaterCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (livestockProductionLowYieldingAnimal.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         livestockProductionLowYieldingAnimalCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (livestockProductionVeterinaryDrugs.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         livestockProductionVeterinaryDrugsCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (livestockProductionPests.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         livestockProductionPestsCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (livestockProductionMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         livestockProductionMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (livestockProductionInsecurity.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         livestockProductionInsecurityCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (fishingLowStocks.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         fishingLowStocksCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (fishingPoorMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         fishingPoorMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (fishingLackOfEquipment.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         fishingLackOfEquipmentCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (fishingCompetition.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         fishingCompetitionCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (fishingLackOfExpertise.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         fishingLackOfExpertiseCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (fishingFishingRights.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         fishingFishingRightsCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (resourceDecline.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         resourceDeclineCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (resourcePopulationPressure.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         resourcePopulationPressureCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (resourceRights.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         resourceRightsCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (resourceLowValue.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         resourceLowValueCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (enterpriseLackOfCapital.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         enterpriseLackOfCapitalCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (enterpriseRedTape.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         enterpriseRedTapeCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (enterpriseTaxes.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         enterpriseTaxesCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (enterpriseMarketAccess.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         enterpriseMarketAccessCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (enterpriseExpertise.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         enterpriseExpertiseCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
 
 
@@ -1019,7 +1100,8 @@ class WealthGroupDialogFragment : DialogFragment() {
                             labourLowEducation.text.toString().toInt()
                         wagedLabourIncomeConstraintsResponses.poorHealth =
                             labourPoorHealth.text.toString().toInt()
-                        wagedLabourIncomeConstraintsResponses.fewJobs = labourFewJobs.text.toString().toInt()
+                        wagedLabourIncomeConstraintsResponses.fewJobs =
+                            labourFewJobs.text.toString().toInt()
                         wagedLabourIncomeConstraintsResponses.tooMuchFarmTime =
                             labourFarmTime.text.toString().toInt()
                         wagedLabourIncomeConstraintsResponses.lowAverageWageRates =
@@ -1178,6 +1260,54 @@ class WealthGroupDialogFragment : DialogFragment() {
             }
         }
     }
+
+    private fun returnZeroStringIfEmpty(inputString: String): String {
+        if (inputString.isNullOrEmpty()) {
+            return "0"
+        }
+        return inputString
+    }
+
+
+    private fun inflateErrorModal(errorTitle: String, errorMessage: String) {
+        val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.error_message_layout, null)
+        val title = v.findViewById<TextView>(R.id.title)
+        val message = v.findViewById<TextView>(R.id.message)
+        val close = v.findViewById<TextView>(R.id.close)
+        title.text = errorTitle
+        message.text = errorMessage
+        close.setOnClickListener {
+            (errorDialog as android.app.AlertDialog).cancel()
+        }
+
+        openErrorModal(v)
+    }
+
+    private fun openErrorModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(activity)
+        builder.setView(v)
+        builder.setCancelable(true)
+        errorDialog = builder.create()
+        (errorDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
+    }
+
+
 
     private fun inflateSubCountyModal() {
         val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
