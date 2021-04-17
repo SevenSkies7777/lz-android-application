@@ -916,9 +916,94 @@ class WealthGroupDialogFragment : DialogFragment() {
                         livestockProductionVeterinaryDrugsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell,null)
                     }
-                    if (livestockProductionVeterinaryDrugs.text.toString().isEmpty()) {
+                    if (livestockProductionPests.text.toString().isEmpty()) {
                         hasNoValidationError = false
-                        livestockProductionVeterinaryDrugsCell.background =
+                        livestockProductionPestsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (livestockProductionMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        livestockProductionMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (livestockProductionInsecurity.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        livestockProductionInsecurityCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (fishingLowStocks.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fishingLowStocksCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (fishingPoorMarket.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fishingPoorMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (fishingLackOfEquipment.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fishingLackOfEquipmentCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (fishingCompetition.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fishingCompetitionCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (fishingLackOfExpertise.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fishingLackOfExpertiseCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (fishingFishingRights.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fishingFishingRightsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (resourceDecline.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        resourceDeclineCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (resourcePopulationPressure.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        resourcePopulationPressureCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (resourceRights.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        resourceRightsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (resourceLowValue.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        resourceLowValueCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (enterpriseLackOfCapital.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        enterpriseLackOfCapitalCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (enterpriseRedTape.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        enterpriseRedTapeCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (enterpriseTaxes.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        enterpriseTaxesCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (enterpriseMarketAccess.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        enterpriseMarketAccessCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (enterpriseExpertise.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        enterpriseExpertiseCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell,null)
                     }
 
@@ -931,14 +1016,14 @@ class WealthGroupDialogFragment : DialogFragment() {
                             WagedLabourIncomeConstraintsResponses()
 
                         wagedLabourIncomeConstraintsResponses.lowEducation =
-                            labourLowEducation.toString().toInt()
+                            labourLowEducation.text.toString().toInt()
                         wagedLabourIncomeConstraintsResponses.poorHealth =
-                            labourPoorHealth.toString().toInt()
-                        wagedLabourIncomeConstraintsResponses.fewJobs = labourFewJobs.toString().toInt()
+                            labourPoorHealth.text.toString().toInt()
+                        wagedLabourIncomeConstraintsResponses.fewJobs = labourFewJobs.text.toString().toInt()
                         wagedLabourIncomeConstraintsResponses.tooMuchFarmTime =
-                            labourFarmTime.toString().toInt()
+                            labourFarmTime.text.toString().toInt()
                         wagedLabourIncomeConstraintsResponses.lowAverageWageRates =
-                            labourLowWageRates.toString().toInt()
+                            labourLowWageRates.text.toString().toInt()
 
                         constraintResponses.wagedLabourIncomeConstraintsResponses =
                             wagedLabourIncomeConstraintsResponses
@@ -948,23 +1033,23 @@ class WealthGroupDialogFragment : DialogFragment() {
                             CropProductionIncomeConstraintsResponses()
 
                         cropProductionIncomeConstraintsResponses.smallLandHoldings =
-                            consumptionHoldings.toString().toInt()
+                            consumptionHoldings.text.toString().toInt()
                         cropProductionIncomeConstraintsResponses.lackOfCredit =
-                            consumptionLackOfCredit.toString().toInt()
+                            consumptionLackOfCredit.text.toString().toInt()
                         cropProductionIncomeConstraintsResponses.highInputCost =
-                            consumptionHighInputs.toString().toInt()
+                            consumptionHighInputs.text.toString().toInt()
                         cropProductionIncomeConstraintsResponses.lowLandFertility =
-                            consumptionLowFertility.toString().toInt()
+                            consumptionLowFertility.text.toString().toInt()
                         cropProductionIncomeConstraintsResponses.lackOfReliableWater =
-                            consumptionUnreliableWater.toString().toInt()
+                            consumptionUnreliableWater.text.toString().toInt()
                         cropProductionIncomeConstraintsResponses.lowTechnicalSkills =
-                            consumptionLowTechnicalSkills.toString().toInt()
+                            consumptionLowTechnicalSkills.text.toString().toInt()
                         cropProductionIncomeConstraintsResponses.lowQualitySeed =
-                            consumptionLowSeedQuality.toString().toInt()
+                            consumptionLowSeedQuality.text.toString().toInt()
                         cropProductionIncomeConstraintsResponses.lackOfMarketAccess =
-                            consumptionMarketAccess.toString().toInt()
+                            consumptionMarketAccess.text.toString().toInt()
                         cropProductionIncomeConstraintsResponses.endemicCropPests =
-                            consumptionCropPests.toString().toInt()
+                            consumptionCropPests.text.toString().toInt()
 
                         constraintResponses.cropProductionIncomeConstraintsResponses =
                             cropProductionIncomeConstraintsResponses
@@ -973,19 +1058,19 @@ class WealthGroupDialogFragment : DialogFragment() {
                             LivestockProductionIncomeConstraintsResponses()
 
                         livestockProductionIncomeConstraintsResponses.lackOfPasture =
-                            livestockProductionPasture.toString().toInt()
+                            livestockProductionPasture.text.toString().toInt()
                         livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater =
-                            livestockProductionDrinkingWater.toString().toInt()
+                            livestockProductionDrinkingWater.text.toString().toInt()
                         livestockProductionIncomeConstraintsResponses.lowYieldingAnimal =
-                            livestockProductionLowYieldingAnimal.toString().toInt()
+                            livestockProductionLowYieldingAnimal.text.toString().toInt()
                         livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs =
-                            livestockProductionVeterinaryDrugs.toString().toInt()
+                            livestockProductionVeterinaryDrugs.text.toString().toInt()
                         livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases =
-                            livestockProductionPests.toString().toInt()
+                            livestockProductionPests.text.toString().toInt()
                         livestockProductionIncomeConstraintsResponses.lackofMarket =
-                            livestockProductionMarket.toString().toInt()
+                            livestockProductionMarket.text.toString().toInt()
                         livestockProductionIncomeConstraintsResponses.insecurity =
-                            livestockProductionInsecurity.toString().toInt()
+                            livestockProductionInsecurity.text.toString().toInt()
 
                         constraintResponses.livestockProductionIncomeConstraintsResponses =
                             livestockProductionIncomeConstraintsResponses
@@ -994,17 +1079,17 @@ class WealthGroupDialogFragment : DialogFragment() {
                         val fishingIncomeConstraintsResponses = FishingIncomeConstraintsResponses()
 
                         fishingIncomeConstraintsResponses.lowFishStocks =
-                            fishingLowStocks.toString().toInt()
+                            fishingLowStocks.text.toString().toInt()
                         fishingIncomeConstraintsResponses.poorMarket =
-                            fishingPoorMarket.toString().toInt()
+                            fishingPoorMarket.text.toString().toInt()
                         fishingIncomeConstraintsResponses.lackOfEquipment =
-                            fishingLackOfEquipment.toString().toInt()
+                            fishingLackOfEquipment.text.toString().toInt()
                         fishingIncomeConstraintsResponses.extremeCompetition =
-                            fishingCompetition.toString().toInt()
+                            fishingCompetition.text.toString().toInt()
                         fishingIncomeConstraintsResponses.lackOfExpertise =
-                            fishingLackOfExpertise.toString().toInt()
+                            fishingLackOfExpertise.text.toString().toInt()
                         fishingIncomeConstraintsResponses.fishingRightsRestrictions =
-                            fishingFishingRights.toString().toInt()
+                            fishingFishingRights.text.toString().toInt()
 
                         constraintResponses.fishingIncomeConstraintsResponses =
                             fishingIncomeConstraintsResponses
@@ -1013,13 +1098,13 @@ class WealthGroupDialogFragment : DialogFragment() {
                             NaturalResourceIncomeConstraintsResponses()
 
                         naturalResourceIncomeConstraintsResponses.decliningNaturalResources =
-                            resourceDecline.toString().toInt()
+                            resourceDecline.text.toString().toInt()
                         naturalResourceIncomeConstraintsResponses.populationPressure =
-                            resourcePopulationPressure.toString().toInt()
+                            resourcePopulationPressure.text.toString().toInt()
                         naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights =
-                            resourceRights.toString().toInt()
+                            resourceRights.text.toString().toInt()
                         naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts =
-                            resourceLowValue.toString().toInt()
+                            resourceLowValue.text.toString().toInt()
 
                         constraintResponses.naturalResourceIncomeConstraintsResponses =
                             naturalResourceIncomeConstraintsResponses
@@ -1028,17 +1113,15 @@ class WealthGroupDialogFragment : DialogFragment() {
                             SmallEnterpriseIncomeConstraintsResponses()
 
                         smallEnterpriseIncomeConstraintsResponses.lackOfCapital =
-                            enterpriseLackOfCapital.toString().toInt()
+                            enterpriseLackOfCapital.text.toString().toInt()
                         smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape =
-                            enterpriseRedTape.toString().toInt()
+                            enterpriseRedTape.text.toString().toInt()
                         smallEnterpriseIncomeConstraintsResponses.tooManyTaxes =
-                            enterpriseTaxes.toString().toInt()
-                        smallEnterpriseIncomeConstraintsResponses.tooManyTaxes =
-                            enterpriseTaxes.toString().toInt()
+                            enterpriseTaxes.text.toString().toInt()
                         smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket =
-                            enterpriseMarketAccess.toString().toInt()
+                            enterpriseMarketAccess.text.toString().toInt()
                         smallEnterpriseIncomeConstraintsResponses.lackOfExpertise =
-                            enterpriseExpertise.toString().toInt()
+                            enterpriseExpertise.text.toString().toInt()
 
                         constraintResponses.smallEnterpriseIncomeConstraintsResponses =
                             smallEnterpriseIncomeConstraintsResponses
