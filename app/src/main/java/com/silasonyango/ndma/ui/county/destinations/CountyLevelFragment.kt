@@ -333,7 +333,15 @@ class CountyLevelFragment : DialogFragment(),
                                 ).toDouble()
 
                             if (totalEntry > 100) {
+                                if (errorDialog != null) {
+                                    errorDialog?.isShowing?.let { isDialogShowing->
+                                        if (isDialogShowing) {
+                                            return@postDelayed
+                                        }
+                                    }
+                                }
                                 inflateErrorModal("Percentage error", "Entries cannot exceed 100%")
+
                             }
 
 
@@ -361,6 +369,7 @@ class CountyLevelFragment : DialogFragment(),
                 etMediumResponse.addTextChangedListener(textWatcher)
                 etBetterOffResponse.addTextChangedListener(textWatcher)
                 locationNextButton.setOnClickListener {
+
 
                     val wealthGroupResponse = WealthGroupResponse(
                         returnZeroStringIfEmpty(etVerPoorResponse.text.toString()).toDouble(),

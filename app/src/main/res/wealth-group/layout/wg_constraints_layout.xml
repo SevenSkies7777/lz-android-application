@@ -120,6 +120,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/labourLowEducationCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -168,6 +169,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/labourPoorHealthCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -216,6 +218,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/labourFewJobsCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -264,6 +267,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/labourFarmTimeCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -312,6 +316,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/labourLowWageRatesCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -382,6 +387,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/consumptionHoldingsCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -430,6 +436,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/consumptionLackOfCreditCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -478,6 +485,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/consumptionHighInputsCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -526,6 +534,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/consumptionLowFertilityCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -574,6 +583,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/consumptionUnreliableWaterCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -622,6 +632,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/consumptionLowTechnicalSkillsCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -670,6 +681,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/consumptionLowSeedQualityCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -718,6 +730,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/consumptionMarketAccessCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -766,6 +779,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/consumptionCropPestsCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -880,6 +894,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/livestockProductionPastureCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -928,6 +943,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/livestockProductionDrinkingWaterCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -976,6 +992,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/livestockProductionLowYieldingAnimalCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -1024,6 +1041,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/livestockProductionVeterinaryDrugsCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"

@@ -822,129 +822,234 @@ class WealthGroupDialogFragment : DialogFragment() {
 
                 constraintsNextButton.setOnClickListener {
 
-                    val constraintResponses = ConstraintsResponses()
+                    var hasNoValidationError: Boolean = true
 
-                    val wagedLabourIncomeConstraintsResponses =
-                        WagedLabourIncomeConstraintsResponses()
+                    if (labourLowEducation.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        labourLowEducationCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (labourPoorHealth.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        labourPoorHealthCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (labourFewJobs.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        labourFewJobsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (labourFarmTime.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        labourFarmTimeCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (labourLowWageRates.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        labourLowWageRatesCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
 
-                    wagedLabourIncomeConstraintsResponses.lowEducation =
-                        labourLowEducation.toString().toInt()
-                    wagedLabourIncomeConstraintsResponses.poorHealth =
-                        labourPoorHealth.toString().toInt()
-                    wagedLabourIncomeConstraintsResponses.fewJobs = labourFewJobs.toString().toInt()
-                    wagedLabourIncomeConstraintsResponses.tooMuchFarmTime =
-                        labourFarmTime.toString().toInt()
-                    wagedLabourIncomeConstraintsResponses.lowAverageWageRates =
-                        labourLowWageRates.toString().toInt()
+                    if (consumptionHoldings.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        consumptionHoldingsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (consumptionLackOfCredit.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        consumptionLackOfCreditCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
 
-                    constraintResponses.wagedLabourIncomeConstraintsResponses =
-                        wagedLabourIncomeConstraintsResponses
-
-
-                    val cropProductionIncomeConstraintsResponses =
-                        CropProductionIncomeConstraintsResponses()
-
-                    cropProductionIncomeConstraintsResponses.smallLandHoldings =
-                        consumptionHoldings.toString().toInt()
-                    cropProductionIncomeConstraintsResponses.lackOfCredit =
-                        consumptionLackOfCredit.toString().toInt()
-                    cropProductionIncomeConstraintsResponses.highInputCost =
-                        consumptionHighInputs.toString().toInt()
-                    cropProductionIncomeConstraintsResponses.lowLandFertility =
-                        consumptionLowFertility.toString().toInt()
-                    cropProductionIncomeConstraintsResponses.lackOfReliableWater =
-                        consumptionUnreliableWater.toString().toInt()
-                    cropProductionIncomeConstraintsResponses.lowTechnicalSkills =
-                        consumptionLowTechnicalSkills.toString().toInt()
-                    cropProductionIncomeConstraintsResponses.lowQualitySeed =
-                        consumptionLowSeedQuality.toString().toInt()
-                    cropProductionIncomeConstraintsResponses.lackOfMarketAccess =
-                        consumptionMarketAccess.toString().toInt()
-                    cropProductionIncomeConstraintsResponses.endemicCropPests =
-                        consumptionCropPests.toString().toInt()
-
-                    constraintResponses.cropProductionIncomeConstraintsResponses =
-                        cropProductionIncomeConstraintsResponses
-
-                    val livestockProductionIncomeConstraintsResponses =
-                        LivestockProductionIncomeConstraintsResponses()
-
-                    livestockProductionIncomeConstraintsResponses.lackOfPasture =
-                        livestockProductionPasture.toString().toInt()
-                    livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater =
-                        livestockProductionDrinkingWater.toString().toInt()
-                    livestockProductionIncomeConstraintsResponses.lowYieldingAnimal =
-                        livestockProductionLowYieldingAnimal.toString().toInt()
-                    livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs =
-                        livestockProductionVeterinaryDrugs.toString().toInt()
-                    livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases =
-                        livestockProductionPests.toString().toInt()
-                    livestockProductionIncomeConstraintsResponses.lackofMarket =
-                        livestockProductionMarket.toString().toInt()
-                    livestockProductionIncomeConstraintsResponses.insecurity =
-                        livestockProductionInsecurity.toString().toInt()
-
-                    constraintResponses.livestockProductionIncomeConstraintsResponses =
-                        livestockProductionIncomeConstraintsResponses
-
-
-                    val fishingIncomeConstraintsResponses = FishingIncomeConstraintsResponses()
-
-                    fishingIncomeConstraintsResponses.lowFishStocks =
-                        fishingLowStocks.toString().toInt()
-                    fishingIncomeConstraintsResponses.poorMarket =
-                        fishingPoorMarket.toString().toInt()
-                    fishingIncomeConstraintsResponses.lackOfEquipment =
-                        fishingLackOfEquipment.toString().toInt()
-                    fishingIncomeConstraintsResponses.extremeCompetition =
-                        fishingCompetition.toString().toInt()
-                    fishingIncomeConstraintsResponses.lackOfExpertise =
-                        fishingLackOfExpertise.toString().toInt()
-                    fishingIncomeConstraintsResponses.fishingRightsRestrictions =
-                        fishingFishingRights.toString().toInt()
-
-                    constraintResponses.fishingIncomeConstraintsResponses =
-                        fishingIncomeConstraintsResponses
-
-                    val naturalResourceIncomeConstraintsResponses =
-                        NaturalResourceIncomeConstraintsResponses()
-
-                    naturalResourceIncomeConstraintsResponses.decliningNaturalResources =
-                        resourceDecline.toString().toInt()
-                    naturalResourceIncomeConstraintsResponses.populationPressure =
-                        resourcePopulationPressure.toString().toInt()
-                    naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights =
-                        resourceRights.toString().toInt()
-                    naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts =
-                        resourceLowValue.toString().toInt()
-
-                    constraintResponses.naturalResourceIncomeConstraintsResponses =
-                        naturalResourceIncomeConstraintsResponses
-
-                    val smallEnterpriseIncomeConstraintsResponses =
-                        SmallEnterpriseIncomeConstraintsResponses()
-
-                    smallEnterpriseIncomeConstraintsResponses.lackOfCapital =
-                        enterpriseLackOfCapital.toString().toInt()
-                    smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape =
-                        enterpriseRedTape.toString().toInt()
-                    smallEnterpriseIncomeConstraintsResponses.tooManyTaxes =
-                        enterpriseTaxes.toString().toInt()
-                    smallEnterpriseIncomeConstraintsResponses.tooManyTaxes =
-                        enterpriseTaxes.toString().toInt()
-                    smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket =
-                        enterpriseMarketAccess.toString().toInt()
-                    smallEnterpriseIncomeConstraintsResponses.lackOfExpertise =
-                        enterpriseExpertise.toString().toInt()
-
-                    constraintResponses.smallEnterpriseIncomeConstraintsResponses =
-                        smallEnterpriseIncomeConstraintsResponses
-
-                    wealthGroupQuestionnaire.constraintsResponses = constraintResponses
+                    if (consumptionHighInputs.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        consumptionHighInputsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (consumptionLowFertility.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        consumptionLowFertilityCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (consumptionUnreliableWater.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        consumptionUnreliableWaterCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (consumptionLowTechnicalSkills.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        consumptionLowTechnicalSkillsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (consumptionLowSeedQuality.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        consumptionLowSeedQualityCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (consumptionMarketAccess.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        consumptionMarketAccessCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (consumptionCropPests.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        consumptionCropPestsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (livestockProductionPasture.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        livestockProductionPastureCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (livestockProductionDrinkingWater.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        livestockProductionDrinkingWaterCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (livestockProductionLowYieldingAnimal.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        livestockProductionLowYieldingAnimalCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (livestockProductionVeterinaryDrugs.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        livestockProductionVeterinaryDrugsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
+                    if (livestockProductionVeterinaryDrugs.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        livestockProductionVeterinaryDrugsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                    }
 
 
-                    wgCompletionPage.root.visibility = View.VISIBLE
-                    wgConstraints.root.visibility = View.GONE
+                    if (hasNoValidationError) {
+
+                        val constraintResponses = ConstraintsResponses()
+
+                        val wagedLabourIncomeConstraintsResponses =
+                            WagedLabourIncomeConstraintsResponses()
+
+                        wagedLabourIncomeConstraintsResponses.lowEducation =
+                            labourLowEducation.toString().toInt()
+                        wagedLabourIncomeConstraintsResponses.poorHealth =
+                            labourPoorHealth.toString().toInt()
+                        wagedLabourIncomeConstraintsResponses.fewJobs = labourFewJobs.toString().toInt()
+                        wagedLabourIncomeConstraintsResponses.tooMuchFarmTime =
+                            labourFarmTime.toString().toInt()
+                        wagedLabourIncomeConstraintsResponses.lowAverageWageRates =
+                            labourLowWageRates.toString().toInt()
+
+                        constraintResponses.wagedLabourIncomeConstraintsResponses =
+                            wagedLabourIncomeConstraintsResponses
+
+
+                        val cropProductionIncomeConstraintsResponses =
+                            CropProductionIncomeConstraintsResponses()
+
+                        cropProductionIncomeConstraintsResponses.smallLandHoldings =
+                            consumptionHoldings.toString().toInt()
+                        cropProductionIncomeConstraintsResponses.lackOfCredit =
+                            consumptionLackOfCredit.toString().toInt()
+                        cropProductionIncomeConstraintsResponses.highInputCost =
+                            consumptionHighInputs.toString().toInt()
+                        cropProductionIncomeConstraintsResponses.lowLandFertility =
+                            consumptionLowFertility.toString().toInt()
+                        cropProductionIncomeConstraintsResponses.lackOfReliableWater =
+                            consumptionUnreliableWater.toString().toInt()
+                        cropProductionIncomeConstraintsResponses.lowTechnicalSkills =
+                            consumptionLowTechnicalSkills.toString().toInt()
+                        cropProductionIncomeConstraintsResponses.lowQualitySeed =
+                            consumptionLowSeedQuality.toString().toInt()
+                        cropProductionIncomeConstraintsResponses.lackOfMarketAccess =
+                            consumptionMarketAccess.toString().toInt()
+                        cropProductionIncomeConstraintsResponses.endemicCropPests =
+                            consumptionCropPests.toString().toInt()
+
+                        constraintResponses.cropProductionIncomeConstraintsResponses =
+                            cropProductionIncomeConstraintsResponses
+
+                        val livestockProductionIncomeConstraintsResponses =
+                            LivestockProductionIncomeConstraintsResponses()
+
+                        livestockProductionIncomeConstraintsResponses.lackOfPasture =
+                            livestockProductionPasture.toString().toInt()
+                        livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater =
+                            livestockProductionDrinkingWater.toString().toInt()
+                        livestockProductionIncomeConstraintsResponses.lowYieldingAnimal =
+                            livestockProductionLowYieldingAnimal.toString().toInt()
+                        livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs =
+                            livestockProductionVeterinaryDrugs.toString().toInt()
+                        livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases =
+                            livestockProductionPests.toString().toInt()
+                        livestockProductionIncomeConstraintsResponses.lackofMarket =
+                            livestockProductionMarket.toString().toInt()
+                        livestockProductionIncomeConstraintsResponses.insecurity =
+                            livestockProductionInsecurity.toString().toInt()
+
+                        constraintResponses.livestockProductionIncomeConstraintsResponses =
+                            livestockProductionIncomeConstraintsResponses
+
+
+                        val fishingIncomeConstraintsResponses = FishingIncomeConstraintsResponses()
+
+                        fishingIncomeConstraintsResponses.lowFishStocks =
+                            fishingLowStocks.toString().toInt()
+                        fishingIncomeConstraintsResponses.poorMarket =
+                            fishingPoorMarket.toString().toInt()
+                        fishingIncomeConstraintsResponses.lackOfEquipment =
+                            fishingLackOfEquipment.toString().toInt()
+                        fishingIncomeConstraintsResponses.extremeCompetition =
+                            fishingCompetition.toString().toInt()
+                        fishingIncomeConstraintsResponses.lackOfExpertise =
+                            fishingLackOfExpertise.toString().toInt()
+                        fishingIncomeConstraintsResponses.fishingRightsRestrictions =
+                            fishingFishingRights.toString().toInt()
+
+                        constraintResponses.fishingIncomeConstraintsResponses =
+                            fishingIncomeConstraintsResponses
+
+                        val naturalResourceIncomeConstraintsResponses =
+                            NaturalResourceIncomeConstraintsResponses()
+
+                        naturalResourceIncomeConstraintsResponses.decliningNaturalResources =
+                            resourceDecline.toString().toInt()
+                        naturalResourceIncomeConstraintsResponses.populationPressure =
+                            resourcePopulationPressure.toString().toInt()
+                        naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights =
+                            resourceRights.toString().toInt()
+                        naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts =
+                            resourceLowValue.toString().toInt()
+
+                        constraintResponses.naturalResourceIncomeConstraintsResponses =
+                            naturalResourceIncomeConstraintsResponses
+
+                        val smallEnterpriseIncomeConstraintsResponses =
+                            SmallEnterpriseIncomeConstraintsResponses()
+
+                        smallEnterpriseIncomeConstraintsResponses.lackOfCapital =
+                            enterpriseLackOfCapital.toString().toInt()
+                        smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape =
+                            enterpriseRedTape.toString().toInt()
+                        smallEnterpriseIncomeConstraintsResponses.tooManyTaxes =
+                            enterpriseTaxes.toString().toInt()
+                        smallEnterpriseIncomeConstraintsResponses.tooManyTaxes =
+                            enterpriseTaxes.toString().toInt()
+                        smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket =
+                            enterpriseMarketAccess.toString().toInt()
+                        smallEnterpriseIncomeConstraintsResponses.lackOfExpertise =
+                            enterpriseExpertise.toString().toInt()
+
+                        constraintResponses.smallEnterpriseIncomeConstraintsResponses =
+                            smallEnterpriseIncomeConstraintsResponses
+
+                        wealthGroupQuestionnaire.constraintsResponses = constraintResponses
+
+
+                        wgCompletionPage.root.visibility = View.VISIBLE
+                        wgConstraints.root.visibility = View.GONE
+
+                    }
                 }
             }
 

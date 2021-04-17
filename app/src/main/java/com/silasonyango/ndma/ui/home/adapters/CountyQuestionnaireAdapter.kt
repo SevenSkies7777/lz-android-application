@@ -19,14 +19,10 @@ class CountyQuestionnaireAdapter(
     val countyQuestionnaireAdapterCallBack: CountyQuestionnaireAdapterCallBack,
     val context: Context
 ) : RecyclerView.Adapter<CountyQuestionnaireAdapter.ViewHolder>() {
-    lateinit var fontAwesome: Typeface
+    val fontAwesome: Typeface = Typeface.createFromAsset(context.getAssets(), "fontawesome-webfont.ttf")
 
     interface CountyQuestionnaireAdapterCallBack {
         fun onCountyLevelQuestionnaireItemClicked(countyLevelQuestionnaire: CountyLevelQuestionnaire)
-    }
-
-    init {
-        fontAwesome = Typeface.createFromAsset(context.getAssets(), "fontawesome-webfont.ttf")
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
