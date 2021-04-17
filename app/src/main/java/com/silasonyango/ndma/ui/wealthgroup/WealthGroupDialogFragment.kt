@@ -427,7 +427,10 @@ class WealthGroupDialogFragment : DialogFragment() {
                     if (totalEntry < 100) {
                         hasNoValidationError = false
                         val remainingPercentage = 100 - totalEntry
-                        inflateErrorModal("Percentage error", "Entries are less than 100% by $remainingPercentage %")
+                        inflateErrorModal(
+                            "Percentage error",
+                            "Entries are less than 100% by $remainingPercentage %"
+                        )
                     }
 
                     if (hasNoValidationError) {
@@ -497,6 +500,62 @@ class WealthGroupDialogFragment : DialogFragment() {
             * */
 
             wgPercentFoodConsumptionIncome.apply {
+
+                var hasNoPercentageError: Boolean = true
+
+                val textWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            if (editable == maizeOwnFarm.editableText ||
+                                editable == maizeMarket.editableText ||
+                                editable == maizeGift.editableText
+                            ) {
+                                val totalPercentage = returnZeroStringIfEmpty(maizeOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    maizeMarket.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(maizeGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    maizeOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    maizeMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    maizeGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    maizeOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    maizeMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    maizeGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+                }
+
+                maizeOwnFarm.addTextChangedListener(textWatcher)
+                maizeMarket.addTextChangedListener(textWatcher)
+                maizeGift.addTextChangedListener(textWatcher)
                 foodSourcesPercentNextButton.setOnClickListener {
 
                     var hasNoValidationError: Boolean = true
@@ -504,230 +563,230 @@ class WealthGroupDialogFragment : DialogFragment() {
                     if (maizeOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         maizeOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (maizeMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         maizeMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (maizeGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         maizeGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (wheatOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         wheatOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (wheatMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         wheatMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (wheatGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         wheatGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (sorghumOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         sorghumOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (sorghumMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         sorghumMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (sorghumGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         sorghumMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (riceOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         riceOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (riceMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         riceMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (riceGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         riceGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (beansOwnfarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         beansOwnfarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (beansMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         beansMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (beansGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         beansGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (pulsesOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         pulsesOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (pulsesMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         pulsesMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (pulsesGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         pulsesGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (vegetablesOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         vegetablesOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (vegetablesMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         vegetablesMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (vegetablesGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         vegetablesGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (fruitsOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         fruitsOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (fruitsMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         fruitsMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (fruitsGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         fruitsGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (whiteRootsOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         whiteRootsOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (whiteRootsMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         whiteRootsMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (whiteRootsGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         whiteRootsGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (meatOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         meatOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (meatMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         meatMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (meatGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         meatGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (milkOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         milkOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (milkMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         milkMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (milkGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         milkGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (fishOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         fishOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (fishOwnMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         fishOwnMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (fishGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         fishGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (eggsOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         eggsOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (eggsMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         eggsMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (eggsGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         eggsGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (cookingFatOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         cookingFatOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (cookingFatMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         cookingFatMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (cookingFatGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         cookingFatGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (spicesOwnFarm.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         spicesOwnFarmCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (spicesMarket.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         spicesMarketCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (spicesGift.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         spicesGiftCell.background =
-                            context?.resources?.getDrawable(R.drawable.error_cell,null)
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
 
-                    if (hasNoValidationError) {
+                    if (hasNoValidationError && hasNoPercentageError) {
 
                         val foodConsumptionResponses = FoodConsumptionResponses()
 
@@ -1563,7 +1622,6 @@ class WealthGroupDialogFragment : DialogFragment() {
         }
 
     }
-
 
 
     private fun inflateSubCountyModal() {

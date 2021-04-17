@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="inactive">#B6BCC4</color>
+    <color name="red_shade">#f8e0df</color>
 </resources>
