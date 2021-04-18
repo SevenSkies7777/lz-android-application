@@ -107,6 +107,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fullyNomadicCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -155,6 +156,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/semiNomadicCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -203,6 +205,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/occasionalNomadicCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -251,6 +254,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/outMigrantLabourCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -299,6 +303,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/inMigrantLabourCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -347,6 +352,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fullySettledCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"
@@ -395,6 +401,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/internallyDisplacedCell"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight=".2"

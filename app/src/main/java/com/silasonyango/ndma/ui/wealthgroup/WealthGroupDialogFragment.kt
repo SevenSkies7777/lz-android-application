@@ -1652,26 +1652,127 @@ class WealthGroupDialogFragment : DialogFragment() {
                     wgMigrationPatterns.root.visibility = View.GONE
                 }
 
+
+                val textWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            val totalEntry =
+                                returnZeroStringIfEmpty(fullyNomadic.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    semiNomadic.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(occasionalNomadic.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    outMigrantLabour.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(inMigrantLabour.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    fullySettled.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(internallyDisplaced.text.toString()).toDouble()
+
+                            if (totalEntry > 100) {
+                                val excessValue = totalEntry - 100.0
+                                errorDialog?.isShowing?.let { isDialogShowing ->
+                                    if (isDialogShowing) {
+                                        return@postDelayed
+                                    }
+                                }
+
+                                inflateErrorModal("Percentage error", "Entries exceed 100% by $excessValue")
+
+                            }
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+                }
+
+                fullyNomadic.addTextChangedListener(textWatcher)
+                semiNomadic.addTextChangedListener(textWatcher)
+                occasionalNomadic.addTextChangedListener(textWatcher)
+                outMigrantLabour.addTextChangedListener(textWatcher)
+                inMigrantLabour.addTextChangedListener(textWatcher)
+                fullySettled.addTextChangedListener(textWatcher)
+                internallyDisplaced.addTextChangedListener(textWatcher)
+
                 migrationPatternsNextButton.setOnClickListener {
 
-                    val migrationPatternResponses = MigrationPatternResponses()
+                    var hasNoValidationError: Boolean = true
 
-                    migrationPatternResponses.fullyNomadic = fullyNomadic.text.toString().toDouble()
-                    migrationPatternResponses.semiNomadic = semiNomadic.text.toString().toDouble()
-                    migrationPatternResponses.occasionalNomadic =
-                        occasionalNomadic.text.toString().toDouble()
-                    migrationPatternResponses.outMigrantLabour =
-                        outMigrantLabour.text.toString().toDouble()
-                    migrationPatternResponses.inMigrantLabour =
-                        inMigrantLabour.text.toString().toDouble()
-                    migrationPatternResponses.fullysettled = fullySettled.text.toString().toDouble()
-                    migrationPatternResponses.internallyDisplaced =
-                        internallyDisplaced.text.toString().toDouble()
+                    if (fullyNomadic.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fullyNomadicCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (semiNomadic.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        semiNomadicCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (occasionalNomadic.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        occasionalNomadicCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (outMigrantLabour.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        outMigrantLabourCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (inMigrantLabour.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        inMigrantLabourCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (fullySettled.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fullySettledCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (internallyDisplaced.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        internallyDisplacedCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
 
-                    wealthGroupQuestionnaire.migrationPatternResponses = migrationPatternResponses
+                    if (hasNoValidationError) {
 
-                    wgConstraints.root.visibility = View.VISIBLE
-                    wgMigrationPatterns.root.visibility = View.GONE
+                        val migrationPatternResponses = MigrationPatternResponses()
+
+                        migrationPatternResponses.fullyNomadic =
+                            fullyNomadic.text.toString().toDouble()
+                        migrationPatternResponses.semiNomadic =
+                            semiNomadic.text.toString().toDouble()
+                        migrationPatternResponses.occasionalNomadic =
+                            occasionalNomadic.text.toString().toDouble()
+                        migrationPatternResponses.outMigrantLabour =
+                            outMigrantLabour.text.toString().toDouble()
+                        migrationPatternResponses.inMigrantLabour =
+                            inMigrantLabour.text.toString().toDouble()
+                        migrationPatternResponses.fullysettled =
+                            fullySettled.text.toString().toDouble()
+                        migrationPatternResponses.internallyDisplaced =
+                            internallyDisplaced.text.toString().toDouble()
+
+                        wealthGroupQuestionnaire.migrationPatternResponses =
+                            migrationPatternResponses
+
+                        wgConstraints.root.visibility = View.VISIBLE
+                        wgMigrationPatterns.root.visibility = View.GONE
+
+                    }
                 }
             }
 
