@@ -511,9 +511,10 @@ class WealthGroupDialogFragment : DialogFragment() {
                                 editable == maizeMarket.editableText ||
                                 editable == maizeGift.editableText
                             ) {
-                                val totalPercentage = returnZeroStringIfEmpty(maizeOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                                    maizeMarket.text.toString()
-                                ).toDouble() + returnZeroStringIfEmpty(maizeGift.text.toString()).toDouble()
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(maizeOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        maizeMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(maizeGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
                                     maizeOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.error_cell, null)
@@ -528,6 +529,34 @@ class WealthGroupDialogFragment : DialogFragment() {
                                     maizeMarketCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     maizeGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+
+                            if (editable == wheatOwnFarm.editableText ||
+                                editable == wheatMarket.editableText ||
+                                editable == wheatGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(wheatOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        wheatMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(wheatGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    wheatOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    wheatMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    wheatGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    wheatOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    wheatMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    wheatGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     hasNoPercentageError = true
                                 }
@@ -556,6 +585,10 @@ class WealthGroupDialogFragment : DialogFragment() {
                 maizeOwnFarm.addTextChangedListener(textWatcher)
                 maizeMarket.addTextChangedListener(textWatcher)
                 maizeGift.addTextChangedListener(textWatcher)
+
+                wheatOwnFarm.addTextChangedListener(textWatcher)
+                wheatMarket.addTextChangedListener(textWatcher)
+                wheatGift.addTextChangedListener(textWatcher)
                 foodSourcesPercentNextButton.setOnClickListener {
 
                     var hasNoValidationError: Boolean = true
