@@ -562,6 +562,384 @@ class WealthGroupDialogFragment : DialogFragment() {
                                 }
                             }
 
+
+
+                            if (editable == sorghumOwnFarm.editableText ||
+                                editable == sorghumMarket.editableText ||
+                                editable == sorghumGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(sorghumOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        sorghumMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(sorghumGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    sorghumOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    sorghumMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    sorghumGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    sorghumOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    sorghumMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    sorghumGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+
+                            if (editable == riceOwnFarm.editableText ||
+                                editable == riceMarket.editableText ||
+                                editable == riceGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(riceOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        riceMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(riceGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    riceOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    riceMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    riceGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    riceOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    riceMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    riceGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+
+
+                            if (editable == beansOwnfarm.editableText ||
+                                editable == beansMarket.editableText ||
+                                editable == beansGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(beansOwnfarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        beansMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(beansGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    beansOwnfarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    beansMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    beansGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    beansOwnfarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    beansMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    beansGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+
+
+                            if (editable == pulsesOwnFarm.editableText ||
+                                editable == pulsesMarket.editableText ||
+                                editable == pulsesGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(pulsesOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        pulsesMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(pulsesGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    pulsesOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    pulsesMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    pulsesGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    pulsesOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    pulsesMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    pulsesGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+
+
+                            if (editable == vegetablesOwnFarm.editableText ||
+                                editable == vegetablesMarket.editableText ||
+                                editable == vegetablesGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(vegetablesOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        vegetablesMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(vegetablesGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    vegetablesOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    vegetablesMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    vegetablesGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    vegetablesOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    vegetablesMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    vegetablesGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+
+
+                            if (editable == fruitsOwnFarm.editableText ||
+                                editable == fruitsMarket.editableText ||
+                                editable == fruitsGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(fruitsOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        fruitsMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(fruitsGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    fruitsOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    fruitsMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    fruitsGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    fruitsOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    fruitsMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    fruitsGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+
+
+                            if (editable == whiteRootsOwnFarm.editableText ||
+                                editable == whiteRootsMarket.editableText ||
+                                editable == whiteRootsGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(whiteRootsOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        whiteRootsMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(whiteRootsGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    whiteRootsOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    whiteRootsMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    whiteRootsGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    whiteRootsOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    whiteRootsMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    whiteRootsGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+
+
+                            if (editable == meatOwnFarm.editableText ||
+                                editable == meatMarket.editableText ||
+                                editable == meatGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(meatOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        meatMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(meatGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    meatOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    meatMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    meatGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    meatOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    meatMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    meatGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+
+
+                            if (editable == milkOwnFarm.editableText ||
+                                editable == milkMarket.editableText ||
+                                editable == milkGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(milkOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        milkMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(milkGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    milkOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    milkMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    milkGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    milkOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    milkMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    milkGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+
+
+                            if (editable == fishOwnFarm.editableText ||
+                                editable == fishOwnMarket.editableText ||
+                                editable == fishGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(fishOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        fishOwnMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(fishGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    fishOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    fishOwnMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    fishGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    fishOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    fishOwnMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    fishGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+
+
+
+                            if (editable == eggsOwnFarm.editableText ||
+                                editable == eggsMarket.editableText ||
+                                editable == eggsGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(eggsOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        eggsMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(eggsGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    eggsOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    eggsMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    eggsGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    eggsOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    eggsMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    eggsGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+
+
+
+                            if (editable == cookingFatOwnFarm.editableText ||
+                                editable == cookingFatMarket.editableText ||
+                                editable == cookingFatGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(cookingFatOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        cookingFatMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(cookingFatGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    cookingFatOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    cookingFatMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    cookingFatGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    cookingFatOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    cookingFatMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    cookingFatGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
+
+
+                            if (editable == spicesOwnFarm.editableText ||
+                                editable == spicesMarket.editableText ||
+                                editable == spicesGift.editableText
+                            ) {
+                                val totalPercentage =
+                                    returnZeroStringIfEmpty(spicesOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                        spicesMarket.text.toString()
+                                    ).toDouble() + returnZeroStringIfEmpty(spicesGift.text.toString()).toDouble()
+                                if (totalPercentage != 100.0) {
+                                    spicesOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    spicesMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    spicesGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
+                                    hasNoPercentageError = false
+                                } else {
+                                    spicesOwnFarmCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    spicesMarketCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    spicesGiftCell.background =
+                                        context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                                    hasNoPercentageError = true
+                                }
+                            }
+
                         }, 1500)
                     }
 
@@ -589,6 +967,61 @@ class WealthGroupDialogFragment : DialogFragment() {
                 wheatOwnFarm.addTextChangedListener(textWatcher)
                 wheatMarket.addTextChangedListener(textWatcher)
                 wheatGift.addTextChangedListener(textWatcher)
+
+                sorghumOwnFarm.addTextChangedListener(textWatcher)
+                sorghumMarket.addTextChangedListener(textWatcher)
+                sorghumGift.addTextChangedListener(textWatcher)
+
+                riceOwnFarm.addTextChangedListener(textWatcher)
+                riceMarket.addTextChangedListener(textWatcher)
+                riceGift.addTextChangedListener(textWatcher)
+
+                beansOwnfarm.addTextChangedListener(textWatcher)
+                beansMarket.addTextChangedListener(textWatcher)
+                beansGift.addTextChangedListener(textWatcher)
+
+                pulsesOwnFarm.addTextChangedListener(textWatcher)
+                pulsesMarket.addTextChangedListener(textWatcher)
+                pulsesGift.addTextChangedListener(textWatcher)
+
+                vegetablesOwnFarm.addTextChangedListener(textWatcher)
+                vegetablesMarket.addTextChangedListener(textWatcher)
+                vegetablesGift.addTextChangedListener(textWatcher)
+
+                fruitsOwnFarm.addTextChangedListener(textWatcher)
+                fruitsMarket.addTextChangedListener(textWatcher)
+                fruitsGift.addTextChangedListener(textWatcher)
+
+                whiteRootsOwnFarm.addTextChangedListener(textWatcher)
+                whiteRootsMarket.addTextChangedListener(textWatcher)
+                whiteRootsGift.addTextChangedListener(textWatcher)
+
+                meatOwnFarm.addTextChangedListener(textWatcher)
+                meatMarket.addTextChangedListener(textWatcher)
+                meatGift.addTextChangedListener(textWatcher)
+
+                milkOwnFarm.addTextChangedListener(textWatcher)
+                milkMarket.addTextChangedListener(textWatcher)
+                milkGift.addTextChangedListener(textWatcher)
+
+                fishOwnFarm.addTextChangedListener(textWatcher)
+                fishOwnMarket.addTextChangedListener(textWatcher)
+                fishGift.addTextChangedListener(textWatcher)
+
+                eggsOwnFarm.addTextChangedListener(textWatcher)
+                eggsMarket.addTextChangedListener(textWatcher)
+                eggsGift.addTextChangedListener(textWatcher)
+
+                cookingFatOwnFarm.addTextChangedListener(textWatcher)
+                cookingFatMarket.addTextChangedListener(textWatcher)
+                cookingFatGift.addTextChangedListener(textWatcher)
+
+                spicesOwnFarm.addTextChangedListener(textWatcher)
+                spicesMarket.addTextChangedListener(textWatcher)
+                spicesGift.addTextChangedListener(textWatcher)
+
+
+
                 foodSourcesPercentNextButton.setOnClickListener {
 
                     var hasNoValidationError: Boolean = true
