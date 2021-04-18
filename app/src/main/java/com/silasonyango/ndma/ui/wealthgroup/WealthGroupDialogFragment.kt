@@ -1579,6 +1579,111 @@ class WealthGroupDialogFragment : DialogFragment() {
 
             /*Expenditure patterns navigation */
             wgExpenditurePatterns.apply {
+
+
+
+                val textWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            val totalEntry =
+                                returnZeroStringIfEmpty(maizeAndMaizeFlour.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    otherCereals.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(pulses.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    rootsAndTubers.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(vegetablesAndFruits.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    fishandseaFood.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(meat.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    milk.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(eggs.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    oilAndFats.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(otherFoods.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    schoolFees.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(drugsAndMedicalCare.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    clothingAndBeautyProducts.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(houseRent.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    communicationExpense.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(farmInputs.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    livestockDrugs.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(waterPurchase.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    soaps.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(farrmLabour.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    travelRelatedExpense.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(entertainment.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    electricityBill.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(socialObligation.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    millingCost.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(cookingFuel.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    savingsAndInvestment.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(loanRepayments.text.toString()).toDouble()
+
+                            if (totalEntry > 100) {
+                                val excessValue = totalEntry - 100.0
+                                errorDialog?.isShowing?.let { isDialogShowing ->
+                                    if (isDialogShowing) {
+                                        return@postDelayed
+                                    }
+                                }
+
+                                inflateErrorModal(
+                                    "Percentage error",
+                                    "Entries exceed 100% by $excessValue"
+                                )
+
+                            }
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+                }
+
+                maizeAndMaizeFlour.addTextChangedListener(textWatcher)
+                otherCereals.addTextChangedListener(textWatcher)
+                pulses.addTextChangedListener(textWatcher)
+                rootsAndTubers.addTextChangedListener(textWatcher)
+                vegetablesAndFruits.addTextChangedListener(textWatcher)
+                fishandseaFood.addTextChangedListener(textWatcher)
+                meat.addTextChangedListener(textWatcher)
+                milk.addTextChangedListener(textWatcher)
+                eggs.addTextChangedListener(textWatcher)
+                oilAndFats.addTextChangedListener(textWatcher)
+                otherFoods.addTextChangedListener(textWatcher)
+                schoolFees.addTextChangedListener(textWatcher)
+                drugsAndMedicalCare.addTextChangedListener(textWatcher)
+                clothingAndBeautyProducts.addTextChangedListener(textWatcher)
+                houseRent.addTextChangedListener(textWatcher)
+                communicationExpense.addTextChangedListener(textWatcher)
+                farmInputs.addTextChangedListener(textWatcher)
+                livestockDrugs.addTextChangedListener(textWatcher)
+                waterPurchase.addTextChangedListener(textWatcher)
+                soaps.addTextChangedListener(textWatcher)
+                farrmLabour.addTextChangedListener(textWatcher)
+                travelRelatedExpense.addTextChangedListener(textWatcher)
+                entertainment.addTextChangedListener(textWatcher)
+                electricityBill.addTextChangedListener(textWatcher)
+                socialObligation.addTextChangedListener(textWatcher)
+                millingCost.addTextChangedListener(textWatcher)
+                cookingFuel.addTextChangedListener(textWatcher)
+                savingsAndInvestment.addTextChangedListener(textWatcher)
+                loanRepayments.addTextChangedListener(textWatcher)
+
+
                 expenditurePatternsBackButton.setOnClickListener {
                     wgLabourPatterns.root.visibility = View.VISIBLE
                     wgExpenditurePatterns.root.visibility = View.GONE
@@ -1586,61 +1691,260 @@ class WealthGroupDialogFragment : DialogFragment() {
 
                 expenditurePatternsNextButton.setOnClickListener {
 
-                    val expenditurePatternsResponses = ExpenditurePatternsResponses()
+                    var hasNoValidationError: Boolean = true
 
-                    expenditurePatternsResponses.maizeAndMaizeFlour =
-                        maizeAndMaizeFlour.text.toString().toDouble()
-                    expenditurePatternsResponses.otherCereals =
-                        otherCereals.text.toString().toDouble()
-                    expenditurePatternsResponses.pulses = pulses.text.toString().toDouble()
-                    expenditurePatternsResponses.rootsAndTubers =
-                        rootsAndTubers.text.toString().toDouble()
-                    expenditurePatternsResponses.vegetablesAndFruits =
-                        vegetablesAndFruits.text.toString().toDouble()
-                    expenditurePatternsResponses.fishandSeaFood =
-                        fishandseaFood.text.toString().toDouble()
-                    expenditurePatternsResponses.meat = meat.text.toString().toDouble()
-                    expenditurePatternsResponses.milk = milk.text.toString().toDouble()
-                    expenditurePatternsResponses.eggs = eggs.text.toString().toDouble()
-                    expenditurePatternsResponses.oilsAndFats = oilAndFats.text.toString().toDouble()
-                    expenditurePatternsResponses.otherFoods = otherFoods.text.toString().toDouble()
-                    expenditurePatternsResponses.schoolFees = schoolFees.text.toString().toDouble()
-                    expenditurePatternsResponses.drugsAndMedicalCare =
-                        drugsAndMedicalCare.text.toString().toDouble()
-                    expenditurePatternsResponses.clothingAndBeautyProducts =
-                        clothingAndBeautyProducts.text.toString().toDouble()
-                    expenditurePatternsResponses.houseRent = houseRent.text.toString().toDouble()
-                    expenditurePatternsResponses.communicationExpenses =
-                        communicationExpense.text.toString().toDouble()
-                    expenditurePatternsResponses.farmInputs = farmInputs.text.toString().toDouble()
-                    expenditurePatternsResponses.livestockDrugs =
-                        livestockDrugs.text.toString().toDouble()
-                    expenditurePatternsResponses.waterPurchase =
-                        waterPurchase.text.toString().toDouble()
-                    expenditurePatternsResponses.soaps = soaps.text.toString().toDouble()
-                    expenditurePatternsResponses.farmLabour = farrmLabour.text.toString().toDouble()
-                    expenditurePatternsResponses.travelRelatedExpenses =
-                        travelRelatedExpense.text.toString().toDouble()
-                    expenditurePatternsResponses.leisureAndEntertainment =
-                        entertainment.text.toString().toDouble()
-                    expenditurePatternsResponses.electricityBills =
-                        electricityBill.text.toString().toDouble()
-                    expenditurePatternsResponses.socialObligation =
-                        socialObligation.text.toString().toDouble()
-                    expenditurePatternsResponses.millingCosts =
-                        millingCost.text.toString().toDouble()
-                    expenditurePatternsResponses.cookingFuel =
-                        cookingFuel.text.toString().toDouble()
-                    expenditurePatternsResponses.savingsAndInvestments =
-                        savingsAndInvestment.text.toString().toDouble()
-                    expenditurePatternsResponses.loanRepayments =
-                        loanRepayments.text.toString().toDouble()
+                    if (maizeAndMaizeFlour.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        maizeAndMaizeFlourCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (otherCereals.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        otherCerealsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (pulses.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        pulsesCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (rootsAndTubers.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        rootsAndTubersCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (vegetablesAndFruits.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        vegetablesAndFruitsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (fishandseaFood.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fishandseaFoodCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (meat.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        meatCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (milk.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        milkCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (eggs.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        eggsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (oilAndFats.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        oilAndFatsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (otherFoods.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        otherFoodsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (schoolFees.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        schoolFeesCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (drugsAndMedicalCare.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        drugsAndMedicalCareCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (clothingAndBeautyProducts.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        clothingAndBeautyProductsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (houseRent.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        houseRentCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (communicationExpense.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        communicationExpenseCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (farmInputs.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        farmInputsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (livestockDrugs.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        livestockDrugsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (waterPurchase.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        waterPurchaseCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (soaps.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        soapsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (farrmLabour.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        farrmLabourCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (travelRelatedExpense.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        travelRelatedExpenseCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (entertainment.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        entertainmentCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (electricityBill.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        electricityBillCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (socialObligation.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        socialObligationCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (millingCost.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        millingCostCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (cookingFuel.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        cookingFuelcell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (savingsAndInvestment.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        savingsAndInvestmentCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (loanRepayments.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        loanRepaymentsCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
 
-                    wealthGroupQuestionnaire.expenditurePatternsResponses =
-                        expenditurePatternsResponses
+                    val totalPercentageEntry =
+                        returnZeroStringIfEmpty(maizeAndMaizeFlour.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            otherCereals.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(pulses.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            rootsAndTubers.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(vegetablesAndFruits.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            fishandseaFood.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(meat.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            milk.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(eggs.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            oilAndFats.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(otherFoods.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            schoolFees.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(drugsAndMedicalCare.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            clothingAndBeautyProducts.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(houseRent.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            communicationExpense.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(farmInputs.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            livestockDrugs.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(waterPurchase.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            soaps.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(farrmLabour.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            travelRelatedExpense.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(entertainment.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            electricityBill.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(socialObligation.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            millingCost.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(cookingFuel.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            savingsAndInvestment.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(loanRepayments.text.toString()).toDouble()
 
-                    wgMigrationPatterns.root.visibility = View.VISIBLE
-                    wgExpenditurePatterns.root.visibility = View.GONE
+                    if (totalPercentageEntry < 100) {
+
+                        val deficitValue = 100 - totalPercentageEntry
+                        inflateErrorModal(
+                            "Percentage error",
+                            "Entries are less than 100% by $deficitValue"
+                        )
+
+                    }
+
+                    if (hasNoValidationError) {
+
+                        val expenditurePatternsResponses = ExpenditurePatternsResponses()
+
+                        expenditurePatternsResponses.maizeAndMaizeFlour =
+                            maizeAndMaizeFlour.text.toString().toDouble()
+                        expenditurePatternsResponses.otherCereals =
+                            otherCereals.text.toString().toDouble()
+                        expenditurePatternsResponses.pulses = pulses.text.toString().toDouble()
+                        expenditurePatternsResponses.rootsAndTubers =
+                            rootsAndTubers.text.toString().toDouble()
+                        expenditurePatternsResponses.vegetablesAndFruits =
+                            vegetablesAndFruits.text.toString().toDouble()
+                        expenditurePatternsResponses.fishandSeaFood =
+                            fishandseaFood.text.toString().toDouble()
+                        expenditurePatternsResponses.meat = meat.text.toString().toDouble()
+                        expenditurePatternsResponses.milk = milk.text.toString().toDouble()
+                        expenditurePatternsResponses.eggs = eggs.text.toString().toDouble()
+                        expenditurePatternsResponses.oilsAndFats =
+                            oilAndFats.text.toString().toDouble()
+                        expenditurePatternsResponses.otherFoods =
+                            otherFoods.text.toString().toDouble()
+                        expenditurePatternsResponses.schoolFees =
+                            schoolFees.text.toString().toDouble()
+                        expenditurePatternsResponses.drugsAndMedicalCare =
+                            drugsAndMedicalCare.text.toString().toDouble()
+                        expenditurePatternsResponses.clothingAndBeautyProducts =
+                            clothingAndBeautyProducts.text.toString().toDouble()
+                        expenditurePatternsResponses.houseRent =
+                            houseRent.text.toString().toDouble()
+                        expenditurePatternsResponses.communicationExpenses =
+                            communicationExpense.text.toString().toDouble()
+                        expenditurePatternsResponses.farmInputs =
+                            farmInputs.text.toString().toDouble()
+                        expenditurePatternsResponses.livestockDrugs =
+                            livestockDrugs.text.toString().toDouble()
+                        expenditurePatternsResponses.waterPurchase =
+                            waterPurchase.text.toString().toDouble()
+                        expenditurePatternsResponses.soaps = soaps.text.toString().toDouble()
+                        expenditurePatternsResponses.farmLabour =
+                            farrmLabour.text.toString().toDouble()
+                        expenditurePatternsResponses.travelRelatedExpenses =
+                            travelRelatedExpense.text.toString().toDouble()
+                        expenditurePatternsResponses.leisureAndEntertainment =
+                            entertainment.text.toString().toDouble()
+                        expenditurePatternsResponses.electricityBills =
+                            electricityBill.text.toString().toDouble()
+                        expenditurePatternsResponses.socialObligation =
+                            socialObligation.text.toString().toDouble()
+                        expenditurePatternsResponses.millingCosts =
+                            millingCost.text.toString().toDouble()
+                        expenditurePatternsResponses.cookingFuel =
+                            cookingFuel.text.toString().toDouble()
+                        expenditurePatternsResponses.savingsAndInvestments =
+                            savingsAndInvestment.text.toString().toDouble()
+                        expenditurePatternsResponses.loanRepayments =
+                            loanRepayments.text.toString().toDouble()
+
+                        wealthGroupQuestionnaire.expenditurePatternsResponses =
+                            expenditurePatternsResponses
+
+                        wgMigrationPatterns.root.visibility = View.VISIBLE
+                        wgExpenditurePatterns.root.visibility = View.GONE
+
+                    }
                 }
             }
 
@@ -1674,7 +1978,10 @@ class WealthGroupDialogFragment : DialogFragment() {
                                     }
                                 }
 
-                                inflateErrorModal("Percentage error", "Entries exceed 100% by $excessValue")
+                                inflateErrorModal(
+                                    "Percentage error",
+                                    "Entries exceed 100% by $excessValue"
+                                )
 
                             }
 
