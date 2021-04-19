@@ -1371,31 +1371,93 @@ class WealthGroupDialogFragment : DialogFragment() {
 
                 livestockPoultryNumbertsNextButton.setOnClickListener {
 
-                    val livestockPoultryOwnershipResponses = LivestockPoultryOwnershipResponses()
-                    livestockPoultryOwnershipResponses.cattle =
-                        cattleNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.goats =
-                        goatNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.sheep =
-                        sheepNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.donkeys =
-                        donkeyNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.camels =
-                        camelNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.pigs = pigNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.chicken =
-                        chickenNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.ducks =
-                        duckNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.beeHives =
-                        beeHiveNumbers.text.toString().toDouble()
-                    livestockPoultryOwnershipResponses.fishPonds =
-                        fishPondNumbers.text.toString().toDouble()
+                    var hasNoValidationError: Boolean = true
 
-                    wealthGroupQuestionnaire.livestockPoultryOwnershipResponses =
-                        livestockPoultryOwnershipResponses
-                    wgLivestockPoultryContribution.root.visibility = View.VISIBLE
-                    wgLivestockPoultryNumbers.root.visibility = View.GONE
+                    if (cattleNumbers.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        cattleNumbersCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (goatNumbers.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        goatNumbersCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (sheepNumbers.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        sheepNumbersCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (donkeyNumbers.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        donkeyNumbersCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (camelNumbers.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        camelNumbersCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (pigNumbers.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        pigNumbersCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (chickenNumbers.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        chickenNumbersCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (duckNumbers.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        duckNumbersCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (duckNumbers.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        duckNumbersCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (beeHiveNumbers.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        beeHiveNumbersCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (fishPondNumbers.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fishPondNumbersCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+
+                    if (hasNoValidationError) {
+
+                        val livestockPoultryOwnershipResponses = LivestockPoultryOwnershipResponses()
+                        livestockPoultryOwnershipResponses.cattle =
+                            cattleNumbers.text.toString().toDouble()
+                        livestockPoultryOwnershipResponses.goats =
+                            goatNumbers.text.toString().toDouble()
+                        livestockPoultryOwnershipResponses.sheep =
+                            sheepNumbers.text.toString().toDouble()
+                        livestockPoultryOwnershipResponses.donkeys =
+                            donkeyNumbers.text.toString().toDouble()
+                        livestockPoultryOwnershipResponses.camels =
+                            camelNumbers.text.toString().toDouble()
+                        livestockPoultryOwnershipResponses.pigs = pigNumbers.text.toString().toDouble()
+                        livestockPoultryOwnershipResponses.chicken =
+                            chickenNumbers.text.toString().toDouble()
+                        livestockPoultryOwnershipResponses.ducks =
+                            duckNumbers.text.toString().toDouble()
+                        livestockPoultryOwnershipResponses.beeHives =
+                            beeHiveNumbers.text.toString().toDouble()
+                        livestockPoultryOwnershipResponses.fishPonds =
+                            fishPondNumbers.text.toString().toDouble()
+
+                        wealthGroupQuestionnaire.livestockPoultryOwnershipResponses =
+                            livestockPoultryOwnershipResponses
+                        wgLivestockPoultryContribution.root.visibility = View.VISIBLE
+                        wgLivestockPoultryNumbers.root.visibility = View.GONE
+
+                    }
                 }
             }
 

@@ -107,6 +107,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/cattleNumbersCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".5"
@@ -156,6 +157,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/goatNumbersCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".5"
@@ -205,6 +207,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sheepNumbersCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".5"
@@ -254,6 +257,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/donkeyNumbersCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".5"
@@ -303,6 +307,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/camelNumbersCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".5"
@@ -352,6 +357,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/pigNumbersCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".5"
@@ -401,6 +407,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/chickenNumbersCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".5"
@@ -450,6 +457,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/duckNumbersCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".5"
@@ -499,6 +507,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/beeHiveNumbersCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".5"
@@ -548,6 +557,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fishPondNumbersCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".5"
