@@ -125,6 +125,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ownFarmWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -148,6 +149,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ownFarmmenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -196,6 +198,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/livestockHusbandryWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -219,6 +222,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/livestockHusbandrymenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -267,6 +271,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/wagedLabourWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -290,6 +295,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/wagedLabourmenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -338,6 +344,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lowSkilledNonFarmWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -361,6 +368,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lowSkilledNonFarmmenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -409,6 +417,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/skilledLabourWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -432,6 +441,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/skilledLabourmenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -480,6 +490,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/formalEmploymentWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -503,6 +514,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/formalEmploymentmenCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -551,6 +563,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/huntingAndGatheringWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -574,6 +587,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/huntingAndGatheringmenCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -622,6 +636,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fishingWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -645,6 +660,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fishingmenCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -693,6 +709,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/tradingWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -716,6 +733,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/tradingmenCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -764,6 +782,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/domesticUnpaidWorkWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -787,6 +806,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/domesticUnpaidWorkmenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -835,6 +855,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/leisureWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -858,6 +879,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/leisuremenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -906,6 +928,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sexWorkWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -929,6 +952,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sexWorkmenCell"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight=".2"
@@ -977,6 +1001,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/beggingWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -1000,6 +1025,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/beggingmenCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -1048,6 +1074,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/inactivityWomenCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
@@ -1071,6 +1098,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/inactivitymenCell"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"

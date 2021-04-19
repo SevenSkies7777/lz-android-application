@@ -1491,6 +1491,152 @@ class WealthGroupDialogFragment : DialogFragment() {
 
             /*Labour patterns navigation */
             wgLabourPatterns.apply {
+
+                val mentTextWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+
+                            val menTotalEntry =
+                                returnZeroStringIfEmpty(ownFarmmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    livestockHusbandrymen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(wagedLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    lowSkilledNonFarmmen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(skilledLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    formalEmploymentmen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(huntingAndGatheringmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    fishingmen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(tradingmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    domesticUnpaidWorkmen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(leisuremen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    sexWorkmen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(beggingmen.text.toString()).toDouble() + returnZeroStringIfEmpty(inactivitymen.text.toString()).toDouble()
+
+                            if (menTotalEntry > 100) {
+                                val excessValue = menTotalEntry - 100.0
+                                errorDialog?.isShowing?.let { isDialogShowing ->
+                                    if (isDialogShowing) {
+                                        return@postDelayed
+                                    }
+                                }
+
+                                inflateErrorModal(
+                                    "Percentage error",
+                                    "Entries exceed 100% by $excessValue"
+                                )
+
+                            }
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+                }
+
+                ownFarmmen.addTextChangedListener(mentTextWatcher)
+                livestockHusbandrymen.addTextChangedListener(mentTextWatcher)
+                wagedLabourmen.addTextChangedListener(mentTextWatcher)
+                lowSkilledNonFarmmen.addTextChangedListener(mentTextWatcher)
+                skilledLabourmen.addTextChangedListener(mentTextWatcher)
+                formalEmploymentmen.addTextChangedListener(mentTextWatcher)
+                huntingAndGatheringmen.addTextChangedListener(mentTextWatcher)
+                fishingmen.addTextChangedListener(mentTextWatcher)
+                tradingmen.addTextChangedListener(mentTextWatcher)
+                domesticUnpaidWorkmen.addTextChangedListener(mentTextWatcher)
+                leisuremen.addTextChangedListener(mentTextWatcher)
+                sexWorkmen.addTextChangedListener(mentTextWatcher)
+                beggingmen.addTextChangedListener(mentTextWatcher)
+                inactivitymen.addTextChangedListener(mentTextWatcher)
+
+
+
+
+                val womentTextWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+
+                            val womenTotalEntry =
+                                returnZeroStringIfEmpty(ownFarmWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    livestockHusbandryWomen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(wagedLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    lowSkilledNonFarmWomen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(skilledLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    formalEmploymentWomen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(huntingAndGatheringWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    fishingWomen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(tradingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    domesticUnpaidWorkWomen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(leisureWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    sexWorkWomen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(beggingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(inactivityWomen.text.toString()).toDouble()
+
+                            if (womenTotalEntry > 100) {
+                                val excessValue = womenTotalEntry - 100.0
+                                errorDialog?.isShowing?.let { isDialogShowing ->
+                                    if (isDialogShowing) {
+                                        return@postDelayed
+                                    }
+                                }
+
+                                inflateErrorModal(
+                                    "Percentage error",
+                                    "Entries exceed 100% by $excessValue"
+                                )
+
+                            }
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+                }
+
+                ownFarmWomen.addTextChangedListener(womentTextWatcher)
+                livestockHusbandryWomen.addTextChangedListener(womentTextWatcher)
+                wagedLabourWomen.addTextChangedListener(womentTextWatcher)
+                lowSkilledNonFarmWomen.addTextChangedListener(womentTextWatcher)
+                skilledLabourWomen.addTextChangedListener(womentTextWatcher)
+                formalEmploymentWomen.addTextChangedListener(womentTextWatcher)
+                huntingAndGatheringWomen.addTextChangedListener(womentTextWatcher)
+                fishingWomen.addTextChangedListener(womentTextWatcher)
+                tradingWomen.addTextChangedListener(womentTextWatcher)
+                domesticUnpaidWorkWomen.addTextChangedListener(womentTextWatcher)
+                leisureWomen.addTextChangedListener(womentTextWatcher)
+                sexWorkWomen.addTextChangedListener(womentTextWatcher)
+                beggingWomen.addTextChangedListener(womentTextWatcher)
+                inactivityWomen.addTextChangedListener(womentTextWatcher)
+
                 labourPatternsBackButton.setOnClickListener {
                     wgLivestockPoultryContribution.root.visibility = View.VISIBLE
                     wgLabourPatterns.root.visibility = View.GONE
@@ -1498,88 +1644,285 @@ class WealthGroupDialogFragment : DialogFragment() {
 
                 labourPatternsNextButton.setOnClickListener {
 
-                    val labourPatternResponse = LabourPatternResponse()
-                    labourPatternResponse.ownFarmCropProduction = LabourPatternResponseItem(
-                        ownFarmWomen.text.toString().toDouble(),
-                        ownFarmmen.text.toString().toDouble()
-                    )
+                    var hasNoValidationError: Boolean = true
 
-                    labourPatternResponse.livestockHusbandry = LabourPatternResponseItem(
-                        livestockHusbandryWomen.text.toString().toDouble(),
-                        livestockHusbandrymen.text.toString().toDouble()
-                    )
+                    val menTotalEntry =
+                        returnZeroStringIfEmpty(ownFarmmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            livestockHusbandrymen.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(wagedLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            lowSkilledNonFarmmen.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(skilledLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            formalEmploymentmen.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(huntingAndGatheringmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            fishingmen.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(tradingmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            domesticUnpaidWorkmen.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(leisuremen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            sexWorkmen.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(beggingmen.text.toString()).toDouble() + returnZeroStringIfEmpty(inactivitymen.text.toString()).toDouble()
 
-                    labourPatternResponse.wagedLabourOnFarms = LabourPatternResponseItem(
-                        wagedLabourWomen.text.toString().toDouble(),
-                        wagedLabourmen.text.toString().toDouble()
-                    )
+                    if (menTotalEntry < 100) {
+                        val deficitValue = 100 - menTotalEntry
+                        inflateErrorModal(
+                            "Percentage error",
+                            "Entries for men are less than 100% by $deficitValue"
+                        )
 
-                    labourPatternResponse.lowSkilledNonFarmLabour = LabourPatternResponseItem(
-                        lowSkilledNonFarmWomen.text.toString().toDouble(),
-                        lowSkilledNonFarmmen.text.toString().toDouble()
-                    )
+                    }
 
-                    labourPatternResponse.skilledLabour = LabourPatternResponseItem(
-                        skilledLabourWomen.text.toString().toDouble(),
-                        skilledLabourmen.text.toString().toDouble()
-                    )
 
-                    labourPatternResponse.formalEmployment = LabourPatternResponseItem(
-                        formalEmploymentWomen.text.toString().toDouble(),
-                        formalEmploymentmen.text.toString().toDouble()
-                    )
+                    val womenTotalEntry =
+                        returnZeroStringIfEmpty(ownFarmWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            livestockHusbandryWomen.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(wagedLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            lowSkilledNonFarmWomen.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(skilledLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            formalEmploymentWomen.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(huntingAndGatheringWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            fishingWomen.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(tradingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            domesticUnpaidWorkWomen.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(leisureWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            sexWorkWomen.text.toString()
+                        ).toDouble() + returnZeroStringIfEmpty(beggingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(inactivityWomen.text.toString()).toDouble()
 
-                    labourPatternResponse.huntingAndGathering = LabourPatternResponseItem(
-                        huntingAndGatheringWomen.text.toString().toDouble(),
-                        huntingAndGatheringmen.text.toString().toDouble()
-                    )
 
-                    labourPatternResponse.fishing = LabourPatternResponseItem(
-                        fishingWomen.text.toString().toDouble(),
-                        fishingmen.text.toString().toDouble()
-                    )
+                    if (womenTotalEntry < 100) {
+                        val womenDeficitValue = 100 - womenTotalEntry
+                        inflateErrorModal(
+                            "Percentage error",
+                            "Entries for women are less than 100% by $womenDeficitValue"
+                        )
 
-                    labourPatternResponse.trading = LabourPatternResponseItem(
-                        tradingWomen.text.toString().toDouble(),
-                        tradingmen.text.toString().toDouble()
-                    )
+                    }
 
-                    labourPatternResponse.domesticUnpaidWork = LabourPatternResponseItem(
-                        domesticUnpaidWorkWomen.text.toString().toDouble(),
-                        domesticUnpaidWorkmen.text.toString().toDouble()
-                    )
+                    if (ownFarmWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        ownFarmWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (ownFarmmen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        ownFarmmenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (livestockHusbandryWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        livestockHusbandryWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (livestockHusbandrymen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        livestockHusbandrymenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (wagedLabourWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        wagedLabourWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (wagedLabourmen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        wagedLabourmenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (lowSkilledNonFarmWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        lowSkilledNonFarmWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (lowSkilledNonFarmmen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        lowSkilledNonFarmmenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (skilledLabourWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        skilledLabourWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (skilledLabourmen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        skilledLabourmenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (formalEmploymentWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        formalEmploymentWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (formalEmploymentmen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        formalEmploymentmenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (huntingAndGatheringWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        huntingAndGatheringWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (huntingAndGatheringmen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        huntingAndGatheringmenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (fishingWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fishingWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (fishingmen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        fishingmenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (tradingWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        tradingWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (tradingmen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        tradingmenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (domesticUnpaidWorkWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        domesticUnpaidWorkWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (domesticUnpaidWorkmen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        domesticUnpaidWorkmenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (leisureWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        leisureWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (leisuremen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        leisuremenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (sexWorkWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        sexWorkWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (sexWorkmen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        sexWorkmenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (beggingWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        beggingWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (beggingmen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        beggingmenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (inactivityWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        inactivityWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (inactivitymen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        inactivitymenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
 
-                    labourPatternResponse.leisure = LabourPatternResponseItem(
-                        leisureWomen.text.toString().toDouble(),
-                        leisuremen.text.toString().toDouble()
-                    )
 
-                    labourPatternResponse.commercialSexWork = LabourPatternResponseItem(
-                        sexWorkWomen.text.toString().toDouble(),
-                        sexWorkmen.text.toString().toDouble()
-                    )
+                    if (hasNoValidationError) {
 
-                    labourPatternResponse.begging = LabourPatternResponseItem(
-                        beggingWomen.text.toString().toDouble(),
-                        beggingmen.text.toString().toDouble()
-                    )
+                        val labourPatternResponse = LabourPatternResponse()
+                        labourPatternResponse.ownFarmCropProduction = LabourPatternResponseItem(
+                            ownFarmWomen.text.toString().toDouble(),
+                            ownFarmmen.text.toString().toDouble()
+                        )
 
-                    labourPatternResponse.inactivity = LabourPatternResponseItem(
-                        inactivityWomen.text.toString().toDouble(),
-                        inactivitymen.text.toString().toDouble()
-                    )
+                        labourPatternResponse.livestockHusbandry = LabourPatternResponseItem(
+                            livestockHusbandryWomen.text.toString().toDouble(),
+                            livestockHusbandrymen.text.toString().toDouble()
+                        )
 
-                    wealthGroupQuestionnaire.labourPatternResponses = labourPatternResponse
+                        labourPatternResponse.wagedLabourOnFarms = LabourPatternResponseItem(
+                            wagedLabourWomen.text.toString().toDouble(),
+                            wagedLabourmen.text.toString().toDouble()
+                        )
 
-                    wgExpenditurePatterns.root.visibility = View.VISIBLE
-                    wgLabourPatterns.root.visibility = View.GONE
+                        labourPatternResponse.lowSkilledNonFarmLabour = LabourPatternResponseItem(
+                            lowSkilledNonFarmWomen.text.toString().toDouble(),
+                            lowSkilledNonFarmmen.text.toString().toDouble()
+                        )
+
+                        labourPatternResponse.skilledLabour = LabourPatternResponseItem(
+                            skilledLabourWomen.text.toString().toDouble(),
+                            skilledLabourmen.text.toString().toDouble()
+                        )
+
+                        labourPatternResponse.formalEmployment = LabourPatternResponseItem(
+                            formalEmploymentWomen.text.toString().toDouble(),
+                            formalEmploymentmen.text.toString().toDouble()
+                        )
+
+                        labourPatternResponse.huntingAndGathering = LabourPatternResponseItem(
+                            huntingAndGatheringWomen.text.toString().toDouble(),
+                            huntingAndGatheringmen.text.toString().toDouble()
+                        )
+
+                        labourPatternResponse.fishing = LabourPatternResponseItem(
+                            fishingWomen.text.toString().toDouble(),
+                            fishingmen.text.toString().toDouble()
+                        )
+
+                        labourPatternResponse.trading = LabourPatternResponseItem(
+                            tradingWomen.text.toString().toDouble(),
+                            tradingmen.text.toString().toDouble()
+                        )
+
+                        labourPatternResponse.domesticUnpaidWork = LabourPatternResponseItem(
+                            domesticUnpaidWorkWomen.text.toString().toDouble(),
+                            domesticUnpaidWorkmen.text.toString().toDouble()
+                        )
+
+                        labourPatternResponse.leisure = LabourPatternResponseItem(
+                            leisureWomen.text.toString().toDouble(),
+                            leisuremen.text.toString().toDouble()
+                        )
+
+                        labourPatternResponse.commercialSexWork = LabourPatternResponseItem(
+                            sexWorkWomen.text.toString().toDouble(),
+                            sexWorkmen.text.toString().toDouble()
+                        )
+
+                        labourPatternResponse.begging = LabourPatternResponseItem(
+                            beggingWomen.text.toString().toDouble(),
+                            beggingmen.text.toString().toDouble()
+                        )
+
+                        labourPatternResponse.inactivity = LabourPatternResponseItem(
+                            inactivityWomen.text.toString().toDouble(),
+                            inactivitymen.text.toString().toDouble()
+                        )
+
+                        wealthGroupQuestionnaire.labourPatternResponses = labourPatternResponse
+
+                        wgExpenditurePatterns.root.visibility = View.VISIBLE
+                        wgLabourPatterns.root.visibility = View.GONE
+
+                    }
                 }
             }
 
 
             /*Expenditure patterns navigation */
             wgExpenditurePatterns.apply {
-
 
 
                 val textWatcher = object : TextWatcher {
