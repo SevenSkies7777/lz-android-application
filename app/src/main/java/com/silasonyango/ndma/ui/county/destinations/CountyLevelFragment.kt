@@ -438,86 +438,228 @@ class CountyLevelFragment : DialogFragment(),
                 }
                 waterSourceNextButton.setOnClickListener {
 
-                    val waterSourceResponses = WaterSourcesResponses()
-                    waterSourceResponses.rivers = WaterDependenceResponseItem(
-                        returnZeroStringIfEmpty(riversWetSeason.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(riversDrySeason.text.toString()).toDouble()
-                    )
+                    var hasNoValidationError: Boolean = true
 
-                    waterSourceResponses.traditionalRiversWells = WaterDependenceResponseItem(
-                        returnZeroStringIfEmpty(traditionalRiversWellsWetSeason.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(traditionalRiversWellsDrySeason.text.toString()).toDouble()
-                    )
-
-                    waterSourceResponses.naturalPonds = WaterDependenceResponseItem(
-                        returnZeroStringIfEmpty(naturalPondsWetSeason.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(naturalPondsDrySeason.text.toString()).toDouble()
-                    )
-
-                    waterSourceResponses.pansAndDams = WaterDependenceResponseItem(
-                        returnZeroStringIfEmpty(pansAndDamsWetSeason.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(pansAndDamsDrySeason.text.toString()).toDouble()
-                    )
-
-                    waterSourceResponses.shallowWells = WaterDependenceResponseItem(
-                        returnZeroStringIfEmpty(shallowWellsWetSeason.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(shallowWellsDrySeason.text.toString()).toDouble()
-                    )
-
-                    waterSourceResponses.boreholes = WaterDependenceResponseItem(
-                        returnZeroStringIfEmpty(boreHolesWetSeason.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(boreHolesDrySeason.text.toString()).toDouble()
-                    )
-
-                    waterSourceResponses.springs = WaterDependenceResponseItem(
-                        returnZeroStringIfEmpty(springsWetSeason.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(springsDrySeason.text.toString()).toDouble()
-                    )
-
-                    waterSourceResponses.lakes = WaterDependenceResponseItem(
-                        returnZeroStringIfEmpty(lakesWetSeason.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(lakesDrySeason.text.toString()).toDouble()
-                    )
-
-                    waterSourceResponses.rockCatchments = WaterDependenceResponseItem(
-                        returnZeroStringIfEmpty(rockCatchmentWetSeason.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(rockCatchmentDrySeason.text.toString()).toDouble()
-                    )
-
-                    waterSourceResponses.pipedWater = WaterDependenceResponseItem(
-                        returnZeroStringIfEmpty(pipedWaterWetSeason.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(pipedWaterDrySeason.text.toString()).toDouble()
-                    )
-
-                    waterSourceResponses.waterTrucking = WaterDependenceResponseItem(
-                        returnZeroStringIfEmpty(waterTruckingWetSeason.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(waterTruckingDrySeason.text.toString()).toDouble()
-                    )
-
-                    waterSourceResponses.roofCatchments = WaterDependenceResponseItem(
-                        returnZeroStringIfEmpty(roofCatchmentWetSeason.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(roofCatchmentDrySeason.text.toString()).toDouble()
-                    )
-
-                    countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
-
-
-                    val tribeSelectionAdapter =
-                        TribeSelectionAdapter(
-                            geographyObject.ethnicGroups,
-                            this@CountyLevelFragment
-                        )
-                    val gridLayoutManager = GridLayoutManager(activity, 1)
-
-                    ethnicGroupSelection.apply {
-                        tribeList.layoutManager = gridLayoutManager
-                        tribeList.hasFixedSize()
-                        tribeList.adapter =
-                            tribeSelectionAdapter
+                    if (riversWetSeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        riversWetSeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (riversDrySeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        riversDrySeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (traditionalRiversWellsWetSeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        traditionalRiversWellsWetSeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (traditionalRiversWellsDrySeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        traditionalRiversWellsDrySeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (naturalPondsWetSeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        naturalPondsWetSeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (naturalPondsDrySeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        naturalPondsDrySeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (pansAndDamsWetSeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        pansAndDamsWetSeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (pansAndDamsDrySeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        pansAndDamsDrySeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (shallowWellsWetSeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        shallowWellsWetSeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (shallowWellsDrySeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        shallowWellsDrySeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (boreHolesWetSeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        boreHolesWetSeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (boreHolesDrySeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        boreHolesDrySeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (springsWetSeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        springsWetSeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (springsDrySeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        springsDrySeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (lakesWetSeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        lakesWetSeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (lakesDrySeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        lakesDrySeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (rockCatchmentWetSeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        rockCatchmentWetSeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (rockCatchmentDrySeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        rockCatchmentDrySeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (pipedWaterWetSeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        pipedWaterWetSeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (pipedWaterDrySeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        pipedWaterDrySeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (waterTruckingWetSeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        waterTruckingWetSeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (waterTruckingDrySeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        waterTruckingDrySeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (roofCatchmentWetSeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        roofCatchmentWetSeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (roofCatchmentDrySeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        roofCatchmentDrySeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (othersWetSeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        othersWetSeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (othersDrySeason.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        othersDrySeasonCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
 
-                    mainWaterSource.root.visibility = View.GONE
-                    marketGeographyConfiguration.root.visibility = View.VISIBLE
+                    if (hasNoValidationError) {
+
+                        val waterSourceResponses = WaterSourcesResponses()
+                        waterSourceResponses.rivers = WaterDependenceResponseItem(
+                            returnZeroStringIfEmpty(riversWetSeason.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(riversDrySeason.text.toString()).toDouble()
+                        )
+
+                        waterSourceResponses.traditionalRiversWells = WaterDependenceResponseItem(
+                            returnZeroStringIfEmpty(traditionalRiversWellsWetSeason.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(traditionalRiversWellsDrySeason.text.toString()).toDouble()
+                        )
+
+                        waterSourceResponses.naturalPonds = WaterDependenceResponseItem(
+                            returnZeroStringIfEmpty(naturalPondsWetSeason.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(naturalPondsDrySeason.text.toString()).toDouble()
+                        )
+
+                        waterSourceResponses.pansAndDams = WaterDependenceResponseItem(
+                            returnZeroStringIfEmpty(pansAndDamsWetSeason.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(pansAndDamsDrySeason.text.toString()).toDouble()
+                        )
+
+                        waterSourceResponses.shallowWells = WaterDependenceResponseItem(
+                            returnZeroStringIfEmpty(shallowWellsWetSeason.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(shallowWellsDrySeason.text.toString()).toDouble()
+                        )
+
+                        waterSourceResponses.boreholes = WaterDependenceResponseItem(
+                            returnZeroStringIfEmpty(boreHolesWetSeason.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(boreHolesDrySeason.text.toString()).toDouble()
+                        )
+
+                        waterSourceResponses.springs = WaterDependenceResponseItem(
+                            returnZeroStringIfEmpty(springsWetSeason.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(springsDrySeason.text.toString()).toDouble()
+                        )
+
+                        waterSourceResponses.lakes = WaterDependenceResponseItem(
+                            returnZeroStringIfEmpty(lakesWetSeason.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(lakesDrySeason.text.toString()).toDouble()
+                        )
+
+                        waterSourceResponses.rockCatchments = WaterDependenceResponseItem(
+                            returnZeroStringIfEmpty(rockCatchmentWetSeason.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(rockCatchmentDrySeason.text.toString()).toDouble()
+                        )
+
+                        waterSourceResponses.pipedWater = WaterDependenceResponseItem(
+                            returnZeroStringIfEmpty(pipedWaterWetSeason.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(pipedWaterDrySeason.text.toString()).toDouble()
+                        )
+
+                        waterSourceResponses.waterTrucking = WaterDependenceResponseItem(
+                            returnZeroStringIfEmpty(waterTruckingWetSeason.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(waterTruckingDrySeason.text.toString()).toDouble()
+                        )
+
+                        waterSourceResponses.roofCatchments = WaterDependenceResponseItem(
+                            returnZeroStringIfEmpty(roofCatchmentWetSeason.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(roofCatchmentDrySeason.text.toString()).toDouble()
+                        )
+
+                        waterSourceResponses.others = WaterDependenceResponseItem(
+                            returnZeroStringIfEmpty(othersWetSeason.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(othersDrySeason.text.toString()).toDouble()
+                        )
+
+                        countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
+
+
+                        val tribeSelectionAdapter =
+                            TribeSelectionAdapter(
+                                geographyObject.ethnicGroups,
+                                this@CountyLevelFragment
+                            )
+                        val gridLayoutManager = GridLayoutManager(activity, 1)
+
+                        ethnicGroupSelection.apply {
+                            tribeList.layoutManager = gridLayoutManager
+                            tribeList.hasFixedSize()
+                            tribeList.adapter =
+                                tribeSelectionAdapter
+                        }
+
+                        mainWaterSource.root.visibility = View.GONE
+                        marketGeographyConfiguration.root.visibility = View.VISIBLE
+
+                    }
                 }
             }
 

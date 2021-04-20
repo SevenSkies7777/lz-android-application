@@ -13,4 +13,5 @@ class WaterSourcesResponses() {
     lateinit var pipedWater: WaterDependenceResponseItem
     lateinit var waterTrucking: WaterDependenceResponseItem
     lateinit var roofCatchments: WaterDependenceResponseItem
+    lateinit var others: WaterDependenceResponseItem
 }

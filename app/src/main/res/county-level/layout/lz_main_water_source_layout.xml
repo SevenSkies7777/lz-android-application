@@ -159,6 +159,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/riversWetSeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -183,6 +184,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/riversDrySeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -231,6 +233,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/traditionalRiversWellsWetSeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -255,6 +258,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/traditionalRiversWellsDrySeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -304,6 +308,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/naturalPondsWetSeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -328,6 +333,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/naturalPondsDrySeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -376,6 +382,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/pansAndDamsWetSeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -400,6 +407,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/pansAndDamsDrySeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -448,6 +456,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/shallowWellsWetSeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -472,6 +481,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/shallowWellsDrySeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -520,6 +530,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/boreHolesWetSeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -544,6 +555,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/boreHolesDrySeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -592,6 +604,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/springsWetSeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -616,6 +629,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/springsDrySeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -664,6 +678,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lakesWetSeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -688,6 +703,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lakesDrySeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -736,6 +752,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/rockCatchmentWetSeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -760,6 +777,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/rockCatchmentDrySeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -808,6 +826,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/pipedWaterWetSeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -832,6 +851,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/pipedWaterDrySeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -880,6 +900,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/waterTruckingWetSeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -904,6 +925,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/waterTruckingDrySeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -952,6 +974,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/roofCatchmentWetSeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -976,6 +999,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/roofCatchmentDrySeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -1024,6 +1048,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/othersWetSeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -1032,6 +1057,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/othersWetSeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -1047,6 +1073,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/othersDrySeasonCell"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight=".2"
@@ -1055,6 +1082,7 @@
                 android:background="@drawable/cell_shape">
 
                 <EditText
+                    android:id="@+id/othersDrySeason"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
