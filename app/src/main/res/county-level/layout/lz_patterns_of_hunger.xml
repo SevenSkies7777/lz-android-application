@@ -104,6 +104,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/etLongRainsHungerPeriodCell"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight=".5"
@@ -152,6 +153,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/etEndLongBeginShortRainsHungerPeriodCell"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight=".5"
@@ -200,6 +202,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/etShortRainsHungerPeriodCell"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight=".5"
@@ -248,6 +251,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/etEndShortBeginLongRainsHungerPeriodCell"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight=".5"

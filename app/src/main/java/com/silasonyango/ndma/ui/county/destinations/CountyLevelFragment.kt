@@ -183,8 +183,9 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.latitude = latitude
                         countyLevelQuestionnaire.longitude = longitude
                         countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
-                        countyLevelQuestionnaire.questionnaireName = AppStore.getInstance().sessionDetails?.geography?.county?.countyName + "county "+
-                            countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + "Livelihood Zone questionnaire"
+                        countyLevelQuestionnaire.questionnaireName =
+                            AppStore.getInstance().sessionDetails?.geography?.county?.countyName + "county " +
+                                    countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + "Livelihood Zone questionnaire"
 
 
                         prepareLivelihoodSelectionLayout()
@@ -333,11 +334,11 @@ class CountyLevelFragment : DialogFragment(),
                                 ).toDouble()
 
                             if (totalEntry > 100) {
-                                    errorDialog?.isShowing?.let { isDialogShowing->
-                                        if (isDialogShowing) {
-                                            return@postDelayed
-                                        }
+                                errorDialog?.isShowing?.let { isDialogShowing ->
+                                    if (isDialogShowing) {
+                                        return@postDelayed
                                     }
+                                }
 
                                 inflateErrorModal("Percentage error", "Entries cannot exceed 100%")
 
@@ -709,19 +710,167 @@ class CountyLevelFragment : DialogFragment(),
 
             /*Hunger patterns navigation buttons*/
             lzHungerPatterns.apply {
+
+                var etLongRainsHungerPeriodHasError: Boolean = false
+                var etEndLongBeginShortRainsHungerPeriodHasError: Boolean = false
+                var etShortRainsHungerPeriodHasError: Boolean = false
+                var etEndShortBeginLongRainsHungerPeriodHasError: Boolean = false
+
+
+                val textWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            if (editable == etLongRainsHungerPeriod.editableText) {
+                                if (editable.toString().toDouble() > 10.0) {
+                                    errorDialog?.isShowing?.let { isDialogShowing ->
+                                        if (isDialogShowing) {
+                                            return@postDelayed
+                                        }
+                                    }
+                                    inflateErrorModal(
+                                        "Constraint error",
+                                        "Number of years cannot exceed 10"
+                                    )
+                                    etLongRainsHungerPeriodHasError = true
+                                } else {
+                                    etLongRainsHungerPeriodHasError = false
+                                }
+                            }
+                            if (editable == etEndLongBeginShortRainsHungerPeriod.editableText) {
+                                if (editable.toString().toDouble() > 10.0) {
+                                    errorDialog?.isShowing?.let { isDialogShowing ->
+                                        if (isDialogShowing) {
+                                            return@postDelayed
+                                        }
+                                    }
+                                    inflateErrorModal(
+                                        "Constraint error",
+                                        "Number of years cannot exceed 10"
+                                    )
+                                    etEndLongBeginShortRainsHungerPeriodHasError = true
+                                } else {
+                                    etEndLongBeginShortRainsHungerPeriodHasError = false
+                                }
+                            }
+                            if (editable == etShortRainsHungerPeriod.editableText) {
+                                if (editable.toString().toDouble() > 10.0) {
+                                    errorDialog?.isShowing?.let { isDialogShowing ->
+                                        if (isDialogShowing) {
+                                            return@postDelayed
+                                        }
+                                    }
+                                    inflateErrorModal(
+                                        "Constraint error",
+                                        "Number of years cannot exceed 10"
+                                    )
+                                    etShortRainsHungerPeriodHasError = true
+                                } else {
+                                    etShortRainsHungerPeriodHasError = false
+                                }
+                            }
+                            if (editable == etEndShortBeginLongRainsHungerPeriod.editableText) {
+                                if (editable.toString().toDouble() > 10.0) {
+                                    errorDialog?.isShowing?.let { isDialogShowing ->
+                                        if (isDialogShowing) {
+                                            return@postDelayed
+                                        }
+                                    }
+                                    inflateErrorModal(
+                                        "Constraint error",
+                                        "Number of years cannot exceed 10"
+                                    )
+                                    etEndShortBeginLongRainsHungerPeriodHasError = true
+                                } else {
+                                    etEndShortBeginLongRainsHungerPeriodHasError = false
+                                }
+                            }
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+                }
+
+                etLongRainsHungerPeriod.addTextChangedListener(textWatcher)
+                etEndLongBeginShortRainsHungerPeriod.addTextChangedListener(textWatcher)
+                etShortRainsHungerPeriod.addTextChangedListener(textWatcher)
+                etEndShortBeginLongRainsHungerPeriod.addTextChangedListener(textWatcher)
+
                 hungerPatternsBackButton.setOnClickListener {
                     ethnicGroupPopulation.root.visibility = View.VISIBLE
                     lzHungerPatterns.root.visibility = View.GONE
                 }
                 hungerPatternsNextButton.setOnClickListener {
-                    countyLevelQuestionnaire.hungerPatternsResponses = HungerPatternsResponses(
-                        returnZeroStringIfEmpty(etLongRainsHungerPeriod.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(etEndLongBeginShortRainsHungerPeriod.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(etShortRainsHungerPeriod.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(etEndShortBeginLongRainsHungerPeriod.text.toString()).toDouble()
-                    )
-                    lzHazards.root.visibility = View.VISIBLE
-                    lzHungerPatterns.root.visibility = View.GONE
+                    var hasNoValidationError: Boolean = true
+
+                    if (etLongRainsHungerPeriod.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        etLongRainsHungerPeriodCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (etEndLongBeginShortRainsHungerPeriod.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        etEndLongBeginShortRainsHungerPeriodCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (etShortRainsHungerPeriod.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        etShortRainsHungerPeriodCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (etEndShortBeginLongRainsHungerPeriod.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        etEndShortBeginLongRainsHungerPeriodCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+
+                    if (hasNoValidationError &&
+                        (!etLongRainsHungerPeriodHasError &&
+                        !etEndLongBeginShortRainsHungerPeriodHasError &&
+                        !etShortRainsHungerPeriodHasError &&
+                        !etEndShortBeginLongRainsHungerPeriodHasError)
+                    ) {
+
+                        countyLevelQuestionnaire.hungerPatternsResponses = HungerPatternsResponses(
+                            returnZeroStringIfEmpty(etLongRainsHungerPeriod.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(etEndLongBeginShortRainsHungerPeriod.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(etShortRainsHungerPeriod.text.toString()).toDouble(),
+                            returnZeroStringIfEmpty(etEndShortBeginLongRainsHungerPeriod.text.toString()).toDouble()
+                        )
+                        lzHazards.root.visibility = View.VISIBLE
+                        lzHungerPatterns.root.visibility = View.GONE
+
+                    }
+
+                    if (!etLongRainsHungerPeriodHasError ||
+                                !etEndLongBeginShortRainsHungerPeriodHasError ||
+                                !etShortRainsHungerPeriodHasError ||
+                                !etEndShortBeginLongRainsHungerPeriodHasError
+                    ) {
+
+                        inflateErrorModal(
+                            "Constraint error",
+                            "Number of years cannot exceed 10"
+                        )
+
+                    }
+
                 }
             }
 
@@ -1321,8 +1470,9 @@ class CountyLevelFragment : DialogFragment(),
             countyLevelQuestionnaire.latitude = latitude
             countyLevelQuestionnaire.longitude = longitude
             countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
-            countyLevelQuestionnaire.questionnaireName = AppStore.getInstance().sessionDetails?.geography?.county?.countyName + "county "+
-                    countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + "Livelihood Zone questionnaire"
+            countyLevelQuestionnaire.questionnaireName =
+                AppStore.getInstance().sessionDetails?.geography?.county?.countyName + "county " +
+                        countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + "Livelihood Zone questionnaire"
 
             prepareLivelihoodSelectionLayout()
             binding.apply {
