@@ -37,7 +37,6 @@
         android:background="@drawable/cell_shape">
 
         <TextView
-            android:text="Select livelihood zone..."
             android:id="@+id/lzDropDown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

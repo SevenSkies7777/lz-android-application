@@ -9,7 +9,7 @@
     <path
         android:pathData="M0,0h32v32h-32z"
         android:strokeWidth="1"
-        android:fillColor="#DEDEDE"
+        android:fillColor="@color/blue_shade"
         android:fillType="evenOdd"
         android:strokeColor="#00000000"/>
   </group>

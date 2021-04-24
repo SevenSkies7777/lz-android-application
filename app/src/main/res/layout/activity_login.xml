@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="85dp"
     tools:context=".login.ui.activity.Login">
 
     <ImageView
@@ -11,7 +12,7 @@
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/sandara"/>
+        android:src="@drawable/tata"/>
 
     <LinearLayout
         android:background="@drawable/bg_login"
@@ -107,8 +108,7 @@
             android:background="@drawable/bg_button"
             android:layout_width="match_parent"
             android:layout_height="33dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="85dp">
+            android:layout_marginTop="32dp">
 
             <TextView
                 android:id="@+id/loginText"
@@ -131,6 +131,19 @@
                 android:visibility="gone" />
 
         </FrameLayout>
+
+        <TextView
+            android:id="@+id/errorText"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:textColor="#d32f2f"
+            android:lineSpacingExtra="6sp"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"/>
 
 
     </LinearLayout>

@@ -94,11 +94,7 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
         registerObservers()
     }
 
-    override fun onResume() {
-        super.onResume()
-        populateQuestionnairesList()
-        populateWealthGroupQuestionnairesList()
-    }
+
 
     private fun populateQuestionnairesList() {
         val gson = Gson()
@@ -188,6 +184,14 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
                         Toast.makeText(activity, "Duplicate questionnaire", Toast.LENGTH_SHORT).show()
                     }
                 }
+            }
+        })
+
+        homeViewModel.isQuestionnaireCompleted.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                populateQuestionnairesList()
+                populateWealthGroupQuestionnairesList()
+                homeViewModel.setIsQuestionnaireCompleted(false)
             }
         })
     }

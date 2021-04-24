@@ -33,6 +33,7 @@ import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.databinding.WealthGroupQuestionnaireLayoutBinding
 import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
+import com.silasonyango.ndma.ui.home.HomeViewModel
 import com.silasonyango.ndma.ui.wealthgroup.responses.*
 import com.silasonyango.ndma.util.Util
 
@@ -53,6 +54,8 @@ class WealthGroupDialogFragment : DialogFragment() {
     private var subContyDialog: AlertDialog? = null
 
     private var errorDialog: android.app.AlertDialog? = null
+
+    private lateinit var homeViewModel: HomeViewModel
 
     companion object {
 
@@ -117,6 +120,8 @@ class WealthGroupDialogFragment : DialogFragment() {
     ): View? {
         wealthGroupViewModel =
             ViewModelProvider(this).get(WealthGroupViewModel::class.java)
+        homeViewModel =
+            ViewModelProvider(this).get(HomeViewModel::class.java)
         binding = WealthGroupQuestionnaireLayoutBinding.inflate(inflater, container, false)
         defineViews()
         return binding.root
@@ -2848,6 +2853,7 @@ class WealthGroupDialogFragment : DialogFragment() {
                     intent.action = Constants.QUESTIONNAIRE_COMPLETED
                     intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
                     activity?.sendBroadcast(intent)
+                    homeViewModel.setIsQuestionnaireCompleted(true)
 
                     this@WealthGroupDialogFragment.dismiss()
 

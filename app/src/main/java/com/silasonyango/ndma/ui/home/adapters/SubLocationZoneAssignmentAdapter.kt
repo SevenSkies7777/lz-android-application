@@ -27,13 +27,16 @@ class SubLocationZoneAssignmentAdapter(
 
     lateinit var currentSubLocationZoneAssignmentModel: SubLocationZoneAssignmentModel
 
+    var currentPosition: Int = 0
+
     interface SubLocationZoneAssignmentAdapterCallBack {
-        fun onLivelihoodZoneSelected(selectedSubLocationZoneAssignment: SubLocationZoneAssignmentModel)
+        fun onLivelihoodZoneSelected(selectedSubLocationZoneAssignment: SubLocationZoneAssignmentModel, position: Int)
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var subLocationName: TextView = view.findViewById<TextView>(R.id.subLocationName)
-        var lzDropDown: View = view.findViewById<View>(R.id.lzDropDown)
+        var lzDropDown: TextView = view.findViewById<TextView>(R.id.lzDropDown)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -46,8 +49,10 @@ class SubLocationZoneAssignmentAdapter(
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        currentPosition = position
         currentSubLocationZoneAssignmentModel = subLocationZoneAssignmentList.get(position)
         viewHolder.subLocationName.text = subLocationZoneAssignmentList.get(position).subLocation.subLocationName
+        viewHolder.lzDropDown.text = currentSubLocationZoneAssignmentModel.zoneName
         viewHolder.lzDropDown.setOnClickListener {
             inflateLivelihoodZoneModal(livelihoodZonesList)
         }
@@ -98,7 +103,8 @@ class SubLocationZoneAssignmentAdapter(
 
     override fun onLivelihoodZoneItemClicked(selectedLivelihoodZone: LivelihoodZoneModel) {
         currentSubLocationZoneAssignmentModel.livelihoodZoneId = selectedLivelihoodZone.livelihoodZoneId
-        subLocationZoneAssignmentAdapterCallBack.onLivelihoodZoneSelected(currentSubLocationZoneAssignmentModel)
+        currentSubLocationZoneAssignmentModel.zoneName = selectedLivelihoodZone.livelihoodZoneName
+        subLocationZoneAssignmentAdapterCallBack.onLivelihoodZoneSelected(currentSubLocationZoneAssignmentModel,currentPosition)
         (livelihoodZoneAlertDialog as android.app.AlertDialog).dismiss()
     }
 }

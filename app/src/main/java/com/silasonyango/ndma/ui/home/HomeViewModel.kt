@@ -24,6 +24,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     }
     val questionnaireApiResponse: LiveData<Resource<QuestionnaireApiResponse?>> = MutableLiveData(null)
 
+    val isQuestionnaireCompleted: LiveData<Boolean> = MutableLiveData(false)
+
     val allQuestionnaireTypesLiveData: LiveData<List<QuestionnaireTypesEntity>>
     private val questionnaireTypeRepository: QuestionnaireTypeRepository
     val questionnaires: LiveData<List<QuestionnaireTypesEntity>> = MutableLiveData(null)
@@ -38,6 +40,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             questionnaireTypeRepository.addQuestionnaireType(questionnaireTypesEntity)
         }
+    }
+
+    fun setIsQuestionnaireCompleted(isQuestionnaireCompleted: Boolean){
+        (this.isQuestionnaireCompleted as MutableLiveData<Boolean>).postValue(isQuestionnaireCompleted)
     }
 
 //    fun fetchAllQuestionnaires() {

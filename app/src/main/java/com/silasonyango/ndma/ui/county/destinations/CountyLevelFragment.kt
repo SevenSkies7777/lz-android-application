@@ -82,6 +82,8 @@ class CountyLevelFragment : DialogFragment(),
 
     private var marketSubCountyDialog: android.app.AlertDialog? = null
 
+    private lateinit var homeViewModel: HomeViewModel
+
     var questionnaireId: String? = null
 
     var questionnaireName: String? = null
@@ -89,6 +91,9 @@ class CountyLevelFragment : DialogFragment(),
     val WRITE_STORAGE_PERMISSION_CODE: Int = 100
 
     val lzSeasonsResponses = LzSeasonsResponses()
+
+    val subLocationZoneAssignmentModelList: MutableList<SubLocationZoneAssignmentModel> =
+        ArrayList()
 
 
     companion object {
@@ -137,6 +142,8 @@ class CountyLevelFragment : DialogFragment(),
     ): View? {
         countyLevelViewModel =
             ViewModelProvider(this).get(CountyLevelViewModel::class.java)
+        homeViewModel =
+            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         binding = CountyLevelQuestionnaireLayoutBinding.inflate(inflater, container, false)
         defineViews()
@@ -271,14 +278,12 @@ class CountyLevelFragment : DialogFragment(),
 
                 lzSelectionNextButton.setOnClickListener {
 
-                    val subLocationZoneAssignmentModelList: MutableList<SubLocationZoneAssignmentModel> =
-                        ArrayList()
-
                     for (currentSubLocation in geographyObject.subLocations) {
                         subLocationZoneAssignmentModelList.add(
                             SubLocationZoneAssignmentModel(
                                 currentSubLocation,
-                                0
+                                0,
+                                "Select livelihood zone..."
                             )
                         )
                     }
@@ -984,9 +989,9 @@ class CountyLevelFragment : DialogFragment(),
 
                     if (hasNoValidationError &&
                         (!etLongRainsHungerPeriodHasError &&
-                        !etEndLongBeginShortRainsHungerPeriodHasError &&
-                        !etShortRainsHungerPeriodHasError &&
-                        !etEndShortBeginLongRainsHungerPeriodHasError)
+                                !etEndLongBeginShortRainsHungerPeriodHasError &&
+                                !etShortRainsHungerPeriodHasError &&
+                                !etEndShortBeginLongRainsHungerPeriodHasError)
                     ) {
 
                         countyLevelQuestionnaire.hungerPatternsResponses = HungerPatternsResponses(
@@ -1001,9 +1006,9 @@ class CountyLevelFragment : DialogFragment(),
                     }
 
                     if (!etLongRainsHungerPeriodHasError ||
-                                !etEndLongBeginShortRainsHungerPeriodHasError ||
-                                !etShortRainsHungerPeriodHasError ||
-                                !etEndShortBeginLongRainsHungerPeriodHasError
+                        !etEndLongBeginShortRainsHungerPeriodHasError ||
+                        !etShortRainsHungerPeriodHasError ||
+                        !etEndShortBeginLongRainsHungerPeriodHasError
                     ) {
 
                         inflateErrorModal(
@@ -1492,6 +1497,7 @@ class CountyLevelFragment : DialogFragment(),
                     intent.action = QUESTIONNAIRE_COMPLETED
                     intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
                     activity?.sendBroadcast(intent)
+                    homeViewModel.setIsQuestionnaireCompleted(true)
 
                     this@CountyLevelFragment.dismiss()
 
@@ -1736,8 +1742,33 @@ class CountyLevelFragment : DialogFragment(),
         return countyLevelQuestionnaire.countyLivelihoodZones.filter { s -> s.livelihoodZoneId == selectedItem.livelihoodZoneId }.size > 0
     }
 
-    override fun onLivelihoodZoneSelected(selectedSubLocationZoneAssignment: SubLocationZoneAssignmentModel) {
+    override fun onLivelihoodZoneSelected(selectedSubLocationZoneAssignment: SubLocationZoneAssignmentModel, currentPosition: Int) {
         countyLevelQuestionnaire.subLocationZoneAllocationList.add(selectedSubLocationZoneAssignment)
+
+        binding.apply {
+
+            val currentList =
+                (subLocationZoneAssignmentModelList.filter { item -> item.subLocation.subLocationId != selectedSubLocationZoneAssignment.subLocation.subLocationId } as MutableList<SubLocationZoneAssignmentModel>)
+            currentList.add(selectedSubLocationZoneAssignment)
+            //subLocationZoneAssignmentModelList.set(currentPosition,selectedSubLocationZoneAssignment)
+            lzSubLocationAssignment.apply {
+                val subLocationassignmentAdapter = activity?.let { it1 ->
+                    SubLocationZoneAssignmentAdapter(
+                        currentList,
+                        this@CountyLevelFragment,
+                        geographyObject.livelihoodZones,
+                        it1
+                    )
+                }
+
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                listRv.layoutManager = gridLayoutManager
+                listRv.hasFixedSize()
+                listRv.adapter =
+                    subLocationassignmentAdapter
+            }
+
+        }
     }
 
     override fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel) {

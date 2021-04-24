@@ -88,16 +88,34 @@ class Login : AppCompatActivity() {
                         startActivity(i)
                     }
                     Status.ERROR -> {
-
+                        binding.apply {
+                            errorText.text = "An unexpected error has occured"
+                            errorText.visibility = View.VISIBLE
+                            loginProgressBar.visibility = View.GONE
+                            loginText.visibility = View.VISIBLE
+                        }
                     }
                     Status.LOADING -> {
-
+                        binding.apply {
+                            errorText.text = ""
+                            errorText.visibility = View.GONE
+                        }
                     }
                     Status.UNAUTHORISED -> {
-
+                        binding.apply {
+                            errorText.text = "Invalid credentials"
+                            errorText.visibility = View.VISIBLE
+                            loginProgressBar.visibility = View.GONE
+                            loginText.visibility = View.VISIBLE
+                        }
                     }
                     Status.UNPROCESSABLE_ENTITY -> {
-
+                        binding.apply {
+                            errorText.text = "No user exists by this email"
+                            errorText.visibility = View.VISIBLE
+                            loginProgressBar.visibility = View.GONE
+                            loginText.visibility = View.VISIBLE
+                        }
                     }
                 }
             }
