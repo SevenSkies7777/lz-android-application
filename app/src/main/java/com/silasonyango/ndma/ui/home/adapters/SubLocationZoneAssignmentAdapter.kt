@@ -18,12 +18,8 @@ import com.silasonyango.ndma.ui.county.model.SubLocationZoneAssignmentModel
 
 class SubLocationZoneAssignmentAdapter(
     private val subLocationZoneAssignmentList: MutableList<SubLocationZoneAssignmentModel>,
-    val subLocationZoneAssignmentAdapterCallBack: SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack,
-    val livelihoodZonesList: MutableList<LivelihoodZoneModel>,
     val context: Context
-) : RecyclerView.Adapter<SubLocationZoneAssignmentAdapter.ViewHolder>(), LivelihoodZonesAdapter.LivelihoodZonesAdapterCallBack {
-
-    private var livelihoodZoneAlertDialog: android.app.AlertDialog? = null
+) : RecyclerView.Adapter<SubLocationZoneAssignmentAdapter.ViewHolder>() {
 
     lateinit var currentSubLocationZoneAssignmentModel: SubLocationZoneAssignmentModel
 
@@ -51,60 +47,9 @@ class SubLocationZoneAssignmentAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         currentPosition = position
         currentSubLocationZoneAssignmentModel = subLocationZoneAssignmentList.get(position)
-        viewHolder.subLocationName.text = subLocationZoneAssignmentList.get(position).subLocation.subLocationName
+        viewHolder.subLocationName.text = subLocationZoneAssignmentList.get(position).subLocationName
         viewHolder.lzDropDown.text = currentSubLocationZoneAssignmentModel.zoneName
-        viewHolder.lzDropDown.setOnClickListener {
-            inflateLivelihoodZoneModal(livelihoodZonesList)
-        }
     }
 
     override fun getItemCount() = subLocationZoneAssignmentList.size
-
-    private fun inflateLivelihoodZoneModal(livelihoodZoneModelList: MutableList<LivelihoodZoneModel>) {
-        val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
-        val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
-
-        val listRecyclerView = v.findViewById<RecyclerView>(R.id.listRv)
-
-        val lzAdapter = LivelihoodZonesAdapter(
-            livelihoodZoneModelList,
-            this
-        )
-        val gridLayoutManager = GridLayoutManager(context, 1)
-        listRecyclerView.layoutManager = gridLayoutManager
-        listRecyclerView.hasFixedSize()
-        listRecyclerView.adapter = lzAdapter
-
-        openLivelihoodZoneModal(v)
-    }
-
-    private fun openLivelihoodZoneModal(v: View) {
-        val width =
-            (context.resources.displayMetrics.widthPixels * 0.75).toInt()
-        val height =
-            (context.resources.displayMetrics.heightPixels * 0.75).toInt()
-
-        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(context)
-        builder.setView(v)
-        builder.setCancelable(true)
-        livelihoodZoneAlertDialog = builder.create()
-        (livelihoodZoneAlertDialog as android.app.AlertDialog).apply {
-            setCancelable(true)
-            setCanceledOnTouchOutside(true)
-            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            show()
-            window?.setLayout(
-                width,
-                height
-            )
-        }
-
-    }
-
-    override fun onLivelihoodZoneItemClicked(selectedLivelihoodZone: LivelihoodZoneModel) {
-        currentSubLocationZoneAssignmentModel.livelihoodZoneId = selectedLivelihoodZone.livelihoodZoneId
-        currentSubLocationZoneAssignmentModel.zoneName = selectedLivelihoodZone.livelihoodZoneName
-        subLocationZoneAssignmentAdapterCallBack.onLivelihoodZoneSelected(currentSubLocationZoneAssignmentModel,currentPosition)
-        (livelihoodZoneAlertDialog as android.app.AlertDialog).dismiss()
-    }
 }

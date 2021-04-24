@@ -9,5 +9,6 @@ data class GeographyObject(
     val crops: MutableList<CropModel>,
     val ethnicGroups: MutableList<EthnicGroupModel>,
     val months: MutableList<MonthsModel>,
-    val subCounties: MutableList<SubCountyModel>
+    val subCounties: MutableList<SubCountyModel>,
+    val sublocationsLivelihoodZoneAssignments: MutableList<SubLocationsLivelihoodZoneAssignmentsModel>
 )

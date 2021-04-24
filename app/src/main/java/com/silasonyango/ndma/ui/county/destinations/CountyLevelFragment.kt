@@ -38,6 +38,7 @@ import com.silasonyango.ndma.config.Constants.QUESTIONNAIRE_COMPLETED
 import com.silasonyango.ndma.database.questionnaires.entity.QuestionnaireTypesEntity
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.login.model.GeographyObject
+import com.silasonyango.ndma.login.model.SubLocationsLivelihoodZoneAssignmentsModel
 import com.silasonyango.ndma.ui.county.adapters.LzCropProductionRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.adapters.LzMarketTradeRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.adapters.SubCountiesSpinnerAdapter
@@ -60,7 +61,6 @@ class CountyLevelFragment : DialogFragment(),
     LzMarketTradeRecyclerViewAdapter.LzMarketTradeRecyclerViewAdapterCallBack,
     LivelihoodZonesAdapter.LivelihoodZonesAdapterCallBack,
     LzSelectionAdapter.LzSelectionAdapterCallBack,
-    SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack,
     CropSelectionAdapter.CropSelectionAdapterCallBack,
     TribeSelectionAdapter.TribeSelectionAdapterCallBack, EthnicityAdapter.EthnicityAdapterCallBack,
     MonthsAdapter.MonthsAdapterCallBack,
@@ -195,10 +195,36 @@ class CountyLevelFragment : DialogFragment(),
                             AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
                                     countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + " Livelihood Zone questionnaire"
 
+                        val subLocationLivelihoodZoneAssignment = geographyObject.sublocationsLivelihoodZoneAssignments.filter {
+                            it.livelihoodZoneId == countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneId
+                        }
 
-                        prepareLivelihoodSelectionLayout()
+                        for (currentSubLocationLivelihoodZoneAssignment in subLocationLivelihoodZoneAssignment) {
+                            subLocationZoneAssignmentModelList.add(
+                                SubLocationZoneAssignmentModel(
+                                    currentSubLocationLivelihoodZoneAssignment.subLocationName,
+                                    currentSubLocationLivelihoodZoneAssignment.livelihoodZoneId,
+                                    currentSubLocationLivelihoodZoneAssignment.livelihoodZoneName
+                                )
+                            )
+                        }
+
+                        lzSubLocationAssignment.apply {
+                            val subLocationassignmentAdapter = activity?.let { it1 ->
+                                SubLocationZoneAssignmentAdapter(
+                                    subLocationZoneAssignmentModelList,
+                                    it1
+                                )
+                            }
+
+                            val gridLayoutManager = GridLayoutManager(activity, 1)
+                            listRv.layoutManager = gridLayoutManager
+                            listRv.hasFixedSize()
+                            listRv.adapter =
+                                subLocationassignmentAdapter
+                        }
+                        lzSubLocationAssignment.root.visibility = View.VISIBLE
                         countyConfiguration.root.visibility = View.GONE
-                        livelihoodZoneSelection.root.visibility = View.VISIBLE
                     }
                 }
             }
@@ -206,24 +232,24 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
-    private fun prepareLivelihoodSelectionLayout() {
-        binding.apply {
-
-            livelihoodZoneSelection.apply {
-
-                val lzSelectionAdapter = LzSelectionAdapter(
-                    geographyObject.livelihoodZones,
-                    this@CountyLevelFragment
-                )
-                val gridLayoutManager = GridLayoutManager(context, 1)
-                lzList.layoutManager = gridLayoutManager
-                lzList.hasFixedSize()
-                lzList.adapter = lzSelectionAdapter
-
-            }
-
-        }
-    }
+//    private fun prepareLivelihoodSelectionLayout() {
+//        binding.apply {
+//
+//            livelihoodZoneSelection.apply {
+//
+//                val lzSelectionAdapter = LzSelectionAdapter(
+//                    geographyObject.livelihoodZones,
+//                    this@CountyLevelFragment
+//                )
+//                val gridLayoutManager = GridLayoutManager(context, 1)
+//                lzList.layoutManager = gridLayoutManager
+//                lzList.hasFixedSize()
+//                lzList.adapter = lzSelectionAdapter
+//
+//            }
+//
+//        }
+//    }
 
     private fun populateLocationAndPopulationRV(subLocationsList: MutableList<SubLocationModel>) {
         binding.apply {
@@ -270,53 +296,13 @@ class CountyLevelFragment : DialogFragment(),
     private fun defineNavigation() {
         binding.apply {
 
-            /* Livelihood Zone Selection navigation */
-            livelihoodZoneSelection.apply {
-                lzSelectionBackButton.setOnClickListener {
-                    countyConfiguration.root.visibility = View.VISIBLE
-                    livelihoodZoneSelection.root.visibility = View.GONE
-                }
-
-                lzSelectionNextButton.setOnClickListener {
-
-                    for (currentSubLocation in geographyObject.subLocations) {
-                        subLocationZoneAssignmentModelList.add(
-                            SubLocationZoneAssignmentModel(
-                                currentSubLocation,
-                                0,
-                                "Select livelihood zone..."
-                            )
-                        )
-                    }
-
-                    lzSubLocationAssignment.apply {
-                        val subLocationassignmentAdapter = activity?.let { it1 ->
-                            SubLocationZoneAssignmentAdapter(
-                                subLocationZoneAssignmentModelList,
-                                this@CountyLevelFragment,
-                                geographyObject.livelihoodZones,
-                                it1
-                            )
-                        }
-
-                        val gridLayoutManager = GridLayoutManager(activity, 1)
-                        listRv.layoutManager = gridLayoutManager
-                        listRv.hasFixedSize()
-                        listRv.adapter =
-                            subLocationassignmentAdapter
-                    }
-                    lzSubLocationAssignment.root.visibility = View.VISIBLE
-                    livelihoodZoneSelection.root.visibility = View.GONE
-                }
-            }
-
 
             /* Lz Sublocation assignment navigation */
             lzSubLocationAssignment.apply {
 
                 lzAllocationBackButton.setOnClickListener {
+                    countyConfiguration.root.visibility = View.VISIBLE
                     lzSubLocationAssignment.root.visibility = View.GONE
-                    livelihoodZoneSelection.root.visibility = View.VISIBLE
                 }
 
                 lzAllocationNextButton.setOnClickListener {
@@ -1467,7 +1453,8 @@ class CountyLevelFragment : DialogFragment(),
             lzCompletionPage.apply {
                 closeButton.setOnClickListener {
                     countyLevelQuestionnaire.questionnaireEndDate = Util.getNow()
-                    countyLevelQuestionnaire.questionnaireStatus = QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
+                    countyLevelQuestionnaire.questionnaireStatus =
+                        QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
                     val gson = Gson()
                     val sharedPreferences: SharedPreferences? =
                         context?.applicationContext?.getSharedPreferences(
@@ -1624,10 +1611,37 @@ class CountyLevelFragment : DialogFragment(),
                 AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
                         countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + " Livelihood Zone questionnaire"
 
-            prepareLivelihoodSelectionLayout()
+
             binding.apply {
+                val subLocationLivelihoodZoneAssignment = geographyObject.sublocationsLivelihoodZoneAssignments.filter {
+                    it.livelihoodZoneId == countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneId
+                }
+                for (currentSubLocationLivelihoodZoneAssignment in subLocationLivelihoodZoneAssignment) {
+                    subLocationZoneAssignmentModelList.add(
+                        SubLocationZoneAssignmentModel(
+                            currentSubLocationLivelihoodZoneAssignment.subLocationName,
+                            currentSubLocationLivelihoodZoneAssignment.livelihoodZoneId,
+                            currentSubLocationLivelihoodZoneAssignment.livelihoodZoneName
+                        )
+                    )
+                }
+
+                lzSubLocationAssignment.apply {
+                    val subLocationassignmentAdapter = activity?.let { it1 ->
+                        SubLocationZoneAssignmentAdapter(
+                            subLocationZoneAssignmentModelList,
+                            it1
+                        )
+                    }
+
+                    val gridLayoutManager = GridLayoutManager(activity, 1)
+                    listRv.layoutManager = gridLayoutManager
+                    listRv.hasFixedSize()
+                    listRv.adapter =
+                        subLocationassignmentAdapter
+                }
+                lzSubLocationAssignment.root.visibility = View.VISIBLE
                 countyConfiguration.root.visibility = View.GONE
-                livelihoodZoneSelection.root.visibility = View.VISIBLE
             }
 
         }
@@ -1744,34 +1758,37 @@ class CountyLevelFragment : DialogFragment(),
         return countyLevelQuestionnaire.countyLivelihoodZones.filter { s -> s.livelihoodZoneId == selectedItem.livelihoodZoneId }.size > 0
     }
 
-    override fun onLivelihoodZoneSelected(selectedSubLocationZoneAssignment: SubLocationZoneAssignmentModel, currentPosition: Int) {
-        countyLevelQuestionnaire.subLocationZoneAllocationList.add(selectedSubLocationZoneAssignment)
-
-        binding.apply {
-
-            val currentList =
-                (subLocationZoneAssignmentModelList.filter { item -> item.subLocation.subLocationId != selectedSubLocationZoneAssignment.subLocation.subLocationId } as MutableList<SubLocationZoneAssignmentModel>)
-            currentList.add(selectedSubLocationZoneAssignment)
-            //subLocationZoneAssignmentModelList.set(currentPosition,selectedSubLocationZoneAssignment)
-            lzSubLocationAssignment.apply {
-                val subLocationassignmentAdapter = activity?.let { it1 ->
-                    SubLocationZoneAssignmentAdapter(
-                        currentList,
-                        this@CountyLevelFragment,
-                        geographyObject.livelihoodZones,
-                        it1
-                    )
-                }
-
-                val gridLayoutManager = GridLayoutManager(activity, 1)
-                listRv.layoutManager = gridLayoutManager
-                listRv.hasFixedSize()
-                listRv.adapter =
-                    subLocationassignmentAdapter
-            }
-
-        }
-    }
+//    override fun onLivelihoodZoneSelected(
+//        selectedSubLocationZoneAssignment: SubLocationZoneAssignmentModel,
+//        currentPosition: Int
+//    ) {
+//        countyLevelQuestionnaire.subLocationZoneAllocationList.add(selectedSubLocationZoneAssignment)
+//
+//        binding.apply {
+//
+//            val currentList =
+//                (subLocationZoneAssignmentModelList.filter { item -> item.subLocation.subLocationId != selectedSubLocationZoneAssignment.subLocation.subLocationId } as MutableList<SubLocationZoneAssignmentModel>)
+//            currentList.add(selectedSubLocationZoneAssignment)
+//            //subLocationZoneAssignmentModelList.set(currentPosition,selectedSubLocationZoneAssignment)
+//            lzSubLocationAssignment.apply {
+//                val subLocationassignmentAdapter = activity?.let { it1 ->
+//                    SubLocationZoneAssignmentAdapter(
+//                        currentList,
+//                        this@CountyLevelFragment,
+//                        geographyObject.livelihoodZones,
+//                        it1
+//                    )
+//                }
+//
+//                val gridLayoutManager = GridLayoutManager(activity, 1)
+//                listRv.layoutManager = gridLayoutManager
+//                listRv.hasFixedSize()
+//                listRv.adapter =
+//                    subLocationassignmentAdapter
+//            }
+//
+//        }
+//    }
 
     override fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel) {
         countyLevelQuestionnaire.livelihoodZoneCrops.add(selectedCrop)

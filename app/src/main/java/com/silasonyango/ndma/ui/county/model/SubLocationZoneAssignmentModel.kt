@@ -1,7 +1,7 @@
 package com.silasonyango.ndma.ui.county.model
 
 data class SubLocationZoneAssignmentModel(
-    val subLocation: SubLocationModel,
+    val subLocationName: String,
     var livelihoodZoneId: Int,
     var zoneName: String
 )
