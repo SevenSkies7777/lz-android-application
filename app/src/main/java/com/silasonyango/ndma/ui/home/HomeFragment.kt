@@ -31,6 +31,8 @@ import com.silasonyango.ndma.services.model.Status
 import com.silasonyango.ndma.ui.county.adapters.LzCropProductionRecyclerViewAdapter
 import com.silasonyango.ndma.ui.home.adapters.CountyQuestionnaireAdapter
 import com.silasonyango.ndma.ui.home.adapters.WealthGroupQuestionnaireAdapter
+import com.silasonyango.ndma.ui.model.QuestionnaireApiResponse
+import com.silasonyango.ndma.ui.model.QuestionnaireStatus
 
 class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireAdapterCallBack, WealthGroupQuestionnaireAdapter.WealthGroupQuestionnaireAdapterCallBack {
 
@@ -168,6 +170,11 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
                 when (resource.status) {
                     Status.SUCCESS -> {
                         Toast.makeText(activity, "Questionnaire submitted succesfully", Toast.LENGTH_SHORT).show()
+                        if ((resource.data as QuestionnaireApiResponse).questionnaireType == 1) {
+                            updateSubmittedCountyLevelQuestionnaire((resource.data as QuestionnaireApiResponse).questionnaireUniqueId)
+                        } else if ((resource.data as QuestionnaireApiResponse).questionnaireType == 2) {
+                            updateSubmittedWealthGroupQuestionnaire((resource.data as QuestionnaireApiResponse).questionnaireUniqueId)
+                        }
                         populateQuestionnairesList()
                         populateWealthGroupQuestionnairesList()
                     }
@@ -182,6 +189,8 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
                     }
                     Status.UNPROCESSABLE_ENTITY -> {
                         Toast.makeText(activity, "Duplicate questionnaire", Toast.LENGTH_SHORT).show()
+                        populateQuestionnairesList()
+                        populateWealthGroupQuestionnairesList()
                     }
                 }
             }
@@ -195,6 +204,79 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
             }
         })
     }
+
+    private fun updateSubmittedWealthGroupQuestionnaire(questionnaireUniqueId: String) {
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.WEALTH_GROUP_LIST_OBJECT, null)
+        val questionnairesListObject: WealthGroupQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                WealthGroupQuestionnaireListObject::class.java
+            )
+        var wealthGroupQuestionnaires: MutableList<WealthGroupQuestionnaire> = questionnairesListObject.questionnaireList
+        val questionnaireToBeUpdated = wealthGroupQuestionnaires.first {
+            it.uniqueId == questionnaireUniqueId
+        }
+        questionnaireToBeUpdated.questionnaireStatus = QuestionnaireStatus.SUBMITTED_TO_BACKEND
+        wealthGroupQuestionnaires = wealthGroupQuestionnaires.filter {
+            it.uniqueId != questionnaireUniqueId
+        } as MutableList<WealthGroupQuestionnaire>
+        wealthGroupQuestionnaires.add(questionnaireToBeUpdated)
+
+        questionnairesListObject.questionnaireList = wealthGroupQuestionnaires
+        editor?.remove(Constants.WEALTH_GROUP_LIST_OBJECT)
+        val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
+        editor?.putString(
+            Constants.WEALTH_GROUP_LIST_OBJECT,
+            newQuestionnaireObjectString
+        )
+        editor?.commit()
+    }
+
+
+    private fun updateSubmittedCountyLevelQuestionnaire(questionnaireUniqueId: String) {
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null)
+        val questionnairesListObject: CountyLevelQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                CountyLevelQuestionnaireListObject::class.java
+            )
+        var countyLevelQuestionnaires: MutableList<CountyLevelQuestionnaire> = questionnairesListObject.questionnaireList
+        val questionnaireToBeUpdated = countyLevelQuestionnaires.first {
+            it.uniqueId == questionnaireUniqueId
+        }
+        questionnaireToBeUpdated.questionnaireStatus = QuestionnaireStatus.SUBMITTED_TO_BACKEND
+        countyLevelQuestionnaires = countyLevelQuestionnaires.filter {
+            it.uniqueId != questionnaireUniqueId
+        } as MutableList<CountyLevelQuestionnaire>
+        countyLevelQuestionnaires.add(questionnaireToBeUpdated)
+
+        questionnairesListObject.questionnaireList = countyLevelQuestionnaires
+        editor?.remove(Constants.QUESTIONNAIRES_LIST_OBJECT)
+        val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
+        editor?.putString(
+            Constants.QUESTIONNAIRES_LIST_OBJECT,
+            newQuestionnaireObjectString
+        )
+        editor?.commit()
+    }
+
+
 
     override fun onQuestionnaireItemClicked(wealthGroupQuestionnaire: WealthGroupQuestionnaire) {
         homeViewModel.submitWealthGroupQuestionnaire(wealthGroupQuestionnaire)

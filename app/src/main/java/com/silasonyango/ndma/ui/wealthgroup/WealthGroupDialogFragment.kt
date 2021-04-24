@@ -34,6 +34,7 @@ import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.databinding.WealthGroupQuestionnaireLayoutBinding
 import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
 import com.silasonyango.ndma.ui.home.HomeViewModel
+import com.silasonyango.ndma.ui.model.QuestionnaireStatus
 import com.silasonyango.ndma.ui.wealthgroup.responses.*
 import com.silasonyango.ndma.util.Util
 
@@ -105,8 +106,8 @@ class WealthGroupDialogFragment : DialogFragment() {
             wealthGroupQuestionnaire.questionnaireGeography = this.questionnaireSessionLocation!!
             wealthGroupQuestionnaire.questionnaireStartDate = Util.getNow()
             wealthGroupQuestionnaire.questionnaireName =
-                AppStore.getInstance().sessionDetails?.geography?.county?.countyName + "county " +
-                        wealthGroupQuestionnaire.questionnaireGeography.selectedLivelihoodZone.livelihoodZoneName + "Livelihood Zone " + wealthGroupQuestionnaire.questionnaireGeography.selectedWealthGroup.wealthGroupName + "questionnaire"
+                AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
+                        wealthGroupQuestionnaire.questionnaireGeography.selectedLivelihoodZone.livelihoodZoneName + " Livelihood Zone " + wealthGroupQuestionnaire.questionnaireGeography.selectedWealthGroup.wealthGroupName + " questionnaire"
         }
 
         inflateSubCountyModal()
@@ -2822,6 +2823,7 @@ class WealthGroupDialogFragment : DialogFragment() {
             /*wgCompletion page navigation*/
             wgCompletionPage.apply {
                 closeButton.setOnClickListener {
+                    wealthGroupQuestionnaire.questionnaireStatus = QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
                     wealthGroupQuestionnaire.questionnaireEndDate = Util.getNow()
                     val gson = Gson()
                     val sharedPreferences: SharedPreferences? =

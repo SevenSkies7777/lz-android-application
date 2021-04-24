@@ -1,11 +1,13 @@
 package com.silasonyango.ndma.appStore.model
 
 import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
+import com.silasonyango.ndma.ui.model.QuestionnaireStatus
 import com.silasonyango.ndma.ui.wealthgroup.responses.*
 
 
 class WealthGroupQuestionnaire(val uniqueId: String, var questionnaireName: String){
     var hasBeenSubmitted: Boolean = false
+    var questionnaireStatus: QuestionnaireStatus = QuestionnaireStatus.DRAFT_QUESTIONNAIRE
     lateinit var questionnaireStartDate: String
     lateinit var questionnaireEndDate: String
     lateinit var questionnaireGeography: QuestionnaireSessionLocation

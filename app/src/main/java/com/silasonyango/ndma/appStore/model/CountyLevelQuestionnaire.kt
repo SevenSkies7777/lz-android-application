@@ -2,9 +2,12 @@ package com.silasonyango.ndma.appStore.model
 
 import com.silasonyango.ndma.ui.county.model.*
 import com.silasonyango.ndma.ui.county.responses.*
+import com.silasonyango.ndma.ui.model.QuestionnaireStatus
 
 class CountyLevelQuestionnaire(val uniqueId: String, var questionnaireName: String){
     var hasBeenSubmitted: Boolean = false
+
+    var questionnaireStatus: QuestionnaireStatus = QuestionnaireStatus.DRAFT_QUESTIONNAIRE
 
     lateinit var selectedLivelihoodZone: LivelihoodZoneModel
 

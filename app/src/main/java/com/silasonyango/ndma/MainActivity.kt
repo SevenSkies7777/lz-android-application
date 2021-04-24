@@ -187,36 +187,6 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
             inflateGeographyDialog()
         }
 
-//        submitButton.setOnClickListener {
-//            if (selectedQuestionnaireType == QuestionnaireType.COUNTY_LEVEL_QUESTIONNAIRE) {
-//                val questionnaireId = Util.generateUniqueId()
-//                AppStore.getInstance().countyLevelQuestionnairesList.add(
-//                    CountyLevelQuestionnaire(
-//                        questionnaireId,
-//                        etQuestionnaireName.text.toString()
-//                    )
-//                )
-//                val countyLevelDialogFragment = CountyLevelFragment.newInstance(
-//                    questionnaireId,
-//                    etQuestionnaireName.text.toString()
-//                )
-//                countyLevelDialogFragment.show(this.supportFragmentManager, "CountyLevel")
-//            } else {
-//                val questionnaireId = Util.generateUniqueId()
-//                AppStore.getInstance().wealthGroupQuestionnaireList.add(
-//                    WealthGroupQuestionnaire(
-//                        questionnaireId,
-//                        etQuestionnaireName.text.toString()
-//                    )
-//                )
-//                this.questionnaireId = questionnaireId
-//                this.questionnaireName = etQuestionnaireName.text.toString()
-//                inflateGeographyDialog()
-//
-//            }
-//
-//            (questionnaireMenuDialog as android.app.AlertDialog).dismiss()
-//        }
         openQuestionnaireMenuModal(v)
     }
 
@@ -337,7 +307,7 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
                     questionnaireName,
                     questionnaireSessionLocation
                 )
-                wealthGroupDialogFragment.show(this.supportFragmentManager, "CountyLevel")
+                wealthGroupDialogFragment.show(this.supportFragmentManager, "WealthGroup")
             }
         }
 

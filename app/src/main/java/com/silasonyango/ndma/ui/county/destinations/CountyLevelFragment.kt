@@ -47,6 +47,7 @@ import com.silasonyango.ndma.ui.county.responses.*
 import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
 import com.silasonyango.ndma.ui.home.HomeViewModel
 import com.silasonyango.ndma.ui.home.adapters.*
+import com.silasonyango.ndma.ui.model.QuestionnaireStatus
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
 import com.silasonyango.ndma.util.GpsTracker
 import com.silasonyango.ndma.util.Util
@@ -191,8 +192,8 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.longitude = longitude
                         countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
                         countyLevelQuestionnaire.questionnaireName =
-                            AppStore.getInstance().sessionDetails?.geography?.county?.countyName + "county " +
-                                    countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + "Livelihood Zone questionnaire"
+                            AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
+                                    countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + " Livelihood Zone questionnaire"
 
 
                         prepareLivelihoodSelectionLayout()
@@ -1466,6 +1467,7 @@ class CountyLevelFragment : DialogFragment(),
             lzCompletionPage.apply {
                 closeButton.setOnClickListener {
                     countyLevelQuestionnaire.questionnaireEndDate = Util.getNow()
+                    countyLevelQuestionnaire.questionnaireStatus = QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
                     val gson = Gson()
                     val sharedPreferences: SharedPreferences? =
                         context?.applicationContext?.getSharedPreferences(
@@ -1619,8 +1621,8 @@ class CountyLevelFragment : DialogFragment(),
             countyLevelQuestionnaire.longitude = longitude
             countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
             countyLevelQuestionnaire.questionnaireName =
-                AppStore.getInstance().sessionDetails?.geography?.county?.countyName + "county " +
-                        countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + "Livelihood Zone questionnaire"
+                AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
+                        countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + " Livelihood Zone questionnaire"
 
             prepareLivelihoodSelectionLayout()
             binding.apply {
