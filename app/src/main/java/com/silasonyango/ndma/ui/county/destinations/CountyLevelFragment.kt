@@ -195,9 +195,10 @@ class CountyLevelFragment : DialogFragment(),
                             AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
                                     countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + " Livelihood Zone questionnaire"
 
-                        val subLocationLivelihoodZoneAssignment = geographyObject.sublocationsLivelihoodZoneAssignments.filter {
-                            it.livelihoodZoneId == countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneId
-                        }
+                        val subLocationLivelihoodZoneAssignment =
+                            geographyObject.sublocationsLivelihoodZoneAssignments.filter {
+                                it.livelihoodZoneId == countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneId
+                            }
 
                         for (currentSubLocationLivelihoodZoneAssignment in subLocationLivelihoodZoneAssignment) {
                             subLocationZoneAssignmentModelList.add(
@@ -403,6 +404,7 @@ class CountyLevelFragment : DialogFragment(),
 
 
                 cropSelectionNextButton.setOnClickListener {
+
                     populateCropProductionRecyclerView(countyLevelQuestionnaire.livelihoodZoneCrops)
                     cropSelectionLayout.root.visibility = View.GONE
                     cropProductionLayout.root.visibility = View.VISIBLE
@@ -413,8 +415,11 @@ class CountyLevelFragment : DialogFragment(),
             /*Crop Production navigation buttons*/
             cropProductionLayout.apply {
                 cropProductionNextButton.setOnClickListener {
-                    mainWaterSource.root.visibility = View.VISIBLE
-                    cropProductionLayout.root.visibility = View.GONE
+                    val intent = Intent()
+                    intent.action = Constants.LZ_CROPS_NEXT_BUTTON_CLICKED
+                    activity?.applicationContext?.sendBroadcast(intent)
+//                    mainWaterSource.root.visibility = View.VISIBLE
+//                    cropProductionLayout.root.visibility = View.GONE
                 }
                 cropProductionBackButton.setOnClickListener {
                     cropSelectionLayout.root.visibility = View.VISIBLE
@@ -1613,9 +1618,10 @@ class CountyLevelFragment : DialogFragment(),
 
 
             binding.apply {
-                val subLocationLivelihoodZoneAssignment = geographyObject.sublocationsLivelihoodZoneAssignments.filter {
-                    it.livelihoodZoneId == countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneId
-                }
+                val subLocationLivelihoodZoneAssignment =
+                    geographyObject.sublocationsLivelihoodZoneAssignments.filter {
+                        it.livelihoodZoneId == countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneId
+                    }
                 for (currentSubLocationLivelihoodZoneAssignment in subLocationLivelihoodZoneAssignment) {
                     subLocationZoneAssignmentModelList.add(
                         SubLocationZoneAssignmentModel(
@@ -2264,5 +2270,16 @@ class CountyLevelFragment : DialogFragment(),
             )
         }
 
+    }
+
+    override fun onCurrentCropHasNoError(
+        lzCropProductionResponseItem: LzCropProductionResponseItem
+    ) {
+        countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses.add(lzCropProductionResponseItem)
+        System.out.println()
+    }
+
+    override fun onACropHasAValidationError() {
+        inflateErrorModal("Missing data", "Kindly fill in all the data in the form")
     }
 }

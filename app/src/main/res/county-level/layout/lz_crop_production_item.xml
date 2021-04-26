@@ -484,6 +484,7 @@
                     android:background="@drawable/cell_shape">
 
                     <EditText
+                        android:id="@+id/rainfedCultivatedAreaPercentage"
                         android:fontFamily="@font/lato_regular"
                         android:textStyle="normal"
                         android:textSize="16sp"
@@ -507,6 +508,7 @@
                     android:background="@drawable/cell_shape">
 
                     <EditText
+                        android:id="@+id/rainfedAverageYieldPerHa"
                         android:fontFamily="@font/lato_regular"
                         android:textStyle="normal"
                         android:textSize="16sp"
@@ -530,6 +532,7 @@
                     android:background="@drawable/cell_shape">
 
                     <EditText
+                        android:id="@+id/irrigatedCultivatedArea"
                         android:fontFamily="@font/lato_regular"
                         android:textStyle="normal"
                         android:textSize="16sp"
@@ -553,6 +556,7 @@
                     android:background="@drawable/cell_shape">
 
                     <EditText
+                        android:id="@+id/irrigatedAverageYieldPerHa"
                         android:fontFamily="@font/lato_regular"
                         android:textStyle="normal"
                         android:textSize="16sp"
@@ -568,6 +572,21 @@
                 </LinearLayout>
             </TableRow>
         </TableLayout>
+
+        <TextView
+            android:id="@+id/cropSubmitButton"
+            android:background="@drawable/bg_green_button"
+            android:text="Submit"
+            android:layout_width="130dp"
+            android:layout_height="28dp"
+            android:fontFamily="@font/lato_bold"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="12sp"
+            android:gravity="center"
+            android:layout_gravity="end"
+            android:layout_marginTop="27dp"/>
 
     </LinearLayout>
 
