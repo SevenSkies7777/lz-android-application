@@ -40,4 +40,6 @@ class CountyLevelQuestionnaire(val uniqueId: String, var questionnaireName: Stri
     lateinit var hazardResponses: HazardResponses
 
     lateinit var livelihoodZoneSeasonsResponses: LzSeasonsResponses
+
+    var lzCropProductionResponses: LzCropProductionResponses =  LzCropProductionResponses()
 }

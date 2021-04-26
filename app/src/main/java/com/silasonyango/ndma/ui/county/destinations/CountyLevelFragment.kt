@@ -402,6 +402,7 @@ class CountyLevelFragment : DialogFragment(),
 
 
                 cropSelectionNextButton.setOnClickListener {
+
                     populateCropProductionRecyclerView(countyLevelQuestionnaire.livelihoodZoneCrops)
                     cropSelectionLayout.root.visibility = View.GONE
                     cropProductionLayout.root.visibility = View.VISIBLE
@@ -412,6 +413,9 @@ class CountyLevelFragment : DialogFragment(),
             /*Crop Production navigation buttons*/
             cropProductionLayout.apply {
                 cropProductionNextButton.setOnClickListener {
+//                    val intent = Intent()
+//                    intent.action = Constants.LZ_CROPS_NEXT_BUTTON_CLICKED
+//                    activity?.applicationContext?.sendBroadcast(intent)
                     mainWaterSource.root.visibility = View.VISIBLE
                     cropProductionLayout.root.visibility = View.GONE
                 }
@@ -2261,5 +2265,16 @@ class CountyLevelFragment : DialogFragment(),
             )
         }
 
+    }
+
+    override fun onCurrentCropHasNoError(
+        lzCropProductionResponseItem: LzCropProductionResponseItem
+    ) {
+        countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses.add(lzCropProductionResponseItem)
+        System.out.println()
+    }
+
+    override fun onACropHasAValidationError() {
+        inflateErrorModal("Missing data", "Kindly fill in all the data in the form")
     }
 }
