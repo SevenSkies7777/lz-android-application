@@ -3,8 +3,7 @@ package com.silasonyango.ndma
 import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Context
-import android.content.SharedPreferences
+import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -84,12 +83,30 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
     lateinit var selectedWard: WardModel
 
+    var dialogDismissBroadCastReceiver: BroadcastReceiver? = null
+
     val WRITE_STORAGE_PERMISSION_CODE: Int = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
+
+        dialogDismissBroadCastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(contxt: Context?, intent: Intent?) {
+                when (intent?.action) {
+                    Constants.DISMISS_MAIN_ACTIVITY_DIALOGS -> {
+                        questionnaireMenuDialog?.dismiss()
+                        geographyDialog?.dismiss()
+                    }
+                }
+            }
+        }
+
+        val filter = IntentFilter()
+        filter.addAction(Constants.DISMISS_MAIN_ACTIVITY_DIALOGS)
+        this?.applicationContext?.registerReceiver(dialogDismissBroadCastReceiver, filter)
+
         val sharedPreferences: SharedPreferences? =
             baseContext?.applicationContext?.getSharedPreferences("MyPref", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor? = sharedPreferences?.edit()

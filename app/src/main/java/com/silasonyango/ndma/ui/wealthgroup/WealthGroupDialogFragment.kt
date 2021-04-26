@@ -2853,10 +2853,7 @@ class WealthGroupDialogFragment : DialogFragment() {
 
                     val intent = Intent()
                     intent.action = Constants.QUESTIONNAIRE_COMPLETED
-                    intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
-                    activity?.sendBroadcast(intent)
-                    homeViewModel.setIsQuestionnaireCompleted(true)
-
+                    activity?.applicationContext?.sendBroadcast(intent)
                     this@WealthGroupDialogFragment.dismiss()
 
                 }

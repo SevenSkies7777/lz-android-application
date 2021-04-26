@@ -2,9 +2,7 @@ package com.silasonyango.ndma.ui.county.destinations
 
 import android.Manifest
 import android.app.AlertDialog
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -415,11 +413,11 @@ class CountyLevelFragment : DialogFragment(),
             /*Crop Production navigation buttons*/
             cropProductionLayout.apply {
                 cropProductionNextButton.setOnClickListener {
-                    val intent = Intent()
-                    intent.action = Constants.LZ_CROPS_NEXT_BUTTON_CLICKED
-                    activity?.applicationContext?.sendBroadcast(intent)
-//                    mainWaterSource.root.visibility = View.VISIBLE
-//                    cropProductionLayout.root.visibility = View.GONE
+//                    val intent = Intent()
+//                    intent.action = Constants.LZ_CROPS_NEXT_BUTTON_CLICKED
+//                    activity?.applicationContext?.sendBroadcast(intent)
+                    mainWaterSource.root.visibility = View.VISIBLE
+                    cropProductionLayout.root.visibility = View.GONE
                 }
                 cropProductionBackButton.setOnClickListener {
                     cropSelectionLayout.root.visibility = View.VISIBLE
@@ -1489,10 +1487,7 @@ class CountyLevelFragment : DialogFragment(),
 
                     val intent = Intent()
                     intent.action = QUESTIONNAIRE_COMPLETED
-                    intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
-                    activity?.sendBroadcast(intent)
-                    homeViewModel.setIsQuestionnaireCompleted(true)
-
+                    activity?.applicationContext?.sendBroadcast(intent)
                     this@CountyLevelFragment.dismiss()
 
                 }

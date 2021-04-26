@@ -22,6 +22,7 @@ import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaireListObject
 import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
 import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaireListObject
 import com.silasonyango.ndma.config.Constants
+import com.silasonyango.ndma.config.Constants.DISMISS_MAIN_ACTIVITY_DIALOGS
 import com.silasonyango.ndma.config.Constants.QUESTIONNAIRE_COMPLETED
 import com.silasonyango.ndma.database.questionnaires.entity.QuestionnaireTypesEntity
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
@@ -53,21 +54,15 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
             }
         }
 
-        activity?.let {
-            LocalBroadcastManager.getInstance(it)
-                .registerReceiver(broadCastReceiver as BroadcastReceiver, IntentFilter(QUESTIONNAIRE_COMPLETED))
-        }
+        val filter = IntentFilter()
+        filter.addAction(QUESTIONNAIRE_COMPLETED)
+        activity?.applicationContext?.registerReceiver(broadCastReceiver, filter)
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
-        activity?.let {
-            broadCastReceiver?.let { it1 ->
-                LocalBroadcastManager.getInstance(it)
-                    .unregisterReceiver(it1)
-            }
-        }
+        activity?.applicationContext?.unregisterReceiver(broadCastReceiver)
     }
 
     override fun onCreateView(
@@ -90,6 +85,9 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
     private fun handleQuestionnaireCompleted() {
         populateQuestionnairesList()
         populateWealthGroupQuestionnairesList()
+        val intent = Intent()
+        intent.action = DISMISS_MAIN_ACTIVITY_DIALOGS
+        activity?.applicationContext?.sendBroadcast(intent)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -193,14 +191,6 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
                         populateWealthGroupQuestionnairesList()
                     }
                 }
-            }
-        })
-
-        homeViewModel.isQuestionnaireCompleted.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                populateQuestionnairesList()
-                populateWealthGroupQuestionnairesList()
-                homeViewModel.setIsQuestionnaireCompleted(false)
             }
         })
     }
