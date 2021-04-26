@@ -2,9 +2,7 @@ package com.silasonyango.ndma.ui.county.destinations
 
 import android.Manifest
 import android.app.AlertDialog
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -195,9 +193,10 @@ class CountyLevelFragment : DialogFragment(),
                             AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
                                     countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + " Livelihood Zone questionnaire"
 
-                        val subLocationLivelihoodZoneAssignment = geographyObject.sublocationsLivelihoodZoneAssignments.filter {
-                            it.livelihoodZoneId == countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneId
-                        }
+                        val subLocationLivelihoodZoneAssignment =
+                            geographyObject.sublocationsLivelihoodZoneAssignments.filter {
+                                it.livelihoodZoneId == countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneId
+                            }
 
                         for (currentSubLocationLivelihoodZoneAssignment in subLocationLivelihoodZoneAssignment) {
                             subLocationZoneAssignmentModelList.add(
@@ -1484,10 +1483,7 @@ class CountyLevelFragment : DialogFragment(),
 
                     val intent = Intent()
                     intent.action = QUESTIONNAIRE_COMPLETED
-                    intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
-                    activity?.sendBroadcast(intent)
-                    homeViewModel.setIsQuestionnaireCompleted(true)
-
+                    activity?.applicationContext?.sendBroadcast(intent)
                     this@CountyLevelFragment.dismiss()
 
                 }
@@ -1613,9 +1609,10 @@ class CountyLevelFragment : DialogFragment(),
 
 
             binding.apply {
-                val subLocationLivelihoodZoneAssignment = geographyObject.sublocationsLivelihoodZoneAssignments.filter {
-                    it.livelihoodZoneId == countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneId
-                }
+                val subLocationLivelihoodZoneAssignment =
+                    geographyObject.sublocationsLivelihoodZoneAssignments.filter {
+                        it.livelihoodZoneId == countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneId
+                    }
                 for (currentSubLocationLivelihoodZoneAssignment in subLocationLivelihoodZoneAssignment) {
                     subLocationZoneAssignmentModelList.add(
                         SubLocationZoneAssignmentModel(
