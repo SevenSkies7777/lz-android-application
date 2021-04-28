@@ -48,7 +48,11 @@ import com.silasonyango.ndma.ui.home.HomeViewModel
 import com.silasonyango.ndma.ui.home.adapters.*
 import com.silasonyango.ndma.ui.model.QuestionnaireStatus
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
+import com.silasonyango.ndma.ui.wealthgroup.adapters.CropProductionListAdapter
 import com.silasonyango.ndma.ui.wealthgroup.adapters.CropSelectionListAdapter
+import com.silasonyango.ndma.ui.wealthgroup.responses.CropProductionResponseValueModel
+import com.silasonyango.ndma.ui.wealthgroup.responses.CropSeasonResponseItem
+import com.silasonyango.ndma.ui.wealthgroup.responses.WgCropProductionResponseItem
 import com.silasonyango.ndma.util.GpsTracker
 import com.silasonyango.ndma.util.Util
 import kotlinx.android.synthetic.main.market_geograpghy_configuration.*
@@ -64,7 +68,8 @@ class CountyLevelFragment : DialogFragment(),
     TribeSelectionAdapter.TribeSelectionAdapterCallBack, EthnicityAdapter.EthnicityAdapterCallBack,
     MonthsAdapter.MonthsAdapterCallBack,
     MarketSubCountySelectionAdapter.MarketSubCountySelectionAdapterCallBack,
-    MarketTransactionsAdapter.MarketTransactionsAdapterCallBack, CropSelectionListAdapter.CropSelectionListAdapterCallBack {
+    MarketTransactionsAdapter.MarketTransactionsAdapterCallBack,
+    CropSelectionListAdapter.CropSelectionListAdapterCallBack, CropProductionListAdapter.CropProductionListAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -81,6 +86,8 @@ class CountyLevelFragment : DialogFragment(),
     private var seasonCalendarDialog: android.app.AlertDialog? = null
 
     private var marketSubCountyDialog: android.app.AlertDialog? = null
+
+    private var cropProductionResponseItems: MutableList<WgCropProductionResponseItem> = ArrayList()
 
     private lateinit var homeViewModel: HomeViewModel
 
@@ -256,26 +263,6 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
-    private fun populateCropProductionRecyclerView(cropModelList: MutableList<CropModel>) {
-        binding.apply {
-            cropProductionLayout.apply {
-                val lzCropProductionRecyclerViewAdapter =
-                    activity?.let {
-                        LzCropProductionRecyclerViewAdapter(
-                            it,
-                            cropModelList,
-                            this@CountyLevelFragment
-                        )
-                    }
-                val gridLayoutManager = GridLayoutManager(activity, 1)
-                lzCropProductionRV.layoutManager = gridLayoutManager
-                lzCropProductionRV.hasFixedSize()
-                lzCropProductionRV.adapter =
-                    lzCropProductionRecyclerViewAdapter
-            }
-        }
-    }
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun defineNavigation() {
@@ -390,26 +377,73 @@ class CountyLevelFragment : DialogFragment(),
 
                 cropSelectionNextButton.setOnClickListener {
 
-                    populateCropProductionRecyclerView(countyLevelQuestionnaire.livelihoodZoneCrops)
-                    cropSelectionLayout.root.visibility = View.GONE
+                    for (currentCrop in countyLevelQuestionnaire.selectedCrops) {
+                        cropProductionResponseItems.add(
+                            WgCropProductionResponseItem(
+                                currentCrop,
+                                CropSeasonResponseItem(
+                                    CropProductionResponseValueModel(0.0, false),
+                                    CropProductionResponseValueModel(0.0, false),
+                                    CropProductionResponseValueModel(0.0, false),
+                                    CropProductionResponseValueModel(0.0, false)
+                                ),
+                                CropSeasonResponseItem(
+                                    CropProductionResponseValueModel(0.0, false),
+                                    CropProductionResponseValueModel(0.0, false),
+                                    CropProductionResponseValueModel(0.0, false),
+                                    CropProductionResponseValueModel(0.0, false)
+                                )
+                            )
+                        )
+                    }
+
+                    cropProductionLayout.apply {
+                        activity?.let { context ->
+                            val adapter =
+                                CropProductionListAdapter(
+                                    context,
+                                    R.layout.lz_crop_production_item,
+                                    cropProductionResponseItems,
+                                    this@CountyLevelFragment
+                                )
+                            cropsList.adapter = adapter
+                        }
+                    }
+
                     cropProductionLayout.root.visibility = View.VISIBLE
+                    cropSelectionLayout.root.visibility = View.GONE
                 }
 
             }
 
             /*Crop Production navigation buttons*/
+
             cropProductionLayout.apply {
-                cropProductionNextButton.setOnClickListener {
-//                    val intent = Intent()
-//                    intent.action = Constants.LZ_CROPS_NEXT_BUTTON_CLICKED
-//                    activity?.applicationContext?.sendBroadcast(intent)
-                    mainWaterSource.root.visibility = View.VISIBLE
-                    cropProductionLayout.root.visibility = View.GONE
-                }
+
                 cropProductionBackButton.setOnClickListener {
-                    cropSelectionLayout.root.visibility = View.VISIBLE
                     cropProductionLayout.root.visibility = View.GONE
+                    cropSelectionLayout.root.visibility = View.VISIBLE
                 }
+
+                cropProductionNextButton.setOnClickListener {
+                    if (!isAnyCropProductionFieldEmpty()) {
+                        cropProductionLayout.root.visibility = View.GONE
+                        mainWaterSource.root.visibility = View.VISIBLE
+                    } else {
+                        activity?.let { context ->
+                            val adapter =
+                                CropProductionListAdapter(
+                                    context,
+                                    R.layout.lz_crop_production_item,
+                                    cropProductionResponseItems,
+                                    this@CountyLevelFragment
+                                )
+                            cropsList.adapter = adapter
+                        }
+                        inflateErrorModal("Missing Data", "Kindly fill out all the fields")
+                    }
+                }
+
             }
 
             /*Water source navigation buttons*/
@@ -1746,37 +1780,6 @@ class CountyLevelFragment : DialogFragment(),
         return countyLevelQuestionnaire.countyLivelihoodZones.filter { s -> s.livelihoodZoneId == selectedItem.livelihoodZoneId }.size > 0
     }
 
-//    override fun onLivelihoodZoneSelected(
-//        selectedSubLocationZoneAssignment: SubLocationZoneAssignmentModel,
-//        currentPosition: Int
-//    ) {
-//        countyLevelQuestionnaire.subLocationZoneAllocationList.add(selectedSubLocationZoneAssignment)
-//
-//        binding.apply {
-//
-//            val currentList =
-//                (subLocationZoneAssignmentModelList.filter { item -> item.subLocation.subLocationId != selectedSubLocationZoneAssignment.subLocation.subLocationId } as MutableList<SubLocationZoneAssignmentModel>)
-//            currentList.add(selectedSubLocationZoneAssignment)
-//            //subLocationZoneAssignmentModelList.set(currentPosition,selectedSubLocationZoneAssignment)
-//            lzSubLocationAssignment.apply {
-//                val subLocationassignmentAdapter = activity?.let { it1 ->
-//                    SubLocationZoneAssignmentAdapter(
-//                        currentList,
-//                        this@CountyLevelFragment,
-//                        geographyObject.livelihoodZones,
-//                        it1
-//                    )
-//                }
-//
-//                val gridLayoutManager = GridLayoutManager(activity, 1)
-//                listRv.layoutManager = gridLayoutManager
-//                listRv.hasFixedSize()
-//                listRv.adapter =
-//                    subLocationassignmentAdapter
-//            }
-//
-//        }
-//    }
 
     override fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel) {
         countyLevelQuestionnaire.livelihoodZoneCrops.add(selectedCrop)
@@ -2257,13 +2260,28 @@ class CountyLevelFragment : DialogFragment(),
     override fun onCurrentCropHasNoError(
         lzCropProductionResponseItem: LzCropProductionResponseItem
     ) {
-        countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses.add(lzCropProductionResponseItem)
+        countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses.add(
+            lzCropProductionResponseItem
+        )
         System.out.println()
     }
 
     override fun onACropHasAValidationError() {
         inflateErrorModal("Missing data", "Kindly fill in all the data in the form")
     }
+
+    private fun isAnyCropProductionFieldEmpty(): Boolean {
+        for (currentResponseItem in cropProductionResponseItems) {
+            if (isAnyValueEmpty(currentResponseItem)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    fun isAnyValueEmpty(currentResponseItem: WgCropProductionResponseItem): Boolean {
+        return !currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted
+                || !currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted}
 
     override fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel, position: Int) {
         crops.set(position, selectedCrop)
@@ -2285,5 +2303,12 @@ class CountyLevelFragment : DialogFragment(),
         if (selectedCrop.hasBeenSelected) {
             countyLevelQuestionnaire.selectedCrops.add(selectedCrop)
         }
+    }
+
+    override fun onCropProductionResponseItemSubmited(
+        responseItem: WgCropProductionResponseItem,
+        position: Int
+    ) {
+        cropProductionResponseItems.set(position, responseItem)
     }
 }
