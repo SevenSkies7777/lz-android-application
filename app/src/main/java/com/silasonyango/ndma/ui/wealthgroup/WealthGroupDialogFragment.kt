@@ -32,13 +32,15 @@ import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaireListObject
 import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.databinding.WealthGroupQuestionnaireLayoutBinding
+import com.silasonyango.ndma.login.model.GeographyObject
+import com.silasonyango.ndma.ui.county.model.CropModel
 import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
 import com.silasonyango.ndma.ui.home.HomeViewModel
 import com.silasonyango.ndma.ui.model.QuestionnaireStatus
 import com.silasonyango.ndma.ui.wealthgroup.responses.*
 import com.silasonyango.ndma.util.Util
 
-class WealthGroupDialogFragment : DialogFragment() {
+class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.CropSelectionListAdapterCallBack {
 
     private lateinit var wealthGroupViewModel: WealthGroupViewModel
 
@@ -50,6 +52,8 @@ class WealthGroupDialogFragment : DialogFragment() {
 
     var questionnaireName: String? = null
 
+    lateinit var geographyObject: GeographyObject
+
     var questionnaireSessionLocation: QuestionnaireSessionLocation? = null
 
     private var subContyDialog: AlertDialog? = null
@@ -57,6 +61,8 @@ class WealthGroupDialogFragment : DialogFragment() {
     private var errorDialog: android.app.AlertDialog? = null
 
     private lateinit var homeViewModel: HomeViewModel
+
+    private var crops: MutableList<CropModel> = ArrayList()
 
     companion object {
 
@@ -124,6 +130,22 @@ class WealthGroupDialogFragment : DialogFragment() {
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
         binding = WealthGroupQuestionnaireLayoutBinding.inflate(inflater, container, false)
+
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+        val geographyString =
+            sharedPreferences?.getString(Constants.GEOGRAPHY_OBJECT, null)
+        geographyObject =
+            gson.fromJson(
+                geographyString,
+                GeographyObject::class.java
+            )
+        crops = geographyObject.crops
         defineViews()
         return binding.root
     }
@@ -1355,8 +1377,15 @@ class WealthGroupDialogFragment : DialogFragment() {
 
                         wealthGroupQuestionnaire.foodConsumptionResponses = foodConsumptionResponses
 
+                        cropSelectionLayout.apply {
+                            activity?.let { context->
+                                val adapter = CropSelectionListAdapter(context, R.layout.lz_selection_item, crops,this@WealthGroupDialogFragment)
+                                cropsList.adapter = adapter
+                            }
+                        }
+
                         wgPercentFoodConsumptionIncome.root.visibility = View.GONE
-                        wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
+                        cropSelectionLayout.root.visibility = View.VISIBLE
 
                     }
                 }
@@ -1368,10 +1397,28 @@ class WealthGroupDialogFragment : DialogFragment() {
             }
 
 
+
+            /* Crop Selection navigation */
+
+            cropSelectionLayout.apply {
+
+                cropSelectionBackButton.setOnClickListener {
+                    wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
+                    cropSelectionLayout.root.visibility = View.GONE
+                }
+
+                cropSelectionNextButton.setOnClickListener {
+                    wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
+                    cropSelectionLayout.root.visibility = View.GONE
+                }
+
+            }
+
+
             /*Livestock and poultry navigation*/
             wgLivestockPoultryNumbers.apply {
                 livestockPoultryNumbertsBackButton.setOnClickListener {
-                    wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
+                    cropSelectionLayout.root.visibility = View.VISIBLE
                     wgLivestockPoultryNumbers.root.visibility = View.GONE
                 }
 
@@ -2929,5 +2976,17 @@ class WealthGroupDialogFragment : DialogFragment() {
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT
         )
+    }
+
+    override fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel, position: Int) {
+        crops.set(position,selectedCrop)
+        binding.apply {
+            cropSelectionLayout.apply {
+                activity?.let { context->
+                    val adapter = CropSelectionListAdapter(context, R.layout.lz_selection_item, crops,this@WealthGroupDialogFragment)
+                    cropsList.adapter = adapter
+                }
+            }
+        }
     }
 }

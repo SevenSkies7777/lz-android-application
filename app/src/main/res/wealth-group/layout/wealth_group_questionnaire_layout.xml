@@ -29,6 +29,17 @@
             android:layout_width="match_parent"
             android:layout_marginTop="22dp"/>
 
+
+        <!--        C(i). Crop selection-->
+        <include
+            android:id="@+id/cropSelectionLayout"
+            layout="@layout/wg_crop_selection_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
+
+
         <!--        D. Livestock and Poultry Ownership-->
         <include layout="@layout/wg_livestock_and_poultry"
             android:visibility="gone"
