@@ -3011,12 +3011,6 @@ class WealthGroupDialogFragment : DialogFragment(),
         return !currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted
                 || !currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted}
 
-//    fun returnAppropriateCropPercentagErrorMessage(): String {
-//        if () {
-//
-//        }
-//    }
-
 
     private fun inflateErrorModal(errorTitle: String, errorMessage: String) {
         val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)

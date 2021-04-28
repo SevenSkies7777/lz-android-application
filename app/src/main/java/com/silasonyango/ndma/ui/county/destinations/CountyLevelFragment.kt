@@ -426,10 +426,8 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
                 cropProductionNextButton.setOnClickListener {
-                    if (!isAnyCropProductionFieldEmpty()) {
-                        cropProductionLayout.root.visibility = View.GONE
-                        mainWaterSource.root.visibility = View.VISIBLE
-                    } else {
+
+                    if (isAnyCropProductionFieldEmpty()) {
                         activity?.let { context ->
                             val adapter =
                                 CropProductionListAdapter(
@@ -441,6 +439,11 @@ class CountyLevelFragment : DialogFragment(),
                             cropsList.adapter = adapter
                         }
                         inflateErrorModal("Missing Data", "Kindly fill out all the fields")
+                    } else if (doesCropProductionHavePercentageErrors()) {
+                        inflateErrorModal("Percentage error", returnAppropriateCropPercentagErrorMessage())
+                    } else {
+                        cropProductionLayout.root.visibility = View.GONE
+                        mainWaterSource.root.visibility = View.VISIBLE
                     }
                 }
 
@@ -2282,6 +2285,162 @@ class CountyLevelFragment : DialogFragment(),
     fun isAnyValueEmpty(currentResponseItem: WgCropProductionResponseItem): Boolean {
         return !currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted
                 || !currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted}
+
+    fun returnAppropriateCropPercentagErrorMessage(): String {
+        if (doesLongRainsRainFedCropsHavePercentageError().hasAPercentageError) {
+            return "Long rains rainfed crops has a percentage error. The value " + isGreaterThanOrLessThan(doesLongRainsRainFedCropsHavePercentageError().variationStatus) + " by " + doesLongRainsRainFedCropsHavePercentageError().differenceValue.toString()
+        } else if (doesLongRainsIrrigatedCropsHavePercentageError().hasAPercentageError) {
+            return "Long rains irrigated crops has a percentage error. The value " + isGreaterThanOrLessThan(doesLongRainsIrrigatedCropsHavePercentageError().variationStatus) + " by " + doesLongRainsIrrigatedCropsHavePercentageError().differenceValue.toString()
+        } else if (doesShortRainFedCropsHavePercentageError().hasAPercentageError) {
+            return "Short rains rainfed crops has a percentage error. The value " + isGreaterThanOrLessThan(doesShortRainFedCropsHavePercentageError().variationStatus) + " by " + doesShortRainFedCropsHavePercentageError().differenceValue.toString()
+        } else if (doesShortRainFedCropsHavePercentageError().hasAPercentageError) {
+            return "Short rains irrigated crops has a percentage error. The value " + isGreaterThanOrLessThan(doesShortRainsIrrigatedCropsHavePercentageError().variationStatus) + " by " + doesShortRainsIrrigatedCropsHavePercentageError().differenceValue.toString()
+        }
+        return ""
+    }
+
+    fun doesCropProductionHavePercentageErrors(): Boolean {
+        return doesLongRainsRainFedCropsHavePercentageError().hasAPercentageError || doesLongRainsIrrigatedCropsHavePercentageError().hasAPercentageError
+                || doesShortRainFedCropsHavePercentageError().hasAPercentageError || doesShortRainFedCropsHavePercentageError().hasAPercentageError
+    }
+
+    fun isGreaterThanOrLessThan(percentageValidationEnum: PercentageValidationEnum): String {
+        return if (percentageValidationEnum == PercentageValidationEnum.HIGH) " is greater than" else " is less than"
+    }
+
+    fun doesLongRainsRainFedCropsHavePercentageError(): CropPercentageValidationModel {
+        var percentageValue: Double = 0.0
+        for (currentResponseItem in cropProductionResponseItems) {
+            percentageValue = percentageValue + currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.value
+        }
+
+        if (percentageValue != 100.0) {
+
+            if (percentageValue > 100.0) {
+                return CropPercentageValidationModel(
+                    true,
+                    PercentageValidationEnum.HIGH,
+                    percentageValue - 100.0
+                )
+            }
+
+            if (percentageValue < 100.0) {
+                return CropPercentageValidationModel(
+                    true,
+                    PercentageValidationEnum.LOW,
+                    100.0 - percentageValue
+                )
+            }
+
+        }
+
+        return CropPercentageValidationModel(
+            false,
+            PercentageValidationEnum.EXACT,
+            0.0
+        )
+    }
+
+    fun doesLongRainsIrrigatedCropsHavePercentageError(): CropPercentageValidationModel {
+        var percentageValue: Double = 0.0
+        for (currentResponseItem in cropProductionResponseItems) {
+            percentageValue = percentageValue + currentResponseItem.longRainsSeason.irrigatedCultivatedArea.value
+        }
+
+        if (percentageValue != 100.0) {
+
+            if (percentageValue > 100.0) {
+                return CropPercentageValidationModel(
+                    true,
+                    PercentageValidationEnum.HIGH,
+                    percentageValue - 100.0
+                )
+            }
+
+            if (percentageValue < 100.0) {
+                return CropPercentageValidationModel(
+                    true,
+                    PercentageValidationEnum.LOW,
+                    100.0 - percentageValue
+                )
+            }
+
+        }
+
+        return CropPercentageValidationModel(
+            false,
+            PercentageValidationEnum.EXACT,
+            0.0
+        )
+    }
+
+
+    fun doesShortRainFedCropsHavePercentageError(): CropPercentageValidationModel {
+        var percentageValue: Double = 0.0
+        for (currentResponseItem in cropProductionResponseItems) {
+            percentageValue = percentageValue + currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.value
+        }
+
+        if (percentageValue != 100.0) {
+
+            if (percentageValue > 100.0) {
+                return CropPercentageValidationModel(
+                    true,
+                    PercentageValidationEnum.HIGH,
+                    percentageValue - 100.0
+                )
+            }
+
+            if (percentageValue < 100.0) {
+                return CropPercentageValidationModel(
+                    true,
+                    PercentageValidationEnum.LOW,
+                    100.0 - percentageValue
+                )
+            }
+
+        }
+
+        return CropPercentageValidationModel(
+            false,
+            PercentageValidationEnum.EXACT,
+            0.0
+        )
+    }
+
+
+    fun doesShortRainsIrrigatedCropsHavePercentageError(): CropPercentageValidationModel {
+        var percentageValue: Double = 0.0
+        for (currentResponseItem in cropProductionResponseItems) {
+            percentageValue = percentageValue + currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.value
+        }
+
+        if (percentageValue != 100.0) {
+
+            if (percentageValue > 100.0) {
+                return CropPercentageValidationModel(
+                    true,
+                    PercentageValidationEnum.HIGH,
+                    percentageValue - 100.0
+                )
+            }
+
+            if (percentageValue < 100.0) {
+                return CropPercentageValidationModel(
+                    true,
+                    PercentageValidationEnum.LOW,
+                    100.0 - percentageValue
+                )
+            }
+
+        }
+
+        return CropPercentageValidationModel(
+            false,
+            PercentageValidationEnum.EXACT,
+            0.0
+        )
+    }
 
     override fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel, position: Int) {
         crops.set(position, selectedCrop)
