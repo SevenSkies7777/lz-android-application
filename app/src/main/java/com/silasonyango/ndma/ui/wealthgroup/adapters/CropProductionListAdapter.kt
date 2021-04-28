@@ -39,14 +39,24 @@ class CropProductionListAdapter(
         val tvAccordionIcon: TextView = view.findViewById<TextView>(R.id.tvAccordionIcon)
         val accordionStroke: View = view.findViewById<TextView>(R.id.accordionStroke)
         val accordionContent: View = view.findViewById<TextView>(R.id.accordionContent)
-        val rainfedCultivatedAreaPercentage: EditText =
-            view.findViewById<EditText>(R.id.rainfedCultivatedAreaPercentage)
-        val rainfedAverageYieldPerHa: EditText =
-            view.findViewById<EditText>(R.id.rainfedAverageYieldPerHa)
-        val irrigatedCultivatedArea: EditText =
-            view.findViewById<EditText>(R.id.irrigatedCultivatedArea)
-        val irrigatedAverageYieldPerHa: EditText =
-            view.findViewById<EditText>(R.id.irrigatedAverageYieldPerHa)
+        val shortRainsRainfedCultivatedAreaPercentage: EditText =
+            view.findViewById<EditText>(R.id.shortRainsRainfedCultivatedAreaPercentage)
+        val shortRainsRainfedAverageYieldPerHa: EditText =
+            view.findViewById<EditText>(R.id.shortRainsRainfedAverageYieldPerHa)
+        val shortRainsIrrigatedCultivatedArea: EditText =
+            view.findViewById<EditText>(R.id.shortRainsIrrigatedCultivatedArea)
+        val shortRainsIrrigatedAverageYieldPerHa: EditText =
+            view.findViewById<EditText>(R.id.shortRainsIrrigatedAverageYieldPerHa)
+
+        val longRainsRainfedCultivatedAreaPercentage: EditText =
+            view.findViewById<EditText>(R.id.longRainsRainfedCultivatedAreaPercentage)
+        val longRainsRainfedAverageYieldPerHa: EditText =
+            view.findViewById<EditText>(R.id.longRainsRainfedAverageYieldPerHa)
+        val longRainsIrrigatedCultivatedArea: EditText =
+            view.findViewById<EditText>(R.id.longRainsIrrigatedCultivatedArea)
+        val longRainsIrrigatedAverageYieldPerHa: EditText =
+            view.findViewById<EditText>(R.id.longRainsIrrigatedAverageYieldPerHa)
+
         val submitButton: TextView = view.findViewById<TextView>(R.id.cropSubmitButton)
 
         cropName.text = currentResponseItem.crop.cropName
@@ -62,7 +72,8 @@ class CropProductionListAdapter(
         }
 
         tvAccordionIcon.setOnClickListener {
-            if (rainfedCultivatedAreaPercentage.text.toString().isEmpty() || rainfedAverageYieldPerHa.text.toString().isEmpty() || irrigatedCultivatedArea.text.toString().isEmpty() || irrigatedAverageYieldPerHa.text.toString().isEmpty()) {
+            if (shortRainsRainfedCultivatedAreaPercentage.text.toString().isEmpty() || shortRainsRainfedAverageYieldPerHa.text.toString().isEmpty() || shortRainsIrrigatedCultivatedArea.text.toString().isEmpty() || shortRainsIrrigatedAverageYieldPerHa.text.toString().isEmpty()
+                || longRainsRainfedCultivatedAreaPercentage.text.toString().isEmpty() || longRainsRainfedAverageYieldPerHa.text.toString().isEmpty() || longRainsIrrigatedCultivatedArea.text.toString().isEmpty() || longRainsIrrigatedAverageYieldPerHa.text.toString().isEmpty()) {
                 tvAccordionIcon.text == "-"
                 accordionStroke.visibility = View.VISIBLE
                 accordionContent.visibility = View.VISIBLE
@@ -74,7 +85,8 @@ class CropProductionListAdapter(
         }
 
         submitButton.setOnClickListener {
-            if (rainfedCultivatedAreaPercentage.text.toString().isEmpty() || rainfedAverageYieldPerHa.text.toString().isEmpty() || irrigatedCultivatedArea.text.toString().isEmpty() || irrigatedAverageYieldPerHa.text.toString().isEmpty()) {
+            if (shortRainsRainfedCultivatedAreaPercentage.text.toString().isEmpty() || shortRainsRainfedAverageYieldPerHa.text.toString().isEmpty() || shortRainsIrrigatedCultivatedArea.text.toString().isEmpty() || shortRainsIrrigatedAverageYieldPerHa.text.toString().isEmpty()
+                || longRainsRainfedCultivatedAreaPercentage.text.toString().isEmpty() || longRainsRainfedAverageYieldPerHa.text.toString().isEmpty() || longRainsIrrigatedCultivatedArea.text.toString().isEmpty() || longRainsIrrigatedAverageYieldPerHa.text.toString().isEmpty()) {
                 tvAccordionIcon.text == "-"
                 accordionStroke.visibility = View.VISIBLE
                 accordionContent.visibility = View.VISIBLE
@@ -83,10 +95,15 @@ class CropProductionListAdapter(
                 tvAccordionIcon.text == "+"
                 accordionStroke.visibility = View.GONE
                 accordionContent.visibility = View.GONE
-                currentResponseItem.rainfedCultivatedAreaPercentage = CropProductionResponseValueModel(rainfedCultivatedAreaPercentage.text.toString().toDouble(),true)
-                currentResponseItem.rainfedAverageYieldPerHa = CropProductionResponseValueModel(rainfedAverageYieldPerHa.text.toString().toDouble(),true)
-                currentResponseItem.irrigatedCultivatedArea = CropProductionResponseValueModel(irrigatedCultivatedArea.text.toString().toDouble(),true)
-                currentResponseItem.irrigatedAverageYieldPerHa = CropProductionResponseValueModel(irrigatedAverageYieldPerHa.text.toString().toDouble(),true)
+                currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage = CropProductionResponseValueModel(shortRainsRainfedCultivatedAreaPercentage.text.toString().toDouble(),true)
+                currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa = CropProductionResponseValueModel(shortRainsRainfedAverageYieldPerHa.text.toString().toDouble(),true)
+                currentResponseItem.shortRainsSeason.irrigatedCultivatedArea = CropProductionResponseValueModel(shortRainsIrrigatedCultivatedArea.text.toString().toDouble(),true)
+                currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa = CropProductionResponseValueModel(shortRainsIrrigatedAverageYieldPerHa.text.toString().toDouble(),true)
+
+                currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage = CropProductionResponseValueModel(longRainsRainfedCultivatedAreaPercentage.text.toString().toDouble(),true)
+                currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa = CropProductionResponseValueModel(longRainsRainfedAverageYieldPerHa.text.toString().toDouble(),true)
+                currentResponseItem.longRainsSeason.irrigatedCultivatedArea = CropProductionResponseValueModel(longRainsIrrigatedCultivatedArea.text.toString().toDouble(),true)
+                currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa = CropProductionResponseValueModel(longRainsIrrigatedAverageYieldPerHa.text.toString().toDouble(),true)
                 cropProductionListAdapterCallBack.onCropProductionResponseItemSubmited(currentResponseItem,position)
             }
         }
@@ -95,8 +112,8 @@ class CropProductionListAdapter(
     }
 
     fun isAnyValueEmpty(currentResponseItem: WgCropProductionResponseItem): Boolean {
-        return !currentResponseItem.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.irrigatedAverageYieldPerHa.hasBeenSubmitted
-    }
+        return !currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted
+                || !currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted}
 
 
     override fun getCount(): Int {

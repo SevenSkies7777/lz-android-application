@@ -4,8 +4,6 @@ import com.silasonyango.ndma.ui.county.model.CropModel
 
 data class WgCropProductionResponseItem(
     val crop: CropModel,
-    var rainfedCultivatedAreaPercentage: CropProductionResponseValueModel,
-    var rainfedAverageYieldPerHa: CropProductionResponseValueModel,
-    var irrigatedCultivatedArea: CropProductionResponseValueModel,
-    var irrigatedAverageYieldPerHa: CropProductionResponseValueModel
+    val longRainsSeason: CropSeasonResponseItem,
+    val shortRainsSeason: CropSeasonResponseItem
 )

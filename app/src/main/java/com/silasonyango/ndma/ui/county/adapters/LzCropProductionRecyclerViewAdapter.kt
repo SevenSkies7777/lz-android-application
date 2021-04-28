@@ -102,11 +102,11 @@ class LzCropProductionRecyclerViewAdapter(
             accordionStroke = view.findViewById<TextView>(R.id.accordionStroke)
             accordionContent = view.findViewById<TextView>(R.id.accordionContent)
             rainfedCultivatedAreaPercentage =
-                view.findViewById<EditText>(R.id.rainfedCultivatedAreaPercentage)
-            rainfedAverageYieldPerHa = view.findViewById<EditText>(R.id.rainfedAverageYieldPerHa)
-            irrigatedCultivatedArea = view.findViewById<EditText>(R.id.irrigatedCultivatedArea)
+                view.findViewById<EditText>(R.id.shortRainsRainfedCultivatedAreaPercentage)
+            rainfedAverageYieldPerHa = view.findViewById<EditText>(R.id.shortRainsRainfedCultivatedAreaPercentage)
+            irrigatedCultivatedArea = view.findViewById<EditText>(R.id.shortRainsIrrigatedCultivatedArea)
             irrigatedAverageYieldPerHa =
-                view.findViewById<EditText>(R.id.irrigatedAverageYieldPerHa)
+                view.findViewById<EditText>(R.id.shortRainsIrrigatedAverageYieldPerHa)
             submitButton = view.findViewById<TextView>(R.id.cropSubmitButton)
         }
     }

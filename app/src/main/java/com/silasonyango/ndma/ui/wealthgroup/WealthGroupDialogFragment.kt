@@ -1422,10 +1422,18 @@ class WealthGroupDialogFragment : DialogFragment(),
                         cropProductionResponseItems.add(
                             WgCropProductionResponseItem(
                                 currentCrop,
-                                CropProductionResponseValueModel(0.0, false),
-                                CropProductionResponseValueModel(0.0, false),
-                                CropProductionResponseValueModel(0.0, false),
-                                CropProductionResponseValueModel(0.0, false)
+                                CropSeasonResponseItem(
+                                    CropProductionResponseValueModel(0.0, false),
+                                    CropProductionResponseValueModel(0.0, false),
+                                    CropProductionResponseValueModel(0.0, false),
+                                    CropProductionResponseValueModel(0.0, false)
+                                ),
+                                CropSeasonResponseItem(
+                                    CropProductionResponseValueModel(0.0, false),
+                                    CropProductionResponseValueModel(0.0, false),
+                                    CropProductionResponseValueModel(0.0, false),
+                                    CropProductionResponseValueModel(0.0, false)
+                                )
                             )
                         )
                     }
@@ -3000,8 +3008,14 @@ class WealthGroupDialogFragment : DialogFragment(),
     }
 
     fun isAnyValueEmpty(currentResponseItem: WgCropProductionResponseItem): Boolean {
-        return !currentResponseItem.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.irrigatedAverageYieldPerHa.hasBeenSubmitted
-    }
+        return !currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted
+                || !currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted}
+
+//    fun returnAppropriateCropPercentagErrorMessage(): String {
+//        if () {
+//
+//        }
+//    }
 
 
     private fun inflateErrorModal(errorTitle: String, errorMessage: String) {
