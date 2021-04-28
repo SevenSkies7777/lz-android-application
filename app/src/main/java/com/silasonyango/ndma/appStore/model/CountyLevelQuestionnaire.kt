@@ -15,6 +15,8 @@ class CountyLevelQuestionnaire(val uniqueId: String, var questionnaireName: Stri
 
     var livelihoodZoneCrops: MutableList<CropModel> = ArrayList()
 
+    var selectedCrops: MutableList<CropModel> = ArrayList()
+
     var livelihoodZoneEthnicGroups: MutableList<EthnicGroupModel> = ArrayList()
 
     var definedMarkets: MutableList<DefinedMarketModel> = ArrayList()

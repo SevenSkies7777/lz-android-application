@@ -48,6 +48,7 @@ import com.silasonyango.ndma.ui.home.HomeViewModel
 import com.silasonyango.ndma.ui.home.adapters.*
 import com.silasonyango.ndma.ui.model.QuestionnaireStatus
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
+import com.silasonyango.ndma.ui.wealthgroup.adapters.CropSelectionListAdapter
 import com.silasonyango.ndma.util.GpsTracker
 import com.silasonyango.ndma.util.Util
 import kotlinx.android.synthetic.main.market_geograpghy_configuration.*
@@ -63,7 +64,7 @@ class CountyLevelFragment : DialogFragment(),
     TribeSelectionAdapter.TribeSelectionAdapterCallBack, EthnicityAdapter.EthnicityAdapterCallBack,
     MonthsAdapter.MonthsAdapterCallBack,
     MarketSubCountySelectionAdapter.MarketSubCountySelectionAdapterCallBack,
-    MarketTransactionsAdapter.MarketTransactionsAdapterCallBack {
+    MarketTransactionsAdapter.MarketTransactionsAdapterCallBack, CropSelectionListAdapter.CropSelectionListAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -90,6 +91,8 @@ class CountyLevelFragment : DialogFragment(),
     val WRITE_STORAGE_PERMISSION_CODE: Int = 100
 
     val lzSeasonsResponses = LzSeasonsResponses()
+
+    private var crops: MutableList<CropModel> = ArrayList()
 
     val subLocationZoneAssignmentModelList: MutableList<SubLocationZoneAssignmentModel> =
         ArrayList()
@@ -165,6 +168,7 @@ class CountyLevelFragment : DialogFragment(),
                 geographyString,
                 GeographyObject::class.java
             )
+        crops = geographyObject.crops
         defineNavigation()
         binding.apply {
 
@@ -231,24 +235,6 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
-//    private fun prepareLivelihoodSelectionLayout() {
-//        binding.apply {
-//
-//            livelihoodZoneSelection.apply {
-//
-//                val lzSelectionAdapter = LzSelectionAdapter(
-//                    geographyObject.livelihoodZones,
-//                    this@CountyLevelFragment
-//                )
-//                val gridLayoutManager = GridLayoutManager(context, 1)
-//                lzList.layoutManager = gridLayoutManager
-//                lzList.hasFixedSize()
-//                lzList.adapter = lzSelectionAdapter
-//
-//            }
-//
-//        }
-//    }
 
     private fun populateLocationAndPopulationRV(subLocationsList: MutableList<SubLocationModel>) {
         binding.apply {
@@ -370,16 +356,17 @@ class CountyLevelFragment : DialogFragment(),
                     )
                     countyLevelQuestionnaire.wealthGroupResponse = wealthGroupResponse
 
-
-                    val cropSelectionAdapter =
-                        CropSelectionAdapter(geographyObject.crops, this@CountyLevelFragment)
-                    val gridLayoutManager = GridLayoutManager(activity, 1)
-
                     cropSelectionLayout.apply {
-                        cropsList.layoutManager = gridLayoutManager
-                        cropsList.hasFixedSize()
-                        cropsList.adapter =
-                            cropSelectionAdapter
+                        activity?.let { context ->
+                            val adapter =
+                                CropSelectionListAdapter(
+                                    context,
+                                    R.layout.lz_selection_item,
+                                    crops,
+                                    this@CountyLevelFragment
+                                )
+                            cropsList.adapter = adapter
+                        }
                     }
 
                     locationAndPopulationLayout.root.visibility = View.GONE
@@ -2276,5 +2263,27 @@ class CountyLevelFragment : DialogFragment(),
 
     override fun onACropHasAValidationError() {
         inflateErrorModal("Missing data", "Kindly fill in all the data in the form")
+    }
+
+    override fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel, position: Int) {
+        crops.set(position, selectedCrop)
+        binding.apply {
+            cropSelectionLayout.apply {
+                activity?.let { context ->
+                    val adapter =
+                        CropSelectionListAdapter(
+                            context,
+                            R.layout.lz_selection_item,
+                            crops,
+                            this@CountyLevelFragment
+                        )
+                    cropsList.adapter = adapter
+                }
+            }
+        }
+
+        if (selectedCrop.hasBeenSelected) {
+            countyLevelQuestionnaire.selectedCrops.add(selectedCrop)
+        }
     }
 }
