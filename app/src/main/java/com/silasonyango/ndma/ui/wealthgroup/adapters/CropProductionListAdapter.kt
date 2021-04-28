@@ -61,6 +61,20 @@ class CropProductionListAdapter(
 
         cropName.text = currentResponseItem.crop.cropName
 
+        if (currentResponseItem.allFieldsFilled) {
+
+            shortRainsRainfedCultivatedAreaPercentage.setText(currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.value.toString())
+            shortRainsRainfedAverageYieldPerHa.setText(currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.value.toString())
+            shortRainsIrrigatedCultivatedArea.setText(currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.value.toString())
+            shortRainsIrrigatedAverageYieldPerHa.setText(currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.value.toString())
+
+            longRainsRainfedCultivatedAreaPercentage.setText(currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.value.toString())
+            longRainsRainfedAverageYieldPerHa.setText(currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.value.toString())
+            longRainsIrrigatedCultivatedArea.setText(currentResponseItem.longRainsSeason.irrigatedCultivatedArea.value.toString())
+            longRainsIrrigatedAverageYieldPerHa.setText(currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.value.toString())
+
+        }
+
         if (isAnyValueEmpty(currentResponseItem)) {
             tvAccordionIcon.text == "-"
             accordionStroke.visibility = View.VISIBLE
@@ -72,6 +86,7 @@ class CropProductionListAdapter(
         }
 
         tvAccordionIcon.setOnClickListener {
+
             if (shortRainsRainfedCultivatedAreaPercentage.text.toString().isEmpty() || shortRainsRainfedAverageYieldPerHa.text.toString().isEmpty() || shortRainsIrrigatedCultivatedArea.text.toString().isEmpty() || shortRainsIrrigatedAverageYieldPerHa.text.toString().isEmpty()
                 || longRainsRainfedCultivatedAreaPercentage.text.toString().isEmpty() || longRainsRainfedAverageYieldPerHa.text.toString().isEmpty() || longRainsIrrigatedCultivatedArea.text.toString().isEmpty() || longRainsIrrigatedAverageYieldPerHa.text.toString().isEmpty()) {
                 tvAccordionIcon.text == "-"
@@ -81,6 +96,12 @@ class CropProductionListAdapter(
                 tvAccordionIcon.text == "+"
                 accordionStroke.visibility = View.GONE
                 accordionContent.visibility = View.GONE
+            }
+
+            if (currentResponseItem.allFieldsFilled) {
+                tvAccordionIcon.text == "-"
+                accordionStroke.visibility = View.VISIBLE
+                accordionContent.visibility = View.VISIBLE
             }
         }
 
@@ -104,6 +125,7 @@ class CropProductionListAdapter(
                 currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa = CropProductionResponseValueModel(longRainsRainfedAverageYieldPerHa.text.toString().toDouble(),true)
                 currentResponseItem.longRainsSeason.irrigatedCultivatedArea = CropProductionResponseValueModel(longRainsIrrigatedCultivatedArea.text.toString().toDouble(),true)
                 currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa = CropProductionResponseValueModel(longRainsIrrigatedAverageYieldPerHa.text.toString().toDouble(),true)
+                currentResponseItem.allFieldsFilled = true
                 cropProductionListAdapterCallBack.onCropProductionResponseItemSubmited(currentResponseItem,position)
             }
         }
