@@ -1,4 +1,4 @@
-package com.silasonyango.ndma.ui.wealthgroup
+package com.silasonyango.ndma.ui.wealthgroup.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,14 +8,12 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.silasonyango.ndma.R
 import com.silasonyango.ndma.ui.county.model.CropModel
-import com.silasonyango.ndma.ui.county.responses.LzCropProductionResponseItem
-import com.silasonyango.ndma.ui.home.adapters.CropSelectionAdapter
 
 class CropSelectionListAdapter(
     context: Context,
     val resource: Int,
     val crops: MutableList<CropModel>,
-    val cropSelectionListAdapterCallBack: CropSelectionListAdapter.CropSelectionListAdapterCallBack
+    val cropSelectionListAdapterCallBack: CropSelectionListAdapterCallBack
 ) :
     ArrayAdapter<CropModel>(context, resource, crops) {
 
@@ -43,7 +41,6 @@ class CropSelectionListAdapter(
         }
 
         view.setOnClickListener {
-
             if (highlightIcon.visibility == View.VISIBLE) {
                 currentCropModel.hasBeenSelected = false
                 highlightIcon.visibility = View.GONE
@@ -53,15 +50,10 @@ class CropSelectionListAdapter(
                 highlightIcon.visibility = View.VISIBLE
                 uncheckedIcon.visibility = View.GONE
             }
-
-//            currentCropModel.hasBeenSelected = if (highlightIcon.visibility == View.VISIBLE) false else true
             cropSelectionListAdapterCallBack.onCropItemSelectedFromSelectionList(
                 currentCropModel,
                 position
             )
-
-//            highlightIcon.visibility = if (highlightIcon.visibility == View.VISIBLE) View.GONE else View.VISIBLE
-//            uncheckedIcon.visibility = if (highlightIcon.visibility == View.VISIBLE) View.GONE else View.VISIBLE
         }
 
         return view

@@ -21,26 +21,27 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.silasonyango.ndma.R
 import com.silasonyango.ndma.appStore.AppStore
-import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaireListObject
 import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaire
 import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaireListObject
 import com.silasonyango.ndma.config.Constants
-import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.databinding.WealthGroupQuestionnaireLayoutBinding
 import com.silasonyango.ndma.login.model.GeographyObject
 import com.silasonyango.ndma.ui.county.model.CropModel
 import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
+import com.silasonyango.ndma.ui.county.responses.LzCropProductionResponseItem
 import com.silasonyango.ndma.ui.home.HomeViewModel
 import com.silasonyango.ndma.ui.model.QuestionnaireStatus
+import com.silasonyango.ndma.ui.wealthgroup.adapters.CropProductionListAdapter
+import com.silasonyango.ndma.ui.wealthgroup.adapters.CropSelectionListAdapter
 import com.silasonyango.ndma.ui.wealthgroup.responses.*
 import com.silasonyango.ndma.util.Util
 
-class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.CropSelectionListAdapterCallBack {
+class WealthGroupDialogFragment : DialogFragment(),
+    CropSelectionListAdapter.CropSelectionListAdapterCallBack, CropProductionListAdapter.CropProductionListAdapterCallBack {
 
     private lateinit var wealthGroupViewModel: WealthGroupViewModel
 
@@ -61,6 +62,8 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
     private var errorDialog: android.app.AlertDialog? = null
 
     private lateinit var homeViewModel: HomeViewModel
+
+    private var cropProductionResponseItems: MutableList<WgCropProductionResponseItem> = ArrayList()
 
     private var crops: MutableList<CropModel> = ArrayList()
 
@@ -1378,8 +1381,14 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
                         wealthGroupQuestionnaire.foodConsumptionResponses = foodConsumptionResponses
 
                         cropSelectionLayout.apply {
-                            activity?.let { context->
-                                val adapter = CropSelectionListAdapter(context, R.layout.lz_selection_item, crops,this@WealthGroupDialogFragment)
+                            activity?.let { context ->
+                                val adapter =
+                                    CropSelectionListAdapter(
+                                        context,
+                                        R.layout.lz_selection_item,
+                                        crops,
+                                        this@WealthGroupDialogFragment
+                                    )
                                 cropsList.adapter = adapter
                             }
                         }
@@ -1397,7 +1406,6 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
             }
 
 
-
             /* Crop Selection navigation */
 
             cropSelectionLayout.apply {
@@ -1408,8 +1416,66 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
                 }
 
                 cropSelectionNextButton.setOnClickListener {
-                    wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
+
+
+                    for (currentCrop in wealthGroupQuestionnaire.selectedCrops) {
+                        cropProductionResponseItems.add(
+                            WgCropProductionResponseItem(
+                                currentCrop,
+                                CropProductionResponseValueModel(0.0, false),
+                                CropProductionResponseValueModel(0.0, false),
+                                CropProductionResponseValueModel(0.0, false),
+                                CropProductionResponseValueModel(0.0, false)
+                            )
+                        )
+                    }
+
+                    cropProductionLayout.apply {
+                        activity?.let { context ->
+                            val adapter =
+                                CropProductionListAdapter(
+                                    context,
+                                    R.layout.lz_crop_production_item,
+                                    cropProductionResponseItems,
+                                    this@WealthGroupDialogFragment
+                                )
+                            cropsList.adapter = adapter
+                        }
+                    }
+
+                    cropProductionLayout.root.visibility = View.VISIBLE
                     cropSelectionLayout.root.visibility = View.GONE
+                }
+
+            }
+
+
+            /* Crop production layout */
+
+            cropProductionLayout.apply {
+
+                cropProductionBackButton.setOnClickListener {
+                    cropProductionLayout.root.visibility = View.GONE
+                    cropSelectionLayout.root.visibility = View.VISIBLE
+                }
+
+                cropProductionNextButton.setOnClickListener {
+                    if (!isAnyCropProductionFieldEmpty()) {
+                        cropProductionLayout.root.visibility = View.GONE
+                        wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
+                    } else {
+                        activity?.let { context ->
+                            val adapter =
+                                CropProductionListAdapter(
+                                    context,
+                                    R.layout.lz_crop_production_item,
+                                    cropProductionResponseItems,
+                                    this@WealthGroupDialogFragment
+                                )
+                            cropsList.adapter = adapter
+                        }
+                        inflateErrorModal("Missing Data", "Kindly fill out all the fields")
+                    }
                 }
 
             }
@@ -1418,7 +1484,7 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
             /*Livestock and poultry navigation*/
             wgLivestockPoultryNumbers.apply {
                 livestockPoultryNumbertsBackButton.setOnClickListener {
-                    cropSelectionLayout.root.visibility = View.VISIBLE
+                    cropProductionLayout.root.visibility = View.VISIBLE
                     wgLivestockPoultryNumbers.root.visibility = View.GONE
                 }
 
@@ -1484,7 +1550,8 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
 
                     if (hasNoValidationError) {
 
-                        val livestockPoultryOwnershipResponses = LivestockPoultryOwnershipResponses()
+                        val livestockPoultryOwnershipResponses =
+                            LivestockPoultryOwnershipResponses()
                         livestockPoultryOwnershipResponses.cattle =
                             cattleNumbers.text.toString().toDouble()
                         livestockPoultryOwnershipResponses.goats =
@@ -1495,7 +1562,8 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
                             donkeyNumbers.text.toString().toDouble()
                         livestockPoultryOwnershipResponses.camels =
                             camelNumbers.text.toString().toDouble()
-                        livestockPoultryOwnershipResponses.pigs = pigNumbers.text.toString().toDouble()
+                        livestockPoultryOwnershipResponses.pigs =
+                            pigNumbers.text.toString().toDouble()
                         livestockPoultryOwnershipResponses.chicken =
                             chickenNumbers.text.toString().toDouble()
                         livestockPoultryOwnershipResponses.ducks =
@@ -1625,7 +1693,9 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
                                     domesticUnpaidWorkmen.text.toString()
                                 ).toDouble() + returnZeroStringIfEmpty(leisuremen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     sexWorkmen.text.toString()
-                                ).toDouble() + returnZeroStringIfEmpty(beggingmen.text.toString()).toDouble() + returnZeroStringIfEmpty(inactivitymen.text.toString()).toDouble()
+                                ).toDouble() + returnZeroStringIfEmpty(beggingmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    inactivitymen.text.toString()
+                                ).toDouble()
 
                             if (menTotalEntry > 100) {
                                 val excessValue = menTotalEntry - 100.0
@@ -1679,8 +1749,6 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
                 inactivitymen.addTextChangedListener(mentTextWatcher)
 
 
-
-
                 val womentTextWatcher = object : TextWatcher {
                     override fun afterTextChanged(editable: Editable?) {
                         Handler(Looper.getMainLooper()).postDelayed({
@@ -1699,7 +1767,9 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
                                     domesticUnpaidWorkWomen.text.toString()
                                 ).toDouble() + returnZeroStringIfEmpty(leisureWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     sexWorkWomen.text.toString()
-                                ).toDouble() + returnZeroStringIfEmpty(beggingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(inactivityWomen.text.toString()).toDouble()
+                                ).toDouble() + returnZeroStringIfEmpty(beggingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    inactivityWomen.text.toString()
+                                ).toDouble()
 
                             if (womenTotalEntry > 100) {
                                 val excessValue = womenTotalEntry - 100.0
@@ -1774,7 +1844,9 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
                             domesticUnpaidWorkmen.text.toString()
                         ).toDouble() + returnZeroStringIfEmpty(leisuremen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                             sexWorkmen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(beggingmen.text.toString()).toDouble() + returnZeroStringIfEmpty(inactivitymen.text.toString()).toDouble()
+                        ).toDouble() + returnZeroStringIfEmpty(beggingmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            inactivitymen.text.toString()
+                        ).toDouble()
 
                     if (menTotalEntry < 100) {
                         val deficitValue = 100 - menTotalEntry
@@ -1799,7 +1871,9 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
                             domesticUnpaidWorkWomen.text.toString()
                         ).toDouble() + returnZeroStringIfEmpty(leisureWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                             sexWorkWomen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(beggingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(inactivityWomen.text.toString()).toDouble()
+                        ).toDouble() + returnZeroStringIfEmpty(beggingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            inactivityWomen.text.toString()
+                        ).toDouble()
 
 
                     if (womenTotalEntry < 100) {
@@ -2870,7 +2944,8 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
             /*wgCompletion page navigation*/
             wgCompletionPage.apply {
                 closeButton.setOnClickListener {
-                    wealthGroupQuestionnaire.questionnaireStatus = QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
+                    wealthGroupQuestionnaire.questionnaireStatus =
+                        QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
                     wealthGroupQuestionnaire.questionnaireEndDate = Util.getNow()
                     val gson = Gson()
                     val sharedPreferences: SharedPreferences? =
@@ -2913,6 +2988,19 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
             return "0"
         }
         return inputString
+    }
+
+    private fun isAnyCropProductionFieldEmpty(): Boolean {
+        for (currentResponseItem in cropProductionResponseItems) {
+            if (isAnyValueEmpty(currentResponseItem)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    fun isAnyValueEmpty(currentResponseItem: WgCropProductionResponseItem): Boolean {
+        return !currentResponseItem.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.irrigatedAverageYieldPerHa.hasBeenSubmitted
     }
 
 
@@ -2979,14 +3067,31 @@ class WealthGroupDialogFragment : DialogFragment(), CropSelectionListAdapter.Cro
     }
 
     override fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel, position: Int) {
-        crops.set(position,selectedCrop)
+        crops.set(position, selectedCrop)
         binding.apply {
             cropSelectionLayout.apply {
-                activity?.let { context->
-                    val adapter = CropSelectionListAdapter(context, R.layout.lz_selection_item, crops,this@WealthGroupDialogFragment)
+                activity?.let { context ->
+                    val adapter =
+                        CropSelectionListAdapter(
+                            context,
+                            R.layout.lz_selection_item,
+                            crops,
+                            this@WealthGroupDialogFragment
+                        )
                     cropsList.adapter = adapter
                 }
             }
         }
+
+        if (selectedCrop.hasBeenSelected) {
+            wealthGroupQuestionnaire.selectedCrops.add(selectedCrop)
+        }
+    }
+
+    override fun onCropProductionResponseItemSubmited(
+        responseItem: WgCropProductionResponseItem,
+        position: Int
+    ) {
+        cropProductionResponseItems.set(position, responseItem)
     }
 }

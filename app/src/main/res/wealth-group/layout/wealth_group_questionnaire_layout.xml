@@ -40,6 +40,16 @@
             android:visibility="gone" />
 
 
+        <!--        C(ii). Crop Production-->
+        <include
+            android:id="@+id/cropProductionLayout"
+            layout="@layout/wg_crop_production_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
+
+
         <!--        D. Livestock and Poultry Ownership-->
         <include layout="@layout/wg_livestock_and_poultry"
             android:visibility="gone"

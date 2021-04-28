@@ -1,5 +1,6 @@
 package com.silasonyango.ndma.appStore.model
 
+import com.silasonyango.ndma.ui.county.model.CropModel
 import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
 import com.silasonyango.ndma.ui.model.QuestionnaireStatus
 import com.silasonyango.ndma.ui.wealthgroup.responses.*
@@ -19,4 +20,5 @@ class WealthGroupQuestionnaire(val uniqueId: String, var questionnaireName: Stri
     lateinit var expenditurePatternsResponses: ExpenditurePatternsResponses
     lateinit var migrationPatternResponses: MigrationPatternResponses
     lateinit var constraintsResponses: ConstraintsResponses
+    var selectedCrops: MutableList<CropModel> = ArrayList()
 }
