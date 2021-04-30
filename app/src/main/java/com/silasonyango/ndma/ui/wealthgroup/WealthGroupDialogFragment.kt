@@ -116,7 +116,7 @@ class WealthGroupDialogFragment : DialogFragment(),
             wealthGroupQuestionnaire.questionnaireStartDate = Util.getNow()
             wealthGroupQuestionnaire.questionnaireName =
                 AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
-                        wealthGroupQuestionnaire.questionnaireGeography.selectedLivelihoodZone.livelihoodZoneName + " Livelihood Zone " + wealthGroupQuestionnaire.questionnaireGeography.selectedWealthGroup.wealthGroupName + " questionnaire"
+                        wealthGroupQuestionnaire.questionnaireGeography.selectedLivelihoodZone?.livelihoodZoneName + " Livelihood Zone " + wealthGroupQuestionnaire.questionnaireGeography.selectedWealthGroup?.wealthGroupName + " questionnaire"
         }
 
         inflateSubCountyModal()

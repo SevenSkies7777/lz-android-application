@@ -53,6 +53,8 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
     private var wardDialog: android.app.AlertDialog? = null
 
+    private var errorDialog: android.app.AlertDialog? = null
+
     private var subLocationDialog: android.app.AlertDialog? = null
 
     private var wealthGroupDialog: android.app.AlertDialog? = null
@@ -311,20 +313,32 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         }
 
         submitButton.setOnClickListener {
-            var latitude: Double = 0.0
-            var longitude: Double = 0.0
-            val gpsTracker: GpsTracker = GpsTracker(this)
-            if (isStoragePermissionGranted()) {
-                latitude = gpsTracker.latitude
-                longitude = gpsTracker.longitude
-                questionnaireSessionLocation.latitude = latitude
-                questionnaireSessionLocation.longitude = longitude
-                val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(
-                    questionnaireId,
-                    questionnaireName,
-                    questionnaireSessionLocation
-                )
-                wealthGroupDialogFragment.show(this.supportFragmentManager, "WealthGroup")
+
+            if (questionnaireSessionLocation.selectedSubCounty != null
+                && questionnaireSessionLocation.selectedWard != null
+                && questionnaireSessionLocation.selectedSubLocation != null
+                && questionnaireSessionLocation.selectedLivelihoodZone != null
+                && questionnaireSessionLocation.selectedWgQuestionnaireType != null
+            ) {
+
+                var latitude: Double = 0.0
+                var longitude: Double = 0.0
+                val gpsTracker: GpsTracker = GpsTracker(this)
+                if (isStoragePermissionGranted()) {
+                    latitude = gpsTracker.latitude
+                    longitude = gpsTracker.longitude
+                    questionnaireSessionLocation.latitude = latitude
+                    questionnaireSessionLocation.longitude = longitude
+                    val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(
+                        questionnaireId,
+                        questionnaireName,
+                        questionnaireSessionLocation
+                    )
+                    wealthGroupDialogFragment.show(this.supportFragmentManager, "WealthGroup")
+                }
+
+            } else {
+                inflateErrorModal("Data error", "Kindly fill out the missing fields")
             }
         }
 
@@ -675,22 +689,72 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         if (requestCode == WRITE_STORAGE_PERMISSION_CODE && grantResults.isNotEmpty()
             && grantResults[0] == PackageManager.PERMISSION_GRANTED
         ) {
-            var latitude: Double = 0.0
-            var longitude: Double = 0.0
-            val gpsTracker: GpsTracker = GpsTracker(this)
 
-            latitude = gpsTracker.latitude
-            longitude = gpsTracker.longitude
-            questionnaireSessionLocation.latitude = latitude
-            questionnaireSessionLocation.longitude = longitude
-            val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(
-                questionnaireId,
-                questionnaireName,
-                questionnaireSessionLocation
-            )
-            wealthGroupDialogFragment.show(this.supportFragmentManager, "CountyLevel")
+            if (questionnaireSessionLocation.selectedSubCounty != null
+                && questionnaireSessionLocation.selectedWard != null
+                && questionnaireSessionLocation.selectedSubLocation != null
+                && questionnaireSessionLocation.selectedLivelihoodZone != null
+                && questionnaireSessionLocation.selectedWgQuestionnaireType != null
+            ) {
+
+                var latitude: Double = 0.0
+                var longitude: Double = 0.0
+                val gpsTracker: GpsTracker = GpsTracker(this)
+
+                latitude = gpsTracker.latitude
+                longitude = gpsTracker.longitude
+                questionnaireSessionLocation.latitude = latitude
+                questionnaireSessionLocation.longitude = longitude
+                val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(
+                    questionnaireId,
+                    questionnaireName,
+                    questionnaireSessionLocation
+                )
+                wealthGroupDialogFragment.show(this.supportFragmentManager, "WealthGroup")
+
+            } else {
+                inflateErrorModal("Data error", "Kindly fill out all the missing fields")
+            }
 
         }
+    }
+
+    private fun inflateErrorModal(errorTitle: String, errorMessage: String) {
+        val inflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.error_message_layout, null)
+        val title = v.findViewById<TextView>(R.id.title)
+        val message = v.findViewById<TextView>(R.id.message)
+        val close = v.findViewById<TextView>(R.id.close)
+        title.text = errorTitle
+        message.text = errorMessage
+        close.setOnClickListener {
+            (errorDialog as android.app.AlertDialog).cancel()
+        }
+
+        openErrorModal(v)
+    }
+
+    private fun openErrorModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+        builder.setView(v)
+        builder.setCancelable(true)
+        errorDialog = builder.create()
+        (errorDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
     }
 
 

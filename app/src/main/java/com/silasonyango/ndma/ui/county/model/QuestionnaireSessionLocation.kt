@@ -6,12 +6,12 @@ import android.os.Parcelable
 class QuestionnaireSessionLocation(): Parcelable {
     var latitude: Double = 0.0
     var longitude: Double = 0.0
-    lateinit var selectedSubCounty: SubCountyModel
-    lateinit var selectedWard: WardModel
-    lateinit var selectedSubLocation: SubLocationModel
-    lateinit var selectedWealthGroup: WealthGroupModel
-    lateinit var selectedLivelihoodZone: LivelihoodZoneModel
-    lateinit var selectedWgQuestionnaireType: WgQuestionnaireTypeModel
+    var selectedSubCounty: SubCountyModel? = null
+    var selectedWard: WardModel? = null
+    var selectedSubLocation: SubLocationModel? = null
+    var selectedWealthGroup: WealthGroupModel? = null
+    var selectedLivelihoodZone: LivelihoodZoneModel? = null
+    var selectedWgQuestionnaireType: WgQuestionnaireTypeModel? = null
 
     constructor(parcel: Parcel) : this() {
 
