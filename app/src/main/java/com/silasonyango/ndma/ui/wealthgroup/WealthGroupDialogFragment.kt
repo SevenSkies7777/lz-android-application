@@ -1844,60 +1844,6 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                     var hasNoValidationError: Boolean = true
 
-                    val menTotalEntry =
-                        returnZeroStringIfEmpty(ownFarmmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            livestockHusbandrymen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(wagedLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            lowSkilledNonFarmmen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(skilledLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            formalEmploymentmen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(huntingAndGatheringmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            fishingmen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(tradingmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            domesticUnpaidWorkmen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(leisuremen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            sexWorkmen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(beggingmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            inactivitymen.text.toString()
-                        ).toDouble()
-
-                    if (menTotalEntry < 100) {
-                        val deficitValue = 100 - menTotalEntry
-                        inflateErrorModal(
-                            "Percentage error",
-                            "Entries for men are less than 100% by $deficitValue"
-                        )
-
-                    }
-
-
-                    val womenTotalEntry =
-                        returnZeroStringIfEmpty(ownFarmWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            livestockHusbandryWomen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(wagedLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            lowSkilledNonFarmWomen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(skilledLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            formalEmploymentWomen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(huntingAndGatheringWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            fishingWomen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(tradingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            domesticUnpaidWorkWomen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(leisureWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            sexWorkWomen.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(beggingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            inactivityWomen.text.toString()
-                        ).toDouble()
-
-
-                    if (womenTotalEntry < 100) {
-                        val womenDeficitValue = 100 - womenTotalEntry
-                        inflateErrorModal(
-                            "Percentage error",
-                            "Entries for women are less than 100% by $womenDeficitValue"
-                        )
-
-                    }
-
                     if (ownFarmWomen.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         ownFarmWomenCell.background =
@@ -2042,81 +1988,128 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                     if (hasNoValidationError) {
 
-                        val labourPatternResponse = LabourPatternResponse()
-                        labourPatternResponse.ownFarmCropProduction = LabourPatternResponseItem(
-                            ownFarmWomen.text.toString().toDouble(),
-                            ownFarmmen.text.toString().toDouble()
-                        )
 
-                        labourPatternResponse.livestockHusbandry = LabourPatternResponseItem(
-                            livestockHusbandryWomen.text.toString().toDouble(),
-                            livestockHusbandrymen.text.toString().toDouble()
-                        )
+                        val menTotalEntry =
+                            returnZeroStringIfEmpty(ownFarmmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                livestockHusbandrymen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(wagedLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                lowSkilledNonFarmmen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(skilledLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                formalEmploymentmen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(huntingAndGatheringmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                fishingmen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(tradingmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                domesticUnpaidWorkmen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(leisuremen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                sexWorkmen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(beggingmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                inactivitymen.text.toString()
+                            ).toDouble()
 
-                        labourPatternResponse.wagedLabourOnFarms = LabourPatternResponseItem(
-                            wagedLabourWomen.text.toString().toDouble(),
-                            wagedLabourmen.text.toString().toDouble()
-                        )
 
-                        labourPatternResponse.lowSkilledNonFarmLabour = LabourPatternResponseItem(
-                            lowSkilledNonFarmWomen.text.toString().toDouble(),
-                            lowSkilledNonFarmmen.text.toString().toDouble()
-                        )
 
-                        labourPatternResponse.skilledLabour = LabourPatternResponseItem(
-                            skilledLabourWomen.text.toString().toDouble(),
-                            skilledLabourmen.text.toString().toDouble()
-                        )
+                        val womenTotalEntry =
+                            returnZeroStringIfEmpty(ownFarmWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                livestockHusbandryWomen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(wagedLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                lowSkilledNonFarmWomen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(skilledLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                formalEmploymentWomen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(huntingAndGatheringWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                fishingWomen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(tradingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                domesticUnpaidWorkWomen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(leisureWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                sexWorkWomen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(beggingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                inactivityWomen.text.toString()
+                            ).toDouble()
 
-                        labourPatternResponse.formalEmployment = LabourPatternResponseItem(
-                            formalEmploymentWomen.text.toString().toDouble(),
-                            formalEmploymentmen.text.toString().toDouble()
-                        )
 
-                        labourPatternResponse.huntingAndGathering = LabourPatternResponseItem(
-                            huntingAndGatheringWomen.text.toString().toDouble(),
-                            huntingAndGatheringmen.text.toString().toDouble()
-                        )
 
-                        labourPatternResponse.fishing = LabourPatternResponseItem(
-                            fishingWomen.text.toString().toDouble(),
-                            fishingmen.text.toString().toDouble()
-                        )
+                        if (menTotalEntry == 100.0 && womenTotalEntry == 100.0) {
 
-                        labourPatternResponse.trading = LabourPatternResponseItem(
-                            tradingWomen.text.toString().toDouble(),
-                            tradingmen.text.toString().toDouble()
-                        )
+                            val labourPatternResponse = LabourPatternResponse()
+                            labourPatternResponse.ownFarmCropProduction = LabourPatternResponseItem(
+                                ownFarmWomen.text.toString().toDouble(),
+                                ownFarmmen.text.toString().toDouble()
+                            )
 
-                        labourPatternResponse.domesticUnpaidWork = LabourPatternResponseItem(
-                            domesticUnpaidWorkWomen.text.toString().toDouble(),
-                            domesticUnpaidWorkmen.text.toString().toDouble()
-                        )
+                            labourPatternResponse.livestockHusbandry = LabourPatternResponseItem(
+                                livestockHusbandryWomen.text.toString().toDouble(),
+                                livestockHusbandrymen.text.toString().toDouble()
+                            )
 
-                        labourPatternResponse.leisure = LabourPatternResponseItem(
-                            leisureWomen.text.toString().toDouble(),
-                            leisuremen.text.toString().toDouble()
-                        )
+                            labourPatternResponse.wagedLabourOnFarms = LabourPatternResponseItem(
+                                wagedLabourWomen.text.toString().toDouble(),
+                                wagedLabourmen.text.toString().toDouble()
+                            )
 
-                        labourPatternResponse.commercialSexWork = LabourPatternResponseItem(
-                            sexWorkWomen.text.toString().toDouble(),
-                            sexWorkmen.text.toString().toDouble()
-                        )
+                            labourPatternResponse.lowSkilledNonFarmLabour = LabourPatternResponseItem(
+                                lowSkilledNonFarmWomen.text.toString().toDouble(),
+                                lowSkilledNonFarmmen.text.toString().toDouble()
+                            )
 
-                        labourPatternResponse.begging = LabourPatternResponseItem(
-                            beggingWomen.text.toString().toDouble(),
-                            beggingmen.text.toString().toDouble()
-                        )
+                            labourPatternResponse.skilledLabour = LabourPatternResponseItem(
+                                skilledLabourWomen.text.toString().toDouble(),
+                                skilledLabourmen.text.toString().toDouble()
+                            )
 
-                        labourPatternResponse.inactivity = LabourPatternResponseItem(
-                            inactivityWomen.text.toString().toDouble(),
-                            inactivitymen.text.toString().toDouble()
-                        )
+                            labourPatternResponse.formalEmployment = LabourPatternResponseItem(
+                                formalEmploymentWomen.text.toString().toDouble(),
+                                formalEmploymentmen.text.toString().toDouble()
+                            )
 
-                        wealthGroupQuestionnaire.labourPatternResponses = labourPatternResponse
+                            labourPatternResponse.huntingAndGathering = LabourPatternResponseItem(
+                                huntingAndGatheringWomen.text.toString().toDouble(),
+                                huntingAndGatheringmen.text.toString().toDouble()
+                            )
 
-                        wgExpenditurePatterns.root.visibility = View.VISIBLE
-                        wgLabourPatterns.root.visibility = View.GONE
+                            labourPatternResponse.fishing = LabourPatternResponseItem(
+                                fishingWomen.text.toString().toDouble(),
+                                fishingmen.text.toString().toDouble()
+                            )
+
+                            labourPatternResponse.trading = LabourPatternResponseItem(
+                                tradingWomen.text.toString().toDouble(),
+                                tradingmen.text.toString().toDouble()
+                            )
+
+                            labourPatternResponse.domesticUnpaidWork = LabourPatternResponseItem(
+                                domesticUnpaidWorkWomen.text.toString().toDouble(),
+                                domesticUnpaidWorkmen.text.toString().toDouble()
+                            )
+
+                            labourPatternResponse.leisure = LabourPatternResponseItem(
+                                leisureWomen.text.toString().toDouble(),
+                                leisuremen.text.toString().toDouble()
+                            )
+
+                            labourPatternResponse.commercialSexWork = LabourPatternResponseItem(
+                                sexWorkWomen.text.toString().toDouble(),
+                                sexWorkmen.text.toString().toDouble()
+                            )
+
+                            labourPatternResponse.begging = LabourPatternResponseItem(
+                                beggingWomen.text.toString().toDouble(),
+                                beggingmen.text.toString().toDouble()
+                            )
+
+                            labourPatternResponse.inactivity = LabourPatternResponseItem(
+                                inactivityWomen.text.toString().toDouble(),
+                                inactivitymen.text.toString().toDouble()
+                            )
+
+                            wealthGroupQuestionnaire.labourPatternResponses = labourPatternResponse
+
+                            wgExpenditurePatterns.root.visibility = View.VISIBLE
+                            wgLabourPatterns.root.visibility = View.GONE
+
+                        } else if (menTotalEntry < 100.0) {
+                            inflateErrorModal("Percentage error", "Male total entries are less than 100% by ${100 - menTotalEntry}")
+                        } else if(womenTotalEntry < 100.0) {
+                            inflateErrorModal("Percentage error", "Female total entries are less than 100% by ${100 - womenTotalEntry}")
+                        }
 
                     }
                 }
@@ -2384,110 +2377,106 @@ class WealthGroupDialogFragment : DialogFragment(),
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
 
-                    val totalPercentageEntry =
-                        returnZeroStringIfEmpty(maizeAndMaizeFlour.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            otherCereals.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(pulses.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            rootsAndTubers.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(vegetablesAndFruits.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            fishandseaFood.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(meat.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            milk.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(eggs.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            oilAndFats.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(otherFoods.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            schoolFees.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(drugsAndMedicalCare.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            clothingAndBeautyProducts.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(houseRent.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            communicationExpense.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(farmInputs.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            livestockDrugs.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(waterPurchase.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            soaps.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(farrmLabour.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            travelRelatedExpense.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(entertainment.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            electricityBill.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(socialObligation.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            millingCost.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(cookingFuel.text.toString()).toDouble() + returnZeroStringIfEmpty(
-                            savingsAndInvestment.text.toString()
-                        ).toDouble() + returnZeroStringIfEmpty(loanRepayments.text.toString()).toDouble()
-
-                    if (totalPercentageEntry < 100) {
-
-                        val deficitValue = 100 - totalPercentageEntry
-                        inflateErrorModal(
-                            "Percentage error",
-                            "Entries are less than 100% by $deficitValue"
-                        )
-
-                    }
-
                     if (hasNoValidationError) {
 
-                        val expenditurePatternsResponses = ExpenditurePatternsResponses()
+                        val totalPercentageEntry =
+                            returnZeroStringIfEmpty(maizeAndMaizeFlour.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                otherCereals.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(pulses.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                rootsAndTubers.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(vegetablesAndFruits.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                fishandseaFood.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(meat.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                milk.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(eggs.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                oilAndFats.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(otherFoods.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                schoolFees.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(drugsAndMedicalCare.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                clothingAndBeautyProducts.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(houseRent.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                communicationExpense.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(farmInputs.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                livestockDrugs.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(waterPurchase.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                soaps.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(farrmLabour.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                travelRelatedExpense.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(entertainment.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                electricityBill.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(socialObligation.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                millingCost.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(cookingFuel.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                savingsAndInvestment.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(loanRepayments.text.toString()).toDouble()
 
-                        expenditurePatternsResponses.maizeAndMaizeFlour =
-                            maizeAndMaizeFlour.text.toString().toDouble()
-                        expenditurePatternsResponses.otherCereals =
-                            otherCereals.text.toString().toDouble()
-                        expenditurePatternsResponses.pulses = pulses.text.toString().toDouble()
-                        expenditurePatternsResponses.rootsAndTubers =
-                            rootsAndTubers.text.toString().toDouble()
-                        expenditurePatternsResponses.vegetablesAndFruits =
-                            vegetablesAndFruits.text.toString().toDouble()
-                        expenditurePatternsResponses.fishandSeaFood =
-                            fishandseaFood.text.toString().toDouble()
-                        expenditurePatternsResponses.meat = meat.text.toString().toDouble()
-                        expenditurePatternsResponses.milk = milk.text.toString().toDouble()
-                        expenditurePatternsResponses.eggs = eggs.text.toString().toDouble()
-                        expenditurePatternsResponses.oilsAndFats =
-                            oilAndFats.text.toString().toDouble()
-                        expenditurePatternsResponses.otherFoods =
-                            otherFoods.text.toString().toDouble()
-                        expenditurePatternsResponses.schoolFees =
-                            schoolFees.text.toString().toDouble()
-                        expenditurePatternsResponses.drugsAndMedicalCare =
-                            drugsAndMedicalCare.text.toString().toDouble()
-                        expenditurePatternsResponses.clothingAndBeautyProducts =
-                            clothingAndBeautyProducts.text.toString().toDouble()
-                        expenditurePatternsResponses.houseRent =
-                            houseRent.text.toString().toDouble()
-                        expenditurePatternsResponses.communicationExpenses =
-                            communicationExpense.text.toString().toDouble()
-                        expenditurePatternsResponses.farmInputs =
-                            farmInputs.text.toString().toDouble()
-                        expenditurePatternsResponses.livestockDrugs =
-                            livestockDrugs.text.toString().toDouble()
-                        expenditurePatternsResponses.waterPurchase =
-                            waterPurchase.text.toString().toDouble()
-                        expenditurePatternsResponses.soaps = soaps.text.toString().toDouble()
-                        expenditurePatternsResponses.farmLabour =
-                            farrmLabour.text.toString().toDouble()
-                        expenditurePatternsResponses.travelRelatedExpenses =
-                            travelRelatedExpense.text.toString().toDouble()
-                        expenditurePatternsResponses.leisureAndEntertainment =
-                            entertainment.text.toString().toDouble()
-                        expenditurePatternsResponses.electricityBills =
-                            electricityBill.text.toString().toDouble()
-                        expenditurePatternsResponses.socialObligation =
-                            socialObligation.text.toString().toDouble()
-                        expenditurePatternsResponses.millingCosts =
-                            millingCost.text.toString().toDouble()
-                        expenditurePatternsResponses.cookingFuel =
-                            cookingFuel.text.toString().toDouble()
-                        expenditurePatternsResponses.savingsAndInvestments =
-                            savingsAndInvestment.text.toString().toDouble()
-                        expenditurePatternsResponses.loanRepayments =
-                            loanRepayments.text.toString().toDouble()
+                        if (totalPercentageEntry == 100.0) {
 
-                        wealthGroupQuestionnaire.expenditurePatternsResponses =
-                            expenditurePatternsResponses
+                            val expenditurePatternsResponses = ExpenditurePatternsResponses()
 
-                        wgMigrationPatterns.root.visibility = View.VISIBLE
-                        wgExpenditurePatterns.root.visibility = View.GONE
+                            expenditurePatternsResponses.maizeAndMaizeFlour =
+                                maizeAndMaizeFlour.text.toString().toDouble()
+                            expenditurePatternsResponses.otherCereals =
+                                otherCereals.text.toString().toDouble()
+                            expenditurePatternsResponses.pulses = pulses.text.toString().toDouble()
+                            expenditurePatternsResponses.rootsAndTubers =
+                                rootsAndTubers.text.toString().toDouble()
+                            expenditurePatternsResponses.vegetablesAndFruits =
+                                vegetablesAndFruits.text.toString().toDouble()
+                            expenditurePatternsResponses.fishandSeaFood =
+                                fishandseaFood.text.toString().toDouble()
+                            expenditurePatternsResponses.meat = meat.text.toString().toDouble()
+                            expenditurePatternsResponses.milk = milk.text.toString().toDouble()
+                            expenditurePatternsResponses.eggs = eggs.text.toString().toDouble()
+                            expenditurePatternsResponses.oilsAndFats =
+                                oilAndFats.text.toString().toDouble()
+                            expenditurePatternsResponses.otherFoods =
+                                otherFoods.text.toString().toDouble()
+                            expenditurePatternsResponses.schoolFees =
+                                schoolFees.text.toString().toDouble()
+                            expenditurePatternsResponses.drugsAndMedicalCare =
+                                drugsAndMedicalCare.text.toString().toDouble()
+                            expenditurePatternsResponses.clothingAndBeautyProducts =
+                                clothingAndBeautyProducts.text.toString().toDouble()
+                            expenditurePatternsResponses.houseRent =
+                                houseRent.text.toString().toDouble()
+                            expenditurePatternsResponses.communicationExpenses =
+                                communicationExpense.text.toString().toDouble()
+                            expenditurePatternsResponses.farmInputs =
+                                farmInputs.text.toString().toDouble()
+                            expenditurePatternsResponses.livestockDrugs =
+                                livestockDrugs.text.toString().toDouble()
+                            expenditurePatternsResponses.waterPurchase =
+                                waterPurchase.text.toString().toDouble()
+                            expenditurePatternsResponses.soaps = soaps.text.toString().toDouble()
+                            expenditurePatternsResponses.farmLabour =
+                                farrmLabour.text.toString().toDouble()
+                            expenditurePatternsResponses.travelRelatedExpenses =
+                                travelRelatedExpense.text.toString().toDouble()
+                            expenditurePatternsResponses.leisureAndEntertainment =
+                                entertainment.text.toString().toDouble()
+                            expenditurePatternsResponses.electricityBills =
+                                electricityBill.text.toString().toDouble()
+                            expenditurePatternsResponses.socialObligation =
+                                socialObligation.text.toString().toDouble()
+                            expenditurePatternsResponses.millingCosts =
+                                millingCost.text.toString().toDouble()
+                            expenditurePatternsResponses.cookingFuel =
+                                cookingFuel.text.toString().toDouble()
+                            expenditurePatternsResponses.savingsAndInvestments =
+                                savingsAndInvestment.text.toString().toDouble()
+                            expenditurePatternsResponses.loanRepayments =
+                                loanRepayments.text.toString().toDouble()
+
+                            wealthGroupQuestionnaire.expenditurePatternsResponses =
+                                expenditurePatternsResponses
+
+                            wgMigrationPatterns.root.visibility = View.VISIBLE
+                            wgExpenditurePatterns.root.visibility = View.GONE
+
+                        } else if (totalPercentageEntry < 100.0) {
+                            inflateErrorModal("Percentage error", "Total entries are  less than 100% by ${100.0 - totalPercentageEntry}")
+                        }
 
                     }
                 }

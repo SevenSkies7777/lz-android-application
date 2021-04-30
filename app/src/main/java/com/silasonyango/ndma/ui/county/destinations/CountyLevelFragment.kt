@@ -1268,10 +1268,10 @@ class CountyLevelFragment : DialogFragment(),
 
                     }
 
-                    if (!etLongRainsHungerPeriodHasError ||
-                        !etEndLongBeginShortRainsHungerPeriodHasError ||
-                        !etShortRainsHungerPeriodHasError ||
-                        !etEndShortBeginLongRainsHungerPeriodHasError
+                    if (etLongRainsHungerPeriodHasError ||
+                        etEndLongBeginShortRainsHungerPeriodHasError ||
+                        etShortRainsHungerPeriodHasError ||
+                        etEndShortBeginLongRainsHungerPeriodHasError
                     ) {
 
                         inflateErrorModal(
