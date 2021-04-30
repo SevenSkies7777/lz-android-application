@@ -33,12 +33,12 @@
         android:gravity="start"/>
 
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
         android:layout_marginTop="27dp"
-        android:id="@+id/tribeList"
+        android:id="@+id/tribesList"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_height="600dp"
+        android:nestedScrollingEnabled="true"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

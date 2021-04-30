@@ -9,7 +9,7 @@ class CountyLevelQuestionnaire(val uniqueId: String, var questionnaireName: Stri
 
     var questionnaireStatus: QuestionnaireStatus = QuestionnaireStatus.DRAFT_QUESTIONNAIRE
 
-    lateinit var selectedLivelihoodZone: LivelihoodZoneModel
+    var selectedLivelihoodZone: LivelihoodZoneModel? = null
 
     var countyLivelihoodZones: MutableList<LivelihoodZoneModel> = ArrayList()
 

@@ -50,6 +50,7 @@ import com.silasonyango.ndma.ui.model.QuestionnaireStatus
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
 import com.silasonyango.ndma.ui.wealthgroup.adapters.CropProductionListAdapter
 import com.silasonyango.ndma.ui.wealthgroup.adapters.CropSelectionListAdapter
+import com.silasonyango.ndma.ui.wealthgroup.adapters.TribesListViewAdapter
 import com.silasonyango.ndma.ui.wealthgroup.responses.CropProductionResponseValueModel
 import com.silasonyango.ndma.ui.wealthgroup.responses.CropSeasonResponseItem
 import com.silasonyango.ndma.ui.wealthgroup.responses.WgCropProductionResponseItem
@@ -69,7 +70,9 @@ class CountyLevelFragment : DialogFragment(),
     MonthsAdapter.MonthsAdapterCallBack,
     MarketSubCountySelectionAdapter.MarketSubCountySelectionAdapterCallBack,
     MarketTransactionsAdapter.MarketTransactionsAdapterCallBack,
-    CropSelectionListAdapter.CropSelectionListAdapterCallBack, CropProductionListAdapter.CropProductionListAdapterCallBack {
+    CropSelectionListAdapter.CropSelectionListAdapterCallBack,
+    CropProductionListAdapter.CropProductionListAdapterCallBack,
+    TribesListViewAdapter.TribesListViewAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -86,6 +89,8 @@ class CountyLevelFragment : DialogFragment(),
     private var seasonCalendarDialog: android.app.AlertDialog? = null
 
     private var marketSubCountyDialog: android.app.AlertDialog? = null
+
+    private var ethnicGroups: MutableList<EthnicGroupModel> = ArrayList()
 
     private var cropProductionResponseItems: MutableList<WgCropProductionResponseItem> = ArrayList()
 
@@ -176,6 +181,7 @@ class CountyLevelFragment : DialogFragment(),
                 GeographyObject::class.java
             )
         crops = geographyObject.crops
+        ethnicGroups = geographyObject.ethnicGroups
         defineNavigation()
         binding.apply {
 
@@ -191,51 +197,70 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
                 configurationSubmitButton.setOnClickListener {
-                    var latitude: Double = 0.0
-                    var longitude: Double = 0.0
-                    val gpsTracker: GpsTracker = GpsTracker(context)
-                    if (isStoragePermissionGranted()) {
-                        latitude = gpsTracker.latitude
-                        longitude = gpsTracker.longitude
-                        countyLevelQuestionnaire.latitude = latitude
-                        countyLevelQuestionnaire.longitude = longitude
-                        countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
-                        countyLevelQuestionnaire.questionnaireName =
-                            AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
-                                    countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + " Livelihood Zone questionnaire"
 
-                        val subLocationLivelihoodZoneAssignment =
-                            geographyObject.sublocationsLivelihoodZoneAssignments.filter {
-                                it.livelihoodZoneId == countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneId
+                    if (countyLevelQuestionnaire.selectedLivelihoodZone != null) {
+
+                        var latitude: Double = 0.0
+                        var longitude: Double = 0.0
+                        val gpsTracker: GpsTracker = GpsTracker(context)
+                        if (isStoragePermissionGranted()) {
+                            latitude = gpsTracker.latitude
+                            longitude = gpsTracker.longitude
+                            countyLevelQuestionnaire.latitude = latitude
+                            countyLevelQuestionnaire.longitude = longitude
+                            countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
+
+                            countyLevelQuestionnaire.selectedLivelihoodZone?.let {
+                                countyLevelQuestionnaire.questionnaireName =
+                                    AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
+                                            it.livelihoodZoneName + " Livelihood Zone questionnaire"
                             }
 
-                        for (currentSubLocationLivelihoodZoneAssignment in subLocationLivelihoodZoneAssignment) {
-                            subLocationZoneAssignmentModelList.add(
-                                SubLocationZoneAssignmentModel(
-                                    currentSubLocationLivelihoodZoneAssignment.subLocationName,
-                                    currentSubLocationLivelihoodZoneAssignment.livelihoodZoneId,
-                                    currentSubLocationLivelihoodZoneAssignment.livelihoodZoneName
-                                )
-                            )
-                        }
 
-                        lzSubLocationAssignment.apply {
-                            val subLocationassignmentAdapter = activity?.let { it1 ->
-                                SubLocationZoneAssignmentAdapter(
-                                    subLocationZoneAssignmentModelList,
-                                    it1
-                                )
+                            countyLevelQuestionnaire.selectedLivelihoodZone?.let {
+                                val subLocationLivelihoodZoneAssignment =
+                                    geographyObject.sublocationsLivelihoodZoneAssignments.filter {
+                                        it.livelihoodZoneId == it.livelihoodZoneId
+                                    }
+
+                                for (currentSubLocationLivelihoodZoneAssignment in subLocationLivelihoodZoneAssignment) {
+                                    subLocationZoneAssignmentModelList.add(
+                                        SubLocationZoneAssignmentModel(
+                                            currentSubLocationLivelihoodZoneAssignment.subLocationName,
+                                            currentSubLocationLivelihoodZoneAssignment.livelihoodZoneId,
+                                            currentSubLocationLivelihoodZoneAssignment.livelihoodZoneName
+                                        )
+                                    )
+                                }
+
+                                lzSubLocationAssignment.apply {
+                                    val subLocationassignmentAdapter = activity?.let { it1 ->
+                                        SubLocationZoneAssignmentAdapter(
+                                            subLocationZoneAssignmentModelList,
+                                            it1
+                                        )
+                                    }
+
+                                    val gridLayoutManager = GridLayoutManager(activity, 1)
+                                    listRv.layoutManager = gridLayoutManager
+                                    listRv.hasFixedSize()
+                                    listRv.adapter =
+                                        subLocationassignmentAdapter
+                                }
                             }
 
-                            val gridLayoutManager = GridLayoutManager(activity, 1)
-                            listRv.layoutManager = gridLayoutManager
-                            listRv.hasFixedSize()
-                            listRv.adapter =
-                                subLocationassignmentAdapter
+
+                            lzSubLocationAssignment.root.visibility = View.VISIBLE
+                            countyConfiguration.root.visibility = View.GONE
                         }
-                        lzSubLocationAssignment.root.visibility = View.VISIBLE
-                        countyConfiguration.root.visibility = View.GONE
+
+                    } else {
+                        inflateErrorModal(
+                            "Data Error",
+                            "You have  not selected any livelihood zone"
+                        )
                     }
+
                 }
             }
 
@@ -332,32 +357,57 @@ class CountyLevelFragment : DialogFragment(),
                 etPoorResponse.addTextChangedListener(textWatcher)
                 etMediumResponse.addTextChangedListener(textWatcher)
                 etBetterOffResponse.addTextChangedListener(textWatcher)
+
+
                 locationNextButton.setOnClickListener {
 
+                    if (etVerPoorResponse.text.toString()
+                            .isNotEmpty() && etPoorResponse.text.toString().isNotEmpty()
+                        && etMediumResponse.text.toString()
+                            .isNotEmpty() && etBetterOffResponse.text.toString().isNotEmpty()
+                    ) {
 
-                    val wealthGroupResponse = WealthGroupResponse(
-                        returnZeroStringIfEmpty(etVerPoorResponse.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(etPoorResponse.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(etMediumResponse.text.toString()).toDouble(),
-                        returnZeroStringIfEmpty(etBetterOffResponse.text.toString()).toDouble()
-                    )
-                    countyLevelQuestionnaire.wealthGroupResponse = wealthGroupResponse
+                        val totalEntry =
+                            returnZeroStringIfEmpty(etVerPoorResponse.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                etPoorResponse.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(etMediumResponse.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                etBetterOffResponse.text.toString()
+                            ).toDouble()
 
-                    cropSelectionLayout.apply {
-                        activity?.let { context ->
-                            val adapter =
-                                CropSelectionListAdapter(
-                                    context,
-                                    R.layout.lz_selection_item,
-                                    crops,
-                                    this@CountyLevelFragment
-                                )
-                            cropsList.adapter = adapter
+                        if (totalEntry < 100) {
+                            inflateErrorModal("Percentage error", "Total value is less than 100% by ${100 - totalEntry}")
+                        } else {
+
+                            val wealthGroupResponse = WealthGroupResponse(
+                                returnZeroStringIfEmpty(etVerPoorResponse.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(etPoorResponse.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(etMediumResponse.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(etBetterOffResponse.text.toString()).toDouble()
+                            )
+                            countyLevelQuestionnaire.wealthGroupResponse = wealthGroupResponse
+
+                            cropSelectionLayout.apply {
+                                activity?.let { context ->
+                                    val adapter =
+                                        CropSelectionListAdapter(
+                                            context,
+                                            R.layout.lz_selection_item,
+                                            crops,
+                                            this@CountyLevelFragment
+                                        )
+                                    cropsList.adapter = adapter
+                                }
+                            }
+
+                            locationAndPopulationLayout.root.visibility = View.GONE
+                            cropSelectionLayout.root.visibility = View.VISIBLE
+
                         }
-                    }
 
-                    locationAndPopulationLayout.root.visibility = View.GONE
-                    cropSelectionLayout.root.visibility = View.VISIBLE
+
+                    } else {
+                        inflateErrorModal("Data error", "Kindly fill out the missing fields")
+                    }
                 }
                 locationBackButton.setOnClickListener {
                     locationAndPopulationLayout.root.visibility = View.GONE
@@ -377,41 +427,48 @@ class CountyLevelFragment : DialogFragment(),
 
                 cropSelectionNextButton.setOnClickListener {
 
-                    for (currentCrop in countyLevelQuestionnaire.selectedCrops) {
-                        cropProductionResponseItems.add(
-                            WgCropProductionResponseItem(
-                                currentCrop,
-                                CropSeasonResponseItem(
-                                    CropProductionResponseValueModel(0.0, false),
-                                    CropProductionResponseValueModel(0.0, false),
-                                    CropProductionResponseValueModel(0.0, false),
-                                    CropProductionResponseValueModel(0.0, false)
-                                ),
-                                CropSeasonResponseItem(
-                                    CropProductionResponseValueModel(0.0, false),
-                                    CropProductionResponseValueModel(0.0, false),
-                                    CropProductionResponseValueModel(0.0, false),
-                                    CropProductionResponseValueModel(0.0, false)
+                    if (countyLevelQuestionnaire.selectedCrops.isNotEmpty()) {
+
+                        for (currentCrop in countyLevelQuestionnaire.selectedCrops) {
+                            cropProductionResponseItems.add(
+                                WgCropProductionResponseItem(
+                                    currentCrop,
+                                    CropSeasonResponseItem(
+                                        CropProductionResponseValueModel(0.0, false),
+                                        CropProductionResponseValueModel(0.0, false),
+                                        CropProductionResponseValueModel(0.0, false),
+                                        CropProductionResponseValueModel(0.0, false)
+                                    ),
+                                    CropSeasonResponseItem(
+                                        CropProductionResponseValueModel(0.0, false),
+                                        CropProductionResponseValueModel(0.0, false),
+                                        CropProductionResponseValueModel(0.0, false),
+                                        CropProductionResponseValueModel(0.0, false)
+                                    )
                                 )
                             )
-                        )
-                    }
-
-                    cropProductionLayout.apply {
-                        activity?.let { context ->
-                            val adapter =
-                                CropProductionListAdapter(
-                                    context,
-                                    R.layout.lz_crop_production_item,
-                                    cropProductionResponseItems,
-                                    this@CountyLevelFragment
-                                )
-                            cropsList.adapter = adapter
                         }
+
+                        cropProductionLayout.apply {
+                            activity?.let { context ->
+                                val adapter =
+                                    CropProductionListAdapter(
+                                        context,
+                                        R.layout.lz_crop_production_item,
+                                        cropProductionResponseItems,
+                                        this@CountyLevelFragment
+                                    )
+                                cropsList.adapter = adapter
+                            }
+                        }
+
+                        cropProductionLayout.root.visibility = View.VISIBLE
+                        cropSelectionLayout.root.visibility = View.GONE
+
+                    } else {
+                        inflateErrorModal("Data error", "You have not selected any crop")
                     }
 
-                    cropProductionLayout.root.visibility = View.VISIBLE
-                    cropSelectionLayout.root.visibility = View.GONE
                 }
 
             }
@@ -440,7 +497,10 @@ class CountyLevelFragment : DialogFragment(),
                         }
                         inflateErrorModal("Missing Data", "Kindly fill out all the fields")
                     } else if (doesCropProductionHavePercentageErrors()) {
-                        inflateErrorModal("Percentage error", returnAppropriateCropPercentagErrorMessage())
+                        inflateErrorModal(
+                            "Percentage error",
+                            returnAppropriateCropPercentagErrorMessage()
+                        )
                     } else {
                         cropProductionLayout.root.visibility = View.GONE
                         mainWaterSource.root.visibility = View.VISIBLE
@@ -660,21 +720,6 @@ class CountyLevelFragment : DialogFragment(),
 
                         countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
 
-
-                        val tribeSelectionAdapter =
-                            TribeSelectionAdapter(
-                                geographyObject.ethnicGroups,
-                                this@CountyLevelFragment
-                            )
-                        val gridLayoutManager = GridLayoutManager(activity, 1)
-
-                        ethnicGroupSelection.apply {
-                            tribeList.layoutManager = gridLayoutManager
-                            tribeList.hasFixedSize()
-                            tribeList.adapter =
-                                tribeSelectionAdapter
-                        }
-
                         mainWaterSource.root.visibility = View.GONE
                         marketGeographyConfiguration.root.visibility = View.VISIBLE
 
@@ -808,6 +853,20 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
                 marketTransactionNextButton.setOnClickListener {
+
+                    ethnicGroupSelection.apply {
+                        activity?.let { context ->
+                            val adapter =
+                                TribesListViewAdapter(
+                                    context,
+                                    R.layout.lz_selection_item,
+                                    ethnicGroups,
+                                    this@CountyLevelFragment
+                                )
+                            tribesList.adapter = adapter
+                        }
+                    }
+
                     ethnicGroupSelection.root.visibility = View.VISIBLE
                     lzMarketTransactions.root.visibility = View.GONE
                 }
@@ -825,29 +884,36 @@ class CountyLevelFragment : DialogFragment(),
 
                 tribeSelectionNextButton.setOnClickListener {
 
-                    val ethnicGroupResponseList: MutableList<EthnicityResponseItem> = ArrayList()
-                    for (currentEthnicGroup: EthnicGroupModel in countyLevelQuestionnaire.livelihoodZoneEthnicGroups) {
-                        ethnicGroupResponseList.add(
-                            EthnicityResponseItem(
-                                currentEthnicGroup,
-                                0.0
+                    if (countyLevelQuestionnaire.livelihoodZoneEthnicGroups.isNotEmpty()) {
+
+                        val ethnicGroupResponseList: MutableList<EthnicityResponseItem> =
+                            ArrayList()
+                        for (currentEthnicGroup: EthnicGroupModel in countyLevelQuestionnaire.livelihoodZoneEthnicGroups) {
+                            ethnicGroupResponseList.add(
+                                EthnicityResponseItem(
+                                    currentEthnicGroup,
+                                    0.0
+                                )
                             )
-                        )
+                        }
+
+                        val ethnicPopulationAdapter =
+                            EthnicityAdapter(ethnicGroupResponseList, this@CountyLevelFragment)
+                        val gridLayoutManager = GridLayoutManager(activity, 1)
+
+                        ethnicGroupPopulation.apply {
+                            ethnicityTable.layoutManager = gridLayoutManager
+                            ethnicityTable.hasFixedSize()
+                            ethnicityTable.adapter =
+                                ethnicPopulationAdapter
+                        }
+
+                        ethnicGroupSelection.root.visibility = View.GONE
+                        ethnicGroupPopulation.root.visibility = View.VISIBLE
+
+                    } else {
+                        inflateErrorModal("Data error", "You have not selected any ethnic group")
                     }
-
-                    val ethnicPopulationAdapter =
-                        EthnicityAdapter(ethnicGroupResponseList, this@CountyLevelFragment)
-                    val gridLayoutManager = GridLayoutManager(activity, 1)
-
-                    ethnicGroupPopulation.apply {
-                        ethnicityTable.layoutManager = gridLayoutManager
-                        ethnicityTable.hasFixedSize()
-                        ethnicityTable.adapter =
-                            ethnicPopulationAdapter
-                    }
-
-                    ethnicGroupSelection.root.visibility = View.GONE
-                    ethnicGroupPopulation.root.visibility = View.VISIBLE
                 }
 
             }
@@ -1633,13 +1699,13 @@ class CountyLevelFragment : DialogFragment(),
             countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
             countyLevelQuestionnaire.questionnaireName =
                 AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
-                        countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneName + " Livelihood Zone questionnaire"
+                        countyLevelQuestionnaire.selectedLivelihoodZone?.livelihoodZoneName + " Livelihood Zone questionnaire"
 
 
             binding.apply {
                 val subLocationLivelihoodZoneAssignment =
                     geographyObject.sublocationsLivelihoodZoneAssignments.filter {
-                        it.livelihoodZoneId == countyLevelQuestionnaire.selectedLivelihoodZone.livelihoodZoneId
+                        it.livelihoodZoneId == countyLevelQuestionnaire.selectedLivelihoodZone?.livelihoodZoneId
                     }
                 for (currentSubLocationLivelihoodZoneAssignment in subLocationLivelihoodZoneAssignment) {
                     subLocationZoneAssignmentModelList.add(
@@ -2284,17 +2350,26 @@ class CountyLevelFragment : DialogFragment(),
 
     fun isAnyValueEmpty(currentResponseItem: WgCropProductionResponseItem): Boolean {
         return !currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted
-                || !currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted}
+                || !currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted
+    }
 
     fun returnAppropriateCropPercentagErrorMessage(): String {
         if (doesLongRainsRainFedCropsHavePercentageError().hasAPercentageError) {
-            return "Long rains rainfed crops has a percentage error. The value " + isGreaterThanOrLessThan(doesLongRainsRainFedCropsHavePercentageError().variationStatus) + " by " + doesLongRainsRainFedCropsHavePercentageError().differenceValue.toString()
+            return "Long rains rainfed crops has a percentage error. The value " + isGreaterThanOrLessThan(
+                doesLongRainsRainFedCropsHavePercentageError().variationStatus
+            ) + " by " + doesLongRainsRainFedCropsHavePercentageError().differenceValue.toString()
         } else if (doesLongRainsIrrigatedCropsHavePercentageError().hasAPercentageError) {
-            return "Long rains irrigated crops has a percentage error. The value " + isGreaterThanOrLessThan(doesLongRainsIrrigatedCropsHavePercentageError().variationStatus) + " by " + doesLongRainsIrrigatedCropsHavePercentageError().differenceValue.toString()
+            return "Long rains irrigated crops has a percentage error. The value " + isGreaterThanOrLessThan(
+                doesLongRainsIrrigatedCropsHavePercentageError().variationStatus
+            ) + " by " + doesLongRainsIrrigatedCropsHavePercentageError().differenceValue.toString()
         } else if (doesShortRainFedCropsHavePercentageError().hasAPercentageError) {
-            return "Short rains rainfed crops has a percentage error. The value " + isGreaterThanOrLessThan(doesShortRainFedCropsHavePercentageError().variationStatus) + " by " + doesShortRainFedCropsHavePercentageError().differenceValue.toString()
+            return "Short rains rainfed crops has a percentage error. The value " + isGreaterThanOrLessThan(
+                doesShortRainFedCropsHavePercentageError().variationStatus
+            ) + " by " + doesShortRainFedCropsHavePercentageError().differenceValue.toString()
         } else if (doesShortRainFedCropsHavePercentageError().hasAPercentageError) {
-            return "Short rains irrigated crops has a percentage error. The value " + isGreaterThanOrLessThan(doesShortRainsIrrigatedCropsHavePercentageError().variationStatus) + " by " + doesShortRainsIrrigatedCropsHavePercentageError().differenceValue.toString()
+            return "Short rains irrigated crops has a percentage error. The value " + isGreaterThanOrLessThan(
+                doesShortRainsIrrigatedCropsHavePercentageError().variationStatus
+            ) + " by " + doesShortRainsIrrigatedCropsHavePercentageError().differenceValue.toString()
         }
         return ""
     }
@@ -2311,7 +2386,8 @@ class CountyLevelFragment : DialogFragment(),
     fun doesLongRainsRainFedCropsHavePercentageError(): CropPercentageValidationModel {
         var percentageValue: Double = 0.0
         for (currentResponseItem in cropProductionResponseItems) {
-            percentageValue = percentageValue + currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.value
+            percentageValue =
+                percentageValue + currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.value
         }
 
         if (percentageValue != 100.0) {
@@ -2344,7 +2420,8 @@ class CountyLevelFragment : DialogFragment(),
     fun doesLongRainsIrrigatedCropsHavePercentageError(): CropPercentageValidationModel {
         var percentageValue: Double = 0.0
         for (currentResponseItem in cropProductionResponseItems) {
-            percentageValue = percentageValue + currentResponseItem.longRainsSeason.irrigatedCultivatedArea.value
+            percentageValue =
+                percentageValue + currentResponseItem.longRainsSeason.irrigatedCultivatedArea.value
         }
 
         if (percentageValue != 100.0) {
@@ -2378,7 +2455,8 @@ class CountyLevelFragment : DialogFragment(),
     fun doesShortRainFedCropsHavePercentageError(): CropPercentageValidationModel {
         var percentageValue: Double = 0.0
         for (currentResponseItem in cropProductionResponseItems) {
-            percentageValue = percentageValue + currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.value
+            percentageValue =
+                percentageValue + currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.value
         }
 
         if (percentageValue != 100.0) {
@@ -2412,7 +2490,8 @@ class CountyLevelFragment : DialogFragment(),
     fun doesShortRainsIrrigatedCropsHavePercentageError(): CropPercentageValidationModel {
         var percentageValue: Double = 0.0
         for (currentResponseItem in cropProductionResponseItems) {
-            percentageValue = percentageValue + currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.value
+            percentageValue =
+                percentageValue + currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.value
         }
 
         if (percentageValue != 100.0) {
@@ -2455,12 +2534,14 @@ class CountyLevelFragment : DialogFragment(),
                             this@CountyLevelFragment
                         )
                     cropsList.adapter = adapter
+                    cropsList.setSelection(position)
                 }
             }
         }
-
         if (selectedCrop.hasBeenSelected) {
             countyLevelQuestionnaire.selectedCrops.add(selectedCrop)
+        } else {
+            countyLevelQuestionnaire.selectedCrops.remove(selectedCrop)
         }
     }
 
@@ -2469,5 +2550,30 @@ class CountyLevelFragment : DialogFragment(),
         position: Int
     ) {
         cropProductionResponseItems.set(position, responseItem)
+    }
+
+    override fun onATribeSelected(currentTribe: EthnicGroupModel, position: Int) {
+        ethnicGroups.set(position, currentTribe)
+        if (currentTribe.hasBeenSelected) {
+            countyLevelQuestionnaire.livelihoodZoneEthnicGroups.add(currentTribe)
+        } else {
+            countyLevelQuestionnaire.livelihoodZoneEthnicGroups.remove(currentTribe)
+        }
+        binding.apply {
+            ethnicGroupSelection.apply {
+                activity?.let { context ->
+                    val adapter =
+                        TribesListViewAdapter(
+                            context,
+                            R.layout.lz_selection_item,
+                            ethnicGroups,
+                            this@CountyLevelFragment
+                        )
+                    tribesList.adapter = adapter
+                    tribesList.setSelection(position)
+                }
+            }
+        }
+
     }
 }

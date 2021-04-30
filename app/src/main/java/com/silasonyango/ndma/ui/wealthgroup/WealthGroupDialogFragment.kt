@@ -1417,42 +1417,47 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 cropSelectionNextButton.setOnClickListener {
 
+                    if (wealthGroupQuestionnaire.selectedCrops.isNotEmpty()) {
 
-                    for (currentCrop in wealthGroupQuestionnaire.selectedCrops) {
-                        cropProductionResponseItems.add(
-                            WgCropProductionResponseItem(
-                                currentCrop,
-                                CropSeasonResponseItem(
-                                    CropProductionResponseValueModel(0.0, false),
-                                    CropProductionResponseValueModel(0.0, false),
-                                    CropProductionResponseValueModel(0.0, false),
-                                    CropProductionResponseValueModel(0.0, false)
-                                ),
-                                CropSeasonResponseItem(
-                                    CropProductionResponseValueModel(0.0, false),
-                                    CropProductionResponseValueModel(0.0, false),
-                                    CropProductionResponseValueModel(0.0, false),
-                                    CropProductionResponseValueModel(0.0, false)
+                        for (currentCrop in wealthGroupQuestionnaire.selectedCrops) {
+                            cropProductionResponseItems.add(
+                                WgCropProductionResponseItem(
+                                    currentCrop,
+                                    CropSeasonResponseItem(
+                                        CropProductionResponseValueModel(0.0, false),
+                                        CropProductionResponseValueModel(0.0, false),
+                                        CropProductionResponseValueModel(0.0, false),
+                                        CropProductionResponseValueModel(0.0, false)
+                                    ),
+                                    CropSeasonResponseItem(
+                                        CropProductionResponseValueModel(0.0, false),
+                                        CropProductionResponseValueModel(0.0, false),
+                                        CropProductionResponseValueModel(0.0, false),
+                                        CropProductionResponseValueModel(0.0, false)
+                                    )
                                 )
                             )
-                        )
-                    }
-
-                    cropProductionLayout.apply {
-                        activity?.let { context ->
-                            val adapter =
-                                CropProductionListAdapter(
-                                    context,
-                                    R.layout.lz_crop_production_item,
-                                    cropProductionResponseItems,
-                                    this@WealthGroupDialogFragment
-                                )
-                            cropsList.adapter = adapter
                         }
-                    }
 
-                    cropProductionLayout.root.visibility = View.VISIBLE
-                    cropSelectionLayout.root.visibility = View.GONE
+                        cropProductionLayout.apply {
+                            activity?.let { context ->
+                                val adapter =
+                                    CropProductionListAdapter(
+                                        context,
+                                        R.layout.lz_crop_production_item,
+                                        cropProductionResponseItems,
+                                        this@WealthGroupDialogFragment
+                                    )
+                                cropsList.adapter = adapter
+                            }
+                        }
+
+                        cropProductionLayout.root.visibility = View.VISIBLE
+                        cropSelectionLayout.root.visibility = View.GONE
+
+                    } else {
+                        inflateErrorModal("Data error","You have not selected any crop")
+                    }
                 }
 
             }
@@ -3076,6 +3081,11 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     override fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel, position: Int) {
         crops.set(position, selectedCrop)
+        if (selectedCrop.hasBeenSelected) {
+            wealthGroupQuestionnaire.selectedCrops.add(selectedCrop)
+        } else {
+            wealthGroupQuestionnaire.selectedCrops.remove(selectedCrop)
+        }
         binding.apply {
             cropSelectionLayout.apply {
                 activity?.let { context ->
@@ -3087,12 +3097,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                             this@WealthGroupDialogFragment
                         )
                     cropsList.adapter = adapter
+                    cropsList.setSelection(position)
                 }
             }
-        }
-
-        if (selectedCrop.hasBeenSelected) {
-            wealthGroupQuestionnaire.selectedCrops.add(selectedCrop)
         }
     }
 
