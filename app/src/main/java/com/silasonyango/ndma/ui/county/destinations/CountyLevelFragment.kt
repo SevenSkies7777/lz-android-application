@@ -375,7 +375,10 @@ class CountyLevelFragment : DialogFragment(),
                             ).toDouble()
 
                         if (totalEntry < 100) {
-                            inflateErrorModal("Percentage error", "Total value is less than 100% by ${100 - totalEntry}")
+                            inflateErrorModal(
+                                "Percentage error",
+                                "Total value is less than 100% by ${100 - totalEntry}"
+                            )
                         } else {
 
                             val wealthGroupResponse = WealthGroupResponse(
@@ -515,6 +518,146 @@ class CountyLevelFragment : DialogFragment(),
                     mainWaterSource.root.visibility = View.GONE
                     cropProductionLayout.root.visibility = View.VISIBLE
                 }
+
+
+                val wetSeasonTextWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            val totalEntry =
+                                returnZeroStringIfEmpty(riversWetSeason.text.toString()).toDouble() +
+                                        returnZeroStringIfEmpty(traditionalRiversWellsWetSeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    naturalPondsWetSeason.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(pansAndDamsWetSeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    shallowWellsWetSeason.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(boreHolesWetSeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    springsWetSeason.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(lakesWetSeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    rockCatchmentWetSeason.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(pipedWaterWetSeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    waterTruckingWetSeason.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(roofCatchmentWetSeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    othersWetSeason.text.toString()
+                                ).toDouble()
+
+
+                            if (totalEntry > 100) {
+                                errorDialog?.isShowing?.let { isDialogShowing ->
+                                    if (isDialogShowing) {
+                                        return@postDelayed
+                                    }
+                                }
+
+                                inflateErrorModal("Percentage error", "Entries cannot exceed 100%")
+
+                            }
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+                }
+
+
+                riversWetSeason.addTextChangedListener(wetSeasonTextWatcher)
+                traditionalRiversWellsWetSeason.addTextChangedListener(wetSeasonTextWatcher)
+                naturalPondsWetSeason.addTextChangedListener(wetSeasonTextWatcher)
+                pansAndDamsWetSeason.addTextChangedListener(wetSeasonTextWatcher)
+                shallowWellsWetSeason.addTextChangedListener(wetSeasonTextWatcher)
+                boreHolesWetSeason.addTextChangedListener(wetSeasonTextWatcher)
+                springsWetSeason.addTextChangedListener(wetSeasonTextWatcher)
+                lakesWetSeason.addTextChangedListener(wetSeasonTextWatcher)
+                rockCatchmentWetSeason.addTextChangedListener(wetSeasonTextWatcher)
+                pipedWaterWetSeason.addTextChangedListener(wetSeasonTextWatcher)
+                waterTruckingWetSeason.addTextChangedListener(wetSeasonTextWatcher)
+                roofCatchmentWetSeason.addTextChangedListener(wetSeasonTextWatcher)
+                othersWetSeason.addTextChangedListener(wetSeasonTextWatcher)
+
+
+
+
+                val drySeasonTextWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            val totalEntry =
+                                returnZeroStringIfEmpty(riversDrySeason.text.toString()).toDouble() +
+                                        returnZeroStringIfEmpty(traditionalRiversWellsDrySeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    naturalPondsDrySeason.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(pansAndDamsDrySeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    shallowWellsDrySeason.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(boreHolesDrySeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    springsDrySeason.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(lakesDrySeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    rockCatchmentDrySeason.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(pipedWaterDrySeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    waterTruckingDrySeason.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(roofCatchmentDrySeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    othersDrySeason.text.toString()
+                                ).toDouble()
+
+
+                            if (totalEntry > 100) {
+                                errorDialog?.isShowing?.let { isDialogShowing ->
+                                    if (isDialogShowing) {
+                                        return@postDelayed
+                                    }
+                                }
+
+                                inflateErrorModal("Percentage error", "Entries cannot exceed 100%")
+
+                            }
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+                }
+
+                riversDrySeason.addTextChangedListener(drySeasonTextWatcher)
+                traditionalRiversWellsDrySeason.addTextChangedListener(drySeasonTextWatcher)
+                naturalPondsDrySeason.addTextChangedListener(drySeasonTextWatcher)
+                pansAndDamsDrySeason.addTextChangedListener(drySeasonTextWatcher)
+                shallowWellsDrySeason.addTextChangedListener(drySeasonTextWatcher)
+                boreHolesDrySeason.addTextChangedListener(drySeasonTextWatcher)
+                springsDrySeason.addTextChangedListener(drySeasonTextWatcher)
+                lakesDrySeason.addTextChangedListener(drySeasonTextWatcher)
+                rockCatchmentDrySeason.addTextChangedListener(drySeasonTextWatcher)
+                pipedWaterDrySeason.addTextChangedListener(drySeasonTextWatcher)
+                waterTruckingDrySeason.addTextChangedListener(drySeasonTextWatcher)
+                roofCatchmentDrySeason.addTextChangedListener(drySeasonTextWatcher)
+                othersDrySeason.addTextChangedListener(drySeasonTextWatcher)
+
                 waterSourceNextButton.setOnClickListener {
 
                     var hasNoValidationError: Boolean = true
@@ -652,76 +795,116 @@ class CountyLevelFragment : DialogFragment(),
 
                     if (hasNoValidationError) {
 
-                        val waterSourceResponses = WaterSourcesResponses()
-                        waterSourceResponses.rivers = WaterDependenceResponseItem(
-                            returnZeroStringIfEmpty(riversWetSeason.text.toString()).toDouble(),
-                            returnZeroStringIfEmpty(riversDrySeason.text.toString()).toDouble()
-                        )
+                        val wetSeasonTotalEntry =
+                            returnZeroStringIfEmpty(riversWetSeason.text.toString()).toDouble() +
+                                    returnZeroStringIfEmpty(traditionalRiversWellsWetSeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                naturalPondsWetSeason.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(pansAndDamsWetSeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                shallowWellsWetSeason.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(boreHolesWetSeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                springsWetSeason.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(lakesWetSeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                rockCatchmentWetSeason.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(pipedWaterWetSeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                waterTruckingWetSeason.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(roofCatchmentWetSeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                othersWetSeason.text.toString()
+                            ).toDouble()
 
-                        waterSourceResponses.traditionalRiversWells = WaterDependenceResponseItem(
-                            returnZeroStringIfEmpty(traditionalRiversWellsWetSeason.text.toString()).toDouble(),
-                            returnZeroStringIfEmpty(traditionalRiversWellsDrySeason.text.toString()).toDouble()
-                        )
+                        val drySeasonTotalEntry =
+                            returnZeroStringIfEmpty(riversDrySeason.text.toString()).toDouble() +
+                                    returnZeroStringIfEmpty(traditionalRiversWellsDrySeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                naturalPondsDrySeason.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(pansAndDamsDrySeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                shallowWellsDrySeason.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(boreHolesDrySeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                springsDrySeason.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(lakesDrySeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                rockCatchmentDrySeason.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(pipedWaterDrySeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                waterTruckingDrySeason.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(roofCatchmentDrySeason.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                othersDrySeason.text.toString()
+                            ).toDouble()
 
-                        waterSourceResponses.naturalPonds = WaterDependenceResponseItem(
-                            returnZeroStringIfEmpty(naturalPondsWetSeason.text.toString()).toDouble(),
-                            returnZeroStringIfEmpty(naturalPondsDrySeason.text.toString()).toDouble()
-                        )
+                        if (wetSeasonTotalEntry == 100.0 && drySeasonTotalEntry == 100.0) {
 
-                        waterSourceResponses.pansAndDams = WaterDependenceResponseItem(
-                            returnZeroStringIfEmpty(pansAndDamsWetSeason.text.toString()).toDouble(),
-                            returnZeroStringIfEmpty(pansAndDamsDrySeason.text.toString()).toDouble()
-                        )
+                            val waterSourceResponses = WaterSourcesResponses()
+                            waterSourceResponses.rivers = WaterDependenceResponseItem(
+                                returnZeroStringIfEmpty(riversWetSeason.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(riversDrySeason.text.toString()).toDouble()
+                            )
 
-                        waterSourceResponses.shallowWells = WaterDependenceResponseItem(
-                            returnZeroStringIfEmpty(shallowWellsWetSeason.text.toString()).toDouble(),
-                            returnZeroStringIfEmpty(shallowWellsDrySeason.text.toString()).toDouble()
-                        )
+                            waterSourceResponses.traditionalRiversWells = WaterDependenceResponseItem(
+                                returnZeroStringIfEmpty(traditionalRiversWellsWetSeason.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(traditionalRiversWellsDrySeason.text.toString()).toDouble()
+                            )
 
-                        waterSourceResponses.boreholes = WaterDependenceResponseItem(
-                            returnZeroStringIfEmpty(boreHolesWetSeason.text.toString()).toDouble(),
-                            returnZeroStringIfEmpty(boreHolesDrySeason.text.toString()).toDouble()
-                        )
+                            waterSourceResponses.naturalPonds = WaterDependenceResponseItem(
+                                returnZeroStringIfEmpty(naturalPondsWetSeason.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(naturalPondsDrySeason.text.toString()).toDouble()
+                            )
 
-                        waterSourceResponses.springs = WaterDependenceResponseItem(
-                            returnZeroStringIfEmpty(springsWetSeason.text.toString()).toDouble(),
-                            returnZeroStringIfEmpty(springsDrySeason.text.toString()).toDouble()
-                        )
+                            waterSourceResponses.pansAndDams = WaterDependenceResponseItem(
+                                returnZeroStringIfEmpty(pansAndDamsWetSeason.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(pansAndDamsDrySeason.text.toString()).toDouble()
+                            )
 
-                        waterSourceResponses.lakes = WaterDependenceResponseItem(
-                            returnZeroStringIfEmpty(lakesWetSeason.text.toString()).toDouble(),
-                            returnZeroStringIfEmpty(lakesDrySeason.text.toString()).toDouble()
-                        )
+                            waterSourceResponses.shallowWells = WaterDependenceResponseItem(
+                                returnZeroStringIfEmpty(shallowWellsWetSeason.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(shallowWellsDrySeason.text.toString()).toDouble()
+                            )
 
-                        waterSourceResponses.rockCatchments = WaterDependenceResponseItem(
-                            returnZeroStringIfEmpty(rockCatchmentWetSeason.text.toString()).toDouble(),
-                            returnZeroStringIfEmpty(rockCatchmentDrySeason.text.toString()).toDouble()
-                        )
+                            waterSourceResponses.boreholes = WaterDependenceResponseItem(
+                                returnZeroStringIfEmpty(boreHolesWetSeason.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(boreHolesDrySeason.text.toString()).toDouble()
+                            )
 
-                        waterSourceResponses.pipedWater = WaterDependenceResponseItem(
-                            returnZeroStringIfEmpty(pipedWaterWetSeason.text.toString()).toDouble(),
-                            returnZeroStringIfEmpty(pipedWaterDrySeason.text.toString()).toDouble()
-                        )
+                            waterSourceResponses.springs = WaterDependenceResponseItem(
+                                returnZeroStringIfEmpty(springsWetSeason.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(springsDrySeason.text.toString()).toDouble()
+                            )
 
-                        waterSourceResponses.waterTrucking = WaterDependenceResponseItem(
-                            returnZeroStringIfEmpty(waterTruckingWetSeason.text.toString()).toDouble(),
-                            returnZeroStringIfEmpty(waterTruckingDrySeason.text.toString()).toDouble()
-                        )
+                            waterSourceResponses.lakes = WaterDependenceResponseItem(
+                                returnZeroStringIfEmpty(lakesWetSeason.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(lakesDrySeason.text.toString()).toDouble()
+                            )
 
-                        waterSourceResponses.roofCatchments = WaterDependenceResponseItem(
-                            returnZeroStringIfEmpty(roofCatchmentWetSeason.text.toString()).toDouble(),
-                            returnZeroStringIfEmpty(roofCatchmentDrySeason.text.toString()).toDouble()
-                        )
+                            waterSourceResponses.rockCatchments = WaterDependenceResponseItem(
+                                returnZeroStringIfEmpty(rockCatchmentWetSeason.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(rockCatchmentDrySeason.text.toString()).toDouble()
+                            )
 
-                        waterSourceResponses.others = WaterDependenceResponseItem(
-                            returnZeroStringIfEmpty(othersWetSeason.text.toString()).toDouble(),
-                            returnZeroStringIfEmpty(othersDrySeason.text.toString()).toDouble()
-                        )
+                            waterSourceResponses.pipedWater = WaterDependenceResponseItem(
+                                returnZeroStringIfEmpty(pipedWaterWetSeason.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(pipedWaterDrySeason.text.toString()).toDouble()
+                            )
 
-                        countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
+                            waterSourceResponses.waterTrucking = WaterDependenceResponseItem(
+                                returnZeroStringIfEmpty(waterTruckingWetSeason.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(waterTruckingDrySeason.text.toString()).toDouble()
+                            )
 
-                        mainWaterSource.root.visibility = View.GONE
-                        marketGeographyConfiguration.root.visibility = View.VISIBLE
+                            waterSourceResponses.roofCatchments = WaterDependenceResponseItem(
+                                returnZeroStringIfEmpty(roofCatchmentWetSeason.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(roofCatchmentDrySeason.text.toString()).toDouble()
+                            )
+
+                            waterSourceResponses.others = WaterDependenceResponseItem(
+                                returnZeroStringIfEmpty(othersWetSeason.text.toString()).toDouble(),
+                                returnZeroStringIfEmpty(othersDrySeason.text.toString()).toDouble()
+                            )
+
+                            countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
+
+                            mainWaterSource.root.visibility = View.GONE
+                            marketGeographyConfiguration.root.visibility = View.VISIBLE
+
+                        } else if (wetSeasonTotalEntry < 100) {
+                            inflateErrorModal("Percentage Error","Wet season total entriesare less than 100% by ${100 - wetSeasonTotalEntry}")
+                        } else if (drySeasonTotalEntry < 100) {
+                           inflateErrorModal("Percentage Error", "Dry season total entries are less than 100% by ${100 - drySeasonTotalEntry}")
+                        }
 
                     }
                 }
