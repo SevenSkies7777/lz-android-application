@@ -5,57 +5,57 @@ import com.silasonyango.ndma.ui.county.model.MonthsModel
 class LzSeasonsResponses() {
 
     /* Seasons responses */
-    lateinit var dry: MonthsModel
-    lateinit var longRains: MonthsModel
-    lateinit var shortRains: MonthsModel
+    var dry: MutableList<MonthsModel> = ArrayList()
+    var longRains: MutableList<MonthsModel> = ArrayList()
+    var shortRains: MutableList<MonthsModel> = ArrayList()
 
     /* Crop production responses */
-    lateinit var maizeLandPreparation: MonthsModel
-    lateinit var cassavaLandPreparation: MonthsModel
-    lateinit var riceLandPreparation: MonthsModel
-    lateinit var sorghumLandPreparation: MonthsModel
-    lateinit var legumesLandPreparation: MonthsModel
+    var maizeLandPreparation: MutableList<MonthsModel> = ArrayList()
+    var cassavaLandPreparation: MutableList<MonthsModel> = ArrayList()
+    var riceLandPreparation: MutableList<MonthsModel> = ArrayList()
+    var sorghumLandPreparation: MutableList<MonthsModel> = ArrayList()
+    var legumesLandPreparation: MutableList<MonthsModel> = ArrayList()
 
-    lateinit var maizePlanting: MonthsModel
-    lateinit var cassavaPlanting: MonthsModel
-    lateinit var ricePlanting: MonthsModel
-    lateinit var sorghumPlanting: MonthsModel
-    lateinit var legumesPlanting: MonthsModel
+    var maizePlanting: MutableList<MonthsModel> = ArrayList()
+    var cassavaPlanting: MutableList<MonthsModel> = ArrayList()
+    var ricePlanting: MutableList<MonthsModel> = ArrayList()
+    var sorghumPlanting: MutableList<MonthsModel> = ArrayList()
+    var legumesPlanting: MutableList<MonthsModel> = ArrayList()
 
-    lateinit var maizeHarvesting: MonthsModel
-    lateinit var cassavaHarvesting: MonthsModel
-    lateinit var riceHarvesting: MonthsModel
-    lateinit var sorghumHarvesting: MonthsModel
-    lateinit var legumesHarvesting: MonthsModel
+    var maizeHarvesting: MutableList<MonthsModel> = ArrayList()
+    var cassavaHarvesting: MutableList<MonthsModel> = ArrayList()
+    var riceHarvesting: MutableList<MonthsModel> = ArrayList()
+    var sorghumHarvesting: MutableList<MonthsModel> = ArrayList()
+    var legumesHarvesting: MutableList<MonthsModel> = ArrayList()
 
     /* Livestock production responses */
-    lateinit var livestockInMigration: MonthsModel
-    lateinit var livestockOutMigration: MonthsModel
-    lateinit var highMilkProduction: MonthsModel
-    lateinit var lowMilkProduction: MonthsModel
-    lateinit var highCalving: MonthsModel
-    lateinit var lowCalving: MonthsModel
-    lateinit var highKidding: MonthsModel
-    lateinit var lowKidding: MonthsModel
-    lateinit var highFoodPrices: MonthsModel
-    lateinit var lowFoodPrices: MonthsModel
-    lateinit var highLivestockPrices: MonthsModel
-    lateinit var lowLivestockPrices: MonthsModel
-    lateinit var highCasualLabourAvailability: MonthsModel
-    lateinit var lowCasualLabourAvailability: MonthsModel
-    lateinit var highCasualLabourWages: MonthsModel
-    lateinit var lowCasualLabourWages: MonthsModel
-    lateinit var highRemittances: MonthsModel
-    lateinit var lowRemittances: MonthsModel
-    lateinit var highFish: MonthsModel
-    lateinit var lowFish: MonthsModel
-    lateinit var highMarketAccess: MonthsModel
-    lateinit var lowMarketAccess: MonthsModel
-    lateinit var highDiseaseOutbreak: MonthsModel
-    lateinit var lowDiseaseOutbreak: MonthsModel
-    lateinit var waterStress: MonthsModel
-    lateinit var conflictRisks: MonthsModel
-    lateinit var ceremonies: MonthsModel
-    lateinit var leanSeasons: MonthsModel
-    lateinit var foodSecurityAssessments: MonthsModel
+    var livestockInMigration: MutableList<MonthsModel> = ArrayList()
+    var livestockOutMigration: MutableList<MonthsModel> = ArrayList()
+    var highMilkProduction: MutableList<MonthsModel> = ArrayList()
+    var lowMilkProduction: MutableList<MonthsModel> = ArrayList()
+    var highCalving: MutableList<MonthsModel> = ArrayList()
+    var lowCalving: MutableList<MonthsModel> = ArrayList()
+    var highKidding: MutableList<MonthsModel> = ArrayList()
+    var lowKidding: MutableList<MonthsModel> = ArrayList()
+    var highFoodPrices: MutableList<MonthsModel> = ArrayList()
+    var lowFoodPrices: MutableList<MonthsModel> = ArrayList()
+    var highLivestockPrices: MutableList<MonthsModel> = ArrayList()
+    var lowLivestockPrices: MutableList<MonthsModel> = ArrayList()
+    var highCasualLabourAvailability: MutableList<MonthsModel> = ArrayList()
+    var lowCasualLabourAvailability: MutableList<MonthsModel> = ArrayList()
+    var highCasualLabourWages: MutableList<MonthsModel> = ArrayList()
+    var lowCasualLabourWages: MutableList<MonthsModel> = ArrayList()
+    var highRemittances: MutableList<MonthsModel> = ArrayList()
+    var lowRemittances: MutableList<MonthsModel> = ArrayList()
+    var highFish: MutableList<MonthsModel> = ArrayList()
+    var lowFish: MutableList<MonthsModel> = ArrayList()
+    var highMarketAccess: MutableList<MonthsModel> = ArrayList()
+    var lowMarketAccess: MutableList<MonthsModel> = ArrayList()
+    var highDiseaseOutbreak: MutableList<MonthsModel> = ArrayList()
+    var lowDiseaseOutbreak: MutableList<MonthsModel> = ArrayList()
+    var waterStress: MutableList<MonthsModel> = ArrayList()
+    var conflictRisks: MutableList<MonthsModel> = ArrayList()
+    var ceremonies: MutableList<MonthsModel> = ArrayList()
+    var leanSeasons: MutableList<MonthsModel> = ArrayList()
+    var foodSecurityAssessments: MutableList<MonthsModel> = ArrayList()
 }

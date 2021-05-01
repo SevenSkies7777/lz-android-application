@@ -25,11 +25,13 @@ class MonthsAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var tvOption: TextView = view.findViewById<TextView>(R.id.tvOption)
         var stroke: View = view.findViewById<View>(R.id.stroke)
+        var highlightIcon: View = view.findViewById<View>(R.id.highlightIcon)
+        var uncheckedIcon: View = view.findViewById<View>(R.id.uncheckedIcon)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.simple_list_item_layout, viewGroup, false)
+            .inflate(R.layout.lz_selection_item, viewGroup, false)
 
         return ViewHolder(view)
     }
@@ -43,6 +45,8 @@ class MonthsAdapter(
         }
         viewHolder.itemView.setOnClickListener {
             monthsAdapterCallBack.onMonthSelected(monthsModelList.get(position),seasonsResponsesEnum)
+            viewHolder.highlightIcon.visibility = if (viewHolder.highlightIcon.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+            viewHolder.uncheckedIcon.visibility = if (viewHolder.highlightIcon.visibility == View.VISIBLE) View.GONE else View.VISIBLE
         }
     }
 

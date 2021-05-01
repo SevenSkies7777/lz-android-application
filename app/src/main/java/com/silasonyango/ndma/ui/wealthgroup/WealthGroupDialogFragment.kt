@@ -2590,28 +2590,43 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                     if (hasNoValidationError) {
 
-                        val migrationPatternResponses = MigrationPatternResponses()
+                        val totalEntry =
+                            returnZeroStringIfEmpty(fullyNomadic.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                semiNomadic.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(occasionalNomadic.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                outMigrantLabour.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(inMigrantLabour.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                fullySettled.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(internallyDisplaced.text.toString()).toDouble()
 
-                        migrationPatternResponses.fullyNomadic =
-                            fullyNomadic.text.toString().toDouble()
-                        migrationPatternResponses.semiNomadic =
-                            semiNomadic.text.toString().toDouble()
-                        migrationPatternResponses.occasionalNomadic =
-                            occasionalNomadic.text.toString().toDouble()
-                        migrationPatternResponses.outMigrantLabour =
-                            outMigrantLabour.text.toString().toDouble()
-                        migrationPatternResponses.inMigrantLabour =
-                            inMigrantLabour.text.toString().toDouble()
-                        migrationPatternResponses.fullysettled =
-                            fullySettled.text.toString().toDouble()
-                        migrationPatternResponses.internallyDisplaced =
-                            internallyDisplaced.text.toString().toDouble()
+                        if (totalEntry == 100.0) {
 
-                        wealthGroupQuestionnaire.migrationPatternResponses =
-                            migrationPatternResponses
+                            val migrationPatternResponses = MigrationPatternResponses()
 
-                        wgConstraints.root.visibility = View.VISIBLE
-                        wgMigrationPatterns.root.visibility = View.GONE
+                            migrationPatternResponses.fullyNomadic =
+                                fullyNomadic.text.toString().toDouble()
+                            migrationPatternResponses.semiNomadic =
+                                semiNomadic.text.toString().toDouble()
+                            migrationPatternResponses.occasionalNomadic =
+                                occasionalNomadic.text.toString().toDouble()
+                            migrationPatternResponses.outMigrantLabour =
+                                outMigrantLabour.text.toString().toDouble()
+                            migrationPatternResponses.inMigrantLabour =
+                                inMigrantLabour.text.toString().toDouble()
+                            migrationPatternResponses.fullysettled =
+                                fullySettled.text.toString().toDouble()
+                            migrationPatternResponses.internallyDisplaced =
+                                internallyDisplaced.text.toString().toDouble()
+
+                            wealthGroupQuestionnaire.migrationPatternResponses =
+                                migrationPatternResponses
+
+                            wgConstraints.root.visibility = View.VISIBLE
+                            wgMigrationPatterns.root.visibility = View.GONE
+
+                        } else if (totalEntry < 100.0) {
+                            inflateErrorModal("Percentage error", "The total entries are less than 100% by ${100.0 - totalEntry}")
+                        }
 
                     }
                 }

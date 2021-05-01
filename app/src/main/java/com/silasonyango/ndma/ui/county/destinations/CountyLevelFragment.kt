@@ -2041,6 +2041,14 @@ class CountyLevelFragment : DialogFragment(),
         countyLevelQuestionnaire.livelihoodZoneEthnicGroups.add(selectedTribe)
     }
 
+    fun returnMonthInitialsString(months: MutableList<MonthsModel>): String {
+        var monthsString = ""
+        for (currentMonth in months) {
+            monthsString =  if (currentMonth.monthName.length > 3) monthsString + " ${currentMonth.monthName.substring(0,4)}," else monthsString + " ${currentMonth.monthName},"
+        }
+        return monthsString
+    }
+
     override fun onMonthSelected(
         selectedMonth: MonthsModel,
         seasonsResponsesEnum: SeasonsResponsesEnum
@@ -2051,210 +2059,586 @@ class CountyLevelFragment : DialogFragment(),
 
                 /* Seasons responses */
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.SEASONS_DRY) {
-                    lzSeasonsResponses.dry = selectedMonth
-                    dryMonth.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.dry.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.dry.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.dry.add(selectedMonth)
+                    }
+                    dryMonth.text = returnMonthInitialsString(lzSeasonsResponses.dry)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.SEASONS_LONG_RAINS) {
-                    lzSeasonsResponses.longRains = selectedMonth
-                    longRainMonth.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.longRains.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.longRains.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.longRains.add(selectedMonth)
+                    }
+                    longRainMonth.text = returnMonthInitialsString(lzSeasonsResponses.longRains)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.SEASONS_SHORT_RAINS) {
-                    lzSeasonsResponses.shortRains = selectedMonth
-                    shortRainMonth.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.shortRains.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.shortRains.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.shortRains.add(selectedMonth)
+                    }
+                    shortRainMonth.text = returnMonthInitialsString(lzSeasonsResponses.shortRains)
                 }
 
 
                 /* Crop production responses */
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.MAIZE_LAND_PREPARATION) {
-                    lzSeasonsResponses.maizeLandPreparation = selectedMonth
-                    landPrepMaize.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.maizeLandPreparation.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.maizeLandPreparation.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.maizeLandPreparation.add(selectedMonth)
+                    }
+                    landPrepMaize.text = returnMonthInitialsString(lzSeasonsResponses.maizeLandPreparation)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.CASSAVA_LAND_PREPARATION) {
-                    lzSeasonsResponses.cassavaLandPreparation = selectedMonth
-                    landPrepCassava.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.cassavaLandPreparation.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.cassavaLandPreparation.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.cassavaLandPreparation.add(selectedMonth)
+                    }
+                    landPrepCassava.text = returnMonthInitialsString(lzSeasonsResponses.cassavaLandPreparation)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.RICE_LAND_PREPARATION) {
-                    lzSeasonsResponses.riceLandPreparation = selectedMonth
-                    landPrepRice.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.riceLandPreparation.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.riceLandPreparation.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.riceLandPreparation.add(selectedMonth)
+                    }
+                    landPrepRice.text = returnMonthInitialsString(lzSeasonsResponses.riceLandPreparation)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.SORGHUM_LAND_PREPARATION) {
-                    lzSeasonsResponses.sorghumLandPreparation = selectedMonth
-                    landPrepSorghum.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.sorghumLandPreparation.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.sorghumLandPreparation.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.sorghumLandPreparation.add(selectedMonth)
+                    }
+                    landPrepSorghum.text = returnMonthInitialsString(lzSeasonsResponses.sorghumLandPreparation)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LEGUMES_LAND_PREPARATION) {
-                    lzSeasonsResponses.legumesLandPreparation = selectedMonth
-                    landPrepLegumes.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.legumesLandPreparation.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.legumesLandPreparation.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.legumesLandPreparation.add(selectedMonth)
+                    }
+                    landPrepLegumes.text = returnMonthInitialsString(lzSeasonsResponses.legumesLandPreparation)
                 }
 
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.MAIZE_PLANTING) {
-                    lzSeasonsResponses.maizePlanting = selectedMonth
-                    plantingMaize.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.maizePlanting.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.maizePlanting.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.maizePlanting.add(selectedMonth)
+                    }
+                    plantingMaize.text = returnMonthInitialsString(lzSeasonsResponses.maizePlanting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.CASSAVA_PLANTING) {
-                    lzSeasonsResponses.cassavaPlanting = selectedMonth
-                    plantingCassava.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.cassavaPlanting.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.cassavaPlanting.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.cassavaPlanting.add(selectedMonth)
+                    }
+                    plantingCassava.text = returnMonthInitialsString(lzSeasonsResponses.cassavaPlanting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.RICE_PLANTING) {
-                    lzSeasonsResponses.ricePlanting = selectedMonth
-                    plantingRice.text = selectedMonth.monthName
+                   val doesMonthAlreadyExist = lzSeasonsResponses.ricePlanting.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.ricePlanting.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.ricePlanting.add(selectedMonth)
+                    }
+                    plantingRice.text = returnMonthInitialsString(lzSeasonsResponses.ricePlanting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.SORGHUM_PLANTING) {
-                    lzSeasonsResponses.sorghumPlanting = selectedMonth
-                    plantingSorghum.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.sorghumPlanting.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.sorghumPlanting.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.sorghumPlanting.add(selectedMonth)
+                    }
+                    plantingSorghum.text = returnMonthInitialsString(lzSeasonsResponses.sorghumPlanting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LEGUMES_PLANTING) {
-                    lzSeasonsResponses.legumesPlanting = selectedMonth
-                    plantingLegumes.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.legumesPlanting.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.legumesPlanting.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.legumesPlanting.add(selectedMonth)
+                    }
+                    plantingLegumes.text = returnMonthInitialsString(lzSeasonsResponses.legumesPlanting)
                 }
 
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.MAIZE_HARVESTING) {
-                    lzSeasonsResponses.maizeHarvesting = selectedMonth
-                    harvestingMaize.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.maizeHarvesting.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.maizeHarvesting.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.maizeHarvesting.add(selectedMonth)
+                    }
+                    harvestingMaize.text = returnMonthInitialsString(lzSeasonsResponses.maizeHarvesting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.CASSAVA_HARVESTING) {
-                    lzSeasonsResponses.cassavaHarvesting = selectedMonth
-                    plantingCassava.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.cassavaHarvesting.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.cassavaHarvesting.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.cassavaHarvesting.add(selectedMonth)
+                    }
+                    plantingCassava.text = returnMonthInitialsString(lzSeasonsResponses.cassavaHarvesting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.RICE_HARVESTING) {
-                    lzSeasonsResponses.riceHarvesting = selectedMonth
-                    harvestingRice.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.riceHarvesting.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.riceHarvesting.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.riceHarvesting.add(selectedMonth)
+                    }
+                    harvestingRice.text = returnMonthInitialsString(lzSeasonsResponses.riceHarvesting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.SORGHUM_HARVESTING) {
-                    lzSeasonsResponses.sorghumHarvesting = selectedMonth
-                    harvestingSorghum.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.sorghumHarvesting.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.sorghumHarvesting.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.sorghumHarvesting.add(selectedMonth)
+                    }
+                    harvestingRice.text = returnMonthInitialsString(lzSeasonsResponses.sorghumHarvesting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LEGUMES_HARVESTING) {
-                    lzSeasonsResponses.legumesHarvesting = selectedMonth
-                    harvestingLegumes.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.legumesHarvesting.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.legumesHarvesting.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.legumesHarvesting.add(selectedMonth)
+                    }
+                    harvestingSorghum.text = returnMonthInitialsString(lzSeasonsResponses.legumesHarvesting)
                 }
 
 
                 /* Livestock production responses */
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LIVESTOCK_IN_MIGRATION) {
-                    lzSeasonsResponses.livestockInMigration = selectedMonth
-                    livestockInMigration.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.livestockInMigration.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.livestockInMigration.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.livestockInMigration.add(selectedMonth)
+                    }
+                    livestockInMigration.text = returnMonthInitialsString(lzSeasonsResponses.livestockInMigration)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LIVESTOCK_OUT_MIGRATION) {
-                    lzSeasonsResponses.livestockOutMigration = selectedMonth
-                    livestockOutMigration.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.livestockOutMigration.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.livestockOutMigration.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.livestockOutMigration.add(selectedMonth)
+                    }
+                    livestockOutMigration.text = returnMonthInitialsString(lzSeasonsResponses.livestockOutMigration)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_MILK_PRODUCTION) {
-                    lzSeasonsResponses.highMilkProduction = selectedMonth
-                    milkHigh.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.highMilkProduction.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.highMilkProduction.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.highMilkProduction.add(selectedMonth)
+                    }
+                    milkHigh.text = returnMonthInitialsString(lzSeasonsResponses.highMilkProduction)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_MILK_PRODUCTION) {
-                    lzSeasonsResponses.lowMilkProduction = selectedMonth
-                    milkLow.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.lowMilkProduction.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.lowMilkProduction.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.lowMilkProduction.add(selectedMonth)
+                    }
+                    milkLow.text = returnMonthInitialsString(lzSeasonsResponses.lowMilkProduction)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_CALVING) {
-                    lzSeasonsResponses.highCalving = selectedMonth
-                    calvingHigh.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.highCalving.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.highCalving.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.highCalving.add(selectedMonth)
+                    }
+                    calvingHigh.text = returnMonthInitialsString(lzSeasonsResponses.highCalving)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_CALVING) {
-                    lzSeasonsResponses.lowCalving = selectedMonth
-                    calvingLow.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.lowCalving.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.lowCalving.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.lowCalving.add(selectedMonth)
+                    }
+                    calvingLow.text = returnMonthInitialsString(lzSeasonsResponses.lowCalving)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_KIDDING) {
-                    lzSeasonsResponses.highKidding = selectedMonth
-                    kiddingHigh.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.highKidding.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.highKidding.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.highKidding.add(selectedMonth)
+                    }
+                    kiddingHigh.text = returnMonthInitialsString(lzSeasonsResponses.highKidding)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_KIDDING) {
-                    lzSeasonsResponses.lowKidding = selectedMonth
-                    kiddingLow.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.lowKidding.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.lowKidding.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.lowKidding.add(selectedMonth)
+                    }
+                    kiddingLow.text = returnMonthInitialsString(lzSeasonsResponses.lowKidding)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_FOOD_PRICES) {
-                    lzSeasonsResponses.highFoodPrices = selectedMonth
-                    foodPricesHigh.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.highFoodPrices.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.highFoodPrices.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.highFoodPrices.add(selectedMonth)
+                    }
+                    foodPricesHigh.text = returnMonthInitialsString(lzSeasonsResponses.highFoodPrices)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_FOOD_PRICES) {
-                    lzSeasonsResponses.lowFoodPrices = selectedMonth
-                    foodPricesLow.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.lowFoodPrices.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.lowFoodPrices.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.lowFoodPrices.add(selectedMonth)
+                    }
+                    foodPricesLow.text = returnMonthInitialsString(lzSeasonsResponses.lowFoodPrices)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_LIVESTOCK_PRICES) {
-                    lzSeasonsResponses.highLivestockPrices = selectedMonth
-                    livestockPricesHigh.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.highLivestockPrices.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.highLivestockPrices.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.highLivestockPrices.add(selectedMonth)
+                    }
+                    livestockPricesHigh.text = returnMonthInitialsString(lzSeasonsResponses.highLivestockPrices)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_LIVESTOCK_PRICES) {
-                    lzSeasonsResponses.lowLivestockPrices = selectedMonth
-                    livestockPricesLow.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.lowLivestockPrices.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.lowLivestockPrices.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.lowLivestockPrices.add(selectedMonth)
+                    }
+                    livestockPricesLow.text = returnMonthInitialsString(lzSeasonsResponses.lowLivestockPrices)
                 }
 
 
                 /* Others */
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_CASUAL_LABOUR_AVAILABILITY) {
-                    lzSeasonsResponses.highCasualLabourAvailability = selectedMonth
-                    casualLabourAvailabilityHigh.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.highCasualLabourAvailability.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.highCasualLabourAvailability.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.highCasualLabourAvailability.add(selectedMonth)
+                    }
+                    casualLabourAvailabilityHigh.text = returnMonthInitialsString(lzSeasonsResponses.highCasualLabourAvailability)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_CASUAL_LABOUR_AVAILABILITY) {
-                    lzSeasonsResponses.lowCasualLabourAvailability = selectedMonth
-                    casualLabourAvailabilityLow.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.lowCasualLabourAvailability.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.lowCasualLabourAvailability.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.lowCasualLabourAvailability.add(selectedMonth)
+                    }
+                    casualLabourAvailabilityLow.text = returnMonthInitialsString(lzSeasonsResponses.lowCasualLabourAvailability)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_CASUAL_LABOUR_WAGES) {
-                    lzSeasonsResponses.highCasualLabourWages = selectedMonth
-                    casualLabourWagesHigh.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.highCasualLabourWages.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.highCasualLabourWages.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.highCasualLabourWages.add(selectedMonth)
+                    }
+                    casualLabourWagesHigh.text = returnMonthInitialsString(lzSeasonsResponses.highCasualLabourWages)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_CASUAL_LABOUR_WAGES) {
-                    lzSeasonsResponses.lowCasualLabourWages = selectedMonth
-                    casualLabourWagesLow.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.lowCasualLabourWages.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.lowCasualLabourWages.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.lowCasualLabourWages.add(selectedMonth)
+                    }
+                    casualLabourWagesLow.text = returnMonthInitialsString(lzSeasonsResponses.lowCasualLabourWages)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_REMITTANCES) {
-                    lzSeasonsResponses.highRemittances = selectedMonth
-                    remittancesHigh.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.highRemittances.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.highRemittances.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.highRemittances.add(selectedMonth)
+                    }
+                    remittancesHigh.text = returnMonthInitialsString(lzSeasonsResponses.highRemittances)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_REMITTANCES) {
-                    lzSeasonsResponses.lowRemittances = selectedMonth
-                    remittancesLow.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.lowRemittances.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.lowRemittances.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.lowRemittances.add(selectedMonth)
+                    }
+                    remittancesLow.text = returnMonthInitialsString(lzSeasonsResponses.lowRemittances)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_FISHING) {
-                    lzSeasonsResponses.highFish = selectedMonth
-                    fishingHigh.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.highFish.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.highFish.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.highFish.add(selectedMonth)
+                    }
+                    fishingHigh.text = returnMonthInitialsString(lzSeasonsResponses.highFish)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_FISHING) {
-                    lzSeasonsResponses.lowFish = selectedMonth
-                    fishingLow.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.lowFish.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.lowFish.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.lowFish.add(selectedMonth)
+                    }
+                    fishingLow.text = returnMonthInitialsString(lzSeasonsResponses.lowFish)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_MARKET_ACCESS) {
-                    lzSeasonsResponses.highMarketAccess = selectedMonth
-                    marketAccessHigh.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.highMarketAccess.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.highMarketAccess.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.highMarketAccess.add(selectedMonth)
+                    }
+                    marketAccessHigh.text = returnMonthInitialsString(lzSeasonsResponses.highMarketAccess)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_MARKET_ACCESS) {
-                    lzSeasonsResponses.lowMarketAccess = selectedMonth
-                    marketAccessLow.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.lowMarketAccess.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.lowMarketAccess.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.lowMarketAccess.add(selectedMonth)
+                    }
+                    marketAccessLow.text = returnMonthInitialsString(lzSeasonsResponses.lowMarketAccess)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_DISEASE_OUTBREAK) {
-                    lzSeasonsResponses.highDiseaseOutbreak = selectedMonth
-                    diseaseOutbreakHigh.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.highDiseaseOutbreak.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.highDiseaseOutbreak.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.highDiseaseOutbreak.add(selectedMonth)
+                    }
+                    diseaseOutbreakHigh.text = returnMonthInitialsString(lzSeasonsResponses.highDiseaseOutbreak)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_DISEASE_OUTBREAK) {
-                    lzSeasonsResponses.lowDiseaseOutbreak = selectedMonth
-                    diseaseOutbreakLow.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.lowDiseaseOutbreak.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.lowDiseaseOutbreak.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.lowDiseaseOutbreak.add(selectedMonth)
+                    }
+                    diseaseOutbreakLow.text = returnMonthInitialsString(lzSeasonsResponses.lowDiseaseOutbreak)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.WATER_STRESS) {
-                    lzSeasonsResponses.waterStress = selectedMonth
-                    waterStressMonth.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.waterStress.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.waterStress.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.waterStress.add(selectedMonth)
+                    }
+                    waterStressMonth.text = returnMonthInitialsString(lzSeasonsResponses.waterStress)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.CONFLICT_RISK) {
-                    lzSeasonsResponses.conflictRisks = selectedMonth
-                    conflictRiskMonth.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.conflictRisks.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.conflictRisks.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.conflictRisks.add(selectedMonth)
+                    }
+                    conflictRiskMonth.text = returnMonthInitialsString(lzSeasonsResponses.conflictRisks)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.CEREMONIES) {
-                    lzSeasonsResponses.ceremonies = selectedMonth
-                    ceremoniesMonth.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.ceremonies.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.ceremonies.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.ceremonies.add(selectedMonth)
+                    }
+                    ceremoniesMonth.text = returnMonthInitialsString(lzSeasonsResponses.ceremonies)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LEAN_SEASONS) {
-                    lzSeasonsResponses.leanSeasons = selectedMonth
-                    leanSeasonsMonth.text = selectedMonth.monthName
+                   val doesMonthAlreadyExist = lzSeasonsResponses.leanSeasons.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.leanSeasons.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.leanSeasons.add(selectedMonth)
+                    }
+                    leanSeasonsMonth.text = returnMonthInitialsString(lzSeasonsResponses.leanSeasons)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.FOOD_SECURITY_ASSESSMENTS) {
-                    lzSeasonsResponses.foodSecurityAssessments = selectedMonth
-                    foodSecurityMonth.text = selectedMonth.monthName
+                    val doesMonthAlreadyExist = lzSeasonsResponses.foodSecurityAssessments.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.foodSecurityAssessments.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.foodSecurityAssessments.add(selectedMonth)
+                    }
+                    foodSecurityMonth.text = returnMonthInitialsString(lzSeasonsResponses.foodSecurityAssessments)
                 }
             }
         }
 
 
 
-        (seasonCalendarDialog as android.app.AlertDialog).dismiss()
+//        (seasonCalendarDialog as android.app.AlertDialog).dismiss()
         countyLevelQuestionnaire.livelihoodZoneSeasonsResponses = lzSeasonsResponses
     }
 
