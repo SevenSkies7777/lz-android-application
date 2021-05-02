@@ -72,10 +72,10 @@ class WgCropContributionAdapter(
         val currentResponseItem = cropContributionResponses.get(position)
         viewHolder.cropName.text = currentResponseItem.cropModel.cropName
         viewHolder.cashIncomeRank.text =
-            if (currentResponseItem.cashIncomeRank.hasBeenSubmitted) currentResponseItem.cashIncomeRank.actualValue.toString() else "Select rank..."
+            if (currentResponseItem.cashIncomeRank.hasBeenSubmitted) currentResponseItem.cashIncomeRank.actualValue.toInt().toString() else "Select rank..."
         viewHolder.cashIncomeApproxPercentage.setText(if (currentResponseItem.cashIncomeApproxPercentage.hasBeenSubmitted) currentResponseItem.cashIncomeApproxPercentage.actualValue.toString() else "")
         viewHolder.foodConsumptionRank.text =
-            if (currentResponseItem.foodConsumptionRank.hasBeenSubmitted) currentResponseItem.foodConsumptionRank.actualValue.toString() else "Select rank..."
+            if (currentResponseItem.foodConsumptionRank.hasBeenSubmitted) currentResponseItem.foodConsumptionRank.actualValue.toInt().toString() else "Select rank..."
         viewHolder.foodApproxPercentage.setText(if (currentResponseItem.foodConsumptionApproxPercentage.hasBeenSubmitted) currentResponseItem.foodConsumptionApproxPercentage.actualValue.toString() else "")
         viewHolder.cashIncomeRank.setOnClickListener {
             inflateRankModal(

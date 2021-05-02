@@ -48,7 +48,8 @@ import com.silasonyango.ndma.util.Util
 
 class WealthGroupDialogFragment : DialogFragment(),
     CropSelectionListAdapter.CropSelectionListAdapterCallBack,
-    CropProductionListAdapter.CropProductionListAdapterCallBack, WgCropContributionAdapter.WgCropContributionAdapterCallBack {
+    CropProductionListAdapter.CropProductionListAdapterCallBack,
+    WgCropContributionAdapter.WgCropContributionAdapterCallBack {
 
     private lateinit var wealthGroupViewModel: WealthGroupViewModel
 
@@ -1447,13 +1448,13 @@ class WealthGroupDialogFragment : DialogFragment(),
                         for (i in 0..cropContributionResponseItems.size) {
                             cropCashIncomeContributionRanks.add(
                                 RankResponseItem(
-                                    i+1,
+                                    i + 1,
                                     false
                                 )
                             )
                             cropFoodConsumptionContributionRanks.add(
                                 RankResponseItem(
-                                    i+1,
+                                    i + 1,
                                     false
                                 )
                             )
@@ -1499,11 +1500,11 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 cropContributionNextButton.setOnClickListener {
-                    if (!isAnyCropProductionFieldEmpty()) {
+                    if (!isAnyCropContributionValueEmpty()) {
                         cropProductionLayout.root.visibility = View.GONE
                         wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
                     } else {
-
+                        inflateErrorModal("Missing data", "Kindly fill out all the missing data")
                     }
                 }
 
@@ -3050,6 +3051,21 @@ class WealthGroupDialogFragment : DialogFragment(),
     }
 
 
+    fun isAnyCropContributionValueEmpty(): Boolean {
+        for (currentResponseItem in cropContributionResponseItems) {
+            if (isAnyCropContributionItemEmpty(currentResponseItem)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    fun isAnyCropContributionItemEmpty(currentResponseItem: WgCropContributionResponseItem): Boolean {
+        return !currentResponseItem.cashIncomeRank.hasBeenSubmitted || !currentResponseItem.cashIncomeApproxPercentage.hasBeenSubmitted
+                || !currentResponseItem.foodConsumptionRank.hasBeenSubmitted || !currentResponseItem.foodConsumptionApproxPercentage.hasBeenSubmitted
+    }
+
+
     private fun inflateErrorModal(errorTitle: String, errorMessage: String) {
         val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.error_message_layout, null)
@@ -3159,7 +3175,7 @@ class WealthGroupDialogFragment : DialogFragment(),
             cropFoodConsumptionContributionRanks.remove(selectedFoodConsumptionContributionRank)
         }
 
-        cropContributionResponseItems.set(position,currentResponseItem)
+        cropContributionResponseItems.set(position, currentResponseItem)
 
         binding.apply {
             cropProductionLayout.apply {
