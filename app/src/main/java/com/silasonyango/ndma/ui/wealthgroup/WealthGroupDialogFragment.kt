@@ -22,6 +22,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.gson.Gson
 import com.silasonyango.ndma.R
 import com.silasonyango.ndma.appStore.AppStore
@@ -34,14 +35,20 @@ import com.silasonyango.ndma.ui.county.model.CropModel
 import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
 import com.silasonyango.ndma.ui.county.responses.LzCropProductionResponseItem
 import com.silasonyango.ndma.ui.home.HomeViewModel
+import com.silasonyango.ndma.ui.home.adapters.EthnicityAdapter
+import com.silasonyango.ndma.ui.model.CropContributionEditTypeEnum
+import com.silasonyango.ndma.ui.model.CropContributionResponseValue
 import com.silasonyango.ndma.ui.model.QuestionnaireStatus
+import com.silasonyango.ndma.ui.model.RankResponseItem
 import com.silasonyango.ndma.ui.wealthgroup.adapters.CropProductionListAdapter
 import com.silasonyango.ndma.ui.wealthgroup.adapters.CropSelectionListAdapter
+import com.silasonyango.ndma.ui.wealthgroup.adapters.WgCropContributionAdapter
 import com.silasonyango.ndma.ui.wealthgroup.responses.*
 import com.silasonyango.ndma.util.Util
 
 class WealthGroupDialogFragment : DialogFragment(),
-    CropSelectionListAdapter.CropSelectionListAdapterCallBack, CropProductionListAdapter.CropProductionListAdapterCallBack {
+    CropSelectionListAdapter.CropSelectionListAdapterCallBack,
+    CropProductionListAdapter.CropProductionListAdapterCallBack, WgCropContributionAdapter.WgCropContributionAdapterCallBack {
 
     private lateinit var wealthGroupViewModel: WealthGroupViewModel
 
@@ -64,6 +71,11 @@ class WealthGroupDialogFragment : DialogFragment(),
     private lateinit var homeViewModel: HomeViewModel
 
     private var cropProductionResponseItems: MutableList<WgCropProductionResponseItem> = ArrayList()
+
+    private var cropContributionResponseItems: MutableList<WgCropContributionResponseItem> =
+        ArrayList()
+    private var cropCashIncomeContributionRanks: MutableList<RankResponseItem> = ArrayList()
+    private var cropFoodConsumptionContributionRanks: MutableList<RankResponseItem> = ArrayList()
 
     private var crops: MutableList<CropModel> = ArrayList()
 
@@ -1420,43 +1432,57 @@ class WealthGroupDialogFragment : DialogFragment(),
                     if (wealthGroupQuestionnaire.selectedCrops.isNotEmpty()) {
 
                         for (currentCrop in wealthGroupQuestionnaire.selectedCrops) {
-                            cropProductionResponseItems.add(
-                                WgCropProductionResponseItem(
+                            cropContributionResponseItems.add(
+                                WgCropContributionResponseItem(
                                     currentCrop,
-                                    CropSeasonResponseItem(
-                                        CropProductionResponseValueModel(0.0, false),
-                                        CropProductionResponseValueModel(0.0, false),
-                                        CropProductionResponseValueModel(0.0, false),
-                                        CropProductionResponseValueModel(0.0, false)
-                                    ),
-                                    CropSeasonResponseItem(
-                                        CropProductionResponseValueModel(0.0, false),
-                                        CropProductionResponseValueModel(0.0, false),
-                                        CropProductionResponseValueModel(0.0, false),
-                                        CropProductionResponseValueModel(0.0, false)
-                                    )
+                                    CropContributionResponseValue(0.0, false),
+                                    CropContributionResponseValue(0.0, false),
+                                    CropContributionResponseValue(0.0, false),
+                                    CropContributionResponseValue(0.0, false)
+                                )
+                            )
+                        }
+
+
+                        for (i in 0..cropContributionResponseItems.size) {
+                            cropCashIncomeContributionRanks.add(
+                                RankResponseItem(
+                                    i+1,
+                                    false
+                                )
+                            )
+                            cropFoodConsumptionContributionRanks.add(
+                                RankResponseItem(
+                                    i+1,
+                                    false
                                 )
                             )
                         }
 
                         cropProductionLayout.apply {
-                            activity?.let { context ->
-                                val adapter =
-                                    CropProductionListAdapter(
-                                        context,
-                                        R.layout.lz_crop_production_item,
-                                        cropProductionResponseItems,
-                                        this@WealthGroupDialogFragment
+
+                            val cropContributionAdapter =
+                                activity?.let { it1 ->
+                                    WgCropContributionAdapter(
+                                        cropContributionResponseItems,
+                                        this@WealthGroupDialogFragment,
+                                        it1,
+                                        cropCashIncomeContributionRanks,
+                                        cropFoodConsumptionContributionRanks
                                     )
-                                cropsList.adapter = adapter
-                            }
+                                }
+                            val gridLayoutManager = GridLayoutManager(activity, 1)
+                            cropResponseList.layoutManager = gridLayoutManager
+                            cropResponseList.hasFixedSize()
+                            cropResponseList.adapter =
+                                cropContributionAdapter
                         }
 
                         cropProductionLayout.root.visibility = View.VISIBLE
                         cropSelectionLayout.root.visibility = View.GONE
 
                     } else {
-                        inflateErrorModal("Data error","You have not selected any crop")
+                        inflateErrorModal("Data error", "You have not selected any crop")
                     }
                 }
 
@@ -1467,27 +1493,17 @@ class WealthGroupDialogFragment : DialogFragment(),
 
             cropProductionLayout.apply {
 
-                cropProductionBackButton.setOnClickListener {
+                cropContributionBackButton.setOnClickListener {
                     cropProductionLayout.root.visibility = View.GONE
                     cropSelectionLayout.root.visibility = View.VISIBLE
                 }
 
-                cropProductionNextButton.setOnClickListener {
+                cropContributionNextButton.setOnClickListener {
                     if (!isAnyCropProductionFieldEmpty()) {
                         cropProductionLayout.root.visibility = View.GONE
                         wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
                     } else {
-                        activity?.let { context ->
-                            val adapter =
-                                CropProductionListAdapter(
-                                    context,
-                                    R.layout.lz_crop_production_item,
-                                    cropProductionResponseItems,
-                                    this@WealthGroupDialogFragment
-                                )
-                            cropsList.adapter = adapter
-                        }
-                        inflateErrorModal("Missing Data", "Kindly fill out all the fields")
+
                     }
                 }
 
@@ -2007,7 +2023,6 @@ class WealthGroupDialogFragment : DialogFragment(),
                             ).toDouble()
 
 
-
                         val womenTotalEntry =
                             returnZeroStringIfEmpty(ownFarmWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 livestockHusbandryWomen.text.toString()
@@ -2045,10 +2060,11 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 wagedLabourmen.text.toString().toDouble()
                             )
 
-                            labourPatternResponse.lowSkilledNonFarmLabour = LabourPatternResponseItem(
-                                lowSkilledNonFarmWomen.text.toString().toDouble(),
-                                lowSkilledNonFarmmen.text.toString().toDouble()
-                            )
+                            labourPatternResponse.lowSkilledNonFarmLabour =
+                                LabourPatternResponseItem(
+                                    lowSkilledNonFarmWomen.text.toString().toDouble(),
+                                    lowSkilledNonFarmmen.text.toString().toDouble()
+                                )
 
                             labourPatternResponse.skilledLabour = LabourPatternResponseItem(
                                 skilledLabourWomen.text.toString().toDouble(),
@@ -2106,9 +2122,15 @@ class WealthGroupDialogFragment : DialogFragment(),
                             wgLabourPatterns.root.visibility = View.GONE
 
                         } else if (menTotalEntry < 100.0) {
-                            inflateErrorModal("Percentage error", "Male total entries are less than 100% by ${100 - menTotalEntry}")
-                        } else if(womenTotalEntry < 100.0) {
-                            inflateErrorModal("Percentage error", "Female total entries are less than 100% by ${100 - womenTotalEntry}")
+                            inflateErrorModal(
+                                "Percentage error",
+                                "Male total entries are less than 100% by ${100 - menTotalEntry}"
+                            )
+                        } else if (womenTotalEntry < 100.0) {
+                            inflateErrorModal(
+                                "Percentage error",
+                                "Female total entries are less than 100% by ${100 - womenTotalEntry}"
+                            )
                         }
 
                     }
@@ -2475,7 +2497,10 @@ class WealthGroupDialogFragment : DialogFragment(),
                             wgExpenditurePatterns.root.visibility = View.GONE
 
                         } else if (totalPercentageEntry < 100.0) {
-                            inflateErrorModal("Percentage error", "Total entries are  less than 100% by ${100.0 - totalPercentageEntry}")
+                            inflateErrorModal(
+                                "Percentage error",
+                                "Total entries are  less than 100% by ${100.0 - totalPercentageEntry}"
+                            )
                         }
 
                     }
@@ -2625,7 +2650,10 @@ class WealthGroupDialogFragment : DialogFragment(),
                             wgMigrationPatterns.root.visibility = View.GONE
 
                         } else if (totalEntry < 100.0) {
-                            inflateErrorModal("Percentage error", "The total entries are less than 100% by ${100.0 - totalEntry}")
+                            inflateErrorModal(
+                                "Percentage error",
+                                "The total entries are less than 100% by ${100.0 - totalEntry}"
+                            )
                         }
 
                     }
@@ -3018,7 +3046,8 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     fun isAnyValueEmpty(currentResponseItem: WgCropProductionResponseItem): Boolean {
         return !currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted
-                || !currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted}
+                || !currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted
+    }
 
 
     private fun inflateErrorModal(errorTitle: String, errorMessage: String) {
@@ -3112,5 +3141,45 @@ class WealthGroupDialogFragment : DialogFragment(),
         position: Int
     ) {
         cropProductionResponseItems.set(position, responseItem)
+    }
+
+    override fun onAnyFieldEdited(
+        currentResponseItem: WgCropContributionResponseItem,
+        position: Int,
+        cropContributionEditTypeEnum: CropContributionEditTypeEnum,
+        selectedCashIncomeContributionRank: RankResponseItem?,
+        selectedFoodConsumptionContributionRank: RankResponseItem?
+    ) {
+
+        if (cropContributionEditTypeEnum == CropContributionEditTypeEnum.CROP_CASH_INCOME_CONTRIBUTION_RANK) {
+            cropCashIncomeContributionRanks.remove(selectedCashIncomeContributionRank)
+        }
+
+        if (cropContributionEditTypeEnum == CropContributionEditTypeEnum.CROP_FOOD_CONSUMPTION_CONTRIBUTION_RANK) {
+            cropFoodConsumptionContributionRanks.remove(selectedFoodConsumptionContributionRank)
+        }
+
+        cropContributionResponseItems.set(position,currentResponseItem)
+
+        binding.apply {
+            cropProductionLayout.apply {
+
+                val cropContributionAdapter =
+                    activity?.let { it1 ->
+                        WgCropContributionAdapter(
+                            cropContributionResponseItems,
+                            this@WealthGroupDialogFragment,
+                            it1,
+                            cropCashIncomeContributionRanks,
+                            cropFoodConsumptionContributionRanks
+                        )
+                    }
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                cropResponseList.layoutManager = gridLayoutManager
+                cropResponseList.hasFixedSize()
+                cropResponseList.adapter =
+                    cropContributionAdapter
+            }
+        }
     }
 }

@@ -5,7 +5,17 @@
     android:background="@drawable/bg_rounded_corner_modal"
     android:orientation="vertical">
 
+    <View
+        android:id="@+id/icClose"
+        android:background="@drawable/ic_black_close"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="16dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="27dp"
         android:id="@+id/listRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

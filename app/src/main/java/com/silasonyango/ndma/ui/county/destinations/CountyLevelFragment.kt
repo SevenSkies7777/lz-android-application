@@ -1719,8 +1719,106 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
                 seasonCalendarNextButton.setOnClickListener {
-                    lzSeasonsCalendar.root.visibility = View.GONE
-                    lzCompletionPage.root.visibility = View.VISIBLE
+
+
+                    if (lzSeasonsResponses.dry.isEmpty()) {
+                        inflateErrorModal("Data error", "Dry season has no months selected")
+                    } else if (lzSeasonsResponses.longRains.isEmpty()) {
+                        inflateErrorModal("Data error", "Long rains season has no months selected")
+                    } else if (lzSeasonsResponses.shortRains.isEmpty()) {
+                        inflateErrorModal("Data error", "Short rains season has no months selected")
+                    } else if (lzSeasonsResponses.maizeLandPreparation.isEmpty()) {
+                        inflateErrorModal("Data error", "Maize land preparation season has no months selected")
+                    } else if (lzSeasonsResponses.cassavaLandPreparation.isEmpty()) {
+                        inflateErrorModal("Data error", "Cassava land preparation season has no months selected")
+                    } else if (lzSeasonsResponses.riceLandPreparation.isEmpty()) {
+                        inflateErrorModal("Data error", "Rice land preparation season has no months selected")
+                    } else if (lzSeasonsResponses.sorghumLandPreparation.isEmpty()) {
+                        inflateErrorModal("Data error", "Sorghum land preparation season has no months selected")
+                    } else if (lzSeasonsResponses.legumesLandPreparation.isEmpty()) {
+                        inflateErrorModal("Data error", "Legumes land preparation season has no months selected")
+                    } else if (lzSeasonsResponses.maizePlanting.isEmpty()) {
+                        inflateErrorModal("Data error", "Maize planting season has no months selected")
+                    } else if (lzSeasonsResponses.cassavaPlanting.isEmpty()) {
+                        inflateErrorModal("Data error", "Cassava planting season has no months selected")
+                    } else if (lzSeasonsResponses.ricePlanting.isEmpty()) {
+                        inflateErrorModal("Data error", "Rice planting season has no months selected")
+                    } else if (lzSeasonsResponses.sorghumPlanting.isEmpty()) {
+                        inflateErrorModal("Data error", "Sorghum planting season has no months selected")
+                    } else if (lzSeasonsResponses.legumesPlanting.isEmpty()) {
+                        inflateErrorModal("Data error", "Legumes planting season has no months selected")
+                    } else if (lzSeasonsResponses.maizeHarvesting.isEmpty()) {
+                        inflateErrorModal("Data error", "Maize harvesting season has no months selected")
+                    } else if (lzSeasonsResponses.cassavaHarvesting.isEmpty()) {
+                        inflateErrorModal("Data error", "Cassava harvesting season has no months selected")
+                    } else if (lzSeasonsResponses.riceHarvesting.isEmpty()) {
+                        inflateErrorModal("Data error", "Rice harvesting season has no months selected")
+                    } else if (lzSeasonsResponses.sorghumHarvesting.isEmpty()) {
+                        inflateErrorModal("Data error", "Sorghum harvesting season has no months selected")
+                    } else if (lzSeasonsResponses.legumesHarvesting.isEmpty()) {
+                        inflateErrorModal("Data error", "Legumes harvesting season has no months selected")
+                    } else if (lzSeasonsResponses.livestockInMigration.isEmpty()) {
+                        inflateErrorModal("Data error", "Livestock in-migration season has no months selected")
+                    } else if (lzSeasonsResponses.livestockOutMigration.isEmpty()) {
+                        inflateErrorModal("Data error", "Livestock out-migration season has no months selected")
+                    } else if (lzSeasonsResponses.highMilkProduction.isEmpty()) {
+                        inflateErrorModal("Data error", "High milk production season has no months selected")
+                    } else if (lzSeasonsResponses.lowMilkProduction.isEmpty()) {
+                        inflateErrorModal("Data error", "Low milk production season has no months selected")
+                    } else if (lzSeasonsResponses.highCalving.isEmpty()) {
+                        inflateErrorModal("Data error", "High calving season has no months selected")
+                    } else if (lzSeasonsResponses.lowCalving.isEmpty()) {
+                        inflateErrorModal("Data error", "Low calving season has no months selected")
+                    } else if (lzSeasonsResponses.highKidding.isEmpty()) {
+                        inflateErrorModal("Data error", "High kidding season has no months selected")
+                    } else if (lzSeasonsResponses.lowKidding.isEmpty()) {
+                        inflateErrorModal("Data error", "Low kidding season has no months selected")
+                    } else if (lzSeasonsResponses.highFoodPrices.isEmpty()) {
+                        inflateErrorModal("Data error", "High food prices season has no months selected")
+                    } else if (lzSeasonsResponses.lowFoodPrices.isEmpty()) {
+                        inflateErrorModal("Data error", "Low food prices season has no months selected")
+                    } else if (lzSeasonsResponses.highLivestockPrices.isEmpty()) {
+                        inflateErrorModal("Data error", "High livestock prices season has no months selected")
+                    } else if (lzSeasonsResponses.lowLivestockPrices.isEmpty()) {
+                        inflateErrorModal("Data error", "Low livestock prices season has no months selected")
+                    } else if (lzSeasonsResponses.highCasualLabourAvailability.isEmpty()) {
+                        inflateErrorModal("Data error", "High casual labour availability season has no months selected")
+                    } else if (lzSeasonsResponses.lowCasualLabourAvailability.isEmpty()) {
+                        inflateErrorModal("Data error", "Low casual labour availability season has no months selected")
+                    } else if (lzSeasonsResponses.highCasualLabourWages.isEmpty()) {
+                        inflateErrorModal("Data error", "High casual labour wages season has no months selected")
+                    } else if (lzSeasonsResponses.lowCasualLabourWages.isEmpty()) {
+                        inflateErrorModal("Data error", "Low casual labour wages season has no months selected")
+                    } else if (lzSeasonsResponses.highRemittances.isEmpty()) {
+                        inflateErrorModal("Data error", "High remittances season has no months selected")
+                    } else if (lzSeasonsResponses.lowRemittances.isEmpty()) {
+                        inflateErrorModal("Data error", "Low remittances season has no months selected")
+                    } else if (lzSeasonsResponses.highFish.isEmpty()) {
+                        inflateErrorModal("Data error", "High fish season has no months selected")
+                    } else if (lzSeasonsResponses.lowFish.isEmpty()) {
+                        inflateErrorModal("Data error", "Low fish season has no months selected")
+                    } else if (lzSeasonsResponses.highMarketAccess.isEmpty()) {
+                        inflateErrorModal("Data error", "High market access season has no months selected")
+                    } else if (lzSeasonsResponses.lowMarketAccess.isEmpty()) {
+                        inflateErrorModal("Data error", "Low market access season has no months selected")
+                    } else if (lzSeasonsResponses.highDiseaseOutbreak.isEmpty()) {
+                        inflateErrorModal("Data error", "High disease outbreak season season has no months selected")
+                    } else if (lzSeasonsResponses.lowDiseaseOutbreak.isEmpty()) {
+                        inflateErrorModal("Data error", "Low disease outbreak season season has no months selected")
+                    } else if (lzSeasonsResponses.waterStress.isEmpty()) {
+                        inflateErrorModal("Data error", "Water stress season season has no months selected")
+                    } else if (lzSeasonsResponses.conflictRisks.isEmpty()) {
+                        inflateErrorModal("Data error", "Conflict risk season season has no months selected")
+                    } else if (lzSeasonsResponses.ceremonies.isEmpty()) {
+                        inflateErrorModal("Data error", "Ceremonies season season has no months selected")
+                    } else if (lzSeasonsResponses.leanSeasons.isEmpty()) {
+                        inflateErrorModal("Data error", "Lean season season has no months selected")
+                    } else if (lzSeasonsResponses.foodSecurityAssessments.isEmpty()) {
+                        inflateErrorModal("Data error", "Food security assessment season season has no months selected")
+                    } else {
+                        lzSeasonsCalendar.root.visibility = View.GONE
+                        lzCompletionPage.root.visibility = View.VISIBLE
+                    }
                 }
 
             }
@@ -1928,6 +2026,7 @@ class CountyLevelFragment : DialogFragment(),
     ) {
         val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
+        val icClose = v.findViewById<View>(R.id.icClose)
 
         val listRecyclerView = v.findViewById<RecyclerView>(R.id.listRv)
 
@@ -1936,6 +2035,11 @@ class CountyLevelFragment : DialogFragment(),
             this,
             seasonsResponsesEnum
         )
+
+        icClose.setOnClickListener {
+            (seasonCalendarDialog as android.app.AlertDialog).dismiss()
+        }
+
         val gridLayoutManager = GridLayoutManager(activity, 1)
         listRecyclerView.layoutManager = gridLayoutManager
         listRecyclerView.hasFixedSize()
