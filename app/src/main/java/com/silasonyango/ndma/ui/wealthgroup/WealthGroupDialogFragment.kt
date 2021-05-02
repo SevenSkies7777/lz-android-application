@@ -36,15 +36,13 @@ import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
 import com.silasonyango.ndma.ui.county.responses.LzCropProductionResponseItem
 import com.silasonyango.ndma.ui.home.HomeViewModel
 import com.silasonyango.ndma.ui.home.adapters.EthnicityAdapter
-import com.silasonyango.ndma.ui.model.CropContributionEditTypeEnum
-import com.silasonyango.ndma.ui.model.CropContributionResponseValue
-import com.silasonyango.ndma.ui.model.QuestionnaireStatus
-import com.silasonyango.ndma.ui.model.RankResponseItem
+import com.silasonyango.ndma.ui.model.*
 import com.silasonyango.ndma.ui.wealthgroup.adapters.CropProductionListAdapter
 import com.silasonyango.ndma.ui.wealthgroup.adapters.CropSelectionListAdapter
 import com.silasonyango.ndma.ui.wealthgroup.adapters.WgCropContributionAdapter
 import com.silasonyango.ndma.ui.wealthgroup.responses.*
 import com.silasonyango.ndma.util.Util
+import kotlin.math.abs
 
 class WealthGroupDialogFragment : DialogFragment(),
     CropSelectionListAdapter.CropSelectionListAdapterCallBack,
@@ -1500,11 +1498,21 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 cropContributionNextButton.setOnClickListener {
-                    if (!isAnyCropContributionValueEmpty()) {
+                    if (!isAnyCropContributionValueEmpty() && !doesCropFoodConsumptionContributionIncomeHaveAPercentageError().hasError && !doesCropCashContributionIncomeHaveAPercentageError().hasError) {
                         cropProductionLayout.root.visibility = View.GONE
                         wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
-                    } else {
+                    } else if (isAnyCropContributionValueEmpty()) {
                         inflateErrorModal("Missing data", "Kindly fill out all the missing data")
+                    } else if (doesCropCashContributionIncomeHaveAPercentageError().hasError) {
+                        inflateErrorModal(
+                            "Percentage error",
+                            doesCropCashContributionIncomeHaveAPercentageError().errorMessage
+                        )
+                    } else if (doesCropFoodConsumptionContributionIncomeHaveAPercentageError().hasError) {
+                        inflateErrorModal(
+                            "Percentage error",
+                            doesCropFoodConsumptionContributionIncomeHaveAPercentageError().errorMessage
+                        )
                     }
                 }
 
@@ -3063,6 +3071,33 @@ class WealthGroupDialogFragment : DialogFragment(),
     fun isAnyCropContributionItemEmpty(currentResponseItem: WgCropContributionResponseItem): Boolean {
         return !currentResponseItem.cashIncomeRank.hasBeenSubmitted || !currentResponseItem.cashIncomeApproxPercentage.hasBeenSubmitted
                 || !currentResponseItem.foodConsumptionRank.hasBeenSubmitted || !currentResponseItem.foodConsumptionApproxPercentage.hasBeenSubmitted
+    }
+
+    fun doesCropCashContributionIncomeHaveAPercentageError(): CropContributionValidationResponse {
+        var totalValue = 0.0
+        for (currentResponseItem in cropContributionResponseItems) {
+            totalValue = totalValue + currentResponseItem.cashIncomeApproxPercentage.actualValue
+        }
+        return CropContributionValidationResponse(
+            totalValue != 100.0,
+            "Crop cash contribution is ${if (totalValue > 100) "greater than 100%" else "less than 100%"} by ${abs(
+                100 - totalValue
+            )}"
+        )
+    }
+
+    fun doesCropFoodConsumptionContributionIncomeHaveAPercentageError(): CropContributionValidationResponse {
+        var totalValue = 0.0
+        for (currentResponseItem in cropContributionResponseItems) {
+            totalValue =
+                totalValue + currentResponseItem.foodConsumptionApproxPercentage.actualValue
+        }
+        return CropContributionValidationResponse(
+            totalValue != 100.0,
+            "Crop food consumption contribution is ${if (totalValue > 100) "greater than 100%" else "less than 100%"} by ${abs(
+                100 - totalValue
+            )}"
+        )
     }
 
 
