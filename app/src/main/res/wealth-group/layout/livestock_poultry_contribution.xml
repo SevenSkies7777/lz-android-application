@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp">
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -30,19 +31,19 @@
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
                     android:text="TYPE OF ANIMAL"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -51,19 +52,19 @@
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight=".4"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
                     android:text="Contribution to Cash Income from animal sales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -71,19 +72,19 @@
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight=".4"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
                     android:text="Contribution to Food Consumption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -98,10 +99,9 @@
                 android:layout_width="0dp"
                 android:layout_height="140dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
-
+                android:paddingLeft="8dp">
 
 
             </LinearLayout>
@@ -111,19 +111,19 @@
                 android:layout_width="0dp"
                 android:layout_height="140dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <TextView
-                    android:text="Rank: 1=most important"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:text="Rank: 1=most important"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -131,19 +131,19 @@
                 android:layout_width="0dp"
                 android:layout_height="140dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
                     android:text="Approx percent of cash income"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -151,19 +151,19 @@
                 android:layout_width="0dp"
                 android:layout_height="140dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
                     android:text="Rank: 1=most important"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -171,19 +171,19 @@
                 android:layout_width="0dp"
                 android:layout_height="140dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <TextView
-                    android:text="Approx percent of consumption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:text="Approx percent of consumption"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -198,20 +198,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
 
                 <TextView
-                    android:text="Cattle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:text="Cattle"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"/>
 
 
             </LinearLayout>
@@ -221,23 +220,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/cattleIncomeRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -245,23 +240,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/cattleCashPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -269,23 +264,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/cattleFoodRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -293,23 +284,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/cattleFoodPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -324,20 +315,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
 
                 <TextView
-                    android:text="Goats"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:text="Goats"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"/>
 
 
             </LinearLayout>
@@ -347,23 +337,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/goatsIncomeRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -371,23 +357,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/goatsIncomePercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -395,23 +381,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
-                    android:id="@+id/goatsCashRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/goatsFoodRank"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -419,23 +401,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/goatsCashPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -450,20 +432,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
 
                 <TextView
-                    android:text="Sheep"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:text="Sheep"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"/>
 
 
             </LinearLayout>
@@ -473,23 +454,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/sheepCashRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -497,23 +474,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/sheepCashPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -521,23 +498,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/sheepFoodRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -545,23 +518,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/sheepFoodPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -576,20 +549,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
 
                 <TextView
-                    android:text="Donkeys"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:text="Donkeys"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"/>
 
 
             </LinearLayout>
@@ -599,23 +571,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
-                    android:id="@+id/donkeysCahRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/donkeysCashRank"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -623,23 +591,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/donkeysCashPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -647,23 +615,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/donkeysFoodRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -671,23 +635,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/donkeysFoodPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -702,20 +666,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
 
                 <TextView
-                    android:text="Camels"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:text="Camels"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"/>
 
 
             </LinearLayout>
@@ -725,23 +688,20 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/camelsCashRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
+
 
             </LinearLayout>
 
@@ -749,23 +709,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/camelsCashPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -773,23 +733,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/camelsFoodRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -797,23 +753,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/camelsFoodPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -828,20 +784,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
 
                 <TextView
-                    android:text="Pigs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:text="Pigs"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"/>
 
 
             </LinearLayout>
@@ -851,23 +806,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/pigscashRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -875,23 +826,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/pigsCashPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -899,23 +850,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/pigsFoodrank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -923,23 +870,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/pigsFoodPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -954,20 +901,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
 
                 <TextView
-                    android:text="Chickens"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:text="Chickens"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"/>
 
 
             </LinearLayout>
@@ -977,23 +923,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/chickenCashRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -1001,23 +943,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/chickenCashPaercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -1025,23 +967,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
-                    android:id="@+id/chickenFooRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/chickenFoodRank"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -1049,23 +987,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/chickenFoodPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -1080,20 +1018,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
 
                 <TextView
-                    android:text="Ducks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:text="Ducks"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"/>
 
 
             </LinearLayout>
@@ -1103,23 +1040,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/ducksCashRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:inputType="numberDecimal"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -1127,23 +1060,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/duckscashPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:inputType="numberDecimal"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -1151,23 +1084,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/ducksFoodRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:inputType="numberDecimal"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -1175,23 +1104,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/ducksFoodPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -1206,20 +1135,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
 
                 <TextView
-                    android:text="Beehives"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:text="Beehives"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"/>
 
 
             </LinearLayout>
@@ -1229,23 +1157,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/beeHivesCashRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -1253,23 +1177,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/beeHivesCashPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -1277,23 +1201,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/beeHivesFoodrank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -1301,23 +1221,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/beeHivesFoodPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -1332,20 +1252,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
 
                 <TextView
-                    android:text="Fish Ponds"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_bold"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:text="Fish Ponds"
                     android:textColor="#FF3F51B5"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:textSize="16sp"/>
 
 
             </LinearLayout>
@@ -1355,23 +1274,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/fishPondsCashRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -1379,23 +1294,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/fishPondscashPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -1403,23 +1318,19 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
-                <EditText
+                <TextView
                     android:id="@+id/fishPondsFoodRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Select rank..."
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -1427,23 +1338,23 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
                 android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                android:background="@drawable/cell_shape">
+                android:paddingLeft="8dp">
 
                 <EditText
                     android:id="@+id/fishPondsFoodPercentage"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"/>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -1460,37 +1371,37 @@
 
         <TextView
             android:id="@+id/livestockPoultryContributionBackButton"
-            android:text="BACK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:textStyle="normal"
-            android:textSize="14sp"
-            android:textColor="#00569c"
-            android:letterSpacing="0.01"
-            android:lineSpacingExtra="6sp"
-            android:lineHeight="20sp"
-            android:gravity="center_horizontal"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_horizontal"
+            android:letterSpacing="0.01"
+            android:lineHeight="20sp"
+            android:lineSpacingExtra="6sp"
+            android:text="BACK"
+            android:textColor="#00569c"
+            android:textSize="14sp"
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/livestockPoultryContributionNextButton"
-            android:text="NEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:textStyle="normal"
-            android:textSize="14sp"
-            android:textColor="#00569c"
-            android:letterSpacing="0.01"
-            android:lineSpacingExtra="6sp"
-            android:lineHeight="20sp"
-            android:gravity="center_horizontal"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_horizontal"
+            android:letterSpacing="0.01"
+            android:lineHeight="20sp"
+            android:lineSpacingExtra="6sp"
+            android:text="NEXT"
+            android:textColor="#00569c"
+            android:textSize="14sp"
+            android:textStyle="normal" />
 
     </RelativeLayout>
 

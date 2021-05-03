@@ -23,6 +23,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.silasonyango.ndma.R
 import com.silasonyango.ndma.appStore.AppStore
@@ -36,9 +37,11 @@ import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
 import com.silasonyango.ndma.ui.county.responses.LzCropProductionResponseItem
 import com.silasonyango.ndma.ui.home.HomeViewModel
 import com.silasonyango.ndma.ui.home.adapters.EthnicityAdapter
+import com.silasonyango.ndma.ui.home.adapters.WgCropContributionRankAdapter
 import com.silasonyango.ndma.ui.model.*
 import com.silasonyango.ndma.ui.wealthgroup.adapters.CropProductionListAdapter
 import com.silasonyango.ndma.ui.wealthgroup.adapters.CropSelectionListAdapter
+import com.silasonyango.ndma.ui.wealthgroup.adapters.LivestockContributionRankAdapter
 import com.silasonyango.ndma.ui.wealthgroup.adapters.WgCropContributionAdapter
 import com.silasonyango.ndma.ui.wealthgroup.responses.*
 import com.silasonyango.ndma.util.Util
@@ -47,7 +50,8 @@ import kotlin.math.abs
 class WealthGroupDialogFragment : DialogFragment(),
     CropSelectionListAdapter.CropSelectionListAdapterCallBack,
     CropProductionListAdapter.CropProductionListAdapterCallBack,
-    WgCropContributionAdapter.WgCropContributionAdapterCallBack {
+    WgCropContributionAdapter.WgCropContributionAdapterCallBack,
+    LivestockContributionRankAdapter.LivestockContributionRankAdapterCallBack {
 
     private lateinit var wealthGroupViewModel: WealthGroupViewModel
 
@@ -63,7 +67,11 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     var questionnaireSessionLocation: QuestionnaireSessionLocation? = null
 
+    val livestockContributionResponses = LivestockContributionResponses()
+
     private var subContyDialog: AlertDialog? = null
+
+    private var livestockContributionRankModal: AlertDialog? = null
 
     private var errorDialog: android.app.AlertDialog? = null
 
@@ -73,6 +81,12 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     private var cropContributionResponseItems: MutableList<WgCropContributionResponseItem> =
         ArrayList()
+
+    private var livestockCashIncomeContributionRanks: MutableList<RankResponseItem> = ArrayList()
+
+    private var livestockFoodConsumptionContributionRanks: MutableList<RankResponseItem> =
+        ArrayList()
+
     private var cropCashIncomeContributionRanks: MutableList<RankResponseItem> = ArrayList()
     private var cropFoodConsumptionContributionRanks: MutableList<RankResponseItem> = ArrayList()
 
@@ -1623,6 +1637,177 @@ class WealthGroupDialogFragment : DialogFragment(),
 
             /*Livestock and poultry contribution navigation*/
             wgLivestockPoultryContribution.apply {
+
+                for (i in 0..9) {
+                    livestockCashIncomeContributionRanks.add(
+                        RankResponseItem(i + 1, false)
+                    )
+                    livestockFoodConsumptionContributionRanks.add(
+                        RankResponseItem(i + 1, false)
+                    )
+                }
+                cattleIncomeRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockCashIncomeContributionRanks,
+                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                        WgLivestockTypesEnum.CATTLE
+                    )
+                }
+
+                cattleFoodRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockFoodConsumptionContributionRanks,
+                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                        WgLivestockTypesEnum.CATTLE
+                    )
+                }
+
+                goatsIncomeRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockCashIncomeContributionRanks,
+                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                        WgLivestockTypesEnum.GOATS
+                    )
+                }
+
+                goatsFoodRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockFoodConsumptionContributionRanks,
+                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                        WgLivestockTypesEnum.GOATS
+                    )
+                }
+
+                sheepCashRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockCashIncomeContributionRanks,
+                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                        WgLivestockTypesEnum.SHEEP
+                    )
+                }
+
+                sheepFoodRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockFoodConsumptionContributionRanks,
+                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                        WgLivestockTypesEnum.SHEEP
+                    )
+                }
+
+                donkeysCashRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockCashIncomeContributionRanks,
+                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                        WgLivestockTypesEnum.DONKEYS
+                    )
+                }
+
+                donkeysFoodRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockFoodConsumptionContributionRanks,
+                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                        WgLivestockTypesEnum.DONKEYS
+                    )
+                }
+
+                pigscashRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockCashIncomeContributionRanks,
+                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                        WgLivestockTypesEnum.PIGS
+                    )
+                }
+
+                pigsFoodrank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockFoodConsumptionContributionRanks,
+                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                        WgLivestockTypesEnum.PIGS
+                    )
+                }
+
+                chickenCashRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockCashIncomeContributionRanks,
+                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                        WgLivestockTypesEnum.CHICKEN
+                    )
+                }
+
+                chickenFoodRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockFoodConsumptionContributionRanks,
+                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                        WgLivestockTypesEnum.CHICKEN
+                    )
+                }
+
+                camelsCashRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockCashIncomeContributionRanks,
+                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                        WgLivestockTypesEnum.CAMELS
+                    )
+                }
+
+                camelsFoodRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockFoodConsumptionContributionRanks,
+                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                        WgLivestockTypesEnum.CAMELS
+                    )
+                }
+
+                ducksCashRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockCashIncomeContributionRanks,
+                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                        WgLivestockTypesEnum.DUCKS
+                    )
+                }
+
+                ducksFoodRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockFoodConsumptionContributionRanks,
+                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                        WgLivestockTypesEnum.DUCKS
+                    )
+                }
+
+                beeHivesCashRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockCashIncomeContributionRanks,
+                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                        WgLivestockTypesEnum.BEE_HIVES
+                    )
+                }
+
+                beeHivesFoodrank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockFoodConsumptionContributionRanks,
+                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                        WgLivestockTypesEnum.BEE_HIVES
+                    )
+                }
+
+                fishPondsCashRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockCashIncomeContributionRanks,
+                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                        WgLivestockTypesEnum.FISH_POND
+                    )
+                }
+
+                fishPondsFoodRank.setOnClickListener {
+                    inflateLivestockContributionRankModal(
+                        livestockFoodConsumptionContributionRanks,
+                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                        WgLivestockTypesEnum.FISH_POND
+                    )
+                }
+
+
+
                 livestockPoultryContributionBackButton.setOnClickListener {
                     wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
                     wgLivestockPoultryContribution.root.visibility = View.GONE
@@ -1630,77 +1815,76 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 livestockPoultryContributionNextButton.setOnClickListener {
 
-                    val livestockContributionResponses = LivestockContributionResponses()
 
-                    livestockContributionResponses.cattle = LivestockContributionResponseItem(
-                        cattleIncomeRank.text.toString().toInt(),
-                        cattleCashPercentage.text.toString().toDouble(),
-                        cattleFoodRank.text.toString().toInt(),
-                        cattleFoodPercentage.text.toString().toDouble()
-                    )
-
-                    livestockContributionResponses.goats = LivestockContributionResponseItem(
-                        goatsIncomeRank.text.toString().toInt(),
-                        goatsIncomePercentage.text.toString().toDouble(),
-                        goatsCashRank.text.toString().toInt(),
-                        goatsCashPercentage.text.toString().toDouble()
-                    )
-
-                    livestockContributionResponses.sheep = LivestockContributionResponseItem(
-                        sheepCashRank.text.toString().toInt(),
-                        sheepCashPercentage.text.toString().toDouble(),
-                        sheepFoodRank.text.toString().toInt(),
-                        sheepFoodPercentage.text.toString().toDouble()
-                    )
-
-                    livestockContributionResponses.donkeys = LivestockContributionResponseItem(
-                        donkeysCahRank.text.toString().toInt(),
-                        donkeysCashPercentage.text.toString().toDouble(),
-                        donkeysFoodRank.text.toString().toInt(),
-                        donkeysFoodPercentage.text.toString().toDouble()
-                    )
-
-                    livestockContributionResponses.pigs = LivestockContributionResponseItem(
-                        pigscashRank.text.toString().toInt(),
-                        pigsCashPercentage.text.toString().toDouble(),
-                        pigsFoodrank.text.toString().toInt(),
-                        pigsFoodPercentage.text.toString().toDouble()
-                    )
-
-                    livestockContributionResponses.chicken = LivestockContributionResponseItem(
-                        chickenCashRank.text.toString().toInt(),
-                        chickenCashPaercentage.text.toString().toDouble(),
-                        chickenFooRank.text.toString().toInt(),
-                        chickenFoodPercentage.text.toString().toDouble()
-                    )
-
-                    livestockContributionResponses.camels = LivestockContributionResponseItem(
-                        camelsCashRank.text.toString().toInt(),
-                        camelsCashPercentage.text.toString().toDouble(),
-                        camelsFoodRank.text.toString().toInt(),
-                        camelsFoodPercentage.text.toString().toDouble()
-                    )
-
-                    livestockContributionResponses.ducks = LivestockContributionResponseItem(
-                        ducksCashRank.text.toString().toInt(),
-                        duckscashPercentage.text.toString().toDouble(),
-                        ducksFoodRank.text.toString().toInt(),
-                        ducksFoodPercentage.text.toString().toDouble()
-                    )
-
-                    livestockContributionResponses.beeHives = LivestockContributionResponseItem(
-                        beeHivesCashRank.text.toString().toInt(),
-                        beeHivesCashPercentage.text.toString().toDouble(),
-                        beeHivesFoodrank.text.toString().toInt(),
-                        beeHivesFoodPercentage.text.toString().toDouble()
-                    )
-
-                    livestockContributionResponses.fishPonds = LivestockContributionResponseItem(
-                        fishPondsCashRank.text.toString().toInt(),
-                        fishPondscashPercentage.text.toString().toDouble(),
-                        fishPondsFoodRank.text.toString().toInt(),
-                        fishPondsFoodPercentage.text.toString().toDouble()
-                    )
+//                    livestockContributionResponses.cattle = LivestockContributionResponseItem(
+//                        cattleIncomeRank.text.toString().toInt(),
+//                        cattleCashPercentage.text.toString().toDouble(),
+//                        cattleFoodRank.text.toString().toInt(),
+//                        cattleFoodPercentage.text.toString().toDouble()
+//                    )
+//
+//                    livestockContributionResponses.goats = LivestockContributionResponseItem(
+//                        goatsIncomeRank.text.toString().toInt(),
+//                        goatsIncomePercentage.text.toString().toDouble(),
+//                        goatsFoodRank.text.toString().toInt(),
+//                        goatsCashPercentage.text.toString().toDouble()
+//                    )
+//
+//                    livestockContributionResponses.sheep = LivestockContributionResponseItem(
+//                        sheepCashRank.text.toString().toInt(),
+//                        sheepCashPercentage.text.toString().toDouble(),
+//                        sheepFoodRank.text.toString().toInt(),
+//                        sheepFoodPercentage.text.toString().toDouble()
+//                    )
+//
+//                    livestockContributionResponses.donkeys = LivestockContributionResponseItem(
+//                        donkeysCashRank.text.toString().toInt(),
+//                        donkeysCashPercentage.text.toString().toDouble(),
+//                        donkeysFoodRank.text.toString().toInt(),
+//                        donkeysFoodPercentage.text.toString().toDouble()
+//                    )
+//
+//                    livestockContributionResponses.pigs = LivestockContributionResponseItem(
+//                        pigscashRank.text.toString().toInt(),
+//                        pigsCashPercentage.text.toString().toDouble(),
+//                        pigsFoodrank.text.toString().toInt(),
+//                        pigsFoodPercentage.text.toString().toDouble()
+//                    )
+//
+//                    livestockContributionResponses.chicken = LivestockContributionResponseItem(
+//                        chickenCashRank.text.toString().toInt(),
+//                        chickenCashPaercentage.text.toString().toDouble(),
+//                        chickenFoodRank.text.toString().toInt(),
+//                        chickenFoodPercentage.text.toString().toDouble()
+//                    )
+//
+//                    livestockContributionResponses.camels = LivestockContributionResponseItem(
+//                        camelsCashRank.text.toString().toInt(),
+//                        camelsCashPercentage.text.toString().toDouble(),
+//                        camelsFoodRank.text.toString().toInt(),
+//                        camelsFoodPercentage.text.toString().toDouble()
+//                    )
+//
+//                    livestockContributionResponses.ducks = LivestockContributionResponseItem(
+//                        ducksCashRank.text.toString().toInt(),
+//                        duckscashPercentage.text.toString().toDouble(),
+//                        ducksFoodRank.text.toString().toInt(),
+//                        ducksFoodPercentage.text.toString().toDouble()
+//                    )
+//
+//                    livestockContributionResponses.beeHives = LivestockContributionResponseItem(
+//                        beeHivesCashRank.text.toString().toInt(),
+//                        beeHivesCashPercentage.text.toString().toDouble(),
+//                        beeHivesFoodrank.text.toString().toInt(),
+//                        beeHivesFoodPercentage.text.toString().toDouble()
+//                    )
+//
+//                    livestockContributionResponses.fishPonds = LivestockContributionResponseItem(
+//                        fishPondsCashRank.text.toString().toInt(),
+//                        fishPondscashPercentage.text.toString().toDouble(),
+//                        fishPondsFoodRank.text.toString().toInt(),
+//                        fishPondsFoodPercentage.text.toString().toDouble()
+//                    )
 
                     wealthGroupQuestionnaire.livestockContributionResponses =
                         livestockContributionResponses
@@ -3163,6 +3347,52 @@ class WealthGroupDialogFragment : DialogFragment(),
         )
     }
 
+
+    private fun inflateLivestockContributionRankModal(
+        contributionRanks: MutableList<RankResponseItem>,
+        livestockContributionRankTypeEnum: LivestockContributionRankTypeEnum,
+        animalType: WgLivestockTypesEnum
+    ) {
+        val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
+        val list: RecyclerView = v.findViewById(R.id.listRv)
+
+        val ranksAdapter =
+            LivestockContributionRankAdapter(
+                contributionRanks,
+                this,
+                livestockContributionRankTypeEnum,
+                animalType
+            )
+        val gridLayoutManager = GridLayoutManager(context, 1)
+        list.layoutManager = gridLayoutManager
+        list.hasFixedSize()
+        list.adapter = ranksAdapter
+
+        openLivestockContributionRankModal(v)
+    }
+
+    private fun openLivestockContributionRankModal(v: View) {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
+        builder.setView(v)
+        builder.setCancelable(true)
+        livestockContributionRankModal = builder.create()
+        (livestockContributionRankModal as AlertDialog).setCancelable(true)
+        (livestockContributionRankModal as AlertDialog).setCanceledOnTouchOutside(true)
+        (livestockContributionRankModal as AlertDialog).window?.setBackgroundDrawable(
+            ColorDrawable(
+                Color.TRANSPARENT
+            )
+        )
+        (livestockContributionRankModal as AlertDialog).show()
+        val window = (livestockContributionRankModal as AlertDialog).window
+        window?.setLayout(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+    }
+
+
     override fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel, position: Int) {
         crops.set(position, selectedCrop)
         if (selectedCrop.hasBeenSelected) {
@@ -3232,5 +3462,165 @@ class WealthGroupDialogFragment : DialogFragment(),
                     cropContributionAdapter
             }
         }
+    }
+
+    override fun onALivestockContributionRankItemSelected(
+        selectedRankItem: RankResponseItem,
+        position: Int,
+        livestockContributionRankTypeEnum: LivestockContributionRankTypeEnum,
+        animalType: WgLivestockTypesEnum
+    ) {
+
+        if (animalType == WgLivestockTypesEnum.CATTLE) {
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.CASH_CONTRIBUTION) {
+                livestockContributionResponses.cattle.incomeRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.cattleIncomeRank.text = selectedRankItem.rankPosition.toString()
+            }
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
+                livestockContributionResponses.cattle.consumptionRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.cattleFoodRank.text = selectedRankItem.rankPosition.toString()
+            }
+        }
+
+
+        if (animalType == WgLivestockTypesEnum.GOATS) {
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.CASH_CONTRIBUTION) {
+                livestockContributionResponses.goats.incomeRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.goatsIncomeRank.text = selectedRankItem.rankPosition.toString()
+            }
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
+                livestockContributionResponses.goats.consumptionRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.goatsFoodRank.text = selectedRankItem.rankPosition.toString()
+            }
+        }
+
+        if (animalType == WgLivestockTypesEnum.SHEEP) {
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.CASH_CONTRIBUTION) {
+                livestockContributionResponses.sheep.incomeRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.sheepCashRank.text = selectedRankItem.rankPosition.toString()
+            }
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
+                livestockContributionResponses.sheep.consumptionRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.sheepFoodRank.text = selectedRankItem.rankPosition.toString()
+            }
+        }
+
+        if (animalType == WgLivestockTypesEnum.DONKEYS) {
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.CASH_CONTRIBUTION) {
+                livestockContributionResponses.donkeys.incomeRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.donkeysCashRank.text = selectedRankItem.rankPosition.toString()
+            }
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
+                livestockContributionResponses.donkeys.consumptionRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.donkeysFoodRank.text = selectedRankItem.rankPosition.toString()
+            }
+        }
+
+        if (animalType == WgLivestockTypesEnum.CAMELS) {
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.CASH_CONTRIBUTION) {
+                livestockContributionResponses.camels.incomeRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.camelsCashRank.text = selectedRankItem.rankPosition.toString()
+            }
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
+                livestockContributionResponses.camels.consumptionRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.camelsFoodRank.text = selectedRankItem.rankPosition.toString()
+            }
+        }
+
+        if (animalType == WgLivestockTypesEnum.PIGS) {
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.CASH_CONTRIBUTION) {
+                livestockContributionResponses.pigs.incomeRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.pigscashRank.text = selectedRankItem.rankPosition.toString()
+            }
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
+                livestockContributionResponses.pigs.consumptionRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.pigsFoodrank.text = selectedRankItem.rankPosition.toString()
+            }
+        }
+
+        if (animalType == WgLivestockTypesEnum.CHICKEN) {
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.CASH_CONTRIBUTION) {
+                livestockContributionResponses.chicken.incomeRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.chickenCashRank.text = selectedRankItem.rankPosition.toString()
+            }
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
+                livestockContributionResponses.chicken.consumptionRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.chickenFoodRank.text = selectedRankItem.rankPosition.toString()
+            }
+        }
+
+        if (animalType == WgLivestockTypesEnum.DUCKS) {
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.CASH_CONTRIBUTION) {
+                livestockContributionResponses.ducks.incomeRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.ducksCashRank.text = selectedRankItem.rankPosition.toString()
+            }
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
+                livestockContributionResponses.ducks.consumptionRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.ducksFoodRank.text = selectedRankItem.rankPosition.toString()
+            }
+        }
+
+        if (animalType == WgLivestockTypesEnum.BEE_HIVES) {
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.CASH_CONTRIBUTION) {
+                livestockContributionResponses.beeHives.incomeRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.beeHivesCashRank.text = selectedRankItem.rankPosition.toString()
+            }
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
+                livestockContributionResponses.beeHives.consumptionRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.beeHivesFoodrank.text = selectedRankItem.rankPosition.toString()
+            }
+        }
+
+        if (animalType == WgLivestockTypesEnum.FISH_POND) {
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.CASH_CONTRIBUTION) {
+                livestockContributionResponses.fishPonds.incomeRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.fishPondsCashRank.text = selectedRankItem.rankPosition.toString()
+            }
+            if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
+                livestockContributionResponses.fishPonds.consumptionRank.actualValue =
+                    selectedRankItem.rankPosition.toDouble()
+                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                binding.wgLivestockPoultryContribution.fishPondsFoodRank.text = selectedRankItem.rankPosition.toString()
+            }
+        }
+        (livestockContributionRankModal as AlertDialog).dismiss()
     }
 }
