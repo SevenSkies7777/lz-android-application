@@ -1815,16 +1815,26 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 livestockPoultryContributionNextButton.setOnClickListener {
 
-                    if (cattleCashPercentage.text.toString().isEmpty() || cattleFoodPercentage.text.toString().isEmpty()
-                        || goatsIncomePercentage.text.toString().isEmpty() || goatsCashPercentage.text.toString().isEmpty()
-                        || sheepCashPercentage.text.toString().isEmpty() || sheepFoodPercentage.text.toString().isEmpty()
-                        || donkeysCashPercentage.text.toString().isEmpty() || donkeysFoodPercentage.text.toString().isEmpty()
-                        || pigsCashPercentage.text.toString().isEmpty() || pigsFoodPercentage.text.toString().isEmpty()
-                        || chickenCashPaercentage.text.toString().isEmpty() || chickenFoodPercentage.text.toString().isEmpty()
-                        || camelsCashPercentage.text.toString().isEmpty() || camelsFoodPercentage.text.toString().isEmpty()
-                        || duckscashPercentage.text.toString().isEmpty() || ducksFoodPercentage.text.toString().isEmpty()
-                        || beeHivesCashPercentage.text.toString().isEmpty() || beeHivesFoodPercentage.text.toString().isEmpty()
-                        || fishPondscashPercentage.text.toString().isEmpty() || fishPondsFoodPercentage.text.toString().isEmpty()
+                    if (cattleCashPercentage.text.toString()
+                            .isEmpty() || cattleFoodPercentage.text.toString().isEmpty()
+                        || goatsIncomePercentage.text.toString()
+                            .isEmpty() || goatsFoodPercentage.text.toString().isEmpty()
+                        || sheepCashPercentage.text.toString()
+                            .isEmpty() || sheepFoodPercentage.text.toString().isEmpty()
+                        || donkeysCashPercentage.text.toString()
+                            .isEmpty() || donkeysFoodPercentage.text.toString().isEmpty()
+                        || pigsCashPercentage.text.toString()
+                            .isEmpty() || pigsFoodPercentage.text.toString().isEmpty()
+                        || chickenCashPaercentage.text.toString()
+                            .isEmpty() || chickenFoodPercentage.text.toString().isEmpty()
+                        || camelsCashPercentage.text.toString()
+                            .isEmpty() || camelsFoodPercentage.text.toString().isEmpty()
+                        || duckscashPercentage.text.toString()
+                            .isEmpty() || ducksFoodPercentage.text.toString().isEmpty()
+                        || beeHivesCashPercentage.text.toString()
+                            .isEmpty() || beeHivesFoodPercentage.text.toString().isEmpty()
+                        || fishPondscashPercentage.text.toString()
+                            .isEmpty() || fishPondsFoodPercentage.text.toString().isEmpty()
                         || !livestockContributionResponses.cattle.incomeRank.hasBeenSubmitted || !livestockContributionResponses.cattle.consumptionRank.hasBeenSubmitted
                         || !livestockContributionResponses.goats.incomeRank.hasBeenSubmitted || !livestockContributionResponses.goats.consumptionRank.hasBeenSubmitted
                         || !livestockContributionResponses.sheep.incomeRank.hasBeenSubmitted || !livestockContributionResponses.sheep.consumptionRank.hasBeenSubmitted
@@ -1834,47 +1844,76 @@ class WealthGroupDialogFragment : DialogFragment(),
                         || !livestockContributionResponses.camels.incomeRank.hasBeenSubmitted || !livestockContributionResponses.camels.consumptionRank.hasBeenSubmitted
                         || !livestockContributionResponses.ducks.incomeRank.hasBeenSubmitted || !livestockContributionResponses.ducks.consumptionRank.hasBeenSubmitted
                         || !livestockContributionResponses.beeHives.incomeRank.hasBeenSubmitted || !livestockContributionResponses.beeHives.consumptionRank.hasBeenSubmitted
-                        || !livestockContributionResponses.fishPonds.incomeRank.hasBeenSubmitted || !livestockContributionResponses.fishPonds.consumptionRank.hasBeenSubmitted) {
+                        || !livestockContributionResponses.fishPonds.incomeRank.hasBeenSubmitted || !livestockContributionResponses.fishPonds.consumptionRank.hasBeenSubmitted
+                    ) {
 
                         inflateErrorModal("Data error", "Kindly input all the empty fields")
 
                     } else {
 
-                        livestockContributionResponses.cattle.incomePercentage.actualValue = cattleCashPercentage.text.toString().toDouble()
-                        livestockContributionResponses.cattle.consumptionPercentage.actualValue = cattleFoodPercentage.text.toString().toDouble()
+                        if (doesLivestockCashContributionColumnHaveAPercentageError().hasAValidationError) {
+                            inflateErrorModal("Percentage error", doesLivestockCashContributionColumnHaveAPercentageError().validationMessage)
+                        } else if (doesLivestockFoodConsumptionContributionColumnHaveAPercentageError().hasAValidationError) {
+                            inflateErrorModal("Percentage error", doesLivestockFoodConsumptionContributionColumnHaveAPercentageError().validationMessage)
+                        } else {
 
-                        livestockContributionResponses.goats.incomePercentage.actualValue = goatsIncomePercentage.text.toString().toDouble()
-                        livestockContributionResponses.goats.consumptionPercentage.actualValue = goatsCashPercentage.text.toString().toDouble()
+                            livestockContributionResponses.cattle.incomePercentage.actualValue =
+                                cattleCashPercentage.text.toString().toDouble()
+                            livestockContributionResponses.cattle.consumptionPercentage.actualValue =
+                                cattleFoodPercentage.text.toString().toDouble()
 
-                        livestockContributionResponses.sheep.incomePercentage.actualValue = sheepCashPercentage.text.toString().toDouble()
-                        livestockContributionResponses.sheep.consumptionPercentage.actualValue = sheepFoodPercentage.text.toString().toDouble()
+                            livestockContributionResponses.goats.incomePercentage.actualValue =
+                                goatsIncomePercentage.text.toString().toDouble()
+                            livestockContributionResponses.goats.consumptionPercentage.actualValue =
+                                goatsFoodPercentage.text.toString().toDouble()
 
-                        livestockContributionResponses.donkeys.incomePercentage.actualValue = donkeysCashPercentage.text.toString().toDouble()
-                        livestockContributionResponses.donkeys.consumptionPercentage.actualValue = donkeysFoodPercentage.text.toString().toDouble()
+                            livestockContributionResponses.sheep.incomePercentage.actualValue =
+                                sheepCashPercentage.text.toString().toDouble()
+                            livestockContributionResponses.sheep.consumptionPercentage.actualValue =
+                                sheepFoodPercentage.text.toString().toDouble()
 
-                        livestockContributionResponses.pigs.incomePercentage.actualValue = pigsCashPercentage.text.toString().toDouble()
-                        livestockContributionResponses.pigs.consumptionPercentage.actualValue = pigsFoodPercentage.text.toString().toDouble()
+                            livestockContributionResponses.donkeys.incomePercentage.actualValue =
+                                donkeysCashPercentage.text.toString().toDouble()
+                            livestockContributionResponses.donkeys.consumptionPercentage.actualValue =
+                                donkeysFoodPercentage.text.toString().toDouble()
 
-                        livestockContributionResponses.chicken.incomePercentage.actualValue = chickenCashPaercentage.text.toString().toDouble()
-                        livestockContributionResponses.chicken.consumptionPercentage.actualValue = chickenFoodPercentage.text.toString().toDouble()
+                            livestockContributionResponses.pigs.incomePercentage.actualValue =
+                                pigsCashPercentage.text.toString().toDouble()
+                            livestockContributionResponses.pigs.consumptionPercentage.actualValue =
+                                pigsFoodPercentage.text.toString().toDouble()
 
-                        livestockContributionResponses.camels.incomePercentage.actualValue = camelsCashPercentage.text.toString().toDouble()
-                        livestockContributionResponses.camels.consumptionPercentage.actualValue = camelsFoodPercentage.text.toString().toDouble()
+                            livestockContributionResponses.chicken.incomePercentage.actualValue =
+                                chickenCashPaercentage.text.toString().toDouble()
+                            livestockContributionResponses.chicken.consumptionPercentage.actualValue =
+                                chickenFoodPercentage.text.toString().toDouble()
 
-                        livestockContributionResponses.ducks.incomePercentage.actualValue = duckscashPercentage.text.toString().toDouble()
-                        livestockContributionResponses.ducks.consumptionPercentage.actualValue = ducksFoodPercentage.text.toString().toDouble()
+                            livestockContributionResponses.camels.incomePercentage.actualValue =
+                                camelsCashPercentage.text.toString().toDouble()
+                            livestockContributionResponses.camels.consumptionPercentage.actualValue =
+                                camelsFoodPercentage.text.toString().toDouble()
 
-                        livestockContributionResponses.beeHives.incomePercentage.actualValue = beeHivesCashPercentage.text.toString().toDouble()
-                        livestockContributionResponses.beeHives.consumptionPercentage.actualValue = beeHivesFoodPercentage.text.toString().toDouble()
+                            livestockContributionResponses.ducks.incomePercentage.actualValue =
+                                duckscashPercentage.text.toString().toDouble()
+                            livestockContributionResponses.ducks.consumptionPercentage.actualValue =
+                                ducksFoodPercentage.text.toString().toDouble()
 
-                        livestockContributionResponses.fishPonds.incomePercentage.actualValue = fishPondscashPercentage.text.toString().toDouble()
-                        livestockContributionResponses.fishPonds.consumptionPercentage.actualValue = fishPondsFoodPercentage.text.toString().toDouble()
+                            livestockContributionResponses.beeHives.incomePercentage.actualValue =
+                                beeHivesCashPercentage.text.toString().toDouble()
+                            livestockContributionResponses.beeHives.consumptionPercentage.actualValue =
+                                beeHivesFoodPercentage.text.toString().toDouble()
 
-                        wealthGroupQuestionnaire.livestockContributionResponses =
-                            livestockContributionResponses
+                            livestockContributionResponses.fishPonds.incomePercentage.actualValue =
+                                fishPondscashPercentage.text.toString().toDouble()
+                            livestockContributionResponses.fishPonds.consumptionPercentage.actualValue =
+                                fishPondsFoodPercentage.text.toString().toDouble()
 
-                        wgLabourPatterns.root.visibility = View.VISIBLE
-                        wgLivestockPoultryContribution.root.visibility = View.GONE
+                            wealthGroupQuestionnaire.livestockContributionResponses =
+                                livestockContributionResponses
+
+                            wgLabourPatterns.root.visibility = View.VISIBLE
+                            wgLivestockPoultryContribution.root.visibility = View.GONE
+
+                        }
 
                     }
                 }
@@ -3214,6 +3253,13 @@ class WealthGroupDialogFragment : DialogFragment(),
         return inputString
     }
 
+    private fun returnZeroDoubleIfEmpty(inputString: String): Double {
+        if (inputString.isNullOrEmpty()) {
+            return 0.0
+        }
+        return inputString.toDouble()
+    }
+
     private fun isAnyCropProductionFieldEmpty(): Boolean {
         for (currentResponseItem in cropProductionResponseItems) {
             if (isAnyValueEmpty(currentResponseItem)) {
@@ -3463,14 +3509,16 @@ class WealthGroupDialogFragment : DialogFragment(),
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.cattle.incomeRank.hasBeenSubmitted = true
                 livestockCashIncomeContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.cattleIncomeRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.cattleIncomeRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
             if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
                 livestockContributionResponses.cattle.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.cattle.consumptionRank.hasBeenSubmitted = true
                 livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.cattleFoodRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.cattleFoodRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
         }
 
@@ -3481,14 +3529,16 @@ class WealthGroupDialogFragment : DialogFragment(),
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.goats.incomeRank.hasBeenSubmitted = true
                 livestockCashIncomeContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.goatsIncomeRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.goatsIncomeRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
             if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
                 livestockContributionResponses.goats.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.goats.consumptionRank.hasBeenSubmitted = true
                 livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.goatsFoodRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.goatsFoodRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
         }
 
@@ -3498,14 +3548,16 @@ class WealthGroupDialogFragment : DialogFragment(),
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.sheep.incomeRank.hasBeenSubmitted = true
                 livestockCashIncomeContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.sheepCashRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.sheepCashRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
             if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
                 livestockContributionResponses.sheep.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.sheep.consumptionRank.hasBeenSubmitted = true
                 livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.sheepFoodRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.sheepFoodRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
         }
 
@@ -3515,14 +3567,16 @@ class WealthGroupDialogFragment : DialogFragment(),
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.donkeys.incomeRank.hasBeenSubmitted = true
                 livestockCashIncomeContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.donkeysCashRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.donkeysCashRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
             if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
                 livestockContributionResponses.donkeys.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.donkeys.consumptionRank.hasBeenSubmitted = true
                 livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.donkeysFoodRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.donkeysFoodRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
         }
 
@@ -3532,14 +3586,16 @@ class WealthGroupDialogFragment : DialogFragment(),
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.camels.incomeRank.hasBeenSubmitted = true
                 livestockCashIncomeContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.camelsCashRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.camelsCashRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
             if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
                 livestockContributionResponses.camels.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.camels.consumptionRank.hasBeenSubmitted = true
                 livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.camelsFoodRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.camelsFoodRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
         }
 
@@ -3549,14 +3605,16 @@ class WealthGroupDialogFragment : DialogFragment(),
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.pigs.incomeRank.hasBeenSubmitted = true
                 livestockCashIncomeContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.pigscashRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.pigscashRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
             if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
                 livestockContributionResponses.pigs.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.pigs.consumptionRank.hasBeenSubmitted = true
                 livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.pigsFoodrank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.pigsFoodrank.text =
+                    selectedRankItem.rankPosition.toString()
             }
         }
 
@@ -3566,14 +3624,16 @@ class WealthGroupDialogFragment : DialogFragment(),
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.chicken.incomeRank.hasBeenSubmitted = true
                 livestockCashIncomeContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.chickenCashRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.chickenCashRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
             if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
                 livestockContributionResponses.chicken.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.chicken.consumptionRank.hasBeenSubmitted = true
                 livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.chickenFoodRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.chickenFoodRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
         }
 
@@ -3583,14 +3643,16 @@ class WealthGroupDialogFragment : DialogFragment(),
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.ducks.incomeRank.hasBeenSubmitted = true
                 livestockCashIncomeContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.ducksCashRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.ducksCashRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
             if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
                 livestockContributionResponses.ducks.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.ducks.consumptionRank.hasBeenSubmitted = true
                 livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.ducksFoodRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.ducksFoodRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
         }
 
@@ -3600,14 +3662,16 @@ class WealthGroupDialogFragment : DialogFragment(),
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.beeHives.incomeRank.hasBeenSubmitted = true
                 livestockCashIncomeContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.beeHivesCashRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.beeHivesCashRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
             if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
                 livestockContributionResponses.beeHives.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.beeHives.consumptionRank.hasBeenSubmitted = true
                 livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.beeHivesFoodrank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.beeHivesFoodrank.text =
+                    selectedRankItem.rankPosition.toString()
             }
         }
 
@@ -3617,16 +3681,75 @@ class WealthGroupDialogFragment : DialogFragment(),
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.fishPonds.incomeRank.hasBeenSubmitted = true
                 livestockCashIncomeContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.fishPondsCashRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.fishPondsCashRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
             if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
                 livestockContributionResponses.fishPonds.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.fishPonds.consumptionRank.hasBeenSubmitted = true
                 livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
-                binding.wgLivestockPoultryContribution.fishPondsFoodRank.text = selectedRankItem.rankPosition.toString()
+                binding.wgLivestockPoultryContribution.fishPondsFoodRank.text =
+                    selectedRankItem.rankPosition.toString()
             }
         }
         (livestockContributionRankModal as AlertDialog).dismiss()
     }
+
+    fun doesLivestockCashContributionColumnHaveAPercentageError(): ValidationResponseObject {
+        binding.apply {
+
+            wgLivestockPoultryContribution.apply {
+                val totalValue =
+                    returnZeroDoubleIfEmpty(cattleCashPercentage.text.toString()) + returnZeroDoubleIfEmpty(
+                        goatsIncomePercentage.text.toString()
+                    ) + returnZeroDoubleIfEmpty(sheepCashPercentage.text.toString()) + returnZeroDoubleIfEmpty(
+                        donkeysCashPercentage.text.toString()
+                    ) + returnZeroDoubleIfEmpty(pigsCashPercentage.text.toString()) + returnZeroDoubleIfEmpty(
+                        chickenCashPaercentage.text.toString()
+                    ) + returnZeroDoubleIfEmpty(camelsCashPercentage.text.toString()) + returnZeroDoubleIfEmpty(
+                        duckscashPercentage.text.toString()
+                    ) + returnZeroDoubleIfEmpty(beeHivesCashPercentage.text.toString()) + returnZeroDoubleIfEmpty(
+                        fishPondscashPercentage.text.toString()
+                    )
+
+                return ValidationResponseObject(
+                    totalValue != 100.0,
+                    "Total inputted percentage for livestock cash contribution column is ${if (totalValue > 100) "greater than" else "less than"} 100% by ${abs(
+                        100 - totalValue
+                    )}"
+                )
+            }
+
+        }
+    }
+
+    fun doesLivestockFoodConsumptionContributionColumnHaveAPercentageError(): ValidationResponseObject {
+        binding.apply {
+
+            wgLivestockPoultryContribution.apply {
+                val totalValue =
+                    returnZeroDoubleIfEmpty(
+                        cattleFoodPercentage.text.toString()
+                    ) + returnZeroDoubleIfEmpty(goatsFoodPercentage.text.toString()) + returnZeroDoubleIfEmpty(
+                        sheepFoodPercentage.text.toString()
+                    ) + returnZeroDoubleIfEmpty(donkeysFoodPercentage.text.toString()) + returnZeroDoubleIfEmpty(
+                        pigsFoodPercentage.text.toString()
+                    ) + returnZeroDoubleIfEmpty(chickenFoodPercentage.text.toString()) + returnZeroDoubleIfEmpty(
+                        camelsFoodPercentage.text.toString()
+                    ) + returnZeroDoubleIfEmpty(ducksFoodPercentage.text.toString()) + returnZeroDoubleIfEmpty(
+                        beeHivesFoodPercentage.text.toString()
+                    ) + returnZeroDoubleIfEmpty(fishPondsFoodPercentage.text.toString())
+
+                return ValidationResponseObject(
+                    totalValue != 100.0,
+                    "Total inputted percentage for livestock food consumption contribution is ${if (totalValue > 100) "greater than" else "less than"} 100% by ${abs(
+                        100 - totalValue
+                    )}"
+                )
+            }
+
+        }
+    }
+
 }
