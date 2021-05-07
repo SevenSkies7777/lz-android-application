@@ -73,7 +73,8 @@ class CountyLevelFragment : DialogFragment(),
     MarketTransactionsAdapter.MarketTransactionsAdapterCallBack,
     CropSelectionListAdapter.CropSelectionListAdapterCallBack,
     CropProductionListAdapter.CropProductionListAdapterCallBack,
-    TribesListViewAdapter.TribesListViewAdapterCallBack, HazardsRankingAdapter.HazardsRankingAdapterCallBack {
+    TribesListViewAdapter.TribesListViewAdapterCallBack,
+    HazardsRankingAdapter.HazardsRankingAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -596,8 +597,6 @@ class CountyLevelFragment : DialogFragment(),
                 othersWetSeason.addTextChangedListener(wetSeasonTextWatcher)
 
 
-
-
                 val drySeasonTextWatcher = object : TextWatcher {
                     override fun afterTextChanged(editable: Editable?) {
                         Handler(Looper.getMainLooper()).postDelayed({
@@ -842,10 +841,11 @@ class CountyLevelFragment : DialogFragment(),
                                 returnZeroStringIfEmpty(riversDrySeason.text.toString()).toDouble()
                             )
 
-                            waterSourceResponses.traditionalRiversWells = WaterDependenceResponseItem(
-                                returnZeroStringIfEmpty(traditionalRiversWellsWetSeason.text.toString()).toDouble(),
-                                returnZeroStringIfEmpty(traditionalRiversWellsDrySeason.text.toString()).toDouble()
-                            )
+                            waterSourceResponses.traditionalRiversWells =
+                                WaterDependenceResponseItem(
+                                    returnZeroStringIfEmpty(traditionalRiversWellsWetSeason.text.toString()).toDouble(),
+                                    returnZeroStringIfEmpty(traditionalRiversWellsDrySeason.text.toString()).toDouble()
+                                )
 
                             waterSourceResponses.naturalPonds = WaterDependenceResponseItem(
                                 returnZeroStringIfEmpty(naturalPondsWetSeason.text.toString()).toDouble(),
@@ -908,9 +908,15 @@ class CountyLevelFragment : DialogFragment(),
                             marketGeographyConfiguration.root.visibility = View.VISIBLE
 
                         } else if (wetSeasonTotalEntry < 100) {
-                            inflateErrorModal("Percentage Error","Wet season total entriesare less than 100% by ${100 - wetSeasonTotalEntry}")
+                            inflateErrorModal(
+                                "Percentage Error",
+                                "Wet season total entriesare less than 100% by ${100 - wetSeasonTotalEntry}"
+                            )
                         } else if (drySeasonTotalEntry < 100) {
-                           inflateErrorModal("Percentage Error", "Dry season total entries are less than 100% by ${100 - drySeasonTotalEntry}")
+                            inflateErrorModal(
+                                "Percentage Error",
+                                "Dry season total entries are less than 100% by ${100 - drySeasonTotalEntry}"
+                            )
                         }
 
                     }
@@ -1397,131 +1403,156 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
 
+                val textWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
 
 
+                            if (editable.toString().isNotEmpty()) {
+                                if (editable.toString().toDouble() > 10.0) {
+                                    errorDialog?.isShowing?.let { isDialogShowing ->
+                                        if (isDialogShowing) {
+                                            return@postDelayed
+                                        }
+                                    }
+                                    inflateErrorModal("Data error", "Number of years cannot be greater than 10")
+                                }
+                                if (editable.toString().toDouble() < 0.0) {
+                                    errorDialog?.isShowing?.let { isDialogShowing ->
+                                        if (isDialogShowing) {
+                                            return@postDelayed
+                                        }
+                                    }
+                                    inflateErrorModal("Data error", "Number of years cannot be less than 0")
+                                }
+                            }
 
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+                }
+
+
+                animalRustlingNoOfYears.addTextChangedListener(textWatcher)
+                banditryNoOfYears.addTextChangedListener(textWatcher)
+                terrorismNoOfYears.addTextChangedListener(textWatcher)
+                ethicConflictNoOfYears.addTextChangedListener(textWatcher)
+                politicalViolenceNoOfYears.addTextChangedListener(textWatcher)
+                droughtNoOfYears.addTextChangedListener(textWatcher)
+                pestAndDiseaseNoOfYears.addTextChangedListener(textWatcher)
+                hailstormsOrFrostNoOfYears.addTextChangedListener(textWatcher)
+                floodingNoOfYears.addTextChangedListener(textWatcher)
+                landslidesNoOfYears.addTextChangedListener(textWatcher)
+                windsOrCycloneNoOfYears.addTextChangedListener(textWatcher)
+                bushFiresNoOfYears.addTextChangedListener(textWatcher)
+                cropPestsNoOfYears.addTextChangedListener(textWatcher)
+                locustInvasionNoOfYears.addTextChangedListener(textWatcher)
+                cropDiseasesNoOfYears.addTextChangedListener(textWatcher)
+                terminalIllnessNoOfYears.addTextChangedListener(textWatcher)
+                malariaOutbreakNoOfYears.addTextChangedListener(textWatcher)
+                waterBorneDiseaseNoOfYears.addTextChangedListener(textWatcher)
+                humanWildlifeConflictNoOfYears.addTextChangedListener(textWatcher)
+                highFoodPriceNoOfYears.addTextChangedListener(textWatcher)
+                foodShortageNoOfYears.addTextChangedListener(textWatcher)
+                drinkingWaterShortageNoOfYears.addTextChangedListener(textWatcher)
+                othersNoOfYears.addTextChangedListener(textWatcher)
 
                 hazardNextButton.setOnClickListener {
 
-                    hazardResponses.animalRustling = HazardResponseItem(
-                        returnZeroStringIfEmpty(animalRustlingRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(animalRustlingNoOfYears.text.toString()).toDouble()
-                    )
+                    if (animalRustlingNoOfYears.text.toString()
+                            .isNotEmpty() && banditryNoOfYears.text.toString()
+                            .isNotEmpty() && terrorismNoOfYears.text.toString()
+                            .isNotEmpty() && ethicConflictNoOfYears.text.toString()
+                            .isNotEmpty() && politicalViolenceNoOfYears.text.toString()
+                            .isNotEmpty() && droughtNoOfYears.text.toString()
+                            .isNotEmpty() && pestAndDiseaseNoOfYears.text.toString()
+                            .isNotEmpty() && hailstormsOrFrostNoOfYears.text.toString()
+                            .isNotEmpty() && floodingNoOfYears.text.toString()
+                            .isNotEmpty() && landslidesNoOfYears.text.toString()
+                            .isNotEmpty() && windsOrCycloneNoOfYears.text.toString()
+                            .isNotEmpty() && bushFiresNoOfYears.text.toString()
+                            .isNotEmpty() && cropPestsNoOfYears.text.toString()
+                            .isNotEmpty() && locustInvasionNoOfYears.text.toString()
+                            .isNotEmpty() && cropDiseasesNoOfYears.text.toString()
+                            .isNotEmpty() && terminalIllnessNoOfYears.text.toString()
+                            .isNotEmpty() && malariaOutbreakNoOfYears.text.toString()
+                            .isNotEmpty() && waterBorneDiseaseNoOfYears.text.toString()
+                            .isNotEmpty() && humanWildlifeConflictNoOfYears.text.toString()
+                            .isNotEmpty() && highFoodPriceNoOfYears.text.toString()
+                            .isNotEmpty() && foodShortageNoOfYears.text.toString()
+                            .isNotEmpty() && drinkingWaterShortageNoOfYears.text.toString()
+                            .isNotEmpty() && othersNoOfYears.text.toString()
+                            .isNotEmpty() && hazardResponses.animalRustling.importanceRank != 0
+                        && hazardResponses.banditry.importanceRank != 0
+                        && hazardResponses.terrorism.importanceRank != 0
+                        && hazardResponses.ethnicConflict.importanceRank != 0
+                        && hazardResponses.ethnicConflict.importanceRank != 0
+                        && hazardResponses.politicalViolence.importanceRank != 0
+                        && hazardResponses.drought.importanceRank != 0
+                        && hazardResponses.livestockPestsAndDiseases.importanceRank != 0
+                        && hazardResponses.hailstormsOrFrost.importanceRank != 0
+                        && hazardResponses.flooding.importanceRank != 0
+                        && hazardResponses.landslides.importanceRank != 0
+                        && hazardResponses.highWindsOrCyclones.importanceRank != 0
+                        && hazardResponses.bushFires.importanceRank != 0
+                        && hazardResponses.cropPests.importanceRank != 0
+                        && hazardResponses.locustInvasion.importanceRank != 0
+                        && hazardResponses.cropDiseases.importanceRank != 0
+                        && hazardResponses.terminalIllnesses.importanceRank != 0
+                        && hazardResponses.malariaPowerOutBreak.importanceRank != 0
+                        && hazardResponses.waterBornDiseases.importanceRank != 0
+                        && hazardResponses.humanWildlifeConflict.importanceRank != 0
+                        && hazardResponses.highFoodPrices.importanceRank != 0
+                        && hazardResponses.marketFoodShortages.importanceRank != 0
+                        && hazardResponses.drinkingWaterShortages.importanceRank != 0
+                        && hazardResponses.others.importanceRank != 0
+                    ) {
+                        hazardResponses.animalRustling.noExperiencedYears = animalRustlingNoOfYears.text.toString().toDouble()
+                        hazardResponses.banditry.noExperiencedYears = banditryNoOfYears.text.toString().toDouble()
+                        hazardResponses.terrorism.noExperiencedYears = terrorismNoOfYears.text.toString().toDouble()
+                        hazardResponses.ethnicConflict.noExperiencedYears = ethicConflictNoOfYears.text.toString().toDouble()
+                        hazardResponses.politicalViolence.noExperiencedYears = politicalViolenceNoOfYears.text.toString().toDouble()
+                        hazardResponses.drought.noExperiencedYears = droughtNoOfYears.text.toString().toDouble()
+                        hazardResponses.livestockPestsAndDiseases.noExperiencedYears = pestAndDiseaseNoOfYears.text.toString().toDouble()
+                        hazardResponses.hailstormsOrFrost.noExperiencedYears = hailstormsOrFrostNoOfYears.text.toString().toDouble()
+                        hazardResponses.flooding.noExperiencedYears = floodingNoOfYears.text.toString().toDouble()
+                        hazardResponses.landslides.noExperiencedYears = landslidesNoOfYears.text.toString().toDouble()
+                        hazardResponses.highWindsOrCyclones.noExperiencedYears = windsOrCycloneNoOfYears.text.toString().toDouble()
+                        hazardResponses.bushFires.noExperiencedYears = bushFiresNoOfYears.text.toString().toDouble()
+                        hazardResponses.cropPests.noExperiencedYears = cropPestsNoOfYears.text.toString().toDouble()
+                        hazardResponses.locustInvasion.noExperiencedYears = locustInvasionNoOfYears.text.toString().toDouble()
+                        hazardResponses.cropDiseases.noExperiencedYears = cropDiseasesNoOfYears.text.toString().toDouble()
+                        hazardResponses.terminalIllnesses.noExperiencedYears = terminalIllnessNoOfYears.text.toString().toDouble()
+                        hazardResponses.malariaPowerOutBreak.noExperiencedYears = malariaOutbreakNoOfYears.text.toString().toDouble()
+                        hazardResponses.waterBornDiseases.noExperiencedYears = waterBorneDiseaseNoOfYears.text.toString().toDouble()
+                        hazardResponses.humanWildlifeConflict.noExperiencedYears = humanWildlifeConflictNoOfYears.text.toString().toDouble()
+                        hazardResponses.highFoodPrices.noExperiencedYears = highFoodPriceNoOfYears.text.toString().toDouble()
+                        hazardResponses.marketFoodShortages.noExperiencedYears = foodShortageNoOfYears.text.toString().toDouble()
+                        hazardResponses.drinkingWaterShortages.noExperiencedYears = drinkingWaterShortageNoOfYears.text.toString().toDouble()
+                        hazardResponses.others.noExperiencedYears = othersNoOfYears.text.toString().toDouble()
 
-                    hazardResponses.banditry = HazardResponseItem(
-                        returnZeroStringIfEmpty(banditryRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(banditryNoOfYears.text.toString()).toDouble()
-                    )
+                        countyLevelQuestionnaire.hazardResponses = hazardResponses
 
-                    hazardResponses.terrorism = HazardResponseItem(
-                        returnZeroStringIfEmpty(terrorismRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(terrorismNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.ethnicConflict = HazardResponseItem(
-                        returnZeroStringIfEmpty(ethicConflictRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(ethicConflictNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.politicalViolence = HazardResponseItem(
-                        returnZeroStringIfEmpty(politicalViolenceRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(politicalViolenceNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.drought = HazardResponseItem(
-                        returnZeroStringIfEmpty(droughtRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(droughtNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.livestockPestsAndDiseases = HazardResponseItem(
-                        returnZeroStringIfEmpty(pestAndDiseaseRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(pestAndDiseaseNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.hailstormsOrFrost = HazardResponseItem(
-                        returnZeroStringIfEmpty(hailstormsOrFrostRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(hailstormsOrFrostNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.flooding = HazardResponseItem(
-                        returnZeroStringIfEmpty(floodingRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(floodingNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.landslides = HazardResponseItem(
-                        returnZeroStringIfEmpty(landslidesRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(landslidesNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.highWindsOrCyclones = HazardResponseItem(
-                        returnZeroStringIfEmpty(windsOrCycloneRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(windsOrCycloneNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.bushFires = HazardResponseItem(
-                        returnZeroStringIfEmpty(bushFiresRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(bushFiresRank.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.cropPests = HazardResponseItem(
-                        returnZeroStringIfEmpty(cropPestsRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(cropPestsNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.locustInvasion = HazardResponseItem(
-                        returnZeroStringIfEmpty(locustInvasionRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(locustInvasionNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.cropDiseases = HazardResponseItem(
-                        returnZeroStringIfEmpty(cropDiseasesRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(cropDiseasesNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.terminalIllnesses = HazardResponseItem(
-                        returnZeroStringIfEmpty(terminalIllnessRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(terminalIllnessNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.malariaPowerOutBreak = HazardResponseItem(
-                        returnZeroStringIfEmpty(malariaOutbreakRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(malariaOutbreakNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.waterBornDiseases = HazardResponseItem(
-                        returnZeroStringIfEmpty(waterBorneDiseaseRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(waterBorneDiseaseNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.humanWildlifeConflict = HazardResponseItem(
-                        returnZeroStringIfEmpty(humanWildlifeConflictRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(humanWildlifeConflictNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.highFoodPrices = HazardResponseItem(
-                        returnZeroStringIfEmpty(highFoodPriceRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(highFoodPriceNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.marketFoodShortages = HazardResponseItem(
-                        returnZeroStringIfEmpty(foodShortageRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(foodShortageNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.drinkingWaterShortages = HazardResponseItem(
-                        returnZeroStringIfEmpty(drinkingWaterShortageRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(drinkingWaterShortageNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.others = HazardResponseItem(
-                        returnZeroStringIfEmpty(othersRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(othersNoOfYears.text.toString()).toDouble()
-                    )
-
-                    countyLevelQuestionnaire.hazardResponses = hazardResponses
-
-                    lzSeasonsCalendar.root.visibility = View.VISIBLE
-                    lzHazards.root.visibility = View.GONE
+                        lzSeasonsCalendar.root.visibility = View.VISIBLE
+                        lzHazards.root.visibility = View.GONE
+                    } else {
+                        inflateErrorModal("Missing data", "Kindly fill out all the missing data")
+                    }
                 }
             }
 
@@ -1836,93 +1867,210 @@ class CountyLevelFragment : DialogFragment(),
                     } else if (lzSeasonsResponses.shortRains.isEmpty()) {
                         inflateErrorModal("Data error", "Short rains season has no months selected")
                     } else if (lzSeasonsResponses.maizeLandPreparation.isEmpty()) {
-                        inflateErrorModal("Data error", "Maize land preparation season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Maize land preparation season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.cassavaLandPreparation.isEmpty()) {
-                        inflateErrorModal("Data error", "Cassava land preparation season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Cassava land preparation season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.riceLandPreparation.isEmpty()) {
-                        inflateErrorModal("Data error", "Rice land preparation season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Rice land preparation season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.sorghumLandPreparation.isEmpty()) {
-                        inflateErrorModal("Data error", "Sorghum land preparation season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Sorghum land preparation season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.legumesLandPreparation.isEmpty()) {
-                        inflateErrorModal("Data error", "Legumes land preparation season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Legumes land preparation season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.maizePlanting.isEmpty()) {
-                        inflateErrorModal("Data error", "Maize planting season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Maize planting season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.cassavaPlanting.isEmpty()) {
-                        inflateErrorModal("Data error", "Cassava planting season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Cassava planting season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.ricePlanting.isEmpty()) {
-                        inflateErrorModal("Data error", "Rice planting season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Rice planting season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.sorghumPlanting.isEmpty()) {
-                        inflateErrorModal("Data error", "Sorghum planting season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Sorghum planting season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.legumesPlanting.isEmpty()) {
-                        inflateErrorModal("Data error", "Legumes planting season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Legumes planting season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.maizeHarvesting.isEmpty()) {
-                        inflateErrorModal("Data error", "Maize harvesting season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Maize harvesting season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.cassavaHarvesting.isEmpty()) {
-                        inflateErrorModal("Data error", "Cassava harvesting season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Cassava harvesting season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.riceHarvesting.isEmpty()) {
-                        inflateErrorModal("Data error", "Rice harvesting season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Rice harvesting season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.sorghumHarvesting.isEmpty()) {
-                        inflateErrorModal("Data error", "Sorghum harvesting season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Sorghum harvesting season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.legumesHarvesting.isEmpty()) {
-                        inflateErrorModal("Data error", "Legumes harvesting season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Legumes harvesting season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.livestockInMigration.isEmpty()) {
-                        inflateErrorModal("Data error", "Livestock in-migration season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Livestock in-migration season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.livestockOutMigration.isEmpty()) {
-                        inflateErrorModal("Data error", "Livestock out-migration season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Livestock out-migration season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.highMilkProduction.isEmpty()) {
-                        inflateErrorModal("Data error", "High milk production season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "High milk production season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.lowMilkProduction.isEmpty()) {
-                        inflateErrorModal("Data error", "Low milk production season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Low milk production season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.highCalving.isEmpty()) {
-                        inflateErrorModal("Data error", "High calving season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "High calving season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.lowCalving.isEmpty()) {
                         inflateErrorModal("Data error", "Low calving season has no months selected")
                     } else if (lzSeasonsResponses.highKidding.isEmpty()) {
-                        inflateErrorModal("Data error", "High kidding season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "High kidding season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.lowKidding.isEmpty()) {
                         inflateErrorModal("Data error", "Low kidding season has no months selected")
                     } else if (lzSeasonsResponses.highFoodPrices.isEmpty()) {
-                        inflateErrorModal("Data error", "High food prices season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "High food prices season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.lowFoodPrices.isEmpty()) {
-                        inflateErrorModal("Data error", "Low food prices season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Low food prices season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.highLivestockPrices.isEmpty()) {
-                        inflateErrorModal("Data error", "High livestock prices season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "High livestock prices season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.lowLivestockPrices.isEmpty()) {
-                        inflateErrorModal("Data error", "Low livestock prices season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Low livestock prices season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.highCasualLabourAvailability.isEmpty()) {
-                        inflateErrorModal("Data error", "High casual labour availability season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "High casual labour availability season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.lowCasualLabourAvailability.isEmpty()) {
-                        inflateErrorModal("Data error", "Low casual labour availability season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Low casual labour availability season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.highCasualLabourWages.isEmpty()) {
-                        inflateErrorModal("Data error", "High casual labour wages season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "High casual labour wages season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.lowCasualLabourWages.isEmpty()) {
-                        inflateErrorModal("Data error", "Low casual labour wages season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Low casual labour wages season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.highRemittances.isEmpty()) {
-                        inflateErrorModal("Data error", "High remittances season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "High remittances season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.lowRemittances.isEmpty()) {
-                        inflateErrorModal("Data error", "Low remittances season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Low remittances season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.highFish.isEmpty()) {
                         inflateErrorModal("Data error", "High fish season has no months selected")
                     } else if (lzSeasonsResponses.lowFish.isEmpty()) {
                         inflateErrorModal("Data error", "Low fish season has no months selected")
                     } else if (lzSeasonsResponses.highMarketAccess.isEmpty()) {
-                        inflateErrorModal("Data error", "High market access season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "High market access season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.lowMarketAccess.isEmpty()) {
-                        inflateErrorModal("Data error", "Low market access season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Low market access season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.highDiseaseOutbreak.isEmpty()) {
-                        inflateErrorModal("Data error", "High disease outbreak season season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "High disease outbreak season season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.lowDiseaseOutbreak.isEmpty()) {
-                        inflateErrorModal("Data error", "Low disease outbreak season season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Low disease outbreak season season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.waterStress.isEmpty()) {
-                        inflateErrorModal("Data error", "Water stress season season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Water stress season season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.conflictRisks.isEmpty()) {
-                        inflateErrorModal("Data error", "Conflict risk season season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Conflict risk season season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.ceremonies.isEmpty()) {
-                        inflateErrorModal("Data error", "Ceremonies season season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Ceremonies season season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.leanSeasons.isEmpty()) {
                         inflateErrorModal("Data error", "Lean season season has no months selected")
                     } else if (lzSeasonsResponses.foodSecurityAssessments.isEmpty()) {
-                        inflateErrorModal("Data error", "Food security assessment season season has no months selected")
+                        inflateErrorModal(
+                            "Data error",
+                            "Food security assessment season season has no months selected"
+                        )
                     } else {
                         lzSeasonsCalendar.root.visibility = View.GONE
                         lzCompletionPage.root.visibility = View.VISIBLE
@@ -2256,7 +2404,11 @@ class CountyLevelFragment : DialogFragment(),
     fun returnMonthInitialsString(months: MutableList<MonthsModel>): String {
         var monthsString = ""
         for (currentMonth in months) {
-            monthsString =  if (currentMonth.monthName.length > 3) monthsString + " ${currentMonth.monthName.substring(0,4)}," else monthsString + " ${currentMonth.monthName},"
+            monthsString =
+                if (currentMonth.monthName.length > 3) monthsString + " ${currentMonth.monthName.substring(
+                    0,
+                    4
+                )}," else monthsString + " ${currentMonth.monthName},"
         }
         return monthsString
     }
@@ -2319,7 +2471,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.maizeLandPreparation.add(selectedMonth)
                     }
-                    landPrepMaize.text = returnMonthInitialsString(lzSeasonsResponses.maizeLandPreparation)
+                    landPrepMaize.text =
+                        returnMonthInitialsString(lzSeasonsResponses.maizeLandPreparation)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.CASSAVA_LAND_PREPARATION) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.cassavaLandPreparation.filter {
@@ -2331,7 +2484,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.cassavaLandPreparation.add(selectedMonth)
                     }
-                    landPrepCassava.text = returnMonthInitialsString(lzSeasonsResponses.cassavaLandPreparation)
+                    landPrepCassava.text =
+                        returnMonthInitialsString(lzSeasonsResponses.cassavaLandPreparation)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.RICE_LAND_PREPARATION) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.riceLandPreparation.filter {
@@ -2343,7 +2497,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.riceLandPreparation.add(selectedMonth)
                     }
-                    landPrepRice.text = returnMonthInitialsString(lzSeasonsResponses.riceLandPreparation)
+                    landPrepRice.text =
+                        returnMonthInitialsString(lzSeasonsResponses.riceLandPreparation)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.SORGHUM_LAND_PREPARATION) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.sorghumLandPreparation.filter {
@@ -2355,7 +2510,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.sorghumLandPreparation.add(selectedMonth)
                     }
-                    landPrepSorghum.text = returnMonthInitialsString(lzSeasonsResponses.sorghumLandPreparation)
+                    landPrepSorghum.text =
+                        returnMonthInitialsString(lzSeasonsResponses.sorghumLandPreparation)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LEGUMES_LAND_PREPARATION) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.legumesLandPreparation.filter {
@@ -2367,7 +2523,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.legumesLandPreparation.add(selectedMonth)
                     }
-                    landPrepLegumes.text = returnMonthInitialsString(lzSeasonsResponses.legumesLandPreparation)
+                    landPrepLegumes.text =
+                        returnMonthInitialsString(lzSeasonsResponses.legumesLandPreparation)
                 }
 
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.MAIZE_PLANTING) {
@@ -2392,10 +2549,11 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.cassavaPlanting.add(selectedMonth)
                     }
-                    plantingCassava.text = returnMonthInitialsString(lzSeasonsResponses.cassavaPlanting)
+                    plantingCassava.text =
+                        returnMonthInitialsString(lzSeasonsResponses.cassavaPlanting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.RICE_PLANTING) {
-                   val doesMonthAlreadyExist = lzSeasonsResponses.ricePlanting.filter {
+                    val doesMonthAlreadyExist = lzSeasonsResponses.ricePlanting.filter {
                         it.monthId == selectedMonth.monthId
                     }.isNotEmpty()
 
@@ -2416,7 +2574,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.sorghumPlanting.add(selectedMonth)
                     }
-                    plantingSorghum.text = returnMonthInitialsString(lzSeasonsResponses.sorghumPlanting)
+                    plantingSorghum.text =
+                        returnMonthInitialsString(lzSeasonsResponses.sorghumPlanting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LEGUMES_PLANTING) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.legumesPlanting.filter {
@@ -2428,7 +2587,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.legumesPlanting.add(selectedMonth)
                     }
-                    plantingLegumes.text = returnMonthInitialsString(lzSeasonsResponses.legumesPlanting)
+                    plantingLegumes.text =
+                        returnMonthInitialsString(lzSeasonsResponses.legumesPlanting)
                 }
 
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.MAIZE_HARVESTING) {
@@ -2441,7 +2601,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.maizeHarvesting.add(selectedMonth)
                     }
-                    harvestingMaize.text = returnMonthInitialsString(lzSeasonsResponses.maizeHarvesting)
+                    harvestingMaize.text =
+                        returnMonthInitialsString(lzSeasonsResponses.maizeHarvesting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.CASSAVA_HARVESTING) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.cassavaHarvesting.filter {
@@ -2453,7 +2614,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.cassavaHarvesting.add(selectedMonth)
                     }
-                    plantingCassava.text = returnMonthInitialsString(lzSeasonsResponses.cassavaHarvesting)
+                    plantingCassava.text =
+                        returnMonthInitialsString(lzSeasonsResponses.cassavaHarvesting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.RICE_HARVESTING) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.riceHarvesting.filter {
@@ -2465,7 +2627,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.riceHarvesting.add(selectedMonth)
                     }
-                    harvestingRice.text = returnMonthInitialsString(lzSeasonsResponses.riceHarvesting)
+                    harvestingRice.text =
+                        returnMonthInitialsString(lzSeasonsResponses.riceHarvesting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.SORGHUM_HARVESTING) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.sorghumHarvesting.filter {
@@ -2477,7 +2640,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.sorghumHarvesting.add(selectedMonth)
                     }
-                    harvestingRice.text = returnMonthInitialsString(lzSeasonsResponses.sorghumHarvesting)
+                    harvestingRice.text =
+                        returnMonthInitialsString(lzSeasonsResponses.sorghumHarvesting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LEGUMES_HARVESTING) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.legumesHarvesting.filter {
@@ -2489,7 +2653,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.legumesHarvesting.add(selectedMonth)
                     }
-                    harvestingSorghum.text = returnMonthInitialsString(lzSeasonsResponses.legumesHarvesting)
+                    harvestingSorghum.text =
+                        returnMonthInitialsString(lzSeasonsResponses.legumesHarvesting)
                 }
 
 
@@ -2504,7 +2669,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.livestockInMigration.add(selectedMonth)
                     }
-                    livestockInMigration.text = returnMonthInitialsString(lzSeasonsResponses.livestockInMigration)
+                    livestockInMigration.text =
+                        returnMonthInitialsString(lzSeasonsResponses.livestockInMigration)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LIVESTOCK_OUT_MIGRATION) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.livestockOutMigration.filter {
@@ -2516,7 +2682,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.livestockOutMigration.add(selectedMonth)
                     }
-                    livestockOutMigration.text = returnMonthInitialsString(lzSeasonsResponses.livestockOutMigration)
+                    livestockOutMigration.text =
+                        returnMonthInitialsString(lzSeasonsResponses.livestockOutMigration)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_MILK_PRODUCTION) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.highMilkProduction.filter {
@@ -2600,7 +2767,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.highFoodPrices.add(selectedMonth)
                     }
-                    foodPricesHigh.text = returnMonthInitialsString(lzSeasonsResponses.highFoodPrices)
+                    foodPricesHigh.text =
+                        returnMonthInitialsString(lzSeasonsResponses.highFoodPrices)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_FOOD_PRICES) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.lowFoodPrices.filter {
@@ -2624,7 +2792,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.highLivestockPrices.add(selectedMonth)
                     }
-                    livestockPricesHigh.text = returnMonthInitialsString(lzSeasonsResponses.highLivestockPrices)
+                    livestockPricesHigh.text =
+                        returnMonthInitialsString(lzSeasonsResponses.highLivestockPrices)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_LIVESTOCK_PRICES) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.lowLivestockPrices.filter {
@@ -2636,34 +2805,39 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.lowLivestockPrices.add(selectedMonth)
                     }
-                    livestockPricesLow.text = returnMonthInitialsString(lzSeasonsResponses.lowLivestockPrices)
+                    livestockPricesLow.text =
+                        returnMonthInitialsString(lzSeasonsResponses.lowLivestockPrices)
                 }
 
 
                 /* Others */
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_CASUAL_LABOUR_AVAILABILITY) {
-                    val doesMonthAlreadyExist = lzSeasonsResponses.highCasualLabourAvailability.filter {
-                        it.monthId == selectedMonth.monthId
-                    }.isNotEmpty()
+                    val doesMonthAlreadyExist =
+                        lzSeasonsResponses.highCasualLabourAvailability.filter {
+                            it.monthId == selectedMonth.monthId
+                        }.isNotEmpty()
 
                     if (doesMonthAlreadyExist) {
                         lzSeasonsResponses.highCasualLabourAvailability.remove(selectedMonth)
                     } else {
                         lzSeasonsResponses.highCasualLabourAvailability.add(selectedMonth)
                     }
-                    casualLabourAvailabilityHigh.text = returnMonthInitialsString(lzSeasonsResponses.highCasualLabourAvailability)
+                    casualLabourAvailabilityHigh.text =
+                        returnMonthInitialsString(lzSeasonsResponses.highCasualLabourAvailability)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_CASUAL_LABOUR_AVAILABILITY) {
-                    val doesMonthAlreadyExist = lzSeasonsResponses.lowCasualLabourAvailability.filter {
-                        it.monthId == selectedMonth.monthId
-                    }.isNotEmpty()
+                    val doesMonthAlreadyExist =
+                        lzSeasonsResponses.lowCasualLabourAvailability.filter {
+                            it.monthId == selectedMonth.monthId
+                        }.isNotEmpty()
 
                     if (doesMonthAlreadyExist) {
                         lzSeasonsResponses.lowCasualLabourAvailability.remove(selectedMonth)
                     } else {
                         lzSeasonsResponses.lowCasualLabourAvailability.add(selectedMonth)
                     }
-                    casualLabourAvailabilityLow.text = returnMonthInitialsString(lzSeasonsResponses.lowCasualLabourAvailability)
+                    casualLabourAvailabilityLow.text =
+                        returnMonthInitialsString(lzSeasonsResponses.lowCasualLabourAvailability)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_CASUAL_LABOUR_WAGES) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.highCasualLabourWages.filter {
@@ -2675,7 +2849,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.highCasualLabourWages.add(selectedMonth)
                     }
-                    casualLabourWagesHigh.text = returnMonthInitialsString(lzSeasonsResponses.highCasualLabourWages)
+                    casualLabourWagesHigh.text =
+                        returnMonthInitialsString(lzSeasonsResponses.highCasualLabourWages)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_CASUAL_LABOUR_WAGES) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.lowCasualLabourWages.filter {
@@ -2687,7 +2862,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.lowCasualLabourWages.add(selectedMonth)
                     }
-                    casualLabourWagesLow.text = returnMonthInitialsString(lzSeasonsResponses.lowCasualLabourWages)
+                    casualLabourWagesLow.text =
+                        returnMonthInitialsString(lzSeasonsResponses.lowCasualLabourWages)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_REMITTANCES) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.highRemittances.filter {
@@ -2699,7 +2875,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.highRemittances.add(selectedMonth)
                     }
-                    remittancesHigh.text = returnMonthInitialsString(lzSeasonsResponses.highRemittances)
+                    remittancesHigh.text =
+                        returnMonthInitialsString(lzSeasonsResponses.highRemittances)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_REMITTANCES) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.lowRemittances.filter {
@@ -2711,7 +2888,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.lowRemittances.add(selectedMonth)
                     }
-                    remittancesLow.text = returnMonthInitialsString(lzSeasonsResponses.lowRemittances)
+                    remittancesLow.text =
+                        returnMonthInitialsString(lzSeasonsResponses.lowRemittances)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_FISHING) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.highFish.filter {
@@ -2747,7 +2925,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.highMarketAccess.add(selectedMonth)
                     }
-                    marketAccessHigh.text = returnMonthInitialsString(lzSeasonsResponses.highMarketAccess)
+                    marketAccessHigh.text =
+                        returnMonthInitialsString(lzSeasonsResponses.highMarketAccess)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_MARKET_ACCESS) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.lowMarketAccess.filter {
@@ -2759,7 +2938,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.lowMarketAccess.add(selectedMonth)
                     }
-                    marketAccessLow.text = returnMonthInitialsString(lzSeasonsResponses.lowMarketAccess)
+                    marketAccessLow.text =
+                        returnMonthInitialsString(lzSeasonsResponses.lowMarketAccess)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_DISEASE_OUTBREAK) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.highDiseaseOutbreak.filter {
@@ -2771,7 +2951,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.highDiseaseOutbreak.add(selectedMonth)
                     }
-                    diseaseOutbreakHigh.text = returnMonthInitialsString(lzSeasonsResponses.highDiseaseOutbreak)
+                    diseaseOutbreakHigh.text =
+                        returnMonthInitialsString(lzSeasonsResponses.highDiseaseOutbreak)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_DISEASE_OUTBREAK) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.lowDiseaseOutbreak.filter {
@@ -2783,7 +2964,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.lowDiseaseOutbreak.add(selectedMonth)
                     }
-                    diseaseOutbreakLow.text = returnMonthInitialsString(lzSeasonsResponses.lowDiseaseOutbreak)
+                    diseaseOutbreakLow.text =
+                        returnMonthInitialsString(lzSeasonsResponses.lowDiseaseOutbreak)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.WATER_STRESS) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.waterStress.filter {
@@ -2795,7 +2977,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.waterStress.add(selectedMonth)
                     }
-                    waterStressMonth.text = returnMonthInitialsString(lzSeasonsResponses.waterStress)
+                    waterStressMonth.text =
+                        returnMonthInitialsString(lzSeasonsResponses.waterStress)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.CONFLICT_RISK) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.conflictRisks.filter {
@@ -2807,7 +2990,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.conflictRisks.add(selectedMonth)
                     }
-                    conflictRiskMonth.text = returnMonthInitialsString(lzSeasonsResponses.conflictRisks)
+                    conflictRiskMonth.text =
+                        returnMonthInitialsString(lzSeasonsResponses.conflictRisks)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.CEREMONIES) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.ceremonies.filter {
@@ -2822,7 +3006,7 @@ class CountyLevelFragment : DialogFragment(),
                     ceremoniesMonth.text = returnMonthInitialsString(lzSeasonsResponses.ceremonies)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LEAN_SEASONS) {
-                   val doesMonthAlreadyExist = lzSeasonsResponses.leanSeasons.filter {
+                    val doesMonthAlreadyExist = lzSeasonsResponses.leanSeasons.filter {
                         it.monthId == selectedMonth.monthId
                     }.isNotEmpty()
 
@@ -2831,7 +3015,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.leanSeasons.add(selectedMonth)
                     }
-                    leanSeasonsMonth.text = returnMonthInitialsString(lzSeasonsResponses.leanSeasons)
+                    leanSeasonsMonth.text =
+                        returnMonthInitialsString(lzSeasonsResponses.leanSeasons)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.FOOD_SECURITY_ASSESSMENTS) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.foodSecurityAssessments.filter {
@@ -2843,11 +3028,11 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.foodSecurityAssessments.add(selectedMonth)
                     }
-                    foodSecurityMonth.text = returnMonthInitialsString(lzSeasonsResponses.foodSecurityAssessments)
+                    foodSecurityMonth.text =
+                        returnMonthInitialsString(lzSeasonsResponses.foodSecurityAssessments)
                 }
             }
         }
-
 
 
 //        (seasonCalendarDialog as android.app.AlertDialog).dismiss()
@@ -3380,7 +3565,8 @@ class CountyLevelFragment : DialogFragment(),
     }
 
     private fun openHazardsRankModal(v: View) {
-        val builder: androidx.appcompat.app.AlertDialog.Builder = androidx.appcompat.app.AlertDialog.Builder(requireActivity())
+        val builder: androidx.appcompat.app.AlertDialog.Builder =
+            androidx.appcompat.app.AlertDialog.Builder(requireActivity())
         builder.setView(v)
         builder.setCancelable(true)
         hazardsRankingDialog = builder.create()
@@ -3435,7 +3621,8 @@ class CountyLevelFragment : DialogFragment(),
                 }
                 if (hazardTypeEnum == HazardTypeEnum.LIVESTOCK_PESTS_DISEASES) {
                     pestAndDiseaseRank.text = selectedRankItem.rankPosition.toString()
-                    hazardResponses.livestockPestsAndDiseases.importanceRank = selectedRankItem.rankPosition
+                    hazardResponses.livestockPestsAndDiseases.importanceRank =
+                        selectedRankItem.rankPosition
                 }
                 if (hazardTypeEnum == HazardTypeEnum.HAILSTORMS) {
                     hailstormsOrFrostRank.text = selectedRankItem.rankPosition.toString()
@@ -3451,7 +3638,8 @@ class CountyLevelFragment : DialogFragment(),
                 }
                 if (hazardTypeEnum == HazardTypeEnum.HIGH_WINDS) {
                     windsOrCycloneRank.text = selectedRankItem.rankPosition.toString()
-                    hazardResponses.highWindsOrCyclones.importanceRank = selectedRankItem.rankPosition
+                    hazardResponses.highWindsOrCyclones.importanceRank =
+                        selectedRankItem.rankPosition
                 }
                 if (hazardTypeEnum == HazardTypeEnum.BUSH_FIRES) {
                     bushFiresRank.text = selectedRankItem.rankPosition.toString()
@@ -3475,7 +3663,8 @@ class CountyLevelFragment : DialogFragment(),
                 }
                 if (hazardTypeEnum == HazardTypeEnum.MALARIA) {
                     malariaOutbreakRank.text = selectedRankItem.rankPosition.toString()
-                    hazardResponses.malariaPowerOutBreak.importanceRank = selectedRankItem.rankPosition
+                    hazardResponses.malariaPowerOutBreak.importanceRank =
+                        selectedRankItem.rankPosition
                 }
                 if (hazardTypeEnum == HazardTypeEnum.WATERBORNE_DISEASES) {
                     waterBorneDiseaseRank.text = selectedRankItem.rankPosition.toString()
@@ -3483,7 +3672,8 @@ class CountyLevelFragment : DialogFragment(),
                 }
                 if (hazardTypeEnum == HazardTypeEnum.HUMAN_WILDLIFE_CONFLICT) {
                     humanWildlifeConflictRank.text = selectedRankItem.rankPosition.toString()
-                    hazardResponses.humanWildlifeConflict.importanceRank = selectedRankItem.rankPosition
+                    hazardResponses.humanWildlifeConflict.importanceRank =
+                        selectedRankItem.rankPosition
                 }
                 if (hazardTypeEnum == HazardTypeEnum.HIGH_FOOD_PRICES) {
                     highFoodPriceRank.text = selectedRankItem.rankPosition.toString()
@@ -3491,11 +3681,13 @@ class CountyLevelFragment : DialogFragment(),
                 }
                 if (hazardTypeEnum == HazardTypeEnum.FOOD_SHORTAGE) {
                     foodShortageRank.text = selectedRankItem.rankPosition.toString()
-                    hazardResponses.marketFoodShortages.importanceRank = selectedRankItem.rankPosition
+                    hazardResponses.marketFoodShortages.importanceRank =
+                        selectedRankItem.rankPosition
                 }
                 if (hazardTypeEnum == HazardTypeEnum.DRINKING_WATER_SHORTAGE) {
                     drinkingWaterShortageRank.text = selectedRankItem.rankPosition.toString()
-                    hazardResponses.drinkingWaterShortages.importanceRank = selectedRankItem.rankPosition
+                    hazardResponses.drinkingWaterShortages.importanceRank =
+                        selectedRankItem.rankPosition
                 }
                 if (hazardTypeEnum == HazardTypeEnum.OTHERS) {
                     othersRank.text = selectedRankItem.rankPosition.toString()
