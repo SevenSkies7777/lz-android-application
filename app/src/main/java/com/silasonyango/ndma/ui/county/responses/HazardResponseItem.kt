@@ -1,3 +1,3 @@
 package com.silasonyango.ndma.ui.county.responses
 
-data class HazardResponseItem(val importanceRank: Int, val noExperiencedYears: Double)
+data class HazardResponseItem(var importanceRank: Int, var noExperiencedYears: Double)

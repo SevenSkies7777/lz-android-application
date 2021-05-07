@@ -132,18 +132,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/animalRustlingRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -204,18 +200,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/banditryRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -276,18 +268,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/terrorismRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -348,18 +336,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/ethicConflictRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -420,18 +404,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/politicalViolenceRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -473,6 +453,75 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:text="Drought"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:id="@+id/droughtRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/droughtNoOfYears"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:inputType="numberDecimal"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
                     android:text="Livestock Pests and Diseases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -492,18 +541,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/pestAndDiseaseRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:inputType="numberDecimal"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -564,18 +609,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/hailstormsOrFrostRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:inputType="numberDecimal"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -636,18 +677,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/floodingRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:inputType="numberDecimal"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -708,18 +745,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/landslidesRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -780,18 +813,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/windsOrCycloneRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -852,18 +881,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/bushFiresRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -924,18 +949,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/cropPestsRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -996,18 +1017,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/locustInvasionRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -1068,18 +1085,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/cropDiseasesRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -1140,18 +1153,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/terminalIllnessRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -1212,18 +1221,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/malariaOutbreakRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -1284,18 +1289,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/waterBorneDiseaseRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:inputType="numberDecimal"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -1356,18 +1357,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/humanWildlifeConflictRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:inputType="numberDecimal"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -1428,18 +1425,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/highFoodPriceRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -1500,18 +1493,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/foodShortageRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -1572,18 +1561,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/drinkingWaterShortageRank"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000000"
-                    android:inputType="numberDecimal"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>
@@ -1644,18 +1629,14 @@
                 android:paddingLeft="8dp"
                 android:background="@drawable/cell_shape">
 
-                <EditText
+                <TextView
                     android:id="@+id/othersRank"
-                    android:fontFamily="@font/lato_regular"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:inputType="numberDecimal"
-                    android:textColor="#000000"
-                    android:lineSpacingExtra="8sp"
-                    android:lineHeight="24sp"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    android:text="Select rank..."
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
                     android:layout_gravity="start|center_vertical"/>
 
             </LinearLayout>

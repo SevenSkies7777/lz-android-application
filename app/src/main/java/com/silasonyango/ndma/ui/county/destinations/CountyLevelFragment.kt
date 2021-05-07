@@ -15,6 +15,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.TextView
@@ -37,26 +38,26 @@ import com.silasonyango.ndma.database.questionnaires.entity.QuestionnaireTypesEn
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.login.model.GeographyObject
 import com.silasonyango.ndma.login.model.SubLocationsLivelihoodZoneAssignmentsModel
-import com.silasonyango.ndma.ui.county.adapters.LzCropProductionRecyclerViewAdapter
-import com.silasonyango.ndma.ui.county.adapters.LzMarketTradeRecyclerViewAdapter
-import com.silasonyango.ndma.ui.county.adapters.SubCountiesSpinnerAdapter
-import com.silasonyango.ndma.ui.county.adapters.SubLocationLzAssignmentRecyclerViewAdapter
+import com.silasonyango.ndma.ui.county.adapters.*
 import com.silasonyango.ndma.ui.county.model.*
 import com.silasonyango.ndma.ui.county.responses.*
 import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
 import com.silasonyango.ndma.ui.home.HomeViewModel
 import com.silasonyango.ndma.ui.home.adapters.*
+import com.silasonyango.ndma.ui.model.LivestockContributionRankTypeEnum
 import com.silasonyango.ndma.ui.model.QuestionnaireStatus
+import com.silasonyango.ndma.ui.model.RankResponseItem
+import com.silasonyango.ndma.ui.model.WgLivestockTypesEnum
 import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
 import com.silasonyango.ndma.ui.wealthgroup.adapters.CropProductionListAdapter
 import com.silasonyango.ndma.ui.wealthgroup.adapters.CropSelectionListAdapter
+import com.silasonyango.ndma.ui.wealthgroup.adapters.LivestockContributionRankAdapter
 import com.silasonyango.ndma.ui.wealthgroup.adapters.TribesListViewAdapter
 import com.silasonyango.ndma.ui.wealthgroup.responses.CropProductionResponseValueModel
 import com.silasonyango.ndma.ui.wealthgroup.responses.CropSeasonResponseItem
 import com.silasonyango.ndma.ui.wealthgroup.responses.WgCropProductionResponseItem
 import com.silasonyango.ndma.util.GpsTracker
 import com.silasonyango.ndma.util.Util
-import kotlinx.android.synthetic.main.market_geograpghy_configuration.*
 
 
 class CountyLevelFragment : DialogFragment(),
@@ -72,7 +73,7 @@ class CountyLevelFragment : DialogFragment(),
     MarketTransactionsAdapter.MarketTransactionsAdapterCallBack,
     CropSelectionListAdapter.CropSelectionListAdapterCallBack,
     CropProductionListAdapter.CropProductionListAdapterCallBack,
-    TribesListViewAdapter.TribesListViewAdapterCallBack {
+    TribesListViewAdapter.TribesListViewAdapterCallBack, HazardsRankingAdapter.HazardsRankingAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -88,9 +89,13 @@ class CountyLevelFragment : DialogFragment(),
 
     private var seasonCalendarDialog: android.app.AlertDialog? = null
 
+    private var hazardsRankingDialog: androidx.appcompat.app.AlertDialog? = null
+
     private var marketSubCountyDialog: android.app.AlertDialog? = null
 
     private var ethnicGroups: MutableList<EthnicGroupModel> = ArrayList()
+
+    private var hazardsRanks: MutableList<RankResponseItem> = ArrayList()
 
     private var cropProductionResponseItems: MutableList<WgCropProductionResponseItem> = ArrayList()
 
@@ -105,6 +110,8 @@ class CountyLevelFragment : DialogFragment(),
     val lzSeasonsResponses = LzSeasonsResponses()
 
     private var crops: MutableList<CropModel> = ArrayList()
+
+    val hazardResponses = HazardResponses()
 
     val subLocationZoneAssignmentModelList: MutableList<SubLocationZoneAssignmentModel> =
         ArrayList()
@@ -1291,9 +1298,110 @@ class CountyLevelFragment : DialogFragment(),
                     lzHungerPatterns.root.visibility = View.VISIBLE
                     lzHazards.root.visibility = View.GONE
                 }
-                hazardNextButton.setOnClickListener {
 
-                    val hazardResponses = HazardResponses()
+                for (i in 0..22) {
+                    hazardsRanks.add(RankResponseItem(i + 1, false))
+                }
+
+
+                animalRustlingRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.ANIMAL_RUSTLING)
+                }
+
+                banditryRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.BANDITRY)
+                }
+
+                terrorismRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.TERRORISM)
+                }
+
+                ethicConflictRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.ETHNIC_CONFLICT)
+                }
+
+                politicalViolenceRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.POLITICAL_CONFLICT)
+                }
+
+                droughtRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.DROUGHT)
+                }
+
+                pestAndDiseaseRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.LIVESTOCK_PESTS_DISEASES)
+                }
+
+                hailstormsOrFrostRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.HAILSTORMS)
+                }
+
+                floodingRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.FLOODING)
+                }
+
+                landslidesRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.LANDSLIDES)
+                }
+
+                windsOrCycloneRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.HIGH_WINDS)
+                }
+
+                bushFiresRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.BUSH_FIRES)
+                }
+
+                cropPestsRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.CROP_PESTS)
+                }
+
+                locustInvasionRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.LOCUST_INVASION)
+                }
+
+                cropDiseasesRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.CROP_DISEASES)
+                }
+
+                terminalIllnessRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.TERMINAL_ILLNESS)
+                }
+
+                malariaOutbreakRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.MALARIA)
+                }
+
+                waterBorneDiseaseRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.WATERBORNE_DISEASES)
+                }
+
+                humanWildlifeConflictRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.HUMAN_WILDLIFE_CONFLICT)
+                }
+
+                highFoodPriceRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.HIGH_FOOD_PRICES)
+                }
+
+                foodShortageRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.FOOD_SHORTAGE)
+                }
+
+                drinkingWaterShortageRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.DRINKING_WATER_SHORTAGE)
+                }
+
+                othersRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.OTHERS)
+                }
+
+
+
+
+
+
+                hazardNextButton.setOnClickListener {
 
                     hazardResponses.animalRustling = HazardResponseItem(
                         returnZeroStringIfEmpty(animalRustlingRank.text.toString()).toInt(),
@@ -1318,6 +1426,11 @@ class CountyLevelFragment : DialogFragment(),
                     hazardResponses.politicalViolence = HazardResponseItem(
                         returnZeroStringIfEmpty(politicalViolenceRank.text.toString()).toInt(),
                         returnZeroStringIfEmpty(politicalViolenceNoOfYears.text.toString()).toDouble()
+                    )
+
+                    hazardResponses.drought = HazardResponseItem(
+                        returnZeroStringIfEmpty(droughtRank.text.toString()).toInt(),
+                        returnZeroStringIfEmpty(droughtNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.livestockPestsAndDiseases = HazardResponseItem(
@@ -1375,14 +1488,9 @@ class CountyLevelFragment : DialogFragment(),
                         returnZeroStringIfEmpty(malariaOutbreakNoOfYears.text.toString()).toDouble()
                     )
 
-                    hazardResponses.malariaPowerOutBreak = HazardResponseItem(
+                    hazardResponses.waterBornDiseases = HazardResponseItem(
                         returnZeroStringIfEmpty(waterBorneDiseaseRank.text.toString()).toInt(),
                         returnZeroStringIfEmpty(waterBorneDiseaseNoOfYears.text.toString()).toDouble()
-                    )
-
-                    hazardResponses.waterBornDiseases = HazardResponseItem(
-                        returnZeroStringIfEmpty(humanWildlifeConflictRank.text.toString()).toInt(),
-                        returnZeroStringIfEmpty(humanWildlifeConflictNoOfYears.text.toString()).toDouble()
                     )
 
                     hazardResponses.humanWildlifeConflict = HazardResponseItem(
@@ -3246,5 +3354,156 @@ class CountyLevelFragment : DialogFragment(),
             }
         }
 
+    }
+
+
+    private fun inflateHazardsRankModal(
+        hazardsRanks: MutableList<RankResponseItem>,
+        hazardTypeEnum: HazardTypeEnum
+    ) {
+        val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
+        val list: RecyclerView = v.findViewById(R.id.listRv)
+
+        val ranksAdapter =
+            HazardsRankingAdapter(
+                hazardsRanks,
+                this,
+                hazardTypeEnum
+            )
+        val gridLayoutManager = GridLayoutManager(context, 1)
+        list.layoutManager = gridLayoutManager
+        list.hasFixedSize()
+        list.adapter = ranksAdapter
+
+        openHazardsRankModal(v)
+    }
+
+    private fun openHazardsRankModal(v: View) {
+        val builder: androidx.appcompat.app.AlertDialog.Builder = androidx.appcompat.app.AlertDialog.Builder(requireActivity())
+        builder.setView(v)
+        builder.setCancelable(true)
+        hazardsRankingDialog = builder.create()
+        (hazardsRankingDialog as androidx.appcompat.app.AlertDialog).setCancelable(true)
+        (hazardsRankingDialog as androidx.appcompat.app.AlertDialog).setCanceledOnTouchOutside(true)
+        (hazardsRankingDialog as androidx.appcompat.app.AlertDialog).window?.setBackgroundDrawable(
+            ColorDrawable(
+                Color.TRANSPARENT
+            )
+        )
+        (hazardsRankingDialog as androidx.appcompat.app.AlertDialog).show()
+        val window = (hazardsRankingDialog as androidx.appcompat.app.AlertDialog).window
+        window?.setLayout(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+    }
+
+    override fun onAHazardRankItemSelected(
+        selectedRankItem: RankResponseItem,
+        position: Int,
+        hazardTypeEnum: HazardTypeEnum
+    ) {
+        hazardsRanks.remove(selectedRankItem)
+        binding.apply {
+
+            lzHazards.apply {
+
+                if (hazardTypeEnum == HazardTypeEnum.ANIMAL_RUSTLING) {
+                    animalRustlingRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.animalRustling.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.BANDITRY) {
+                    banditryRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.banditry.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.TERRORISM) {
+                    terrorismRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.terrorism.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.ETHNIC_CONFLICT) {
+                    ethicConflictRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.ethnicConflict.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.POLITICAL_CONFLICT) {
+                    politicalViolenceRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.politicalViolence.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.DROUGHT) {
+                    droughtRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.drought.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.LIVESTOCK_PESTS_DISEASES) {
+                    pestAndDiseaseRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.livestockPestsAndDiseases.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.HAILSTORMS) {
+                    hailstormsOrFrostRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.hailstormsOrFrost.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.FLOODING) {
+                    floodingRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.flooding.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.LANDSLIDES) {
+                    landslidesRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.landslides.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.HIGH_WINDS) {
+                    windsOrCycloneRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.highWindsOrCyclones.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.BUSH_FIRES) {
+                    bushFiresRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.bushFires.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.CROP_PESTS) {
+                    cropPestsRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.cropPests.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.LOCUST_INVASION) {
+                    locustInvasionRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.locustInvasion.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.CROP_DISEASES) {
+                    cropDiseasesRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.cropDiseases.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.TERMINAL_ILLNESS) {
+                    terminalIllnessRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.terminalIllnesses.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.MALARIA) {
+                    malariaOutbreakRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.malariaPowerOutBreak.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.WATERBORNE_DISEASES) {
+                    waterBorneDiseaseRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.waterBornDiseases.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.HUMAN_WILDLIFE_CONFLICT) {
+                    humanWildlifeConflictRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.humanWildlifeConflict.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.HIGH_FOOD_PRICES) {
+                    highFoodPriceRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.highFoodPrices.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.FOOD_SHORTAGE) {
+                    foodShortageRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.marketFoodShortages.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.DRINKING_WATER_SHORTAGE) {
+                    drinkingWaterShortageRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.drinkingWaterShortages.importanceRank = selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.OTHERS) {
+                    othersRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.others.importanceRank = selectedRankItem.rankPosition
+                }
+            }
+        }
+
+        (hazardsRankingDialog as androidx.appcompat.app.AlertDialog).dismiss()
     }
 }
