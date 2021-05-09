@@ -32,17 +32,18 @@ import com.silasonyango.ndma.appStore.model.WealthGroupQuestionnaireListObject
 import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.databinding.WealthGroupQuestionnaireLayoutBinding
 import com.silasonyango.ndma.login.model.GeographyObject
+import com.silasonyango.ndma.ui.county.adapters.HazardsRankingAdapter
 import com.silasonyango.ndma.ui.county.model.CropModel
+import com.silasonyango.ndma.ui.county.model.HazardTypeEnum
 import com.silasonyango.ndma.ui.county.model.QuestionnaireSessionLocation
 import com.silasonyango.ndma.ui.county.responses.LzCropProductionResponseItem
 import com.silasonyango.ndma.ui.home.HomeViewModel
 import com.silasonyango.ndma.ui.home.adapters.EthnicityAdapter
 import com.silasonyango.ndma.ui.home.adapters.WgCropContributionRankAdapter
 import com.silasonyango.ndma.ui.model.*
-import com.silasonyango.ndma.ui.wealthgroup.adapters.CropProductionListAdapter
-import com.silasonyango.ndma.ui.wealthgroup.adapters.CropSelectionListAdapter
-import com.silasonyango.ndma.ui.wealthgroup.adapters.LivestockContributionRankAdapter
-import com.silasonyango.ndma.ui.wealthgroup.adapters.WgCropContributionAdapter
+import com.silasonyango.ndma.ui.wealthgroup.adapters.*
+import com.silasonyango.ndma.ui.wealthgroup.model.ConstraintCategoryEnum
+import com.silasonyango.ndma.ui.wealthgroup.model.ConstraintsTypeEnum
 import com.silasonyango.ndma.ui.wealthgroup.responses.*
 import com.silasonyango.ndma.util.Util
 import kotlin.math.abs
@@ -51,7 +52,8 @@ class WealthGroupDialogFragment : DialogFragment(),
     CropSelectionListAdapter.CropSelectionListAdapterCallBack,
     CropProductionListAdapter.CropProductionListAdapterCallBack,
     WgCropContributionAdapter.WgCropContributionAdapterCallBack,
-    LivestockContributionRankAdapter.LivestockContributionRankAdapterCallBack {
+    LivestockContributionRankAdapter.LivestockContributionRankAdapterCallBack,
+    ConstraintsRankingAdapter.ConstraintsRankingAdapterCallBack {
 
     private lateinit var wealthGroupViewModel: WealthGroupViewModel
 
@@ -75,6 +77,8 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     private var errorDialog: android.app.AlertDialog? = null
 
+    private var constraintsRankDialog: androidx.appcompat.app.AlertDialog? = null
+
     private lateinit var homeViewModel: HomeViewModel
 
     private var cropProductionResponseItems: MutableList<WgCropProductionResponseItem> = ArrayList()
@@ -90,7 +94,38 @@ class WealthGroupDialogFragment : DialogFragment(),
     private var cropCashIncomeContributionRanks: MutableList<RankResponseItem> = ArrayList()
     private var cropFoodConsumptionContributionRanks: MutableList<RankResponseItem> = ArrayList()
 
+    private var incomeSourceRanks: MutableList<RankResponseItem> = ArrayList()
+
+    private var incomeConsumptionRanks: MutableList<RankResponseItem> = ArrayList()
+
+    private var livestockProductionRanks: MutableList<RankResponseItem> = ArrayList()
+
+    private var fishingRanks: MutableList<RankResponseItem> = ArrayList()
+
+    private var naturalResourceRanks: MutableList<RankResponseItem> = ArrayList()
+
+    private var smallEnterpriesRanks: MutableList<RankResponseItem> = ArrayList()
+
     private var crops: MutableList<CropModel> = ArrayList()
+
+    val constraintResponses = ConstraintsResponses()
+
+    val wagedLabourIncomeConstraintsResponses =
+        WagedLabourIncomeConstraintsResponses()
+
+    val cropProductionIncomeConstraintsResponses =
+        CropProductionIncomeConstraintsResponses()
+
+    val livestockProductionIncomeConstraintsResponses =
+        LivestockProductionIncomeConstraintsResponses()
+
+    val fishingIncomeConstraintsResponses = FishingIncomeConstraintsResponses()
+
+    val naturalResourceIncomeConstraintsResponses =
+        NaturalResourceIncomeConstraintsResponses()
+
+    val smallEnterpriseIncomeConstraintsResponses =
+        SmallEnterpriseIncomeConstraintsResponses()
 
     companion object {
 
@@ -1852,9 +1887,15 @@ class WealthGroupDialogFragment : DialogFragment(),
                     } else {
 
                         if (doesLivestockCashContributionColumnHaveAPercentageError().hasAValidationError) {
-                            inflateErrorModal("Percentage error", doesLivestockCashContributionColumnHaveAPercentageError().validationMessage)
+                            inflateErrorModal(
+                                "Percentage error",
+                                doesLivestockCashContributionColumnHaveAPercentageError().validationMessage
+                            )
                         } else if (doesLivestockFoodConsumptionContributionColumnHaveAPercentageError().hasAValidationError) {
-                            inflateErrorModal("Percentage error", doesLivestockFoodConsumptionContributionColumnHaveAPercentageError().validationMessage)
+                            inflateErrorModal(
+                                "Percentage error",
+                                doesLivestockFoodConsumptionContributionColumnHaveAPercentageError().validationMessage
+                            )
                         } else {
 
                             livestockContributionResponses.cattle.incomePercentage.actualValue =
@@ -2886,188 +2927,470 @@ class WealthGroupDialogFragment : DialogFragment(),
                     wgConstraints.root.visibility = View.GONE
                 }
 
+                for (i in 0..4) {
+                    incomeSourceRanks.add(RankResponseItem(i + 1, false))
+                }
+                for (i in 0..9) {
+                    incomeConsumptionRanks.add(RankResponseItem(i + 1, false))
+                }
+                for (i in 0..7) {
+                    livestockProductionRanks.add(RankResponseItem(i + 1, false))
+                }
+                for (i in 0..6) {
+                    fishingRanks.add(RankResponseItem(i + 1, false))
+                }
+                for (i in 0..4) {
+                    naturalResourceRanks.add(RankResponseItem(i + 1, false))
+                }
+                for (i in 0..5) {
+                    smallEnterpriesRanks.add(RankResponseItem(i + 1, false))
+                }
+
+                labourLowEducation.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeSourceRanks,
+                        ConstraintsTypeEnum.IS_LOW_EDUCATION,
+                        ConstraintCategoryEnum.SOURCE_OF_INCOME
+                    )
+                }
+                labourPoorHealth.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeSourceRanks,
+                        ConstraintsTypeEnum.IS_POOR_HEALTH,
+                        ConstraintCategoryEnum.SOURCE_OF_INCOME
+                    )
+                }
+                labourFewJobs.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeSourceRanks,
+                        ConstraintsTypeEnum.IS_FEW_JOBS,
+                        ConstraintCategoryEnum.SOURCE_OF_INCOME
+                    )
+                }
+                labourFarmTime.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeSourceRanks,
+                        ConstraintsTypeEnum.IS_TIME_ON_FARM,
+                        ConstraintCategoryEnum.SOURCE_OF_INCOME
+                    )
+                }
+                labourLowWageRates.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeSourceRanks,
+                        ConstraintsTypeEnum.IS_LOW_WAGE_RATES,
+                        ConstraintCategoryEnum.SOURCE_OF_INCOME
+                    )
+                }
+
+
+                consumptionHoldings.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeConsumptionRanks,
+                        ConstraintsTypeEnum.IC_SMALL_LAND,
+                        ConstraintCategoryEnum.INCOME_CONSUMPTION
+                    )
+                }
+                consumptionLackOfCredit.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeConsumptionRanks,
+                        ConstraintsTypeEnum.IC_LACK_OF_CREDIT,
+                        ConstraintCategoryEnum.INCOME_CONSUMPTION
+                    )
+                }
+                consumptionHighInputs.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeConsumptionRanks,
+                        ConstraintsTypeEnum.IC_HIGH_INPUT_COSTS,
+                        ConstraintCategoryEnum.INCOME_CONSUMPTION
+                    )
+                }
+                consumptionLowFertility.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeConsumptionRanks,
+                        ConstraintsTypeEnum.IC_LOW_LAND_FERTILITY,
+                        ConstraintCategoryEnum.INCOME_CONSUMPTION
+                    )
+                }
+                consumptionUnreliableWater.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeConsumptionRanks,
+                        ConstraintsTypeEnum.IC_UNRELIABLE_WATER,
+                        ConstraintCategoryEnum.INCOME_CONSUMPTION
+                    )
+                }
+                consumptionLowTechnicalSkills.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeConsumptionRanks,
+                        ConstraintsTypeEnum.IC_LOW_TECHNICAL_SKILLS,
+                        ConstraintCategoryEnum.INCOME_CONSUMPTION
+                    )
+                }
+                consumptionLowSeedQuality.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeConsumptionRanks,
+                        ConstraintsTypeEnum.IC_LOW_QUALITY_SEED,
+                        ConstraintCategoryEnum.INCOME_CONSUMPTION
+                    )
+                }
+                consumptionMarketAccess.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeConsumptionRanks,
+                        ConstraintsTypeEnum.IC_MARKET_ACCESS,
+                        ConstraintCategoryEnum.INCOME_CONSUMPTION
+                    )
+                }
+                consumptionCropPests.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        incomeConsumptionRanks,
+                        ConstraintsTypeEnum.IC_CROP_PESTS_DISEASES,
+                        ConstraintCategoryEnum.INCOME_CONSUMPTION
+                    )
+                }
+
+
+                livestockProductionPasture.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        livestockProductionRanks,
+                        ConstraintsTypeEnum.LP_LACK_OF_PASTURE,
+                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                    )
+                }
+                livestockProductionDrinkingWater.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        livestockProductionRanks,
+                        ConstraintsTypeEnum.LP_LACK_ANIMAL_DRINKING_WATER,
+                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                    )
+                }
+                livestockProductionLowYieldingAnimal.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        livestockProductionRanks,
+                        ConstraintsTypeEnum.LP_LOW_YIELDING_ANIMALS,
+                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                    )
+                }
+                livestockProductionVeterinaryDrugs.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        livestockProductionRanks,
+                        ConstraintsTypeEnum.LP_COSTLY_VETERINARY_DRUGS,
+                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                    )
+                }
+                livestockProductionPests.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        livestockProductionRanks,
+                        ConstraintsTypeEnum.LP_LIVESTOCK_PESTS_DISEASES,
+                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                    )
+                }
+                livestockProductionMarket.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        livestockProductionRanks,
+                        ConstraintsTypeEnum.LP_LACK_OF_MARKET,
+                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                    )
+                }
+                livestockProductionInsecurity.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        livestockProductionRanks,
+                        ConstraintsTypeEnum.LP_INSECURITY,
+                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                    )
+                }
+
+
+                fishingLowStocks.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        fishingRanks,
+                        ConstraintsTypeEnum.F_LOW_FISH_STOCKS,
+                        ConstraintCategoryEnum.FISHING
+                    )
+                }
+                fishingPoorMarket.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        fishingRanks,
+                        ConstraintsTypeEnum.F_POOR_MARKET,
+                        ConstraintCategoryEnum.FISHING
+                    )
+                }
+                fishingLackOfEquipment.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        fishingRanks,
+                        ConstraintsTypeEnum.F_EQUIPMENT,
+                        ConstraintCategoryEnum.FISHING
+                    )
+                }
+                fishingCompetition.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        fishingRanks,
+                        ConstraintsTypeEnum.F_COMPETITION,
+                        ConstraintCategoryEnum.FISHING
+                    )
+                }
+                fishingLackOfExpertise.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        fishingRanks,
+                        ConstraintsTypeEnum.F_LACK_OF_EXPERTISE,
+                        ConstraintCategoryEnum.FISHING
+                    )
+                }
+                fishingFishingRights.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        fishingRanks,
+                        ConstraintsTypeEnum.F_FISHING_RIGHTS,
+                        ConstraintCategoryEnum.FISHING
+                    )
+                }
+
+
+                resourceDecline.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        naturalResourceRanks,
+                        ConstraintsTypeEnum.NR_DECLINING_RESOURCE,
+                        ConstraintCategoryEnum.NATURAL_RESOURCE
+                    )
+                }
+                resourcePopulationPressure.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        naturalResourceRanks,
+                        ConstraintsTypeEnum.NR_POPULATION_PRESSURE,
+                        ConstraintCategoryEnum.NATURAL_RESOURCE
+                    )
+                }
+                resourceRights.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        naturalResourceRanks,
+                        ConstraintsTypeEnum.NR_RIGHTS_RESTRICTIONS,
+                        ConstraintCategoryEnum.NATURAL_RESOURCE
+                    )
+                }
+                resourceLowValue.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        naturalResourceRanks,
+                        ConstraintsTypeEnum.NR_LOW_VALUE,
+                        ConstraintCategoryEnum.NATURAL_RESOURCE
+                    )
+                }
+
+
+                enterpriseLackOfCapital.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        smallEnterpriesRanks,
+                        ConstraintsTypeEnum.SE_LACK_OF_CAPITAL,
+                        ConstraintCategoryEnum.SMALL_ENTERPRISE
+                    )
+                }
+                enterpriseRedTape.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        smallEnterpriesRanks,
+                        ConstraintsTypeEnum.SE_RED_TAPE,
+                        ConstraintCategoryEnum.SMALL_ENTERPRISE
+                    )
+                }
+                enterpriseTaxes.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        smallEnterpriesRanks,
+                        ConstraintsTypeEnum.SE_TAXES,
+                        ConstraintCategoryEnum.SMALL_ENTERPRISE
+                    )
+                }
+                enterpriseMarketAccess.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        smallEnterpriesRanks,
+                        ConstraintsTypeEnum.SE_MARKET_ACCESS,
+                        ConstraintCategoryEnum.SMALL_ENTERPRISE
+                    )
+                }
+                enterpriseExpertise.setOnClickListener {
+                    inflateConstraintsRankModal(
+                        smallEnterpriesRanks,
+                        ConstraintsTypeEnum.SE_LACK_OF_EXPERTISE,
+                        ConstraintCategoryEnum.SMALL_ENTERPRISE
+                    )
+                }
+
                 constraintsNextButton.setOnClickListener {
 
                     var hasNoValidationError: Boolean = true
 
-                    if (labourLowEducation.text.toString().isEmpty()) {
+                    if (wagedLabourIncomeConstraintsResponses.lowEducation == 0) {
                         hasNoValidationError = false
                         labourLowEducationCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (labourPoorHealth.text.toString().isEmpty()) {
+                    if (wagedLabourIncomeConstraintsResponses.poorHealth == 0) {
                         hasNoValidationError = false
                         labourPoorHealthCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (labourFewJobs.text.toString().isEmpty()) {
+                    if (wagedLabourIncomeConstraintsResponses.fewJobs == 0) {
                         hasNoValidationError = false
                         labourFewJobsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (labourFarmTime.text.toString().isEmpty()) {
+                    if (wagedLabourIncomeConstraintsResponses.tooMuchFarmTime == 0) {
                         hasNoValidationError = false
                         labourFarmTimeCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (labourLowWageRates.text.toString().isEmpty()) {
+                    if (wagedLabourIncomeConstraintsResponses.lowAverageWageRates == 0) {
                         hasNoValidationError = false
                         labourLowWageRatesCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
 
-                    if (consumptionHoldings.text.toString().isEmpty()) {
+                    if (cropProductionIncomeConstraintsResponses.smallLandHoldings == 0) {
                         hasNoValidationError = false
                         consumptionHoldingsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (consumptionLackOfCredit.text.toString().isEmpty()) {
+                    if (cropProductionIncomeConstraintsResponses.lackOfCredit == 0) {
                         hasNoValidationError = false
                         consumptionLackOfCreditCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
 
-                    if (consumptionHighInputs.text.toString().isEmpty()) {
+                    if (cropProductionIncomeConstraintsResponses.highInputCost == 0) {
                         hasNoValidationError = false
                         consumptionHighInputsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (consumptionLowFertility.text.toString().isEmpty()) {
+                    if (cropProductionIncomeConstraintsResponses.lowLandFertility == 0) {
                         hasNoValidationError = false
                         consumptionLowFertilityCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (consumptionUnreliableWater.text.toString().isEmpty()) {
+                    if (cropProductionIncomeConstraintsResponses.lackOfReliableWater == 0) {
                         hasNoValidationError = false
                         consumptionUnreliableWaterCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (consumptionLowTechnicalSkills.text.toString().isEmpty()) {
+                    if (cropProductionIncomeConstraintsResponses.lowTechnicalSkills == 0) {
                         hasNoValidationError = false
                         consumptionLowTechnicalSkillsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (consumptionLowSeedQuality.text.toString().isEmpty()) {
+                    if (cropProductionIncomeConstraintsResponses.lowQualitySeed == 0) {
                         hasNoValidationError = false
                         consumptionLowSeedQualityCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (consumptionMarketAccess.text.toString().isEmpty()) {
+                    if (cropProductionIncomeConstraintsResponses.lackOfMarketAccess == 0) {
                         hasNoValidationError = false
                         consumptionMarketAccessCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (consumptionCropPests.text.toString().isEmpty()) {
+                    if (cropProductionIncomeConstraintsResponses.endemicCropPests == 0) {
                         hasNoValidationError = false
                         consumptionCropPestsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionPasture.text.toString().isEmpty()) {
+                    if (livestockProductionIncomeConstraintsResponses.lackOfPasture == 0) {
                         hasNoValidationError = false
                         livestockProductionPastureCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionDrinkingWater.text.toString().isEmpty()) {
+                    if (livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater == 0) {
                         hasNoValidationError = false
                         livestockProductionDrinkingWaterCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionLowYieldingAnimal.text.toString().isEmpty()) {
+                    if (livestockProductionIncomeConstraintsResponses.lowYieldingAnimal == 0) {
                         hasNoValidationError = false
                         livestockProductionLowYieldingAnimalCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionVeterinaryDrugs.text.toString().isEmpty()) {
+                    if (livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs == 0) {
                         hasNoValidationError = false
                         livestockProductionVeterinaryDrugsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionPests.text.toString().isEmpty()) {
+                    if (livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases == 0) {
                         hasNoValidationError = false
                         livestockProductionPestsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionMarket.text.toString().isEmpty()) {
+                    if (livestockProductionIncomeConstraintsResponses.lackofMarket == 0) {
                         hasNoValidationError = false
                         livestockProductionMarketCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionInsecurity.text.toString().isEmpty()) {
+                    if (livestockProductionIncomeConstraintsResponses.insecurity == 0) {
                         hasNoValidationError = false
                         livestockProductionInsecurityCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (fishingLowStocks.text.toString().isEmpty()) {
+                    if (fishingIncomeConstraintsResponses.lowFishStocks == 0) {
                         hasNoValidationError = false
                         fishingLowStocksCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (fishingPoorMarket.text.toString().isEmpty()) {
+                    if (fishingIncomeConstraintsResponses.poorMarket == 0) {
                         hasNoValidationError = false
                         fishingPoorMarketCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (fishingLackOfEquipment.text.toString().isEmpty()) {
+                    if (fishingIncomeConstraintsResponses.lackOfEquipment == 0) {
                         hasNoValidationError = false
                         fishingLackOfEquipmentCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (fishingCompetition.text.toString().isEmpty()) {
+                    if (fishingIncomeConstraintsResponses.extremeCompetition == 0) {
                         hasNoValidationError = false
                         fishingCompetitionCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (fishingLackOfExpertise.text.toString().isEmpty()) {
+                    if (fishingIncomeConstraintsResponses.lackOfExpertise == 0) {
                         hasNoValidationError = false
                         fishingLackOfExpertiseCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (fishingFishingRights.text.toString().isEmpty()) {
+                    if (fishingIncomeConstraintsResponses.fishingRightsRestrictions == 0) {
                         hasNoValidationError = false
                         fishingFishingRightsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (resourceDecline.text.toString().isEmpty()) {
+                    if (naturalResourceIncomeConstraintsResponses.decliningNaturalResources == 0) {
                         hasNoValidationError = false
                         resourceDeclineCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (resourcePopulationPressure.text.toString().isEmpty()) {
+                    if (naturalResourceIncomeConstraintsResponses.populationPressure == 0) {
                         hasNoValidationError = false
                         resourcePopulationPressureCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (resourceRights.text.toString().isEmpty()) {
+                    if (naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights == 0) {
                         hasNoValidationError = false
                         resourceRightsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (resourceLowValue.text.toString().isEmpty()) {
+                    if (naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts == 0) {
                         hasNoValidationError = false
                         resourceLowValueCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (enterpriseLackOfCapital.text.toString().isEmpty()) {
+                    if (smallEnterpriseIncomeConstraintsResponses.lackOfCapital == 0) {
                         hasNoValidationError = false
                         enterpriseLackOfCapitalCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (enterpriseRedTape.text.toString().isEmpty()) {
+                    if (smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape == 0) {
                         hasNoValidationError = false
                         enterpriseRedTapeCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (enterpriseTaxes.text.toString().isEmpty()) {
+                    if (smallEnterpriseIncomeConstraintsResponses.tooManyTaxes == 0) {
                         hasNoValidationError = false
                         enterpriseTaxesCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (enterpriseMarketAccess.text.toString().isEmpty()) {
+                    if (smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket == 0) {
                         hasNoValidationError = false
                         enterpriseMarketAccessCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (enterpriseExpertise.text.toString().isEmpty()) {
+                    if (smallEnterpriseIncomeConstraintsResponses.lackOfExpertise == 0) {
                         hasNoValidationError = false
                         enterpriseExpertiseCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
@@ -3076,119 +3399,26 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                     if (hasNoValidationError) {
 
-                        val constraintResponses = ConstraintsResponses()
-
-                        val wagedLabourIncomeConstraintsResponses =
-                            WagedLabourIncomeConstraintsResponses()
-
-                        wagedLabourIncomeConstraintsResponses.lowEducation =
-                            labourLowEducation.text.toString().toInt()
-                        wagedLabourIncomeConstraintsResponses.poorHealth =
-                            labourPoorHealth.text.toString().toInt()
-                        wagedLabourIncomeConstraintsResponses.fewJobs =
-                            labourFewJobs.text.toString().toInt()
-                        wagedLabourIncomeConstraintsResponses.tooMuchFarmTime =
-                            labourFarmTime.text.toString().toInt()
-                        wagedLabourIncomeConstraintsResponses.lowAverageWageRates =
-                            labourLowWageRates.text.toString().toInt()
 
                         constraintResponses.wagedLabourIncomeConstraintsResponses =
                             wagedLabourIncomeConstraintsResponses
 
 
-                        val cropProductionIncomeConstraintsResponses =
-                            CropProductionIncomeConstraintsResponses()
-
-                        cropProductionIncomeConstraintsResponses.smallLandHoldings =
-                            consumptionHoldings.text.toString().toInt()
-                        cropProductionIncomeConstraintsResponses.lackOfCredit =
-                            consumptionLackOfCredit.text.toString().toInt()
-                        cropProductionIncomeConstraintsResponses.highInputCost =
-                            consumptionHighInputs.text.toString().toInt()
-                        cropProductionIncomeConstraintsResponses.lowLandFertility =
-                            consumptionLowFertility.text.toString().toInt()
-                        cropProductionIncomeConstraintsResponses.lackOfReliableWater =
-                            consumptionUnreliableWater.text.toString().toInt()
-                        cropProductionIncomeConstraintsResponses.lowTechnicalSkills =
-                            consumptionLowTechnicalSkills.text.toString().toInt()
-                        cropProductionIncomeConstraintsResponses.lowQualitySeed =
-                            consumptionLowSeedQuality.text.toString().toInt()
-                        cropProductionIncomeConstraintsResponses.lackOfMarketAccess =
-                            consumptionMarketAccess.text.toString().toInt()
-                        cropProductionIncomeConstraintsResponses.endemicCropPests =
-                            consumptionCropPests.text.toString().toInt()
-
                         constraintResponses.cropProductionIncomeConstraintsResponses =
                             cropProductionIncomeConstraintsResponses
 
-                        val livestockProductionIncomeConstraintsResponses =
-                            LivestockProductionIncomeConstraintsResponses()
-
-                        livestockProductionIncomeConstraintsResponses.lackOfPasture =
-                            livestockProductionPasture.text.toString().toInt()
-                        livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater =
-                            livestockProductionDrinkingWater.text.toString().toInt()
-                        livestockProductionIncomeConstraintsResponses.lowYieldingAnimal =
-                            livestockProductionLowYieldingAnimal.text.toString().toInt()
-                        livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs =
-                            livestockProductionVeterinaryDrugs.text.toString().toInt()
-                        livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases =
-                            livestockProductionPests.text.toString().toInt()
-                        livestockProductionIncomeConstraintsResponses.lackofMarket =
-                            livestockProductionMarket.text.toString().toInt()
-                        livestockProductionIncomeConstraintsResponses.insecurity =
-                            livestockProductionInsecurity.text.toString().toInt()
 
                         constraintResponses.livestockProductionIncomeConstraintsResponses =
                             livestockProductionIncomeConstraintsResponses
 
 
-                        val fishingIncomeConstraintsResponses = FishingIncomeConstraintsResponses()
-
-                        fishingIncomeConstraintsResponses.lowFishStocks =
-                            fishingLowStocks.text.toString().toInt()
-                        fishingIncomeConstraintsResponses.poorMarket =
-                            fishingPoorMarket.text.toString().toInt()
-                        fishingIncomeConstraintsResponses.lackOfEquipment =
-                            fishingLackOfEquipment.text.toString().toInt()
-                        fishingIncomeConstraintsResponses.extremeCompetition =
-                            fishingCompetition.text.toString().toInt()
-                        fishingIncomeConstraintsResponses.lackOfExpertise =
-                            fishingLackOfExpertise.text.toString().toInt()
-                        fishingIncomeConstraintsResponses.fishingRightsRestrictions =
-                            fishingFishingRights.text.toString().toInt()
-
                         constraintResponses.fishingIncomeConstraintsResponses =
                             fishingIncomeConstraintsResponses
 
-                        val naturalResourceIncomeConstraintsResponses =
-                            NaturalResourceIncomeConstraintsResponses()
-
-                        naturalResourceIncomeConstraintsResponses.decliningNaturalResources =
-                            resourceDecline.text.toString().toInt()
-                        naturalResourceIncomeConstraintsResponses.populationPressure =
-                            resourcePopulationPressure.text.toString().toInt()
-                        naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights =
-                            resourceRights.text.toString().toInt()
-                        naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts =
-                            resourceLowValue.text.toString().toInt()
 
                         constraintResponses.naturalResourceIncomeConstraintsResponses =
                             naturalResourceIncomeConstraintsResponses
 
-                        val smallEnterpriseIncomeConstraintsResponses =
-                            SmallEnterpriseIncomeConstraintsResponses()
-
-                        smallEnterpriseIncomeConstraintsResponses.lackOfCapital =
-                            enterpriseLackOfCapital.text.toString().toInt()
-                        smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape =
-                            enterpriseRedTape.text.toString().toInt()
-                        smallEnterpriseIncomeConstraintsResponses.tooManyTaxes =
-                            enterpriseTaxes.text.toString().toInt()
-                        smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket =
-                            enterpriseMarketAccess.text.toString().toInt()
-                        smallEnterpriseIncomeConstraintsResponses.lackOfExpertise =
-                            enterpriseExpertise.text.toString().toInt()
 
                         constraintResponses.smallEnterpriseIncomeConstraintsResponses =
                             smallEnterpriseIncomeConstraintsResponses
@@ -3751,5 +3981,253 @@ class WealthGroupDialogFragment : DialogFragment(),
 
         }
     }
+
+
+    private fun inflateConstraintsRankModal(
+        ranks: MutableList<RankResponseItem>,
+        constraintsTypeEnum: ConstraintsTypeEnum,
+        constraintCategoryEnum: ConstraintCategoryEnum
+    ) {
+        val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
+        val list: RecyclerView = v.findViewById(R.id.listRv)
+
+        val ranksAdapter =
+            ConstraintsRankingAdapter(
+                ranks,
+                this,
+                constraintsTypeEnum,
+                constraintCategoryEnum
+            )
+        val gridLayoutManager = GridLayoutManager(context, 1)
+        list.layoutManager = gridLayoutManager
+        list.hasFixedSize()
+        list.adapter = ranksAdapter
+
+        openConstraintsRankModal(v)
+    }
+
+    private fun openConstraintsRankModal(v: View) {
+        val builder: androidx.appcompat.app.AlertDialog.Builder =
+            androidx.appcompat.app.AlertDialog.Builder(requireActivity())
+        builder.setView(v)
+        builder.setCancelable(true)
+        constraintsRankDialog = builder.create()
+        (constraintsRankDialog as androidx.appcompat.app.AlertDialog).setCancelable(true)
+        (constraintsRankDialog as androidx.appcompat.app.AlertDialog).setCanceledOnTouchOutside(true)
+        (constraintsRankDialog as androidx.appcompat.app.AlertDialog).window?.setBackgroundDrawable(
+            ColorDrawable(
+                Color.TRANSPARENT
+            )
+        )
+        (constraintsRankDialog as androidx.appcompat.app.AlertDialog).show()
+        val window = (constraintsRankDialog as androidx.appcompat.app.AlertDialog).window
+        window?.setLayout(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+    }
+
+    override fun onAConstraintsRankItemSelected(
+        selectedRankItem: RankResponseItem,
+        position: Int,
+        constraintsTypeEnum: ConstraintsTypeEnum,
+        constraintCategoryEnum: ConstraintCategoryEnum
+    ) {
+
+        binding.apply {
+            wgConstraints.apply {
+
+                if (constraintCategoryEnum == ConstraintCategoryEnum.SOURCE_OF_INCOME) {
+
+                    incomeSourceRanks.remove(selectedRankItem)
+
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IS_LOW_EDUCATION) {
+                        wagedLabourIncomeConstraintsResponses.lowEducation = selectedRankItem.rankPosition
+                        labourLowEducation.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IS_POOR_HEALTH) {
+                        wagedLabourIncomeConstraintsResponses.poorHealth = selectedRankItem.rankPosition
+                        labourPoorHealth.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IS_FEW_JOBS) {
+                        wagedLabourIncomeConstraintsResponses.fewJobs = selectedRankItem.rankPosition
+                        labourFewJobs.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IS_TIME_ON_FARM) {
+                        wagedLabourIncomeConstraintsResponses.tooMuchFarmTime = selectedRankItem.rankPosition
+                        labourFarmTime.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IS_LOW_WAGE_RATES) {
+                        wagedLabourIncomeConstraintsResponses.lowAverageWageRates = selectedRankItem.rankPosition
+                        labourLowWageRates.text = selectedRankItem.rankPosition.toString()
+                    }
+                }
+
+
+                if (constraintCategoryEnum == ConstraintCategoryEnum.INCOME_CONSUMPTION) {
+
+                    incomeConsumptionRanks.remove(selectedRankItem)
+
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IC_SMALL_LAND) {
+                        cropProductionIncomeConstraintsResponses.smallLandHoldings = selectedRankItem.rankPosition
+                        consumptionHoldings.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IC_LACK_OF_CREDIT) {
+                        cropProductionIncomeConstraintsResponses.lackOfCredit = selectedRankItem.rankPosition
+                        consumptionLackOfCredit.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IC_HIGH_INPUT_COSTS) {
+                        cropProductionIncomeConstraintsResponses.highInputCost = selectedRankItem.rankPosition
+                        consumptionHighInputs.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IC_LOW_LAND_FERTILITY) {
+                        cropProductionIncomeConstraintsResponses.lowLandFertility = selectedRankItem.rankPosition
+                        consumptionLowFertility.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IC_UNRELIABLE_WATER) {
+                        cropProductionIncomeConstraintsResponses.lackOfReliableWater = selectedRankItem.rankPosition
+                        consumptionUnreliableWater.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IC_LOW_TECHNICAL_SKILLS) {
+                        cropProductionIncomeConstraintsResponses.lowTechnicalSkills = selectedRankItem.rankPosition
+                        consumptionLowTechnicalSkills.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IC_LOW_QUALITY_SEED) {
+                        cropProductionIncomeConstraintsResponses.lowQualitySeed = selectedRankItem.rankPosition
+                        consumptionLowSeedQuality.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IC_MARKET_ACCESS) {
+                        cropProductionIncomeConstraintsResponses.lackOfMarketAccess = selectedRankItem.rankPosition
+                        consumptionMarketAccess.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.IC_CROP_PESTS_DISEASES) {
+                        cropProductionIncomeConstraintsResponses.endemicCropPests = selectedRankItem.rankPosition
+                        consumptionCropPests.text = selectedRankItem.rankPosition.toString()
+                    }
+                }
+
+                if (constraintCategoryEnum == ConstraintCategoryEnum.LIVESTOCK_PRODUCTION) {
+
+                    livestockProductionRanks.remove(selectedRankItem)
+
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.LP_LACK_OF_PASTURE) {
+                        livestockProductionIncomeConstraintsResponses.lackOfPasture = selectedRankItem.rankPosition
+                        livestockProductionPasture.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.LP_LACK_ANIMAL_DRINKING_WATER) {
+                        livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater = selectedRankItem.rankPosition
+                        livestockProductionDrinkingWater.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.LP_LOW_YIELDING_ANIMALS) {
+                        livestockProductionIncomeConstraintsResponses.lowYieldingAnimal = selectedRankItem.rankPosition
+                        livestockProductionLowYieldingAnimal.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.LP_COSTLY_VETERINARY_DRUGS) {
+                        livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs = selectedRankItem.rankPosition
+                        livestockProductionVeterinaryDrugs.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.LP_LIVESTOCK_PESTS_DISEASES) {
+                        livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases = selectedRankItem.rankPosition
+                        livestockProductionPests.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.LP_LACK_OF_MARKET) {
+                        livestockProductionIncomeConstraintsResponses.lackofMarket = selectedRankItem.rankPosition
+                        livestockProductionMarket.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.LP_INSECURITY) {
+                        livestockProductionIncomeConstraintsResponses.insecurity = selectedRankItem.rankPosition
+                        livestockProductionInsecurity.text = selectedRankItem.rankPosition.toString()
+                    }
+
+                }
+
+
+                if (constraintCategoryEnum == ConstraintCategoryEnum.FISHING) {
+
+                    fishingRanks.remove(selectedRankItem)
+
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.F_LOW_FISH_STOCKS) {
+                        fishingIncomeConstraintsResponses.lowFishStocks = selectedRankItem.rankPosition
+                        fishingLowStocks.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.F_POOR_MARKET) {
+                        fishingIncomeConstraintsResponses.poorMarket = selectedRankItem.rankPosition
+                        fishingPoorMarket.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.F_EQUIPMENT) {
+                        fishingIncomeConstraintsResponses.lackOfEquipment = selectedRankItem.rankPosition
+                        fishingLackOfEquipment.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.F_COMPETITION) {
+                        fishingIncomeConstraintsResponses.extremeCompetition = selectedRankItem.rankPosition
+                        fishingCompetition.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.F_LACK_OF_EXPERTISE) {
+                        fishingIncomeConstraintsResponses.lackOfExpertise = selectedRankItem.rankPosition
+                        fishingLackOfExpertise.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.F_FISHING_RIGHTS) {
+                        fishingIncomeConstraintsResponses.fishingRightsRestrictions = selectedRankItem.rankPosition
+                        fishingFishingRights.text = selectedRankItem.rankPosition.toString()
+                    }
+                }
+
+
+                if (constraintCategoryEnum == ConstraintCategoryEnum.NATURAL_RESOURCE) {
+
+                    naturalResourceRanks.remove(selectedRankItem)
+
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.NR_DECLINING_RESOURCE) {
+                        naturalResourceIncomeConstraintsResponses.decliningNaturalResources = selectedRankItem.rankPosition
+                        resourceDecline.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.NR_POPULATION_PRESSURE) {
+                        naturalResourceIncomeConstraintsResponses.populationPressure = selectedRankItem.rankPosition
+                        resourcePopulationPressure.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.NR_RIGHTS_RESTRICTIONS) {
+                        naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights = selectedRankItem.rankPosition
+                        resourceRights.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.NR_LOW_VALUE) {
+                        naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts = selectedRankItem.rankPosition
+                        resourceLowValue.text = selectedRankItem.rankPosition.toString()
+                    }
+                }
+
+
+                if (constraintCategoryEnum == ConstraintCategoryEnum.SMALL_ENTERPRISE) {
+
+                    smallEnterpriesRanks.remove(selectedRankItem)
+
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.SE_LACK_OF_CAPITAL) {
+                        smallEnterpriseIncomeConstraintsResponses.lackOfCapital = selectedRankItem.rankPosition
+                        enterpriseLackOfCapital.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.SE_RED_TAPE) {
+                        smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape = selectedRankItem.rankPosition
+                        enterpriseRedTape.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.SE_TAXES) {
+                        smallEnterpriseIncomeConstraintsResponses.tooManyTaxes = selectedRankItem.rankPosition
+                        enterpriseTaxes.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.SE_MARKET_ACCESS) {
+                        smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket = selectedRankItem.rankPosition
+                        enterpriseMarketAccess.text = selectedRankItem.rankPosition.toString()
+                    }
+                    if (constraintsTypeEnum == ConstraintsTypeEnum.SE_LACK_OF_EXPERTISE) {
+                        smallEnterpriseIncomeConstraintsResponses.lackOfExpertise = selectedRankItem.rankPosition
+                        enterpriseExpertise.text = selectedRankItem.rankPosition.toString()
+                    }
+                }
+
+            }
+        }
+
+        (constraintsRankDialog as androidx.appcompat.app.AlertDialog).dismiss()
+    }
+
 
 }
