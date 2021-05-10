@@ -98,6 +98,14 @@
             android:layout_width="match_parent"
             android:layout_marginTop="22dp"/>
 
+        <!--        I. Coping strategies-->
+        <include layout="@layout/wg_coping_strategies"
+            android:visibility="gone"
+            android:id="@+id/wgCopingStrategies"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="22dp"/>
+
         <!--        Completion Page-->
         <include
             android:id="@+id/wgCompletionPage"

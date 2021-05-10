@@ -21,4 +21,5 @@ class WealthGroupQuestionnaire(val uniqueId: String, var questionnaireName: Stri
     lateinit var migrationPatternResponses: MigrationPatternResponses
     lateinit var constraintsResponses: ConstraintsResponses
     var selectedCrops: MutableList<CropModel> = ArrayList()
+    lateinit var copingStrategiesResponses: CopingStrategiesResponses
 }

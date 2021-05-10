@@ -3426,11 +3426,116 @@ class WealthGroupDialogFragment : DialogFragment(),
                         wealthGroupQuestionnaire.constraintsResponses = constraintResponses
 
 
-                        wgCompletionPage.root.visibility = View.VISIBLE
+                        wgCopingStrategies.root.visibility = View.VISIBLE
                         wgConstraints.root.visibility = View.GONE
 
                     }
                 }
+            }
+
+            /* I) Coping strategies */
+            wgCopingStrategies.apply {
+
+                copingBackButton.setOnClickListener {
+                    wgCopingStrategies.root.visibility = View.GONE
+                    wgConstraints.root.visibility = View.VISIBLE
+                }
+
+                copingNextButton.setOnClickListener {
+
+                    if (soldHouseHoldAssets.text.toString()
+                            .isEmpty() || reducedNonFoodExpenses.text.toString()
+                            .isEmpty() || soldProductiveAssets.text.toString()
+                            .isEmpty() || spentSavings.text.toString()
+                            .isEmpty() || borrowedMoneyFromLender.text.toString()
+                            .isEmpty() || soldHouseOrLand.text.toString()
+                            .isEmpty() || withdrewSchoolChildren.text.toString()
+                            .isEmpty() || soldFemaleAnimals.text.toString()
+                            .isEmpty() || begging.text.toString()
+                            .isEmpty() || soldMoreAnimals.text.toString()
+                            .isEmpty() || lessExpensiveFood.text.toString()
+                            .isEmpty() || reducedFoodQuantity.text.toString()
+                            .isEmpty() || borrowedFood.text.toString()
+                            .isEmpty() || reducedNoMealsPerDay.text.toString()
+                            .isEmpty() || reducedMealPortionSize.text.toString().isEmpty()
+                    ) {
+                        inflateErrorModal("Data error", "Kindly input all the empty fields")
+                    } else {
+
+                        if (consumptionStrategiesResponseMoreThanSevenDays(lessExpensiveFood.text.toString()) || consumptionStrategiesResponseMoreThanSevenDays(
+                                reducedFoodQuantity.text.toString()
+                            ) || consumptionStrategiesResponseMoreThanSevenDays(borrowedFood.text.toString()) || consumptionStrategiesResponseMoreThanSevenDays(
+                                reducedNoMealsPerDay.text.toString()
+                            ) || consumptionStrategiesResponseMoreThanSevenDays(reducedMealPortionSize.text.toString())
+                        ) {
+                            inflateErrorModal(
+                                "Validation error",
+                                "A response on consumption based strategies(part a) is greater than 7"
+                            )
+                        } else if (livelihoodStrategiesResponseNotWithinRange(soldHouseHoldAssets.text.toString()) || livelihoodStrategiesResponseNotWithinRange(
+                                reducedNonFoodExpenses.text.toString()
+                            ) || livelihoodStrategiesResponseNotWithinRange(
+                                soldProductiveAssets.text.toString()
+                            ) || livelihoodStrategiesResponseNotWithinRange(spentSavings.text.toString()) || livelihoodStrategiesResponseNotWithinRange(
+                                borrowedMoneyFromLender.text.toString()
+                            ) || livelihoodStrategiesResponseNotWithinRange(soldHouseOrLand.text.toString()) || livelihoodStrategiesResponseNotWithinRange(
+                                withdrewSchoolChildren.text.toString()
+                            ) || livelihoodStrategiesResponseNotWithinRange(soldFemaleAnimals.text.toString()) || livelihoodStrategiesResponseNotWithinRange(
+                                begging.text.toString()
+                            ) || livelihoodStrategiesResponseNotWithinRange(soldMoreAnimals.text.toString())
+                        ) {
+                            inflateErrorModal(
+                                "Validation error",
+                                "Some responses under  the livelihood based strategies are not within range"
+                            )
+                        } else {
+
+                            val copingStrategiesResponses = CopingStrategiesResponses()
+
+                            val consumptionBasedStrategies = ConsumptionBasedStrategies()
+                            consumptionBasedStrategies.lessExpensiveFood =
+                                lessExpensiveFood.text.toString().toDouble()
+                            consumptionBasedStrategies.reducedAdultFoodQuantity =
+                                reducedFoodQuantity.text.toString().toDouble()
+                            consumptionBasedStrategies.borrowedFood =
+                                borrowedFood.text.toString().toDouble()
+                            consumptionBasedStrategies.reducedMealsPerDay =
+                                reducedNoMealsPerDay.text.toString().toDouble()
+                            consumptionBasedStrategies.reducedMealPortionSize =
+                                reducedMealPortionSize.text.toString().toDouble()
+
+                            val livelihoodBasedStrategies = LivelihoodBasedStrategies()
+                            livelihoodBasedStrategies.soldHouseHoldAssets =
+                                soldHouseHoldAssets.text.toString().toInt()
+                            livelihoodBasedStrategies.reducedNonFoodExpense =
+                                reducedNonFoodExpenses.text.toString().toInt()
+                            livelihoodBasedStrategies.soldProductiveAssets =
+                                soldProductiveAssets.text.toString().toInt()
+                            livelihoodBasedStrategies.spentSavings =
+                                spentSavings.text.toString().toInt()
+                            livelihoodBasedStrategies.borrowedMoneyFromLender =
+                                borrowedMoneyFromLender.text.toString().toInt()
+                            livelihoodBasedStrategies.soldHouseOrLand =
+                                soldHouseOrLand.text.toString().toInt()
+                            livelihoodBasedStrategies.withdrewSchoolChildren =
+                                withdrewSchoolChildren.text.toString().toInt()
+                            livelihoodBasedStrategies.soldFemaleAnimals =
+                                soldFemaleAnimals.text.toString().toInt()
+                            livelihoodBasedStrategies.begging = begging.text.toString().toInt()
+                            livelihoodBasedStrategies.soldMoreAnimals =
+                                soldMoreAnimals.text.toString().toInt()
+
+                            copingStrategiesResponses.consumptionBasedStrategies = consumptionBasedStrategies
+                            copingStrategiesResponses.livelihoodBasedStrategies = livelihoodBasedStrategies
+                            wealthGroupQuestionnaire.copingStrategiesResponses = copingStrategiesResponses
+
+                            wgCompletionPage.root.visibility = View.VISIBLE
+                            wgCopingStrategies.root.visibility = View.GONE
+                        }
+                    }
+
+                }
+
             }
 
 
@@ -3474,6 +3579,14 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
             }
         }
+    }
+
+    fun consumptionStrategiesResponseMoreThanSevenDays(responseString: String): Boolean {
+        return responseString.toDouble() > 7.0
+    }
+
+    fun livelihoodStrategiesResponseNotWithinRange(responseString: String): Boolean {
+        return responseString.toInt() != 1 && responseString.toInt() != 2 && responseString.toInt() != 3 && responseString.toInt() != 4
     }
 
     private fun returnZeroStringIfEmpty(inputString: String): String {
@@ -4043,23 +4156,28 @@ class WealthGroupDialogFragment : DialogFragment(),
                     incomeSourceRanks.remove(selectedRankItem)
 
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IS_LOW_EDUCATION) {
-                        wagedLabourIncomeConstraintsResponses.lowEducation = selectedRankItem.rankPosition
+                        wagedLabourIncomeConstraintsResponses.lowEducation =
+                            selectedRankItem.rankPosition
                         labourLowEducation.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IS_POOR_HEALTH) {
-                        wagedLabourIncomeConstraintsResponses.poorHealth = selectedRankItem.rankPosition
+                        wagedLabourIncomeConstraintsResponses.poorHealth =
+                            selectedRankItem.rankPosition
                         labourPoorHealth.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IS_FEW_JOBS) {
-                        wagedLabourIncomeConstraintsResponses.fewJobs = selectedRankItem.rankPosition
+                        wagedLabourIncomeConstraintsResponses.fewJobs =
+                            selectedRankItem.rankPosition
                         labourFewJobs.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IS_TIME_ON_FARM) {
-                        wagedLabourIncomeConstraintsResponses.tooMuchFarmTime = selectedRankItem.rankPosition
+                        wagedLabourIncomeConstraintsResponses.tooMuchFarmTime =
+                            selectedRankItem.rankPosition
                         labourFarmTime.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IS_LOW_WAGE_RATES) {
-                        wagedLabourIncomeConstraintsResponses.lowAverageWageRates = selectedRankItem.rankPosition
+                        wagedLabourIncomeConstraintsResponses.lowAverageWageRates =
+                            selectedRankItem.rankPosition
                         labourLowWageRates.text = selectedRankItem.rankPosition.toString()
                     }
                 }
@@ -4070,39 +4188,49 @@ class WealthGroupDialogFragment : DialogFragment(),
                     incomeConsumptionRanks.remove(selectedRankItem)
 
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IC_SMALL_LAND) {
-                        cropProductionIncomeConstraintsResponses.smallLandHoldings = selectedRankItem.rankPosition
+                        cropProductionIncomeConstraintsResponses.smallLandHoldings =
+                            selectedRankItem.rankPosition
                         consumptionHoldings.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IC_LACK_OF_CREDIT) {
-                        cropProductionIncomeConstraintsResponses.lackOfCredit = selectedRankItem.rankPosition
+                        cropProductionIncomeConstraintsResponses.lackOfCredit =
+                            selectedRankItem.rankPosition
                         consumptionLackOfCredit.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IC_HIGH_INPUT_COSTS) {
-                        cropProductionIncomeConstraintsResponses.highInputCost = selectedRankItem.rankPosition
+                        cropProductionIncomeConstraintsResponses.highInputCost =
+                            selectedRankItem.rankPosition
                         consumptionHighInputs.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IC_LOW_LAND_FERTILITY) {
-                        cropProductionIncomeConstraintsResponses.lowLandFertility = selectedRankItem.rankPosition
+                        cropProductionIncomeConstraintsResponses.lowLandFertility =
+                            selectedRankItem.rankPosition
                         consumptionLowFertility.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IC_UNRELIABLE_WATER) {
-                        cropProductionIncomeConstraintsResponses.lackOfReliableWater = selectedRankItem.rankPosition
+                        cropProductionIncomeConstraintsResponses.lackOfReliableWater =
+                            selectedRankItem.rankPosition
                         consumptionUnreliableWater.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IC_LOW_TECHNICAL_SKILLS) {
-                        cropProductionIncomeConstraintsResponses.lowTechnicalSkills = selectedRankItem.rankPosition
-                        consumptionLowTechnicalSkills.text = selectedRankItem.rankPosition.toString()
+                        cropProductionIncomeConstraintsResponses.lowTechnicalSkills =
+                            selectedRankItem.rankPosition
+                        consumptionLowTechnicalSkills.text =
+                            selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IC_LOW_QUALITY_SEED) {
-                        cropProductionIncomeConstraintsResponses.lowQualitySeed = selectedRankItem.rankPosition
+                        cropProductionIncomeConstraintsResponses.lowQualitySeed =
+                            selectedRankItem.rankPosition
                         consumptionLowSeedQuality.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IC_MARKET_ACCESS) {
-                        cropProductionIncomeConstraintsResponses.lackOfMarketAccess = selectedRankItem.rankPosition
+                        cropProductionIncomeConstraintsResponses.lackOfMarketAccess =
+                            selectedRankItem.rankPosition
                         consumptionMarketAccess.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IC_CROP_PESTS_DISEASES) {
-                        cropProductionIncomeConstraintsResponses.endemicCropPests = selectedRankItem.rankPosition
+                        cropProductionIncomeConstraintsResponses.endemicCropPests =
+                            selectedRankItem.rankPosition
                         consumptionCropPests.text = selectedRankItem.rankPosition.toString()
                     }
                 }
@@ -4112,32 +4240,43 @@ class WealthGroupDialogFragment : DialogFragment(),
                     livestockProductionRanks.remove(selectedRankItem)
 
                     if (constraintsTypeEnum == ConstraintsTypeEnum.LP_LACK_OF_PASTURE) {
-                        livestockProductionIncomeConstraintsResponses.lackOfPasture = selectedRankItem.rankPosition
+                        livestockProductionIncomeConstraintsResponses.lackOfPasture =
+                            selectedRankItem.rankPosition
                         livestockProductionPasture.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.LP_LACK_ANIMAL_DRINKING_WATER) {
-                        livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater = selectedRankItem.rankPosition
-                        livestockProductionDrinkingWater.text = selectedRankItem.rankPosition.toString()
+                        livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater =
+                            selectedRankItem.rankPosition
+                        livestockProductionDrinkingWater.text =
+                            selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.LP_LOW_YIELDING_ANIMALS) {
-                        livestockProductionIncomeConstraintsResponses.lowYieldingAnimal = selectedRankItem.rankPosition
-                        livestockProductionLowYieldingAnimal.text = selectedRankItem.rankPosition.toString()
+                        livestockProductionIncomeConstraintsResponses.lowYieldingAnimal =
+                            selectedRankItem.rankPosition
+                        livestockProductionLowYieldingAnimal.text =
+                            selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.LP_COSTLY_VETERINARY_DRUGS) {
-                        livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs = selectedRankItem.rankPosition
-                        livestockProductionVeterinaryDrugs.text = selectedRankItem.rankPosition.toString()
+                        livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs =
+                            selectedRankItem.rankPosition
+                        livestockProductionVeterinaryDrugs.text =
+                            selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.LP_LIVESTOCK_PESTS_DISEASES) {
-                        livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases = selectedRankItem.rankPosition
+                        livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases =
+                            selectedRankItem.rankPosition
                         livestockProductionPests.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.LP_LACK_OF_MARKET) {
-                        livestockProductionIncomeConstraintsResponses.lackofMarket = selectedRankItem.rankPosition
+                        livestockProductionIncomeConstraintsResponses.lackofMarket =
+                            selectedRankItem.rankPosition
                         livestockProductionMarket.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.LP_INSECURITY) {
-                        livestockProductionIncomeConstraintsResponses.insecurity = selectedRankItem.rankPosition
-                        livestockProductionInsecurity.text = selectedRankItem.rankPosition.toString()
+                        livestockProductionIncomeConstraintsResponses.insecurity =
+                            selectedRankItem.rankPosition
+                        livestockProductionInsecurity.text =
+                            selectedRankItem.rankPosition.toString()
                     }
 
                 }
@@ -4148,7 +4287,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                     fishingRanks.remove(selectedRankItem)
 
                     if (constraintsTypeEnum == ConstraintsTypeEnum.F_LOW_FISH_STOCKS) {
-                        fishingIncomeConstraintsResponses.lowFishStocks = selectedRankItem.rankPosition
+                        fishingIncomeConstraintsResponses.lowFishStocks =
+                            selectedRankItem.rankPosition
                         fishingLowStocks.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.F_POOR_MARKET) {
@@ -4156,19 +4296,23 @@ class WealthGroupDialogFragment : DialogFragment(),
                         fishingPoorMarket.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.F_EQUIPMENT) {
-                        fishingIncomeConstraintsResponses.lackOfEquipment = selectedRankItem.rankPosition
+                        fishingIncomeConstraintsResponses.lackOfEquipment =
+                            selectedRankItem.rankPosition
                         fishingLackOfEquipment.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.F_COMPETITION) {
-                        fishingIncomeConstraintsResponses.extremeCompetition = selectedRankItem.rankPosition
+                        fishingIncomeConstraintsResponses.extremeCompetition =
+                            selectedRankItem.rankPosition
                         fishingCompetition.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.F_LACK_OF_EXPERTISE) {
-                        fishingIncomeConstraintsResponses.lackOfExpertise = selectedRankItem.rankPosition
+                        fishingIncomeConstraintsResponses.lackOfExpertise =
+                            selectedRankItem.rankPosition
                         fishingLackOfExpertise.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.F_FISHING_RIGHTS) {
-                        fishingIncomeConstraintsResponses.fishingRightsRestrictions = selectedRankItem.rankPosition
+                        fishingIncomeConstraintsResponses.fishingRightsRestrictions =
+                            selectedRankItem.rankPosition
                         fishingFishingRights.text = selectedRankItem.rankPosition.toString()
                     }
                 }
@@ -4179,19 +4323,23 @@ class WealthGroupDialogFragment : DialogFragment(),
                     naturalResourceRanks.remove(selectedRankItem)
 
                     if (constraintsTypeEnum == ConstraintsTypeEnum.NR_DECLINING_RESOURCE) {
-                        naturalResourceIncomeConstraintsResponses.decliningNaturalResources = selectedRankItem.rankPosition
+                        naturalResourceIncomeConstraintsResponses.decliningNaturalResources =
+                            selectedRankItem.rankPosition
                         resourceDecline.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.NR_POPULATION_PRESSURE) {
-                        naturalResourceIncomeConstraintsResponses.populationPressure = selectedRankItem.rankPosition
+                        naturalResourceIncomeConstraintsResponses.populationPressure =
+                            selectedRankItem.rankPosition
                         resourcePopulationPressure.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.NR_RIGHTS_RESTRICTIONS) {
-                        naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights = selectedRankItem.rankPosition
+                        naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights =
+                            selectedRankItem.rankPosition
                         resourceRights.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.NR_LOW_VALUE) {
-                        naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts = selectedRankItem.rankPosition
+                        naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts =
+                            selectedRankItem.rankPosition
                         resourceLowValue.text = selectedRankItem.rankPosition.toString()
                     }
                 }
@@ -4202,23 +4350,28 @@ class WealthGroupDialogFragment : DialogFragment(),
                     smallEnterpriesRanks.remove(selectedRankItem)
 
                     if (constraintsTypeEnum == ConstraintsTypeEnum.SE_LACK_OF_CAPITAL) {
-                        smallEnterpriseIncomeConstraintsResponses.lackOfCapital = selectedRankItem.rankPosition
+                        smallEnterpriseIncomeConstraintsResponses.lackOfCapital =
+                            selectedRankItem.rankPosition
                         enterpriseLackOfCapital.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.SE_RED_TAPE) {
-                        smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape = selectedRankItem.rankPosition
+                        smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape =
+                            selectedRankItem.rankPosition
                         enterpriseRedTape.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.SE_TAXES) {
-                        smallEnterpriseIncomeConstraintsResponses.tooManyTaxes = selectedRankItem.rankPosition
+                        smallEnterpriseIncomeConstraintsResponses.tooManyTaxes =
+                            selectedRankItem.rankPosition
                         enterpriseTaxes.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.SE_MARKET_ACCESS) {
-                        smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket = selectedRankItem.rankPosition
+                        smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket =
+                            selectedRankItem.rankPosition
                         enterpriseMarketAccess.text = selectedRankItem.rankPosition.toString()
                     }
                     if (constraintsTypeEnum == ConstraintsTypeEnum.SE_LACK_OF_EXPERTISE) {
-                        smallEnterpriseIncomeConstraintsResponses.lackOfExpertise = selectedRankItem.rankPosition
+                        smallEnterpriseIncomeConstraintsResponses.lackOfExpertise =
+                            selectedRankItem.rankPosition
                         enterpriseExpertise.text = selectedRankItem.rankPosition.toString()
                     }
                 }
