@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingLeft="24dp"
+    android:paddingEnd="24dp"
+    android:paddingRight="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:lineSpacingExtra="9sp"
+        android:text="I. Coping strategies in the Livelihood Zone"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/lato_bold"
+        android:gravity="start"
+        android:lineHeight="24sp"
+        android:lineSpacingExtra="8sp"
+        android:text="a) Consumption based strategies (rCSI)"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="normal" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:fontFamily="@font/lato_regular"
+        android:gravity="start"
+        android:lineHeight="24sp"
+        android:lineSpacingExtra="8sp"
+        android:text="During the last 7 days, were there days (and if so, how many) when your household had to use any of the following strategies to cope with lack of food or money to buy it?"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="normal" />
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="STRATEGY"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="DAYS"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Relied on less preferred and/or less expensive food"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/lessExpensiveFood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Reduced the quantity of food consumed by adults/mothers to ensure that children had enough to eat"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/reducedFoodQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Borrowed food, or relied on help from friends or relatives"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/borrowedFood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Reduced the number of meals eaten per day"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/reducedNoMealsPerDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Reduced the portion size of meals"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/reducedMealPortionSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/lato_bold"
+        android:gravity="start"
+        android:lineHeight="24sp"
+        android:lineSpacingExtra="8sp"
+        android:text="a) Consumption based strategies (rCSI)"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="normal" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:fontFamily="@font/lato_regular"
+        android:gravity="start"
+        android:lineHeight="24sp"
+        android:lineSpacingExtra="8sp"
+        android:text="During the past 4 Weeks, did anyone in your household have to engage in any following due to a lack of food or a lack of money to buy food or exposed to a shock?"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="normal" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="STRATEGY"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="1 = No
+2 = No, because I already sold those assets or have engaged in this activity within the last 12 months and cannot continue to do it
+3 = Yes
+4 = Not applicable
+"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Sold household assets/goods (radio, furniture, television, jewellery etc..)"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/soldHouseHoldAssets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Reduced nonfood expenses on health (including drugs) and education"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/reducedNonFoodExpenses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Sold productive assets or means of transport (sewing machine, wheelbarrow, bicycle, car, etc..)"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/soldProductiveAssets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Spent savings"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/spentSavings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Borrowed money / food from a formal lender / bank"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/borrowedMoneyFromLender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Sold house or land"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/soldHouseOrLand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Withdrew children from school"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/withdrewSchoolChildren"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Sold last female animals"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/soldFemaleAnimals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Begging"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/begging"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".8"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Sold more animals (non-productive) than usual"
+                    android:textColor="#FF3F51B5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:background="@drawable/cell_shape"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp">
+
+                <EditText
+                    android:id="@+id/soldMoreAnimals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/lato_regular"
+                    android:inputType="numberDecimal"
+                    android:lineHeight="24sp"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+
+    </TableLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="18dp">
+
+        <TextView
+            android:id="@+id/copingBackButton"
+            android:text="BACK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#00569c"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/copingNextButton"
+            android:text="NEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#00569c"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
