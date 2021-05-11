@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:background="@drawable/bg_rounded_corner_modal"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/disabilityOption"
+        android:text="Has any disability?"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginTop="19dp"
+        android:layout_gravity="start|center_vertical"/>
+
+    <View
+        android:id="@+id/stroke"
+        android:background="#DDE4E9"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/noDisabilityOption"
+        android:text="Has no disability?"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginTop="19dp"
+        android:layout_gravity="start|center_vertical"/>
+
+</LinearLayout>

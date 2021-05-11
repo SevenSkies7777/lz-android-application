@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:text="J. FGD participants"
+        android:text="J. FDG participants"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_bold"
@@ -53,6 +53,7 @@
             android:layout_width="100dp"
             android:layout_marginTop="27dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_gravity="center_horizontal"/>
 
 
