@@ -44,6 +44,7 @@ import com.silasonyango.ndma.ui.model.*
 import com.silasonyango.ndma.ui.wealthgroup.adapters.*
 import com.silasonyango.ndma.ui.wealthgroup.model.ConstraintCategoryEnum
 import com.silasonyango.ndma.ui.wealthgroup.model.ConstraintsTypeEnum
+import com.silasonyango.ndma.ui.wealthgroup.model.FgdParticipantModel
 import com.silasonyango.ndma.ui.wealthgroup.responses.*
 import com.silasonyango.ndma.util.Util
 import kotlin.math.abs
@@ -53,7 +54,7 @@ class WealthGroupDialogFragment : DialogFragment(),
     CropProductionListAdapter.CropProductionListAdapterCallBack,
     WgCropContributionAdapter.WgCropContributionAdapterCallBack,
     LivestockContributionRankAdapter.LivestockContributionRankAdapterCallBack,
-    ConstraintsRankingAdapter.ConstraintsRankingAdapterCallBack {
+    ConstraintsRankingAdapter.ConstraintsRankingAdapterCallBack, FgdParticipantsAdapter.FgdParticipantsAdapterCallBack {
 
     private lateinit var wealthGroupViewModel: WealthGroupViewModel
 
@@ -126,6 +127,8 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     val smallEnterpriseIncomeConstraintsResponses =
         SmallEnterpriseIncomeConstraintsResponses()
+
+    val fdgParticipantsModelList: MutableList<FgdParticipantModel> = ArrayList()
 
     companion object {
 
@@ -3529,11 +3532,51 @@ class WealthGroupDialogFragment : DialogFragment(),
                             copingStrategiesResponses.livelihoodBasedStrategies = livelihoodBasedStrategies
                             wealthGroupQuestionnaire.copingStrategiesResponses = copingStrategiesResponses
 
-                            wgCompletionPage.root.visibility = View.VISIBLE
+                            fdgParticipants.root.visibility = View.VISIBLE
                             wgCopingStrategies.root.visibility = View.GONE
                         }
                     }
 
+                }
+
+            }
+
+
+            fdgParticipants.apply {
+
+                fgdConfigurationSubmitButton.setOnClickListener {
+
+                    if (noFdgParticipants.text.toString().isNotEmpty()) {
+
+                        for (i in 0..noFdgParticipants.text.toString().toInt() - 1) {
+                            fdgParticipantsModelList.add(
+                                FgdParticipantModel(
+                                    "",
+                                    0.0,
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                                )
+                            )
+                        }
+
+                        val fgdParticipantAdapter = FgdParticipantsAdapter(fdgParticipantsModelList, this@WealthGroupDialogFragment)
+                        val gridLayoutManager = GridLayoutManager(activity, 1)
+                        participantsList.layoutManager = gridLayoutManager
+                        participantsList.hasFixedSize()
+                        participantsList.adapter = fgdParticipantAdapter
+
+                        numberFgdParticipantsConfiguration.visibility = View.GONE
+                        participantsListWrapper.visibility = View.VISIBLE
+
+                    }
+
+                }
+
+                fdgParticipantsBackButton.setOnClickListener {
+                    fdgParticipants.root.visibility = View.GONE
+                    wgCopingStrategies.root.visibility = View.VISIBLE
                 }
 
             }
