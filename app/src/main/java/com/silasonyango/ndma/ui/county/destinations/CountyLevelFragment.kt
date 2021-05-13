@@ -2,7 +2,9 @@ package com.silasonyango.ndma.ui.county.destinations
 
 import android.Manifest
 import android.app.AlertDialog
-import android.content.*
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -16,13 +18,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import androidx.core.view.get
-import androidx.core.view.size
+import androidx.core.view.children
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -34,24 +35,21 @@ import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaire
 import com.silasonyango.ndma.appStore.model.CountyLevelQuestionnaireListObject
 import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.config.Constants.QUESTIONNAIRE_COMPLETED
-import com.silasonyango.ndma.database.questionnaires.entity.QuestionnaireTypesEntity
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.login.model.GeographyObject
-import com.silasonyango.ndma.login.model.SubLocationsLivelihoodZoneAssignmentsModel
-import com.silasonyango.ndma.ui.county.adapters.*
+import com.silasonyango.ndma.ui.county.adapters.HazardsRankingAdapter
+import com.silasonyango.ndma.ui.county.adapters.LzCropProductionRecyclerViewAdapter
+import com.silasonyango.ndma.ui.county.adapters.LzMarketTradeRecyclerViewAdapter
+import com.silasonyango.ndma.ui.county.adapters.SubLocationLzAssignmentRecyclerViewAdapter
 import com.silasonyango.ndma.ui.county.model.*
 import com.silasonyango.ndma.ui.county.responses.*
 import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
 import com.silasonyango.ndma.ui.home.HomeViewModel
 import com.silasonyango.ndma.ui.home.adapters.*
-import com.silasonyango.ndma.ui.model.LivestockContributionRankTypeEnum
 import com.silasonyango.ndma.ui.model.QuestionnaireStatus
 import com.silasonyango.ndma.ui.model.RankResponseItem
-import com.silasonyango.ndma.ui.model.WgLivestockTypesEnum
-import com.silasonyango.ndma.ui.wealthgroup.WealthGroupDialogFragment
 import com.silasonyango.ndma.ui.wealthgroup.adapters.CropProductionListAdapter
 import com.silasonyango.ndma.ui.wealthgroup.adapters.CropSelectionListAdapter
-import com.silasonyango.ndma.ui.wealthgroup.adapters.LivestockContributionRankAdapter
 import com.silasonyango.ndma.ui.wealthgroup.adapters.TribesListViewAdapter
 import com.silasonyango.ndma.ui.wealthgroup.responses.CropProductionResponseValueModel
 import com.silasonyango.ndma.ui.wealthgroup.responses.CropSeasonResponseItem
@@ -312,7 +310,51 @@ class CountyLevelFragment : DialogFragment(),
 
                 lzAllocationNextButton.setOnClickListener {
                     lzSubLocationAssignment.root.visibility = View.GONE
-                    locationAndPopulationLayout.root.visibility = View.VISIBLE
+                    wealthGroupCharectaristics.root.visibility = View.VISIBLE
+                }
+
+            }
+
+            wealthGroupCharectaristics.apply {
+
+                val wealthGroupCharectaristicsResponses = WealthGroupCharectaristicsResponses()
+
+                xticsNumberSubmitButton.setOnClickListener {
+                    if (noCharectaristics.text.toString().isNotEmpty()) {
+
+                        val editTextsList: MutableList<EditText> = ArrayList()
+                        for (i in 0..noCharectaristics.text.toString().toInt() - 1) {
+                            editTextsList.add(EditText(requireContext()))
+                        }
+
+                        var ids = 1
+                        for (currentEditText in editTextsList) {
+                            currentEditText.setId(ids)
+                            currentEditText.hint = "Charectaristic $ids"
+                            currentEditText.setLayoutParams(
+                                ViewGroup.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT
+                                )
+                            )
+                            veryPoorList.addView(currentEditText)
+                            ids++
+                        }
+
+                        numberVeryPoorCharectaristics.visibility = View.GONE
+                        veryPoorCharectaristicsList.visibility = View.VISIBLE
+
+                    }
+                }
+
+
+                veryPoorSubmitButton.setOnClickListener {
+
+                    for (currentEditText in veryPoorList.children) {
+                        val currentString = (currentEditText as EditText).text.toString()
+                        wealthGroupCharectaristicsResponses.veryPoorCharectaristics.add(currentString)
+                    }
+
                 }
 
             }
