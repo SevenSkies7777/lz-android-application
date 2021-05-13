@@ -350,11 +350,186 @@ class CountyLevelFragment : DialogFragment(),
 
                 veryPoorSubmitButton.setOnClickListener {
 
+                    var allEditTextsAreEmpty = true
                     for (currentEditText in veryPoorList.children) {
                         val currentString = (currentEditText as EditText).text.toString()
-                        wealthGroupCharectaristicsResponses.veryPoorCharectaristics.add(currentString)
+                        if (currentString.trim().isNotEmpty()) {
+                            allEditTextsAreEmpty = false
+                            wealthGroupCharectaristicsResponses.veryPoorCharectaristics.add(currentString)
+                        }
                     }
 
+                    if (allEditTextsAreEmpty) {
+                        inflateErrorModal("Data error", "You have not filled in any charectaristic")
+                    } else {
+                        veryPoorSection.visibility = View.GONE
+                        veryPoorIcon.visibility = View.VISIBLE
+                    }
+
+                }
+
+
+                poorXticsNumberSubmitButton.setOnClickListener {
+                    if (poorNoCharectaristics.text.toString().isNotEmpty()) {
+
+                        val editTextsList: MutableList<EditText> = ArrayList()
+                        for (i in 0..poorNoCharectaristics.text.toString().toInt() - 1) {
+                            editTextsList.add(EditText(requireContext()))
+                        }
+
+                        var ids = 1
+                        for (currentEditText in editTextsList) {
+                            currentEditText.hint = "Charectaristic $ids"
+                            currentEditText.setLayoutParams(
+                                ViewGroup.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT
+                                )
+                            )
+                            poorList.addView(currentEditText)
+                            ids++
+                        }
+
+                        numberPoorCharectaristics.visibility = View.GONE
+                        poorCharectaristicsList.visibility = View.VISIBLE
+
+                    }
+                }
+
+
+                poorSubmitButton.setOnClickListener {
+
+                    var allEditTextsAreEmpty = true
+                    for (currentEditText in poorList.children) {
+                        val currentString = (currentEditText as EditText).text.toString()
+                        if (currentString.trim().isNotEmpty()) {
+                            allEditTextsAreEmpty = false
+                            wealthGroupCharectaristicsResponses.poorCharectaristics.add(currentString)
+                        }
+                    }
+
+                    if (allEditTextsAreEmpty) {
+                        inflateErrorModal("Data error", "You have not filled in any charectaristic")
+                    } else {
+                        poorSection.visibility = View.GONE
+                        poorIcon.visibility = View.VISIBLE
+                    }
+
+                }
+
+
+                mediumXticsNumberSubmitButton.setOnClickListener {
+                    if (mediumNoCharectaristics.text.toString().isNotEmpty()) {
+
+                        val editTextsList: MutableList<EditText> = ArrayList()
+                        for (i in 0..mediumNoCharectaristics.text.toString().toInt() - 1) {
+                            editTextsList.add(EditText(requireContext()))
+                        }
+
+                        var ids = 1
+                        for (currentEditText in editTextsList) {
+                            currentEditText.hint = "Charectaristic $ids"
+                            currentEditText.setLayoutParams(
+                                ViewGroup.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT
+                                )
+                            )
+                            mediumList.addView(currentEditText)
+                            ids++
+                        }
+
+                        numberMediumCharectaristics.visibility = View.GONE
+                        mediumCharectaristicsList.visibility = View.VISIBLE
+
+                    }
+                }
+
+
+                mediumSubmitButton.setOnClickListener {
+
+                    var allEditTextsAreEmpty = true
+                    for (currentEditText in mediumList.children) {
+                        val currentString = (currentEditText as EditText).text.toString()
+                        if (currentString.trim().isNotEmpty()) {
+                            allEditTextsAreEmpty = false
+                            wealthGroupCharectaristicsResponses.mediumCharectaristics.add(currentString)
+                        }
+                    }
+
+                    if (allEditTextsAreEmpty) {
+                        inflateErrorModal("Data error", "You have not filled in any charectaristic")
+                    } else {
+                        mediumSection.visibility = View.GONE
+                        mediumIcon.visibility = View.VISIBLE
+                    }
+
+                }
+
+
+                betterOffXticsNumberSubmitButton.setOnClickListener {
+                    if (betterOffNoCharectaristics.text.toString().isNotEmpty()) {
+
+                        val editTextsList: MutableList<EditText> = ArrayList()
+                        for (i in 0..betterOffNoCharectaristics.text.toString().toInt() - 1) {
+                            editTextsList.add(EditText(requireContext()))
+                        }
+
+                        var ids = 1
+                        for (currentEditText in editTextsList) {
+                            currentEditText.hint = "Charectaristic $ids"
+                            currentEditText.setLayoutParams(
+                                ViewGroup.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT
+                                )
+                            )
+                            betterOffList.addView(currentEditText)
+                            ids++
+                        }
+
+                        numberBetterOffCharectaristics.visibility = View.GONE
+                        betterOffCharectaristicsList.visibility = View.VISIBLE
+
+                    }
+                }
+
+                betterOffSubmitButton.setOnClickListener {
+
+                    var allEditTextsAreEmpty = true
+                    for (currentEditText in betterOffList.children) {
+                        val currentString = (currentEditText as EditText).text.toString()
+                        if (currentString.trim().isNotEmpty()) {
+                            allEditTextsAreEmpty = false
+                            wealthGroupCharectaristicsResponses.betterOffCharectaristics.add(currentString)
+                        }
+                    }
+
+                    if (allEditTextsAreEmpty) {
+                        inflateErrorModal("Data error", "You have not filled in any charectaristic")
+                    } else {
+                        betterOffSection.visibility = View.GONE
+                        betterOffIcon.visibility = View.VISIBLE
+                    }
+
+                }
+
+                wgCharectaristicsBackButton.setOnClickListener {
+                    lzSubLocationAssignment.root.visibility = View.VISIBLE
+                    wealthGroupCharectaristics.root.visibility = View.GONE
+                }
+
+                wgCharectaristicsNextButton.setOnClickListener {
+
+                    if (wealthGroupCharectaristicsResponses.poorCharectaristics.isNotEmpty() && wealthGroupCharectaristicsResponses.veryPoorCharectaristics.isNotEmpty()
+                        && wealthGroupCharectaristicsResponses.mediumCharectaristics.isNotEmpty() && wealthGroupCharectaristicsResponses.betterOffCharectaristics.isNotEmpty()) {
+                        countyLevelQuestionnaire.wealthGroupCharectariticsResponses =  wealthGroupCharectaristicsResponses
+
+                        locationAndPopulationLayout.root.visibility = View.VISIBLE
+                        wealthGroupCharectaristics.root.visibility = View.GONE
+                    } else {
+                        inflateErrorModal("Missing data", "Kindly fill in atleast a single charectaristic in all of the sections")
+                    }
                 }
 
             }
@@ -464,7 +639,7 @@ class CountyLevelFragment : DialogFragment(),
                 }
                 locationBackButton.setOnClickListener {
                     locationAndPopulationLayout.root.visibility = View.GONE
-                    lzSubLocationAssignment.root.visibility = View.VISIBLE
+                    wealthGroupCharectaristics.root.visibility = View.VISIBLE
                 }
             }
 

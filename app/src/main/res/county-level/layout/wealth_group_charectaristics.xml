@@ -19,110 +19,629 @@
         android:lineSpacingExtra="9sp"/>
 
 
-    <TextView
-        android:text="1) Very poor"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/lato_bold"
-        android:textStyle="normal"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:lineSpacingExtra="8sp"
-        android:lineHeight="24sp"
-        android:layout_marginTop="27dp"
-        android:gravity="start"/>
-
-    <!--    Number of charectaristics-->
-
-    <LinearLayout
-        android:id="@+id/numberVeryPoorCharectaristics"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:text="a) Input the number of charectaristics you would likew to register"
+            android:id="@+id/veryPoorTitle"
+            android:text="1) Very poor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/lato_regular"
+            android:fontFamily="@font/lato_bold"
             android:textStyle="normal"
             android:textSize="16sp"
             android:textColor="#000000"
             android:lineSpacingExtra="8sp"
             android:lineHeight="24sp"
-            android:gravity="start"/>
-
-
-        <EditText
-            android:id="@+id/noCharectaristics"
-            android:fontFamily="@font/lato_regular"
-            android:textStyle="normal"
-            android:textSize="24sp"
-            android:textColor="#000000"
-            android:lineSpacingExtra="8sp"
-            android:inputType="numberDecimal"
-            android:lineHeight="24sp"
-            android:layout_width="100dp"
             android:layout_marginTop="27dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
 
 
-        <TextView
-            android:id="@+id/xticsNumberSubmitButton"
-            android:background="@drawable/bg_green_button"
-            android:text="Next"
-            android:layout_width="130dp"
-            android:layout_height="28dp"
-            android:fontFamily="@font/lato_bold"
-            android:textStyle="bold"
-            android:textSize="12sp"
-            android:textColor="#ffffff"
-            android:lineSpacingExtra="12sp"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="27dp"/>
+        <LinearLayout
+            android:id="@+id/veryPoorIcon"
+            android:visibility="gone"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_green_oval"
+            android:layout_toEndOf="@+id/veryPoorTitle"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:gravity="center">
 
-    </LinearLayout>
+            <View
+                android:background="@drawable/ic_white_check"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"/>
 
+        </LinearLayout>
 
-<!--    Charectaristics list-->
+    </RelativeLayout>
 
 
     <LinearLayout
-        android:id="@+id/veryPoorCharectaristicsList"
+        android:id="@+id/veryPoorSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="27dp"
-        android:visibility="gone"
+        android:layout_marginTop="27dp"
         android:orientation="vertical">
 
+        <!--    Number of charectaristics-->
         <LinearLayout
-            android:id="@+id/veryPoorList"
+            android:id="@+id/numberVeryPoorCharectaristics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:text="a) Input the number of charectaristics you would likew to register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="8sp"
+                android:lineHeight="24sp"
+                android:gravity="start"/>
 
 
-        <TextView
-            android:id="@+id/veryPoorSubmitButton"
-            android:background="@drawable/bg_green_button"
-            android:text="Submit"
-            android:layout_width="130dp"
-            android:layout_height="28dp"
-            android:fontFamily="@font/lato_bold"
-            android:textStyle="bold"
-            android:textSize="12sp"
-            android:textColor="#ffffff"
-            android:lineSpacingExtra="12sp"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="27dp"/>
+            <EditText
+                android:id="@+id/noCharectaristics"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="24sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="8sp"
+                android:inputType="numberDecimal"
+                android:lineHeight="24sp"
+                android:layout_width="100dp"
+                android:layout_marginTop="27dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"/>
+
+
+            <TextView
+                android:id="@+id/xticsNumberSubmitButton"
+                android:background="@drawable/bg_green_button"
+                android:text="Next"
+                android:layout_width="130dp"
+                android:layout_height="28dp"
+                android:fontFamily="@font/lato_bold"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="12sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="27dp"/>
+
+        </LinearLayout>
+
+
+        <!--    Charectaristics list-->
+
+
+        <LinearLayout
+            android:id="@+id/veryPoorCharectaristicsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="27dp"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/veryPoorList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"/>
+
+
+            <TextView
+                android:id="@+id/veryPoorSubmitButton"
+                android:background="@drawable/bg_green_button"
+                android:text="Submit"
+                android:layout_width="130dp"
+                android:layout_height="28dp"
+                android:fontFamily="@font/lato_bold"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="12sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="27dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
+
+
+
+<!--    Poor Section-->
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/poorTitle"
+            android:text="2) Poor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:lineSpacingExtra="8sp"
+            android:lineHeight="24sp"
+            android:layout_marginTop="27dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+
+        <LinearLayout
+            android:id="@+id/poorIcon"
+            android:visibility="gone"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_green_oval"
+            android:layout_toEndOf="@+id/poorTitle"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:gravity="center">
+
+            <View
+                android:background="@drawable/ic_white_check"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/poorSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:orientation="vertical">
+
+        <!--    Number of charectaristics-->
+        <LinearLayout
+            android:id="@+id/numberPoorCharectaristics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="a) Input the number of charectaristics you would likew to register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="8sp"
+                android:lineHeight="24sp"
+                android:gravity="start"/>
+
+
+            <EditText
+                android:id="@+id/poorNoCharectaristics"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="24sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="8sp"
+                android:inputType="numberDecimal"
+                android:lineHeight="24sp"
+                android:layout_width="100dp"
+                android:layout_marginTop="27dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"/>
+
+
+            <TextView
+                android:id="@+id/poorXticsNumberSubmitButton"
+                android:background="@drawable/bg_green_button"
+                android:text="Next"
+                android:layout_width="130dp"
+                android:layout_height="28dp"
+                android:fontFamily="@font/lato_bold"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="12sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="27dp"/>
+
+        </LinearLayout>
+
+
+        <!--    Charectaristics list-->
+
+
+        <LinearLayout
+            android:id="@+id/poorCharectaristicsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="27dp"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/poorList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"/>
+
+
+            <TextView
+                android:id="@+id/poorSubmitButton"
+                android:background="@drawable/bg_green_button"
+                android:text="Submit"
+                android:layout_width="130dp"
+                android:layout_height="28dp"
+                android:fontFamily="@font/lato_bold"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="12sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="27dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!--    Medium Section-->
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/mediumTitle"
+            android:text="3) Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:lineSpacingExtra="8sp"
+            android:lineHeight="24sp"
+            android:layout_marginTop="27dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+
+        <LinearLayout
+            android:id="@+id/mediumIcon"
+            android:visibility="gone"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_green_oval"
+            android:layout_toEndOf="@+id/mediumTitle"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:gravity="center">
+
+            <View
+                android:background="@drawable/ic_white_check"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/mediumSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:orientation="vertical">
+
+        <!--    Number of charectaristics-->
+        <LinearLayout
+            android:id="@+id/numberMediumCharectaristics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="a) Input the number of charectaristics you would likew to register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="8sp"
+                android:lineHeight="24sp"
+                android:gravity="start"/>
+
+
+            <EditText
+                android:id="@+id/mediumNoCharectaristics"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="24sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="8sp"
+                android:inputType="numberDecimal"
+                android:lineHeight="24sp"
+                android:layout_width="100dp"
+                android:layout_marginTop="27dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"/>
+
+
+            <TextView
+                android:id="@+id/mediumXticsNumberSubmitButton"
+                android:background="@drawable/bg_green_button"
+                android:text="Next"
+                android:layout_width="130dp"
+                android:layout_height="28dp"
+                android:fontFamily="@font/lato_bold"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="12sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="27dp"/>
+
+        </LinearLayout>
+
+
+        <!--    Charectaristics list-->
+
+
+        <LinearLayout
+            android:id="@+id/mediumCharectaristicsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="27dp"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/mediumList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"/>
+
+
+            <TextView
+                android:id="@+id/mediumSubmitButton"
+                android:background="@drawable/bg_green_button"
+                android:text="Submit"
+                android:layout_width="130dp"
+                android:layout_height="28dp"
+                android:fontFamily="@font/lato_bold"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="12sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="27dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!--    Poor Section-->
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/betterOffTitle"
+            android:text="4) Better off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:lineSpacingExtra="8sp"
+            android:lineHeight="24sp"
+            android:layout_marginTop="27dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+
+        <LinearLayout
+            android:id="@+id/betterOffIcon"
+            android:visibility="gone"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_green_oval"
+            android:layout_toEndOf="@+id/betterOffTitle"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:gravity="center">
+
+            <View
+                android:background="@drawable/ic_white_check"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/betterOffSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:orientation="vertical">
+
+        <!--    Number of charectaristics-->
+        <LinearLayout
+            android:id="@+id/numberBetterOffCharectaristics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="a) Input the number of charectaristics you would likew to register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="8sp"
+                android:lineHeight="24sp"
+                android:gravity="start"/>
+
+
+            <EditText
+                android:id="@+id/betterOffNoCharectaristics"
+                android:fontFamily="@font/lato_regular"
+                android:textStyle="normal"
+                android:textSize="24sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="8sp"
+                android:inputType="numberDecimal"
+                android:lineHeight="24sp"
+                android:layout_width="100dp"
+                android:layout_marginTop="27dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"/>
+
+
+            <TextView
+                android:id="@+id/betterOffXticsNumberSubmitButton"
+                android:background="@drawable/bg_green_button"
+                android:text="Next"
+                android:layout_width="130dp"
+                android:layout_height="28dp"
+                android:fontFamily="@font/lato_bold"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="12sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="27dp"/>
+
+        </LinearLayout>
+
+
+        <!--    Charectaristics list-->
+
+
+        <LinearLayout
+            android:id="@+id/betterOffCharectaristicsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="27dp"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/betterOffList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"/>
+
+
+            <TextView
+                android:id="@+id/betterOffSubmitButton"
+                android:background="@drawable/bg_green_button"
+                android:text="Submit"
+                android:layout_width="130dp"
+                android:layout_height="28dp"
+                android:fontFamily="@font/lato_bold"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="12sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="27dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="18dp">
+
+        <TextView
+            android:id="@+id/wgCharectaristicsBackButton"
+            android:text="BACK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#00569c"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/wgCharectaristicsNextButton"
+            android:text="NEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#00569c"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
