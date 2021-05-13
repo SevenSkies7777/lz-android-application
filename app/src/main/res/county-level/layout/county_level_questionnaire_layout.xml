@@ -31,6 +31,18 @@
             android:visibility="gone"
             android:layout_marginTop="22dp" />
 
+
+        <!--        C(i). Wealth Group charectaristics-->
+        <include
+            android:id="@+id/wealthGroupCharectaristics"
+            layout="@layout/wealth_group_charectaristics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:visibility="gone" />
+
+
+
         <!--        C. Location and Population-->
         <include
             android:id="@+id/locationAndPopulationLayout"
