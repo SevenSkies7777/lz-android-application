@@ -3,6 +3,10 @@ package com.silasonyango.ndma.ui.wealthgroup.adapters
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,20 +29,20 @@ class CropProductionListAdapter(
     private var errorDialog: android.app.AlertDialog? = null
 
     interface CropProductionListAdapterCallBack {
-        fun onCropProductionResponseItemSubmited(responseItem: WgCropProductionResponseItem, position: Int)
+        fun onCropProductionResponseItemSubmited(
+            responseItem: WgCropProductionResponseItem,
+            position: Int
+        )
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val inflater: LayoutInflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.lz_crop_production_item, null, true)
+        val view = inflater.inflate(R.layout.crop_cultivation_item, null, true)
 
         val currentResponseItem = responseItems.get(position)
 
         val cropName: TextView = view.findViewById<TextView>(R.id.cropName)
-        val tvAccordionIcon: TextView = view.findViewById<TextView>(R.id.tvAccordionIcon)
-        val accordionStroke: View = view.findViewById<TextView>(R.id.accordionStroke)
-        val accordionContent: View = view.findViewById<TextView>(R.id.accordionContent)
         val shortRainsRainfedCultivatedAreaPercentage: EditText =
             view.findViewById<EditText>(R.id.shortRainsRainfedCultivatedAreaPercentage)
         val shortRainsRainfedAverageYieldPerHa: EditText =
@@ -57,85 +61,138 @@ class CropProductionListAdapter(
         val longRainsIrrigatedAverageYieldPerHa: EditText =
             view.findViewById<EditText>(R.id.longRainsIrrigatedAverageYieldPerHa)
 
-        val submitButton: TextView = view.findViewById<TextView>(R.id.cropSubmitButton)
+
 
         cropName.text = currentResponseItem.crop.cropName
 
-        if (currentResponseItem.allFieldsFilled) {
+//        shortRainsRainfedCultivatedAreaPercentage.setText(currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.value.toString())
+//        shortRainsRainfedAverageYieldPerHa.setText(currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.value.toString())
+//        shortRainsIrrigatedCultivatedArea.setText(currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.value.toString())
+//        shortRainsIrrigatedAverageYieldPerHa.setText(currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.value.toString())
+//
+//        longRainsRainfedCultivatedAreaPercentage.setText(currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.value.toString())
+//        longRainsRainfedAverageYieldPerHa.setText(currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.value.toString())
+//        longRainsIrrigatedCultivatedArea.setText(currentResponseItem.longRainsSeason.irrigatedCultivatedArea.value.toString())
+//        longRainsIrrigatedAverageYieldPerHa.setText(currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.value.toString())
 
-            shortRainsRainfedCultivatedAreaPercentage.setText(currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.value.toString())
-            shortRainsRainfedAverageYieldPerHa.setText(currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.value.toString())
-            shortRainsIrrigatedCultivatedArea.setText(currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.value.toString())
-            shortRainsIrrigatedAverageYieldPerHa.setText(currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.value.toString())
 
-            longRainsRainfedCultivatedAreaPercentage.setText(currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.value.toString())
-            longRainsRainfedAverageYieldPerHa.setText(currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.value.toString())
-            longRainsIrrigatedCultivatedArea.setText(currentResponseItem.longRainsSeason.irrigatedCultivatedArea.value.toString())
-            longRainsIrrigatedAverageYieldPerHa.setText(currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.value.toString())
+        val textWatcher = object : TextWatcher {
+            override fun afterTextChanged(editable: Editable?) {
+                Handler(Looper.getMainLooper()).postDelayed({
 
-        }
+                    if (editable == shortRainsRainfedCultivatedAreaPercentage.editableText) {
+                        if (shortRainsRainfedCultivatedAreaPercentage.text.toString().trim().isNotEmpty()) {
+                            currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage =
+                                CropProductionResponseValueModel(
+                                    shortRainsRainfedCultivatedAreaPercentage.text.toString()
+                                        .toDouble(),
+                                    true
+                                )
+                        }
+                    }
+                    if (editable == shortRainsRainfedAverageYieldPerHa.editableText) {
+                        if (shortRainsRainfedAverageYieldPerHa.text.toString().trim().isNotEmpty()) {
+                            currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa =
+                                CropProductionResponseValueModel(
+                                    shortRainsRainfedAverageYieldPerHa.text.toString().toDouble(), true
+                                )
+                        }
+                    }
+                    if (editable == shortRainsIrrigatedCultivatedArea.editableText) {
+                        if (shortRainsIrrigatedCultivatedArea.text.toString().trim().isNotEmpty()) {
+                            currentResponseItem.shortRainsSeason.irrigatedCultivatedArea =
+                                CropProductionResponseValueModel(
+                                    shortRainsIrrigatedCultivatedArea.text.toString().toDouble(), true
+                                )
+                        }
+                    }
+                    if (editable == shortRainsIrrigatedAverageYieldPerHa.editableText) {
+                        if (shortRainsIrrigatedAverageYieldPerHa.text.toString().trim().isNotEmpty()) {
+                            currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa =
+                                CropProductionResponseValueModel(
+                                    shortRainsIrrigatedAverageYieldPerHa.text.toString().toDouble(),
+                                    true
+                                )
+                        }
+                    }
 
-        if (isAnyValueEmpty(currentResponseItem)) {
-            tvAccordionIcon.text == "-"
-            accordionStroke.visibility = View.VISIBLE
-            accordionContent.visibility = View.VISIBLE
-        } else {
-            tvAccordionIcon.text == "+"
-            accordionStroke.visibility = View.GONE
-            accordionContent.visibility = View.GONE
-        }
 
-        tvAccordionIcon.setOnClickListener {
+                    if (editable == longRainsRainfedCultivatedAreaPercentage.editableText) {
+                        if (longRainsRainfedCultivatedAreaPercentage.text.toString().trim().isNotEmpty()) {
+                            currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage =
+                                CropProductionResponseValueModel(
+                                    longRainsRainfedCultivatedAreaPercentage.text.toString().toDouble(),
+                                    true
+                                )
+                        }
+                    }
+                    if (editable == longRainsRainfedAverageYieldPerHa.editableText) {
+                        if (longRainsRainfedAverageYieldPerHa.text.toString().trim().isNotEmpty()) {
+                            currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa =
+                                CropProductionResponseValueModel(
+                                    longRainsRainfedAverageYieldPerHa.text.toString().toDouble(), true
+                                )
+                        }
+                    }
+                    if (editable == longRainsIrrigatedCultivatedArea.editableText) {
+                        if (longRainsIrrigatedCultivatedArea.text.toString().trim().isNotEmpty()) {
+                            currentResponseItem.longRainsSeason.irrigatedCultivatedArea =
+                                CropProductionResponseValueModel(
+                                    longRainsIrrigatedCultivatedArea.text.toString().toDouble(), true
+                                )
+                        }
+                    }
+                    if (editable == longRainsIrrigatedAverageYieldPerHa.editableText) {
+                        if (longRainsIrrigatedAverageYieldPerHa.text.toString().trim().isNotEmpty()) {
+                            currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa =
+                                CropProductionResponseValueModel(
+                                    longRainsIrrigatedAverageYieldPerHa.text.toString().toDouble(), true
+                                )
+                        }
+                    }
 
-            if (shortRainsRainfedCultivatedAreaPercentage.text.toString().isEmpty() || shortRainsRainfedAverageYieldPerHa.text.toString().isEmpty() || shortRainsIrrigatedCultivatedArea.text.toString().isEmpty() || shortRainsIrrigatedAverageYieldPerHa.text.toString().isEmpty()
-                || longRainsRainfedCultivatedAreaPercentage.text.toString().isEmpty() || longRainsRainfedAverageYieldPerHa.text.toString().isEmpty() || longRainsIrrigatedCultivatedArea.text.toString().isEmpty() || longRainsIrrigatedAverageYieldPerHa.text.toString().isEmpty()) {
-                tvAccordionIcon.text == "-"
-                accordionStroke.visibility = View.VISIBLE
-                accordionContent.visibility = View.VISIBLE
-            } else {
-                tvAccordionIcon.text == "+"
-                accordionStroke.visibility = View.GONE
-                accordionContent.visibility = View.GONE
+                    cropProductionListAdapterCallBack.onCropProductionResponseItemSubmited(
+                        currentResponseItem,
+                        position
+                    )
+
+                }, 2500)
             }
 
-            if (currentResponseItem.allFieldsFilled) {
-                tvAccordionIcon.text == "-"
-                accordionStroke.visibility = View.VISIBLE
-                accordionContent.visibility = View.VISIBLE
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
             }
         }
 
-        submitButton.setOnClickListener {
-            if (shortRainsRainfedCultivatedAreaPercentage.text.toString().isEmpty() || shortRainsRainfedAverageYieldPerHa.text.toString().isEmpty() || shortRainsIrrigatedCultivatedArea.text.toString().isEmpty() || shortRainsIrrigatedAverageYieldPerHa.text.toString().isEmpty()
-                || longRainsRainfedCultivatedAreaPercentage.text.toString().isEmpty() || longRainsRainfedAverageYieldPerHa.text.toString().isEmpty() || longRainsIrrigatedCultivatedArea.text.toString().isEmpty() || longRainsIrrigatedAverageYieldPerHa.text.toString().isEmpty()) {
-                tvAccordionIcon.text == "-"
-                accordionStroke.visibility = View.VISIBLE
-                accordionContent.visibility = View.VISIBLE
-                inflateErrorModal("Missing data", "Fill out or the missing fields")
-            } else {
-                tvAccordionIcon.text == "+"
-                accordionStroke.visibility = View.GONE
-                accordionContent.visibility = View.GONE
-                currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage = CropProductionResponseValueModel(shortRainsRainfedCultivatedAreaPercentage.text.toString().toDouble(),true)
-                currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa = CropProductionResponseValueModel(shortRainsRainfedAverageYieldPerHa.text.toString().toDouble(),true)
-                currentResponseItem.shortRainsSeason.irrigatedCultivatedArea = CropProductionResponseValueModel(shortRainsIrrigatedCultivatedArea.text.toString().toDouble(),true)
-                currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa = CropProductionResponseValueModel(shortRainsIrrigatedAverageYieldPerHa.text.toString().toDouble(),true)
+        shortRainsRainfedCultivatedAreaPercentage.addTextChangedListener(textWatcher)
+        shortRainsRainfedAverageYieldPerHa.addTextChangedListener(textWatcher)
+        shortRainsIrrigatedCultivatedArea.addTextChangedListener(textWatcher)
+        shortRainsIrrigatedAverageYieldPerHa.addTextChangedListener(textWatcher)
 
-                currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage = CropProductionResponseValueModel(longRainsRainfedCultivatedAreaPercentage.text.toString().toDouble(),true)
-                currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa = CropProductionResponseValueModel(longRainsRainfedAverageYieldPerHa.text.toString().toDouble(),true)
-                currentResponseItem.longRainsSeason.irrigatedCultivatedArea = CropProductionResponseValueModel(longRainsIrrigatedCultivatedArea.text.toString().toDouble(),true)
-                currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa = CropProductionResponseValueModel(longRainsIrrigatedAverageYieldPerHa.text.toString().toDouble(),true)
-                currentResponseItem.allFieldsFilled = true
-                cropProductionListAdapterCallBack.onCropProductionResponseItemSubmited(currentResponseItem,position)
-            }
-        }
+        longRainsRainfedCultivatedAreaPercentage.addTextChangedListener(textWatcher)
+        longRainsRainfedAverageYieldPerHa.addTextChangedListener(textWatcher)
+        longRainsIrrigatedCultivatedArea.addTextChangedListener(textWatcher)
+        longRainsIrrigatedAverageYieldPerHa.addTextChangedListener(textWatcher)
 
         return view
     }
 
     fun isAnyValueEmpty(currentResponseItem: WgCropProductionResponseItem): Boolean {
         return !currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted
-                || !currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted}
+                || !currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.hasBeenSubmitted || !currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedCultivatedArea.hasBeenSubmitted || !currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.hasBeenSubmitted
+    }
 
 
     override fun getCount(): Int {

@@ -37,6 +37,7 @@
         android:background="@drawable/cell_shape">
 
         <EditText
+            android:id="@+id/longRainsRainfedCultivatedAreaPercentage"
             android:fontFamily="@font/lato_regular"
             android:textStyle="normal"
             android:textSize="16sp"
@@ -62,6 +63,7 @@
         android:background="@drawable/cell_shape">
 
         <EditText
+            android:id="@+id/longRainsRainfedAverageYieldPerHa"
             android:fontFamily="@font/lato_regular"
             android:textStyle="normal"
             android:textSize="16sp"
@@ -87,6 +89,7 @@
         android:background="@drawable/cell_shape">
 
         <EditText
+            android:id="@+id/longRainsIrrigatedCultivatedArea"
             android:fontFamily="@font/lato_regular"
             android:textStyle="normal"
             android:textSize="16sp"
@@ -112,6 +115,7 @@
         android:background="@drawable/cell_shape">
 
         <EditText
+            android:id="@+id/longRainsIrrigatedAverageYieldPerHa"
             android:fontFamily="@font/lato_regular"
             android:textStyle="normal"
             android:textSize="16sp"
@@ -137,6 +141,7 @@
         android:background="@drawable/cell_shape">
 
         <EditText
+            android:id="@+id/shortRainsRainfedCultivatedAreaPercentage"
             android:fontFamily="@font/lato_regular"
             android:textStyle="normal"
             android:textSize="16sp"
@@ -162,6 +167,7 @@
         android:background="@drawable/cell_shape">
 
         <EditText
+            android:id="@+id/shortRainsRainfedAverageYieldPerHa"
             android:fontFamily="@font/lato_regular"
             android:textStyle="normal"
             android:textSize="16sp"
@@ -187,6 +193,7 @@
         android:background="@drawable/cell_shape">
 
         <EditText
+            android:id="@+id/shortRainsIrrigatedCultivatedArea"
             android:fontFamily="@font/lato_regular"
             android:textStyle="normal"
             android:textSize="16sp"
@@ -212,6 +219,7 @@
         android:background="@drawable/cell_shape">
 
         <EditText
+            android:id="@+id/shortRainsIrrigatedAverageYieldPerHa"
             android:fontFamily="@font/lato_regular"
             android:textStyle="normal"
             android:textSize="16sp"

@@ -3547,7 +3547,7 @@ class CountyLevelFragment : DialogFragment(),
             return "Short rains rainfed crops has a percentage error. The value " + isGreaterThanOrLessThan(
                 doesShortRainFedCropsHavePercentageError().variationStatus
             ) + " by " + doesShortRainFedCropsHavePercentageError().differenceValue.toString()
-        } else if (doesShortRainFedCropsHavePercentageError().hasAPercentageError) {
+        } else if (doesShortRainsIrrigatedCropsHavePercentageError().hasAPercentageError) {
             return "Short rains irrigated crops has a percentage error. The value " + isGreaterThanOrLessThan(
                 doesShortRainsIrrigatedCropsHavePercentageError().variationStatus
             ) + " by " + doesShortRainsIrrigatedCropsHavePercentageError().differenceValue.toString()
@@ -3557,7 +3557,7 @@ class CountyLevelFragment : DialogFragment(),
 
     fun doesCropProductionHavePercentageErrors(): Boolean {
         return doesLongRainsRainFedCropsHavePercentageError().hasAPercentageError || doesLongRainsIrrigatedCropsHavePercentageError().hasAPercentageError
-                || doesShortRainFedCropsHavePercentageError().hasAPercentageError || doesShortRainFedCropsHavePercentageError().hasAPercentageError
+                || doesShortRainFedCropsHavePercentageError().hasAPercentageError || doesShortRainsIrrigatedCropsHavePercentageError().hasAPercentageError
     }
 
     fun isGreaterThanOrLessThan(percentageValidationEnum: PercentageValidationEnum): String {
