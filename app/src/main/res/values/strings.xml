@@ -11,4 +11,5 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="ic_send">&#xf1d8;</string>
+    <string name="ic_details">&#xf0f6;</string>
 </resources>

@@ -21,8 +21,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp" />
 
+        <!--        C(i). Livelihood Zone Charectaristics-->
+        <include
+            android:id="@+id/countyLivelihoodZoneCharectaristics"
+            layout="@layout/county_livelihoodzone_charectaristics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="22dp" />
 
-        <!--        C(i). Livelihood Zone SubLocation assignment-->
+
+        <!--        C(ii). Livelihood Zone SubLocation assignment-->
         <include
             android:id="@+id/lzSubLocationAssignment"
             layout="@layout/lz_sublocation_assignment_layout"

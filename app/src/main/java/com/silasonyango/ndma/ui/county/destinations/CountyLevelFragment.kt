@@ -37,10 +37,7 @@ import com.silasonyango.ndma.config.Constants
 import com.silasonyango.ndma.config.Constants.QUESTIONNAIRE_COMPLETED
 import com.silasonyango.ndma.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.silasonyango.ndma.login.model.GeographyObject
-import com.silasonyango.ndma.ui.county.adapters.HazardsRankingAdapter
-import com.silasonyango.ndma.ui.county.adapters.LzCropProductionRecyclerViewAdapter
-import com.silasonyango.ndma.ui.county.adapters.LzMarketTradeRecyclerViewAdapter
-import com.silasonyango.ndma.ui.county.adapters.SubLocationLzAssignmentRecyclerViewAdapter
+import com.silasonyango.ndma.ui.county.adapters.*
 import com.silasonyango.ndma.ui.county.model.*
 import com.silasonyango.ndma.ui.county.responses.*
 import com.silasonyango.ndma.ui.county.viewmodel.CountyLevelViewModel
@@ -72,7 +69,7 @@ class CountyLevelFragment : DialogFragment(),
     CropSelectionListAdapter.CropSelectionListAdapterCallBack,
     CropProductionListAdapter.CropProductionListAdapterCallBack,
     TribesListViewAdapter.TribesListViewAdapterCallBack,
-    HazardsRankingAdapter.HazardsRankingAdapterCallBack {
+    HazardsRankingAdapter.HazardsRankingAdapterCallBack, ZoneCharectaristicsAdapter.ZoneCharectaristicsAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -95,6 +92,8 @@ class CountyLevelFragment : DialogFragment(),
     private var ethnicGroups: MutableList<EthnicGroupModel> = ArrayList()
 
     private var hazardsRanks: MutableList<RankResponseItem> = ArrayList()
+
+    private var zoneCharectaristicsItemsList: MutableList<ZoneCharectaristicsResponseItem> = ArrayList()
 
     private var cropProductionResponseItems: MutableList<WgCropProductionResponseItem> = ArrayList()
 
@@ -238,25 +237,30 @@ class CountyLevelFragment : DialogFragment(),
                                         )
                                     )
                                 }
+                            }
 
-                                lzSubLocationAssignment.apply {
-                                    val subLocationassignmentAdapter = activity?.let { it1 ->
-                                        SubLocationZoneAssignmentAdapter(
-                                            subLocationZoneAssignmentModelList,
+                            countyLivelihoodZoneCharectaristics.apply {
+                                for (currentLivelihoodZone in geographyObject.currentUserAssignedCountyLivelihoodZones) {
+                                    zoneCharectaristicsItemsList.add(ZoneCharectaristicsResponseItem(
+                                        currentLivelihoodZone, ArrayList<String>()
+                                    ))
+                                }
+                                val zoneCharectaristicsAdapter =
+                                    activity?.applicationContext?.let { it1 ->
+                                        ZoneCharectaristicsAdapter(zoneCharectaristicsItemsList,this@CountyLevelFragment,
                                             it1
                                         )
                                     }
+                                val gridLayoutManager = GridLayoutManager(activity, 1)
+                                zoneList.layoutManager = gridLayoutManager
+                                zoneList.hasFixedSize()
+                                zoneList.adapter =
+                                    zoneCharectaristicsAdapter
 
-                                    val gridLayoutManager = GridLayoutManager(activity, 1)
-                                    listRv.layoutManager = gridLayoutManager
-                                    listRv.hasFixedSize()
-                                    listRv.adapter =
-                                        subLocationassignmentAdapter
-                                }
                             }
 
 
-                            lzSubLocationAssignment.root.visibility = View.VISIBLE
+                            countyLivelihoodZoneCharectaristics.root.visibility = View.VISIBLE
                             countyConfiguration.root.visibility = View.GONE
                         }
 
@@ -299,12 +303,41 @@ class CountyLevelFragment : DialogFragment(),
     private fun defineNavigation() {
         binding.apply {
 
+            countyLivelihoodZoneCharectaristics.apply {
+
+                lzXticsBackButton.setOnClickListener {
+                    countyLivelihoodZoneCharectaristics.root.visibility = View.GONE
+                    countyConfiguration.root.visibility = View.VISIBLE
+                }
+
+                lzXticsNextButton.setOnClickListener {
+
+                    lzSubLocationAssignment.apply {
+                        val subLocationassignmentAdapter = activity?.let { it1 ->
+                            SubLocationZoneAssignmentAdapter(
+                                subLocationZoneAssignmentModelList,
+                                it1
+                            )
+                        }
+
+                        val gridLayoutManager = GridLayoutManager(activity, 1)
+                        listRv.layoutManager = gridLayoutManager
+                        listRv.hasFixedSize()
+                        listRv.adapter =
+                            subLocationassignmentAdapter
+                    }
+
+                    countyLivelihoodZoneCharectaristics.root.visibility = View.GONE
+                    lzSubLocationAssignment.root.visibility = View.VISIBLE
+                }
+
+            }
 
             /* Lz Sublocation assignment navigation */
             lzSubLocationAssignment.apply {
 
                 lzAllocationBackButton.setOnClickListener {
-                    countyConfiguration.root.visibility = View.VISIBLE
+                    countyLivelihoodZoneCharectaristics.root.visibility = View.VISIBLE
                     lzSubLocationAssignment.root.visibility = View.GONE
                 }
 
@@ -2471,21 +2504,28 @@ class CountyLevelFragment : DialogFragment(),
                     )
                 }
 
-                lzSubLocationAssignment.apply {
-                    val subLocationassignmentAdapter = activity?.let { it1 ->
-                        SubLocationZoneAssignmentAdapter(
-                            subLocationZoneAssignmentModelList,
-                            it1
-                        )
+                countyLivelihoodZoneCharectaristics.apply {
+                    for (currentLivelihoodZone in geographyObject.currentUserAssignedCountyLivelihoodZones) {
+                        zoneCharectaristicsItemsList.add(ZoneCharectaristicsResponseItem(
+                            currentLivelihoodZone, ArrayList<String>()
+                        ))
                     }
-
+                    val zoneCharectaristicsAdapter =
+                        activity?.applicationContext?.let { it1 ->
+                            ZoneCharectaristicsAdapter(zoneCharectaristicsItemsList,this@CountyLevelFragment,
+                                it1
+                            )
+                        }
                     val gridLayoutManager = GridLayoutManager(activity, 1)
-                    listRv.layoutManager = gridLayoutManager
-                    listRv.hasFixedSize()
-                    listRv.adapter =
-                        subLocationassignmentAdapter
+                    zoneList.layoutManager = gridLayoutManager
+                    zoneList.hasFixedSize()
+                    zoneList.adapter =
+                        zoneCharectaristicsAdapter
+
                 }
-                lzSubLocationAssignment.root.visibility = View.VISIBLE
+
+
+                countyLivelihoodZoneCharectaristics.root.visibility = View.VISIBLE
                 countyConfiguration.root.visibility = View.GONE
             }
 
