@@ -48,7 +48,7 @@ class ZoneCharectaristicsAdapter(
 
     override fun getItemCount() = zoneCharectaristicsResponseItemList.size
 
-    private fun inflateZoneCharectaristicsModal() {
+    private fun inflateZoneCharectaristicsModal() {wq   q13
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.error_message_layout, null)
         val close = v.findViewById<TextView>(R.id.close)
