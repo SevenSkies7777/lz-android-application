@@ -199,7 +199,7 @@ class CountyLevelFragment : DialogFragment(),
             countyConfiguration.apply {
 
                 livelihoodZoneDropDown.setOnClickListener {
-                    inflateLivelihoodZoneModal(geographyObject.livelihoodZones)
+                    inflateLivelihoodZoneModal(geographyObject.currentUserAssignedCountyLivelihoodZones)
                 }
 
                 configurationSubmitButton.setOnClickListener {
