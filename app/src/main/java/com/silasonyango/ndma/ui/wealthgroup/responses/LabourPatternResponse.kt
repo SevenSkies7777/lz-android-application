@@ -3,6 +3,7 @@ package com.silasonyango.ndma.ui.wealthgroup.responses
 class LabourPatternResponse() {
     lateinit var ownFarmCropProduction: LabourPatternResponseItem
     lateinit var livestockHusbandry: LabourPatternResponseItem
+    lateinit var transportServices: LabourPatternResponseItem
     lateinit var wagedLabourOnFarms: LabourPatternResponseItem
     lateinit var lowSkilledNonFarmLabour: LabourPatternResponseItem
     lateinit var skilledLabour: LabourPatternResponseItem

@@ -1194,7 +1194,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="Leisure and Entertainment"
+                    android:text="Leisure and Entertainment(including alcohol)"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"

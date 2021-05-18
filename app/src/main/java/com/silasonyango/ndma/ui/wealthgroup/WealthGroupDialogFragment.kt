@@ -2053,7 +2053,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                             val menTotalEntry =
                                 returnZeroStringIfEmpty(ownFarmmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     livestockHusbandrymen.text.toString()
-                                ).toDouble() + returnZeroStringIfEmpty(wagedLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                ).toDouble() + returnZeroStringIfEmpty(transportServicesMen.text.toString()).toDouble() + returnZeroStringIfEmpty(wagedLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     lowSkilledNonFarmmen.text.toString()
                                 ).toDouble() + returnZeroStringIfEmpty(skilledLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     formalEmploymentmen.text.toString()
@@ -2105,6 +2105,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 ownFarmmen.addTextChangedListener(mentTextWatcher)
                 livestockHusbandrymen.addTextChangedListener(mentTextWatcher)
+                transportServicesMen.addTextChangedListener(mentTextWatcher)
                 wagedLabourmen.addTextChangedListener(mentTextWatcher)
                 lowSkilledNonFarmmen.addTextChangedListener(mentTextWatcher)
                 skilledLabourmen.addTextChangedListener(mentTextWatcher)
@@ -2127,7 +2128,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                             val womenTotalEntry =
                                 returnZeroStringIfEmpty(ownFarmWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     livestockHusbandryWomen.text.toString()
-                                ).toDouble() + returnZeroStringIfEmpty(wagedLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                ).toDouble() + returnZeroStringIfEmpty(transportServicesWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(wagedLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     lowSkilledNonFarmWomen.text.toString()
                                 ).toDouble() + returnZeroStringIfEmpty(skilledLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     formalEmploymentWomen.text.toString()
@@ -2179,6 +2180,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 ownFarmWomen.addTextChangedListener(womentTextWatcher)
                 livestockHusbandryWomen.addTextChangedListener(womentTextWatcher)
+                transportServicesWomen.addTextChangedListener(womentTextWatcher)
                 wagedLabourWomen.addTextChangedListener(womentTextWatcher)
                 lowSkilledNonFarmWomen.addTextChangedListener(womentTextWatcher)
                 skilledLabourWomen.addTextChangedListener(womentTextWatcher)
@@ -2219,6 +2221,16 @@ class WealthGroupDialogFragment : DialogFragment(),
                     if (livestockHusbandrymen.text.toString().isEmpty()) {
                         hasNoValidationError = false
                         livestockHusbandrymenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (transportServicesMen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        transportServicesMenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (transportServicesWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        transportServicesWomenCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
                     if (wagedLabourWomen.text.toString().isEmpty()) {
@@ -2349,7 +2361,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                         val menTotalEntry =
                             returnZeroStringIfEmpty(ownFarmmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 livestockHusbandrymen.text.toString()
-                            ).toDouble() + returnZeroStringIfEmpty(wagedLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            ).toDouble() + returnZeroStringIfEmpty(transportServicesMen.text.toString()).toDouble() + returnZeroStringIfEmpty(wagedLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 lowSkilledNonFarmmen.text.toString()
                             ).toDouble() + returnZeroStringIfEmpty(skilledLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 formalEmploymentmen.text.toString()
@@ -2367,7 +2379,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                         val womenTotalEntry =
                             returnZeroStringIfEmpty(ownFarmWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 livestockHusbandryWomen.text.toString()
-                            ).toDouble() + returnZeroStringIfEmpty(wagedLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            ).toDouble() + returnZeroStringIfEmpty(transportServicesWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(wagedLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 lowSkilledNonFarmWomen.text.toString()
                             ).toDouble() + returnZeroStringIfEmpty(skilledLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 formalEmploymentWomen.text.toString()
@@ -2394,6 +2406,11 @@ class WealthGroupDialogFragment : DialogFragment(),
                             labourPatternResponse.livestockHusbandry = LabourPatternResponseItem(
                                 livestockHusbandryWomen.text.toString().toDouble(),
                                 livestockHusbandrymen.text.toString().toDouble()
+                            )
+
+                            labourPatternResponse.transportServices = LabourPatternResponseItem(
+                                transportServicesWomen.text.toString().toDouble(),
+                                transportServicesMen.text.toString().toDouble()
                             )
 
                             labourPatternResponse.wagedLabourOnFarms = LabourPatternResponseItem(
