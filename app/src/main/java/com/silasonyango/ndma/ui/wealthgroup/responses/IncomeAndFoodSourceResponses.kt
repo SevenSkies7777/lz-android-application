@@ -2,6 +2,7 @@ package com.silasonyango.ndma.ui.wealthgroup.responses
 
 class IncomeAndFoodSourceResponses() {
     var livestockProduction: Double = 0.0
+    var pastureFodderProduction: Double = 0.0
     var poultryProduction: Double = 0.0
     var cashCropProduction: Double = 0.0
     var foodCropProduction: Double = 0.0

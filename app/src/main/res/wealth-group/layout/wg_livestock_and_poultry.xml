@@ -95,7 +95,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="Cattle"
+                    android:text="Local Cattle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -117,6 +117,58 @@
 
                 <EditText
                     android:id="@+id/cattleNumbers"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:inputType="numberDecimal"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Dairy Cattle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dairyCattleNumbersCell"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/dairyCattleNumbers"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"
@@ -423,6 +475,57 @@
 
                 <EditText
                     android:id="@+id/chickenNumbers"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:inputType="numberDecimal"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
+                    android:text="Improved Chicken e.g Broilers,  layers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/improvedChickenNumbersCell"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight=".5"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/improvedChickenNumbers"
                     android:fontFamily="@font/lato_regular"
                     android:textStyle="normal"
                     android:textSize="16sp"

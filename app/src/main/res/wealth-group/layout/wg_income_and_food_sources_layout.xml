@@ -143,6 +143,56 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:text="Pasture/Fodder Production"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#FF3F51B5"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pastureFodderProductionWrapper"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".2"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <EditText
+                    android:id="@+id/pastureFodderProduction"
+                    android:fontFamily="@font/lato_regular"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:lineHeight="24sp"
+                    android:inputType="numberDecimal"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight=".6"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/cell_shape">
+
+                <TextView
                     android:text="Poultry Production including meat and egg production"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -293,7 +343,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="Casual /Waged-labour Income"
+                    android:text="Casual /Waged-labour Income(Both skilled and non-skilled)"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -594,7 +644,7 @@ Brokerage services/ middlemen, beer etc"
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="Petty Trading"
+                    android:text="Petty Trading(Street vendors, hawkers e.t.c)"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -744,7 +794,7 @@ Brokerage services/ middlemen, beer etc"
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="Bee Keeping"
+                    android:text="Bee Keeping and by-products e.g wax"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"

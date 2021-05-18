@@ -7,6 +7,12 @@ class LivestockContributionResponses() {
         LivestockContributionResponseValue(0.0, false),
         LivestockContributionResponseValue(0.0, false)
     )
+    var dairyCattle = WgLivestockContributionResponseItem(
+        LivestockContributionResponseValue(0.0, false),
+        LivestockContributionResponseValue(0.0, false),
+        LivestockContributionResponseValue(0.0, false),
+        LivestockContributionResponseValue(0.0, false)
+    )
     var goats = WgLivestockContributionResponseItem(
         LivestockContributionResponseValue(0.0, false),
         LivestockContributionResponseValue(0.0, false),
@@ -38,6 +44,12 @@ class LivestockContributionResponses() {
         LivestockContributionResponseValue(0.0, false)
     )
     var chicken = WgLivestockContributionResponseItem(
+        LivestockContributionResponseValue(0.0, false),
+        LivestockContributionResponseValue(0.0, false),
+        LivestockContributionResponseValue(0.0, false),
+        LivestockContributionResponseValue(0.0, false)
+    )
+    var improvedChicken = WgLivestockContributionResponseItem(
         LivestockContributionResponseValue(0.0, false),
         LivestockContributionResponseValue(0.0, false),
         LivestockContributionResponseValue(0.0, false),
