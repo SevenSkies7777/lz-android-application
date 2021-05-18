@@ -246,7 +246,7 @@ class CountyLevelFragment : DialogFragment(),
                                     ))
                                 }
                                 val zoneCharectaristicsAdapter =
-                                    activity?.applicationContext?.let { it1 ->
+                                    activity?.let { it1 ->
                                         ZoneCharectaristicsAdapter(zoneCharectaristicsItemsList,this@CountyLevelFragment,
                                             it1
                                         )
@@ -2511,7 +2511,7 @@ class CountyLevelFragment : DialogFragment(),
                         ))
                     }
                     val zoneCharectaristicsAdapter =
-                        activity?.applicationContext?.let { it1 ->
+                        activity?.let { it1 ->
                             ZoneCharectaristicsAdapter(zoneCharectaristicsItemsList,this@CountyLevelFragment,
                                 it1
                             )
@@ -3954,5 +3954,12 @@ class CountyLevelFragment : DialogFragment(),
         }
 
         (hazardsRankingDialog as androidx.appcompat.app.AlertDialog).dismiss()
+    }
+
+    override fun onAZoneCharectaristicsSubmitted(
+        currentResponseItem: ZoneCharectaristicsResponseItem,
+        position: Int
+    ) {
+        zoneCharectaristicsItemsList.set(position,currentResponseItem)
     }
 }
