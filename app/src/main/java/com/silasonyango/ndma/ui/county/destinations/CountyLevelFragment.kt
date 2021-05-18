@@ -312,23 +312,27 @@ class CountyLevelFragment : DialogFragment(),
 
                 lzXticsNextButton.setOnClickListener {
 
-                    lzSubLocationAssignment.apply {
-                        val subLocationassignmentAdapter = activity?.let { it1 ->
-                            SubLocationZoneAssignmentAdapter(
-                                subLocationZoneAssignmentModelList,
-                                it1
-                            )
+                    if (zoneCharectaristicsItemsList.filter { it.zoneCharectaristics.isEmpty() }.size > 0) {
+                        inflateErrorModal("Missing data", "Kindly fill in all the charectaristics for all the zones")
+                    } else {
+                        lzSubLocationAssignment.apply {
+                            val subLocationassignmentAdapter = activity?.let { it1 ->
+                                SubLocationZoneAssignmentAdapter(
+                                    subLocationZoneAssignmentModelList,
+                                    it1
+                                )
+                            }
+
+                            val gridLayoutManager = GridLayoutManager(activity, 1)
+                            listRv.layoutManager = gridLayoutManager
+                            listRv.hasFixedSize()
+                            listRv.adapter =
+                                subLocationassignmentAdapter
                         }
 
-                        val gridLayoutManager = GridLayoutManager(activity, 1)
-                        listRv.layoutManager = gridLayoutManager
-                        listRv.hasFixedSize()
-                        listRv.adapter =
-                            subLocationassignmentAdapter
+                        countyLivelihoodZoneCharectaristics.root.visibility = View.GONE
+                        lzSubLocationAssignment.root.visibility = View.VISIBLE
                     }
-
-                    countyLivelihoodZoneCharectaristics.root.visibility = View.GONE
-                    lzSubLocationAssignment.root.visibility = View.VISIBLE
                 }
 
             }
