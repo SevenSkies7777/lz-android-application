@@ -2500,7 +2500,7 @@ class WealthGroupDialogFragment : DialogFragment(),
             wgExpenditurePatterns.apply {
 
 
-                val textWatcher = object : TextWatcher {
+                val foodItemsTextWatcher = object : TextWatcher {
                     override fun afterTextChanged(editable: Editable?) {
                         Handler(Looper.getMainLooper()).postDelayed({
 
@@ -2515,7 +2515,63 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     milk.text.toString()
                                 ).toDouble() + returnZeroStringIfEmpty(eggs.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     oilAndFats.text.toString()
-                                ).toDouble() + returnZeroStringIfEmpty(otherFoods.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                ).toDouble() + returnZeroStringIfEmpty(otherFoods.text.toString()).toDouble()
+
+                            if (totalEntry > 100) {
+                                val excessValue = totalEntry - 100.0
+                                errorDialog?.isShowing?.let { isDialogShowing ->
+                                    if (isDialogShowing) {
+                                        return@postDelayed
+                                    }
+                                }
+
+                                inflateErrorModal(
+                                    "Percentage error",
+                                    "Food entries exceed 100% by $excessValue"
+                                )
+
+                            }
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                    }
+                }
+
+                maizeAndMaizeFlour.addTextChangedListener(foodItemsTextWatcher)
+                otherCereals.addTextChangedListener(foodItemsTextWatcher)
+                pulses.addTextChangedListener(foodItemsTextWatcher)
+                rootsAndTubers.addTextChangedListener(foodItemsTextWatcher)
+                vegetablesAndFruits.addTextChangedListener(foodItemsTextWatcher)
+                fishandseaFood.addTextChangedListener(foodItemsTextWatcher)
+                meat.addTextChangedListener(foodItemsTextWatcher)
+                milk.addTextChangedListener(foodItemsTextWatcher)
+                eggs.addTextChangedListener(foodItemsTextWatcher)
+                oilAndFats.addTextChangedListener(foodItemsTextWatcher)
+                otherFoods.addTextChangedListener(foodItemsTextWatcher)
+
+
+                val nonFoodItemsTextWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            val totalEntry =
+                                returnZeroStringIfEmpty(
                                     schoolFees.text.toString()
                                 ).toDouble() + returnZeroStringIfEmpty(drugsAndMedicalCare.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     clothingAndBeautyProducts.text.toString()
@@ -2571,35 +2627,24 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                 }
 
-                maizeAndMaizeFlour.addTextChangedListener(textWatcher)
-                otherCereals.addTextChangedListener(textWatcher)
-                pulses.addTextChangedListener(textWatcher)
-                rootsAndTubers.addTextChangedListener(textWatcher)
-                vegetablesAndFruits.addTextChangedListener(textWatcher)
-                fishandseaFood.addTextChangedListener(textWatcher)
-                meat.addTextChangedListener(textWatcher)
-                milk.addTextChangedListener(textWatcher)
-                eggs.addTextChangedListener(textWatcher)
-                oilAndFats.addTextChangedListener(textWatcher)
-                otherFoods.addTextChangedListener(textWatcher)
-                schoolFees.addTextChangedListener(textWatcher)
-                drugsAndMedicalCare.addTextChangedListener(textWatcher)
-                clothingAndBeautyProducts.addTextChangedListener(textWatcher)
-                houseRent.addTextChangedListener(textWatcher)
-                communicationExpense.addTextChangedListener(textWatcher)
-                farmInputs.addTextChangedListener(textWatcher)
-                livestockDrugs.addTextChangedListener(textWatcher)
-                waterPurchase.addTextChangedListener(textWatcher)
-                soaps.addTextChangedListener(textWatcher)
-                farrmLabour.addTextChangedListener(textWatcher)
-                travelRelatedExpense.addTextChangedListener(textWatcher)
-                entertainment.addTextChangedListener(textWatcher)
-                electricityBill.addTextChangedListener(textWatcher)
-                socialObligation.addTextChangedListener(textWatcher)
-                millingCost.addTextChangedListener(textWatcher)
-                cookingFuel.addTextChangedListener(textWatcher)
-                savingsAndInvestment.addTextChangedListener(textWatcher)
-                loanRepayments.addTextChangedListener(textWatcher)
+                schoolFees.addTextChangedListener(nonFoodItemsTextWatcher)
+                drugsAndMedicalCare.addTextChangedListener(nonFoodItemsTextWatcher)
+                clothingAndBeautyProducts.addTextChangedListener(nonFoodItemsTextWatcher)
+                houseRent.addTextChangedListener(nonFoodItemsTextWatcher)
+                communicationExpense.addTextChangedListener(nonFoodItemsTextWatcher)
+                farmInputs.addTextChangedListener(nonFoodItemsTextWatcher)
+                livestockDrugs.addTextChangedListener(nonFoodItemsTextWatcher)
+                waterPurchase.addTextChangedListener(nonFoodItemsTextWatcher)
+                soaps.addTextChangedListener(nonFoodItemsTextWatcher)
+                farrmLabour.addTextChangedListener(nonFoodItemsTextWatcher)
+                travelRelatedExpense.addTextChangedListener(nonFoodItemsTextWatcher)
+                entertainment.addTextChangedListener(nonFoodItemsTextWatcher)
+                electricityBill.addTextChangedListener(nonFoodItemsTextWatcher)
+                socialObligation.addTextChangedListener(nonFoodItemsTextWatcher)
+                millingCost.addTextChangedListener(nonFoodItemsTextWatcher)
+                cookingFuel.addTextChangedListener(nonFoodItemsTextWatcher)
+                savingsAndInvestment.addTextChangedListener(nonFoodItemsTextWatcher)
+                loanRepayments.addTextChangedListener(nonFoodItemsTextWatcher)
 
 
                 expenditurePatternsBackButton.setOnClickListener {
@@ -2759,7 +2804,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                     if (hasNoValidationError) {
 
-                        val totalPercentageEntry =
+                        val totalFoodPercentageEntry =
                             returnZeroStringIfEmpty(maizeAndMaizeFlour.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 otherCereals.text.toString()
                             ).toDouble() + returnZeroStringIfEmpty(pulses.text.toString()).toDouble() + returnZeroStringIfEmpty(
@@ -2770,7 +2815,10 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 milk.text.toString()
                             ).toDouble() + returnZeroStringIfEmpty(eggs.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 oilAndFats.text.toString()
-                            ).toDouble() + returnZeroStringIfEmpty(otherFoods.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            ).toDouble() + returnZeroStringIfEmpty(otherFoods.text.toString()).toDouble()
+
+                        val totalNonFoodPercentageEntry =
+                            returnZeroStringIfEmpty(
                                 schoolFees.text.toString()
                             ).toDouble() + returnZeroStringIfEmpty(drugsAndMedicalCare.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 clothingAndBeautyProducts.text.toString()
@@ -2790,7 +2838,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 savingsAndInvestment.text.toString()
                             ).toDouble() + returnZeroStringIfEmpty(loanRepayments.text.toString()).toDouble()
 
-                        if (totalPercentageEntry == 100.0) {
+                        if (totalFoodPercentageEntry == 100.0 && totalNonFoodPercentageEntry == 100.0) {
 
                             val expenditurePatternsResponses = ExpenditurePatternsResponses()
 
@@ -2854,10 +2902,15 @@ class WealthGroupDialogFragment : DialogFragment(),
                             wgMigrationPatterns.root.visibility = View.VISIBLE
                             wgExpenditurePatterns.root.visibility = View.GONE
 
-                        } else if (totalPercentageEntry < 100.0) {
+                        } else if (totalFoodPercentageEntry < 100.0) {
                             inflateErrorModal(
                                 "Percentage error",
-                                "Total entries are  less than 100% by ${100.0 - totalPercentageEntry}"
+                                "Total food entries are  less than 100% by ${100.0 - totalFoodPercentageEntry}"
+                            )
+                        } else if (totalNonFoodPercentageEntry < 100.0) {
+                            inflateErrorModal(
+                                "Percentage error",
+                                "Total non-food entries are  less than 100% by ${100.0 - totalNonFoodPercentageEntry}"
                             )
                         }
 
@@ -4576,24 +4629,24 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     override fun onAParticipantUpdated(updatedParticipant: FgdParticipantModel, position: Int) {
         fdgParticipantsModelList.set(position, updatedParticipant)
-        binding.apply {
-
-            fdgParticipants.apply {
-
-                val fgdParticipantAdapter = activity?.let { it1 ->
-                    FgdParticipantsAdapter(
-                        fdgParticipantsModelList, this@WealthGroupDialogFragment,
-                        it1
-                    )
-                }
-                val gridLayoutManager = GridLayoutManager(activity, 1)
-                participantsList.layoutManager = gridLayoutManager
-                participantsList.hasFixedSize()
-                participantsList.adapter = fgdParticipantAdapter
-
-            }
-
-        }
+//        binding.apply {
+//
+//            fdgParticipants.apply {
+//
+//                val fgdParticipantAdapter = activity?.let { it1 ->
+//                    FgdParticipantsAdapter(
+//                        fdgParticipantsModelList, this@WealthGroupDialogFragment,
+//                        it1
+//                    )
+//                }
+//                val gridLayoutManager = GridLayoutManager(activity, 1)
+//                participantsList.layoutManager = gridLayoutManager
+//                participantsList.hasFixedSize()
+//                participantsList.adapter = fgdParticipantAdapter
+//
+//            }
+//
+//        }
     }
 
 

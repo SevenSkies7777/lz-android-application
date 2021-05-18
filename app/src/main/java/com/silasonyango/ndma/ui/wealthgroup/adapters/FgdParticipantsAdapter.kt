@@ -62,51 +62,51 @@ class FgdParticipantsAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val currentParticipant = fgdParticipants.get(position)
 
-        if (currentParticipant.gender == 1) {
-            viewHolder.tvGender.text = "Male"
-        }
-        if (currentParticipant.gender == 2) {
-            viewHolder.tvGender.text = "Female"
-        }
-        if (currentParticipant.disability == 1) {
-            viewHolder.tvDisability.text = "Disabled"
-        }
-        if (currentParticipant.disability == 2) {
-            viewHolder.tvDisability.text = "Not Disabled"
-        }
-        if (currentParticipant.levelOfEducation == 1) {
-            viewHolder.tvLevelOfEducation.text = "Non-formal education"
-        }
-        if (currentParticipant.levelOfEducation == 2) {
-            viewHolder.tvLevelOfEducation.text = "Primary"
-        }
-        if (currentParticipant.levelOfEducation == 3) {
-            viewHolder.tvLevelOfEducation.text = "Secondary"
-        }
-        if (currentParticipant.levelOfEducation == 4) {
-            viewHolder.tvLevelOfEducation.text = "Post-Secondary"
-        }
-        if (currentParticipant.consentToParticipate == 1) {
-            viewHolder.tvConsentToParticipate.text = "Consented"
-        }
-        if (currentParticipant.consentToParticipate == 2) {
-            viewHolder.tvConsentToParticipate.text = "No consent"
-        }
+//        if (currentParticipant.gender == 1) {
+//            viewHolder.tvGender.text = "Male"
+//        }
+//        if (currentParticipant.gender == 2) {
+//            viewHolder.tvGender.text = "Female"
+//        }
+//        if (currentParticipant.disability == 1) {
+//            viewHolder.tvDisability.text = "Disabled"
+//        }
+//        if (currentParticipant.disability == 2) {
+//            viewHolder.tvDisability.text = "Not Disabled"
+//        }
+//        if (currentParticipant.levelOfEducation == 1) {
+//            viewHolder.tvLevelOfEducation.text = "Non-formal education"
+//        }
+//        if (currentParticipant.levelOfEducation == 2) {
+//            viewHolder.tvLevelOfEducation.text = "Primary"
+//        }
+//        if (currentParticipant.levelOfEducation == 3) {
+//            viewHolder.tvLevelOfEducation.text = "Secondary"
+//        }
+//        if (currentParticipant.levelOfEducation == 4) {
+//            viewHolder.tvLevelOfEducation.text = "Post-Secondary"
+//        }
+//        if (currentParticipant.consentToParticipate == 1) {
+//            viewHolder.tvConsentToParticipate.text = "Consented"
+//        }
+//        if (currentParticipant.consentToParticipate == 2) {
+//            viewHolder.tvConsentToParticipate.text = "No consent"
+//        }
 
-        viewHolder.etParticipantName.setText(currentParticipant.participantName)
-        viewHolder.etAge.setText(currentParticipant.age.toString())
+//        viewHolder.etParticipantName.setText(currentParticipant.participantName)
+//        viewHolder.etAge.setText(currentParticipant.age.toString())
 
         viewHolder.tvGender.setOnClickListener {
-            inflateGenderModal(currentParticipant, position)
+            inflateGenderModal(currentParticipant, position,viewHolder)
         }
         viewHolder.tvDisability.setOnClickListener {
-            inflateDisabilityModal(currentParticipant, position)
+            inflateDisabilityModal(currentParticipant, position,viewHolder)
         }
         viewHolder.tvLevelOfEducation.setOnClickListener {
-            inflateEducationLevelModal(currentParticipant, position)
+            inflateEducationLevelModal(currentParticipant, position,viewHolder)
         }
         viewHolder.tvConsentToParticipate.setOnClickListener {
-            inflateConsentModal(currentParticipant, position)
+            inflateConsentModal(currentParticipant, position,viewHolder)
         }
 
         viewHolder.etParticipantName.addTextChangedListener(object : TextWatcher {
@@ -115,7 +115,7 @@ class FgdParticipantsAdapter(
                     currentParticipant.participantName = editable.toString()
                     fgdParticipantsAdapterCallBack.onAParticipantUpdated(currentParticipant, position)
 
-                }, 6000)
+                }, 1500)
             }
 
             override fun beforeTextChanged(
@@ -142,7 +142,7 @@ class FgdParticipantsAdapter(
                     currentParticipant.age = editable.toString().toDouble()
                     fgdParticipantsAdapterCallBack.onAParticipantUpdated(currentParticipant, position)
 
-                }, 6000)
+                }, 1500)
             }
 
             override fun beforeTextChanged(
@@ -166,7 +166,7 @@ class FgdParticipantsAdapter(
 
     override fun getItemCount() = fgdParticipants.size
 
-    private fun inflateGenderModal(updatedParticipant: FgdParticipantModel, position: Int) {
+    private fun inflateGenderModal(updatedParticipant: FgdParticipantModel, position: Int, viewHolder: ViewHolder) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.gender_layout, null)
         val maleGender = v.findViewById<TextView>(R.id.maleOption)
@@ -174,11 +174,13 @@ class FgdParticipantsAdapter(
 
         maleGender.setOnClickListener {
             updatedParticipant.gender = 1
+            viewHolder.tvGender.text = "Male"
             fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
             (genderDialog as androidx.appcompat.app.AlertDialog).dismiss()
         }
         femaleGender.setOnClickListener {
             updatedParticipant.gender = 2
+            viewHolder.tvGender.text = "Female"
             fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
             (genderDialog as androidx.appcompat.app.AlertDialog).dismiss()
         }
@@ -208,7 +210,7 @@ class FgdParticipantsAdapter(
     }
 
 
-    private fun inflateDisabilityModal(updatedParticipant: FgdParticipantModel, position: Int) {
+    private fun inflateDisabilityModal(updatedParticipant: FgdParticipantModel, position: Int, viewHolder: ViewHolder) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.disability_layout, null)
         val disabilityOption = v.findViewById<TextView>(R.id.disabilityOption)
@@ -216,11 +218,13 @@ class FgdParticipantsAdapter(
 
         disabilityOption.setOnClickListener {
             updatedParticipant.disability = 1
+            viewHolder.tvDisability.text = "Disabled"
             fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
             (disabilityDialog as androidx.appcompat.app.AlertDialog).dismiss()
         }
         noDisabilityOption.setOnClickListener {
             updatedParticipant.disability = 2
+            viewHolder.tvDisability.text = "Not Disabled"
             fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
             (disabilityDialog as androidx.appcompat.app.AlertDialog).dismiss()
         }
@@ -250,7 +254,7 @@ class FgdParticipantsAdapter(
     }
 
 
-    private fun inflateEducationLevelModal(updatedParticipant: FgdParticipantModel, position: Int) {
+    private fun inflateEducationLevelModal(updatedParticipant: FgdParticipantModel, position: Int, viewHolder: ViewHolder) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.education_level_layout, null)
         val nonFormalEducation = v.findViewById<TextView>(R.id.nonFormalEducation)
@@ -260,21 +264,25 @@ class FgdParticipantsAdapter(
 
         nonFormalEducation.setOnClickListener {
             updatedParticipant.levelOfEducation = 1
+            viewHolder.tvLevelOfEducation.text = "Non-formal education"
             fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
             (educationLevelDialog as androidx.appcompat.app.AlertDialog).dismiss()
         }
         primary.setOnClickListener {
             updatedParticipant.levelOfEducation = 2
+            viewHolder.tvLevelOfEducation.text = "Primary"
             fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
             (educationLevelDialog as androidx.appcompat.app.AlertDialog).dismiss()
         }
         secondary.setOnClickListener {
             updatedParticipant.levelOfEducation = 3
+            viewHolder.tvLevelOfEducation.text = "Secondary"
             fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
             (educationLevelDialog as androidx.appcompat.app.AlertDialog).dismiss()
         }
         postSecondary.setOnClickListener {
             updatedParticipant.levelOfEducation = 4
+            viewHolder.tvLevelOfEducation.text = "Post-Secondary"
             fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
             (educationLevelDialog as androidx.appcompat.app.AlertDialog).dismiss()
         }
@@ -304,7 +312,7 @@ class FgdParticipantsAdapter(
     }
 
 
-    private fun inflateConsentModal(updatedParticipant: FgdParticipantModel, position: Int) {
+    private fun inflateConsentModal(updatedParticipant: FgdParticipantModel, position: Int, viewHolder: ViewHolder) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.consent_layout, null)
         val consentOption = v.findViewById<TextView>(R.id.consentOption)
@@ -312,11 +320,13 @@ class FgdParticipantsAdapter(
 
         consentOption.setOnClickListener {
             updatedParticipant.consentToParticipate = 1
+            viewHolder.tvConsentToParticipate.text = "Consented"
             fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
             (consentDialog as androidx.appcompat.app.AlertDialog).dismiss()
         }
         noConsentOption.setOnClickListener {
             updatedParticipant.consentToParticipate = 2
+            viewHolder.tvConsentToParticipate.text = "No consent"
             fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
             (consentDialog as androidx.appcompat.app.AlertDialog).dismiss()
         }
