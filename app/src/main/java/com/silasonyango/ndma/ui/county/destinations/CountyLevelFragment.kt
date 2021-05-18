@@ -1559,7 +1559,7 @@ class CountyLevelFragment : DialogFragment(),
                     lzHazards.root.visibility = View.GONE
                 }
 
-                for (i in 0..22) {
+                for (i in 0..23) {
                     hazardsRanks.add(RankResponseItem(i + 1, false))
                 }
 
@@ -1652,6 +1652,10 @@ class CountyLevelFragment : DialogFragment(),
                     inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.DRINKING_WATER_SHORTAGE)
                 }
 
+                invasivePlantsRank.setOnClickListener {
+                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.INVASIVE_PLANTS)
+                }
+
                 othersRank.setOnClickListener {
                     inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.OTHERS)
                 }
@@ -1724,6 +1728,7 @@ class CountyLevelFragment : DialogFragment(),
                 highFoodPriceNoOfYears.addTextChangedListener(textWatcher)
                 foodShortageNoOfYears.addTextChangedListener(textWatcher)
                 drinkingWaterShortageNoOfYears.addTextChangedListener(textWatcher)
+                invasivePlantsNoOfYears.addTextChangedListener(textWatcher)
                 othersNoOfYears.addTextChangedListener(textWatcher)
 
                 hazardNextButton.setOnClickListener {
@@ -1750,6 +1755,7 @@ class CountyLevelFragment : DialogFragment(),
                             .isNotEmpty() && highFoodPriceNoOfYears.text.toString()
                             .isNotEmpty() && foodShortageNoOfYears.text.toString()
                             .isNotEmpty() && drinkingWaterShortageNoOfYears.text.toString()
+                            .isNotEmpty() && invasivePlantsNoOfYears.text.toString()
                             .isNotEmpty() && othersNoOfYears.text.toString()
                             .isNotEmpty() && hazardResponses.animalRustling.importanceRank != 0
                         && hazardResponses.banditry.importanceRank != 0
@@ -1774,6 +1780,7 @@ class CountyLevelFragment : DialogFragment(),
                         && hazardResponses.highFoodPrices.importanceRank != 0
                         && hazardResponses.marketFoodShortages.importanceRank != 0
                         && hazardResponses.drinkingWaterShortages.importanceRank != 0
+                        && hazardResponses.invasivePlants.importanceRank != 0
                         && hazardResponses.others.importanceRank != 0
                     ) {
                         hazardResponses.animalRustling.noExperiencedYears = animalRustlingNoOfYears.text.toString().toDouble()
@@ -1798,6 +1805,7 @@ class CountyLevelFragment : DialogFragment(),
                         hazardResponses.highFoodPrices.noExperiencedYears = highFoodPriceNoOfYears.text.toString().toDouble()
                         hazardResponses.marketFoodShortages.noExperiencedYears = foodShortageNoOfYears.text.toString().toDouble()
                         hazardResponses.drinkingWaterShortages.noExperiencedYears = drinkingWaterShortageNoOfYears.text.toString().toDouble()
+                        hazardResponses.invasivePlants.noExperiencedYears = invasivePlantsNoOfYears.text.toString().toDouble()
                         hazardResponses.others.noExperiencedYears = othersNoOfYears.text.toString().toDouble()
 
                         countyLevelQuestionnaire.hazardResponses = hazardResponses
@@ -3949,6 +3957,10 @@ class CountyLevelFragment : DialogFragment(),
                     drinkingWaterShortageRank.text = selectedRankItem.rankPosition.toString()
                     hazardResponses.drinkingWaterShortages.importanceRank =
                         selectedRankItem.rankPosition
+                }
+                if (hazardTypeEnum == HazardTypeEnum.INVASIVE_PLANTS) {
+                    invasivePlantsRank.text = selectedRankItem.rankPosition.toString()
+                    hazardResponses.invasivePlants.importanceRank = selectedRankItem.rankPosition
                 }
                 if (hazardTypeEnum == HazardTypeEnum.OTHERS) {
                     othersRank.text = selectedRankItem.rankPosition.toString()

@@ -23,6 +23,7 @@ enum class HazardTypeEnum {
     HIGH_FOOD_PRICES,
     FOOD_SHORTAGE,
     DRINKING_WATER_SHORTAGE,
+    INVASIVE_PLANTS,
     OTHERS
 
 }

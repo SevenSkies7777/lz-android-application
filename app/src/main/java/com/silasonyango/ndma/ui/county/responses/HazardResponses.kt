@@ -23,5 +23,6 @@ class HazardResponses() {
     var highFoodPrices = HazardResponseItem(0,0.0)
     var marketFoodShortages = HazardResponseItem(0,0.0)
     var drinkingWaterShortages = HazardResponseItem(0,0.0)
+    var invasivePlants = HazardResponseItem(0,0.0)
     var others = HazardResponseItem(0,0.0)
 }
