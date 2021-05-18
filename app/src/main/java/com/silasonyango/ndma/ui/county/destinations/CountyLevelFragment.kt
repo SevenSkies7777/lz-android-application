@@ -69,7 +69,8 @@ class CountyLevelFragment : DialogFragment(),
     CropSelectionListAdapter.CropSelectionListAdapterCallBack,
     CropProductionListAdapter.CropProductionListAdapterCallBack,
     TribesListViewAdapter.TribesListViewAdapterCallBack,
-    HazardsRankingAdapter.HazardsRankingAdapterCallBack, ZoneCharectaristicsAdapter.ZoneCharectaristicsAdapterCallBack {
+    HazardsRankingAdapter.HazardsRankingAdapterCallBack,
+    ZoneCharectaristicsAdapter.ZoneCharectaristicsAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -93,7 +94,8 @@ class CountyLevelFragment : DialogFragment(),
 
     private var hazardsRanks: MutableList<RankResponseItem> = ArrayList()
 
-    private var zoneCharectaristicsItemsList: MutableList<ZoneCharectaristicsResponseItem> = ArrayList()
+    private var zoneCharectaristicsItemsList: MutableList<ZoneCharectaristicsResponseItem> =
+        ArrayList()
 
     private var cropProductionResponseItems: MutableList<WgCropProductionResponseItem> = ArrayList()
 
@@ -241,13 +243,16 @@ class CountyLevelFragment : DialogFragment(),
 
                             countyLivelihoodZoneCharectaristics.apply {
                                 for (currentLivelihoodZone in geographyObject.currentUserAssignedCountyLivelihoodZones) {
-                                    zoneCharectaristicsItemsList.add(ZoneCharectaristicsResponseItem(
-                                        currentLivelihoodZone, ArrayList<String>()
-                                    ))
+                                    zoneCharectaristicsItemsList.add(
+                                        ZoneCharectaristicsResponseItem(
+                                            currentLivelihoodZone, ArrayList<String>()
+                                        )
+                                    )
                                 }
                                 val zoneCharectaristicsAdapter =
                                     activity?.let { it1 ->
-                                        ZoneCharectaristicsAdapter(zoneCharectaristicsItemsList,this@CountyLevelFragment,
+                                        ZoneCharectaristicsAdapter(
+                                            zoneCharectaristicsItemsList, this@CountyLevelFragment,
                                             it1
                                         )
                                     }
@@ -313,7 +318,10 @@ class CountyLevelFragment : DialogFragment(),
                 lzXticsNextButton.setOnClickListener {
 
                     if (zoneCharectaristicsItemsList.filter { it.zoneCharectaristics.isEmpty() }.size > 0) {
-                        inflateErrorModal("Missing data", "Kindly fill in all the charectaristics for all the zones")
+                        inflateErrorModal(
+                            "Missing data",
+                            "Kindly fill in all the charectaristics for all the zones"
+                        )
                     } else {
                         lzSubLocationAssignment.apply {
                             val subLocationassignmentAdapter = activity?.let { it1 ->
@@ -392,7 +400,9 @@ class CountyLevelFragment : DialogFragment(),
                         val currentString = (currentEditText as EditText).text.toString()
                         if (currentString.trim().isNotEmpty()) {
                             allEditTextsAreEmpty = false
-                            wealthGroupCharectaristicsResponses.veryPoorCharectaristics.add(currentString)
+                            wealthGroupCharectaristicsResponses.veryPoorCharectaristics.add(
+                                currentString
+                            )
                         }
                     }
 
@@ -441,7 +451,9 @@ class CountyLevelFragment : DialogFragment(),
                         val currentString = (currentEditText as EditText).text.toString()
                         if (currentString.trim().isNotEmpty()) {
                             allEditTextsAreEmpty = false
-                            wealthGroupCharectaristicsResponses.poorCharectaristics.add(currentString)
+                            wealthGroupCharectaristicsResponses.poorCharectaristics.add(
+                                currentString
+                            )
                         }
                     }
 
@@ -490,7 +502,9 @@ class CountyLevelFragment : DialogFragment(),
                         val currentString = (currentEditText as EditText).text.toString()
                         if (currentString.trim().isNotEmpty()) {
                             allEditTextsAreEmpty = false
-                            wealthGroupCharectaristicsResponses.mediumCharectaristics.add(currentString)
+                            wealthGroupCharectaristicsResponses.mediumCharectaristics.add(
+                                currentString
+                            )
                         }
                     }
 
@@ -538,7 +552,9 @@ class CountyLevelFragment : DialogFragment(),
                         val currentString = (currentEditText as EditText).text.toString()
                         if (currentString.trim().isNotEmpty()) {
                             allEditTextsAreEmpty = false
-                            wealthGroupCharectaristicsResponses.betterOffCharectaristics.add(currentString)
+                            wealthGroupCharectaristicsResponses.betterOffCharectaristics.add(
+                                currentString
+                            )
                         }
                     }
 
@@ -559,13 +575,18 @@ class CountyLevelFragment : DialogFragment(),
                 wgCharectaristicsNextButton.setOnClickListener {
 
                     if (wealthGroupCharectaristicsResponses.poorCharectaristics.isNotEmpty() && wealthGroupCharectaristicsResponses.veryPoorCharectaristics.isNotEmpty()
-                        && wealthGroupCharectaristicsResponses.mediumCharectaristics.isNotEmpty() && wealthGroupCharectaristicsResponses.betterOffCharectaristics.isNotEmpty()) {
-                        countyLevelQuestionnaire.wealthGroupCharectariticsResponses =  wealthGroupCharectaristicsResponses
+                        && wealthGroupCharectaristicsResponses.mediumCharectaristics.isNotEmpty() && wealthGroupCharectaristicsResponses.betterOffCharectaristics.isNotEmpty()
+                    ) {
+                        countyLevelQuestionnaire.wealthGroupCharectariticsResponses =
+                            wealthGroupCharectaristicsResponses
 
                         locationAndPopulationLayout.root.visibility = View.VISIBLE
                         wealthGroupCharectaristics.root.visibility = View.GONE
                     } else {
-                        inflateErrorModal("Missing data", "Kindly fill in atleast a single charectaristic in all of the sections")
+                        inflateErrorModal(
+                            "Missing data",
+                            "Kindly fill in atleast a single charectaristic in all of the sections"
+                        )
                     }
                 }
 
@@ -1673,7 +1694,10 @@ class CountyLevelFragment : DialogFragment(),
                                             return@postDelayed
                                         }
                                     }
-                                    inflateErrorModal("Data error", "Number of years cannot be greater than 10")
+                                    inflateErrorModal(
+                                        "Data error",
+                                        "Number of years cannot be greater than 10"
+                                    )
                                 }
                                 if (editable.toString().toDouble() < 0.0) {
                                     errorDialog?.isShowing?.let { isDialogShowing ->
@@ -1681,7 +1705,10 @@ class CountyLevelFragment : DialogFragment(),
                                             return@postDelayed
                                         }
                                     }
-                                    inflateErrorModal("Data error", "Number of years cannot be less than 0")
+                                    inflateErrorModal(
+                                        "Data error",
+                                        "Number of years cannot be less than 0"
+                                    )
                                 }
                             }
 
@@ -1783,30 +1810,54 @@ class CountyLevelFragment : DialogFragment(),
                         && hazardResponses.invasivePlants.importanceRank != 0
                         && hazardResponses.others.importanceRank != 0
                     ) {
-                        hazardResponses.animalRustling.noExperiencedYears = animalRustlingNoOfYears.text.toString().toDouble()
-                        hazardResponses.banditry.noExperiencedYears = banditryNoOfYears.text.toString().toDouble()
-                        hazardResponses.terrorism.noExperiencedYears = terrorismNoOfYears.text.toString().toDouble()
-                        hazardResponses.ethnicConflict.noExperiencedYears = ethicConflictNoOfYears.text.toString().toDouble()
-                        hazardResponses.politicalViolence.noExperiencedYears = politicalViolenceNoOfYears.text.toString().toDouble()
-                        hazardResponses.drought.noExperiencedYears = droughtNoOfYears.text.toString().toDouble()
-                        hazardResponses.livestockPestsAndDiseases.noExperiencedYears = pestAndDiseaseNoOfYears.text.toString().toDouble()
-                        hazardResponses.hailstormsOrFrost.noExperiencedYears = hailstormsOrFrostNoOfYears.text.toString().toDouble()
-                        hazardResponses.flooding.noExperiencedYears = floodingNoOfYears.text.toString().toDouble()
-                        hazardResponses.landslides.noExperiencedYears = landslidesNoOfYears.text.toString().toDouble()
-                        hazardResponses.highWindsOrCyclones.noExperiencedYears = windsOrCycloneNoOfYears.text.toString().toDouble()
-                        hazardResponses.bushFires.noExperiencedYears = bushFiresNoOfYears.text.toString().toDouble()
-                        hazardResponses.cropPests.noExperiencedYears = cropPestsNoOfYears.text.toString().toDouble()
-                        hazardResponses.locustInvasion.noExperiencedYears = locustInvasionNoOfYears.text.toString().toDouble()
-                        hazardResponses.cropDiseases.noExperiencedYears = cropDiseasesNoOfYears.text.toString().toDouble()
-                        hazardResponses.terminalIllnesses.noExperiencedYears = terminalIllnessNoOfYears.text.toString().toDouble()
-                        hazardResponses.malariaPowerOutBreak.noExperiencedYears = malariaOutbreakNoOfYears.text.toString().toDouble()
-                        hazardResponses.waterBornDiseases.noExperiencedYears = waterBorneDiseaseNoOfYears.text.toString().toDouble()
-                        hazardResponses.humanWildlifeConflict.noExperiencedYears = humanWildlifeConflictNoOfYears.text.toString().toDouble()
-                        hazardResponses.highFoodPrices.noExperiencedYears = highFoodPriceNoOfYears.text.toString().toDouble()
-                        hazardResponses.marketFoodShortages.noExperiencedYears = foodShortageNoOfYears.text.toString().toDouble()
-                        hazardResponses.drinkingWaterShortages.noExperiencedYears = drinkingWaterShortageNoOfYears.text.toString().toDouble()
-                        hazardResponses.invasivePlants.noExperiencedYears = invasivePlantsNoOfYears.text.toString().toDouble()
-                        hazardResponses.others.noExperiencedYears = othersNoOfYears.text.toString().toDouble()
+                        hazardResponses.animalRustling.noExperiencedYears =
+                            animalRustlingNoOfYears.text.toString().toDouble()
+                        hazardResponses.banditry.noExperiencedYears =
+                            banditryNoOfYears.text.toString().toDouble()
+                        hazardResponses.terrorism.noExperiencedYears =
+                            terrorismNoOfYears.text.toString().toDouble()
+                        hazardResponses.ethnicConflict.noExperiencedYears =
+                            ethicConflictNoOfYears.text.toString().toDouble()
+                        hazardResponses.politicalViolence.noExperiencedYears =
+                            politicalViolenceNoOfYears.text.toString().toDouble()
+                        hazardResponses.drought.noExperiencedYears =
+                            droughtNoOfYears.text.toString().toDouble()
+                        hazardResponses.livestockPestsAndDiseases.noExperiencedYears =
+                            pestAndDiseaseNoOfYears.text.toString().toDouble()
+                        hazardResponses.hailstormsOrFrost.noExperiencedYears =
+                            hailstormsOrFrostNoOfYears.text.toString().toDouble()
+                        hazardResponses.flooding.noExperiencedYears =
+                            floodingNoOfYears.text.toString().toDouble()
+                        hazardResponses.landslides.noExperiencedYears =
+                            landslidesNoOfYears.text.toString().toDouble()
+                        hazardResponses.highWindsOrCyclones.noExperiencedYears =
+                            windsOrCycloneNoOfYears.text.toString().toDouble()
+                        hazardResponses.bushFires.noExperiencedYears =
+                            bushFiresNoOfYears.text.toString().toDouble()
+                        hazardResponses.cropPests.noExperiencedYears =
+                            cropPestsNoOfYears.text.toString().toDouble()
+                        hazardResponses.locustInvasion.noExperiencedYears =
+                            locustInvasionNoOfYears.text.toString().toDouble()
+                        hazardResponses.cropDiseases.noExperiencedYears =
+                            cropDiseasesNoOfYears.text.toString().toDouble()
+                        hazardResponses.terminalIllnesses.noExperiencedYears =
+                            terminalIllnessNoOfYears.text.toString().toDouble()
+                        hazardResponses.malariaPowerOutBreak.noExperiencedYears =
+                            malariaOutbreakNoOfYears.text.toString().toDouble()
+                        hazardResponses.waterBornDiseases.noExperiencedYears =
+                            waterBorneDiseaseNoOfYears.text.toString().toDouble()
+                        hazardResponses.humanWildlifeConflict.noExperiencedYears =
+                            humanWildlifeConflictNoOfYears.text.toString().toDouble()
+                        hazardResponses.highFoodPrices.noExperiencedYears =
+                            highFoodPriceNoOfYears.text.toString().toDouble()
+                        hazardResponses.marketFoodShortages.noExperiencedYears =
+                            foodShortageNoOfYears.text.toString().toDouble()
+                        hazardResponses.drinkingWaterShortages.noExperiencedYears =
+                            drinkingWaterShortageNoOfYears.text.toString().toDouble()
+                        hazardResponses.invasivePlants.noExperiencedYears =
+                            invasivePlantsNoOfYears.text.toString().toDouble()
+                        hazardResponses.others.noExperiencedYears =
+                            othersNoOfYears.text.toString().toDouble()
 
                         countyLevelQuestionnaire.hazardResponses = hazardResponses
 
@@ -1992,6 +2043,12 @@ class CountyLevelFragment : DialogFragment(),
                         SeasonsResponsesEnum.HIGH_FOOD_PRICES
                     )
                 }
+                foodPricesMedium.setOnClickListener {
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.MEDIUM_FOOD_PRICES
+                    )
+                }
                 foodPricesLow.setOnClickListener {
                     inflateSeasonCalendarModal(
                         geographyObject.months,
@@ -2002,6 +2059,12 @@ class CountyLevelFragment : DialogFragment(),
                     inflateSeasonCalendarModal(
                         geographyObject.months,
                         SeasonsResponsesEnum.HIGH_LIVESTOCK_PRICES
+                    )
+                }
+                livestockPricesMedium.setOnClickListener {
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.MEDIUM_LIVESTOCK_PRICES
                     )
                 }
                 livestockPricesLow.setOnClickListener {
@@ -2020,6 +2083,18 @@ class CountyLevelFragment : DialogFragment(),
                     inflateSeasonCalendarModal(
                         geographyObject.months,
                         SeasonsResponsesEnum.LOW_CASUAL_LABOUR_AVAILABILITY
+                    )
+                }
+                nonAgricCasualLabourAvailabilityHigh.setOnClickListener {
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.NON_AGRIC_HIGH_CASUAL_LABOUR_AVAILABILITY
+                    )
+                }
+                nonAgricCasualLabourAvailabilityLow.setOnClickListener {
+                    inflateSeasonCalendarModal(
+                        geographyObject.months,
+                        SeasonsResponsesEnum.NON_AGRIC_LOW_CASUAL_LABOUR_AVAILABILITY
                     )
                 }
                 casualLabourWagesHigh.setOnClickListener {
@@ -2242,6 +2317,11 @@ class CountyLevelFragment : DialogFragment(),
                             "Data error",
                             "High food prices season has no months selected"
                         )
+                    } else if (lzSeasonsResponses.mediumFoodPrices.isEmpty()) {
+                        inflateErrorModal(
+                            "Data error",
+                            "Medium food prices season has no months selected"
+                        )
                     } else if (lzSeasonsResponses.lowFoodPrices.isEmpty()) {
                         inflateErrorModal(
                             "Data error",
@@ -2251,6 +2331,11 @@ class CountyLevelFragment : DialogFragment(),
                         inflateErrorModal(
                             "Data error",
                             "High livestock prices season has no months selected"
+                        )
+                    } else if (lzSeasonsResponses.mediumLivestockPrices.isEmpty()) {
+                        inflateErrorModal(
+                            "Data error",
+                            "Medium livestock prices season has no months selected"
                         )
                     } else if (lzSeasonsResponses.lowLivestockPrices.isEmpty()) {
                         inflateErrorModal(
@@ -2266,6 +2351,16 @@ class CountyLevelFragment : DialogFragment(),
                         inflateErrorModal(
                             "Data error",
                             "Low casual labour availability season has no months selected"
+                        )
+                    } else if (lzSeasonsResponses.nonAgricHighCasualLabourAvailability.isEmpty()) {
+                        inflateErrorModal(
+                            "Data error",
+                            "High non-agriculture casual labour availability season has no months selected"
+                        )
+                    } else if (lzSeasonsResponses.nonAgricLowCasualLabourAvailability.isEmpty()) {
+                        inflateErrorModal(
+                            "Data error",
+                            "Low non-agriculture casual labour availability season has no months selected"
                         )
                     } else if (lzSeasonsResponses.highCasualLabourWages.isEmpty()) {
                         inflateErrorModal(
@@ -2518,13 +2613,16 @@ class CountyLevelFragment : DialogFragment(),
 
                 countyLivelihoodZoneCharectaristics.apply {
                     for (currentLivelihoodZone in geographyObject.currentUserAssignedCountyLivelihoodZones) {
-                        zoneCharectaristicsItemsList.add(ZoneCharectaristicsResponseItem(
-                            currentLivelihoodZone, ArrayList<String>()
-                        ))
+                        zoneCharectaristicsItemsList.add(
+                            ZoneCharectaristicsResponseItem(
+                                currentLivelihoodZone, ArrayList<String>()
+                            )
+                        )
                     }
                     val zoneCharectaristicsAdapter =
                         activity?.let { it1 ->
-                            ZoneCharectaristicsAdapter(zoneCharectaristicsItemsList,this@CountyLevelFragment,
+                            ZoneCharectaristicsAdapter(
+                                zoneCharectaristicsItemsList, this@CountyLevelFragment,
                                 it1
                             )
                         }
@@ -2673,11 +2771,10 @@ class CountyLevelFragment : DialogFragment(),
     fun returnMonthInitialsString(months: MutableList<MonthsModel>): String {
         var monthsString = ""
         for (currentMonth in months) {
-            monthsString =
-                if (currentMonth.monthName.length > 3) monthsString + " ${currentMonth.monthName.substring(
-                    0,
-                    4
-                )}," else monthsString + " ${currentMonth.monthName},"
+            monthsString = monthsString + " ${currentMonth.monthName.substring(
+                0,
+                3
+            )},"
         }
         return monthsString
     }
@@ -2883,7 +2980,7 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.cassavaHarvesting.add(selectedMonth)
                     }
-                    plantingCassava.text =
+                    harvestingCassava.text =
                         returnMonthInitialsString(lzSeasonsResponses.cassavaHarvesting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.RICE_HARVESTING) {
@@ -2909,7 +3006,7 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.sorghumHarvesting.add(selectedMonth)
                     }
-                    harvestingRice.text =
+                    harvestingSorghum.text =
                         returnMonthInitialsString(lzSeasonsResponses.sorghumHarvesting)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LEGUMES_HARVESTING) {
@@ -2922,7 +3019,7 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         lzSeasonsResponses.legumesHarvesting.add(selectedMonth)
                     }
-                    harvestingSorghum.text =
+                    harvestingLegumes.text =
                         returnMonthInitialsString(lzSeasonsResponses.legumesHarvesting)
                 }
 
@@ -3039,6 +3136,19 @@ class CountyLevelFragment : DialogFragment(),
                     foodPricesHigh.text =
                         returnMonthInitialsString(lzSeasonsResponses.highFoodPrices)
                 }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.MEDIUM_FOOD_PRICES) {
+                    val doesMonthAlreadyExist = lzSeasonsResponses.mediumFoodPrices.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.mediumFoodPrices.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.mediumFoodPrices.add(selectedMonth)
+                    }
+                    foodPricesMedium.text =
+                        returnMonthInitialsString(lzSeasonsResponses.mediumFoodPrices)
+                }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_FOOD_PRICES) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.lowFoodPrices.filter {
                         it.monthId == selectedMonth.monthId
@@ -3063,6 +3173,19 @@ class CountyLevelFragment : DialogFragment(),
                     }
                     livestockPricesHigh.text =
                         returnMonthInitialsString(lzSeasonsResponses.highLivestockPrices)
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.MEDIUM_LIVESTOCK_PRICES) {
+                    val doesMonthAlreadyExist = lzSeasonsResponses.mediumLivestockPrices.filter {
+                        it.monthId == selectedMonth.monthId
+                    }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.mediumLivestockPrices.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.mediumLivestockPrices.add(selectedMonth)
+                    }
+                    livestockPricesMedium.text =
+                        returnMonthInitialsString(lzSeasonsResponses.mediumLivestockPrices)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.LOW_LIVESTOCK_PRICES) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.lowLivestockPrices.filter {
@@ -3107,6 +3230,34 @@ class CountyLevelFragment : DialogFragment(),
                     }
                     casualLabourAvailabilityLow.text =
                         returnMonthInitialsString(lzSeasonsResponses.lowCasualLabourAvailability)
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.NON_AGRIC_HIGH_CASUAL_LABOUR_AVAILABILITY) {
+                    val doesMonthAlreadyExist =
+                        lzSeasonsResponses.nonAgricHighCasualLabourAvailability.filter {
+                            it.monthId == selectedMonth.monthId
+                        }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.nonAgricHighCasualLabourAvailability.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.nonAgricHighCasualLabourAvailability.add(selectedMonth)
+                    }
+                    nonAgricCasualLabourAvailabilityHigh.text =
+                        returnMonthInitialsString(lzSeasonsResponses.nonAgricHighCasualLabourAvailability)
+                }
+                if (seasonsResponsesEnum == SeasonsResponsesEnum.NON_AGRIC_LOW_CASUAL_LABOUR_AVAILABILITY) {
+                    val doesMonthAlreadyExist =
+                        lzSeasonsResponses.nonAgricLowCasualLabourAvailability.filter {
+                            it.monthId == selectedMonth.monthId
+                        }.isNotEmpty()
+
+                    if (doesMonthAlreadyExist) {
+                        lzSeasonsResponses.nonAgricLowCasualLabourAvailability.remove(selectedMonth)
+                    } else {
+                        lzSeasonsResponses.nonAgricLowCasualLabourAvailability.add(selectedMonth)
+                    }
+                    nonAgricCasualLabourAvailabilityLow.text =
+                        returnMonthInitialsString(lzSeasonsResponses.nonAgricLowCasualLabourAvailability)
                 }
                 if (seasonsResponsesEnum == SeasonsResponsesEnum.HIGH_CASUAL_LABOUR_WAGES) {
                     val doesMonthAlreadyExist = lzSeasonsResponses.highCasualLabourWages.filter {
@@ -3976,6 +4127,6 @@ class CountyLevelFragment : DialogFragment(),
         currentResponseItem: ZoneCharectaristicsResponseItem,
         position: Int
     ) {
-        zoneCharectaristicsItemsList.set(position,currentResponseItem)
+        zoneCharectaristicsItemsList.set(position, currentResponseItem)
     }
 }
