@@ -80,6 +80,9 @@ class CountyLevelFragment : DialogFragment(),
 
     lateinit var geographyObject: GeographyObject
 
+    val ethnicGroupResponseList: MutableList<EthnicityResponseItem> =
+        ArrayList()
+
     private var livelihoodZoneAlertDialog: android.app.AlertDialog? = null
 
     private var errorDialog: android.app.AlertDialog? = null
@@ -1357,8 +1360,7 @@ class CountyLevelFragment : DialogFragment(),
 
                     if (countyLevelQuestionnaire.livelihoodZoneEthnicGroups.isNotEmpty()) {
 
-                        val ethnicGroupResponseList: MutableList<EthnicityResponseItem> =
-                            ArrayList()
+
                         for (currentEthnicGroup: EthnicGroupModel in countyLevelQuestionnaire.livelihoodZoneEthnicGroups) {
                             ethnicGroupResponseList.add(
                                 EthnicityResponseItem(
@@ -1399,8 +1401,19 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
                 ethnicNextButton.setOnClickListener {
-                    ethnicGroupPopulation.root.visibility = View.GONE
-                    lzHungerPatterns.root.visibility = View.VISIBLE
+                    var totalEntry = 0.0
+                    for (currentResponseItem in ethnicGroupResponseList) {
+                        totalEntry = totalEntry + currentResponseItem.populationPercentage
+                    }
+
+                    if (totalEntry == 100.0) {
+                        ethnicGroupPopulation.root.visibility = View.GONE
+                        lzHungerPatterns.root.visibility = View.VISIBLE
+                    } else if (totalEntry < 100) {
+                        inflateErrorModal("Percentage error", "Total entry is less than 100% by ${100 - totalEntry}")
+                    } else if (totalEntry > 100) {
+                        inflateErrorModal("Percentage error", "Total entry is greater than 100% by ${totalEntry - 100}")
+                    }
                 }
 
             }
@@ -4128,5 +4141,12 @@ class CountyLevelFragment : DialogFragment(),
         position: Int
     ) {
         zoneCharectaristicsItemsList.set(position, currentResponseItem)
+    }
+
+    override fun onAnEthnicityResponseUpdated(
+        ethnicityResponseItem: EthnicityResponseItem,
+        position: Int
+    ) {
+        ethnicGroupResponseList.set(position, ethnicityResponseItem)
     }
 }
