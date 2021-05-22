@@ -11,8 +11,7 @@
         android:id="@+id/img1"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/toto"/>
+        android:layout_height="match_parent"/>
 
     <LinearLayout
         android:background="@drawable/bg_login"
