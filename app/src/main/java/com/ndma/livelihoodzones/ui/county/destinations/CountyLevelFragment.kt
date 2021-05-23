@@ -187,7 +187,50 @@ class CountyLevelFragment : DialogFragment(),
 
         binding = CountyLevelQuestionnaireLayoutBinding.inflate(inflater, container, false)
         defineViews()
+
+        if (isAResumeQuestionnaire) {
+            binding.countyConfiguration.root.visibility = View.GONE
+            determineTheResumeStep()
+        }
         return binding.root
+    }
+
+    private fun determineTheResumeStep() {
+        when(countyLevelQuestionnaire.lastQuestionnaireStep) {
+            Constants.LIVELIHOOD_ZONE_CHARACTERISTICS_STEP -> {
+                resumeLivelihoodZoneCharectaristics()
+            }
+            Constants.ZONE_SUBLOCATION_ASSIGNMENT_STEP -> {
+                resumeZoneSublocationAssignment()
+            }
+            Constants.WEALTH_GROUP_CHARACTERISTICS_STEP -> {
+                resumeZoneWealthGroupCharectaristics()
+            }
+        }
+    }
+
+    fun resumeLivelihoodZoneCharectaristics() {
+        binding.apply {
+            countyLivelihoodZoneCharectaristics.root.visibility = View.VISIBLE
+            countyLivelihoodZoneCharectaristics.apply {
+
+            }
+        }
+    }
+
+    fun resumeZoneSublocationAssignment() {
+        binding.apply {
+            lzSubLocationAssignment.root.visibility = View.VISIBLE
+        }
+    }
+
+    fun resumeZoneWealthGroupCharectaristics() {
+        binding.apply {
+            wealthGroupCharectaristics.root.visibility = View.VISIBLE
+            wealthGroupCharectaristics.apply {
+
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
