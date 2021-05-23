@@ -1,5 +1,7 @@
 package com.ndma.livelihoodzones.ui.county.responses
 
+import com.ndma.livelihoodzones.ui.wealthgroup.responses.WgCropProductionResponseItem
+
 class LzCropProductionResponses() {
-    var cropProductionResponses: MutableList<LzCropProductionResponseItem> = ArrayList()
+    var cropProductionResponses: MutableList<WgCropProductionResponseItem> = ArrayList()
 }

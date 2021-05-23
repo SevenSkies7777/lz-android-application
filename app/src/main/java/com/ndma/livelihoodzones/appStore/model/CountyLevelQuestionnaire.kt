@@ -7,6 +7,8 @@ import com.ndma.livelihoodzones.ui.model.QuestionnaireStatus
 class CountyLevelQuestionnaire(val uniqueId: String, var questionnaireName: String){
     var hasBeenSubmitted: Boolean = false
 
+    var lastQuestionnaireStep: Int = 0
+
     var questionnaireStatus: QuestionnaireStatus = QuestionnaireStatus.DRAFT_QUESTIONNAIRE
 
     var selectedLivelihoodZone: LivelihoodZoneModel? = null

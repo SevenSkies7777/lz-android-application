@@ -32,7 +32,10 @@ import com.ndma.livelihoodzones.appStore.AppStore
 import com.ndma.livelihoodzones.appStore.model.CountyLevelQuestionnaire
 import com.ndma.livelihoodzones.appStore.model.CountyLevelQuestionnaireListObject
 import com.ndma.livelihoodzones.config.Constants
+import com.ndma.livelihoodzones.config.Constants.LIVELIHOOD_ZONE_CHARACTERISTICS_STEP
 import com.ndma.livelihoodzones.config.Constants.QUESTIONNAIRE_COMPLETED
+import com.ndma.livelihoodzones.config.Constants.WEALTH_GROUP_CHARACTERISTICS_STEP
+import com.ndma.livelihoodzones.config.Constants.ZONE_SUBLOCATION_ASSIGNMENT_STEP
 import com.ndma.livelihoodzones.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.ndma.livelihoodzones.login.model.GeographyObject
 import com.ndma.livelihoodzones.ui.county.adapters.*
@@ -265,6 +268,7 @@ class CountyLevelFragment : DialogFragment(),
 
                             }
 
+                            countyLevelQuestionnaire.lastQuestionnaireStep = LIVELIHOOD_ZONE_CHARACTERISTICS_STEP
 
                             countyLivelihoodZoneCharectaristics.root.visibility = View.VISIBLE
                             countyConfiguration.root.visibility = View.GONE
@@ -339,6 +343,8 @@ class CountyLevelFragment : DialogFragment(),
                                 subLocationassignmentAdapter
                         }
 
+                        countyLevelQuestionnaire.lastQuestionnaireStep = ZONE_SUBLOCATION_ASSIGNMENT_STEP
+
                         countyLivelihoodZoneCharectaristics.root.visibility = View.GONE
                         lzSubLocationAssignment.root.visibility = View.VISIBLE
                     }
@@ -355,6 +361,9 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
                 lzAllocationNextButton.setOnClickListener {
+
+                    countyLevelQuestionnaire.lastQuestionnaireStep = WEALTH_GROUP_CHARACTERISTICS_STEP
+
                     lzSubLocationAssignment.root.visibility = View.GONE
                     wealthGroupCharectaristics.root.visibility = View.VISIBLE
                 }
@@ -789,6 +798,8 @@ class CountyLevelFragment : DialogFragment(),
                             returnAppropriateCropPercentagErrorMessage()
                         )
                     } else {
+
+                        countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses = cropProductionResponseItems
                         cropProductionLayout.root.visibility = View.GONE
                         mainWaterSource.root.visibility = View.VISIBLE
                     }
@@ -2646,6 +2657,8 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
 
+                countyLevelQuestionnaire.lastQuestionnaireStep = LIVELIHOOD_ZONE_CHARACTERISTICS_STEP
+
                 countyLivelihoodZoneCharectaristics.root.visibility = View.VISIBLE
                 countyConfiguration.root.visibility = View.GONE
             }
@@ -3724,10 +3737,10 @@ class CountyLevelFragment : DialogFragment(),
     override fun onCurrentCropHasNoError(
         lzCropProductionResponseItem: LzCropProductionResponseItem
     ) {
-        countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses.add(
-            lzCropProductionResponseItem
-        )
-        System.out.println()
+//        countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses.add(
+//            lzCropProductionResponseItem
+//        )
+//        System.out.println()
     }
 
     override fun onACropHasAValidationError() {
@@ -4147,4 +4160,59 @@ class CountyLevelFragment : DialogFragment(),
     ) {
         ethnicGroupResponseList.set(position, ethnicityResponseItem)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        saveQuestionnaireAsDraft()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        saveQuestionnaireAsDraft()
+    }
+
+
+    fun saveQuestionnaireAsDraft() {
+        countyLevelQuestionnaire.questionnaireStatus =
+            QuestionnaireStatus.DRAFT_QUESTIONNAIRE
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null)
+        val questionnairesListObject: CountyLevelQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                CountyLevelQuestionnaireListObject::class.java
+            )
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == countyLevelQuestionnaire.uniqueId
+        }
+        if (existingQuestionnaires.isEmpty()) {
+            questionnairesListObject.addQuestionnaire(countyLevelQuestionnaire)
+        } else {
+            val questionnairePosition = questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0))
+            questionnairesListObject.updateQuestionnaire(questionnairePosition,countyLevelQuestionnaire)
+        }
+
+        editor?.remove(Constants.QUESTIONNAIRES_LIST_OBJECT)
+
+        val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
+        editor?.putString(
+            Constants.QUESTIONNAIRES_LIST_OBJECT,
+            newQuestionnaireObjectString
+        )
+        editor?.commit()
+
+        val intent = Intent()
+        intent.action = QUESTIONNAIRE_COMPLETED
+        activity?.applicationContext?.sendBroadcast(intent)
+    }
+
 }
