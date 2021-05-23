@@ -123,12 +123,16 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
                     Constants.RESUME_ZONAL_QUESTIONNAIRE -> intent.getStringExtra(RESUME_QUESTIONNAIRE_ID)?.let {
                         handleZonalQuestionnaireResume(it)
                     }
+                    Constants.RESUME_WEALTH_GROUP_QUESTIONNAIRE -> intent.getStringExtra(RESUME_QUESTIONNAIRE_ID)?.let {
+                        handleWealthGroupQuestionnaireResume(it)
+                    }
                 }
             }
         }
 
         val resumeZonalQuestionnaireFilter = IntentFilter()
         resumeZonalQuestionnaireFilter.addAction(Constants.RESUME_ZONAL_QUESTIONNAIRE)
+        resumeZonalQuestionnaireFilter.addAction(Constants.RESUME_WEALTH_GROUP_QUESTIONNAIRE)
         this.applicationContext?.registerReceiver(resumeZonalQuestionnaireBroadCastReceiver, resumeZonalQuestionnaireFilter)
 
         val sharedPreferences: SharedPreferences? =
@@ -357,7 +361,8 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
                     val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(
                         questionnaireId,
                         questionnaireName,
-                        questionnaireSessionLocation
+                        questionnaireSessionLocation,
+                        false
                     )
                     wealthGroupDialogFragment.show(this.supportFragmentManager, "WealthGroup")
                 }
@@ -734,7 +739,8 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
                 val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(
                     questionnaireId,
                     questionnaireName,
-                    questionnaireSessionLocation
+                    questionnaireSessionLocation,
+                    false
                 )
                 wealthGroupDialogFragment.show(this.supportFragmentManager, "WealthGroup")
 
@@ -796,6 +802,16 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
             true
         )
         countyLevelDialogFragment.show(this.supportFragmentManager, "CountyLevel")
+    }
+
+    fun handleWealthGroupQuestionnaireResume(questionnaireId: String) {
+        val wealthGroupDialogFragment = WealthGroupDialogFragment.newInstance(
+            questionnaireId,
+            "none",
+            null,
+            true
+        )
+        wealthGroupDialogFragment.show(this.supportFragmentManager, "WealthGroup")
     }
 
 

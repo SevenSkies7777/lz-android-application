@@ -62,6 +62,8 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     var questionnaireName: String? = null
 
+    var isAResumeQuestionnaire: Boolean = false
+
     lateinit var geographyObject: GeographyObject
 
     var questionnaireSessionLocation: QuestionnaireSessionLocation? = null
@@ -134,11 +136,14 @@ class WealthGroupDialogFragment : DialogFragment(),
 
         private const val QUESTIONNAIRE_SESSION_LOCATION = "sessionLocation"
 
+        private const val IS_A_RESUME_QUESTIONNAIRE = "IS_A_RESUME_QUESTIONNAIRE"
+
         @JvmStatic
         fun newInstance(
             questionnaireId: String,
             questionnaireName: String,
-            questionnaireSessionLocation: QuestionnaireSessionLocation
+            questionnaireSessionLocation: QuestionnaireSessionLocation?,
+            isAResumeQuestionnaire: Boolean
         ) =
             WealthGroupDialogFragment()
                 .apply {
@@ -146,6 +151,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                         putString(QUESTIONNAIRE_ID, questionnaireId)
                         putString(QUESTIONNAIRE_NAME, questionnaireName)
                         putParcelable(QUESTIONNAIRE_SESSION_LOCATION, questionnaireSessionLocation)
+                        putBoolean(IS_A_RESUME_QUESTIONNAIRE, isAResumeQuestionnaire)
                     }
                 }
     }
@@ -158,24 +164,34 @@ class WealthGroupDialogFragment : DialogFragment(),
 
             questionnaireName = it.getString(QUESTIONNAIRE_NAME)
 
-            questionnaireSessionLocation =
-                it.getParcelable<QuestionnaireSessionLocation>(QUESTIONNAIRE_SESSION_LOCATION)
+            isAResumeQuestionnaire = it.getBoolean(IS_A_RESUME_QUESTIONNAIRE)
 
-            wealthGroupQuestionnaire =
-                questionnaireId?.let { it1 ->
-                    questionnaireName?.let { it2 ->
-                        WealthGroupQuestionnaire(
-                            it1,
-                            it2
-                        )
-                    }
+            if (!isAResumeQuestionnaire) {
+                questionnaireSessionLocation =
+                    it.getParcelable<QuestionnaireSessionLocation>(QUESTIONNAIRE_SESSION_LOCATION)
+
+                wealthGroupQuestionnaire =
+                    questionnaireId?.let { it1 ->
+                        questionnaireName?.let { it2 ->
+                            WealthGroupQuestionnaire(
+                                it1,
+                                it2
+                            )
+                        }
+                    }!!
+
+                wealthGroupQuestionnaire.questionnaireGeography = this.questionnaireSessionLocation!!
+                wealthGroupQuestionnaire.questionnaireStartDate = Util.getNow()
+                wealthGroupQuestionnaire.questionnaireName =
+                    AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
+                            wealthGroupQuestionnaire.questionnaireGeography.selectedLivelihoodZone?.livelihoodZoneName + " Livelihood Zone " + wealthGroupQuestionnaire.questionnaireGeography.selectedWealthGroup?.wealthGroupName + " questionnaire"
+            } else {
+                wealthGroupQuestionnaire = questionnaireId?.let { it1 ->
+                    retrieveASpecificWealthGroupQuestionnaire(
+                        it1
+                    )
                 }!!
-
-            wealthGroupQuestionnaire.questionnaireGeography = this.questionnaireSessionLocation!!
-            wealthGroupQuestionnaire.questionnaireStartDate = Util.getNow()
-            wealthGroupQuestionnaire.questionnaireName =
-                AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
-                        wealthGroupQuestionnaire.questionnaireGeography.selectedLivelihoodZone?.livelihoodZoneName + " Livelihood Zone " + wealthGroupQuestionnaire.questionnaireGeography.selectedWealthGroup?.wealthGroupName + " questionnaire"
+            }
         }
 
         inflateSubCountyModal()
@@ -4642,6 +4658,81 @@ class WealthGroupDialogFragment : DialogFragment(),
 //            }
 //
 //        }
+    }
+
+    fun retrieveASpecificWealthGroupQuestionnaire(questionnaireId: String): WealthGroupQuestionnaire {
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.WEALTH_GROUP_LIST_OBJECT, null)
+        val questionnairesListObject: WealthGroupQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                WealthGroupQuestionnaireListObject::class.java
+            )
+
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == questionnaireId
+        }
+
+        return existingQuestionnaires.get(0)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        saveQuestionnaireAsDraft()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        saveQuestionnaireAsDraft()
+    }
+
+    fun saveQuestionnaireAsDraft() {
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.WEALTH_GROUP_LIST_OBJECT, null)
+        val questionnairesListObject: WealthGroupQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                WealthGroupQuestionnaireListObject::class.java
+            )
+
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == wealthGroupQuestionnaire.uniqueId
+        }
+
+        if (existingQuestionnaires.isEmpty()) {
+            questionnairesListObject.addQuestionnaire(wealthGroupQuestionnaire)
+        } else {
+            questionnairesListObject.updateQuestionnaire(questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0)), wealthGroupQuestionnaire)
+        }
+        editor?.remove(Constants.WEALTH_GROUP_LIST_OBJECT)
+
+        val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
+        editor?.putString(
+            Constants.WEALTH_GROUP_LIST_OBJECT,
+            newQuestionnaireObjectString
+        )
+        editor?.commit()
+
+        val intent = Intent()
+        intent.action = Constants.QUESTIONNAIRE_COMPLETED
+        activity?.applicationContext?.sendBroadcast(intent)
     }
 
 

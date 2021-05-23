@@ -11,6 +11,7 @@ class WealthGroupQuestionnaire(val uniqueId: String, var questionnaireName: Stri
     var questionnaireStatus: QuestionnaireStatus = QuestionnaireStatus.DRAFT_QUESTIONNAIRE
     lateinit var questionnaireStartDate: String
     lateinit var questionnaireEndDate: String
+    var lastQuestionnaireStep: Int = 0
     lateinit var questionnaireGeography: QuestionnaireSessionLocation
     lateinit var incomeAndFoodSourceResponses: IncomeAndFoodSourceResponses
     lateinit var foodConsumptionResponses: FoodConsumptionResponses

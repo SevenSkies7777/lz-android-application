@@ -6,4 +6,8 @@ class WealthGroupQuestionnaireListObject {
     fun addQuestionnaire(wealthGroupQuestionnaire: WealthGroupQuestionnaire) {
         questionnaireList.add(wealthGroupQuestionnaire)
     }
+
+    fun updateQuestionnaire(position: Int, wealthGroupQuestionnaire: WealthGroupQuestionnaire) {
+        questionnaireList.set(position,wealthGroupQuestionnaire)
+    }
 }

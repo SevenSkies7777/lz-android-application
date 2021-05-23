@@ -24,6 +24,7 @@ class WealthGroupQuestionnaireAdapter(
 
     interface WealthGroupQuestionnaireAdapterCallBack {
         fun onQuestionnaireItemClicked(wealthGroupQuestionnaire: WealthGroupQuestionnaire)
+        fun onDraftWealthGroupQuestionnaireClicked(wealthGroupQuestionnaire: WealthGroupQuestionnaire)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -80,6 +81,12 @@ class WealthGroupQuestionnaireAdapter(
             determineStatusBackground(currentQuestionnaire.questionnaireStatus),
             null
         )
+
+        viewHolder.itemView.setOnClickListener {
+            if (currentQuestionnaire.questionnaireStatus != QuestionnaireStatus.SUBMITTED_TO_BACKEND) {
+                wealthGroupQuestionnaireAdapterCallBack.onDraftWealthGroupQuestionnaireClicked(currentQuestionnaire)
+            }
+        }
     }
 
     private fun determineQuestionnaireStatusText(questionnaireStatus: QuestionnaireStatus): String {
