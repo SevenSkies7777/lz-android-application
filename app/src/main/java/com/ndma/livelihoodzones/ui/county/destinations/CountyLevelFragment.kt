@@ -109,6 +109,8 @@ class CountyLevelFragment : DialogFragment(),
 
     var questionnaireName: String? = null
 
+    var isAResumeQuestionnaire: Boolean = false
+
     val WRITE_STORAGE_PERMISSION_CODE: Int = 100
 
     val lzSeasonsResponses = LzSeasonsResponses()
@@ -127,13 +129,16 @@ class CountyLevelFragment : DialogFragment(),
 
         private const val QUESTIONNAIRE_NAME = "questionnaireName"
 
+        private const val IS_A_RESUME_QUESTIONNAIRE = "IS_A_RESUME_QUESTIONNAIRE"
+
         @JvmStatic
-        fun newInstance(questionnaireId: String, questionnaireName: String) =
+        fun newInstance(questionnaireId: String, questionnaireName: String, isAResumeQuestionnaire: Boolean) =
             CountyLevelFragment()
                 .apply {
                     arguments = Bundle().apply {
                         putString(QUESTIONNAIRE_ID, questionnaireId)
                         putString(QUESTIONNAIRE_NAME, questionnaireName)
+                        putBoolean(IS_A_RESUME_QUESTIONNAIRE, isAResumeQuestionnaire)
                     }
                 }
     }
@@ -145,18 +150,28 @@ class CountyLevelFragment : DialogFragment(),
             questionnaireId = it.getString(QUESTIONNAIRE_ID)
 
             questionnaireName = it.getString(QUESTIONNAIRE_NAME)
+
+            isAResumeQuestionnaire = it.getBoolean(IS_A_RESUME_QUESTIONNAIRE)
         }
 
-        countyLevelQuestionnaire =
-            questionnaireId?.let {
-                questionnaireName?.let { it1 ->
-                    CountyLevelQuestionnaire(
-                        it,
-                        it1
-                    )
-                }
+        if (!isAResumeQuestionnaire) {
+            countyLevelQuestionnaire =
+                questionnaireId?.let {
+                    questionnaireName?.let { it1 ->
+                        CountyLevelQuestionnaire(
+                            it,
+                            it1
+                        )
+                    }
+                }!!
+            countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
+        } else {
+            countyLevelQuestionnaire = questionnaireId?.let {
+                retrieveASpecificQuestionnaireFromStore(
+                    it
+                )
             }!!
-        countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -4213,6 +4228,29 @@ class CountyLevelFragment : DialogFragment(),
         val intent = Intent()
         intent.action = QUESTIONNAIRE_COMPLETED
         activity?.applicationContext?.sendBroadcast(intent)
+    }
+
+    fun retrieveASpecificQuestionnaireFromStore(questionnaireId: String): CountyLevelQuestionnaire {
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null)
+        val questionnairesListObject: CountyLevelQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                CountyLevelQuestionnaireListObject::class.java
+            )
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == questionnaireId
+        }
+
+        return existingQuestionnaires.get(0)
     }
 
 }

@@ -25,6 +25,7 @@ class CountyQuestionnaireAdapter(
 
     interface CountyQuestionnaireAdapterCallBack {
         fun onCountyLevelQuestionnaireItemClicked(countyLevelQuestionnaire: CountyLevelQuestionnaire)
+        fun onDraftCountyLevelQuestionnaireClicked(countyLevelQuestionnaire: CountyLevelQuestionnaire)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -80,6 +81,12 @@ class CountyQuestionnaireAdapter(
             determineStatusBackground(currentQuestionnaire.questionnaireStatus),
             null
         )
+
+        viewHolder.itemView.setOnClickListener {
+            if (currentQuestionnaire.questionnaireStatus != QuestionnaireStatus.SUBMITTED_TO_BACKEND)  {
+                countyQuestionnaireAdapterCallBack.onDraftCountyLevelQuestionnaireClicked(currentQuestionnaire)
+            }
+        }
     }
 
     private fun determineQuestionnaireStatusText(questionnaireStatus: QuestionnaireStatus): String {

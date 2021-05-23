@@ -32,6 +32,8 @@ class Login : AppCompatActivity() {
             LoginViewModelProvider(LoginRepository((LoginService()))).provideLoginViewModel()
         defineViews()
         setupObservers()
+        val i = Intent(this@Login, MainActivity::class.java)
+        startActivity(i)
     }
 
 

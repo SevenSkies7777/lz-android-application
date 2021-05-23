@@ -18,6 +18,7 @@ import com.ndma.livelihoodzones.appStore.model.WealthGroupQuestionnaireListObjec
 import com.ndma.livelihoodzones.config.Constants
 import com.ndma.livelihoodzones.config.Constants.DISMISS_MAIN_ACTIVITY_DIALOGS
 import com.ndma.livelihoodzones.config.Constants.QUESTIONNAIRE_COMPLETED
+import com.ndma.livelihoodzones.config.Constants.RESUME_ZONAL_QUESTIONNAIRE
 import com.ndma.livelihoodzones.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.ndma.livelihoodzones.databinding.FragmentHomeBinding
 import com.ndma.livelihoodzones.services.model.Status
@@ -265,5 +266,12 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
 
     override fun onCountyLevelQuestionnaireItemClicked(countyLevelQuestionnaire: CountyLevelQuestionnaire) {
         homeViewModel.submitCountyLevelQuestionnaire(countyLevelQuestionnaire)
+    }
+
+    override fun onDraftCountyLevelQuestionnaireClicked(countyLevelQuestionnaire: CountyLevelQuestionnaire) {
+        val intent = Intent()
+        intent.action = RESUME_ZONAL_QUESTIONNAIRE
+        intent.putExtra(Constants.RESUME_QUESTIONNAIRE_ID, countyLevelQuestionnaire.uniqueId)
+        activity?.applicationContext?.sendBroadcast(intent)
     }
 }

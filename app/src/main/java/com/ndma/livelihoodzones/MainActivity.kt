@@ -7,10 +7,12 @@ import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -28,6 +30,7 @@ import com.google.gson.Gson
 import com.ndma.livelihoodzones.appStore.AppStore
 import com.ndma.livelihoodzones.appStore.model.*
 import com.ndma.livelihoodzones.config.Constants
+import com.ndma.livelihoodzones.config.Constants.RESUME_QUESTIONNAIRE_ID
 import com.ndma.livelihoodzones.login.model.GeographyObject
 import com.ndma.livelihoodzones.ui.county.destinations.CountyLevelFragment
 import com.ndma.livelihoodzones.ui.county.model.*
@@ -84,14 +87,18 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
 
     lateinit var selectedWard: WardModel
 
+    var resumeZonalQuestionnaireBroadCastReceiver: BroadcastReceiver? = null
+
     var dialogDismissBroadCastReceiver: BroadcastReceiver? = null
 
     val WRITE_STORAGE_PERMISSION_CODE: Int = 100
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
+
 
         dialogDismissBroadCastReceiver = object : BroadcastReceiver() {
             override fun onReceive(contxt: Context?, intent: Intent?) {
@@ -104,9 +111,25 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
             }
         }
 
+
         val filter = IntentFilter()
         filter.addAction(Constants.DISMISS_MAIN_ACTIVITY_DIALOGS)
-        this?.applicationContext?.registerReceiver(dialogDismissBroadCastReceiver, filter)
+        this.applicationContext?.registerReceiver(dialogDismissBroadCastReceiver, filter)
+
+
+        resumeZonalQuestionnaireBroadCastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(contxt: Context?, intent: Intent?) {
+                when (intent?.action) {
+                    Constants.RESUME_ZONAL_QUESTIONNAIRE -> intent.getStringExtra(RESUME_QUESTIONNAIRE_ID)?.let {
+                        handleZonalQuestionnaireResume(it)
+                    }
+                }
+            }
+        }
+
+        val resumeZonalQuestionnaireFilter = IntentFilter()
+        resumeZonalQuestionnaireFilter.addAction(Constants.RESUME_ZONAL_QUESTIONNAIRE)
+        this.applicationContext?.registerReceiver(resumeZonalQuestionnaireBroadCastReceiver, resumeZonalQuestionnaireFilter)
 
         val sharedPreferences: SharedPreferences? =
             baseContext?.applicationContext?.getSharedPreferences("MyPref", Context.MODE_PRIVATE)
@@ -164,6 +187,7 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun inflateQuestionnaireMenuModal() {
         lateinit var selectedQuestionnaireType: QuestionnaireType
         val inflater = this?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
@@ -187,7 +211,8 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
             )
             val countyLevelDialogFragment = CountyLevelFragment.newInstance(
                 questionnaireId,
-                "none"
+                "none",
+                false
             )
             countyLevelDialogFragment.show(this.supportFragmentManager, "CountyLevel")
         }
@@ -244,6 +269,7 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun inflateGeographyDialog() {
         val gson = Gson()
         val sharedPreferences: SharedPreferences? =
@@ -659,6 +685,7 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         (questionnaireTypeAlertDialog as android.app.AlertDialog).dismiss()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun isStoragePermissionGranted(): Boolean {
         val scopedActivity = this
 
@@ -754,6 +781,21 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
             )
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        this.applicationContext?.unregisterReceiver(resumeZonalQuestionnaireBroadCastReceiver)
+        this.applicationContext?.unregisterReceiver(dialogDismissBroadCastReceiver)
+    }
+
+    fun handleZonalQuestionnaireResume(resumeQuestionnaireId: String) {
+        val countyLevelDialogFragment = CountyLevelFragment.newInstance(
+            resumeQuestionnaireId,
+            "none",
+            true
+        )
+        countyLevelDialogFragment.show(this.supportFragmentManager, "CountyLevel")
     }
 
 
