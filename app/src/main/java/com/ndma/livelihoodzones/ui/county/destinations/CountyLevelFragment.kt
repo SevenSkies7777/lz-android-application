@@ -1717,6 +1717,7 @@ class CountyLevelFragment : DialogFragment(),
             /*Hazards navigation*/
             lzHazards.apply {
                 hazardBackButton.setOnClickListener {
+                    populateHungerPatterns()
                     lzHungerPatterns.root.visibility = View.VISIBLE
                     lzHazards.root.visibility = View.GONE
                 }
@@ -4774,6 +4775,18 @@ class CountyLevelFragment : DialogFragment(),
             }
         }
 
+    }
+
+    fun populateHungerPatterns() {
+        binding.apply {
+            lzHungerPatterns.apply {
+                val hungerPatternsResponses = countyLevelQuestionnaire.hungerPatternsResponses
+                etLongRainsHungerPeriod.setText(hungerPatternsResponses.longRainsPeriod.toString())
+                etEndLongBeginShortRainsHungerPeriod.setText(hungerPatternsResponses.endLongBeginShort.toString())
+                etShortRainsHungerPeriod.setText(hungerPatternsResponses.shortRainsPeriod.toString())
+                etEndShortBeginLongRainsHungerPeriod.setText(hungerPatternsResponses.endShortBeginLong.toString())
+            }
+        }
     }
 
 }
