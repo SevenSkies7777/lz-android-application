@@ -2335,6 +2335,7 @@ class CountyLevelFragment : DialogFragment(),
 
 
                 seasonCalendarBackButton.setOnClickListener {
+                    populateHarzards()
                     lzSeasonsCalendar.root.visibility = View.GONE
                     lzHazards.root.visibility = View.VISIBLE
                 }
@@ -4785,6 +4786,63 @@ class CountyLevelFragment : DialogFragment(),
                 etEndLongBeginShortRainsHungerPeriod.setText(hungerPatternsResponses.endLongBeginShort.toString())
                 etShortRainsHungerPeriod.setText(hungerPatternsResponses.shortRainsPeriod.toString())
                 etEndShortBeginLongRainsHungerPeriod.setText(hungerPatternsResponses.endShortBeginLong.toString())
+            }
+        }
+    }
+
+    fun populateHarzards() {
+        binding.apply {
+            lzHazards.apply {
+                val hazardResponses = countyLevelQuestionnaire.hazardResponses
+                animalRustlingNoOfYears.setText(hazardResponses.animalRustling.noExperiencedYears.toString())
+                banditryNoOfYears.setText(hazardResponses.banditry.noExperiencedYears.toString())
+                terrorismNoOfYears.setText(hazardResponses.terrorism.noExperiencedYears.toString())
+                ethicConflictNoOfYears.setText(hazardResponses.ethnicConflict.noExperiencedYears.toString())
+                politicalViolenceNoOfYears.setText(hazardResponses.politicalViolence.noExperiencedYears.toString())
+                droughtNoOfYears.setText(hazardResponses.drought.noExperiencedYears.toString())
+                pestAndDiseaseNoOfYears.setText(hazardResponses.livestockPestsAndDiseases.noExperiencedYears.toString())
+                hailstormsOrFrostNoOfYears.setText(hazardResponses.hailstormsOrFrost.noExperiencedYears.toString())
+                floodingNoOfYears.setText(hazardResponses.flooding.noExperiencedYears.toString())
+                landslidesNoOfYears.setText(hazardResponses.landslides.noExperiencedYears.toString())
+                windsOrCycloneNoOfYears.setText(hazardResponses.highWindsOrCyclones.noExperiencedYears.toString())
+                bushFiresNoOfYears.setText(hazardResponses.bushFires.noExperiencedYears.toString())
+                cropPestsNoOfYears.setText(hazardResponses.cropPests.noExperiencedYears.toString())
+                locustInvasionNoOfYears.setText(hazardResponses.locustInvasion.noExperiencedYears.toString())
+                cropDiseasesNoOfYears.setText(hazardResponses.cropDiseases.noExperiencedYears.toString())
+                terminalIllnessNoOfYears.setText(hazardResponses.terminalIllnesses.noExperiencedYears.toString())
+                malariaOutbreakNoOfYears.setText(hazardResponses.malariaPowerOutBreak.noExperiencedYears.toString())
+                waterBorneDiseaseNoOfYears.setText(hazardResponses.waterBornDiseases.noExperiencedYears.toString())
+                humanWildlifeConflictNoOfYears.setText(hazardResponses.humanWildlifeConflict.noExperiencedYears.toString())
+                highFoodPriceNoOfYears.setText(hazardResponses.highFoodPrices.noExperiencedYears.toString())
+                foodShortageNoOfYears.setText(hazardResponses.marketFoodShortages.noExperiencedYears.toString())
+                drinkingWaterShortageNoOfYears.setText(hazardResponses.drinkingWaterShortages.noExperiencedYears.toString())
+                invasivePlantsNoOfYears.setText(hazardResponses.invasivePlants.noExperiencedYears.toString())
+                othersNoOfYears.setText(hazardResponses.others.noExperiencedYears.toString())
+
+                animalRustlingRank.text = hazardResponses.animalRustling.importanceRank.toString()
+                banditryRank.text = hazardResponses.banditry.importanceRank.toString()
+                terrorismRank.text = hazardResponses.terrorism.importanceRank.toString()
+                ethicConflictRank.text = hazardResponses.ethnicConflict.importanceRank.toString()
+                politicalViolenceRank.text = hazardResponses.politicalViolence.importanceRank.toString()
+                droughtRank.text = hazardResponses.drought.importanceRank.toString()
+                pestAndDiseaseRank.text = hazardResponses.livestockPestsAndDiseases.importanceRank.toString()
+                hailstormsOrFrostRank.text = hazardResponses.hailstormsOrFrost.importanceRank.toString()
+                floodingRank.text = hazardResponses.flooding.importanceRank.toString()
+                landslidesRank.text = hazardResponses.landslides.importanceRank.toString()
+                windsOrCycloneRank.text = hazardResponses.highWindsOrCyclones.importanceRank.toString()
+                bushFiresRank.text = hazardResponses.bushFires.importanceRank.toString()
+                cropPestsRank.text = hazardResponses.cropPests.importanceRank.toString()
+                locustInvasionRank.text = hazardResponses.locustInvasion.importanceRank.toString()
+                cropDiseasesRank.text = hazardResponses.cropDiseases.importanceRank.toString()
+                terminalIllnessRank.text = hazardResponses.terminalIllnesses.importanceRank.toString()
+                malariaOutbreakRank.text = hazardResponses.malariaPowerOutBreak.importanceRank.toString()
+                waterBorneDiseaseRank.text = hazardResponses.waterBornDiseases.importanceRank.toString()
+                humanWildlifeConflictRank.text = hazardResponses.humanWildlifeConflict.importanceRank.toString()
+                highFoodPriceRank.text = hazardResponses.highFoodPrices.importanceRank.toString()
+                foodShortageRank.text = hazardResponses.marketFoodShortages.importanceRank.toString()
+                drinkingWaterShortageRank.text = hazardResponses.drinkingWaterShortages.importanceRank.toString()
+                invasivePlantsRank.text = hazardResponses.invasivePlants.importanceRank.toString()
+                othersRank.text = hazardResponses.others.importanceRank.toString()
             }
         }
     }
