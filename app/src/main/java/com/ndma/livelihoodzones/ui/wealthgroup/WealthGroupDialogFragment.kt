@@ -238,11 +238,129 @@ class WealthGroupDialogFragment : DialogFragment(),
     @RequiresApi(Build.VERSION_CODES.O)
     private fun defineViews() {
         defineNavigation()
+        if (isAResumeQuestionnaire) {
+            binding.wgIncomeAndFoodSources.root.visibility = View.GONE
+            determineTheResumeStep()
+        }
+    }
+
+    fun determineTheResumeStep() {
+        when(wealthGroupQuestionnaire.lastQuestionnaireStep) {
+            Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP -> {
+                resumeMainIncomeandFoodSources()
+            }
+            Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP -> {
+                resumeFoodConsumptionSourcePercentages()
+            }
+            Constants.WG_CROP_SELECTION_STEP -> {
+                resumeCropSelection()
+            }
+            Constants.WG_CROP_PRODUCTION_STEP -> {
+                resumeCropProduction()
+            }
+            Constants.LIVESTOCK_POULTRY_NUMBERS_STEP -> {
+                resumeLivestockPoultryNumbers()
+            }
+            Constants.LIVESTOCK_POULTRY_CONTRIBUTION_STEP -> {
+                resumeLivestockPoultryContributions()
+            }
+            Constants.LABOUR_PATTERNS_STEP -> {
+                resumeLabourPatterns()
+            }
+            Constants.EXPENDITURE_PATTERNS_STEP -> {
+                resumeExpenditurePatterns()
+            }
+            Constants.MIGRATION_PATTERNS_STEP -> {
+                resumeExpenditurePatterns()
+            }
+            Constants.CONSTRAINTS_STEP -> {
+                resumeConstraints()
+            }
+            Constants.COPING_STRATEGIES_STEP -> {
+                resumeCopingStrategies()
+            }
+            Constants.FGD_PARTICIPANTS_STEP -> {
+                resumeFgdParticipants()
+            }
+            Constants.WG_COMPLETION_PAGE -> {
+                resumeCompletionPage()
+            }
+        }
+    }
+
+    fun resumeMainIncomeandFoodSources() {
+        binding.apply {
+            wgIncomeAndFoodSources.root.visibility = View.VISIBLE
+        }
+    }
+    fun resumeFoodConsumptionSourcePercentages() {
+        binding.apply {
+            wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
+        }
+    }
+    fun resumeCropSelection() {
+        binding.apply {
+            prepareCropSelectionListView()
+            cropSelectionLayout.root.visibility = View.VISIBLE
+        }
+    }
+    fun resumeCropProduction() {
+        binding.apply {
+            cropProductionLayout.root.visibility = View.VISIBLE
+        }
+    }
+    fun resumeLivestockPoultryNumbers() {
+        binding.apply {
+            wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
+        }
+    }
+    fun resumeLivestockPoultryContributions() {
+        binding.apply {
+            wgLivestockPoultryContribution.root.visibility = View.VISIBLE
+        }
+    }
+    fun resumeLabourPatterns() {
+        binding.apply {
+            wgLabourPatterns.root.visibility = View.VISIBLE
+        }
+    }
+    fun resumeExpenditurePatterns() {
+        binding.apply {
+            wgExpenditurePatterns.root.visibility = View.VISIBLE
+        }
+    }
+    fun resumeMigrationPatterns() {
+        binding.apply {
+            wgMigrationPatterns.root.visibility = View.VISIBLE
+        }
+    }
+    fun resumeConstraints() {
+        binding.apply {
+            wgConstraints.root.visibility = View.VISIBLE
+        }
+    }
+    fun resumeCopingStrategies() {
+        binding.apply {
+            wgCopingStrategies.root.visibility = View.VISIBLE
+        }
+    }
+    fun resumeFgdParticipants() {
+        binding.apply {
+            fdgParticipants.root.visibility = View.VISIBLE
+        }
+    }
+    fun resumeCompletionPage() {
+        binding.apply {
+            wgCompletionPage.root.visibility = View.VISIBLE
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun defineNavigation() {
-        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP
+        if (!isAResumeQuestionnaire) {
+            wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP
+        }
+
         binding.apply {
 
             /*Income and food sources navigation*/
@@ -1463,18 +1581,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                         wealthGroupQuestionnaire.foodConsumptionResponses = foodConsumptionResponses
 
-                        cropSelectionLayout.apply {
-                            activity?.let { context ->
-                                val adapter =
-                                    CropSelectionListAdapter(
-                                        context,
-                                        R.layout.lz_selection_item,
-                                        crops,
-                                        this@WealthGroupDialogFragment
-                                    )
-                                cropsList.adapter = adapter
-                            }
-                        }
+                        prepareCropSelectionListView()
 
                         wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_CROP_SELECTION_STEP
                         wgPercentFoodConsumptionIncome.root.visibility = View.GONE
@@ -4727,6 +4834,23 @@ class WealthGroupDialogFragment : DialogFragment(),
         val intent = Intent()
         intent.action = Constants.QUESTIONNAIRE_COMPLETED
         activity?.applicationContext?.sendBroadcast(intent)
+    }
+
+    fun prepareCropSelectionListView() {
+        binding.apply {
+            cropSelectionLayout.apply {
+                activity?.let { context ->
+                    val adapter =
+                        CropSelectionListAdapter(
+                            context,
+                            R.layout.lz_selection_item,
+                            crops,
+                            this@WealthGroupDialogFragment
+                        )
+                    cropsList.adapter = adapter
+                }
+            }
+        }
     }
 
 
