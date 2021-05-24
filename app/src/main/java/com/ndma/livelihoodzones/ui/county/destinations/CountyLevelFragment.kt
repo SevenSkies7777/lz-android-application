@@ -1455,6 +1455,7 @@ class CountyLevelFragment : DialogFragment(),
             lzMarketTransactions.apply {
 
                 marketTransactionBackButton.setOnClickListener {
+                    populateMarketConfiguration()
                     marketGeographyConfiguration.root.visibility = View.VISIBLE
                     lzMarketTransactions.root.visibility = View.GONE
                 }
@@ -3652,7 +3653,7 @@ class CountyLevelFragment : DialogFragment(),
                             oneMarketName.text.toString(),
                             selectedSubCounty,
                             oneNearestVillageOrTown.text.toString(),
-                            Util.generateUniqueId()
+                            "1"
                         )
                     )
                     oneSubCounty.text = selectedSubCounty.subCountyName
@@ -3663,7 +3664,7 @@ class CountyLevelFragment : DialogFragment(),
                             twoMarketName.text.toString(),
                             selectedSubCounty,
                             twoNearestVillageOrTown.text.toString(),
-                            Util.generateUniqueId()
+                            "2"
                         )
                     )
                     twoSubCounty.text = selectedSubCounty.subCountyName
@@ -3674,7 +3675,7 @@ class CountyLevelFragment : DialogFragment(),
                             threeMarketName.text.toString(),
                             selectedSubCounty,
                             threeNearestVillageOrTown.text.toString(),
-                            Util.generateUniqueId()
+                            "3"
                         )
                     )
                     threeSubCounty.text = selectedSubCounty.subCountyName
@@ -3685,7 +3686,7 @@ class CountyLevelFragment : DialogFragment(),
                             fourMarketName.text.toString(),
                             selectedSubCounty,
                             fourNearestVillageOrTown.text.toString(),
-                            Util.generateUniqueId()
+                            "4"
                         )
                     )
                     fourSubCounty.text = selectedSubCounty.subCountyName
@@ -3696,7 +3697,7 @@ class CountyLevelFragment : DialogFragment(),
                             fiveMarketName.text.toString(),
                             selectedSubCounty,
                             fiveNearestVillageOrTown.text.toString(),
-                            Util.generateUniqueId()
+                            "5"
                         )
                     )
                     fiveSubCounty.text = selectedSubCounty.subCountyName
@@ -3707,7 +3708,7 @@ class CountyLevelFragment : DialogFragment(),
                             sixMarketName.text.toString(),
                             selectedSubCounty,
                             sixNearestVillageOrTown.text.toString(),
-                            Util.generateUniqueId()
+                            "6"
                         )
                     )
                     sixSubCounty.text = selectedSubCounty.subCountyName
@@ -3718,7 +3719,7 @@ class CountyLevelFragment : DialogFragment(),
                             sevenMarketName.text.toString(),
                             selectedSubCounty,
                             sevenNearestVillageOrTown.text.toString(),
-                            Util.generateUniqueId()
+                            "7"
                         )
                     )
                     sevenSubCounty.text = selectedSubCounty.subCountyName
@@ -3729,7 +3730,7 @@ class CountyLevelFragment : DialogFragment(),
                             eightMarketName.text.toString(),
                             selectedSubCounty,
                             eightNearestVillageOrTown.text.toString(),
-                            Util.generateUniqueId()
+                            "8"
                         )
                     )
                     eightSubCounty.text = selectedSubCounty.subCountyName
@@ -3740,7 +3741,7 @@ class CountyLevelFragment : DialogFragment(),
                             nineMarketName.text.toString(),
                             selectedSubCounty,
                             nineNearestVillageOrTown.text.toString(),
-                            Util.generateUniqueId()
+                            "9"
                         )
                     )
                     nineSubCounty.text = selectedSubCounty.subCountyName
@@ -3751,7 +3752,7 @@ class CountyLevelFragment : DialogFragment(),
                             tenMarketName.text.toString(),
                             selectedSubCounty,
                             tenNearestVillageOrTown.text.toString(),
-                            Util.generateUniqueId()
+                            "10"
                         )
                     )
                     tenSubCounty.text = selectedSubCounty.subCountyName
@@ -4632,6 +4633,94 @@ class CountyLevelFragment : DialogFragment(),
             }
 
         }
+    }
+
+    fun populateMarketConfiguration() {
+        binding.apply {
+            marketGeographyConfiguration.apply {
+                val definedMarkets = countyLevelQuestionnaire.definedMarkets
+
+                val oneMarket = returnMarketFromMarketId("1")
+                oneMarket?.let {
+                    oneMarketName.setText(it.marketName)
+                    oneNearestVillageOrTown.setText(it.nearestVillageOrTown)
+                    oneSubCounty.text = it.subCountyModel.subCountyName
+                }
+
+                val twoMarket = returnMarketFromMarketId("2")
+                twoMarket?.let {
+                    twoMarketName.setText(it.marketName)
+                    twoNearestVillageOrTown.setText(it.nearestVillageOrTown)
+                    twoSubCounty.text = it.subCountyModel.subCountyName
+                }
+
+                val threeMarket = returnMarketFromMarketId("3")
+                threeMarket?.let {
+                    threeMarketName.setText(it.marketName)
+                    threeNearestVillageOrTown.setText(it.nearestVillageOrTown)
+                    threeSubCounty.text = it.subCountyModel.subCountyName
+                }
+
+                val fourMarket = returnMarketFromMarketId("4")
+                fourMarket?.let {
+                    fourMarketName.setText(it.marketName)
+                    fourNearestVillageOrTown.setText(it.nearestVillageOrTown)
+                    fourSubCounty.text = it.subCountyModel.subCountyName
+                }
+
+                val fiveMarket = returnMarketFromMarketId("5")
+                fiveMarket?.let {
+                    fiveMarketName.setText(it.marketName)
+                    fiveNearestVillageOrTown.setText(it.nearestVillageOrTown)
+                    fiveSubCounty.text = it.subCountyModel.subCountyName
+                }
+
+                val sixMarket = returnMarketFromMarketId("6")
+                sixMarket?.let {
+                    sixMarketName.setText(it.marketName)
+                    sixNearestVillageOrTown.setText(it.nearestVillageOrTown)
+                    sixSubCounty.text = it.subCountyModel.subCountyName
+                }
+
+                val sevenMarket = returnMarketFromMarketId("7")
+                sevenMarket?.let {
+                    sevenMarketName.setText(it.marketName)
+                    sevenNearestVillageOrTown.setText(it.nearestVillageOrTown)
+                    sevenSubCounty.text = it.subCountyModel.subCountyName
+                }
+
+                val eightMarket = returnMarketFromMarketId("8")
+                eightMarket?.let {
+                    eightMarketName.setText(it.marketName)
+                    eightNearestVillageOrTown.setText(it.nearestVillageOrTown)
+                    eightSubCounty.text = it.subCountyModel.subCountyName
+                }
+
+                val nineMarket = returnMarketFromMarketId("9")
+                nineMarket?.let {
+                    nineMarketName.setText(it.marketName)
+                    nineNearestVillageOrTown.setText(it.nearestVillageOrTown)
+                    nineSubCounty.text = it.subCountyModel.subCountyName
+                }
+
+                val tenMarket = returnMarketFromMarketId("10")
+                tenMarket?.let {
+                    tenMarketName.setText(it.marketName)
+                    tenNearestVillageOrTown.setText(it.nearestVillageOrTown)
+                    tenSubCounty.text = it.subCountyModel.subCountyName
+                }
+            }
+        }
+    }
+
+    fun returnMarketFromMarketId(marketId: String): DefinedMarketModel? {
+        var currentMarket: MarketModel? = null
+        for (currentMarket in countyLevelQuestionnaire.definedMarkets) {
+            if (currentMarket.marketUniqueId == marketId) {
+                return currentMarket
+            }
+        }
+        return null
     }
 
 }
