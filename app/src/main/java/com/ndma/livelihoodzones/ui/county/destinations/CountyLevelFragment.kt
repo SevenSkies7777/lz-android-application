@@ -334,6 +334,7 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeEthnicGroupPopulation() {
         binding.apply {
+            prepareEthnicGroupPopulation()
             ethnicGroupPopulation.root.visibility = View.VISIBLE
         }
     }
@@ -1487,25 +1488,7 @@ class CountyLevelFragment : DialogFragment(),
                     if (countyLevelQuestionnaire.livelihoodZoneEthnicGroups.isNotEmpty()) {
 
 
-                        for (currentEthnicGroup: EthnicGroupModel in countyLevelQuestionnaire.livelihoodZoneEthnicGroups) {
-                            ethnicGroupResponseList.add(
-                                EthnicityResponseItem(
-                                    currentEthnicGroup,
-                                    0.0
-                                )
-                            )
-                        }
-
-                        val ethnicPopulationAdapter =
-                            EthnicityAdapter(ethnicGroupResponseList, this@CountyLevelFragment)
-                        val gridLayoutManager = GridLayoutManager(activity, 1)
-
-                        ethnicGroupPopulation.apply {
-                            ethnicityTable.layoutManager = gridLayoutManager
-                            ethnicityTable.hasFixedSize()
-                            ethnicityTable.adapter =
-                                ethnicPopulationAdapter
-                        }
+                        prepareEthnicGroupPopulation()
 
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.ETHNIC_GROUP_POPULATION_STEP
@@ -1525,6 +1508,7 @@ class CountyLevelFragment : DialogFragment(),
             ethnicGroupPopulation.apply {
 
                 ethnicBackButton.setOnClickListener {
+                    populateEthnicGroupSelection()
                     ethnicGroupPopulation.root.visibility = View.GONE
                     ethnicGroupSelection.root.visibility = View.VISIBLE
                 }
@@ -4721,6 +4705,51 @@ class CountyLevelFragment : DialogFragment(),
             }
         }
         return null
+    }
+
+    fun populateEthnicGroupSelection() {
+        binding.apply {
+            ethnicGroupSelection.apply {
+                for (currentEthnicGroup in countyLevelQuestionnaire.livelihoodZoneEthnicGroups) {
+                    ethnicGroups.set(ethnicGroups.indexOf(ethnicGroups.first { it.ethnicGroupId ==  currentEthnicGroup.ethnicGroupId}), currentEthnicGroup)
+                }
+                activity?.let { context ->
+                    val adapter =
+                        TribesListViewAdapter(
+                            context,
+                            R.layout.lz_selection_item,
+                            ethnicGroups,
+                            this@CountyLevelFragment
+                        )
+                    tribesList.adapter = adapter
+                }
+            }
+        }
+    }
+
+    fun prepareEthnicGroupPopulation() {
+        binding.apply {
+            ethnicGroupPopulation.apply {
+                for (currentEthnicGroup: EthnicGroupModel in countyLevelQuestionnaire.livelihoodZoneEthnicGroups) {
+                    ethnicGroupResponseList.add(
+                        EthnicityResponseItem(
+                            currentEthnicGroup,
+                            0.0
+                        )
+                    )
+                }
+                val ethnicPopulationAdapter =
+                    EthnicityAdapter(ethnicGroupResponseList, this@CountyLevelFragment)
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+
+                ethnicGroupPopulation.apply {
+                    ethnicityTable.layoutManager = gridLayoutManager
+                    ethnicityTable.hasFixedSize()
+                    ethnicityTable.adapter =
+                        ethnicPopulationAdapter
+                }
+            }
+        }
     }
 
 }
