@@ -1478,6 +1478,7 @@ class CountyLevelFragment : DialogFragment(),
             ethnicGroupSelection.apply {
 
                 tribeSelectionBackButton.setOnClickListener {
+                    populateMarketTransactions()
                     lzMarketTransactions.root.visibility = View.VISIBLE
                     ethnicGroupSelection.root.visibility = View.GONE
                 }
@@ -3766,88 +3767,64 @@ class CountyLevelFragment : DialogFragment(),
 
     }
 
-    override fun onLivestockMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
-        val currentMarketingTransactionItem =
-            countyLevelQuestionnaire.marketTransactionItems.first {
-                it.marketUniqueId == marketUniqueId
-            }
-        currentMarketingTransactionItem.livestockTrade = isTradeHappening
-        val tempList: List<MarketTransactionsItem> =
-            countyLevelQuestionnaire.marketTransactionItems.filter {
-                it.marketUniqueId != marketUniqueId
-            }
-        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
-        countyLevelQuestionnaire.marketTransactionItems = tempList
+    override fun onLivestockMarketTradeClicked(
+        marketUniqueId: String,
+        isTradeHappening: Boolean,
+        marketTransactionItem: MarketTransactionsItem,
+        position: Int
+    ) {
+        val currentItem = countyLevelQuestionnaire.marketTransactionItems.first { it.marketUniqueId == marketUniqueId }
+        countyLevelQuestionnaire.marketTransactionItems.set(countyLevelQuestionnaire.marketTransactionItems.indexOf(currentItem),marketTransactionItem)
     }
 
-    override fun onPoultryMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
-        val currentMarketingTransactionItem =
-            countyLevelQuestionnaire.marketTransactionItems.first {
-                it.marketUniqueId == marketUniqueId
-            }
-        currentMarketingTransactionItem.poultryTrade = isTradeHappening
-        val tempList: List<MarketTransactionsItem> =
-            countyLevelQuestionnaire.marketTransactionItems.filter {
-                it.marketUniqueId != marketUniqueId
-            }
-        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
-        countyLevelQuestionnaire.marketTransactionItems = tempList
+    override fun onPoultryMarketTradeClicked(
+        marketUniqueId: String,
+        isTradeHappening: Boolean,
+        marketTransactionItem: MarketTransactionsItem,
+        position: Int
+    ) {
+        val currentItem = countyLevelQuestionnaire.marketTransactionItems.first { it.marketUniqueId == marketUniqueId }
+        countyLevelQuestionnaire.marketTransactionItems.set(countyLevelQuestionnaire.marketTransactionItems.indexOf(currentItem),marketTransactionItem)
     }
 
-    override fun onFarmProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
-        val currentMarketingTransactionItem =
-            countyLevelQuestionnaire.marketTransactionItems.first {
-                it.marketUniqueId == marketUniqueId
-            }
-        currentMarketingTransactionItem.farmProduceTrade = isTradeHappening
-        val tempList: List<MarketTransactionsItem> =
-            countyLevelQuestionnaire.marketTransactionItems.filter {
-                it.marketUniqueId != marketUniqueId
-            }
-        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
-        countyLevelQuestionnaire.marketTransactionItems = tempList
+    override fun onFarmProduceTradeClicked(
+        marketUniqueId: String,
+        isTradeHappening: Boolean,
+        marketTransactionItem: MarketTransactionsItem,
+        position: Int
+    ) {
+        val currentItem = countyLevelQuestionnaire.marketTransactionItems.first { it.marketUniqueId == marketUniqueId }
+        countyLevelQuestionnaire.marketTransactionItems.set(countyLevelQuestionnaire.marketTransactionItems.indexOf(currentItem),marketTransactionItem)
     }
 
-    override fun onFoodProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
-        val currentMarketingTransactionItem =
-            countyLevelQuestionnaire.marketTransactionItems.first {
-                it.marketUniqueId == marketUniqueId
-            }
-        currentMarketingTransactionItem.foodProduceRetail = isTradeHappening
-        val tempList: List<MarketTransactionsItem> =
-            countyLevelQuestionnaire.marketTransactionItems.filter {
-                it.marketUniqueId != marketUniqueId
-            }
-        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
-        countyLevelQuestionnaire.marketTransactionItems = tempList
+    override fun onFoodProduceTradeClicked(
+        marketUniqueId: String,
+        isTradeHappening: Boolean,
+        marketTransactionItem: MarketTransactionsItem,
+        position: Int
+    ) {
+        val currentItem = countyLevelQuestionnaire.marketTransactionItems.first { it.marketUniqueId == marketUniqueId }
+        countyLevelQuestionnaire.marketTransactionItems.set(countyLevelQuestionnaire.marketTransactionItems.indexOf(currentItem),marketTransactionItem)
     }
 
-    override fun onFarmInputsTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
-        val currentMarketingTransactionItem =
-            countyLevelQuestionnaire.marketTransactionItems.first {
-                it.marketUniqueId == marketUniqueId
-            }
-        currentMarketingTransactionItem.retailFarmInput = isTradeHappening
-        val tempList: List<MarketTransactionsItem> =
-            countyLevelQuestionnaire.marketTransactionItems.filter {
-                it.marketUniqueId != marketUniqueId
-            }
-        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
-        countyLevelQuestionnaire.marketTransactionItems = tempList
+    override fun onFarmInputsTradeClicked(
+        marketUniqueId: String,
+        isTradeHappening: Boolean,
+        marketTransactionItem: MarketTransactionsItem,
+        position: Int
+    ) {
+        val currentItem = countyLevelQuestionnaire.marketTransactionItems.first { it.marketUniqueId == marketUniqueId }
+        countyLevelQuestionnaire.marketTransactionItems.set(countyLevelQuestionnaire.marketTransactionItems.indexOf(currentItem),marketTransactionItem)
     }
 
-    override fun onLabourExchangeTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
-        val currentMarketingTransactionItem =
-            countyLevelQuestionnaire.marketTransactionItems.first {
-                it.marketUniqueId == marketUniqueId
-            }
-        currentMarketingTransactionItem.labourExchange = isTradeHappening
-        val tempList: List<MarketTransactionsItem> =
-            countyLevelQuestionnaire.marketTransactionItems.filter {
-                it.marketUniqueId != marketUniqueId
-            }
-        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
-        countyLevelQuestionnaire.marketTransactionItems = tempList
+    override fun onLabourExchangeTradeClicked(
+        marketUniqueId: String,
+        isTradeHappening: Boolean,
+        marketTransactionItem: MarketTransactionsItem,
+        position: Int
+    ) {
+        val currentItem = countyLevelQuestionnaire.marketTransactionItems.first { it.marketUniqueId == marketUniqueId }
+        countyLevelQuestionnaire.marketTransactionItems.set(countyLevelQuestionnaire.marketTransactionItems.indexOf(currentItem),marketTransactionItem)
     }
 
 
@@ -4501,7 +4478,8 @@ class CountyLevelFragment : DialogFragment(),
             val marketTransactionsAdapter =
                 MarketTransactionsAdapter(
                     marketTransactionItems,
-                    this@CountyLevelFragment
+                    this@CountyLevelFragment,
+                    false
                 )
             val gridLayoutManager = GridLayoutManager(activity, 1)
 
@@ -4573,6 +4551,7 @@ class CountyLevelFragment : DialogFragment(),
         binding.apply {
             cropProductionLayout.apply {
                 activity?.let { context ->
+                    cropsList.adapter = null
                     val adapter =
                         CropProductionListAdapter(
                             context,
@@ -4714,13 +4693,36 @@ class CountyLevelFragment : DialogFragment(),
     }
 
     fun returnMarketFromMarketId(marketId: String): DefinedMarketModel? {
-        var currentMarket: MarketModel? = null
         for (currentMarket in countyLevelQuestionnaire.definedMarkets) {
             if (currentMarket.marketUniqueId == marketId) {
                 return currentMarket
             }
         }
         return null
+    }
+
+    fun populateMarketTransactions() {
+        binding.apply {
+            lzMarketTransactions.apply {
+
+                val marketTransactionsAdapter =
+                    MarketTransactionsAdapter(
+                        countyLevelQuestionnaire.marketTransactionItems,
+                        this@CountyLevelFragment,
+                        true
+                    )
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+
+                lzMarketTransactions.apply {
+
+                    marketTransactionsList.layoutManager = gridLayoutManager
+                    marketTransactionsList.hasFixedSize()
+                    marketTransactionsList.adapter =
+                        marketTransactionsAdapter
+
+                }
+            }
+        }
     }
 
 }
