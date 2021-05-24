@@ -132,7 +132,11 @@ class CountyLevelFragment : DialogFragment(),
         private const val IS_A_RESUME_QUESTIONNAIRE = "IS_A_RESUME_QUESTIONNAIRE"
 
         @JvmStatic
-        fun newInstance(questionnaireId: String, questionnaireName: String, isAResumeQuestionnaire: Boolean) =
+        fun newInstance(
+            questionnaireId: String,
+            questionnaireName: String,
+            isAResumeQuestionnaire: Boolean
+        ) =
             CountyLevelFragment()
                 .apply {
                     arguments = Bundle().apply {
@@ -196,7 +200,7 @@ class CountyLevelFragment : DialogFragment(),
     }
 
     private fun determineTheResumeStep() {
-        when(countyLevelQuestionnaire.lastQuestionnaireStep) {
+        when (countyLevelQuestionnaire.lastQuestionnaireStep) {
             Constants.LIVELIHOOD_ZONE_CHARACTERISTICS_STEP -> {
                 resumeLivelihoodZoneCharectaristics()
             }
@@ -280,7 +284,7 @@ class CountyLevelFragment : DialogFragment(),
     fun resumeCropSelection() {
         binding.apply {
             cropSelectionLayout.root.visibility = View.VISIBLE
-            if(countyLevelQuestionnaire.selectedCrops.isEmpty()) {
+            if (countyLevelQuestionnaire.selectedCrops.isEmpty()) {
                 prepareCropSelectionListView()
             } else {
                 populateCropSelectionSection()
@@ -302,6 +306,9 @@ class CountyLevelFragment : DialogFragment(),
     fun resumeSourcesOfWater() {
         binding.apply {
             mainWaterSource.root.visibility = View.VISIBLE
+            if (countyLevelQuestionnaire.waterSourceResponses != null) {
+                populateMainSourcesOfWater()
+            }
         }
     }
 
@@ -448,7 +455,8 @@ class CountyLevelFragment : DialogFragment(),
 
                             }
 
-                            countyLevelQuestionnaire.lastQuestionnaireStep = LIVELIHOOD_ZONE_CHARACTERISTICS_STEP
+                            countyLevelQuestionnaire.lastQuestionnaireStep =
+                                LIVELIHOOD_ZONE_CHARACTERISTICS_STEP
 
                             countyLivelihoodZoneCharectaristics.root.visibility = View.VISIBLE
                             countyConfiguration.root.visibility = View.GONE
@@ -510,7 +518,8 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
                         prepareLivelihoodZoneSubLocationAssignmentRecyclerView()
 
-                        countyLevelQuestionnaire.lastQuestionnaireStep = ZONE_SUBLOCATION_ASSIGNMENT_STEP
+                        countyLevelQuestionnaire.lastQuestionnaireStep =
+                            ZONE_SUBLOCATION_ASSIGNMENT_STEP
 
                         countyLivelihoodZoneCharectaristics.root.visibility = View.GONE
                         lzSubLocationAssignment.root.visibility = View.VISIBLE
@@ -529,7 +538,8 @@ class CountyLevelFragment : DialogFragment(),
 
                 lzAllocationNextButton.setOnClickListener {
 
-                    countyLevelQuestionnaire.lastQuestionnaireStep = WEALTH_GROUP_CHARACTERISTICS_STEP
+                    countyLevelQuestionnaire.lastQuestionnaireStep =
+                        WEALTH_GROUP_CHARACTERISTICS_STEP
 
                     lzSubLocationAssignment.root.visibility = View.GONE
                     wealthGroupCharectaristics.root.visibility = View.VISIBLE
@@ -757,7 +767,8 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.wealthGroupCharectariticsResponses =
                             wealthGroupCharectaristicsResponses
 
-                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.WEALTH_GROUP_PERCENTAGES_STEP
+                        countyLevelQuestionnaire.lastQuestionnaireStep =
+                            Constants.WEALTH_GROUP_PERCENTAGES_STEP
                         locationAndPopulationLayout.root.visibility = View.VISIBLE
                         wealthGroupCharectaristics.root.visibility = View.GONE
                     } else {
@@ -852,7 +863,8 @@ class CountyLevelFragment : DialogFragment(),
 
                             prepareCropSelectionListView()
 
-                            countyLevelQuestionnaire.lastQuestionnaireStep = Constants.LZ_CROP_SELECTION_STEP
+                            countyLevelQuestionnaire.lastQuestionnaireStep =
+                                Constants.LZ_CROP_SELECTION_STEP
 
                             locationAndPopulationLayout.root.visibility = View.GONE
                             cropSelectionLayout.root.visibility = View.VISIBLE
@@ -887,7 +899,8 @@ class CountyLevelFragment : DialogFragment(),
 
                         prepareCropProductionResponseItems()
 
-                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.LZ_CROP_PRODUCTION_STEP
+                        countyLevelQuestionnaire.lastQuestionnaireStep =
+                            Constants.LZ_CROP_PRODUCTION_STEP
 
                         cropProductionLayout.root.visibility = View.VISIBLE
                         cropSelectionLayout.root.visibility = View.GONE
@@ -932,8 +945,10 @@ class CountyLevelFragment : DialogFragment(),
                         )
                     } else {
 
-                        countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses = cropProductionResponseItems
-                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.MAIN_SOURCES_OF_WATER_STEP
+                        countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses =
+                            cropProductionResponseItems
+                        countyLevelQuestionnaire.lastQuestionnaireStep =
+                            Constants.MAIN_SOURCES_OF_WATER_STEP
                         cropProductionLayout.root.visibility = View.GONE
                         mainWaterSource.root.visibility = View.VISIBLE
                     }
@@ -1326,7 +1341,8 @@ class CountyLevelFragment : DialogFragment(),
 
                             countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
 
-                            countyLevelQuestionnaire.lastQuestionnaireStep = Constants.MARKETS_CONFIGURATION_STEP
+                            countyLevelQuestionnaire.lastQuestionnaireStep =
+                                Constants.MARKETS_CONFIGURATION_STEP
 
                             mainWaterSource.root.visibility = View.GONE
                             marketGeographyConfiguration.root.visibility = View.VISIBLE
@@ -1352,13 +1368,15 @@ class CountyLevelFragment : DialogFragment(),
             marketGeographyConfiguration.apply {
 
                 marketGeographyBackButton.setOnClickListener {
+                    populateMainSourcesOfWater()
                     mainWaterSource.root.visibility = View.VISIBLE
                     marketGeographyConfiguration.root.visibility = View.GONE
                 }
 
                 marketGeographyNextButton.setOnClickListener {
 
-                    countyLevelQuestionnaire.lastQuestionnaireStep = Constants.MARKETS_TRANSACTIONS_STEP
+                    countyLevelQuestionnaire.lastQuestionnaireStep =
+                        Constants.MARKETS_TRANSACTIONS_STEP
 
                     prepareMarketTransactionsResponses()
 
@@ -1445,7 +1463,8 @@ class CountyLevelFragment : DialogFragment(),
 
                     prepareEthnicGroupsSelectionlistView()
 
-                    countyLevelQuestionnaire.lastQuestionnaireStep = Constants.ETHNIC_GROUP_SELECTION_STEP
+                    countyLevelQuestionnaire.lastQuestionnaireStep =
+                        Constants.ETHNIC_GROUP_SELECTION_STEP
 
                     ethnicGroupSelection.root.visibility = View.VISIBLE
                     lzMarketTransactions.root.visibility = View.GONE
@@ -1458,7 +1477,7 @@ class CountyLevelFragment : DialogFragment(),
             ethnicGroupSelection.apply {
 
                 tribeSelectionBackButton.setOnClickListener {
-                    mainWaterSource.root.visibility = View.VISIBLE
+                    lzMarketTransactions.root.visibility = View.VISIBLE
                     ethnicGroupSelection.root.visibility = View.GONE
                 }
 
@@ -1487,7 +1506,8 @@ class CountyLevelFragment : DialogFragment(),
                                 ethnicPopulationAdapter
                         }
 
-                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.ETHNIC_GROUP_POPULATION_STEP
+                        countyLevelQuestionnaire.lastQuestionnaireStep =
+                            Constants.ETHNIC_GROUP_POPULATION_STEP
 
                         ethnicGroupSelection.root.visibility = View.GONE
                         ethnicGroupPopulation.root.visibility = View.VISIBLE
@@ -1516,14 +1536,21 @@ class CountyLevelFragment : DialogFragment(),
 
                     if (totalEntry == 100.0) {
 
-                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.HUNGER_PATTERNS_STEP
+                        countyLevelQuestionnaire.lastQuestionnaireStep =
+                            Constants.HUNGER_PATTERNS_STEP
 
                         ethnicGroupPopulation.root.visibility = View.GONE
                         lzHungerPatterns.root.visibility = View.VISIBLE
                     } else if (totalEntry < 100) {
-                        inflateErrorModal("Percentage error", "Total entry is less than 100% by ${100 - totalEntry}")
+                        inflateErrorModal(
+                            "Percentage error",
+                            "Total entry is less than 100% by ${100 - totalEntry}"
+                        )
                     } else if (totalEntry > 100) {
-                        inflateErrorModal("Percentage error", "Total entry is greater than 100% by ${totalEntry - 100}")
+                        inflateErrorModal(
+                            "Percentage error",
+                            "Total entry is greater than 100% by ${totalEntry - 100}"
+                        )
                     }
                 }
 
@@ -1988,7 +2015,8 @@ class CountyLevelFragment : DialogFragment(),
 
                         countyLevelQuestionnaire.hazardResponses = hazardResponses
 
-                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.SEASON_CALENDAR_STEP
+                        countyLevelQuestionnaire.lastQuestionnaireStep =
+                            Constants.SEASON_CALENDAR_STEP
 
                         lzSeasonsCalendar.root.visibility = View.VISIBLE
                         lzHazards.root.visibility = View.GONE
@@ -2559,7 +2587,8 @@ class CountyLevelFragment : DialogFragment(),
                         )
                     } else {
 
-                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.LZ_COMPLETION_PAGE
+                        countyLevelQuestionnaire.lastQuestionnaireStep =
+                            Constants.LZ_COMPLETION_PAGE
 
                         lzSeasonsCalendar.root.visibility = View.GONE
                         lzCompletionPage.root.visibility = View.VISIBLE
@@ -2596,8 +2625,14 @@ class CountyLevelFragment : DialogFragment(),
                     if (existingQuestionnaires.isEmpty()) {
                         questionnairesListObject.addQuestionnaire(countyLevelQuestionnaire)
                     } else {
-                        val questionnairePosition = questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0))
-                        questionnairesListObject.updateQuestionnaire(questionnairePosition,countyLevelQuestionnaire)
+                        val questionnairePosition =
+                            questionnairesListObject.questionnaireList.indexOf(
+                                existingQuestionnaires.get(0)
+                            )
+                        questionnairesListObject.updateQuestionnaire(
+                            questionnairePosition,
+                            countyLevelQuestionnaire
+                        )
                     }
                     editor?.remove(Constants.QUESTIONNAIRES_LIST_OBJECT)
 
@@ -2775,7 +2810,8 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
 
-                countyLevelQuestionnaire.lastQuestionnaireStep = LIVELIHOOD_ZONE_CHARACTERISTICS_STEP
+                countyLevelQuestionnaire.lastQuestionnaireStep =
+                    LIVELIHOOD_ZONE_CHARACTERISTICS_STEP
 
                 countyLivelihoodZoneCharectaristics.root.visibility = View.VISIBLE
                 countyConfiguration.root.visibility = View.GONE
@@ -4320,8 +4356,12 @@ class CountyLevelFragment : DialogFragment(),
         if (existingQuestionnaires.isEmpty()) {
             questionnairesListObject.addQuestionnaire(countyLevelQuestionnaire)
         } else {
-            val questionnairePosition = questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0))
-            questionnairesListObject.updateQuestionnaire(questionnairePosition,countyLevelQuestionnaire)
+            val questionnairePosition =
+                questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0))
+            questionnairesListObject.updateQuestionnaire(
+                questionnairePosition,
+                countyLevelQuestionnaire
+            )
         }
 
         editor?.remove(Constants.QUESTIONNAIRES_LIST_OBJECT)
@@ -4510,7 +4550,7 @@ class CountyLevelFragment : DialogFragment(),
                     val existingCrop = crops.first {
                         it.cropId == currentCrop.cropId
                     }
-                    crops.set(crops.indexOf(existingCrop),currentCrop)
+                    crops.set(crops.indexOf(existingCrop), currentCrop)
                 }
                 activity?.let { context ->
                     val adapter =
@@ -4527,7 +4567,8 @@ class CountyLevelFragment : DialogFragment(),
     }
 
     fun populateCropProduction() {
-        cropProductionResponseItems = countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses
+        cropProductionResponseItems =
+            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses
         binding.apply {
             cropProductionLayout.apply {
                 activity?.let { context ->
@@ -4542,6 +4583,54 @@ class CountyLevelFragment : DialogFragment(),
                     cropsList.adapter = adapter
                 }
             }
+        }
+    }
+
+    fun populateMainSourcesOfWater() {
+        binding.apply {
+            mainWaterSource.apply {
+                countyLevelQuestionnaire.waterSourceResponses?.let {
+                    riversWetSeason.setText(it.rivers.wetSeasonPopulation.toString())
+                    riversDrySeason.setText(it.rivers.drySeasonPopulationResponse.toString())
+
+                    traditionalRiversWellsWetSeason.setText(it.traditionalRiversWells.wetSeasonPopulation.toString())
+                    traditionalRiversWellsDrySeason.setText(it.traditionalRiversWells.drySeasonPopulationResponse.toString())
+
+                    naturalPondsWetSeason.setText(it.naturalPonds.wetSeasonPopulation.toString())
+                    naturalPondsDrySeason.setText(it.naturalPonds.drySeasonPopulationResponse.toString())
+
+                    pansAndDamsWetSeason.setText(it.pansAndDams.wetSeasonPopulation.toString())
+                    pansAndDamsDrySeason.setText(it.pansAndDams.drySeasonPopulationResponse.toString())
+
+                    shallowWellsWetSeason.setText(it.shallowWells.wetSeasonPopulation.toString())
+                    shallowWellsDrySeason.setText(it.shallowWells.drySeasonPopulationResponse.toString())
+
+                    boreHolesWetSeason.setText(it.boreholes.wetSeasonPopulation.toString())
+                    boreHolesDrySeason.setText(it.boreholes.drySeasonPopulationResponse.toString())
+
+                    springsWetSeason.setText(it.springs.wetSeasonPopulation.toString())
+                    springsDrySeason.setText(it.springs.drySeasonPopulationResponse.toString())
+
+                    lakesWetSeason.setText(it.lakes.wetSeasonPopulation.toString())
+                    lakesDrySeason.setText(it.lakes.drySeasonPopulationResponse.toString())
+
+                    rockCatchmentWetSeason.setText(it.rockCatchments.wetSeasonPopulation.toString())
+                    rockCatchmentDrySeason.setText(it.rockCatchments.drySeasonPopulationResponse.toString())
+
+                    pipedWaterWetSeason.setText(it.pipedWater.wetSeasonPopulation.toString())
+                    pipedWaterDrySeason.setText(it.pipedWater.drySeasonPopulationResponse.toString())
+
+                    waterTruckingWetSeason.setText(it.waterTrucking.wetSeasonPopulation.toString())
+                    waterTruckingDrySeason.setText(it.waterTrucking.drySeasonPopulationResponse.toString())
+
+                    roofCatchmentWetSeason.setText(it.roofCatchments.wetSeasonPopulation.toString())
+                    roofCatchmentDrySeason.setText(it.roofCatchments.drySeasonPopulationResponse.toString())
+
+                    othersWetSeason.setText(it.others.wetSeasonPopulation.toString())
+                    othersDrySeason.setText(it.others.drySeasonPopulationResponse.toString())
+                }
+            }
+
         }
     }
 
