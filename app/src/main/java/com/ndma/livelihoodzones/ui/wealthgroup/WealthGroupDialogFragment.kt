@@ -193,8 +193,6 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }!!
             }
         }
-
-        inflateSubCountyModal()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -240,19 +238,11 @@ class WealthGroupDialogFragment : DialogFragment(),
     @RequiresApi(Build.VERSION_CODES.O)
     private fun defineViews() {
         defineNavigation()
-        defineIncomeandFoodSource()
-    }
-
-    private fun defineIncomeandFoodSource() {
-        binding.apply {
-            wgIncomeAndFoodSources.apply {
-
-            }
-        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun defineNavigation() {
+        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP
         binding.apply {
 
             /*Income and food sources navigation*/
@@ -612,6 +602,8 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                         wealthGroupQuestionnaire.incomeAndFoodSourceResponses =
                             incomeAndFoodSourceResponses
+
+                        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP
 
                         wgIncomeAndFoodSources.root.visibility = View.GONE
                         wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
@@ -1484,6 +1476,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                             }
                         }
 
+                        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_CROP_SELECTION_STEP
                         wgPercentFoodConsumptionIncome.root.visibility = View.GONE
                         cropSelectionLayout.root.visibility = View.VISIBLE
 
@@ -1557,6 +1550,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 cropContributionAdapter
                         }
 
+                        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_CROP_PRODUCTION_STEP
+
                         cropProductionLayout.root.visibility = View.VISIBLE
                         cropSelectionLayout.root.visibility = View.GONE
 
@@ -1579,6 +1574,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 cropContributionNextButton.setOnClickListener {
                     if (!isAnyCropContributionValueEmpty() && !doesCropFoodConsumptionContributionIncomeHaveAPercentageError().hasError && !doesCropCashContributionIncomeHaveAPercentageError().hasError) {
+                        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.LIVESTOCK_POULTRY_NUMBERS_STEP
                         cropProductionLayout.root.visibility = View.GONE
                         wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
                     } else if (isAnyCropContributionValueEmpty()) {
@@ -1707,6 +1703,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                         wealthGroupQuestionnaire.livestockPoultryOwnershipResponses =
                             livestockPoultryOwnershipResponses
+                        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.LIVESTOCK_POULTRY_CONTRIBUTION_STEP
                         wgLivestockPoultryContribution.root.visibility = View.VISIBLE
                         wgLivestockPoultryNumbers.root.visibility = View.GONE
 
@@ -2043,6 +2040,8 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                             wealthGroupQuestionnaire.livestockContributionResponses =
                                 livestockContributionResponses
+
+                            wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.LABOUR_PATTERNS_STEP
 
                             wgLabourPatterns.root.visibility = View.VISIBLE
                             wgLivestockPoultryContribution.root.visibility = View.GONE
@@ -2487,6 +2486,8 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                             wealthGroupQuestionnaire.labourPatternResponses = labourPatternResponse
 
+                            wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.EXPENDITURE_PATTERNS_STEP
+
                             wgExpenditurePatterns.root.visibility = View.VISIBLE
                             wgLabourPatterns.root.visibility = View.GONE
 
@@ -2910,6 +2911,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             wealthGroupQuestionnaire.expenditurePatternsResponses =
                                 expenditurePatternsResponses
 
+                            wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.MIGRATION_PATTERNS_STEP
+
                             wgMigrationPatterns.root.visibility = View.VISIBLE
                             wgExpenditurePatterns.root.visibility = View.GONE
 
@@ -3067,6 +3070,8 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                             wealthGroupQuestionnaire.migrationPatternResponses =
                                 migrationPatternResponses
+
+                            wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.CONSTRAINTS_STEP
 
                             wgConstraints.root.visibility = View.VISIBLE
                             wgMigrationPatterns.root.visibility = View.GONE
@@ -3588,6 +3593,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                         wealthGroupQuestionnaire.constraintsResponses = constraintResponses
 
+                        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.COPING_STRATEGIES_STEP
 
                         wgCopingStrategies.root.visibility = View.VISIBLE
                         wgConstraints.root.visibility = View.GONE
@@ -3697,6 +3703,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             wealthGroupQuestionnaire.copingStrategiesResponses =
                                 copingStrategiesResponses
 
+                            wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.FGD_PARTICIPANTS_STEP
+
                             fdgParticipants.root.visibility = View.VISIBLE
                             wgCopingStrategies.root.visibility = View.GONE
                         }
@@ -3750,6 +3758,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 fdgParticipantsNextButton.setOnClickListener {
+
+                    wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_COMPLETION_PAGE
                     fdgParticipants.root.visibility = View.GONE
                     wgCompletionPage.root.visibility = View.VISIBLE
                 }
@@ -3779,7 +3789,15 @@ class WealthGroupDialogFragment : DialogFragment(),
                             questionnairesListString,
                             WealthGroupQuestionnaireListObject::class.java
                         )
-                    questionnairesListObject.addQuestionnaire(wealthGroupQuestionnaire)
+                    val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+                        it.uniqueId == wealthGroupQuestionnaire.uniqueId
+                    }
+
+                    if (existingQuestionnaires.isEmpty()) {
+                        questionnairesListObject.addQuestionnaire(wealthGroupQuestionnaire)
+                    } else {
+                        questionnairesListObject.updateQuestionnaire(questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0)), wealthGroupQuestionnaire)
+                    }
                     editor?.remove(Constants.WEALTH_GROUP_LIST_OBJECT)
 
                     val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
@@ -3914,30 +3932,6 @@ class WealthGroupDialogFragment : DialogFragment(),
             )
         }
 
-    }
-
-
-    private fun inflateSubCountyModal() {
-        val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
-        val v = (inflater as LayoutInflater).inflate(R.layout.geographic_configuration_layout, null)
-
-        openSubCountyModal(v)
-    }
-
-    private fun openSubCountyModal(v: View) {
-        val builder: AlertDialog.Builder = activity?.let { AlertDialog.Builder(it) }!!
-        builder.setView(v)
-        builder.setCancelable(true)
-        subContyDialog = builder.create()
-        (subContyDialog as AlertDialog).setCancelable(true)
-        (subContyDialog as AlertDialog).setCanceledOnTouchOutside(true)
-        (subContyDialog as AlertDialog).window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        (subContyDialog as AlertDialog).show()
-        val window = (subContyDialog as AlertDialog).window
-        window?.setLayout(
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
     }
 
 

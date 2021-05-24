@@ -2564,7 +2564,15 @@ class CountyLevelFragment : DialogFragment(),
                             questionnairesListString,
                             CountyLevelQuestionnaireListObject::class.java
                         )
-                    questionnairesListObject.addQuestionnaire(countyLevelQuestionnaire)
+                    val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+                        it.uniqueId == countyLevelQuestionnaire.uniqueId
+                    }
+                    if (existingQuestionnaires.isEmpty()) {
+                        questionnairesListObject.addQuestionnaire(countyLevelQuestionnaire)
+                    } else {
+                        val questionnairePosition = questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0))
+                        questionnairesListObject.updateQuestionnaire(questionnairePosition,countyLevelQuestionnaire)
+                    }
                     editor?.remove(Constants.QUESTIONNAIRES_LIST_OBJECT)
 
                     val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
