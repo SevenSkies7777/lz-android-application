@@ -206,6 +206,42 @@ class CountyLevelFragment : DialogFragment(),
             Constants.WEALTH_GROUP_CHARACTERISTICS_STEP -> {
                 resumeZoneWealthGroupCharectaristics()
             }
+            Constants.WEALTH_GROUP_PERCENTAGES_STEP -> {
+                resumeWealthGroupPopulationPercentages()
+            }
+            Constants.LZ_CROP_SELECTION_STEP -> {
+                resumeCropSelection()
+            }
+            Constants.LZ_CROP_PRODUCTION_STEP -> {
+                resumeCropProduction()
+            }
+            Constants.MAIN_SOURCES_OF_WATER_STEP -> {
+                resumeSourcesOfWater()
+            }
+            Constants.MARKETS_CONFIGURATION_STEP -> {
+                resumeMarkets()
+            }
+            Constants.MARKETS_TRANSACTIONS_STEP -> {
+                resumeMarketTransactions()
+            }
+            Constants.ETHNIC_GROUP_SELECTION_STEP -> {
+                resumeEthnicGroupSelection()
+            }
+            Constants.ETHNIC_GROUP_POPULATION_STEP -> {
+                resumeEthnicGroupPopulation()
+            }
+            Constants.HUNGER_PATTERNS_STEP -> {
+                resumeHungerPatterns()
+            }
+            Constants.HAZARDS_STEP -> {
+                resumeHazards()
+            }
+            Constants.SEASON_CALENDAR_STEP -> {
+                resumeSeasonsCalendar()
+            }
+            Constants.LZ_COMPLETION_PAGE -> {
+                resumeCompletionPage()
+            }
         }
     }
 
@@ -230,6 +266,78 @@ class CountyLevelFragment : DialogFragment(),
             wealthGroupCharectaristics.apply {
 
             }
+        }
+    }
+
+    fun resumeWealthGroupPopulationPercentages() {
+        binding.apply {
+            locationAndPopulationLayout.root.visibility = View.VISIBLE
+        }
+    }
+
+    fun resumeCropSelection() {
+        binding.apply {
+            cropSelectionLayout.root.visibility = View.VISIBLE
+        }
+    }
+
+    fun resumeCropProduction() {
+        binding.apply {
+            cropProductionLayout.root.visibility = View.VISIBLE
+        }
+    }
+
+    fun resumeSourcesOfWater() {
+        binding.apply {
+            mainWaterSource.root.visibility = View.VISIBLE
+        }
+    }
+
+    fun resumeMarkets() {
+        binding.apply {
+            marketGeographyConfiguration.root.visibility = View.VISIBLE
+        }
+    }
+
+    fun resumeMarketTransactions() {
+        binding.apply {
+            lzMarketTransactions.root.visibility = View.VISIBLE
+        }
+    }
+
+    fun resumeEthnicGroupSelection() {
+        binding.apply {
+            ethnicGroupSelection.root.visibility = View.VISIBLE
+        }
+    }
+
+    fun resumeEthnicGroupPopulation() {
+        binding.apply {
+            ethnicGroupPopulation.root.visibility = View.VISIBLE
+        }
+    }
+
+    fun resumeHungerPatterns() {
+        binding.apply {
+            lzHungerPatterns.root.visibility = View.VISIBLE
+        }
+    }
+
+    fun resumeHazards() {
+        binding.apply {
+            lzHazards.root.visibility = View.VISIBLE
+        }
+    }
+
+    fun resumeSeasonsCalendar() {
+        binding.apply {
+            lzSeasonsCalendar.root.visibility = View.VISIBLE
+        }
+    }
+
+    fun resumeCompletionPage() {
+        binding.apply {
+            lzCompletionPage.root.visibility = View.VISIBLE
         }
     }
 
