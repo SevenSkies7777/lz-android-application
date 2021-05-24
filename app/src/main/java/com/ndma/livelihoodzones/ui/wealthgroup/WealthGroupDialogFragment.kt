@@ -3866,6 +3866,8 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 fdgParticipantsNextButton.setOnClickListener {
 
+                    wealthGroupQuestionnaire.fdgParticipants = fdgParticipantsModelList
+
                     wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_COMPLETION_PAGE
                     fdgParticipants.root.visibility = View.GONE
                     wgCompletionPage.root.visibility = View.VISIBLE

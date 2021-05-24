@@ -19,6 +19,8 @@ object Constants {
 
     val RESUME_QUESTIONNAIRE_ID = "RESUME_QUESTIONNAIRE_ID"
 
+    val EXISTING_ACCOUNT = "EXISTING_ACCOUNT"
+
     /* County level steps */
     const val LIVELIHOOD_ZONE_CHARACTERISTICS_STEP = 1
     const val ZONE_SUBLOCATION_ASSIGNMENT_STEP = 2

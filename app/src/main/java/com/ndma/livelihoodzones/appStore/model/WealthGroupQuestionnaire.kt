@@ -3,6 +3,7 @@ package com.ndma.livelihoodzones.appStore.model
 import com.ndma.livelihoodzones.ui.county.model.CropModel
 import com.ndma.livelihoodzones.ui.county.model.QuestionnaireSessionLocation
 import com.ndma.livelihoodzones.ui.model.QuestionnaireStatus
+import com.ndma.livelihoodzones.ui.wealthgroup.model.FgdParticipantModel
 import com.ndma.livelihoodzones.ui.wealthgroup.responses.*
 
 
@@ -23,4 +24,5 @@ class WealthGroupQuestionnaire(val uniqueId: String, var questionnaireName: Stri
     lateinit var constraintsResponses: ConstraintsResponses
     var selectedCrops: MutableList<CropModel> = ArrayList()
     lateinit var copingStrategiesResponses: CopingStrategiesResponses
+    var fdgParticipants: MutableList<FgdParticipantModel> = ArrayList()
 }

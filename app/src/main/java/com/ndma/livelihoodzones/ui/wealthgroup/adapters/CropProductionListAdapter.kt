@@ -21,7 +21,8 @@ class CropProductionListAdapter(
     context: Context,
     val resource: Int,
     val responseItems: MutableList<WgCropProductionResponseItem>,
-    val cropProductionListAdapterCallBack: CropProductionListAdapterCallBack
+    val cropProductionListAdapterCallBack: CropProductionListAdapterCallBack,
+    val isAResume: Boolean
 ) :
     ArrayAdapter<WgCropProductionResponseItem>(context, resource, responseItems) {
     private var errorDialog: android.app.AlertDialog? = null
@@ -63,15 +64,17 @@ class CropProductionListAdapter(
 
         cropName.text = currentResponseItem.crop.cropName
 
-//        shortRainsRainfedCultivatedAreaPercentage.setText(currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.value.toString())
-//        shortRainsRainfedAverageYieldPerHa.setText(currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.value.toString())
-//        shortRainsIrrigatedCultivatedArea.setText(currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.value.toString())
-//        shortRainsIrrigatedAverageYieldPerHa.setText(currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.value.toString())
-//
-//        longRainsRainfedCultivatedAreaPercentage.setText(currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.value.toString())
-//        longRainsRainfedAverageYieldPerHa.setText(currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.value.toString())
-//        longRainsIrrigatedCultivatedArea.setText(currentResponseItem.longRainsSeason.irrigatedCultivatedArea.value.toString())
-//        longRainsIrrigatedAverageYieldPerHa.setText(currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.value.toString())
+        if (isAResume) {
+            shortRainsRainfedCultivatedAreaPercentage.setText(currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.value.toString())
+            shortRainsRainfedAverageYieldPerHa.setText(currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.value.toString())
+            shortRainsIrrigatedCultivatedArea.setText(currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.value.toString())
+            shortRainsIrrigatedAverageYieldPerHa.setText(currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.value.toString())
+
+            longRainsRainfedCultivatedAreaPercentage.setText(currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.value.toString())
+            longRainsRainfedAverageYieldPerHa.setText(currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.value.toString())
+            longRainsIrrigatedCultivatedArea.setText(currentResponseItem.longRainsSeason.irrigatedCultivatedArea.value.toString())
+            longRainsIrrigatedAverageYieldPerHa.setText(currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.value.toString())
+        }
 
 
         val textWatcher = object : TextWatcher {

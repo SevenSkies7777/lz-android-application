@@ -272,6 +272,7 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeWealthGroupPopulationPercentages() {
         binding.apply {
+            populateWealthGroupPercentagesSection()
             locationAndPopulationLayout.root.visibility = View.VISIBLE
         }
     }
@@ -279,13 +280,21 @@ class CountyLevelFragment : DialogFragment(),
     fun resumeCropSelection() {
         binding.apply {
             cropSelectionLayout.root.visibility = View.VISIBLE
-            prepareCropSelectionListView()
+            if(countyLevelQuestionnaire.selectedCrops.isEmpty()) {
+                prepareCropSelectionListView()
+            } else {
+                populateCropSelectionSection()
+            }
         }
     }
 
     fun resumeCropProduction() {
         binding.apply {
-            prepareCropProductionResponseItems()
+            if (countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses.isEmpty()) {
+                prepareCropProductionResponseItems()
+            } else {
+                populateCropProduction()
+            }
             cropProductionLayout.root.visibility = View.VISIBLE
         }
     }
@@ -866,6 +875,7 @@ class CountyLevelFragment : DialogFragment(),
             cropSelectionLayout.apply {
 
                 cropSelectionBackButton.setOnClickListener {
+                    populateWealthGroupPercentagesSection()
                     cropSelectionLayout.root.visibility = View.GONE
                     locationAndPopulationLayout.root.visibility = View.VISIBLE
                 }
@@ -895,6 +905,7 @@ class CountyLevelFragment : DialogFragment(),
             cropProductionLayout.apply {
 
                 cropProductionBackButton.setOnClickListener {
+                    populateCropSelectionSection()
                     cropProductionLayout.root.visibility = View.GONE
                     cropSelectionLayout.root.visibility = View.VISIBLE
                 }
@@ -908,7 +919,8 @@ class CountyLevelFragment : DialogFragment(),
                                     context,
                                     R.layout.lz_crop_production_item,
                                     cropProductionResponseItems,
-                                    this@CountyLevelFragment
+                                    this@CountyLevelFragment,
+                                    false
                                 )
                             cropsList.adapter = adapter
                         }
@@ -932,6 +944,7 @@ class CountyLevelFragment : DialogFragment(),
             /*Water source navigation buttons*/
             mainWaterSource.apply {
                 waterSourceBackButton.setOnClickListener {
+                    populateCropProduction()
                     mainWaterSource.root.visibility = View.GONE
                     cropProductionLayout.root.visibility = View.VISIBLE
                 }
@@ -4063,6 +4076,7 @@ class CountyLevelFragment : DialogFragment(),
         position: Int
     ) {
         cropProductionResponseItems.set(position, responseItem)
+        System.out.println()
     }
 
     override fun onATribeSelected(currentTribe: EthnicGroupModel, position: Int) {
@@ -4412,7 +4426,8 @@ class CountyLevelFragment : DialogFragment(),
                             context,
                             R.layout.lz_crop_production_item,
                             cropProductionResponseItems,
-                            this@CountyLevelFragment
+                            this@CountyLevelFragment,
+                            false
                         )
                     cropsList.adapter = adapter
                 }
@@ -4472,6 +4487,59 @@ class CountyLevelFragment : DialogFragment(),
                             this@CountyLevelFragment
                         )
                     tribesList.adapter = adapter
+                }
+            }
+        }
+    }
+
+    fun populateWealthGroupPercentagesSection() {
+        binding.apply {
+            locationAndPopulationLayout.apply {
+                etVerPoorResponse.setText(countyLevelQuestionnaire.wealthGroupResponse.verPoorResponse.toString())
+                etPoorResponse.setText(countyLevelQuestionnaire.wealthGroupResponse.poorResponse.toString())
+                etMediumResponse.setText(countyLevelQuestionnaire.wealthGroupResponse.mediumResponse.toString())
+                etBetterOffResponse.setText(countyLevelQuestionnaire.wealthGroupResponse.betterOfResponse.toString())
+            }
+        }
+    }
+
+    fun populateCropSelectionSection() {
+        binding.apply {
+            cropSelectionLayout.apply {
+                for (currentCrop in countyLevelQuestionnaire.selectedCrops) {
+                    val existingCrop = crops.first {
+                        it.cropId == currentCrop.cropId
+                    }
+                    crops.set(crops.indexOf(existingCrop),currentCrop)
+                }
+                activity?.let { context ->
+                    val adapter =
+                        CropSelectionListAdapter(
+                            context,
+                            R.layout.lz_selection_item,
+                            crops,
+                            this@CountyLevelFragment
+                        )
+                    cropsList.adapter = adapter
+                }
+            }
+        }
+    }
+
+    fun populateCropProduction() {
+        cropProductionResponseItems = countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses
+        binding.apply {
+            cropProductionLayout.apply {
+                activity?.let { context ->
+                    val adapter =
+                        CropProductionListAdapter(
+                            context,
+                            R.layout.lz_crop_production_item,
+                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
+                            this@CountyLevelFragment,
+                            true
+                        )
+                    cropsList.adapter = adapter
                 }
             }
         }
