@@ -648,6 +648,7 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.wealthGroupCharectariticsResponses =
                             wealthGroupCharectaristicsResponses
 
+                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.WEALTH_GROUP_PERCENTAGES_STEP
                         locationAndPopulationLayout.root.visibility = View.VISIBLE
                         wealthGroupCharectaristics.root.visibility = View.GONE
                     } else {
@@ -753,6 +754,8 @@ class CountyLevelFragment : DialogFragment(),
                                 }
                             }
 
+                            countyLevelQuestionnaire.lastQuestionnaireStep = Constants.LZ_CROP_SELECTION_STEP
+
                             locationAndPopulationLayout.root.visibility = View.GONE
                             cropSelectionLayout.root.visibility = View.VISIBLE
 
@@ -816,6 +819,8 @@ class CountyLevelFragment : DialogFragment(),
                             }
                         }
 
+                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.LZ_CROP_PRODUCTION_STEP
+
                         cropProductionLayout.root.visibility = View.VISIBLE
                         cropSelectionLayout.root.visibility = View.GONE
 
@@ -858,6 +863,7 @@ class CountyLevelFragment : DialogFragment(),
                     } else {
 
                         countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses = cropProductionResponseItems
+                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.MAIN_SOURCES_OF_WATER_STEP
                         cropProductionLayout.root.visibility = View.GONE
                         mainWaterSource.root.visibility = View.VISIBLE
                     }
@@ -1249,6 +1255,8 @@ class CountyLevelFragment : DialogFragment(),
 
                             countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
 
+                            countyLevelQuestionnaire.lastQuestionnaireStep = Constants.MARKETS_CONFIGURATION_STEP
+
                             mainWaterSource.root.visibility = View.GONE
                             marketGeographyConfiguration.root.visibility = View.VISIBLE
 
@@ -1278,6 +1286,9 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
                 marketGeographyNextButton.setOnClickListener {
+
+                    countyLevelQuestionnaire.lastQuestionnaireStep = Constants.MARKETS_TRANSACTIONS_STEP
+
                     lzMarketTransactions.root.visibility = View.VISIBLE
                     marketGeographyConfiguration.root.visibility = View.GONE
 
@@ -1408,6 +1419,8 @@ class CountyLevelFragment : DialogFragment(),
                         }
                     }
 
+                    countyLevelQuestionnaire.lastQuestionnaireStep = Constants.ETHNIC_GROUP_SELECTION_STEP
+
                     ethnicGroupSelection.root.visibility = View.VISIBLE
                     lzMarketTransactions.root.visibility = View.GONE
                 }
@@ -1448,6 +1461,8 @@ class CountyLevelFragment : DialogFragment(),
                                 ethnicPopulationAdapter
                         }
 
+                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.ETHNIC_GROUP_POPULATION_STEP
+
                         ethnicGroupSelection.root.visibility = View.GONE
                         ethnicGroupPopulation.root.visibility = View.VISIBLE
 
@@ -1474,6 +1489,9 @@ class CountyLevelFragment : DialogFragment(),
                     }
 
                     if (totalEntry == 100.0) {
+
+                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.HUNGER_PATTERNS_STEP
+
                         ethnicGroupPopulation.root.visibility = View.GONE
                         lzHungerPatterns.root.visibility = View.VISIBLE
                     } else if (totalEntry < 100) {
@@ -1631,6 +1649,9 @@ class CountyLevelFragment : DialogFragment(),
                             returnZeroStringIfEmpty(etShortRainsHungerPeriod.text.toString()).toDouble(),
                             returnZeroStringIfEmpty(etEndShortBeginLongRainsHungerPeriod.text.toString()).toDouble()
                         )
+
+                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.HAZARDS_STEP
+
                         lzHazards.root.visibility = View.VISIBLE
                         lzHungerPatterns.root.visibility = View.GONE
 
@@ -1940,6 +1961,8 @@ class CountyLevelFragment : DialogFragment(),
                             othersNoOfYears.text.toString().toDouble()
 
                         countyLevelQuestionnaire.hazardResponses = hazardResponses
+
+                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.SEASON_CALENDAR_STEP
 
                         lzSeasonsCalendar.root.visibility = View.VISIBLE
                         lzHazards.root.visibility = View.GONE
@@ -2509,6 +2532,9 @@ class CountyLevelFragment : DialogFragment(),
                             "Food security assessment season season has no months selected"
                         )
                     } else {
+
+                        countyLevelQuestionnaire.lastQuestionnaireStep = Constants.LZ_COMPLETION_PAGE
+
                         lzSeasonsCalendar.root.visibility = View.GONE
                         lzCompletionPage.root.visibility = View.VISIBLE
                     }
