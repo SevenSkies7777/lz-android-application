@@ -81,7 +81,7 @@ class CountyLevelFragment : DialogFragment(),
 
     lateinit var geographyObject: GeographyObject
 
-    val ethnicGroupResponseList: MutableList<EthnicityResponseItem> =
+    var ethnicGroupResponseList: MutableList<EthnicityResponseItem> =
         ArrayList()
 
     private var livelihoodZoneAlertDialog: android.app.AlertDialog? = null
@@ -4760,6 +4760,7 @@ class CountyLevelFragment : DialogFragment(),
     fun populateEthnicGroupPopulation() {
         binding.apply {
             ethnicGroupPopulation.apply {
+                ethnicGroupResponseList = countyLevelQuestionnaire.ethnicGroupResponseList
                 val ethnicPopulationAdapter =
                     EthnicityAdapter(countyLevelQuestionnaire.ethnicGroupResponseList, this@CountyLevelFragment,true)
                 val gridLayoutManager = GridLayoutManager(activity, 1)
