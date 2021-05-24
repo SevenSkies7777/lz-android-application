@@ -4787,12 +4787,16 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     override fun onDestroy() {
         super.onDestroy()
-        saveQuestionnaireAsDraft()
+        if (wealthGroupQuestionnaire.questionnaireStatus != QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
+            saveQuestionnaireAsDraft()
+        }
     }
 
     override fun onStop() {
         super.onStop()
-        saveQuestionnaireAsDraft()
+        if (wealthGroupQuestionnaire.questionnaireStatus != QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
+            saveQuestionnaireAsDraft()
+        }
     }
 
     fun saveQuestionnaireAsDraft() {

@@ -256,6 +256,7 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeZoneSublocationAssignment() {
         binding.apply {
+            prepareLivelihoodZoneSubLocationAssignmentRecyclerView()
             lzSubLocationAssignment.root.visibility = View.VISIBLE
         }
     }
@@ -278,11 +279,13 @@ class CountyLevelFragment : DialogFragment(),
     fun resumeCropSelection() {
         binding.apply {
             cropSelectionLayout.root.visibility = View.VISIBLE
+            prepareCropSelectionListView()
         }
     }
 
     fun resumeCropProduction() {
         binding.apply {
+            prepareCropProductionResponseItems()
             cropProductionLayout.root.visibility = View.VISIBLE
         }
     }
@@ -301,12 +304,14 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeMarketTransactions() {
         binding.apply {
+            prepareMarketTransactionsResponses()
             lzMarketTransactions.root.visibility = View.VISIBLE
         }
     }
 
     fun resumeEthnicGroupSelection() {
         binding.apply {
+            prepareEthnicGroupsSelectionlistView()
             ethnicGroupSelection.root.visibility = View.VISIBLE
         }
     }
@@ -494,20 +499,7 @@ class CountyLevelFragment : DialogFragment(),
                             "Kindly fill in all the charectaristics for all the zones"
                         )
                     } else {
-                        lzSubLocationAssignment.apply {
-                            val subLocationassignmentAdapter = activity?.let { it1 ->
-                                SubLocationZoneAssignmentAdapter(
-                                    subLocationZoneAssignmentModelList,
-                                    it1
-                                )
-                            }
-
-                            val gridLayoutManager = GridLayoutManager(activity, 1)
-                            listRv.layoutManager = gridLayoutManager
-                            listRv.hasFixedSize()
-                            listRv.adapter =
-                                subLocationassignmentAdapter
-                        }
+                        prepareLivelihoodZoneSubLocationAssignmentRecyclerView()
 
                         countyLevelQuestionnaire.lastQuestionnaireStep = ZONE_SUBLOCATION_ASSIGNMENT_STEP
 
@@ -849,18 +841,7 @@ class CountyLevelFragment : DialogFragment(),
                             )
                             countyLevelQuestionnaire.wealthGroupResponse = wealthGroupResponse
 
-                            cropSelectionLayout.apply {
-                                activity?.let { context ->
-                                    val adapter =
-                                        CropSelectionListAdapter(
-                                            context,
-                                            R.layout.lz_selection_item,
-                                            crops,
-                                            this@CountyLevelFragment
-                                        )
-                                    cropsList.adapter = adapter
-                                }
-                            }
+                            prepareCropSelectionListView()
 
                             countyLevelQuestionnaire.lastQuestionnaireStep = Constants.LZ_CROP_SELECTION_STEP
 
@@ -894,38 +875,7 @@ class CountyLevelFragment : DialogFragment(),
 
                     if (countyLevelQuestionnaire.selectedCrops.isNotEmpty()) {
 
-                        for (currentCrop in countyLevelQuestionnaire.selectedCrops) {
-                            cropProductionResponseItems.add(
-                                WgCropProductionResponseItem(
-                                    currentCrop,
-                                    CropSeasonResponseItem(
-                                        CropProductionResponseValueModel(0.0, false),
-                                        CropProductionResponseValueModel(0.0, false),
-                                        CropProductionResponseValueModel(0.0, false),
-                                        CropProductionResponseValueModel(0.0, false)
-                                    ),
-                                    CropSeasonResponseItem(
-                                        CropProductionResponseValueModel(0.0, false),
-                                        CropProductionResponseValueModel(0.0, false),
-                                        CropProductionResponseValueModel(0.0, false),
-                                        CropProductionResponseValueModel(0.0, false)
-                                    )
-                                )
-                            )
-                        }
-
-                        cropProductionLayout.apply {
-                            activity?.let { context ->
-                                val adapter =
-                                    CropProductionListAdapter(
-                                        context,
-                                        R.layout.lz_crop_production_item,
-                                        cropProductionResponseItems,
-                                        this@CountyLevelFragment
-                                    )
-                                cropsList.adapter = adapter
-                            }
-                        }
+                        prepareCropProductionResponseItems()
 
                         countyLevelQuestionnaire.lastQuestionnaireStep = Constants.LZ_CROP_PRODUCTION_STEP
 
@@ -1397,44 +1347,10 @@ class CountyLevelFragment : DialogFragment(),
 
                     countyLevelQuestionnaire.lastQuestionnaireStep = Constants.MARKETS_TRANSACTIONS_STEP
 
+                    prepareMarketTransactionsResponses()
+
                     lzMarketTransactions.root.visibility = View.VISIBLE
                     marketGeographyConfiguration.root.visibility = View.GONE
-
-                    val marketTransactionItems: MutableList<MarketTransactionsItem> = ArrayList()
-
-
-                    for (currentDefinedMarket in countyLevelQuestionnaire.definedMarkets) {
-                        marketTransactionItems.add(
-                            MarketTransactionsItem(
-                                currentDefinedMarket.marketUniqueId,
-                                currentDefinedMarket.marketName,
-                                false,
-                                false,
-                                false,
-                                false,
-                                false,
-                                false
-                            )
-                        )
-                    }
-
-                    countyLevelQuestionnaire.marketTransactionItems = marketTransactionItems
-
-                    val marketTransactionsAdapter =
-                        MarketTransactionsAdapter(
-                            marketTransactionItems,
-                            this@CountyLevelFragment
-                        )
-                    val gridLayoutManager = GridLayoutManager(activity, 1)
-
-                    lzMarketTransactions.apply {
-
-                        marketTransactionsList.layoutManager = gridLayoutManager
-                        marketTransactionsList.hasFixedSize()
-                        marketTransactionsList.adapter =
-                            marketTransactionsAdapter
-
-                    }
 
                 }
 
@@ -1514,18 +1430,7 @@ class CountyLevelFragment : DialogFragment(),
 
                 marketTransactionNextButton.setOnClickListener {
 
-                    ethnicGroupSelection.apply {
-                        activity?.let { context ->
-                            val adapter =
-                                TribesListViewAdapter(
-                                    context,
-                                    R.layout.lz_selection_item,
-                                    ethnicGroups,
-                                    this@CountyLevelFragment
-                                )
-                            tribesList.adapter = adapter
-                        }
-                    }
+                    prepareEthnicGroupsSelectionlistView()
 
                     countyLevelQuestionnaire.lastQuestionnaireStep = Constants.ETHNIC_GROUP_SELECTION_STEP
 
@@ -4363,12 +4268,16 @@ class CountyLevelFragment : DialogFragment(),
 
     override fun onDestroy() {
         super.onDestroy()
-        saveQuestionnaireAsDraft()
+        if (countyLevelQuestionnaire.questionnaireStatus != QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
+            saveQuestionnaireAsDraft()
+        }
     }
 
     override fun onStop() {
         super.onStop()
-        saveQuestionnaireAsDraft()
+        if (countyLevelQuestionnaire.questionnaireStatus != QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
+            saveQuestionnaireAsDraft()
+        }
     }
 
 
@@ -4436,6 +4345,136 @@ class CountyLevelFragment : DialogFragment(),
         }
 
         return existingQuestionnaires.get(0)
+    }
+
+    fun prepareLivelihoodZoneSubLocationAssignmentRecyclerView() {
+        binding.apply {
+            lzSubLocationAssignment.apply {
+                val subLocationassignmentAdapter = activity?.let { it1 ->
+                    SubLocationZoneAssignmentAdapter(
+                        subLocationZoneAssignmentModelList,
+                        it1
+                    )
+                }
+
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                listRv.layoutManager = gridLayoutManager
+                listRv.hasFixedSize()
+                listRv.adapter =
+                    subLocationassignmentAdapter
+            }
+        }
+    }
+
+    fun prepareCropSelectionListView() {
+        binding.apply {
+            cropSelectionLayout.apply {
+                activity?.let { context ->
+                    val adapter =
+                        CropSelectionListAdapter(
+                            context,
+                            R.layout.lz_selection_item,
+                            crops,
+                            this@CountyLevelFragment
+                        )
+                    cropsList.adapter = adapter
+                }
+            }
+        }
+    }
+
+    fun prepareCropProductionResponseItems() {
+        binding.apply {
+            for (currentCrop in countyLevelQuestionnaire.selectedCrops) {
+                cropProductionResponseItems.add(
+                    WgCropProductionResponseItem(
+                        currentCrop,
+                        CropSeasonResponseItem(
+                            CropProductionResponseValueModel(0.0, false),
+                            CropProductionResponseValueModel(0.0, false),
+                            CropProductionResponseValueModel(0.0, false),
+                            CropProductionResponseValueModel(0.0, false)
+                        ),
+                        CropSeasonResponseItem(
+                            CropProductionResponseValueModel(0.0, false),
+                            CropProductionResponseValueModel(0.0, false),
+                            CropProductionResponseValueModel(0.0, false),
+                            CropProductionResponseValueModel(0.0, false)
+                        )
+                    )
+                )
+            }
+
+            cropProductionLayout.apply {
+                activity?.let { context ->
+                    val adapter =
+                        CropProductionListAdapter(
+                            context,
+                            R.layout.lz_crop_production_item,
+                            cropProductionResponseItems,
+                            this@CountyLevelFragment
+                        )
+                    cropsList.adapter = adapter
+                }
+            }
+        }
+    }
+
+    fun prepareMarketTransactionsResponses() {
+        binding.apply {
+            val marketTransactionItems: MutableList<MarketTransactionsItem> = ArrayList()
+
+
+            for (currentDefinedMarket in countyLevelQuestionnaire.definedMarkets) {
+                marketTransactionItems.add(
+                    MarketTransactionsItem(
+                        currentDefinedMarket.marketUniqueId,
+                        currentDefinedMarket.marketName,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false
+                    )
+                )
+            }
+
+            countyLevelQuestionnaire.marketTransactionItems = marketTransactionItems
+
+            val marketTransactionsAdapter =
+                MarketTransactionsAdapter(
+                    marketTransactionItems,
+                    this@CountyLevelFragment
+                )
+            val gridLayoutManager = GridLayoutManager(activity, 1)
+
+            lzMarketTransactions.apply {
+
+                marketTransactionsList.layoutManager = gridLayoutManager
+                marketTransactionsList.hasFixedSize()
+                marketTransactionsList.adapter =
+                    marketTransactionsAdapter
+
+            }
+        }
+    }
+
+    fun prepareEthnicGroupsSelectionlistView() {
+        binding.apply {
+            ethnicGroupSelection.apply {
+                activity?.let { context ->
+                    val adapter =
+                        TribesListViewAdapter(
+                            context,
+                            R.layout.lz_selection_item,
+                            ethnicGroups,
+                            this@CountyLevelFragment
+                        )
+                    tribesList.adapter = adapter
+                }
+            }
+        }
     }
 
 }
