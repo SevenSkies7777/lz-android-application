@@ -1521,6 +1521,7 @@ class CountyLevelFragment : DialogFragment(),
 
                     if (totalEntry == 100.0) {
 
+                        countyLevelQuestionnaire.ethnicGroupResponseList = ethnicGroupResponseList
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.HUNGER_PATTERNS_STEP
 
@@ -1647,6 +1648,7 @@ class CountyLevelFragment : DialogFragment(),
                 etEndShortBeginLongRainsHungerPeriod.addTextChangedListener(textWatcher)
 
                 hungerPatternsBackButton.setOnClickListener {
+                    populateEthnicGroupPopulation()
                     ethnicGroupPopulation.root.visibility = View.VISIBLE
                     lzHungerPatterns.root.visibility = View.GONE
                 }
@@ -4711,7 +4713,10 @@ class CountyLevelFragment : DialogFragment(),
         binding.apply {
             ethnicGroupSelection.apply {
                 for (currentEthnicGroup in countyLevelQuestionnaire.livelihoodZoneEthnicGroups) {
-                    ethnicGroups.set(ethnicGroups.indexOf(ethnicGroups.first { it.ethnicGroupId ==  currentEthnicGroup.ethnicGroupId}), currentEthnicGroup)
+                    ethnicGroups.set(
+                        ethnicGroups.indexOf(ethnicGroups.first { it.ethnicGroupId == currentEthnicGroup.ethnicGroupId }),
+                        currentEthnicGroup
+                    )
                 }
                 activity?.let { context ->
                     val adapter =
@@ -4739,7 +4744,7 @@ class CountyLevelFragment : DialogFragment(),
                     )
                 }
                 val ethnicPopulationAdapter =
-                    EthnicityAdapter(ethnicGroupResponseList, this@CountyLevelFragment)
+                    EthnicityAdapter(ethnicGroupResponseList, this@CountyLevelFragment, false)
                 val gridLayoutManager = GridLayoutManager(activity, 1)
 
                 ethnicGroupPopulation.apply {
@@ -4750,6 +4755,24 @@ class CountyLevelFragment : DialogFragment(),
                 }
             }
         }
+    }
+
+    fun populateEthnicGroupPopulation() {
+        binding.apply {
+            ethnicGroupPopulation.apply {
+                val ethnicPopulationAdapter =
+                    EthnicityAdapter(countyLevelQuestionnaire.ethnicGroupResponseList, this@CountyLevelFragment,true)
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+
+                ethnicGroupPopulation.apply {
+                    ethnicityTable.layoutManager = gridLayoutManager
+                    ethnicityTable.hasFixedSize()
+                    ethnicityTable.adapter =
+                        ethnicPopulationAdapter
+                }
+            }
+        }
+
     }
 
 }

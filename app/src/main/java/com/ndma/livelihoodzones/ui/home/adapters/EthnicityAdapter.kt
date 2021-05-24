@@ -17,7 +17,8 @@ import com.ndma.livelihoodzones.ui.county.model.EthnicityResponseItem
 
 class EthnicityAdapter(
     private val ethnicityResponseItemList: MutableList<EthnicityResponseItem>,
-    val ethnicityAdapterCallBack: EthnicityAdapter.EthnicityAdapterCallBack
+    val ethnicityAdapterCallBack: EthnicityAdapter.EthnicityAdapterCallBack,
+    val isAResume: Boolean
 ) : RecyclerView.Adapter<EthnicityAdapter.ViewHolder>() {
 
     interface EthnicityAdapterCallBack {
@@ -41,6 +42,10 @@ class EthnicityAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val currentEthnicityResponseItem = ethnicityResponseItemList.get(position)
         viewHolder.ethnicityName.text = currentEthnicityResponseItem.ethnicGroupModel.ethnicGroupName
+
+        if (isAResume) {
+            viewHolder.populationPercentage.setText(currentEthnicityResponseItem.populationPercentage.toString())
+        }
 
         val textWatcher = object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {

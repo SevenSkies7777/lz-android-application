@@ -29,6 +29,9 @@ class CountyLevelQuestionnaire(val uniqueId: String, var questionnaireName: Stri
 
     var marketTransactionItems: MutableList<MarketTransactionsItem> = ArrayList()
 
+    var ethnicGroupResponseList: MutableList<EthnicityResponseItem> =
+        ArrayList()
+
     var latitude: Double = 0.0
 
     var longitude: Double = 0.0
