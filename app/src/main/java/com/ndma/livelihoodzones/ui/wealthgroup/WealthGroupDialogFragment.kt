@@ -1611,6 +1611,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                     if (wealthGroupQuestionnaire.selectedCrops.isNotEmpty()) {
 
+                        cropContributionResponseItems.clear()
                         for (currentCrop in wealthGroupQuestionnaire.selectedCrops) {
                             cropContributionResponseItems.add(
                                 WgCropContributionResponseItem(
@@ -1640,6 +1641,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                         }
 
                         cropProductionLayout.apply {
+
 
                             val cropContributionAdapter =
                                 activity?.let { it1 ->
@@ -3845,7 +3847,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                         val fgdParticipantAdapter = activity?.let { it1 ->
                             FgdParticipantsAdapter(
                                 fdgParticipantsModelList, this@WealthGroupDialogFragment,
-                                it1
+                                it1,
+                                false
                             )
                         }
                         val gridLayoutManager = GridLayoutManager(activity, 1)
@@ -4881,6 +4884,25 @@ class WealthGroupDialogFragment : DialogFragment(),
                 beeKeeping.setText(incomeAndFoodSourceResponses.beeKeeping.toString())
                 sandHarvesting.setText(incomeAndFoodSourceResponses.sandHarvesting.toString())
                 other.setText(incomeAndFoodSourceResponses.other.toString())
+            }
+        }
+    }
+
+    fun populateFgdParticipants() {
+        binding.apply {
+            fdgParticipants.apply {
+
+                val fgdParticipantAdapter = activity?.let { it1 ->
+                    FgdParticipantsAdapter(
+                        wealthGroupQuestionnaire.fdgParticipants, this@WealthGroupDialogFragment,
+                        it1,
+                        true
+                    )
+                }
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                participantsList.layoutManager = gridLayoutManager
+                participantsList.hasFixedSize()
+                participantsList.adapter = fgdParticipantAdapter
             }
         }
     }

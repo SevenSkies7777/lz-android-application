@@ -7,6 +7,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <View
+        android:id="@+id/topBackIcon"
         android:layout_centerVertical="true"
         android:background="@drawable/ic_back_white"
         android:layout_width="24dp"

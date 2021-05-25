@@ -54,6 +54,7 @@ import com.ndma.livelihoodzones.ui.wealthgroup.responses.CropSeasonResponseItem
 import com.ndma.livelihoodzones.ui.wealthgroup.responses.WgCropProductionResponseItem
 import com.ndma.livelihoodzones.util.GpsTracker
 import com.ndma.livelihoodzones.util.Util
+import kotlinx.android.synthetic.main.top_bar.*
 
 
 class CountyLevelFragment : DialogFragment(),
@@ -353,6 +354,7 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeSeasonsCalendar() {
         binding.apply {
+            populateSeasonsCalendar()
             lzSeasonsCalendar.root.visibility = View.VISIBLE
         }
     }
@@ -384,6 +386,15 @@ class CountyLevelFragment : DialogFragment(),
         defineNavigation()
         binding.apply {
 
+            toolBar.apply {
+                topBackIcon.setOnClickListener {
+                    if (countyLevelQuestionnaire.lastQuestionnaireStep == Constants.LZ_COMPLETION_PAGE) {
+                        populateSeasonsCalendar()
+                        lzCompletionPage.root.visibility = View.GONE
+                        lzSeasonsCalendar.root.visibility = View.VISIBLE
+                    }
+                }
+            }
 
             val sublocationList: MutableList<SubLocationModel> = ArrayList()
 
@@ -415,51 +426,12 @@ class CountyLevelFragment : DialogFragment(),
                                             it.livelihoodZoneName + " Livelihood Zone questionnaire"
                             }
 
-
-                            countyLevelQuestionnaire.selectedLivelihoodZone?.let {
-                                val subLocationLivelihoodZoneAssignment =
-                                    geographyObject.sublocationsLivelihoodZoneAssignments.filter {
-                                        it.livelihoodZoneId == it.livelihoodZoneId
-                                    }
-
-                                for (currentSubLocationLivelihoodZoneAssignment in subLocationLivelihoodZoneAssignment) {
-                                    subLocationZoneAssignmentModelList.add(
-                                        SubLocationZoneAssignmentModel(
-                                            currentSubLocationLivelihoodZoneAssignment.subLocationName,
-                                            currentSubLocationLivelihoodZoneAssignment.livelihoodZoneId,
-                                            currentSubLocationLivelihoodZoneAssignment.livelihoodZoneName
-                                        )
-                                    )
-                                }
-                            }
-
-                            countyLivelihoodZoneCharectaristics.apply {
-                                for (currentLivelihoodZone in geographyObject.currentUserAssignedCountyLivelihoodZones) {
-                                    zoneCharectaristicsItemsList.add(
-                                        ZoneCharectaristicsResponseItem(
-                                            currentLivelihoodZone, ArrayList<String>()
-                                        )
-                                    )
-                                }
-                                val zoneCharectaristicsAdapter =
-                                    activity?.let { it1 ->
-                                        ZoneCharectaristicsAdapter(
-                                            zoneCharectaristicsItemsList, this@CountyLevelFragment,
-                                            it1
-                                        )
-                                    }
-                                val gridLayoutManager = GridLayoutManager(activity, 1)
-                                zoneList.layoutManager = gridLayoutManager
-                                zoneList.hasFixedSize()
-                                zoneList.adapter =
-                                    zoneCharectaristicsAdapter
-
-                            }
+                            prepareLivelihoodZoneSubLocationAssignmentRecyclerView()
 
                             countyLevelQuestionnaire.lastQuestionnaireStep =
                                 LIVELIHOOD_ZONE_CHARACTERISTICS_STEP
 
-                            countyLivelihoodZoneCharectaristics.root.visibility = View.VISIBLE
+                            lzSubLocationAssignment.root.visibility = View.VISIBLE
                             countyConfiguration.root.visibility = View.GONE
                         }
 
@@ -533,7 +505,7 @@ class CountyLevelFragment : DialogFragment(),
             lzSubLocationAssignment.apply {
 
                 lzAllocationBackButton.setOnClickListener {
-                    countyLivelihoodZoneCharectaristics.root.visibility = View.VISIBLE
+                    countyConfiguration.root.visibility = View.VISIBLE
                     lzSubLocationAssignment.root.visibility = View.GONE
                 }
 
@@ -563,7 +535,7 @@ class CountyLevelFragment : DialogFragment(),
                         var ids = 1
                         for (currentEditText in editTextsList) {
                             currentEditText.setId(ids)
-                            currentEditText.hint = "Charectaristic $ids"
+                            currentEditText.hint = "$ids)"
                             currentEditText.setLayoutParams(
                                 ViewGroup.LayoutParams(
                                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -614,7 +586,7 @@ class CountyLevelFragment : DialogFragment(),
 
                         var ids = 1
                         for (currentEditText in editTextsList) {
-                            currentEditText.hint = "Charectaristic $ids"
+                            currentEditText.hint = "$ids)"
                             currentEditText.setLayoutParams(
                                 ViewGroup.LayoutParams(
                                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -665,7 +637,7 @@ class CountyLevelFragment : DialogFragment(),
 
                         var ids = 1
                         for (currentEditText in editTextsList) {
-                            currentEditText.hint = "Charectaristic $ids"
+                            currentEditText.hint = "$ids)"
                             currentEditText.setLayoutParams(
                                 ViewGroup.LayoutParams(
                                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -716,7 +688,7 @@ class CountyLevelFragment : DialogFragment(),
 
                         var ids = 1
                         for (currentEditText in editTextsList) {
-                            currentEditText.hint = "Charectaristic $ids"
+                            currentEditText.hint = "$ids)"
                             currentEditText.setLayoutParams(
                                 ViewGroup.LayoutParams(
                                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -756,6 +728,7 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
                 wgCharectaristicsBackButton.setOnClickListener {
+                    prepareLivelihoodZoneSubLocationAssignmentRecyclerView()
                     lzSubLocationAssignment.root.visibility = View.VISIBLE
                     wealthGroupCharectaristics.root.visibility = View.GONE
                 }
@@ -1514,30 +1487,37 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
                 ethnicNextButton.setOnClickListener {
-                    var totalEntry = 0.0
-                    for (currentResponseItem in ethnicGroupResponseList) {
-                        totalEntry = totalEntry + currentResponseItem.populationPercentage
-                    }
+//                    var totalEntry = 0.0
+//                    for (currentResponseItem in ethnicGroupResponseList) {
+//                        totalEntry = totalEntry + currentResponseItem.populationPercentage
+//                    }
+//
+//                    if (totalEntry == 100.0) {
+//
+//                        countyLevelQuestionnaire.ethnicGroupResponseList = ethnicGroupResponseList
+//                        countyLevelQuestionnaire.lastQuestionnaireStep =
+//                            Constants.HUNGER_PATTERNS_STEP
+//
+//                        ethnicGroupPopulation.root.visibility = View.GONE
+//                        lzHungerPatterns.root.visibility = View.VISIBLE
+//                    } else if (totalEntry < 100) {
+//                        inflateErrorModal(
+//                            "Percentage error",
+//                            "Total entry is less than 100% by ${100 - totalEntry}"
+//                        )
+//                    } else if (totalEntry > 100) {
+//                        inflateErrorModal(
+//                            "Percentage error",
+//                            "Total entry is greater than 100% by ${totalEntry - 100}"
+//                        )
+//                    }
 
-                    if (totalEntry == 100.0) {
+                    countyLevelQuestionnaire.ethnicGroupResponseList = ethnicGroupResponseList
+                    countyLevelQuestionnaire.lastQuestionnaireStep =
+                        Constants.HUNGER_PATTERNS_STEP
 
-                        countyLevelQuestionnaire.ethnicGroupResponseList = ethnicGroupResponseList
-                        countyLevelQuestionnaire.lastQuestionnaireStep =
-                            Constants.HUNGER_PATTERNS_STEP
-
-                        ethnicGroupPopulation.root.visibility = View.GONE
-                        lzHungerPatterns.root.visibility = View.VISIBLE
-                    } else if (totalEntry < 100) {
-                        inflateErrorModal(
-                            "Percentage error",
-                            "Total entry is less than 100% by ${100 - totalEntry}"
-                        )
-                    } else if (totalEntry > 100) {
-                        inflateErrorModal(
-                            "Percentage error",
-                            "Total entry is greater than 100% by ${totalEntry - 100}"
-                        )
-                    }
+                    ethnicGroupPopulation.root.visibility = View.GONE
+                    lzHungerPatterns.root.visibility = View.VISIBLE
                 }
 
             }
@@ -2775,34 +2755,13 @@ class CountyLevelFragment : DialogFragment(),
                     )
                 }
 
-                countyLivelihoodZoneCharectaristics.apply {
-                    for (currentLivelihoodZone in geographyObject.currentUserAssignedCountyLivelihoodZones) {
-                        zoneCharectaristicsItemsList.add(
-                            ZoneCharectaristicsResponseItem(
-                                currentLivelihoodZone, ArrayList<String>()
-                            )
-                        )
-                    }
-                    val zoneCharectaristicsAdapter =
-                        activity?.let { it1 ->
-                            ZoneCharectaristicsAdapter(
-                                zoneCharectaristicsItemsList, this@CountyLevelFragment,
-                                it1
-                            )
-                        }
-                    val gridLayoutManager = GridLayoutManager(activity, 1)
-                    zoneList.layoutManager = gridLayoutManager
-                    zoneList.hasFixedSize()
-                    zoneList.adapter =
-                        zoneCharectaristicsAdapter
-
-                }
+                prepareLivelihoodZoneSubLocationAssignmentRecyclerView()
 
 
                 countyLevelQuestionnaire.lastQuestionnaireStep =
                     LIVELIHOOD_ZONE_CHARACTERISTICS_STEP
 
-                countyLivelihoodZoneCharectaristics.root.visibility = View.VISIBLE
+                lzSubLocationAssignment.root.visibility = View.VISIBLE
                 countyConfiguration.root.visibility = View.GONE
             }
 
@@ -2928,7 +2887,7 @@ class CountyLevelFragment : DialogFragment(),
 
 
     override fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel) {
-        countyLevelQuestionnaire.livelihoodZoneCrops.add(selectedCrop)
+        countyLevelQuestionnaire.selectedCrops.add(selectedCrop)
     }
 
     override fun onTribeItemSelectedFromSelectionList(selectedTribe: EthnicGroupModel) {
@@ -4393,6 +4352,26 @@ class CountyLevelFragment : DialogFragment(),
     fun prepareLivelihoodZoneSubLocationAssignmentRecyclerView() {
         binding.apply {
             lzSubLocationAssignment.apply {
+
+                countyLevelQuestionnaire.selectedLivelihoodZone?.let {
+                    val subLocationLivelihoodZoneAssignment =
+                        geographyObject.sublocationsLivelihoodZoneAssignments.filter {
+                            it.livelihoodZoneId == it.livelihoodZoneId
+                        }
+
+                    subLocationZoneAssignmentModelList.clear()
+
+                    for (currentSubLocationLivelihoodZoneAssignment in subLocationLivelihoodZoneAssignment) {
+                        subLocationZoneAssignmentModelList.add(
+                            SubLocationZoneAssignmentModel(
+                                currentSubLocationLivelihoodZoneAssignment.subLocationName,
+                                currentSubLocationLivelihoodZoneAssignment.livelihoodZoneId,
+                                currentSubLocationLivelihoodZoneAssignment.livelihoodZoneName
+                            )
+                        )
+                    }
+                }
+
                 val subLocationassignmentAdapter = activity?.let { it1 ->
                     SubLocationZoneAssignmentAdapter(
                         subLocationZoneAssignmentModelList,
@@ -4428,6 +4407,7 @@ class CountyLevelFragment : DialogFragment(),
 
     fun prepareCropProductionResponseItems() {
         binding.apply {
+            cropProductionResponseItems.clear()
             for (currentCrop in countyLevelQuestionnaire.selectedCrops) {
                 cropProductionResponseItems.add(
                     WgCropProductionResponseItem(
@@ -4843,6 +4823,99 @@ class CountyLevelFragment : DialogFragment(),
                 drinkingWaterShortageRank.text = hazardResponses.drinkingWaterShortages.importanceRank.toString()
                 invasivePlantsRank.text = hazardResponses.invasivePlants.importanceRank.toString()
                 othersRank.text = hazardResponses.others.importanceRank.toString()
+            }
+        }
+    }
+
+    fun prepareCountyLivelihoodZoneCharectaristics() {
+        binding.apply {
+            countyLivelihoodZoneCharectaristics.apply {
+                for (currentLivelihoodZone in geographyObject.currentUserAssignedCountyLivelihoodZones) {
+                    zoneCharectaristicsItemsList.add(
+                        ZoneCharectaristicsResponseItem(
+                            currentLivelihoodZone, ArrayList<String>()
+                        )
+                    )
+                }
+                val zoneCharectaristicsAdapter =
+                    activity?.let { it1 ->
+                        ZoneCharectaristicsAdapter(
+                            zoneCharectaristicsItemsList, this@CountyLevelFragment,
+                            it1
+                        )
+                    }
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                zoneList.layoutManager = gridLayoutManager
+                zoneList.hasFixedSize()
+                zoneList.adapter =
+                    zoneCharectaristicsAdapter
+
+            }
+        }
+    }
+
+    fun populateSeasonsCalendar() {
+        binding.apply {
+            lzSeasonsCalendar.apply {
+                val seasonsResponse = countyLevelQuestionnaire.livelihoodZoneSeasonsResponses
+                dryMonth.text = returnMonthInitialsString(seasonsResponse.dry)
+                longRainMonth.text = returnMonthInitialsString(seasonsResponse.longRains)
+                shortRainMonth.text = returnMonthInitialsString(seasonsResponse.shortRains)
+
+                landPrepMaize.text = returnMonthInitialsString(seasonsResponse.maizeLandPreparation)
+                landPrepCassava.text = returnMonthInitialsString(seasonsResponse.cassavaLandPreparation)
+                landPrepRice.text = returnMonthInitialsString(seasonsResponse.riceLandPreparation)
+                landPrepSorghum.text = returnMonthInitialsString(seasonsResponse.sorghumLandPreparation)
+                landPrepLegumes.text = returnMonthInitialsString(seasonsResponse.legumesLandPreparation)
+
+                plantingMaize.text = returnMonthInitialsString(seasonsResponse.maizePlanting)
+                plantingCassava.text = returnMonthInitialsString(seasonsResponse.cassavaPlanting)
+                plantingRice.text = returnMonthInitialsString(seasonsResponse.ricePlanting)
+                plantingSorghum.text = returnMonthInitialsString(seasonsResponse.sorghumPlanting)
+                plantingLegumes.text = returnMonthInitialsString(seasonsResponse.legumesPlanting)
+
+                harvestingMaize.text = returnMonthInitialsString(seasonsResponse.maizeHarvesting)
+                harvestingCassava.text = returnMonthInitialsString(seasonsResponse.cassavaHarvesting)
+                harvestingRice.text = returnMonthInitialsString(seasonsResponse.riceHarvesting)
+                harvestingSorghum.text = returnMonthInitialsString(seasonsResponse.sorghumHarvesting)
+                harvestingLegumes.text = returnMonthInitialsString(seasonsResponse.legumesHarvesting)
+
+                livestockInMigration.text = returnMonthInitialsString(seasonsResponse.livestockInMigration)
+                livestockOutMigration.text = returnMonthInitialsString(seasonsResponse.livestockOutMigration)
+
+                milkHigh.text = returnMonthInitialsString(seasonsResponse.highMilkProduction)
+                milkLow.text = returnMonthInitialsString(seasonsResponse.lowMilkProduction)
+                calvingHigh.text = returnMonthInitialsString(seasonsResponse.highCalving)
+                calvingLow.text = returnMonthInitialsString(seasonsResponse.lowCalving)
+                kiddingHigh.text = returnMonthInitialsString(seasonsResponse.highKidding)
+                kiddingLow.text = returnMonthInitialsString(seasonsResponse.lowKidding)
+                foodPricesHigh.text = returnMonthInitialsString(seasonsResponse.highFoodPrices)
+                foodPricesMedium.text = returnMonthInitialsString(seasonsResponse.mediumFoodPrices)
+                foodPricesLow.text = returnMonthInitialsString(seasonsResponse.lowFoodPrices)
+                livestockPricesHigh.text = returnMonthInitialsString(seasonsResponse.highLivestockPrices)
+                livestockPricesMedium.text = returnMonthInitialsString(seasonsResponse.mediumLivestockPrices)
+                livestockPricesLow.text = returnMonthInitialsString(seasonsResponse.lowLivestockPrices)
+                casualLabourAvailabilityHigh.text = returnMonthInitialsString(seasonsResponse.highCasualLabourAvailability)
+                casualLabourAvailabilityLow.text = returnMonthInitialsString(seasonsResponse.lowCasualLabourAvailability)
+                nonAgricCasualLabourAvailabilityHigh.text = returnMonthInitialsString(seasonsResponse.nonAgricHighCasualLabourAvailability)
+                nonAgricCasualLabourAvailabilityLow.text = returnMonthInitialsString(seasonsResponse.nonAgricLowCasualLabourAvailability)
+                casualLabourWagesHigh.text = returnMonthInitialsString(seasonsResponse.highCasualLabourWages)
+                casualLabourWagesLow.text = returnMonthInitialsString(seasonsResponse.lowCasualLabourWages)
+                remittancesHigh.text = returnMonthInitialsString(seasonsResponse.highRemittances)
+                remittancesLow.text = returnMonthInitialsString(seasonsResponse.lowRemittances)
+                fishingHigh.text = returnMonthInitialsString(seasonsResponse.highFish)
+                fishingLow.text = returnMonthInitialsString(seasonsResponse.lowFish)
+                marketAccessHigh.text = returnMonthInitialsString(seasonsResponse.highMarketAccess)
+                marketAccessLow.text = returnMonthInitialsString(seasonsResponse.lowMarketAccess)
+                marketAccessLow.text = returnMonthInitialsString(seasonsResponse.lowMarketAccess)
+                diseaseOutbreakHigh.text = returnMonthInitialsString(seasonsResponse.highDiseaseOutbreak)
+                diseaseOutbreakLow.text = returnMonthInitialsString(seasonsResponse.lowDiseaseOutbreak)
+                waterStressMonth.text = returnMonthInitialsString(seasonsResponse.waterStress)
+                conflictRiskMonth.text = returnMonthInitialsString(seasonsResponse.conflictRisks)
+                ceremoniesMonth.text = returnMonthInitialsString(seasonsResponse.ceremonies)
+                leanSeasonsMonth.text = returnMonthInitialsString(seasonsResponse.leanSeasons)
+                foodSecurityMonth.text = returnMonthInitialsString(seasonsResponse.foodSecurityAssessments)
+
             }
         }
     }

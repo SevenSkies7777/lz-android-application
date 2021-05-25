@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:text="C(i). Wealth Group charectaristics"
+        android:text="C(i). Wealth Group characteristics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_bold"
@@ -77,7 +77,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="a) Input the number of charectaristics you would likew to register"
+                android:text="a) Input the number of characteristics you would likew to register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_regular"
@@ -224,7 +224,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="a) Input the number of charectaristics you would likew to register"
+                android:text="a) Input the number of characteristics you would likew to register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_regular"
@@ -370,7 +370,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="a) Input the number of charectaristics you would likew to register"
+                android:text="a) Input the number of characteristics you would likew to register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_regular"
@@ -516,7 +516,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="a) Input the number of charectaristics you would likew to register"
+                android:text="a) Input the number of characteristics you would likew to register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_regular"

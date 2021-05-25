@@ -20,7 +20,8 @@ import com.ndma.livelihoodzones.ui.wealthgroup.model.FgdParticipantModel
 class FgdParticipantsAdapter(
     val fgdParticipants: MutableList<FgdParticipantModel>,
     val fgdParticipantsAdapterCallBack: FgdParticipantsAdapter.FgdParticipantsAdapterCallBack,
-    val context: Context
+    val context: Context,
+    val isAResume: Boolean
 ) : RecyclerView.Adapter<FgdParticipantsAdapter.ViewHolder>() {
 
     private var genderDialog: androidx.appcompat.app.AlertDialog? = null
@@ -92,24 +93,35 @@ class FgdParticipantsAdapter(
 //        viewHolder.etParticipantName.setText(currentParticipant.participantName)
 //        viewHolder.etAge.setText(currentParticipant.age.toString())
 
+        if (isAResume) {
+            viewHolder.etParticipantName.setText(currentParticipant.participantName)
+            viewHolder.tvGender.text = if (currentParticipant.gender == 1) "Male" else "Female"
+            viewHolder.tvDisability.text =
+                if (currentParticipant.disability == 1) "Disabled" else "Not disabled"
+            viewHolder.tvLevelOfEducation
+        }
+
         viewHolder.tvGender.setOnClickListener {
-            inflateGenderModal(currentParticipant, position,viewHolder)
+            inflateGenderModal(currentParticipant, position, viewHolder)
         }
         viewHolder.tvDisability.setOnClickListener {
-            inflateDisabilityModal(currentParticipant, position,viewHolder)
+            inflateDisabilityModal(currentParticipant, position, viewHolder)
         }
         viewHolder.tvLevelOfEducation.setOnClickListener {
-            inflateEducationLevelModal(currentParticipant, position,viewHolder)
+            inflateEducationLevelModal(currentParticipant, position, viewHolder)
         }
         viewHolder.tvConsentToParticipate.setOnClickListener {
-            inflateConsentModal(currentParticipant, position,viewHolder)
+            inflateConsentModal(currentParticipant, position, viewHolder)
         }
 
         viewHolder.etParticipantName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
                 Handler(Looper.getMainLooper()).postDelayed({
                     currentParticipant.participantName = editable.toString()
-                    fgdParticipantsAdapterCallBack.onAParticipantUpdated(currentParticipant, position)
+                    fgdParticipantsAdapterCallBack.onAParticipantUpdated(
+                        currentParticipant,
+                        position
+                    )
 
                 }, 1500)
             }
@@ -136,7 +148,10 @@ class FgdParticipantsAdapter(
             override fun afterTextChanged(editable: Editable?) {
                 Handler(Looper.getMainLooper()).postDelayed({
                     currentParticipant.age = editable.toString().toDouble()
-                    fgdParticipantsAdapterCallBack.onAParticipantUpdated(currentParticipant, position)
+                    fgdParticipantsAdapterCallBack.onAParticipantUpdated(
+                        currentParticipant,
+                        position
+                    )
 
                 }, 1500)
             }
@@ -162,7 +177,11 @@ class FgdParticipantsAdapter(
 
     override fun getItemCount() = fgdParticipants.size
 
-    private fun inflateGenderModal(updatedParticipant: FgdParticipantModel, position: Int, viewHolder: ViewHolder) {
+    private fun inflateGenderModal(
+        updatedParticipant: FgdParticipantModel,
+        position: Int,
+        viewHolder: ViewHolder
+    ) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.gender_layout, null)
         val maleGender = v.findViewById<TextView>(R.id.maleOption)
@@ -206,7 +225,11 @@ class FgdParticipantsAdapter(
     }
 
 
-    private fun inflateDisabilityModal(updatedParticipant: FgdParticipantModel, position: Int, viewHolder: ViewHolder) {
+    private fun inflateDisabilityModal(
+        updatedParticipant: FgdParticipantModel,
+        position: Int,
+        viewHolder: ViewHolder
+    ) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.disability_layout, null)
         val disabilityOption = v.findViewById<TextView>(R.id.disabilityOption)
@@ -250,7 +273,11 @@ class FgdParticipantsAdapter(
     }
 
 
-    private fun inflateEducationLevelModal(updatedParticipant: FgdParticipantModel, position: Int, viewHolder: ViewHolder) {
+    private fun inflateEducationLevelModal(
+        updatedParticipant: FgdParticipantModel,
+        position: Int,
+        viewHolder: ViewHolder
+    ) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.education_level_layout, null)
         val nonFormalEducation = v.findViewById<TextView>(R.id.nonFormalEducation)
@@ -308,7 +335,11 @@ class FgdParticipantsAdapter(
     }
 
 
-    private fun inflateConsentModal(updatedParticipant: FgdParticipantModel, position: Int, viewHolder: ViewHolder) {
+    private fun inflateConsentModal(
+        updatedParticipant: FgdParticipantModel,
+        position: Int,
+        viewHolder: ViewHolder
+    ) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.consent_layout, null)
         val consentOption = v.findViewById<TextView>(R.id.consentOption)
@@ -349,5 +380,22 @@ class FgdParticipantsAdapter(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT
         )
+    }
+
+    fun returnEducationLevelstring(currentParticipant: FgdParticipantModel): String {
+        if (currentParticipant.levelOfEducation == 1) {
+            return "Non-formal education"
+        }
+        if (currentParticipant.levelOfEducation == 2) {
+            return  "Primary"
+        }
+        if (currentParticipant.levelOfEducation == 3) {
+            return  "Secondary"
+        }
+        if (currentParticipant.levelOfEducation == 4) {
+            return  "Post-Secondary"
+        }
+
+        return ""
     }
 }
