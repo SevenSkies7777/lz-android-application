@@ -245,7 +245,7 @@ class WealthGroupDialogFragment : DialogFragment(),
     }
 
     fun determineTheResumeStep() {
-        when(wealthGroupQuestionnaire.lastQuestionnaireStep) {
+        when(determineTheFurthestCoveredStep(wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
             Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP -> {
                 resumeMainIncomeandFoodSources()
             }
@@ -355,10 +355,27 @@ class WealthGroupDialogFragment : DialogFragment(),
         }
     }
 
+    fun doesStepExist(step: Int, existingSteps: MutableList<Int>): Boolean {
+        for (item in existingSteps) {
+            if (item == step) {
+                return true
+            }
+        }
+        return false
+    }
+
+    fun determineTheFurthestCoveredStep(steps: MutableList<Int>): Int {
+        steps.sort()
+        return steps.last()
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun defineNavigation() {
         if (!isAResumeQuestionnaire) {
             wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP
+            if (!doesStepExist(Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP)
+            }
         }
 
         binding.apply {
@@ -722,6 +739,10 @@ class WealthGroupDialogFragment : DialogFragment(),
                             incomeAndFoodSourceResponses
 
                         wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP
+
+                        if (!doesStepExist(Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                            wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP)
+                        }
 
                         wgIncomeAndFoodSources.root.visibility = View.GONE
                         wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
@@ -1584,6 +1605,11 @@ class WealthGroupDialogFragment : DialogFragment(),
                         prepareCropSelectionListView()
 
                         wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_CROP_SELECTION_STEP
+
+                        if (!doesStepExist(Constants.WG_CROP_SELECTION_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                            wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.WG_CROP_SELECTION_STEP)
+                        }
+
                         wgPercentFoodConsumptionIncome.root.visibility = View.GONE
                         cropSelectionLayout.root.visibility = View.VISIBLE
 
@@ -1662,6 +1688,10 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                         wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_CROP_PRODUCTION_STEP
 
+                        if (!doesStepExist(Constants.WG_CROP_PRODUCTION_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                            wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.WG_CROP_PRODUCTION_STEP)
+                        }
+
                         cropProductionLayout.root.visibility = View.VISIBLE
                         cropSelectionLayout.root.visibility = View.GONE
 
@@ -1685,6 +1715,10 @@ class WealthGroupDialogFragment : DialogFragment(),
                 cropContributionNextButton.setOnClickListener {
                     if (!isAnyCropContributionValueEmpty() && !doesCropFoodConsumptionContributionIncomeHaveAPercentageError().hasError && !doesCropCashContributionIncomeHaveAPercentageError().hasError) {
                         wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.LIVESTOCK_POULTRY_NUMBERS_STEP
+
+                        if (!doesStepExist(Constants.LIVESTOCK_POULTRY_NUMBERS_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                            wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.LIVESTOCK_POULTRY_NUMBERS_STEP)
+                        }
                         cropProductionLayout.root.visibility = View.GONE
                         wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
                     } else if (isAnyCropContributionValueEmpty()) {
@@ -1814,6 +1848,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                         wealthGroupQuestionnaire.livestockPoultryOwnershipResponses =
                             livestockPoultryOwnershipResponses
                         wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.LIVESTOCK_POULTRY_CONTRIBUTION_STEP
+                        if (!doesStepExist(Constants.LIVESTOCK_POULTRY_CONTRIBUTION_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                            wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.LIVESTOCK_POULTRY_CONTRIBUTION_STEP)
+                        }
                         wgLivestockPoultryContribution.root.visibility = View.VISIBLE
                         wgLivestockPoultryNumbers.root.visibility = View.GONE
 
@@ -2152,6 +2189,10 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 livestockContributionResponses
 
                             wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.LABOUR_PATTERNS_STEP
+
+                            if (!doesStepExist(Constants.LABOUR_PATTERNS_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                                wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.LABOUR_PATTERNS_STEP)
+                            }
 
                             wgLabourPatterns.root.visibility = View.VISIBLE
                             wgLivestockPoultryContribution.root.visibility = View.GONE
@@ -2598,6 +2639,10 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                             wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.EXPENDITURE_PATTERNS_STEP
 
+                            if (!doesStepExist(Constants.EXPENDITURE_PATTERNS_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                                wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.EXPENDITURE_PATTERNS_STEP)
+                            }
+
                             wgExpenditurePatterns.root.visibility = View.VISIBLE
                             wgLabourPatterns.root.visibility = View.GONE
 
@@ -3023,6 +3068,10 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                             wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.MIGRATION_PATTERNS_STEP
 
+                            if (!doesStepExist(Constants.MIGRATION_PATTERNS_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                                wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.MIGRATION_PATTERNS_STEP)
+                            }
+
                             wgMigrationPatterns.root.visibility = View.VISIBLE
                             wgExpenditurePatterns.root.visibility = View.GONE
 
@@ -3182,6 +3231,10 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 migrationPatternResponses
 
                             wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.CONSTRAINTS_STEP
+
+                            if (!doesStepExist(Constants.CONSTRAINTS_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                                wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.CONSTRAINTS_STEP)
+                            }
 
                             wgConstraints.root.visibility = View.VISIBLE
                             wgMigrationPatterns.root.visibility = View.GONE
@@ -3705,6 +3758,10 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                         wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.COPING_STRATEGIES_STEP
 
+                        if (!doesStepExist(Constants.COPING_STRATEGIES_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                            wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.COPING_STRATEGIES_STEP)
+                        }
+
                         wgCopingStrategies.root.visibility = View.VISIBLE
                         wgConstraints.root.visibility = View.GONE
 
@@ -3815,6 +3872,10 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                             wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.FGD_PARTICIPANTS_STEP
 
+                            if (!doesStepExist(Constants.FGD_PARTICIPANTS_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                                wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.FGD_PARTICIPANTS_STEP)
+                            }
+
                             fdgParticipants.root.visibility = View.VISIBLE
                             wgCopingStrategies.root.visibility = View.GONE
                         }
@@ -3873,6 +3934,11 @@ class WealthGroupDialogFragment : DialogFragment(),
                     wealthGroupQuestionnaire.fdgParticipants = fdgParticipantsModelList
 
                     wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_COMPLETION_PAGE
+
+                    if (!doesStepExist(Constants.WG_COMPLETION_PAGE, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                        wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.WG_COMPLETION_PAGE)
+                    }
+
                     fdgParticipants.root.visibility = View.GONE
                     wgCompletionPage.root.visibility = View.VISIBLE
                 }

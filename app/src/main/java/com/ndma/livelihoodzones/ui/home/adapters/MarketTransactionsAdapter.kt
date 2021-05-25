@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.ndma.livelihoodzones.R
 import com.ndma.livelihoodzones.ui.county.model.MarketTransactionsItem
@@ -17,17 +18,17 @@ class MarketTransactionsAdapter(
     lateinit var currentMarketTransactionItem: MarketTransactionsItem
 
     interface MarketTransactionsAdapterCallBack {
-        fun onLivestockMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean)
+        fun onLivestockMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int)
 
-        fun onPoultryMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean)
+        fun onPoultryMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int)
 
-        fun onFarmProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean)
+        fun onFarmProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int)
 
-        fun onFoodProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean)
+        fun onFoodProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int)
 
-        fun onFarmInputsTradeClicked(marketUniqueId: String, isTradeHappening: Boolean)
+        fun onFarmInputsTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int)
 
-        fun onLabourExchangeTradeClicked(marketUniqueId: String, isTradeHappening: Boolean)
+        fun onLabourExchangeTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -66,18 +67,27 @@ class MarketTransactionsAdapter(
         currentMarketTransactionItem = marketTransactionItems.get(position)
         viewHolder.marketName.text = currentMarketTransactionItem.marketName
 
+        viewHolder.livestockTick.isVisible = currentMarketTransactionItem.livestockTrade
+        viewHolder.poultryTick.isVisible = currentMarketTransactionItem.poultryTrade
+        viewHolder.farmProduceTick.isVisible = currentMarketTransactionItem.farmProduceTrade
+        viewHolder.foodProduceTick.isVisible = currentMarketTransactionItem.foodProduceRetail
+        viewHolder.farmInputsTick.isVisible = currentMarketTransactionItem.retailFarmInput
+        viewHolder.labourExchangeTick.isVisible = currentMarketTransactionItem.labourExchange
+
         viewHolder.livestock.setOnClickListener {
             if (viewHolder.livestockTick.visibility == View.VISIBLE) {
                 viewHolder.livestockTick.visibility = View.GONE
                 marketTransactionsAdapterCallBack.onLivestockMarketTradeClicked(
                     currentMarketTransactionItem.marketUniqueId,
-                    false
+                    false,
+                    position
                 )
             } else {
                 viewHolder.livestockTick.visibility = View.VISIBLE
                 marketTransactionsAdapterCallBack.onLivestockMarketTradeClicked(
                     currentMarketTransactionItem.marketUniqueId,
-                    true
+                    true,
+                    position
                 )
             }
         }
@@ -87,13 +97,15 @@ class MarketTransactionsAdapter(
                 viewHolder.poultryTick.visibility = View.GONE
                 marketTransactionsAdapterCallBack.onPoultryMarketTradeClicked(
                     currentMarketTransactionItem.marketUniqueId,
-                    false
+                    false,
+                    position
                 )
             } else {
                 viewHolder.poultryTick.visibility = View.VISIBLE
                 marketTransactionsAdapterCallBack.onPoultryMarketTradeClicked(
                     currentMarketTransactionItem.marketUniqueId,
-                    true
+                    true,
+                    position
                 )
             }
         }
@@ -103,13 +115,15 @@ class MarketTransactionsAdapter(
                 viewHolder.farmProduceTick.visibility = View.GONE
                 marketTransactionsAdapterCallBack.onFarmProduceTradeClicked(
                     currentMarketTransactionItem.marketUniqueId,
-                    false
+                    false,
+                    position
                 )
             } else {
                 viewHolder.farmProduceTick.visibility = View.VISIBLE
                 marketTransactionsAdapterCallBack.onFarmProduceTradeClicked(
                     currentMarketTransactionItem.marketUniqueId,
-                    true
+                    true,
+                    position
                 )
             }
         }
@@ -120,13 +134,15 @@ class MarketTransactionsAdapter(
                 viewHolder.foodProduceTick.visibility = View.GONE
                 marketTransactionsAdapterCallBack.onFoodProduceTradeClicked(
                     currentMarketTransactionItem.marketUniqueId,
-                    false
+                    false,
+                    position
                 )
             } else {
                 viewHolder.foodProduceTick.visibility = View.VISIBLE
                 marketTransactionsAdapterCallBack.onFoodProduceTradeClicked(
                     currentMarketTransactionItem.marketUniqueId,
-                    true
+                    true,
+                    position
                 )
             }
         }
@@ -137,13 +153,15 @@ class MarketTransactionsAdapter(
                 viewHolder.farmInputsTick.visibility = View.GONE
                 marketTransactionsAdapterCallBack.onFarmInputsTradeClicked(
                     currentMarketTransactionItem.marketUniqueId,
-                    false
+                    false,
+                    position
                 )
             } else {
                 viewHolder.farmInputsTick.visibility = View.VISIBLE
                 marketTransactionsAdapterCallBack.onFarmInputsTradeClicked(
                     currentMarketTransactionItem.marketUniqueId,
-                    true
+                    true,
+                    position
                 )
             }
         }
@@ -154,13 +172,15 @@ class MarketTransactionsAdapter(
                 viewHolder.labourExchangeTick.visibility = View.GONE
                 marketTransactionsAdapterCallBack.onLabourExchangeTradeClicked(
                     currentMarketTransactionItem.marketUniqueId,
-                    false
+                    false,
+                    position
                 )
             } else {
                 viewHolder.labourExchangeTick.visibility = View.VISIBLE
                 marketTransactionsAdapterCallBack.onLabourExchangeTradeClicked(
                     currentMarketTransactionItem.marketUniqueId,
-                    true
+                    true,
+                    position
                 )
             }
         }

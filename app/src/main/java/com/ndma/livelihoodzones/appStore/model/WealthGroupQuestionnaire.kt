@@ -13,6 +13,7 @@ class WealthGroupQuestionnaire(val uniqueId: String, var questionnaireName: Stri
     lateinit var questionnaireStartDate: String
     lateinit var questionnaireEndDate: String
     var lastQuestionnaireStep: Int = 0
+    val questionnaireCoveredSteps: MutableList<Int> = ArrayList()
     lateinit var questionnaireGeography: QuestionnaireSessionLocation
     lateinit var incomeAndFoodSourceResponses: IncomeAndFoodSourceResponses
     lateinit var foodConsumptionResponses: FoodConsumptionResponses

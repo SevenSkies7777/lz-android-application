@@ -114,11 +114,11 @@ class CountyLevelFragment : DialogFragment(),
 
     val WRITE_STORAGE_PERMISSION_CODE: Int = 100
 
-    val lzSeasonsResponses = LzSeasonsResponses()
+    var lzSeasonsResponses = LzSeasonsResponses()
 
     private var crops: MutableList<CropModel> = ArrayList()
 
-    val hazardResponses = HazardResponses()
+    var hazardResponses = HazardResponses()
 
     val subLocationZoneAssignmentModelList: MutableList<SubLocationZoneAssignmentModel> =
         ArrayList()
@@ -200,8 +200,13 @@ class CountyLevelFragment : DialogFragment(),
         return binding.root
     }
 
+    fun determineTheFurthestCoveredStep(steps: MutableList<Int>): Int {
+        steps.sort()
+        return steps.last()
+    }
+
     private fun determineTheResumeStep() {
-        when (countyLevelQuestionnaire.lastQuestionnaireStep) {
+        when (determineTheFurthestCoveredStep(countyLevelQuestionnaire.questionnaireCoveredSteps)) {
             Constants.LIVELIHOOD_ZONE_CHARACTERISTICS_STEP -> {
                 resumeLivelihoodZoneCharectaristics()
             }
@@ -365,6 +370,15 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
+    fun doesStepExist(step: Int, existingSteps: MutableList<Int>): Boolean {
+        for (item in existingSteps) {
+            if (item == step) {
+                return true
+            }
+        }
+        return false
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun defineViews() {
         val gson = Gson()
@@ -431,6 +445,11 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.lastQuestionnaireStep =
                                 LIVELIHOOD_ZONE_CHARACTERISTICS_STEP
 
+                            if (!doesStepExist(LIVELIHOOD_ZONE_CHARACTERISTICS_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                                countyLevelQuestionnaire.questionnaireCoveredSteps.add(LIVELIHOOD_ZONE_CHARACTERISTICS_STEP)
+                            }
+
+
                             lzSubLocationAssignment.root.visibility = View.VISIBLE
                             countyConfiguration.root.visibility = View.GONE
                         }
@@ -494,6 +513,10 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             ZONE_SUBLOCATION_ASSIGNMENT_STEP
 
+                        if (!doesStepExist(ZONE_SUBLOCATION_ASSIGNMENT_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                            countyLevelQuestionnaire.questionnaireCoveredSteps.add(ZONE_SUBLOCATION_ASSIGNMENT_STEP)
+                        }
+
                         countyLivelihoodZoneCharectaristics.root.visibility = View.GONE
                         lzSubLocationAssignment.root.visibility = View.VISIBLE
                     }
@@ -513,6 +536,10 @@ class CountyLevelFragment : DialogFragment(),
 
                     countyLevelQuestionnaire.lastQuestionnaireStep =
                         WEALTH_GROUP_CHARACTERISTICS_STEP
+
+                    if (!doesStepExist(WEALTH_GROUP_CHARACTERISTICS_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                        countyLevelQuestionnaire.questionnaireCoveredSteps.add(WEALTH_GROUP_CHARACTERISTICS_STEP)
+                    }
 
                     lzSubLocationAssignment.root.visibility = View.GONE
                     wealthGroupCharectaristics.root.visibility = View.VISIBLE
@@ -743,6 +770,11 @@ class CountyLevelFragment : DialogFragment(),
 
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.WEALTH_GROUP_PERCENTAGES_STEP
+
+                        if (!doesStepExist(Constants.WEALTH_GROUP_PERCENTAGES_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                            countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.WEALTH_GROUP_PERCENTAGES_STEP)
+                        }
+
                         locationAndPopulationLayout.root.visibility = View.VISIBLE
                         wealthGroupCharectaristics.root.visibility = View.GONE
                     } else {
@@ -840,6 +872,10 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.lastQuestionnaireStep =
                                 Constants.LZ_CROP_SELECTION_STEP
 
+                            if (!doesStepExist(Constants.LZ_CROP_SELECTION_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                                countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.LZ_CROP_SELECTION_STEP)
+                            }
+
                             locationAndPopulationLayout.root.visibility = View.GONE
                             cropSelectionLayout.root.visibility = View.VISIBLE
 
@@ -875,6 +911,10 @@ class CountyLevelFragment : DialogFragment(),
 
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.LZ_CROP_PRODUCTION_STEP
+
+                        if (!doesStepExist(Constants.LZ_CROP_PRODUCTION_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                            countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.LZ_CROP_PRODUCTION_STEP)
+                        }
 
                         cropProductionLayout.root.visibility = View.VISIBLE
                         cropSelectionLayout.root.visibility = View.GONE
@@ -923,6 +963,11 @@ class CountyLevelFragment : DialogFragment(),
                             cropProductionResponseItems
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.MAIN_SOURCES_OF_WATER_STEP
+
+                        if (!doesStepExist(Constants.MAIN_SOURCES_OF_WATER_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                            countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.MAIN_SOURCES_OF_WATER_STEP)
+                        }
+
                         cropProductionLayout.root.visibility = View.GONE
                         mainWaterSource.root.visibility = View.VISIBLE
                     }
@@ -1318,6 +1363,10 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.lastQuestionnaireStep =
                                 Constants.MARKETS_CONFIGURATION_STEP
 
+                            if (!doesStepExist(Constants.MARKETS_CONFIGURATION_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                                countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.MARKETS_CONFIGURATION_STEP)
+                            }
+
                             mainWaterSource.root.visibility = View.GONE
                             marketGeographyConfiguration.root.visibility = View.VISIBLE
 
@@ -1351,6 +1400,10 @@ class CountyLevelFragment : DialogFragment(),
 
                     countyLevelQuestionnaire.lastQuestionnaireStep =
                         Constants.MARKETS_TRANSACTIONS_STEP
+
+                    if (!doesStepExist(Constants.MARKETS_TRANSACTIONS_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                        countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.MARKETS_TRANSACTIONS_STEP)
+                    }
 
                     prepareMarketTransactionsResponses()
 
@@ -1441,6 +1494,10 @@ class CountyLevelFragment : DialogFragment(),
                     countyLevelQuestionnaire.lastQuestionnaireStep =
                         Constants.ETHNIC_GROUP_SELECTION_STEP
 
+                    if (!doesStepExist(Constants.ETHNIC_GROUP_SELECTION_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                        countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.ETHNIC_GROUP_SELECTION_STEP)
+                    }
+
                     ethnicGroupSelection.root.visibility = View.VISIBLE
                     lzMarketTransactions.root.visibility = View.GONE
                 }
@@ -1465,6 +1522,10 @@ class CountyLevelFragment : DialogFragment(),
 
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.ETHNIC_GROUP_POPULATION_STEP
+
+                        if (!doesStepExist(Constants.ETHNIC_GROUP_POPULATION_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                            countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.ETHNIC_GROUP_POPULATION_STEP)
+                        }
 
                         ethnicGroupSelection.root.visibility = View.GONE
                         ethnicGroupPopulation.root.visibility = View.VISIBLE
@@ -1515,6 +1576,10 @@ class CountyLevelFragment : DialogFragment(),
                     countyLevelQuestionnaire.ethnicGroupResponseList = ethnicGroupResponseList
                     countyLevelQuestionnaire.lastQuestionnaireStep =
                         Constants.HUNGER_PATTERNS_STEP
+
+                    if (!doesStepExist(Constants.HUNGER_PATTERNS_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                        countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.HUNGER_PATTERNS_STEP)
+                    }
 
                     ethnicGroupPopulation.root.visibility = View.GONE
                     lzHungerPatterns.root.visibility = View.VISIBLE
@@ -1671,6 +1736,10 @@ class CountyLevelFragment : DialogFragment(),
                         )
 
                         countyLevelQuestionnaire.lastQuestionnaireStep = Constants.HAZARDS_STEP
+
+                        if (!doesStepExist(Constants.HAZARDS_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                            countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.HAZARDS_STEP)
+                        }
 
                         lzHazards.root.visibility = View.VISIBLE
                         lzHungerPatterns.root.visibility = View.GONE
@@ -1985,6 +2054,10 @@ class CountyLevelFragment : DialogFragment(),
 
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.SEASON_CALENDAR_STEP
+
+                        if (!doesStepExist(Constants.SEASON_CALENDAR_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                            countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.SEASON_CALENDAR_STEP)
+                        }
 
                         lzSeasonsCalendar.root.visibility = View.VISIBLE
                         lzHazards.root.visibility = View.GONE
@@ -2558,6 +2631,10 @@ class CountyLevelFragment : DialogFragment(),
 
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.LZ_COMPLETION_PAGE
+
+                        if (!doesStepExist(Constants.LZ_COMPLETION_PAGE, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                            countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.LZ_COMPLETION_PAGE)
+                        }
 
                         lzSeasonsCalendar.root.visibility = View.GONE
                         lzCompletionPage.root.visibility = View.VISIBLE
@@ -3713,88 +3790,178 @@ class CountyLevelFragment : DialogFragment(),
 
     }
 
-    override fun onLivestockMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
+    override fun onLivestockMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int) {
         val currentMarketingTransactionItem =
             countyLevelQuestionnaire.marketTransactionItems.first {
                 it.marketUniqueId == marketUniqueId
             }
         currentMarketingTransactionItem.livestockTrade = isTradeHappening
-        val tempList: List<MarketTransactionsItem> =
-            countyLevelQuestionnaire.marketTransactionItems.filter {
-                it.marketUniqueId != marketUniqueId
+        countyLevelQuestionnaire.marketTransactionItems.set(position, currentMarketingTransactionItem
+        )
+
+        binding.apply {
+
+            val marketTransactionsAdapter =
+                MarketTransactionsAdapter(
+                    countyLevelQuestionnaire.marketTransactionItems,
+                    this@CountyLevelFragment
+                )
+            val gridLayoutManager = GridLayoutManager(activity, 1)
+
+            lzMarketTransactions.apply {
+
+                marketTransactionsList.layoutManager = gridLayoutManager
+                marketTransactionsList.hasFixedSize()
+                marketTransactionsList.adapter =
+                    marketTransactionsAdapter
+
             }
-        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
-        countyLevelQuestionnaire.marketTransactionItems = tempList
+        }
     }
 
-    override fun onPoultryMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
+    override fun onPoultryMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int) {
         val currentMarketingTransactionItem =
             countyLevelQuestionnaire.marketTransactionItems.first {
                 it.marketUniqueId == marketUniqueId
             }
         currentMarketingTransactionItem.poultryTrade = isTradeHappening
-        val tempList: List<MarketTransactionsItem> =
-            countyLevelQuestionnaire.marketTransactionItems.filter {
-                it.marketUniqueId != marketUniqueId
+        countyLevelQuestionnaire.marketTransactionItems.set(position, currentMarketingTransactionItem
+        )
+
+        binding.apply {
+
+            val marketTransactionsAdapter =
+                MarketTransactionsAdapter(
+                    countyLevelQuestionnaire.marketTransactionItems,
+                    this@CountyLevelFragment
+                )
+            val gridLayoutManager = GridLayoutManager(activity, 1)
+
+            lzMarketTransactions.apply {
+
+                marketTransactionsList.layoutManager = gridLayoutManager
+                marketTransactionsList.hasFixedSize()
+                marketTransactionsList.adapter =
+                    marketTransactionsAdapter
+
             }
-        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
-        countyLevelQuestionnaire.marketTransactionItems = tempList
+        }
     }
 
-    override fun onFarmProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
+    override fun onFarmProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int) {
         val currentMarketingTransactionItem =
             countyLevelQuestionnaire.marketTransactionItems.first {
                 it.marketUniqueId == marketUniqueId
             }
         currentMarketingTransactionItem.farmProduceTrade = isTradeHappening
-        val tempList: List<MarketTransactionsItem> =
-            countyLevelQuestionnaire.marketTransactionItems.filter {
-                it.marketUniqueId != marketUniqueId
+        countyLevelQuestionnaire.marketTransactionItems.set(position, currentMarketingTransactionItem
+        )
+
+        binding.apply {
+
+            val marketTransactionsAdapter =
+                MarketTransactionsAdapter(
+                    countyLevelQuestionnaire.marketTransactionItems,
+                    this@CountyLevelFragment
+                )
+            val gridLayoutManager = GridLayoutManager(activity, 1)
+
+            lzMarketTransactions.apply {
+
+                marketTransactionsList.layoutManager = gridLayoutManager
+                marketTransactionsList.hasFixedSize()
+                marketTransactionsList.adapter =
+                    marketTransactionsAdapter
+
             }
-        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
-        countyLevelQuestionnaire.marketTransactionItems = tempList
+        }
     }
 
-    override fun onFoodProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
+    override fun onFoodProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int) {
         val currentMarketingTransactionItem =
             countyLevelQuestionnaire.marketTransactionItems.first {
                 it.marketUniqueId == marketUniqueId
             }
         currentMarketingTransactionItem.foodProduceRetail = isTradeHappening
-        val tempList: List<MarketTransactionsItem> =
-            countyLevelQuestionnaire.marketTransactionItems.filter {
-                it.marketUniqueId != marketUniqueId
+        countyLevelQuestionnaire.marketTransactionItems.set(position, currentMarketingTransactionItem
+        )
+
+        binding.apply {
+
+            val marketTransactionsAdapter =
+                MarketTransactionsAdapter(
+                    countyLevelQuestionnaire.marketTransactionItems,
+                    this@CountyLevelFragment
+                )
+            val gridLayoutManager = GridLayoutManager(activity, 1)
+
+            lzMarketTransactions.apply {
+
+                marketTransactionsList.layoutManager = gridLayoutManager
+                marketTransactionsList.hasFixedSize()
+                marketTransactionsList.adapter =
+                    marketTransactionsAdapter
+
             }
-        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
-        countyLevelQuestionnaire.marketTransactionItems = tempList
+        }
     }
 
-    override fun onFarmInputsTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
+    override fun onFarmInputsTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int) {
         val currentMarketingTransactionItem =
             countyLevelQuestionnaire.marketTransactionItems.first {
                 it.marketUniqueId == marketUniqueId
             }
         currentMarketingTransactionItem.retailFarmInput = isTradeHappening
-        val tempList: List<MarketTransactionsItem> =
-            countyLevelQuestionnaire.marketTransactionItems.filter {
-                it.marketUniqueId != marketUniqueId
+        countyLevelQuestionnaire.marketTransactionItems.set(position, currentMarketingTransactionItem
+        )
+
+        binding.apply {
+
+            val marketTransactionsAdapter =
+                MarketTransactionsAdapter(
+                    countyLevelQuestionnaire.marketTransactionItems,
+                    this@CountyLevelFragment
+                )
+            val gridLayoutManager = GridLayoutManager(activity, 1)
+
+            lzMarketTransactions.apply {
+
+                marketTransactionsList.layoutManager = gridLayoutManager
+                marketTransactionsList.hasFixedSize()
+                marketTransactionsList.adapter =
+                    marketTransactionsAdapter
+
             }
-        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
-        countyLevelQuestionnaire.marketTransactionItems = tempList
+        }
     }
 
-    override fun onLabourExchangeTradeClicked(marketUniqueId: String, isTradeHappening: Boolean) {
+    override fun onLabourExchangeTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int) {
         val currentMarketingTransactionItem =
             countyLevelQuestionnaire.marketTransactionItems.first {
                 it.marketUniqueId == marketUniqueId
             }
         currentMarketingTransactionItem.labourExchange = isTradeHappening
-        val tempList: List<MarketTransactionsItem> =
-            countyLevelQuestionnaire.marketTransactionItems.filter {
-                it.marketUniqueId != marketUniqueId
+        countyLevelQuestionnaire.marketTransactionItems.set(position, currentMarketingTransactionItem
+        )
+
+        binding.apply {
+
+            val marketTransactionsAdapter =
+                MarketTransactionsAdapter(
+                    countyLevelQuestionnaire.marketTransactionItems,
+                    this@CountyLevelFragment
+                )
+            val gridLayoutManager = GridLayoutManager(activity, 1)
+
+            lzMarketTransactions.apply {
+
+                marketTransactionsList.layoutManager = gridLayoutManager
+                marketTransactionsList.hasFixedSize()
+                marketTransactionsList.adapter =
+                    marketTransactionsAdapter
+
             }
-        (tempList as MutableList<MarketTransactionsItem>).add(currentMarketingTransactionItem)
-        countyLevelQuestionnaire.marketTransactionItems = tempList
+        }
     }
 
 
@@ -4269,6 +4436,9 @@ class CountyLevelFragment : DialogFragment(),
         if (countyLevelQuestionnaire.questionnaireStatus != QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
             saveQuestionnaireAsDraft()
         }
+        if (countyLevelQuestionnaire.questionnaireStatus == QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
+            updateCompletedQuestionnaire()
+        }
     }
 
     override fun onStop() {
@@ -4276,12 +4446,63 @@ class CountyLevelFragment : DialogFragment(),
         if (countyLevelQuestionnaire.questionnaireStatus != QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
             saveQuestionnaireAsDraft()
         }
+        if (countyLevelQuestionnaire.questionnaireStatus == QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
+            updateCompletedQuestionnaire()
+        }
     }
 
 
     fun saveQuestionnaireAsDraft() {
         countyLevelQuestionnaire.questionnaireStatus =
             QuestionnaireStatus.DRAFT_QUESTIONNAIRE
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null)
+        val questionnairesListObject: CountyLevelQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                CountyLevelQuestionnaireListObject::class.java
+            )
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == countyLevelQuestionnaire.uniqueId
+        }
+        if (existingQuestionnaires.isEmpty()) {
+            questionnairesListObject.addQuestionnaire(countyLevelQuestionnaire)
+        } else {
+            val questionnairePosition =
+                questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0))
+            questionnairesListObject.updateQuestionnaire(
+                questionnairePosition,
+                countyLevelQuestionnaire
+            )
+        }
+
+        editor?.remove(Constants.QUESTIONNAIRES_LIST_OBJECT)
+
+        val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
+        editor?.putString(
+            Constants.QUESTIONNAIRES_LIST_OBJECT,
+            newQuestionnaireObjectString
+        )
+        editor?.commit()
+
+        val intent = Intent()
+        intent.action = QUESTIONNAIRE_COMPLETED
+        activity?.applicationContext?.sendBroadcast(intent)
+    }
+
+
+    fun updateCompletedQuestionnaire() {
+        countyLevelQuestionnaire.questionnaireStatus =
+            QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
         val gson = Gson()
         val sharedPreferences: SharedPreferences? =
             context?.applicationContext?.getSharedPreferences(
@@ -4744,7 +4965,11 @@ class CountyLevelFragment : DialogFragment(),
             ethnicGroupPopulation.apply {
                 ethnicGroupResponseList = countyLevelQuestionnaire.ethnicGroupResponseList
                 val ethnicPopulationAdapter =
-                    EthnicityAdapter(countyLevelQuestionnaire.ethnicGroupResponseList, this@CountyLevelFragment,true)
+                    EthnicityAdapter(
+                        countyLevelQuestionnaire.ethnicGroupResponseList,
+                        this@CountyLevelFragment,
+                        true
+                    )
                 val gridLayoutManager = GridLayoutManager(activity, 1)
 
                 ethnicGroupPopulation.apply {
@@ -4774,6 +4999,7 @@ class CountyLevelFragment : DialogFragment(),
         binding.apply {
             lzHazards.apply {
                 val hazardResponses = countyLevelQuestionnaire.hazardResponses
+                this@CountyLevelFragment.hazardResponses = countyLevelQuestionnaire.hazardResponses
                 animalRustlingNoOfYears.setText(hazardResponses.animalRustling.noExperiencedYears.toString())
                 banditryNoOfYears.setText(hazardResponses.banditry.noExperiencedYears.toString())
                 terrorismNoOfYears.setText(hazardResponses.terrorism.noExperiencedYears.toString())
@@ -4803,24 +5029,34 @@ class CountyLevelFragment : DialogFragment(),
                 banditryRank.text = hazardResponses.banditry.importanceRank.toString()
                 terrorismRank.text = hazardResponses.terrorism.importanceRank.toString()
                 ethicConflictRank.text = hazardResponses.ethnicConflict.importanceRank.toString()
-                politicalViolenceRank.text = hazardResponses.politicalViolence.importanceRank.toString()
+                politicalViolenceRank.text =
+                    hazardResponses.politicalViolence.importanceRank.toString()
                 droughtRank.text = hazardResponses.drought.importanceRank.toString()
-                pestAndDiseaseRank.text = hazardResponses.livestockPestsAndDiseases.importanceRank.toString()
-                hailstormsOrFrostRank.text = hazardResponses.hailstormsOrFrost.importanceRank.toString()
+                pestAndDiseaseRank.text =
+                    hazardResponses.livestockPestsAndDiseases.importanceRank.toString()
+                hailstormsOrFrostRank.text =
+                    hazardResponses.hailstormsOrFrost.importanceRank.toString()
                 floodingRank.text = hazardResponses.flooding.importanceRank.toString()
                 landslidesRank.text = hazardResponses.landslides.importanceRank.toString()
-                windsOrCycloneRank.text = hazardResponses.highWindsOrCyclones.importanceRank.toString()
+                windsOrCycloneRank.text =
+                    hazardResponses.highWindsOrCyclones.importanceRank.toString()
                 bushFiresRank.text = hazardResponses.bushFires.importanceRank.toString()
                 cropPestsRank.text = hazardResponses.cropPests.importanceRank.toString()
                 locustInvasionRank.text = hazardResponses.locustInvasion.importanceRank.toString()
                 cropDiseasesRank.text = hazardResponses.cropDiseases.importanceRank.toString()
-                terminalIllnessRank.text = hazardResponses.terminalIllnesses.importanceRank.toString()
-                malariaOutbreakRank.text = hazardResponses.malariaPowerOutBreak.importanceRank.toString()
-                waterBorneDiseaseRank.text = hazardResponses.waterBornDiseases.importanceRank.toString()
-                humanWildlifeConflictRank.text = hazardResponses.humanWildlifeConflict.importanceRank.toString()
+                terminalIllnessRank.text =
+                    hazardResponses.terminalIllnesses.importanceRank.toString()
+                malariaOutbreakRank.text =
+                    hazardResponses.malariaPowerOutBreak.importanceRank.toString()
+                waterBorneDiseaseRank.text =
+                    hazardResponses.waterBornDiseases.importanceRank.toString()
+                humanWildlifeConflictRank.text =
+                    hazardResponses.humanWildlifeConflict.importanceRank.toString()
                 highFoodPriceRank.text = hazardResponses.highFoodPrices.importanceRank.toString()
-                foodShortageRank.text = hazardResponses.marketFoodShortages.importanceRank.toString()
-                drinkingWaterShortageRank.text = hazardResponses.drinkingWaterShortages.importanceRank.toString()
+                foodShortageRank.text =
+                    hazardResponses.marketFoodShortages.importanceRank.toString()
+                drinkingWaterShortageRank.text =
+                    hazardResponses.drinkingWaterShortages.importanceRank.toString()
                 invasivePlantsRank.text = hazardResponses.invasivePlants.importanceRank.toString()
                 othersRank.text = hazardResponses.others.importanceRank.toString()
             }
@@ -4858,15 +5094,19 @@ class CountyLevelFragment : DialogFragment(),
         binding.apply {
             lzSeasonsCalendar.apply {
                 val seasonsResponse = countyLevelQuestionnaire.livelihoodZoneSeasonsResponses
+                lzSeasonsResponses = countyLevelQuestionnaire.livelihoodZoneSeasonsResponses
                 dryMonth.text = returnMonthInitialsString(seasonsResponse.dry)
                 longRainMonth.text = returnMonthInitialsString(seasonsResponse.longRains)
                 shortRainMonth.text = returnMonthInitialsString(seasonsResponse.shortRains)
 
                 landPrepMaize.text = returnMonthInitialsString(seasonsResponse.maizeLandPreparation)
-                landPrepCassava.text = returnMonthInitialsString(seasonsResponse.cassavaLandPreparation)
+                landPrepCassava.text =
+                    returnMonthInitialsString(seasonsResponse.cassavaLandPreparation)
                 landPrepRice.text = returnMonthInitialsString(seasonsResponse.riceLandPreparation)
-                landPrepSorghum.text = returnMonthInitialsString(seasonsResponse.sorghumLandPreparation)
-                landPrepLegumes.text = returnMonthInitialsString(seasonsResponse.legumesLandPreparation)
+                landPrepSorghum.text =
+                    returnMonthInitialsString(seasonsResponse.sorghumLandPreparation)
+                landPrepLegumes.text =
+                    returnMonthInitialsString(seasonsResponse.legumesLandPreparation)
 
                 plantingMaize.text = returnMonthInitialsString(seasonsResponse.maizePlanting)
                 plantingCassava.text = returnMonthInitialsString(seasonsResponse.cassavaPlanting)
@@ -4875,13 +5115,18 @@ class CountyLevelFragment : DialogFragment(),
                 plantingLegumes.text = returnMonthInitialsString(seasonsResponse.legumesPlanting)
 
                 harvestingMaize.text = returnMonthInitialsString(seasonsResponse.maizeHarvesting)
-                harvestingCassava.text = returnMonthInitialsString(seasonsResponse.cassavaHarvesting)
+                harvestingCassava.text =
+                    returnMonthInitialsString(seasonsResponse.cassavaHarvesting)
                 harvestingRice.text = returnMonthInitialsString(seasonsResponse.riceHarvesting)
-                harvestingSorghum.text = returnMonthInitialsString(seasonsResponse.sorghumHarvesting)
-                harvestingLegumes.text = returnMonthInitialsString(seasonsResponse.legumesHarvesting)
+                harvestingSorghum.text =
+                    returnMonthInitialsString(seasonsResponse.sorghumHarvesting)
+                harvestingLegumes.text =
+                    returnMonthInitialsString(seasonsResponse.legumesHarvesting)
 
-                livestockInMigration.text = returnMonthInitialsString(seasonsResponse.livestockInMigration)
-                livestockOutMigration.text = returnMonthInitialsString(seasonsResponse.livestockOutMigration)
+                livestockInMigration.text =
+                    returnMonthInitialsString(seasonsResponse.livestockInMigration)
+                livestockOutMigration.text =
+                    returnMonthInitialsString(seasonsResponse.livestockOutMigration)
 
                 milkHigh.text = returnMonthInitialsString(seasonsResponse.highMilkProduction)
                 milkLow.text = returnMonthInitialsString(seasonsResponse.lowMilkProduction)
@@ -4892,15 +5137,24 @@ class CountyLevelFragment : DialogFragment(),
                 foodPricesHigh.text = returnMonthInitialsString(seasonsResponse.highFoodPrices)
                 foodPricesMedium.text = returnMonthInitialsString(seasonsResponse.mediumFoodPrices)
                 foodPricesLow.text = returnMonthInitialsString(seasonsResponse.lowFoodPrices)
-                livestockPricesHigh.text = returnMonthInitialsString(seasonsResponse.highLivestockPrices)
-                livestockPricesMedium.text = returnMonthInitialsString(seasonsResponse.mediumLivestockPrices)
-                livestockPricesLow.text = returnMonthInitialsString(seasonsResponse.lowLivestockPrices)
-                casualLabourAvailabilityHigh.text = returnMonthInitialsString(seasonsResponse.highCasualLabourAvailability)
-                casualLabourAvailabilityLow.text = returnMonthInitialsString(seasonsResponse.lowCasualLabourAvailability)
-                nonAgricCasualLabourAvailabilityHigh.text = returnMonthInitialsString(seasonsResponse.nonAgricHighCasualLabourAvailability)
-                nonAgricCasualLabourAvailabilityLow.text = returnMonthInitialsString(seasonsResponse.nonAgricLowCasualLabourAvailability)
-                casualLabourWagesHigh.text = returnMonthInitialsString(seasonsResponse.highCasualLabourWages)
-                casualLabourWagesLow.text = returnMonthInitialsString(seasonsResponse.lowCasualLabourWages)
+                livestockPricesHigh.text =
+                    returnMonthInitialsString(seasonsResponse.highLivestockPrices)
+                livestockPricesMedium.text =
+                    returnMonthInitialsString(seasonsResponse.mediumLivestockPrices)
+                livestockPricesLow.text =
+                    returnMonthInitialsString(seasonsResponse.lowLivestockPrices)
+                casualLabourAvailabilityHigh.text =
+                    returnMonthInitialsString(seasonsResponse.highCasualLabourAvailability)
+                casualLabourAvailabilityLow.text =
+                    returnMonthInitialsString(seasonsResponse.lowCasualLabourAvailability)
+                nonAgricCasualLabourAvailabilityHigh.text =
+                    returnMonthInitialsString(seasonsResponse.nonAgricHighCasualLabourAvailability)
+                nonAgricCasualLabourAvailabilityLow.text =
+                    returnMonthInitialsString(seasonsResponse.nonAgricLowCasualLabourAvailability)
+                casualLabourWagesHigh.text =
+                    returnMonthInitialsString(seasonsResponse.highCasualLabourWages)
+                casualLabourWagesLow.text =
+                    returnMonthInitialsString(seasonsResponse.lowCasualLabourWages)
                 remittancesHigh.text = returnMonthInitialsString(seasonsResponse.highRemittances)
                 remittancesLow.text = returnMonthInitialsString(seasonsResponse.lowRemittances)
                 fishingHigh.text = returnMonthInitialsString(seasonsResponse.highFish)
@@ -4908,13 +5162,16 @@ class CountyLevelFragment : DialogFragment(),
                 marketAccessHigh.text = returnMonthInitialsString(seasonsResponse.highMarketAccess)
                 marketAccessLow.text = returnMonthInitialsString(seasonsResponse.lowMarketAccess)
                 marketAccessLow.text = returnMonthInitialsString(seasonsResponse.lowMarketAccess)
-                diseaseOutbreakHigh.text = returnMonthInitialsString(seasonsResponse.highDiseaseOutbreak)
-                diseaseOutbreakLow.text = returnMonthInitialsString(seasonsResponse.lowDiseaseOutbreak)
+                diseaseOutbreakHigh.text =
+                    returnMonthInitialsString(seasonsResponse.highDiseaseOutbreak)
+                diseaseOutbreakLow.text =
+                    returnMonthInitialsString(seasonsResponse.lowDiseaseOutbreak)
                 waterStressMonth.text = returnMonthInitialsString(seasonsResponse.waterStress)
                 conflictRiskMonth.text = returnMonthInitialsString(seasonsResponse.conflictRisks)
                 ceremoniesMonth.text = returnMonthInitialsString(seasonsResponse.ceremonies)
                 leanSeasonsMonth.text = returnMonthInitialsString(seasonsResponse.leanSeasons)
-                foodSecurityMonth.text = returnMonthInitialsString(seasonsResponse.foodSecurityAssessments)
+                foodSecurityMonth.text =
+                    returnMonthInitialsString(seasonsResponse.foodSecurityAssessments)
 
             }
         }
