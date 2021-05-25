@@ -250,6 +250,16 @@ class CountyLevelFragment : DialogFragment(),
                 resumeSeasonsCalendar()
             }
             Constants.LZ_COMPLETION_PAGE -> {
+                countyLevelQuestionnaire.lastQuestionnaireStep =
+                    Constants.LZ_COMPLETION_PAGE
+
+                if (!doesStepExist(
+                        Constants.LZ_COMPLETION_PAGE,
+                        countyLevelQuestionnaire.questionnaireCoveredSteps
+                    )
+                ) {
+                    countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.LZ_COMPLETION_PAGE)
+                }
                 resumeCompletionPage()
             }
         }
@@ -445,8 +455,14 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.lastQuestionnaireStep =
                                 LIVELIHOOD_ZONE_CHARACTERISTICS_STEP
 
-                            if (!doesStepExist(LIVELIHOOD_ZONE_CHARACTERISTICS_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
-                                countyLevelQuestionnaire.questionnaireCoveredSteps.add(LIVELIHOOD_ZONE_CHARACTERISTICS_STEP)
+                            if (!doesStepExist(
+                                    LIVELIHOOD_ZONE_CHARACTERISTICS_STEP,
+                                    countyLevelQuestionnaire.questionnaireCoveredSteps
+                                )
+                            ) {
+                                countyLevelQuestionnaire.questionnaireCoveredSteps.add(
+                                    LIVELIHOOD_ZONE_CHARACTERISTICS_STEP
+                                )
                             }
 
 
@@ -513,8 +529,14 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             ZONE_SUBLOCATION_ASSIGNMENT_STEP
 
-                        if (!doesStepExist(ZONE_SUBLOCATION_ASSIGNMENT_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
-                            countyLevelQuestionnaire.questionnaireCoveredSteps.add(ZONE_SUBLOCATION_ASSIGNMENT_STEP)
+                        if (!doesStepExist(
+                                ZONE_SUBLOCATION_ASSIGNMENT_STEP,
+                                countyLevelQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
+                            countyLevelQuestionnaire.questionnaireCoveredSteps.add(
+                                ZONE_SUBLOCATION_ASSIGNMENT_STEP
+                            )
                         }
 
                         countyLivelihoodZoneCharectaristics.root.visibility = View.GONE
@@ -537,8 +559,14 @@ class CountyLevelFragment : DialogFragment(),
                     countyLevelQuestionnaire.lastQuestionnaireStep =
                         WEALTH_GROUP_CHARACTERISTICS_STEP
 
-                    if (!doesStepExist(WEALTH_GROUP_CHARACTERISTICS_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
-                        countyLevelQuestionnaire.questionnaireCoveredSteps.add(WEALTH_GROUP_CHARACTERISTICS_STEP)
+                    if (!doesStepExist(
+                            WEALTH_GROUP_CHARACTERISTICS_STEP,
+                            countyLevelQuestionnaire.questionnaireCoveredSteps
+                        )
+                    ) {
+                        countyLevelQuestionnaire.questionnaireCoveredSteps.add(
+                            WEALTH_GROUP_CHARACTERISTICS_STEP
+                        )
                     }
 
                     lzSubLocationAssignment.root.visibility = View.GONE
@@ -771,7 +799,11 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.WEALTH_GROUP_PERCENTAGES_STEP
 
-                        if (!doesStepExist(Constants.WEALTH_GROUP_PERCENTAGES_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                        if (!doesStepExist(
+                                Constants.WEALTH_GROUP_PERCENTAGES_STEP,
+                                countyLevelQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.WEALTH_GROUP_PERCENTAGES_STEP)
                         }
 
@@ -872,7 +904,11 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.lastQuestionnaireStep =
                                 Constants.LZ_CROP_SELECTION_STEP
 
-                            if (!doesStepExist(Constants.LZ_CROP_SELECTION_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                            if (!doesStepExist(
+                                    Constants.LZ_CROP_SELECTION_STEP,
+                                    countyLevelQuestionnaire.questionnaireCoveredSteps
+                                )
+                            ) {
                                 countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.LZ_CROP_SELECTION_STEP)
                             }
 
@@ -907,12 +943,23 @@ class CountyLevelFragment : DialogFragment(),
 
                     if (countyLevelQuestionnaire.selectedCrops.isNotEmpty()) {
 
-                        prepareCropProductionResponseItems()
+                        if (determineTheFurthestCoveredStep(countyLevelQuestionnaire.questionnaireCoveredSteps) < Constants.LZ_CROP_PRODUCTION_STEP) {
+                            prepareCropProductionResponseItems()
+                        } else {
+                            updateCropProductionPage(processUpdatedCropProductionresponses(
+                                countyLevelQuestionnaire.selectedCrops,
+                                countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses
+                            ))
+                        }
 
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.LZ_CROP_PRODUCTION_STEP
 
-                        if (!doesStepExist(Constants.LZ_CROP_PRODUCTION_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                        if (!doesStepExist(
+                                Constants.LZ_CROP_PRODUCTION_STEP,
+                                countyLevelQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.LZ_CROP_PRODUCTION_STEP)
                         }
 
@@ -940,17 +987,17 @@ class CountyLevelFragment : DialogFragment(),
                 cropProductionNextButton.setOnClickListener {
 
                     if (isAnyCropProductionFieldEmpty()) {
-                        activity?.let { context ->
-                            val adapter =
-                                CropProductionListAdapter(
-                                    context,
-                                    R.layout.lz_crop_production_item,
-                                    cropProductionResponseItems,
-                                    this@CountyLevelFragment,
-                                    false
-                                )
-                            cropsList.adapter = adapter
-                        }
+//                        activity?.let { context ->
+//                            val adapter =
+//                                CropProductionListAdapter(
+//                                    context,
+//                                    R.layout.lz_crop_production_item,
+//                                    cropProductionResponseItems,
+//                                    this@CountyLevelFragment,
+//                                    false
+//                                )
+//                            cropsList.adapter = adapter
+//                        }
                         inflateErrorModal("Missing Data", "Kindly fill out all the fields")
                     } else if (doesCropProductionHavePercentageErrors()) {
                         inflateErrorModal(
@@ -964,7 +1011,11 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.MAIN_SOURCES_OF_WATER_STEP
 
-                        if (!doesStepExist(Constants.MAIN_SOURCES_OF_WATER_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                        if (!doesStepExist(
+                                Constants.MAIN_SOURCES_OF_WATER_STEP,
+                                countyLevelQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.MAIN_SOURCES_OF_WATER_STEP)
                         }
 
@@ -1363,7 +1414,11 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.lastQuestionnaireStep =
                                 Constants.MARKETS_CONFIGURATION_STEP
 
-                            if (!doesStepExist(Constants.MARKETS_CONFIGURATION_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                            if (!doesStepExist(
+                                    Constants.MARKETS_CONFIGURATION_STEP,
+                                    countyLevelQuestionnaire.questionnaireCoveredSteps
+                                )
+                            ) {
                                 countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.MARKETS_CONFIGURATION_STEP)
                             }
 
@@ -1401,7 +1456,11 @@ class CountyLevelFragment : DialogFragment(),
                     countyLevelQuestionnaire.lastQuestionnaireStep =
                         Constants.MARKETS_TRANSACTIONS_STEP
 
-                    if (!doesStepExist(Constants.MARKETS_TRANSACTIONS_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                    if (!doesStepExist(
+                            Constants.MARKETS_TRANSACTIONS_STEP,
+                            countyLevelQuestionnaire.questionnaireCoveredSteps
+                        )
+                    ) {
                         countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.MARKETS_TRANSACTIONS_STEP)
                     }
 
@@ -1494,7 +1553,11 @@ class CountyLevelFragment : DialogFragment(),
                     countyLevelQuestionnaire.lastQuestionnaireStep =
                         Constants.ETHNIC_GROUP_SELECTION_STEP
 
-                    if (!doesStepExist(Constants.ETHNIC_GROUP_SELECTION_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                    if (!doesStepExist(
+                            Constants.ETHNIC_GROUP_SELECTION_STEP,
+                            countyLevelQuestionnaire.questionnaireCoveredSteps
+                        )
+                    ) {
                         countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.ETHNIC_GROUP_SELECTION_STEP)
                     }
 
@@ -1523,7 +1586,11 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.ETHNIC_GROUP_POPULATION_STEP
 
-                        if (!doesStepExist(Constants.ETHNIC_GROUP_POPULATION_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                        if (!doesStepExist(
+                                Constants.ETHNIC_GROUP_POPULATION_STEP,
+                                countyLevelQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.ETHNIC_GROUP_POPULATION_STEP)
                         }
 
@@ -1577,7 +1644,11 @@ class CountyLevelFragment : DialogFragment(),
                     countyLevelQuestionnaire.lastQuestionnaireStep =
                         Constants.HUNGER_PATTERNS_STEP
 
-                    if (!doesStepExist(Constants.HUNGER_PATTERNS_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                    if (!doesStepExist(
+                            Constants.HUNGER_PATTERNS_STEP,
+                            countyLevelQuestionnaire.questionnaireCoveredSteps
+                        )
+                    ) {
                         countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.HUNGER_PATTERNS_STEP)
                     }
 
@@ -1601,68 +1672,70 @@ class CountyLevelFragment : DialogFragment(),
                     override fun afterTextChanged(editable: Editable?) {
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            if (editable == etLongRainsHungerPeriod.editableText) {
-                                if (editable.toString().toDouble() > 10.0) {
-                                    errorDialog?.isShowing?.let { isDialogShowing ->
-                                        if (isDialogShowing) {
-                                            return@postDelayed
+                            if(editable.toString().isNotEmpty()) {
+                                if (editable == etLongRainsHungerPeriod.editableText) {
+                                    if (editable.toString().toDouble() > 10.0) {
+                                        errorDialog?.isShowing?.let { isDialogShowing ->
+                                            if (isDialogShowing) {
+                                                return@postDelayed
+                                            }
                                         }
+                                        inflateErrorModal(
+                                            "Constraint error",
+                                            "Number of years cannot exceed 10"
+                                        )
+                                        etLongRainsHungerPeriodHasError = true
+                                    } else {
+                                        etLongRainsHungerPeriodHasError = false
                                     }
-                                    inflateErrorModal(
-                                        "Constraint error",
-                                        "Number of years cannot exceed 10"
-                                    )
-                                    etLongRainsHungerPeriodHasError = true
-                                } else {
-                                    etLongRainsHungerPeriodHasError = false
                                 }
-                            }
-                            if (editable == etEndLongBeginShortRainsHungerPeriod.editableText) {
-                                if (editable.toString().toDouble() > 10.0) {
-                                    errorDialog?.isShowing?.let { isDialogShowing ->
-                                        if (isDialogShowing) {
-                                            return@postDelayed
+                                if (editable == etEndLongBeginShortRainsHungerPeriod.editableText) {
+                                    if (editable.toString().toDouble() > 10.0) {
+                                        errorDialog?.isShowing?.let { isDialogShowing ->
+                                            if (isDialogShowing) {
+                                                return@postDelayed
+                                            }
                                         }
+                                        inflateErrorModal(
+                                            "Constraint error",
+                                            "Number of years cannot exceed 10"
+                                        )
+                                        etEndLongBeginShortRainsHungerPeriodHasError = true
+                                    } else {
+                                        etEndLongBeginShortRainsHungerPeriodHasError = false
                                     }
-                                    inflateErrorModal(
-                                        "Constraint error",
-                                        "Number of years cannot exceed 10"
-                                    )
-                                    etEndLongBeginShortRainsHungerPeriodHasError = true
-                                } else {
-                                    etEndLongBeginShortRainsHungerPeriodHasError = false
                                 }
-                            }
-                            if (editable == etShortRainsHungerPeriod.editableText) {
-                                if (editable.toString().toDouble() > 10.0) {
-                                    errorDialog?.isShowing?.let { isDialogShowing ->
-                                        if (isDialogShowing) {
-                                            return@postDelayed
+                                if (editable == etShortRainsHungerPeriod.editableText) {
+                                    if (editable.toString().toDouble() > 10.0) {
+                                        errorDialog?.isShowing?.let { isDialogShowing ->
+                                            if (isDialogShowing) {
+                                                return@postDelayed
+                                            }
                                         }
+                                        inflateErrorModal(
+                                            "Constraint error",
+                                            "Number of years cannot exceed 10"
+                                        )
+                                        etShortRainsHungerPeriodHasError = true
+                                    } else {
+                                        etShortRainsHungerPeriodHasError = false
                                     }
-                                    inflateErrorModal(
-                                        "Constraint error",
-                                        "Number of years cannot exceed 10"
-                                    )
-                                    etShortRainsHungerPeriodHasError = true
-                                } else {
-                                    etShortRainsHungerPeriodHasError = false
                                 }
-                            }
-                            if (editable == etEndShortBeginLongRainsHungerPeriod.editableText) {
-                                if (editable.toString().toDouble() > 10.0) {
-                                    errorDialog?.isShowing?.let { isDialogShowing ->
-                                        if (isDialogShowing) {
-                                            return@postDelayed
+                                if (editable == etEndShortBeginLongRainsHungerPeriod.editableText) {
+                                    if (editable.toString().toDouble() > 10.0) {
+                                        errorDialog?.isShowing?.let { isDialogShowing ->
+                                            if (isDialogShowing) {
+                                                return@postDelayed
+                                            }
                                         }
+                                        inflateErrorModal(
+                                            "Constraint error",
+                                            "Number of years cannot exceed 10"
+                                        )
+                                        etEndShortBeginLongRainsHungerPeriodHasError = true
+                                    } else {
+                                        etEndShortBeginLongRainsHungerPeriodHasError = false
                                     }
-                                    inflateErrorModal(
-                                        "Constraint error",
-                                        "Number of years cannot exceed 10"
-                                    )
-                                    etEndShortBeginLongRainsHungerPeriodHasError = true
-                                } else {
-                                    etEndShortBeginLongRainsHungerPeriodHasError = false
                                 }
                             }
 
@@ -1737,7 +1810,11 @@ class CountyLevelFragment : DialogFragment(),
 
                         countyLevelQuestionnaire.lastQuestionnaireStep = Constants.HAZARDS_STEP
 
-                        if (!doesStepExist(Constants.HAZARDS_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                        if (!doesStepExist(
+                                Constants.HAZARDS_STEP,
+                                countyLevelQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.HAZARDS_STEP)
                         }
 
@@ -2055,7 +2132,11 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.SEASON_CALENDAR_STEP
 
-                        if (!doesStepExist(Constants.SEASON_CALENDAR_STEP, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                        if (!doesStepExist(
+                                Constants.SEASON_CALENDAR_STEP,
+                                countyLevelQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.SEASON_CALENDAR_STEP)
                         }
 
@@ -2632,7 +2713,11 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.LZ_COMPLETION_PAGE
 
-                        if (!doesStepExist(Constants.LZ_COMPLETION_PAGE, countyLevelQuestionnaire.questionnaireCoveredSteps)) {
+                        if (!doesStepExist(
+                                Constants.LZ_COMPLETION_PAGE,
+                                countyLevelQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.LZ_COMPLETION_PAGE)
                         }
 
@@ -3790,13 +3875,18 @@ class CountyLevelFragment : DialogFragment(),
 
     }
 
-    override fun onLivestockMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int) {
+    override fun onLivestockMarketTradeClicked(
+        marketUniqueId: String,
+        isTradeHappening: Boolean,
+        position: Int
+    ) {
         val currentMarketingTransactionItem =
             countyLevelQuestionnaire.marketTransactionItems.first {
                 it.marketUniqueId == marketUniqueId
             }
         currentMarketingTransactionItem.livestockTrade = isTradeHappening
-        countyLevelQuestionnaire.marketTransactionItems.set(position, currentMarketingTransactionItem
+        countyLevelQuestionnaire.marketTransactionItems.set(
+            position, currentMarketingTransactionItem
         )
 
         binding.apply {
@@ -3819,13 +3909,18 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
-    override fun onPoultryMarketTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int) {
+    override fun onPoultryMarketTradeClicked(
+        marketUniqueId: String,
+        isTradeHappening: Boolean,
+        position: Int
+    ) {
         val currentMarketingTransactionItem =
             countyLevelQuestionnaire.marketTransactionItems.first {
                 it.marketUniqueId == marketUniqueId
             }
         currentMarketingTransactionItem.poultryTrade = isTradeHappening
-        countyLevelQuestionnaire.marketTransactionItems.set(position, currentMarketingTransactionItem
+        countyLevelQuestionnaire.marketTransactionItems.set(
+            position, currentMarketingTransactionItem
         )
 
         binding.apply {
@@ -3848,13 +3943,18 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
-    override fun onFarmProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int) {
+    override fun onFarmProduceTradeClicked(
+        marketUniqueId: String,
+        isTradeHappening: Boolean,
+        position: Int
+    ) {
         val currentMarketingTransactionItem =
             countyLevelQuestionnaire.marketTransactionItems.first {
                 it.marketUniqueId == marketUniqueId
             }
         currentMarketingTransactionItem.farmProduceTrade = isTradeHappening
-        countyLevelQuestionnaire.marketTransactionItems.set(position, currentMarketingTransactionItem
+        countyLevelQuestionnaire.marketTransactionItems.set(
+            position, currentMarketingTransactionItem
         )
 
         binding.apply {
@@ -3877,13 +3977,18 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
-    override fun onFoodProduceTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int) {
+    override fun onFoodProduceTradeClicked(
+        marketUniqueId: String,
+        isTradeHappening: Boolean,
+        position: Int
+    ) {
         val currentMarketingTransactionItem =
             countyLevelQuestionnaire.marketTransactionItems.first {
                 it.marketUniqueId == marketUniqueId
             }
         currentMarketingTransactionItem.foodProduceRetail = isTradeHappening
-        countyLevelQuestionnaire.marketTransactionItems.set(position, currentMarketingTransactionItem
+        countyLevelQuestionnaire.marketTransactionItems.set(
+            position, currentMarketingTransactionItem
         )
 
         binding.apply {
@@ -3906,13 +4011,18 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
-    override fun onFarmInputsTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int) {
+    override fun onFarmInputsTradeClicked(
+        marketUniqueId: String,
+        isTradeHappening: Boolean,
+        position: Int
+    ) {
         val currentMarketingTransactionItem =
             countyLevelQuestionnaire.marketTransactionItems.first {
                 it.marketUniqueId == marketUniqueId
             }
         currentMarketingTransactionItem.retailFarmInput = isTradeHappening
-        countyLevelQuestionnaire.marketTransactionItems.set(position, currentMarketingTransactionItem
+        countyLevelQuestionnaire.marketTransactionItems.set(
+            position, currentMarketingTransactionItem
         )
 
         binding.apply {
@@ -3935,13 +4045,18 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
-    override fun onLabourExchangeTradeClicked(marketUniqueId: String, isTradeHappening: Boolean,position: Int) {
+    override fun onLabourExchangeTradeClicked(
+        marketUniqueId: String,
+        isTradeHappening: Boolean,
+        position: Int
+    ) {
         val currentMarketingTransactionItem =
             countyLevelQuestionnaire.marketTransactionItems.first {
                 it.marketUniqueId == marketUniqueId
             }
         currentMarketingTransactionItem.labourExchange = isTradeHappening
-        countyLevelQuestionnaire.marketTransactionItems.set(position, currentMarketingTransactionItem
+        countyLevelQuestionnaire.marketTransactionItems.set(
+            position, currentMarketingTransactionItem
         )
 
         binding.apply {
@@ -5173,6 +5288,69 @@ class CountyLevelFragment : DialogFragment(),
                 foodSecurityMonth.text =
                     returnMonthInitialsString(seasonsResponse.foodSecurityAssessments)
 
+            }
+        }
+    }
+
+    fun processUpdatedCropProductionresponses(
+        selectedCrops: MutableList<CropModel>,
+        currentCropProductionResponses: MutableList<WgCropProductionResponseItem>
+    ): MutableList<WgCropProductionResponseItem> {
+        binding.apply {
+            cropProductionLayout.apply {
+                val updatedCropProductionResponses: MutableList<WgCropProductionResponseItem> =
+                    ArrayList()
+                val newlySelectedCrops: MutableList<CropModel> = ArrayList()
+                val newlyAddedResponses: MutableList<WgCropProductionResponseItem> = ArrayList()
+                for (crop in selectedCrops) {
+                    for (response in currentCropProductionResponses) {
+                        if (crop.cropId == response.crop.cropId) {
+                            updatedCropProductionResponses.add(response)
+                        }
+                    }
+                }
+
+
+                for (newCrop in newlySelectedCrops) {
+                    newlyAddedResponses.add(
+                        WgCropProductionResponseItem(
+                            newCrop,
+                            CropSeasonResponseItem(
+                                CropProductionResponseValueModel(0.0, false),
+                                CropProductionResponseValueModel(0.0, false),
+                                CropProductionResponseValueModel(0.0, false),
+                                CropProductionResponseValueModel(0.0, false)
+                            ),
+                            CropSeasonResponseItem(
+                                CropProductionResponseValueModel(0.0, false),
+                                CropProductionResponseValueModel(0.0, false),
+                                CropProductionResponseValueModel(0.0, false),
+                                CropProductionResponseValueModel(0.0, false)
+                            )
+                        )
+                    )
+                }
+
+                updatedCropProductionResponses.addAll(newlyAddedResponses)
+                return updatedCropProductionResponses
+            }
+        }
+    }
+
+    fun updateCropProductionPage(responses: MutableList<WgCropProductionResponseItem>) {
+        binding.apply {
+            cropProductionLayout.apply {
+                activity?.let { context ->
+                    val adapter =
+                        CropProductionListAdapter(
+                            context,
+                            R.layout.lz_crop_production_item,
+                            responses,
+                            this@CountyLevelFragment,
+                            true
+                        )
+                    cropsList.adapter = adapter
+                }
             }
         }
     }
