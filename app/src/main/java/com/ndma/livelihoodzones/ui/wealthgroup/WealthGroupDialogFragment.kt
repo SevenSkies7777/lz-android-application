@@ -671,7 +671,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                             livestockProduction.text.toString().toDouble()
 
                         incomeAndFoodSourceResponses.pastureFodderProduction =
-                            livestockProduction.text.toString().toDouble()
+                            pastureFodderProduction.text.toString().toDouble()
 
                         incomeAndFoodSourceResponses.poultryProduction =
                             poultryProduction.text.toString().toDouble()
@@ -1591,6 +1591,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 foodSourcesPercentBackButton.setOnClickListener {
+                    populateMainSourcesIncomeAndfood()
                     wgPercentFoodConsumptionIncome.root.visibility = View.GONE
                     wgIncomeAndFoodSources.root.visibility = View.VISIBLE
                 }
@@ -4855,6 +4856,31 @@ class WealthGroupDialogFragment : DialogFragment(),
                         )
                     cropsList.adapter = adapter
                 }
+            }
+        }
+    }
+
+    fun populateMainSourcesIncomeAndfood() {
+        binding.apply {
+            wgIncomeAndFoodSources.apply {
+                val incomeAndFoodSourceResponses = wealthGroupQuestionnaire.incomeAndFoodSourceResponses
+                livestockProduction.setText(incomeAndFoodSourceResponses.livestockProduction.toString())
+                pastureFodderProduction.setText(incomeAndFoodSourceResponses.livestockProduction.toString())
+                poultryProduction.setText(incomeAndFoodSourceResponses.poultryProduction.toString())
+                cashCropProduction.setText(incomeAndFoodSourceResponses.cashCropProduction.toString())
+                foodCropProduction.setText(incomeAndFoodSourceResponses.foodCropProduction.toString())
+                casualOrWagedLabour.setText(incomeAndFoodSourceResponses.casualOrWagedLabour.toString())
+                formalWagedLabour.setText(incomeAndFoodSourceResponses.formalWagedLabour.toString())
+                fishing.setText(incomeAndFoodSourceResponses.fishing.toString())
+                huntingAndGathering.setText(incomeAndFoodSourceResponses.huntingAndGathering.toString())
+                smallBusiness.setText(incomeAndFoodSourceResponses.smallBusiness.toString())
+                firewoodOrCharcoal.setText(incomeAndFoodSourceResponses.firewoodOrCharcoal.toString())
+                pettyTrading.setText(incomeAndFoodSourceResponses.pettyTrading.toString())
+                remittance.setText(incomeAndFoodSourceResponses.remittance.toString())
+                bodaboda.setText(incomeAndFoodSourceResponses.bodaboda.toString())
+                beeKeeping.setText(incomeAndFoodSourceResponses.beeKeeping.toString())
+                sandHarvesting.setText(incomeAndFoodSourceResponses.sandHarvesting.toString())
+                other.setText(incomeAndFoodSourceResponses.other.toString())
             }
         }
     }
