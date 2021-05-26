@@ -1687,6 +1687,7 @@ class WealthGroupDialogFragment : DialogFragment(),
             cropProductionLayout.apply {
 
                 cropContributionBackButton.setOnClickListener {
+                    populateCropSelectionSection()
                     cropProductionLayout.root.visibility = View.GONE
                     cropSelectionLayout.root.visibility = View.VISIBLE
                 }
@@ -5385,6 +5386,29 @@ class WealthGroupDialogFragment : DialogFragment(),
                     cropResponseList.hasFixedSize()
                     cropResponseList.adapter =
                         cropContributionAdapter
+                }
+            }
+        }
+    }
+
+    fun populateCropSelectionSection() {
+        binding.apply {
+            cropSelectionLayout.apply {
+                for (currentCrop in wealthGroupQuestionnaire.selectedCrops) {
+                    val existingCrop = crops.first {
+                        it.cropId == currentCrop.cropId
+                    }
+                    crops.set(crops.indexOf(existingCrop), currentCrop)
+                }
+                activity?.let { context ->
+                    val adapter =
+                        CropSelectionListAdapter(
+                            context,
+                            R.layout.lz_selection_item,
+                            crops,
+                            this@WealthGroupDialogFragment
+                        )
+                    cropsList.adapter = adapter
                 }
             }
         }
