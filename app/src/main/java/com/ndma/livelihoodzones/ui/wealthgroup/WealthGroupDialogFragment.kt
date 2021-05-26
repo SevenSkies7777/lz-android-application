@@ -109,23 +109,23 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     private var crops: MutableList<CropModel> = ArrayList()
 
-    val constraintResponses = ConstraintsResponses()
+    var constraintResponses = ConstraintsResponses()
 
-    val wagedLabourIncomeConstraintsResponses =
+    var wagedLabourIncomeConstraintsResponses =
         WagedLabourIncomeConstraintsResponses()
 
-    val cropProductionIncomeConstraintsResponses =
+    var cropProductionIncomeConstraintsResponses =
         CropProductionIncomeConstraintsResponses()
 
-    val livestockProductionIncomeConstraintsResponses =
+    var livestockProductionIncomeConstraintsResponses =
         LivestockProductionIncomeConstraintsResponses()
 
-    val fishingIncomeConstraintsResponses = FishingIncomeConstraintsResponses()
+    var fishingIncomeConstraintsResponses = FishingIncomeConstraintsResponses()
 
-    val naturalResourceIncomeConstraintsResponses =
+    var naturalResourceIncomeConstraintsResponses =
         NaturalResourceIncomeConstraintsResponses()
 
-    val smallEnterpriseIncomeConstraintsResponses =
+    var smallEnterpriseIncomeConstraintsResponses =
         SmallEnterpriseIncomeConstraintsResponses()
 
     var fdgParticipantsModelList: MutableList<FgdParticipantModel> = ArrayList()
@@ -2840,6 +2840,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
 
                 expenditurePatternsBackButton.setOnClickListener {
+                    populateLabourPatterns()
                     wgLabourPatterns.root.visibility = View.VISIBLE
                     wgExpenditurePatterns.root.visibility = View.GONE
                 }
@@ -3120,6 +3121,7 @@ class WealthGroupDialogFragment : DialogFragment(),
             /*Migration patterns */
             wgMigrationPatterns.apply {
                 migrationPatternsBackButton.setOnClickListener {
+                    populateExpenditurePatterns()
                     wgExpenditurePatterns.root.visibility = View.VISIBLE
                     wgMigrationPatterns.root.visibility = View.GONE
                 }
@@ -3279,6 +3281,7 @@ class WealthGroupDialogFragment : DialogFragment(),
             /*Constraints navigation */
             wgConstraints.apply {
                 constraintsBackButton.setOnClickListener {
+                    populateSettlementAndMigration()
                     wgMigrationPatterns.root.visibility = View.VISIBLE
                     wgConstraints.root.visibility = View.GONE
                 }
@@ -3798,6 +3801,7 @@ class WealthGroupDialogFragment : DialogFragment(),
             wgCopingStrategies.apply {
 
                 copingBackButton.setOnClickListener {
+                    populateConstraints()
                     wgCopingStrategies.root.visibility = View.GONE
                     wgConstraints.root.visibility = View.VISIBLE
                 }
@@ -5080,5 +5084,167 @@ class WealthGroupDialogFragment : DialogFragment(),
         }
     }
 
+
+    fun populateConstraints() {
+        binding.apply {
+            wgConstraints.apply {
+                constraintResponses = wealthGroupQuestionnaire.constraintsResponses
+                wagedLabourIncomeConstraintsResponses = constraintResponses.wagedLabourIncomeConstraintsResponses
+                cropProductionIncomeConstraintsResponses = constraintResponses.cropProductionIncomeConstraintsResponses
+                livestockProductionIncomeConstraintsResponses = constraintResponses.livestockProductionIncomeConstraintsResponses
+                fishingIncomeConstraintsResponses = constraintResponses.fishingIncomeConstraintsResponses
+                naturalResourceIncomeConstraintsResponses = constraintResponses.naturalResourceIncomeConstraintsResponses
+                smallEnterpriseIncomeConstraintsResponses = constraintResponses.smallEnterpriseIncomeConstraintsResponses
+
+                labourLowEducation.text = wagedLabourIncomeConstraintsResponses.lowEducation.toString()
+                labourPoorHealth.text = wagedLabourIncomeConstraintsResponses.poorHealth.toString()
+                labourFewJobs.text = wagedLabourIncomeConstraintsResponses.fewJobs.toString()
+                labourFarmTime.text = wagedLabourIncomeConstraintsResponses.tooMuchFarmTime.toString()
+                labourLowWageRates.text = wagedLabourIncomeConstraintsResponses.lowAverageWageRates.toString()
+
+                consumptionHoldings.text = cropProductionIncomeConstraintsResponses.smallLandHoldings.toString()
+                consumptionLackOfCredit.text = cropProductionIncomeConstraintsResponses.lackOfCredit.toString()
+                consumptionHighInputs.text = cropProductionIncomeConstraintsResponses.highInputCost.toString()
+                consumptionLowFertility.text = cropProductionIncomeConstraintsResponses.lowLandFertility.toString()
+                consumptionUnreliableWater.text = cropProductionIncomeConstraintsResponses.lackOfReliableWater.toString()
+                consumptionLowTechnicalSkills.text = cropProductionIncomeConstraintsResponses.lowTechnicalSkills.toString()
+                consumptionLowSeedQuality.text = cropProductionIncomeConstraintsResponses.lowQualitySeed.toString()
+                consumptionMarketAccess.text = cropProductionIncomeConstraintsResponses.lackOfMarketAccess.toString()
+                consumptionCropPests.text = cropProductionIncomeConstraintsResponses.endemicCropPests.toString()
+
+                livestockProductionPasture.text = livestockProductionIncomeConstraintsResponses.lackOfPasture.toString()
+                livestockProductionDrinkingWater.text = livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater.toString()
+                livestockProductionLowYieldingAnimal.text = livestockProductionIncomeConstraintsResponses.lowYieldingAnimal.toString()
+                livestockProductionVeterinaryDrugs.text = livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs.toString()
+                livestockProductionPests.text = livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases.toString()
+                livestockProductionMarket.text = livestockProductionIncomeConstraintsResponses.lackofMarket.toString()
+                livestockProductionInsecurity.text = livestockProductionIncomeConstraintsResponses.insecurity.toString()
+
+                fishingLowStocks.text = fishingIncomeConstraintsResponses.lowFishStocks.toString()
+                fishingPoorMarket.text = fishingIncomeConstraintsResponses.poorMarket.toString()
+                fishingLackOfEquipment.text = fishingIncomeConstraintsResponses.lackOfEquipment.toString()
+                fishingCompetition.text = fishingIncomeConstraintsResponses.extremeCompetition.toString()
+                fishingLackOfExpertise.text = fishingIncomeConstraintsResponses.lackOfExpertise.toString()
+                fishingFishingRights.text = fishingIncomeConstraintsResponses.fishingRightsRestrictions.toString()
+
+                resourceDecline.text = naturalResourceIncomeConstraintsResponses.decliningNaturalResources.toString()
+                resourcePopulationPressure.text = naturalResourceIncomeConstraintsResponses.populationPressure.toString()
+                resourceRights.text = naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights.toString()
+                resourceLowValue.text = naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts.toString()
+
+                enterpriseLackOfCapital.text = smallEnterpriseIncomeConstraintsResponses.lackOfCapital.toString()
+                enterpriseRedTape.text = smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape.toString()
+                enterpriseTaxes.text = smallEnterpriseIncomeConstraintsResponses.tooManyTaxes.toString()
+                enterpriseMarketAccess.text = smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket.toString()
+                enterpriseExpertise.text = smallEnterpriseIncomeConstraintsResponses.lackOfExpertise.toString()
+            }
+        }
+    }
+
+    fun populateSettlementAndMigration() {
+        binding.apply {
+            wgMigrationPatterns.apply {
+                val migrationPatternResponses = wealthGroupQuestionnaire.migrationPatternResponses
+
+                fullyNomadic.setText(migrationPatternResponses.fullyNomadic.toString())
+                semiNomadic.setText(migrationPatternResponses.semiNomadic.toString())
+                occasionalNomadic.setText(migrationPatternResponses.occasionalNomadic.toString())
+                outMigrantLabour.setText(migrationPatternResponses.outMigrantLabour.toString())
+                inMigrantLabour.setText(migrationPatternResponses.inMigrantLabour.toString())
+                fullySettled.setText(migrationPatternResponses.fullysettled.toString())
+                internallyDisplaced.setText(migrationPatternResponses.internallyDisplaced.toString())
+            }
+        }
+    }
+
+    fun populateExpenditurePatterns() {
+        binding.apply {
+            wgExpenditurePatterns.apply {
+                val expenditurePatternsResponses = wealthGroupQuestionnaire.expenditurePatternsResponses
+                maizeAndMaizeFlour.setText(expenditurePatternsResponses.maizeAndMaizeFlour.toString())
+                otherCereals.setText(expenditurePatternsResponses.otherCereals.toString())
+                pulses.setText(expenditurePatternsResponses.pulses.toString())
+                rootsAndTubers.setText(expenditurePatternsResponses.rootsAndTubers.toString())
+                vegetablesAndFruits.setText(expenditurePatternsResponses.vegetablesAndFruits.toString())
+                fishandseaFood.setText(expenditurePatternsResponses.fishandSeaFood.toString())
+                meat.setText(expenditurePatternsResponses.meat.toString())
+                milk.setText(expenditurePatternsResponses.milk.toString())
+                eggs.setText(expenditurePatternsResponses.eggs.toString())
+                oilAndFats.setText(expenditurePatternsResponses.oilsAndFats.toString())
+                otherFoods.setText(expenditurePatternsResponses.otherFoods.toString())
+                schoolFees.setText(expenditurePatternsResponses.schoolFees.toString())
+                drugsAndMedicalCare.setText(expenditurePatternsResponses.drugsAndMedicalCare.toString())
+                clothingAndBeautyProducts.setText(expenditurePatternsResponses.clothingAndBeautyProducts.toString())
+                houseRent.setText(expenditurePatternsResponses.houseRent.toString())
+                communicationExpense.setText(expenditurePatternsResponses.communicationExpenses.toString())
+                farmInputs.setText(expenditurePatternsResponses.farmInputs.toString())
+                livestockDrugs.setText(expenditurePatternsResponses.livestockDrugs.toString())
+                waterPurchase.setText(expenditurePatternsResponses.waterPurchase.toString())
+                soaps.setText(expenditurePatternsResponses.soaps.toString())
+                farrmLabour.setText(expenditurePatternsResponses.farmLabour.toString())
+                travelRelatedExpense.setText(expenditurePatternsResponses.travelRelatedExpenses.toString())
+                entertainment.setText(expenditurePatternsResponses.leisureAndEntertainment.toString())
+                electricityBill.setText(expenditurePatternsResponses.electricityBills.toString())
+                socialObligation.setText(expenditurePatternsResponses.socialObligation.toString())
+                millingCost.setText(expenditurePatternsResponses.millingCosts.toString())
+                cookingFuel.setText(expenditurePatternsResponses.cookingFuel.toString())
+                savingsAndInvestment.setText(expenditurePatternsResponses.savingsAndInvestments.toString())
+                loanRepayments.setText(expenditurePatternsResponses.loanRepayments.toString())
+            }
+        }
+    }
+
+    fun populateLabourPatterns() {
+        binding.apply {
+            wgLabourPatterns.apply {
+                val labourPatternResponse = wealthGroupQuestionnaire.labourPatternResponses
+
+                ownFarmWomen.setText(labourPatternResponse.ownFarmCropProduction.women.toString())
+                ownFarmmen.setText(labourPatternResponse.ownFarmCropProduction.men.toString())
+
+                livestockHusbandryWomen.setText(labourPatternResponse.livestockHusbandry.women.toString())
+                livestockHusbandrymen.setText(labourPatternResponse.livestockHusbandry.men.toString())
+
+                transportServicesWomen.setText(labourPatternResponse.transportServices.women.toString())
+                transportServicesMen.setText(labourPatternResponse.transportServices.men.toString())
+
+                wagedLabourWomen.setText(labourPatternResponse.wagedLabourOnFarms.women.toString())
+                wagedLabourmen.setText(labourPatternResponse.wagedLabourOnFarms.men.toString())
+
+                lowSkilledNonFarmWomen.setText(labourPatternResponse.lowSkilledNonFarmLabour.women.toString())
+                lowSkilledNonFarmmen.setText(labourPatternResponse.lowSkilledNonFarmLabour.men.toString())
+
+                skilledLabourWomen.setText(labourPatternResponse.skilledLabour.women.toString())
+                skilledLabourmen.setText(labourPatternResponse.skilledLabour.men.toString())
+
+                formalEmploymentWomen.setText(labourPatternResponse.formalEmployment.women.toString())
+                formalEmploymentmen.setText(labourPatternResponse.formalEmployment.men.toString())
+
+                huntingAndGatheringWomen.setText(labourPatternResponse.huntingAndGathering.women.toString())
+                huntingAndGatheringmen.setText(labourPatternResponse.huntingAndGathering.men.toString())
+
+                fishingWomen.setText(labourPatternResponse.fishing.women.toString())
+                fishingmen.setText(labourPatternResponse.fishing.men.toString())
+
+                tradingWomen.setText(labourPatternResponse.trading.women.toString())
+                tradingmen.setText(labourPatternResponse.trading.men.toString())
+
+                domesticUnpaidWorkWomen.setText(labourPatternResponse.domesticUnpaidWork.women.toString())
+                domesticUnpaidWorkmen.setText(labourPatternResponse.domesticUnpaidWork.men.toString())
+
+                leisureWomen.setText(labourPatternResponse.leisure.women.toString())
+                leisuremen.setText(labourPatternResponse.leisure.men.toString())
+
+                sexWorkWomen.setText(labourPatternResponse.commercialSexWork.women.toString())
+                sexWorkmen.setText(labourPatternResponse.commercialSexWork.men.toString())
+
+                beggingWomen.setText(labourPatternResponse.begging.women.toString())
+                beggingmen.setText(labourPatternResponse.begging.men.toString())
+
+                inactivityWomen.setText(labourPatternResponse.inactivity.women.toString())
+                inactivitymen.setText(labourPatternResponse.inactivity.men.toString())
+            }
+        }
+    }
 
 }
