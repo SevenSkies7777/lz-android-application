@@ -1667,7 +1667,10 @@ class WealthGroupDialogFragment : DialogFragment(),
                         if (determineTheFurthestCoveredStep(wealthGroupQuestionnaire.questionnaireCoveredSteps) < Constants.WG_CROP_PRODUCTION_STEP) {
                             prepareCropProduction()
                         } else {
-                            populateCropProduction()
+                            updateCropProductionPage(processUpdatedCropProductionresponses(
+                                wealthGroupQuestionnaire.selectedCrops,
+                                wealthGroupQuestionnaire.cropContributionResponseItems
+                            ))
                         }
 
                         wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_CROP_PRODUCTION_STEP
@@ -5324,6 +5327,25 @@ class WealthGroupDialogFragment : DialogFragment(),
         binding.apply {
             cropProductionLayout.apply {
                 cropContributionResponseItems = wealthGroupQuestionnaire.cropContributionResponseItems
+                for (i in 0..cropContributionResponseItems.size - 1) {
+                    cropCashIncomeContributionRanks.clear()
+                    cropFoodConsumptionContributionRanks.clear()
+                    for (i in 0..cropContributionResponseItems.size - 1) {
+                        cropCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                i + 1,
+                                false
+                            )
+                        )
+                        cropFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                i + 1,
+                                false
+                            )
+                        )
+                    }
+
+                }
                 val cropContributionAdapter =
                     activity?.let { it1 ->
                         WgCropContributionAdapter(
@@ -5414,7 +5436,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                             R.layout.lz_selection_item,
                             crops,
                             this@WealthGroupDialogFragment,
-                            false
+                            true
                         )
                     cropsList.adapter = adapter
                 }
@@ -5485,6 +5507,83 @@ class WealthGroupDialogFragment : DialogFragment(),
                 spicesOwnFarm.setText(foodConsumptionResponses.spices.ownFarm.toString())
                 spicesMarket.setText(foodConsumptionResponses.spices.marketFoodPurchase.toString())
                 spicesGift.setText(foodConsumptionResponses.spices.gifts.toString())
+            }
+        }
+    }
+
+
+    fun processUpdatedCropProductionresponses(
+        selectedCrops: MutableList<CropModel>,
+        currentCropProductionResponses: MutableList<WgCropContributionResponseItem>
+    ): MutableList<WgCropContributionResponseItem> {
+        binding.apply {
+            cropProductionLayout.apply {
+                val updatedCropProductionResponses: MutableList<WgCropContributionResponseItem> =
+                    ArrayList()
+                val newlyAddedResponses: MutableList<WgCropContributionResponseItem> = ArrayList()
+                for (crop in selectedCrops) {
+                    for (response in currentCropProductionResponses) {
+                        if (crop.cropId == response.cropModel.cropId) {
+                            updatedCropProductionResponses.add(response)
+                        }
+                    }
+                }
+
+
+                for (newCrop in AppStore.getInstance().newlySelectedCrops) {
+                    newlyAddedResponses.add(
+                        WgCropContributionResponseItem(
+                            newCrop,
+                            CropContributionResponseValue(0.0, false),
+                            CropContributionResponseValue(0.0, false),
+                            CropContributionResponseValue(0.0, false),
+                            CropContributionResponseValue(0.0, false)
+                        )
+                    )
+                }
+
+                AppStore.getInstance().newlySelectedCrops = ArrayList()
+
+                updatedCropProductionResponses.addAll(newlyAddedResponses)
+                wealthGroupQuestionnaire.cropContributionResponseItems = updatedCropProductionResponses
+                cropContributionResponseItems = updatedCropProductionResponses
+                return updatedCropProductionResponses
+            }
+        }
+    }
+
+    fun updateCropProductionPage(responses: MutableList<WgCropContributionResponseItem>) {
+        binding.apply {
+            cropProductionLayout.apply {
+
+                cropCashIncomeContributionRanks.clear()
+                cropFoodConsumptionContributionRanks.clear()
+                for (i in 0..cropContributionResponseItems.size - 1) {
+                    cropCashIncomeContributionRanks.add(
+                        RankResponseItem(
+                            i + 1,
+                            false
+                        )
+                    )
+                    cropFoodConsumptionContributionRanks.add(
+                        RankResponseItem(
+                            i + 1,
+                            false
+                        )
+                    )
+                }
+
+                activity?.let { context ->
+                    val adapter =
+                        WgCropContributionAdapter(
+                            responses,
+                            this@WealthGroupDialogFragment,
+                            context,
+                            cropCashIncomeContributionRanks,
+                            cropFoodConsumptionContributionRanks
+                        )
+                    cropResponseList.adapter = adapter
+                }
             }
         }
     }
