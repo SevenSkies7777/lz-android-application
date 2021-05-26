@@ -2090,6 +2090,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
 
                 livestockPoultryContributionBackButton.setOnClickListener {
+                    populateLivestockAndPoultryOwnership()
                     wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
                     wgLivestockPoultryContribution.root.visibility = View.GONE
                 }
@@ -5326,6 +5327,27 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 fishPondsCashRank.text = livestockContributionResponses.fishPonds.incomeRank.actualValue.toInt().toString()
                 fishPondsFoodRank.text = livestockContributionResponses.fishPonds.consumptionRank.actualValue.toInt().toString()
+            }
+        }
+    }
+
+    fun populateLivestockAndPoultryOwnership() {
+        binding.apply {
+            wgLivestockPoultryNumbers.apply {
+                val livestockPoultryOwnershipResponses = wealthGroupQuestionnaire.livestockPoultryOwnershipResponses
+
+                cattleNumbers.setText(livestockPoultryOwnershipResponses.cattle.toString())
+                dairyCattleNumbers.setText(livestockPoultryOwnershipResponses.dairyCattle.toString())
+                goatNumbers.setText(livestockPoultryOwnershipResponses.goats.toString())
+                sheepNumbers.setText(livestockPoultryOwnershipResponses.sheep.toString())
+                donkeyNumbers.setText(livestockPoultryOwnershipResponses.donkeys.toString())
+                camelNumbers.setText(livestockPoultryOwnershipResponses.camels.toString())
+                pigNumbers.setText(livestockPoultryOwnershipResponses.pigs.toString())
+                chickenNumbers.setText(livestockPoultryOwnershipResponses.chicken.toString())
+                improvedChickenNumbers.setText(livestockPoultryOwnershipResponses.improvedChicken.toString())
+                duckNumbers.setText(livestockPoultryOwnershipResponses.ducks.toString())
+                beeHiveNumbers.setText(livestockPoultryOwnershipResponses.beeHives.toString())
+                fishPondNumbers.setText(livestockPoultryOwnershipResponses.fishPonds.toString())
             }
         }
     }
