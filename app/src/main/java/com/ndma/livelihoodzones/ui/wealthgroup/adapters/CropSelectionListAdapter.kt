@@ -7,13 +7,15 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.ndma.livelihoodzones.R
+import com.ndma.livelihoodzones.appStore.AppStore
 import com.ndma.livelihoodzones.ui.county.model.CropModel
 
 class CropSelectionListAdapter(
     context: Context,
     val resource: Int,
     val crops: MutableList<CropModel>,
-    val cropSelectionListAdapterCallBack: CropSelectionListAdapterCallBack
+    val cropSelectionListAdapterCallBack: CropSelectionListAdapterCallBack,
+    val isThisCurrentPageResume: Boolean
 ) :
     ArrayAdapter<CropModel>(context, resource, crops) {
 
@@ -49,6 +51,9 @@ class CropSelectionListAdapter(
                 currentCropModel.hasBeenSelected = true
                 highlightIcon.visibility = View.VISIBLE
                 uncheckedIcon.visibility = View.GONE
+                if (isThisCurrentPageResume) {
+                    AppStore.getInstance().newlySelectedCrops.add(currentCropModel)
+                }
             }
             cropSelectionListAdapterCallBack.onCropItemSelectedFromSelectionList(
                 currentCropModel,

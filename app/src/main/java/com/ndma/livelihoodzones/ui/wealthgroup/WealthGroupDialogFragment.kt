@@ -4169,7 +4169,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             context,
                             R.layout.lz_selection_item,
                             crops,
-                            this@WealthGroupDialogFragment
+                            this@WealthGroupDialogFragment,
+                            false
                         )
                     cropsList.adapter = adapter
                     cropsList.setSelection(position)
@@ -4969,7 +4970,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             context,
                             R.layout.lz_selection_item,
                             crops,
-                            this@WealthGroupDialogFragment
+                            this@WealthGroupDialogFragment,
+                            false
                         )
                     cropsList.adapter = adapter
                 }
@@ -5411,7 +5413,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             context,
                             R.layout.lz_selection_item,
                             crops,
-                            this@WealthGroupDialogFragment
+                            this@WealthGroupDialogFragment,
+                            false
                         )
                     cropsList.adapter = adapter
                 }

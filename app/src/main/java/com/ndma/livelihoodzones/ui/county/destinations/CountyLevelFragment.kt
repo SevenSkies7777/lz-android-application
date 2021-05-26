@@ -1581,7 +1581,11 @@ class CountyLevelFragment : DialogFragment(),
                     if (countyLevelQuestionnaire.livelihoodZoneEthnicGroups.isNotEmpty()) {
 
 
-                        prepareEthnicGroupPopulation()
+                        if (determineTheFurthestCoveredStep(countyLevelQuestionnaire.questionnaireCoveredSteps) < Constants.ETHNIC_GROUP_POPULATION_STEP) {
+                            prepareEthnicGroupPopulation()
+                        } else {
+                            populateEthnicGroupPopulation()
+                        }
 
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.ETHNIC_GROUP_POPULATION_STEP
@@ -3886,27 +3890,27 @@ class CountyLevelFragment : DialogFragment(),
             }
         currentMarketingTransactionItem.livestockTrade = isTradeHappening
         countyLevelQuestionnaire.marketTransactionItems.set(
-            position, currentMarketingTransactionItem
+            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem), currentMarketingTransactionItem
         )
 
-        binding.apply {
-
-            val marketTransactionsAdapter =
-                MarketTransactionsAdapter(
-                    countyLevelQuestionnaire.marketTransactionItems,
-                    this@CountyLevelFragment
-                )
-            val gridLayoutManager = GridLayoutManager(activity, 1)
-
-            lzMarketTransactions.apply {
-
-                marketTransactionsList.layoutManager = gridLayoutManager
-                marketTransactionsList.hasFixedSize()
-                marketTransactionsList.adapter =
-                    marketTransactionsAdapter
-
-            }
-        }
+//        binding.apply {
+//
+//            val marketTransactionsAdapter =
+//                MarketTransactionsAdapter(
+//                    countyLevelQuestionnaire.marketTransactionItems,
+//                    this@CountyLevelFragment
+//                )
+//            val gridLayoutManager = GridLayoutManager(activity, 1)
+//
+//            lzMarketTransactions.apply {
+//
+//                marketTransactionsList.layoutManager = gridLayoutManager
+//                marketTransactionsList.hasFixedSize()
+//                marketTransactionsList.adapter =
+//                    marketTransactionsAdapter
+//
+//            }
+//        }
     }
 
     override fun onPoultryMarketTradeClicked(
@@ -3920,27 +3924,27 @@ class CountyLevelFragment : DialogFragment(),
             }
         currentMarketingTransactionItem.poultryTrade = isTradeHappening
         countyLevelQuestionnaire.marketTransactionItems.set(
-            position, currentMarketingTransactionItem
+            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem), currentMarketingTransactionItem
         )
 
-        binding.apply {
-
-            val marketTransactionsAdapter =
-                MarketTransactionsAdapter(
-                    countyLevelQuestionnaire.marketTransactionItems,
-                    this@CountyLevelFragment
-                )
-            val gridLayoutManager = GridLayoutManager(activity, 1)
-
-            lzMarketTransactions.apply {
-
-                marketTransactionsList.layoutManager = gridLayoutManager
-                marketTransactionsList.hasFixedSize()
-                marketTransactionsList.adapter =
-                    marketTransactionsAdapter
-
-            }
-        }
+//        binding.apply {
+//
+//            val marketTransactionsAdapter =
+//                MarketTransactionsAdapter(
+//                    countyLevelQuestionnaire.marketTransactionItems,
+//                    this@CountyLevelFragment
+//                )
+//            val gridLayoutManager = GridLayoutManager(activity, 1)
+//
+//            lzMarketTransactions.apply {
+//
+//                marketTransactionsList.layoutManager = gridLayoutManager
+//                marketTransactionsList.hasFixedSize()
+//                marketTransactionsList.adapter =
+//                    marketTransactionsAdapter
+//
+//            }
+//        }
     }
 
     override fun onFarmProduceTradeClicked(
@@ -3954,27 +3958,27 @@ class CountyLevelFragment : DialogFragment(),
             }
         currentMarketingTransactionItem.farmProduceTrade = isTradeHappening
         countyLevelQuestionnaire.marketTransactionItems.set(
-            position, currentMarketingTransactionItem
+            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem), currentMarketingTransactionItem
         )
 
-        binding.apply {
-
-            val marketTransactionsAdapter =
-                MarketTransactionsAdapter(
-                    countyLevelQuestionnaire.marketTransactionItems,
-                    this@CountyLevelFragment
-                )
-            val gridLayoutManager = GridLayoutManager(activity, 1)
-
-            lzMarketTransactions.apply {
-
-                marketTransactionsList.layoutManager = gridLayoutManager
-                marketTransactionsList.hasFixedSize()
-                marketTransactionsList.adapter =
-                    marketTransactionsAdapter
-
-            }
-        }
+//        binding.apply {
+//
+//            val marketTransactionsAdapter =
+//                MarketTransactionsAdapter(
+//                    countyLevelQuestionnaire.marketTransactionItems,
+//                    this@CountyLevelFragment
+//                )
+//            val gridLayoutManager = GridLayoutManager(activity, 1)
+//
+//            lzMarketTransactions.apply {
+//
+//                marketTransactionsList.layoutManager = gridLayoutManager
+//                marketTransactionsList.hasFixedSize()
+//                marketTransactionsList.adapter =
+//                    marketTransactionsAdapter
+//
+//            }
+//        }
     }
 
     override fun onFoodProduceTradeClicked(
@@ -3988,27 +3992,27 @@ class CountyLevelFragment : DialogFragment(),
             }
         currentMarketingTransactionItem.foodProduceRetail = isTradeHappening
         countyLevelQuestionnaire.marketTransactionItems.set(
-            position, currentMarketingTransactionItem
+            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem), currentMarketingTransactionItem
         )
 
-        binding.apply {
-
-            val marketTransactionsAdapter =
-                MarketTransactionsAdapter(
-                    countyLevelQuestionnaire.marketTransactionItems,
-                    this@CountyLevelFragment
-                )
-            val gridLayoutManager = GridLayoutManager(activity, 1)
-
-            lzMarketTransactions.apply {
-
-                marketTransactionsList.layoutManager = gridLayoutManager
-                marketTransactionsList.hasFixedSize()
-                marketTransactionsList.adapter =
-                    marketTransactionsAdapter
-
-            }
-        }
+//        binding.apply {
+//
+//            val marketTransactionsAdapter =
+//                MarketTransactionsAdapter(
+//                    countyLevelQuestionnaire.marketTransactionItems,
+//                    this@CountyLevelFragment
+//                )
+//            val gridLayoutManager = GridLayoutManager(activity, 1)
+//
+//            lzMarketTransactions.apply {
+//
+//                marketTransactionsList.layoutManager = gridLayoutManager
+//                marketTransactionsList.hasFixedSize()
+//                marketTransactionsList.adapter =
+//                    marketTransactionsAdapter
+//
+//            }
+//        }
     }
 
     override fun onFarmInputsTradeClicked(
@@ -4022,27 +4026,27 @@ class CountyLevelFragment : DialogFragment(),
             }
         currentMarketingTransactionItem.retailFarmInput = isTradeHappening
         countyLevelQuestionnaire.marketTransactionItems.set(
-            position, currentMarketingTransactionItem
+            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem), currentMarketingTransactionItem
         )
 
-        binding.apply {
-
-            val marketTransactionsAdapter =
-                MarketTransactionsAdapter(
-                    countyLevelQuestionnaire.marketTransactionItems,
-                    this@CountyLevelFragment
-                )
-            val gridLayoutManager = GridLayoutManager(activity, 1)
-
-            lzMarketTransactions.apply {
-
-                marketTransactionsList.layoutManager = gridLayoutManager
-                marketTransactionsList.hasFixedSize()
-                marketTransactionsList.adapter =
-                    marketTransactionsAdapter
-
-            }
-        }
+//        binding.apply {
+//
+//            val marketTransactionsAdapter =
+//                MarketTransactionsAdapter(
+//                    countyLevelQuestionnaire.marketTransactionItems,
+//                    this@CountyLevelFragment
+//                )
+//            val gridLayoutManager = GridLayoutManager(activity, 1)
+//
+//            lzMarketTransactions.apply {
+//
+//                marketTransactionsList.layoutManager = gridLayoutManager
+//                marketTransactionsList.hasFixedSize()
+//                marketTransactionsList.adapter =
+//                    marketTransactionsAdapter
+//
+//            }
+//        }
     }
 
     override fun onLabourExchangeTradeClicked(
@@ -4056,27 +4060,27 @@ class CountyLevelFragment : DialogFragment(),
             }
         currentMarketingTransactionItem.labourExchange = isTradeHappening
         countyLevelQuestionnaire.marketTransactionItems.set(
-            position, currentMarketingTransactionItem
+            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem), currentMarketingTransactionItem
         )
 
-        binding.apply {
-
-            val marketTransactionsAdapter =
-                MarketTransactionsAdapter(
-                    countyLevelQuestionnaire.marketTransactionItems,
-                    this@CountyLevelFragment
-                )
-            val gridLayoutManager = GridLayoutManager(activity, 1)
-
-            lzMarketTransactions.apply {
-
-                marketTransactionsList.layoutManager = gridLayoutManager
-                marketTransactionsList.hasFixedSize()
-                marketTransactionsList.adapter =
-                    marketTransactionsAdapter
-
-            }
-        }
+//        binding.apply {
+//
+//            val marketTransactionsAdapter =
+//                MarketTransactionsAdapter(
+//                    countyLevelQuestionnaire.marketTransactionItems,
+//                    this@CountyLevelFragment
+//                )
+//            val gridLayoutManager = GridLayoutManager(activity, 1)
+//
+//            lzMarketTransactions.apply {
+//
+//                marketTransactionsList.layoutManager = gridLayoutManager
+//                marketTransactionsList.hasFixedSize()
+//                marketTransactionsList.adapter =
+//                    marketTransactionsAdapter
+//
+//            }
+//        }
     }
 
 
@@ -4323,7 +4327,8 @@ class CountyLevelFragment : DialogFragment(),
                             context,
                             R.layout.lz_selection_item,
                             crops,
-                            this@CountyLevelFragment
+                            this@CountyLevelFragment,
+                            false
                         )
                     cropsList.adapter = adapter
                     cropsList.setSelection(position)
@@ -4733,7 +4738,8 @@ class CountyLevelFragment : DialogFragment(),
                             context,
                             R.layout.lz_selection_item,
                             crops,
-                            this@CountyLevelFragment
+                            this@CountyLevelFragment,
+                            false
                         )
                     cropsList.adapter = adapter
                 }
@@ -4863,7 +4869,8 @@ class CountyLevelFragment : DialogFragment(),
                             context,
                             R.layout.lz_selection_item,
                             crops,
-                            this@CountyLevelFragment
+                            this@CountyLevelFragment,
+                            true
                         )
                     cropsList.adapter = adapter
                 }
@@ -5300,7 +5307,6 @@ class CountyLevelFragment : DialogFragment(),
             cropProductionLayout.apply {
                 val updatedCropProductionResponses: MutableList<WgCropProductionResponseItem> =
                     ArrayList()
-                val newlySelectedCrops: MutableList<CropModel> = ArrayList()
                 val newlyAddedResponses: MutableList<WgCropProductionResponseItem> = ArrayList()
                 for (crop in selectedCrops) {
                     for (response in currentCropProductionResponses) {
@@ -5311,7 +5317,7 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
 
-                for (newCrop in newlySelectedCrops) {
+                for (newCrop in AppStore.getInstance().newlySelectedCrops) {
                     newlyAddedResponses.add(
                         WgCropProductionResponseItem(
                             newCrop,
@@ -5331,7 +5337,10 @@ class CountyLevelFragment : DialogFragment(),
                     )
                 }
 
+                AppStore.getInstance().newlySelectedCrops = ArrayList()
+
                 updatedCropProductionResponses.addAll(newlyAddedResponses)
+                countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses = updatedCropProductionResponses
                 return updatedCropProductionResponses
             }
         }
