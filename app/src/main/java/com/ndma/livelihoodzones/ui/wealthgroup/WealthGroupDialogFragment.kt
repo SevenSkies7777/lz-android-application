@@ -1655,6 +1655,7 @@ class WealthGroupDialogFragment : DialogFragment(),
             cropSelectionLayout.apply {
 
                 cropSelectionBackButton.setOnClickListener {
+                    populateFoodConsunptionPercentages()
                     wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
                     cropSelectionLayout.root.visibility = View.GONE
                 }
@@ -1663,7 +1664,11 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                     if (wealthGroupQuestionnaire.selectedCrops.isNotEmpty()) {
 
-                        prepareCropProduction()
+                        if (determineTheFurthestCoveredStep(wealthGroupQuestionnaire.questionnaireCoveredSteps) < Constants.WG_CROP_PRODUCTION_STEP) {
+                            prepareCropProduction()
+                        } else {
+                            populateCropProduction()
+                        }
 
                         wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_CROP_PRODUCTION_STEP
 
@@ -5410,6 +5415,73 @@ class WealthGroupDialogFragment : DialogFragment(),
                         )
                     cropsList.adapter = adapter
                 }
+            }
+        }
+    }
+
+    fun populateFoodConsunptionPercentages() {
+        binding.apply {
+            wgPercentFoodConsumptionIncome.apply {
+                val foodConsumptionResponses = wealthGroupQuestionnaire.foodConsumptionResponses
+                maizeOwnFarm.setText(foodConsumptionResponses.maizeAndPosho.ownFarm.toString())
+                maizeMarket.setText(foodConsumptionResponses.maizeAndPosho.marketFoodPurchase.toString())
+                maizeGift.setText(foodConsumptionResponses.maizeAndPosho.gifts.toString())
+
+                wheatOwnFarm.setText(foodConsumptionResponses.wheatOrBarley.ownFarm.toString())
+                wheatMarket.setText(foodConsumptionResponses.wheatOrBarley.marketFoodPurchase.toString())
+                wheatGift.setText(foodConsumptionResponses.wheatOrBarley.gifts.toString())
+
+                sorghumOwnFarm.setText(foodConsumptionResponses.sorghumOrMillet.ownFarm.toString())
+                sorghumMarket.setText(foodConsumptionResponses.sorghumOrMillet.marketFoodPurchase.toString())
+                sorghumGift.setText(foodConsumptionResponses.sorghumOrMillet.gifts.toString())
+
+                riceOwnFarm.setText(foodConsumptionResponses.rice.ownFarm.toString())
+                riceMarket.setText(foodConsumptionResponses.rice.marketFoodPurchase.toString())
+                riceGift.setText(foodConsumptionResponses.rice.gifts.toString())
+
+                beansOwnfarm.setText(foodConsumptionResponses.beans.ownFarm.toString())
+                beansMarket.setText(foodConsumptionResponses.beans.marketFoodPurchase.toString())
+                beansGift.setText(foodConsumptionResponses.beans.gifts.toString())
+
+                pulsesOwnFarm.setText(foodConsumptionResponses.pulses.ownFarm.toString())
+                pulsesMarket.setText(foodConsumptionResponses.pulses.marketFoodPurchase.toString())
+                pulsesGift.setText(foodConsumptionResponses.pulses.gifts.toString())
+
+                vegetablesOwnFarm.setText(foodConsumptionResponses.vegetables.ownFarm.toString())
+                vegetablesMarket.setText(foodConsumptionResponses.vegetables.marketFoodPurchase.toString())
+                vegetablesGift.setText(foodConsumptionResponses.vegetables.gifts.toString())
+
+                fruitsOwnFarm.setText(foodConsumptionResponses.fruits.ownFarm.toString())
+                fruitsMarket.setText(foodConsumptionResponses.fruits.marketFoodPurchase.toString())
+                fruitsGift.setText(foodConsumptionResponses.fruits.gifts.toString())
+
+                whiteRootsOwnFarm.setText(foodConsumptionResponses.whiteRoots.ownFarm.toString())
+                whiteRootsMarket.setText(foodConsumptionResponses.whiteRoots.marketFoodPurchase.toString())
+                whiteRootsGift.setText(foodConsumptionResponses.whiteRoots.gifts.toString())
+
+                meatOwnFarm.setText(foodConsumptionResponses.meat.ownFarm.toString())
+                meatMarket.setText(foodConsumptionResponses.meat.marketFoodPurchase.toString())
+                meatGift.setText(foodConsumptionResponses.meat.gifts.toString())
+
+                milkOwnFarm.setText(foodConsumptionResponses.milk.ownFarm.toString())
+                milkMarket.setText(foodConsumptionResponses.milk.marketFoodPurchase.toString())
+                milkGift.setText(foodConsumptionResponses.milk.gifts.toString())
+
+                fishOwnFarm.setText(foodConsumptionResponses.fish.ownFarm.toString())
+                fishOwnMarket.setText(foodConsumptionResponses.fish.marketFoodPurchase.toString())
+                fishGift.setText(foodConsumptionResponses.fish.gifts.toString())
+
+                eggsOwnFarm.setText(foodConsumptionResponses.eggs.ownFarm.toString())
+                eggsMarket.setText(foodConsumptionResponses.eggs.marketFoodPurchase.toString())
+                eggsGift.setText(foodConsumptionResponses.eggs.gifts.toString())
+
+                cookingFatOwnFarm.setText(foodConsumptionResponses.cookingFats.ownFarm.toString())
+                cookingFatMarket.setText(foodConsumptionResponses.cookingFats.marketFoodPurchase.toString())
+                cookingFatGift.setText(foodConsumptionResponses.cookingFats.gifts.toString())
+
+                spicesOwnFarm.setText(foodConsumptionResponses.spices.ownFarm.toString())
+                spicesMarket.setText(foodConsumptionResponses.spices.marketFoodPurchase.toString())
+                spicesGift.setText(foodConsumptionResponses.spices.gifts.toString())
             }
         }
     }
