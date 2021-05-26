@@ -16,6 +16,8 @@ class WealthGroupQuestionnaire(val uniqueId: String, var questionnaireName: Stri
     val questionnaireCoveredSteps: MutableList<Int> = ArrayList()
     lateinit var questionnaireGeography: QuestionnaireSessionLocation
     lateinit var incomeAndFoodSourceResponses: IncomeAndFoodSourceResponses
+    var cropContributionResponseItems: MutableList<WgCropContributionResponseItem> =
+        ArrayList()
     lateinit var foodConsumptionResponses: FoodConsumptionResponses
     lateinit var livestockPoultryOwnershipResponses: LivestockPoultryOwnershipResponses
     lateinit var livestockContributionResponses: LivestockContributionResponses

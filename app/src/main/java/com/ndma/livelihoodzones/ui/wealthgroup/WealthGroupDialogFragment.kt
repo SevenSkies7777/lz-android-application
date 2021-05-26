@@ -331,6 +331,7 @@ class WealthGroupDialogFragment : DialogFragment(),
     }
     fun resumeCropProduction() {
         binding.apply {
+            prepareCropProduction()
             cropProductionLayout.root.visibility = View.VISIBLE
         }
     }
@@ -1662,54 +1663,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                     if (wealthGroupQuestionnaire.selectedCrops.isNotEmpty()) {
 
-                        cropContributionResponseItems.clear()
-                        for (currentCrop in wealthGroupQuestionnaire.selectedCrops) {
-                            cropContributionResponseItems.add(
-                                WgCropContributionResponseItem(
-                                    currentCrop,
-                                    CropContributionResponseValue(0.0, false),
-                                    CropContributionResponseValue(0.0, false),
-                                    CropContributionResponseValue(0.0, false),
-                                    CropContributionResponseValue(0.0, false)
-                                )
-                            )
-                        }
-
-
-                        for (i in 0..cropContributionResponseItems.size - 1) {
-                            cropCashIncomeContributionRanks.add(
-                                RankResponseItem(
-                                    i + 1,
-                                    false
-                                )
-                            )
-                            cropFoodConsumptionContributionRanks.add(
-                                RankResponseItem(
-                                    i + 1,
-                                    false
-                                )
-                            )
-                        }
-
-                        cropProductionLayout.apply {
-
-
-                            val cropContributionAdapter =
-                                activity?.let { it1 ->
-                                    WgCropContributionAdapter(
-                                        cropContributionResponseItems,
-                                        this@WealthGroupDialogFragment,
-                                        it1,
-                                        cropCashIncomeContributionRanks,
-                                        cropFoodConsumptionContributionRanks
-                                    )
-                                }
-                            val gridLayoutManager = GridLayoutManager(activity, 1)
-                            cropResponseList.layoutManager = gridLayoutManager
-                            cropResponseList.hasFixedSize()
-                            cropResponseList.adapter =
-                                cropContributionAdapter
-                        }
+                        prepareCropProduction()
 
                         wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_CROP_PRODUCTION_STEP
 
@@ -1739,6 +1693,8 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 cropContributionNextButton.setOnClickListener {
                     if (!isAnyCropContributionValueEmpty() && !doesCropFoodConsumptionContributionIncomeHaveAPercentageError().hasError && !doesCropCashContributionIncomeHaveAPercentageError().hasError) {
+
+                        wealthGroupQuestionnaire.cropContributionResponseItems = cropContributionResponseItems
                         wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.LIVESTOCK_POULTRY_NUMBERS_STEP
 
                         if (!doesStepExist(Constants.LIVESTOCK_POULTRY_NUMBERS_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
@@ -1767,6 +1723,7 @@ class WealthGroupDialogFragment : DialogFragment(),
             /*Livestock and poultry navigation*/
             wgLivestockPoultryNumbers.apply {
                 livestockPoultryNumbertsBackButton.setOnClickListener {
+                    populateCropProduction()
                     cropProductionLayout.root.visibility = View.VISIBLE
                     wgLivestockPoultryNumbers.root.visibility = View.GONE
                 }
@@ -4227,7 +4184,8 @@ class WealthGroupDialogFragment : DialogFragment(),
         position: Int,
         cropContributionEditTypeEnum: CropContributionEditTypeEnum,
         selectedCashIncomeContributionRank: RankResponseItem?,
-        selectedFoodConsumptionContributionRank: RankResponseItem?
+        selectedFoodConsumptionContributionRank: RankResponseItem?,
+        isAnEditTextField: Boolean
     ) {
 
         if (cropContributionEditTypeEnum == CropContributionEditTypeEnum.CROP_CASH_INCOME_CONTRIBUTION_RANK) {
@@ -4243,21 +4201,23 @@ class WealthGroupDialogFragment : DialogFragment(),
         binding.apply {
             cropProductionLayout.apply {
 
-                val cropContributionAdapter =
-                    activity?.let { it1 ->
-                        WgCropContributionAdapter(
-                            cropContributionResponseItems,
-                            this@WealthGroupDialogFragment,
-                            it1,
-                            cropCashIncomeContributionRanks,
-                            cropFoodConsumptionContributionRanks
-                        )
-                    }
-                val gridLayoutManager = GridLayoutManager(activity, 1)
-                cropResponseList.layoutManager = gridLayoutManager
-                cropResponseList.hasFixedSize()
-                cropResponseList.adapter =
-                    cropContributionAdapter
+                if(!isAnEditTextField) {
+                    val cropContributionAdapter =
+                        activity?.let { it1 ->
+                            WgCropContributionAdapter(
+                                cropContributionResponseItems,
+                                this@WealthGroupDialogFragment,
+                                it1,
+                                cropCashIncomeContributionRanks,
+                                cropFoodConsumptionContributionRanks
+                            )
+                        }
+                    val gridLayoutManager = GridLayoutManager(activity, 1)
+                    cropResponseList.layoutManager = gridLayoutManager
+                    cropResponseList.hasFixedSize()
+                    cropResponseList.adapter =
+                        cropContributionAdapter
+                }
             }
         }
     }
@@ -5348,6 +5308,84 @@ class WealthGroupDialogFragment : DialogFragment(),
                 duckNumbers.setText(livestockPoultryOwnershipResponses.ducks.toString())
                 beeHiveNumbers.setText(livestockPoultryOwnershipResponses.beeHives.toString())
                 fishPondNumbers.setText(livestockPoultryOwnershipResponses.fishPonds.toString())
+            }
+        }
+    }
+
+    fun populateCropProduction() {
+        binding.apply {
+            cropProductionLayout.apply {
+                cropContributionResponseItems = wealthGroupQuestionnaire.cropContributionResponseItems
+                val cropContributionAdapter =
+                    activity?.let { it1 ->
+                        WgCropContributionAdapter(
+                            cropContributionResponseItems,
+                            this@WealthGroupDialogFragment,
+                            it1,
+                            cropCashIncomeContributionRanks,
+                            cropFoodConsumptionContributionRanks
+                        )
+                    }
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                cropResponseList.layoutManager = gridLayoutManager
+                cropResponseList.hasFixedSize()
+                cropResponseList.adapter =
+                    cropContributionAdapter
+            }
+        }
+    }
+
+    fun prepareCropProduction() {
+        binding.apply {
+            cropProductionLayout.apply {
+                cropContributionResponseItems.clear()
+                for (currentCrop in wealthGroupQuestionnaire.selectedCrops) {
+                    cropContributionResponseItems.add(
+                        WgCropContributionResponseItem(
+                            currentCrop,
+                            CropContributionResponseValue(0.0, false),
+                            CropContributionResponseValue(0.0, false),
+                            CropContributionResponseValue(0.0, false),
+                            CropContributionResponseValue(0.0, false)
+                        )
+                    )
+                }
+
+
+                for (i in 0..cropContributionResponseItems.size - 1) {
+                    cropCashIncomeContributionRanks.add(
+                        RankResponseItem(
+                            i + 1,
+                            false
+                        )
+                    )
+                    cropFoodConsumptionContributionRanks.add(
+                        RankResponseItem(
+                            i + 1,
+                            false
+                        )
+                    )
+                }
+
+                cropProductionLayout.apply {
+
+
+                    val cropContributionAdapter =
+                        activity?.let { it1 ->
+                            WgCropContributionAdapter(
+                                cropContributionResponseItems,
+                                this@WealthGroupDialogFragment,
+                                it1,
+                                cropCashIncomeContributionRanks,
+                                cropFoodConsumptionContributionRanks
+                            )
+                        }
+                    val gridLayoutManager = GridLayoutManager(activity, 1)
+                    cropResponseList.layoutManager = gridLayoutManager
+                    cropResponseList.hasFixedSize()
+                    cropResponseList.adapter =
+                        cropContributionAdapter
+                }
             }
         }
     }

@@ -44,7 +44,8 @@ class WgCropContributionAdapter(
             position: Int,
             cropContributionEditTypeEnum: CropContributionEditTypeEnum,
             selectedCashIncomeContributionRank: RankResponseItem?,
-            selectedFoodConsumptionContributionRank: RankResponseItem?
+            selectedFoodConsumptionContributionRank: RankResponseItem?,
+            isAnEditTextField: Boolean
         )
     }
 
@@ -113,7 +114,8 @@ class WgCropContributionAdapter(
                             position,
                             CropContributionEditTypeEnum.NORMAL_EDIT_TEXT,
                             null,
-                            null
+                            null,
+                            true
                         )
                     }
 
@@ -131,7 +133,8 @@ class WgCropContributionAdapter(
                             position,
                             CropContributionEditTypeEnum.NORMAL_EDIT_TEXT,
                             null,
-                            null
+                            null,
+                            true
                         )
                     }
 
@@ -221,7 +224,8 @@ class WgCropContributionAdapter(
                 currentCropResponseItemPosition,
                 CropContributionEditTypeEnum.CROP_CASH_INCOME_CONTRIBUTION_RANK,
                 selectedRankItem,
-                null
+                null,
+                false
             )
         }
 
@@ -235,7 +239,8 @@ class WgCropContributionAdapter(
                 currentCropResponseItemPosition,
                 CropContributionEditTypeEnum.CROP_FOOD_CONSUMPTION_CONTRIBUTION_RANK,
                 null,
-                selectedRankItem
+                selectedRankItem,
+                false
             )
         }
         (rankDialog as AlertDialog).dismiss()
