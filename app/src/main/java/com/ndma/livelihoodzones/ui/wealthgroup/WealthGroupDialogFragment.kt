@@ -70,7 +70,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     var questionnaireSessionLocation: QuestionnaireSessionLocation? = null
 
-    val livestockContributionResponses = LivestockContributionResponses()
+    var livestockContributionResponses = LivestockContributionResponses()
 
     private var subContyDialog: AlertDialog? = null
 
@@ -2381,6 +2381,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 inactivityWomen.addTextChangedListener(womentTextWatcher)
 
                 labourPatternsBackButton.setOnClickListener {
+                    populateLivestockAndPoultryContribution()
                     wgLivestockPoultryContribution.root.visibility = View.VISIBLE
                     wgLabourPatterns.root.visibility = View.GONE
                 }
@@ -5243,6 +5244,88 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 inactivityWomen.setText(labourPatternResponse.inactivity.women.toString())
                 inactivitymen.setText(labourPatternResponse.inactivity.men.toString())
+            }
+        }
+    }
+
+    fun populateLivestockAndPoultryContribution() {
+        binding.apply {
+            wgLivestockPoultryContribution.apply {
+                livestockContributionResponses = wealthGroupQuestionnaire.livestockContributionResponses
+
+                cattleCashPercentage.setText(livestockContributionResponses.cattle.incomePercentage.actualValue.toString())
+                cattleFoodPercentage.setText(livestockContributionResponses.cattle.consumptionPercentage.actualValue.toString())
+
+                dairyCattleCashPercentage.setText(livestockContributionResponses.dairyCattle.incomePercentage.actualValue.toString())
+                dairyCattleFoodPercentage.setText(livestockContributionResponses.dairyCattle.consumptionPercentage.actualValue.toString())
+
+                goatsIncomePercentage.setText(livestockContributionResponses.goats.incomePercentage.actualValue.toString())
+                goatsFoodPercentage.setText(livestockContributionResponses.goats.consumptionPercentage.actualValue.toString())
+
+                sheepCashPercentage.setText(livestockContributionResponses.sheep.incomePercentage.actualValue.toString())
+                sheepFoodPercentage.setText(livestockContributionResponses.sheep.consumptionPercentage.actualValue.toString())
+
+                donkeysCashPercentage.setText(livestockContributionResponses.donkeys.incomePercentage.actualValue.toString())
+                donkeysFoodPercentage.setText(livestockContributionResponses.donkeys.consumptionPercentage.actualValue.toString())
+
+                pigsCashPercentage.setText(livestockContributionResponses.pigs.incomePercentage.actualValue.toString())
+                pigsFoodPercentage.setText(livestockContributionResponses.pigs.consumptionPercentage.actualValue.toString())
+
+                chickenCashPaercentage.setText(livestockContributionResponses.chicken.incomePercentage.actualValue.toString())
+                chickenFoodPercentage.setText(livestockContributionResponses.chicken.consumptionPercentage.actualValue.toString())
+
+                improvedChickenCashPaercentage.setText(livestockContributionResponses.improvedChicken.incomePercentage.actualValue.toString())
+                improvedChickenFoodPercentage.setText(livestockContributionResponses.improvedChicken.consumptionPercentage.actualValue.toString())
+
+                camelsCashPercentage.setText(livestockContributionResponses.camels.incomePercentage.actualValue.toString())
+                camelsFoodPercentage.setText(livestockContributionResponses.camels.consumptionPercentage.actualValue.toString())
+
+                duckscashPercentage.setText(livestockContributionResponses.ducks.incomePercentage.actualValue.toString())
+                ducksFoodPercentage.setText(livestockContributionResponses.ducks.consumptionPercentage.actualValue.toString())
+
+                beeHivesCashPercentage.setText(livestockContributionResponses.beeHives.incomePercentage.actualValue.toString())
+                beeHivesFoodPercentage.setText(livestockContributionResponses.beeHives.consumptionPercentage.actualValue.toString())
+
+                fishPondscashPercentage.setText(livestockContributionResponses.fishPonds.incomePercentage.actualValue.toString())
+                fishPondsFoodPercentage.setText(livestockContributionResponses.fishPonds.consumptionPercentage.actualValue.toString())
+
+
+                /* Ranking */
+                cattleIncomeRank.text = livestockContributionResponses.cattle.incomeRank.actualValue.toInt().toString()
+                cattleFoodRank.text = livestockContributionResponses.cattle.consumptionRank.actualValue.toInt().toString()
+
+                dairyCattleIncomeRank.text = livestockContributionResponses.dairyCattle.incomeRank.actualValue.toInt().toString()
+                dairyCattleFoodRank.text = livestockContributionResponses.dairyCattle.consumptionRank.actualValue.toInt().toString()
+
+                goatsIncomeRank.text = livestockContributionResponses.goats.incomeRank.actualValue.toInt().toString()
+                goatsFoodRank.text = livestockContributionResponses.goats.consumptionRank.actualValue.toInt().toString()
+
+                sheepCashRank.text = livestockContributionResponses.sheep.incomeRank.actualValue.toInt().toString()
+                sheepFoodRank.text = livestockContributionResponses.sheep.consumptionRank.actualValue.toInt().toString()
+
+                donkeysCashRank.text = livestockContributionResponses.donkeys.incomeRank.actualValue.toInt().toString()
+                donkeysFoodRank.text = livestockContributionResponses.donkeys.consumptionRank.actualValue.toInt().toString()
+
+                camelsCashRank.text = livestockContributionResponses.camels.incomeRank.actualValue.toInt().toString()
+                camelsFoodRank.text = livestockContributionResponses.camels.consumptionRank.actualValue.toInt().toString()
+
+                pigscashRank.text = livestockContributionResponses.pigs.incomeRank.actualValue.toInt().toString()
+                pigsFoodrank.text = livestockContributionResponses.pigs.consumptionRank.actualValue.toInt().toString()
+
+                chickenCashRank.text = livestockContributionResponses.chicken.incomeRank.actualValue.toInt().toString()
+                chickenFoodRank.text = livestockContributionResponses.chicken.consumptionRank.actualValue.toInt().toString()
+
+                improvedChickenCashRank.text = livestockContributionResponses.improvedChicken.incomeRank.actualValue.toInt().toString()
+                improvedChickenFoodRank.text = livestockContributionResponses.improvedChicken.consumptionRank.actualValue.toInt().toString()
+
+                ducksCashRank.text = livestockContributionResponses.ducks.incomeRank.actualValue.toInt().toString()
+                ducksFoodRank.text = livestockContributionResponses.ducks.consumptionRank.actualValue.toInt().toString()
+
+                beeHivesCashRank.text = livestockContributionResponses.beeHives.incomeRank.actualValue.toInt().toString()
+                beeHivesFoodrank.text = livestockContributionResponses.beeHives.consumptionRank.actualValue.toInt().toString()
+
+                fishPondsCashRank.text = livestockContributionResponses.fishPonds.incomeRank.actualValue.toInt().toString()
+                fishPondsFoodRank.text = livestockContributionResponses.fishPonds.consumptionRank.actualValue.toInt().toString()
             }
         }
     }
