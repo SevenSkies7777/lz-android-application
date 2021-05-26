@@ -20,6 +20,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -126,7 +128,7 @@ class WealthGroupDialogFragment : DialogFragment(),
     val smallEnterpriseIncomeConstraintsResponses =
         SmallEnterpriseIncomeConstraintsResponses()
 
-    val fdgParticipantsModelList: MutableList<FgdParticipantModel> = ArrayList()
+    var fdgParticipantsModelList: MutableList<FgdParticipantModel> = ArrayList()
 
     companion object {
 
@@ -238,6 +240,17 @@ class WealthGroupDialogFragment : DialogFragment(),
     @RequiresApi(Build.VERSION_CODES.O)
     private fun defineViews() {
         defineNavigation()
+        binding.apply {
+            toolBar.apply {
+                topLeftBackIcon.setOnClickListener {
+                    if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.WG_COMPLETION_PAGE) {
+                        populateFgdParticipants()
+                        wgCompletionPage.root.visibility = View.GONE
+                        fdgParticipants.root.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
         if (isAResumeQuestionnaire) {
             binding.wgIncomeAndFoodSources.root.visibility = View.GONE
             determineTheResumeStep()
@@ -283,6 +296,18 @@ class WealthGroupDialogFragment : DialogFragment(),
                 resumeFgdParticipants()
             }
             Constants.WG_COMPLETION_PAGE -> {
+                wealthGroupQuestionnaire.lastQuestionnaireStep =
+                    Constants.WG_COMPLETION_PAGE
+
+                if (!doesStepExist(
+                        Constants.WG_COMPLETION_PAGE,
+                        wealthGroupQuestionnaire.questionnaireCoveredSteps
+                    )
+                ) {
+                    wealthGroupQuestionnaire.questionnaireCoveredSteps.add(
+                        Constants.WG_COMPLETION_PAGE
+                    )
+                }
                 resumeCompletionPage()
             }
         }
@@ -3925,6 +3950,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 fdgParticipantsBackButton.setOnClickListener {
+                    populateCopingStrategies()
                     fdgParticipants.root.visibility = View.GONE
                     wgCopingStrategies.root.visibility = View.VISIBLE
                 }
@@ -4862,6 +4888,9 @@ class WealthGroupDialogFragment : DialogFragment(),
         if (wealthGroupQuestionnaire.questionnaireStatus != QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
             saveQuestionnaireAsDraft()
         }
+        if (wealthGroupQuestionnaire.questionnaireStatus == QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
+            updateCompletedQuestionnaire()
+        }
     }
 
     override fun onStop() {
@@ -4869,9 +4898,56 @@ class WealthGroupDialogFragment : DialogFragment(),
         if (wealthGroupQuestionnaire.questionnaireStatus != QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
             saveQuestionnaireAsDraft()
         }
+        if (wealthGroupQuestionnaire.questionnaireStatus == QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
+            updateCompletedQuestionnaire()
+        }
     }
 
     fun saveQuestionnaireAsDraft() {
+        wealthGroupQuestionnaire.questionnaireStatus = QuestionnaireStatus.DRAFT_QUESTIONNAIRE
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.WEALTH_GROUP_LIST_OBJECT, null)
+        val questionnairesListObject: WealthGroupQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                WealthGroupQuestionnaireListObject::class.java
+            )
+
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == wealthGroupQuestionnaire.uniqueId
+        }
+
+        if (existingQuestionnaires.isEmpty()) {
+            questionnairesListObject.addQuestionnaire(wealthGroupQuestionnaire)
+        } else {
+            questionnairesListObject.updateQuestionnaire(questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0)), wealthGroupQuestionnaire)
+        }
+        editor?.remove(Constants.WEALTH_GROUP_LIST_OBJECT)
+
+        val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
+        editor?.putString(
+            Constants.WEALTH_GROUP_LIST_OBJECT,
+            newQuestionnaireObjectString
+        )
+        editor?.commit()
+
+        val intent = Intent()
+        intent.action = Constants.QUESTIONNAIRE_COMPLETED
+        activity?.applicationContext?.sendBroadcast(intent)
+    }
+
+
+    fun updateCompletedQuestionnaire() {
+        wealthGroupQuestionnaire.questionnaireStatus = QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
         val gson = Gson()
         val sharedPreferences: SharedPreferences? =
             context?.applicationContext?.getSharedPreferences(
@@ -4957,7 +5033,7 @@ class WealthGroupDialogFragment : DialogFragment(),
     fun populateFgdParticipants() {
         binding.apply {
             fdgParticipants.apply {
-
+                fdgParticipantsModelList = wealthGroupQuestionnaire.fdgParticipants
                 val fgdParticipantAdapter = activity?.let { it1 ->
                     FgdParticipantsAdapter(
                         wealthGroupQuestionnaire.fdgParticipants, this@WealthGroupDialogFragment,
@@ -4969,6 +5045,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                 participantsList.layoutManager = gridLayoutManager
                 participantsList.hasFixedSize()
                 participantsList.adapter = fgdParticipantAdapter
+
+                numberFgdParticipantsConfiguration.isGone = true
+                participantsListWrapper.isVisible = true
+            }
+        }
+    }
+
+
+    fun populateCopingStrategies() {
+        binding.apply {
+            wgCopingStrategies.apply {
+                val copingStrategiesResponses = wealthGroupQuestionnaire.copingStrategiesResponses
+                val consumptionBasedStrategies = copingStrategiesResponses.consumptionBasedStrategies
+                lessExpensiveFood.setText(consumptionBasedStrategies.lessExpensiveFood.toString())
+                reducedFoodQuantity.setText(consumptionBasedStrategies.reducedAdultFoodQuantity.toString())
+                borrowedFood.setText(consumptionBasedStrategies.borrowedFood.toString())
+                reducedNoMealsPerDay.setText(consumptionBasedStrategies.reducedMealsPerDay.toString())
+                reducedMealPortionSize.setText(consumptionBasedStrategies.reducedMealPortionSize.toString())
+
+                val livelihoodBasedStrategies = copingStrategiesResponses.livelihoodBasedStrategies
+                soldHouseHoldAssets.setText(livelihoodBasedStrategies.soldHouseHoldAssets.toString())
+                reducedNonFoodExpenses.setText(livelihoodBasedStrategies.reducedNonFoodExpense.toString())
+                soldProductiveAssets.setText(livelihoodBasedStrategies.soldProductiveAssets.toString())
+                spentSavings.setText(livelihoodBasedStrategies.spentSavings.toString())
+                borrowedMoneyFromLender.setText(livelihoodBasedStrategies.borrowedMoneyFromLender.toString())
+                soldHouseOrLand.setText(livelihoodBasedStrategies.soldHouseOrLand.toString())
+                withdrewSchoolChildren.setText(livelihoodBasedStrategies.withdrewSchoolChildren.toString())
+                soldFemaleAnimals.setText(livelihoodBasedStrategies.soldFemaleAnimals.toString())
+                begging.setText(livelihoodBasedStrategies.begging.toString())
+                soldMoreAnimals.setText(livelihoodBasedStrategies.soldMoreAnimals.toString())
+                soldMoreAnimals.setText(livelihoodBasedStrategies.soldMoreAnimals.toString())
             }
         }
     }

@@ -98,7 +98,8 @@ class FgdParticipantsAdapter(
             viewHolder.tvGender.text = if (currentParticipant.gender == 1) "Male" else "Female"
             viewHolder.tvDisability.text =
                 if (currentParticipant.disability == 1) "Disabled" else "Not disabled"
-            viewHolder.tvLevelOfEducation
+            viewHolder.tvLevelOfEducation.text = returnEducationLevelString(currentParticipant)
+            viewHolder.tvConsentToParticipate.text = if (currentParticipant.consentToParticipate == 1) "Consented" else  "Not consented"
         }
 
         viewHolder.tvGender.setOnClickListener {
@@ -382,7 +383,7 @@ class FgdParticipantsAdapter(
         )
     }
 
-    fun returnEducationLevelstring(currentParticipant: FgdParticipantModel): String {
+    fun returnEducationLevelString(currentParticipant: FgdParticipantModel): String {
         if (currentParticipant.levelOfEducation == 1) {
             return "Non-formal education"
         }

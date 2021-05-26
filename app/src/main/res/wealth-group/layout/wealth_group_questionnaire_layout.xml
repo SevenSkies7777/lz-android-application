@@ -11,7 +11,10 @@
         android:orientation="vertical">
 
         <!--        Top bar-->
-        <include layout="@layout/wealth_group_top_bar"/>
+        <include layout="@layout/wealth_group_top_bar"
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"/>
 
 
         <!--        B. Main Sources of Income and Food-->
