@@ -4281,6 +4281,15 @@ class WealthGroupDialogFragment : DialogFragment(),
         cropProductionResponseItems.set(position, responseItem)
     }
 
+    fun doesRankItemAlreadyExistInTheRankList(rankPosition: Int, rankList: MutableList<RankResponseItem>): Boolean {
+        for (currentRankItem in rankList) {
+            if (currentRankItem.rankPosition == rankPosition) {
+                return true
+            }
+        }
+        return false
+    }
+
     override fun onARankItemDiscarded(
         currentResponseItem: WgCropContributionResponseItem,
         position: Int,
@@ -4288,23 +4297,28 @@ class WealthGroupDialogFragment : DialogFragment(),
         rankNumberValue: Int
     ) {
         if (cropContributionEditTypeEnum == CropContributionEditTypeEnum.CROP_CASH_INCOME_CONTRIBUTION_RANK) {
-            cropCashIncomeContributionRanks.add(
-                RankResponseItem(
-                    rankNumberValue,
-                    false
+            if (!doesRankItemAlreadyExistInTheRankList(rankNumberValue, cropCashIncomeContributionRanks)) {
+                cropCashIncomeContributionRanks.add(
+                    RankResponseItem(
+                        rankNumberValue,
+                        false
+                    )
                 )
-            )
+            }
             currentResponseItem.cashIncomeRank.actualValue = 0.0
             currentResponseItem.cashIncomeRank.hasBeenSubmitted = false
         }
 
         if (cropContributionEditTypeEnum == CropContributionEditTypeEnum.CROP_FOOD_CONSUMPTION_CONTRIBUTION_RANK) {
-            cropFoodConsumptionContributionRanks.add(
-                RankResponseItem(
-                    rankNumberValue,
-                    false
+            if (!doesRankItemAlreadyExistInTheRankList(rankNumberValue, cropCashIncomeContributionRanks)) {
+                cropFoodConsumptionContributionRanks.add(
+                    RankResponseItem(
+                        rankNumberValue,
+                        false
+                    )
                 )
-            )
+            }
+
             currentResponseItem.foodConsumptionRank.actualValue = 0.0
             currentResponseItem.foodConsumptionRank.hasBeenSubmitted = false
         }
@@ -5776,19 +5790,44 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 cropCashIncomeContributionRanks.clear()
                 cropFoodConsumptionContributionRanks.clear()
+
+                val extractedCashRankItems: MutableList<RankResponseItem> = ArrayList()
+                val extractedFoodRankItems: MutableList<RankResponseItem> = ArrayList()
+                for (item in cropContributionResponseItems) {
+                    extractedCashRankItems.add(
+                        RankResponseItem(
+                            item.cashIncomeRank.actualValue.toInt(),
+                            false
+                        )
+                    )
+                }
+                for (item in cropContributionResponseItems) {
+                    extractedFoodRankItems.add(
+                        RankResponseItem(
+                            item.foodConsumptionRank.actualValue.toInt(),
+                            false
+                        )
+                    )
+                }
+
                 for (i in 0..cropContributionResponseItems.size - 1) {
-                    cropCashIncomeContributionRanks.add(
-                        RankResponseItem(
-                            i + 1,
-                            false
+                    if(!doesRankItemAlreadyExistInTheRankList(i + 1, extractedCashRankItems)) {
+                        cropCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                i + 1,
+                                false
+                            )
                         )
-                    )
-                    cropFoodConsumptionContributionRanks.add(
-                        RankResponseItem(
-                            i + 1,
-                            false
+                    }
+
+                    if(!doesRankItemAlreadyExistInTheRankList(i + 1, extractedFoodRankItems)) {
+                        cropFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                i + 1,
+                                false
+                            )
                         )
-                    )
+                    }
                 }
 
                 activity?.let { context ->

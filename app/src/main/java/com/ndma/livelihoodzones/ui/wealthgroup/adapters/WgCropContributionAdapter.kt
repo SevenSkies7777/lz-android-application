@@ -165,7 +165,7 @@ class WgCropContributionAdapter(
                         )
                     }
 
-                }, 2000)
+                }, 1000)
             }
 
             override fun beforeTextChanged(
