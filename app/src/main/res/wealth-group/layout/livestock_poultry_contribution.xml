@@ -1632,7 +1632,7 @@
             android:letterSpacing="0.01"
             android:lineHeight="20sp"
             android:lineSpacingExtra="6sp"
-            android:text="NEXT"
+            android:text="SAVE"
             android:textColor="#00569c"
             android:textSize="14sp"
             android:textStyle="normal" />
