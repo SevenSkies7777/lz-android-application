@@ -5341,6 +5341,7 @@ class CountyLevelFragment : DialogFragment(),
 
                 updatedCropProductionResponses.addAll(newlyAddedResponses)
                 countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses = updatedCropProductionResponses
+                cropProductionResponseItems = updatedCropProductionResponses
                 return updatedCropProductionResponses
             }
         }

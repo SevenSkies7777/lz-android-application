@@ -157,7 +157,7 @@ class CropProductionListAdapter(
                         position
                     )
 
-                }, 2500)
+                }, 1000)
             }
 
             override fun beforeTextChanged(
