@@ -39,11 +39,12 @@
         <TextView
             android:id="@+id/cashIncomeRank"
             android:text="Select rank..."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:fontFamily="@font/lato_regular"
             android:textSize="16sp"
             android:textColor="#000000"
+            android:gravity="center_vertical"
             android:layout_gravity="start|center_vertical"/>
 
     </LinearLayout>
@@ -88,11 +89,12 @@
         <TextView
             android:id="@+id/foodConsumptionRank"
             android:text="Select rank..."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:fontFamily="@font/lato_regular"
             android:textSize="16sp"
             android:textColor="#000000"
+            android:gravity="center_vertical"
             android:layout_gravity="start|center_vertical"/>
 
     </LinearLayout>

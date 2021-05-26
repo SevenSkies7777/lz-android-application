@@ -47,6 +47,13 @@ class WgCropContributionAdapter(
             selectedFoodConsumptionContributionRank: RankResponseItem?,
             isAnEditTextField: Boolean
         )
+
+        fun onARankItemDiscarded(
+            currentResponseItem: WgCropContributionResponseItem,
+            position: Int,
+            cropContributionEditTypeEnum: CropContributionEditTypeEnum,
+            rankNumberValue: Int
+        )
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -73,27 +80,47 @@ class WgCropContributionAdapter(
         val currentResponseItem = cropContributionResponses.get(position)
         viewHolder.cropName.text = currentResponseItem.cropModel.cropName
         viewHolder.cashIncomeRank.text =
-            if (currentResponseItem.cashIncomeRank.hasBeenSubmitted) currentResponseItem.cashIncomeRank.actualValue.toInt().toString() else "Select rank..."
+            if (currentResponseItem.cashIncomeRank.hasBeenSubmitted) currentResponseItem.cashIncomeRank.actualValue.toInt()
+                .toString() else "Select rank..."
         viewHolder.cashIncomeApproxPercentage.setText(if (currentResponseItem.cashIncomeApproxPercentage.hasBeenSubmitted) currentResponseItem.cashIncomeApproxPercentage.actualValue.toString() else "")
         viewHolder.foodConsumptionRank.text =
-            if (currentResponseItem.foodConsumptionRank.hasBeenSubmitted) currentResponseItem.foodConsumptionRank.actualValue.toInt().toString() else "Select rank..."
+            if (currentResponseItem.foodConsumptionRank.hasBeenSubmitted) currentResponseItem.foodConsumptionRank.actualValue.toInt()
+                .toString() else "Select rank..."
         viewHolder.foodApproxPercentage.setText(if (currentResponseItem.foodConsumptionApproxPercentage.hasBeenSubmitted) currentResponseItem.foodConsumptionApproxPercentage.actualValue.toString() else "")
         viewHolder.cashIncomeRank.setOnClickListener {
-            inflateRankModal(
-                cropCashIncomeContributionRanks,
-                CropContributionRankTypeEnum.CASH_INCOME_RANK,
-                currentResponseItem,
-                position
-            )
+            if (currentResponseItem.cashIncomeRank.actualValue != 0.0) {
+                wgCropContributionAdapterCallBack.onARankItemDiscarded(
+                    currentResponseItem,
+                    position,
+                    CropContributionEditTypeEnum.CROP_CASH_INCOME_CONTRIBUTION_RANK,
+                    currentResponseItem.cashIncomeRank.actualValue.toInt()
+                )
+            } else {
+                inflateRankModal(
+                    cropCashIncomeContributionRanks,
+                    CropContributionRankTypeEnum.CASH_INCOME_RANK,
+                    currentResponseItem,
+                    position
+                )
+            }
         }
 
         viewHolder.foodConsumptionRank.setOnClickListener {
-            inflateRankModal(
-                cropFoodConsumptionContributionRanks,
-                CropContributionRankTypeEnum.FOOD_CONSUMPTION_RANK,
-                currentResponseItem,
-                position
-            )
+            if (currentResponseItem.foodConsumptionRank.actualValue != 0.0) {
+                wgCropContributionAdapterCallBack.onARankItemDiscarded(
+                    currentResponseItem,
+                    position,
+                    CropContributionEditTypeEnum.CROP_FOOD_CONSUMPTION_CONTRIBUTION_RANK,
+                    currentResponseItem.foodConsumptionRank.actualValue.toInt()
+                )
+            } else {
+                inflateRankModal(
+                    cropFoodConsumptionContributionRanks,
+                    CropContributionRankTypeEnum.FOOD_CONSUMPTION_RANK,
+                    currentResponseItem,
+                    position
+                )
+            }
         }
 
         val textWatcher = object : TextWatcher {

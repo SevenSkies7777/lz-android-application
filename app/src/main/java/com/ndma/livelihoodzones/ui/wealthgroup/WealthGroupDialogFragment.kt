@@ -182,7 +182,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                         }
                     }!!
 
-                wealthGroupQuestionnaire.questionnaireGeography = this.questionnaireSessionLocation!!
+                wealthGroupQuestionnaire.questionnaireGeography =
+                    this.questionnaireSessionLocation!!
                 wealthGroupQuestionnaire.questionnaireStartDate = Util.getNow()
                 wealthGroupQuestionnaire.questionnaireName =
                     AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
@@ -258,7 +259,7 @@ class WealthGroupDialogFragment : DialogFragment(),
     }
 
     fun determineTheResumeStep() {
-        when(determineTheFurthestCoveredStep(wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+        when (determineTheFurthestCoveredStep(wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
             Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP -> {
                 resumeMainIncomeandFoodSources()
             }
@@ -318,63 +319,75 @@ class WealthGroupDialogFragment : DialogFragment(),
             wgIncomeAndFoodSources.root.visibility = View.VISIBLE
         }
     }
+
     fun resumeFoodConsumptionSourcePercentages() {
         binding.apply {
             wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
         }
     }
+
     fun resumeCropSelection() {
         binding.apply {
             prepareCropSelectionListView()
             cropSelectionLayout.root.visibility = View.VISIBLE
         }
     }
+
     fun resumeCropProduction() {
         binding.apply {
             prepareCropProduction()
             cropProductionLayout.root.visibility = View.VISIBLE
         }
     }
+
     fun resumeLivestockPoultryNumbers() {
         binding.apply {
             wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
         }
     }
+
     fun resumeLivestockPoultryContributions() {
         binding.apply {
             wgLivestockPoultryContribution.root.visibility = View.VISIBLE
         }
     }
+
     fun resumeLabourPatterns() {
         binding.apply {
             wgLabourPatterns.root.visibility = View.VISIBLE
         }
     }
+
     fun resumeExpenditurePatterns() {
         binding.apply {
             wgExpenditurePatterns.root.visibility = View.VISIBLE
         }
     }
+
     fun resumeMigrationPatterns() {
         binding.apply {
             wgMigrationPatterns.root.visibility = View.VISIBLE
         }
     }
+
     fun resumeConstraints() {
         binding.apply {
             wgConstraints.root.visibility = View.VISIBLE
         }
     }
+
     fun resumeCopingStrategies() {
         binding.apply {
             wgCopingStrategies.root.visibility = View.VISIBLE
         }
     }
+
     fun resumeFgdParticipants() {
         binding.apply {
             fdgParticipants.root.visibility = View.VISIBLE
         }
     }
+
     fun resumeCompletionPage() {
         binding.apply {
             wgCompletionPage.root.visibility = View.VISIBLE
@@ -398,8 +411,13 @@ class WealthGroupDialogFragment : DialogFragment(),
     @RequiresApi(Build.VERSION_CODES.O)
     private fun defineNavigation() {
         if (!isAResumeQuestionnaire) {
-            wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP
-            if (!doesStepExist(Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+            wealthGroupQuestionnaire.lastQuestionnaireStep =
+                Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP
+            if (!doesStepExist(
+                    Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP,
+                    wealthGroupQuestionnaire.questionnaireCoveredSteps
+                )
+            ) {
                 wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP)
             }
         }
@@ -764,9 +782,14 @@ class WealthGroupDialogFragment : DialogFragment(),
                         wealthGroupQuestionnaire.incomeAndFoodSourceResponses =
                             incomeAndFoodSourceResponses
 
-                        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP
+                        wealthGroupQuestionnaire.lastQuestionnaireStep =
+                            Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP
 
-                        if (!doesStepExist(Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                        if (!doesStepExist(
+                                Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP,
+                                wealthGroupQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
                             wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP)
                         }
 
@@ -1630,9 +1653,14 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                         prepareCropSelectionListView()
 
-                        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_CROP_SELECTION_STEP
+                        wealthGroupQuestionnaire.lastQuestionnaireStep =
+                            Constants.WG_CROP_SELECTION_STEP
 
-                        if (!doesStepExist(Constants.WG_CROP_SELECTION_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                        if (!doesStepExist(
+                                Constants.WG_CROP_SELECTION_STEP,
+                                wealthGroupQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
                             wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.WG_CROP_SELECTION_STEP)
                         }
 
@@ -1667,15 +1695,22 @@ class WealthGroupDialogFragment : DialogFragment(),
                         if (determineTheFurthestCoveredStep(wealthGroupQuestionnaire.questionnaireCoveredSteps) < Constants.WG_CROP_PRODUCTION_STEP) {
                             prepareCropProduction()
                         } else {
-                            updateCropProductionPage(processUpdatedCropProductionresponses(
-                                wealthGroupQuestionnaire.selectedCrops,
-                                wealthGroupQuestionnaire.cropContributionResponseItems
-                            ))
+                            updateCropProductionPage(
+                                processUpdatedCropProductionresponses(
+                                    wealthGroupQuestionnaire.selectedCrops,
+                                    wealthGroupQuestionnaire.cropContributionResponseItems
+                                )
+                            )
                         }
 
-                        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_CROP_PRODUCTION_STEP
+                        wealthGroupQuestionnaire.lastQuestionnaireStep =
+                            Constants.WG_CROP_PRODUCTION_STEP
 
-                        if (!doesStepExist(Constants.WG_CROP_PRODUCTION_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                        if (!doesStepExist(
+                                Constants.WG_CROP_PRODUCTION_STEP,
+                                wealthGroupQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
                             wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.WG_CROP_PRODUCTION_STEP)
                         }
 
@@ -1703,10 +1738,16 @@ class WealthGroupDialogFragment : DialogFragment(),
                 cropContributionNextButton.setOnClickListener {
                     if (!isAnyCropContributionValueEmpty() && !doesCropFoodConsumptionContributionIncomeHaveAPercentageError().hasError && !doesCropCashContributionIncomeHaveAPercentageError().hasError) {
 
-                        wealthGroupQuestionnaire.cropContributionResponseItems = cropContributionResponseItems
-                        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.LIVESTOCK_POULTRY_NUMBERS_STEP
+                        wealthGroupQuestionnaire.cropContributionResponseItems =
+                            cropContributionResponseItems
+                        wealthGroupQuestionnaire.lastQuestionnaireStep =
+                            Constants.LIVESTOCK_POULTRY_NUMBERS_STEP
 
-                        if (!doesStepExist(Constants.LIVESTOCK_POULTRY_NUMBERS_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                        if (!doesStepExist(
+                                Constants.LIVESTOCK_POULTRY_NUMBERS_STEP,
+                                wealthGroupQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
                             wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.LIVESTOCK_POULTRY_NUMBERS_STEP)
                         }
                         cropProductionLayout.root.visibility = View.GONE
@@ -1838,8 +1879,13 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                         wealthGroupQuestionnaire.livestockPoultryOwnershipResponses =
                             livestockPoultryOwnershipResponses
-                        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.LIVESTOCK_POULTRY_CONTRIBUTION_STEP
-                        if (!doesStepExist(Constants.LIVESTOCK_POULTRY_CONTRIBUTION_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                        wealthGroupQuestionnaire.lastQuestionnaireStep =
+                            Constants.LIVESTOCK_POULTRY_CONTRIBUTION_STEP
+                        if (!doesStepExist(
+                                Constants.LIVESTOCK_POULTRY_CONTRIBUTION_STEP,
+                                wealthGroupQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
                             wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.LIVESTOCK_POULTRY_CONTRIBUTION_STEP)
                         }
                         wgLivestockPoultryContribution.root.visibility = View.VISIBLE
@@ -2180,9 +2226,14 @@ class WealthGroupDialogFragment : DialogFragment(),
                             wealthGroupQuestionnaire.livestockContributionResponses =
                                 livestockContributionResponses
 
-                            wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.LABOUR_PATTERNS_STEP
+                            wealthGroupQuestionnaire.lastQuestionnaireStep =
+                                Constants.LABOUR_PATTERNS_STEP
 
-                            if (!doesStepExist(Constants.LABOUR_PATTERNS_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                            if (!doesStepExist(
+                                    Constants.LABOUR_PATTERNS_STEP,
+                                    wealthGroupQuestionnaire.questionnaireCoveredSteps
+                                )
+                            ) {
                                 wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.LABOUR_PATTERNS_STEP)
                             }
 
@@ -2206,7 +2257,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                             val menTotalEntry =
                                 returnZeroStringIfEmpty(ownFarmmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     livestockHusbandrymen.text.toString()
-                                ).toDouble() + returnZeroStringIfEmpty(transportServicesMen.text.toString()).toDouble() + returnZeroStringIfEmpty(wagedLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                ).toDouble() + returnZeroStringIfEmpty(transportServicesMen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    wagedLabourmen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(
                                     lowSkilledNonFarmmen.text.toString()
                                 ).toDouble() + returnZeroStringIfEmpty(skilledLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     formalEmploymentmen.text.toString()
@@ -2281,7 +2334,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                             val womenTotalEntry =
                                 returnZeroStringIfEmpty(ownFarmWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     livestockHusbandryWomen.text.toString()
-                                ).toDouble() + returnZeroStringIfEmpty(transportServicesWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(wagedLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                ).toDouble() + returnZeroStringIfEmpty(transportServicesWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                    wagedLabourWomen.text.toString()
+                                ).toDouble() + returnZeroStringIfEmpty(
                                     lowSkilledNonFarmWomen.text.toString()
                                 ).toDouble() + returnZeroStringIfEmpty(skilledLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     formalEmploymentWomen.text.toString()
@@ -2515,7 +2570,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                         val menTotalEntry =
                             returnZeroStringIfEmpty(ownFarmmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 livestockHusbandrymen.text.toString()
-                            ).toDouble() + returnZeroStringIfEmpty(transportServicesMen.text.toString()).toDouble() + returnZeroStringIfEmpty(wagedLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            ).toDouble() + returnZeroStringIfEmpty(transportServicesMen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                wagedLabourmen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(
                                 lowSkilledNonFarmmen.text.toString()
                             ).toDouble() + returnZeroStringIfEmpty(skilledLabourmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 formalEmploymentmen.text.toString()
@@ -2533,7 +2590,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                         val womenTotalEntry =
                             returnZeroStringIfEmpty(ownFarmWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 livestockHusbandryWomen.text.toString()
-                            ).toDouble() + returnZeroStringIfEmpty(transportServicesWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(wagedLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                            ).toDouble() + returnZeroStringIfEmpty(transportServicesWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
+                                wagedLabourWomen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(
                                 lowSkilledNonFarmWomen.text.toString()
                             ).toDouble() + returnZeroStringIfEmpty(skilledLabourWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 formalEmploymentWomen.text.toString()
@@ -2630,9 +2689,14 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                             wealthGroupQuestionnaire.labourPatternResponses = labourPatternResponse
 
-                            wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.EXPENDITURE_PATTERNS_STEP
+                            wealthGroupQuestionnaire.lastQuestionnaireStep =
+                                Constants.EXPENDITURE_PATTERNS_STEP
 
-                            if (!doesStepExist(Constants.EXPENDITURE_PATTERNS_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                            if (!doesStepExist(
+                                    Constants.EXPENDITURE_PATTERNS_STEP,
+                                    wealthGroupQuestionnaire.questionnaireCoveredSteps
+                                )
+                            ) {
                                 wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.EXPENDITURE_PATTERNS_STEP)
                             }
 
@@ -3060,9 +3124,14 @@ class WealthGroupDialogFragment : DialogFragment(),
                             wealthGroupQuestionnaire.expenditurePatternsResponses =
                                 expenditurePatternsResponses
 
-                            wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.MIGRATION_PATTERNS_STEP
+                            wealthGroupQuestionnaire.lastQuestionnaireStep =
+                                Constants.MIGRATION_PATTERNS_STEP
 
-                            if (!doesStepExist(Constants.MIGRATION_PATTERNS_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                            if (!doesStepExist(
+                                    Constants.MIGRATION_PATTERNS_STEP,
+                                    wealthGroupQuestionnaire.questionnaireCoveredSteps
+                                )
+                            ) {
                                 wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.MIGRATION_PATTERNS_STEP)
                             }
 
@@ -3225,9 +3294,14 @@ class WealthGroupDialogFragment : DialogFragment(),
                             wealthGroupQuestionnaire.migrationPatternResponses =
                                 migrationPatternResponses
 
-                            wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.CONSTRAINTS_STEP
+                            wealthGroupQuestionnaire.lastQuestionnaireStep =
+                                Constants.CONSTRAINTS_STEP
 
-                            if (!doesStepExist(Constants.CONSTRAINTS_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                            if (!doesStepExist(
+                                    Constants.CONSTRAINTS_STEP,
+                                    wealthGroupQuestionnaire.questionnaireCoveredSteps
+                                )
+                            ) {
                                 wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.CONSTRAINTS_STEP)
                             }
 
@@ -3752,9 +3826,14 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                         wealthGroupQuestionnaire.constraintsResponses = constraintResponses
 
-                        wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.COPING_STRATEGIES_STEP
+                        wealthGroupQuestionnaire.lastQuestionnaireStep =
+                            Constants.COPING_STRATEGIES_STEP
 
-                        if (!doesStepExist(Constants.COPING_STRATEGIES_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                        if (!doesStepExist(
+                                Constants.COPING_STRATEGIES_STEP,
+                                wealthGroupQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
                             wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.COPING_STRATEGIES_STEP)
                         }
 
@@ -3867,9 +3946,14 @@ class WealthGroupDialogFragment : DialogFragment(),
                             wealthGroupQuestionnaire.copingStrategiesResponses =
                                 copingStrategiesResponses
 
-                            wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.FGD_PARTICIPANTS_STEP
+                            wealthGroupQuestionnaire.lastQuestionnaireStep =
+                                Constants.FGD_PARTICIPANTS_STEP
 
-                            if (!doesStepExist(Constants.FGD_PARTICIPANTS_STEP, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                            if (!doesStepExist(
+                                    Constants.FGD_PARTICIPANTS_STEP,
+                                    wealthGroupQuestionnaire.questionnaireCoveredSteps
+                                )
+                            ) {
                                 wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.FGD_PARTICIPANTS_STEP)
                             }
 
@@ -3933,7 +4017,11 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                     wealthGroupQuestionnaire.lastQuestionnaireStep = Constants.WG_COMPLETION_PAGE
 
-                    if (!doesStepExist(Constants.WG_COMPLETION_PAGE, wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
+                    if (!doesStepExist(
+                            Constants.WG_COMPLETION_PAGE,
+                            wealthGroupQuestionnaire.questionnaireCoveredSteps
+                        )
+                    ) {
                         wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.WG_COMPLETION_PAGE)
                     }
 
@@ -3973,7 +4061,11 @@ class WealthGroupDialogFragment : DialogFragment(),
                     if (existingQuestionnaires.isEmpty()) {
                         questionnairesListObject.addQuestionnaire(wealthGroupQuestionnaire)
                     } else {
-                        questionnairesListObject.updateQuestionnaire(questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0)), wealthGroupQuestionnaire)
+                        questionnairesListObject.updateQuestionnaire(
+                            questionnairesListObject.questionnaireList.indexOf(
+                                existingQuestionnaires.get(0)
+                            ), wealthGroupQuestionnaire
+                        )
                     }
                     editor?.remove(Constants.WEALTH_GROUP_LIST_OBJECT)
 
@@ -4189,6 +4281,56 @@ class WealthGroupDialogFragment : DialogFragment(),
         cropProductionResponseItems.set(position, responseItem)
     }
 
+    override fun onARankItemDiscarded(
+        currentResponseItem: WgCropContributionResponseItem,
+        position: Int,
+        cropContributionEditTypeEnum: CropContributionEditTypeEnum,
+        rankNumberValue: Int
+    ) {
+        if (cropContributionEditTypeEnum == CropContributionEditTypeEnum.CROP_CASH_INCOME_CONTRIBUTION_RANK) {
+            cropCashIncomeContributionRanks.add(
+                RankResponseItem(
+                    rankNumberValue,
+                    false
+                )
+            )
+            currentResponseItem.cashIncomeRank.actualValue = 0.0
+            currentResponseItem.cashIncomeRank.hasBeenSubmitted = false
+        }
+
+        if (cropContributionEditTypeEnum == CropContributionEditTypeEnum.CROP_FOOD_CONSUMPTION_CONTRIBUTION_RANK) {
+            cropFoodConsumptionContributionRanks.add(
+                RankResponseItem(
+                    rankNumberValue,
+                    false
+                )
+            )
+            currentResponseItem.foodConsumptionRank.actualValue = 0.0
+            currentResponseItem.foodConsumptionRank.hasBeenSubmitted = false
+        }
+
+        cropContributionResponseItems.set(position,currentResponseItem)
+        binding.apply {
+            cropProductionLayout.apply {
+                val cropContributionAdapter =
+                    activity?.let { it1 ->
+                        WgCropContributionAdapter(
+                            cropContributionResponseItems,
+                            this@WealthGroupDialogFragment,
+                            it1,
+                            cropCashIncomeContributionRanks,
+                            cropFoodConsumptionContributionRanks
+                        )
+                    }
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                cropResponseList.layoutManager = gridLayoutManager
+                cropResponseList.hasFixedSize()
+                cropResponseList.adapter =
+                    cropContributionAdapter
+            }
+        }
+    }
+
     override fun onAnyFieldEdited(
         currentResponseItem: WgCropContributionResponseItem,
         position: Int,
@@ -4211,7 +4353,7 @@ class WealthGroupDialogFragment : DialogFragment(),
         binding.apply {
             cropProductionLayout.apply {
 
-                if(!isAnEditTextField) {
+                if (!isAnEditTextField) {
                     val cropContributionAdapter =
                         activity?.let { it1 ->
                             WgCropContributionAdapter(
@@ -4404,7 +4546,8 @@ class WealthGroupDialogFragment : DialogFragment(),
             if (livestockContributionRankTypeEnum == LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION) {
                 livestockContributionResponses.improvedChicken.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
-                livestockContributionResponses.improvedChicken.consumptionRank.hasBeenSubmitted = true
+                livestockContributionResponses.improvedChicken.consumptionRank.hasBeenSubmitted =
+                    true
                 livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
                 binding.wgLivestockPoultryContribution.improvedChickenFoodRank.text =
                     selectedRankItem.rankPosition.toString()
@@ -4905,7 +5048,11 @@ class WealthGroupDialogFragment : DialogFragment(),
         if (existingQuestionnaires.isEmpty()) {
             questionnairesListObject.addQuestionnaire(wealthGroupQuestionnaire)
         } else {
-            questionnairesListObject.updateQuestionnaire(questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0)), wealthGroupQuestionnaire)
+            questionnairesListObject.updateQuestionnaire(
+                questionnairesListObject.questionnaireList.indexOf(
+                    existingQuestionnaires.get(0)
+                ), wealthGroupQuestionnaire
+            )
         }
         editor?.remove(Constants.WEALTH_GROUP_LIST_OBJECT)
 
@@ -4923,7 +5070,8 @@ class WealthGroupDialogFragment : DialogFragment(),
 
 
     fun updateCompletedQuestionnaire() {
-        wealthGroupQuestionnaire.questionnaireStatus = QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
+        wealthGroupQuestionnaire.questionnaireStatus =
+            QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
         val gson = Gson()
         val sharedPreferences: SharedPreferences? =
             context?.applicationContext?.getSharedPreferences(
@@ -4948,7 +5096,11 @@ class WealthGroupDialogFragment : DialogFragment(),
         if (existingQuestionnaires.isEmpty()) {
             questionnairesListObject.addQuestionnaire(wealthGroupQuestionnaire)
         } else {
-            questionnairesListObject.updateQuestionnaire(questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0)), wealthGroupQuestionnaire)
+            questionnairesListObject.updateQuestionnaire(
+                questionnairesListObject.questionnaireList.indexOf(
+                    existingQuestionnaires.get(0)
+                ), wealthGroupQuestionnaire
+            )
         }
         editor?.remove(Constants.WEALTH_GROUP_LIST_OBJECT)
 
@@ -4985,7 +5137,8 @@ class WealthGroupDialogFragment : DialogFragment(),
     fun populateMainSourcesIncomeAndfood() {
         binding.apply {
             wgIncomeAndFoodSources.apply {
-                val incomeAndFoodSourceResponses = wealthGroupQuestionnaire.incomeAndFoodSourceResponses
+                val incomeAndFoodSourceResponses =
+                    wealthGroupQuestionnaire.incomeAndFoodSourceResponses
                 livestockProduction.setText(incomeAndFoodSourceResponses.livestockProduction.toString())
                 pastureFodderProduction.setText(incomeAndFoodSourceResponses.livestockProduction.toString())
                 poultryProduction.setText(incomeAndFoodSourceResponses.poultryProduction.toString())
@@ -5034,7 +5187,8 @@ class WealthGroupDialogFragment : DialogFragment(),
         binding.apply {
             wgCopingStrategies.apply {
                 val copingStrategiesResponses = wealthGroupQuestionnaire.copingStrategiesResponses
-                val consumptionBasedStrategies = copingStrategiesResponses.consumptionBasedStrategies
+                val consumptionBasedStrategies =
+                    copingStrategiesResponses.consumptionBasedStrategies
                 lessExpensiveFood.setText(consumptionBasedStrategies.lessExpensiveFood.toString())
                 reducedFoodQuantity.setText(consumptionBasedStrategies.reducedAdultFoodQuantity.toString())
                 borrowedFood.setText(consumptionBasedStrategies.borrowedFood.toString())
@@ -5062,54 +5216,92 @@ class WealthGroupDialogFragment : DialogFragment(),
         binding.apply {
             wgConstraints.apply {
                 constraintResponses = wealthGroupQuestionnaire.constraintsResponses
-                wagedLabourIncomeConstraintsResponses = constraintResponses.wagedLabourIncomeConstraintsResponses
-                cropProductionIncomeConstraintsResponses = constraintResponses.cropProductionIncomeConstraintsResponses
-                livestockProductionIncomeConstraintsResponses = constraintResponses.livestockProductionIncomeConstraintsResponses
-                fishingIncomeConstraintsResponses = constraintResponses.fishingIncomeConstraintsResponses
-                naturalResourceIncomeConstraintsResponses = constraintResponses.naturalResourceIncomeConstraintsResponses
-                smallEnterpriseIncomeConstraintsResponses = constraintResponses.smallEnterpriseIncomeConstraintsResponses
+                wagedLabourIncomeConstraintsResponses =
+                    constraintResponses.wagedLabourIncomeConstraintsResponses
+                cropProductionIncomeConstraintsResponses =
+                    constraintResponses.cropProductionIncomeConstraintsResponses
+                livestockProductionIncomeConstraintsResponses =
+                    constraintResponses.livestockProductionIncomeConstraintsResponses
+                fishingIncomeConstraintsResponses =
+                    constraintResponses.fishingIncomeConstraintsResponses
+                naturalResourceIncomeConstraintsResponses =
+                    constraintResponses.naturalResourceIncomeConstraintsResponses
+                smallEnterpriseIncomeConstraintsResponses =
+                    constraintResponses.smallEnterpriseIncomeConstraintsResponses
 
-                labourLowEducation.text = wagedLabourIncomeConstraintsResponses.lowEducation.toString()
+                labourLowEducation.text =
+                    wagedLabourIncomeConstraintsResponses.lowEducation.toString()
                 labourPoorHealth.text = wagedLabourIncomeConstraintsResponses.poorHealth.toString()
                 labourFewJobs.text = wagedLabourIncomeConstraintsResponses.fewJobs.toString()
-                labourFarmTime.text = wagedLabourIncomeConstraintsResponses.tooMuchFarmTime.toString()
-                labourLowWageRates.text = wagedLabourIncomeConstraintsResponses.lowAverageWageRates.toString()
+                labourFarmTime.text =
+                    wagedLabourIncomeConstraintsResponses.tooMuchFarmTime.toString()
+                labourLowWageRates.text =
+                    wagedLabourIncomeConstraintsResponses.lowAverageWageRates.toString()
 
-                consumptionHoldings.text = cropProductionIncomeConstraintsResponses.smallLandHoldings.toString()
-                consumptionLackOfCredit.text = cropProductionIncomeConstraintsResponses.lackOfCredit.toString()
-                consumptionHighInputs.text = cropProductionIncomeConstraintsResponses.highInputCost.toString()
-                consumptionLowFertility.text = cropProductionIncomeConstraintsResponses.lowLandFertility.toString()
-                consumptionUnreliableWater.text = cropProductionIncomeConstraintsResponses.lackOfReliableWater.toString()
-                consumptionLowTechnicalSkills.text = cropProductionIncomeConstraintsResponses.lowTechnicalSkills.toString()
-                consumptionLowSeedQuality.text = cropProductionIncomeConstraintsResponses.lowQualitySeed.toString()
-                consumptionMarketAccess.text = cropProductionIncomeConstraintsResponses.lackOfMarketAccess.toString()
-                consumptionCropPests.text = cropProductionIncomeConstraintsResponses.endemicCropPests.toString()
+                consumptionHoldings.text =
+                    cropProductionIncomeConstraintsResponses.smallLandHoldings.toString()
+                consumptionLackOfCredit.text =
+                    cropProductionIncomeConstraintsResponses.lackOfCredit.toString()
+                consumptionHighInputs.text =
+                    cropProductionIncomeConstraintsResponses.highInputCost.toString()
+                consumptionLowFertility.text =
+                    cropProductionIncomeConstraintsResponses.lowLandFertility.toString()
+                consumptionUnreliableWater.text =
+                    cropProductionIncomeConstraintsResponses.lackOfReliableWater.toString()
+                consumptionLowTechnicalSkills.text =
+                    cropProductionIncomeConstraintsResponses.lowTechnicalSkills.toString()
+                consumptionLowSeedQuality.text =
+                    cropProductionIncomeConstraintsResponses.lowQualitySeed.toString()
+                consumptionMarketAccess.text =
+                    cropProductionIncomeConstraintsResponses.lackOfMarketAccess.toString()
+                consumptionCropPests.text =
+                    cropProductionIncomeConstraintsResponses.endemicCropPests.toString()
 
-                livestockProductionPasture.text = livestockProductionIncomeConstraintsResponses.lackOfPasture.toString()
-                livestockProductionDrinkingWater.text = livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater.toString()
-                livestockProductionLowYieldingAnimal.text = livestockProductionIncomeConstraintsResponses.lowYieldingAnimal.toString()
-                livestockProductionVeterinaryDrugs.text = livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs.toString()
-                livestockProductionPests.text = livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases.toString()
-                livestockProductionMarket.text = livestockProductionIncomeConstraintsResponses.lackofMarket.toString()
-                livestockProductionInsecurity.text = livestockProductionIncomeConstraintsResponses.insecurity.toString()
+                livestockProductionPasture.text =
+                    livestockProductionIncomeConstraintsResponses.lackOfPasture.toString()
+                livestockProductionDrinkingWater.text =
+                    livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater.toString()
+                livestockProductionLowYieldingAnimal.text =
+                    livestockProductionIncomeConstraintsResponses.lowYieldingAnimal.toString()
+                livestockProductionVeterinaryDrugs.text =
+                    livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs.toString()
+                livestockProductionPests.text =
+                    livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases.toString()
+                livestockProductionMarket.text =
+                    livestockProductionIncomeConstraintsResponses.lackofMarket.toString()
+                livestockProductionInsecurity.text =
+                    livestockProductionIncomeConstraintsResponses.insecurity.toString()
 
                 fishingLowStocks.text = fishingIncomeConstraintsResponses.lowFishStocks.toString()
                 fishingPoorMarket.text = fishingIncomeConstraintsResponses.poorMarket.toString()
-                fishingLackOfEquipment.text = fishingIncomeConstraintsResponses.lackOfEquipment.toString()
-                fishingCompetition.text = fishingIncomeConstraintsResponses.extremeCompetition.toString()
-                fishingLackOfExpertise.text = fishingIncomeConstraintsResponses.lackOfExpertise.toString()
-                fishingFishingRights.text = fishingIncomeConstraintsResponses.fishingRightsRestrictions.toString()
+                fishingLackOfEquipment.text =
+                    fishingIncomeConstraintsResponses.lackOfEquipment.toString()
+                fishingCompetition.text =
+                    fishingIncomeConstraintsResponses.extremeCompetition.toString()
+                fishingLackOfExpertise.text =
+                    fishingIncomeConstraintsResponses.lackOfExpertise.toString()
+                fishingFishingRights.text =
+                    fishingIncomeConstraintsResponses.fishingRightsRestrictions.toString()
 
-                resourceDecline.text = naturalResourceIncomeConstraintsResponses.decliningNaturalResources.toString()
-                resourcePopulationPressure.text = naturalResourceIncomeConstraintsResponses.populationPressure.toString()
-                resourceRights.text = naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights.toString()
-                resourceLowValue.text = naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts.toString()
+                resourceDecline.text =
+                    naturalResourceIncomeConstraintsResponses.decliningNaturalResources.toString()
+                resourcePopulationPressure.text =
+                    naturalResourceIncomeConstraintsResponses.populationPressure.toString()
+                resourceRights.text =
+                    naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights.toString()
+                resourceLowValue.text =
+                    naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts.toString()
 
-                enterpriseLackOfCapital.text = smallEnterpriseIncomeConstraintsResponses.lackOfCapital.toString()
-                enterpriseRedTape.text = smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape.toString()
-                enterpriseTaxes.text = smallEnterpriseIncomeConstraintsResponses.tooManyTaxes.toString()
-                enterpriseMarketAccess.text = smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket.toString()
-                enterpriseExpertise.text = smallEnterpriseIncomeConstraintsResponses.lackOfExpertise.toString()
+                enterpriseLackOfCapital.text =
+                    smallEnterpriseIncomeConstraintsResponses.lackOfCapital.toString()
+                enterpriseRedTape.text =
+                    smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape.toString()
+                enterpriseTaxes.text =
+                    smallEnterpriseIncomeConstraintsResponses.tooManyTaxes.toString()
+                enterpriseMarketAccess.text =
+                    smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket.toString()
+                enterpriseExpertise.text =
+                    smallEnterpriseIncomeConstraintsResponses.lackOfExpertise.toString()
             }
         }
     }
@@ -5133,7 +5325,8 @@ class WealthGroupDialogFragment : DialogFragment(),
     fun populateExpenditurePatterns() {
         binding.apply {
             wgExpenditurePatterns.apply {
-                val expenditurePatternsResponses = wealthGroupQuestionnaire.expenditurePatternsResponses
+                val expenditurePatternsResponses =
+                    wealthGroupQuestionnaire.expenditurePatternsResponses
                 maizeAndMaizeFlour.setText(expenditurePatternsResponses.maizeAndMaizeFlour.toString())
                 otherCereals.setText(expenditurePatternsResponses.otherCereals.toString())
                 pulses.setText(expenditurePatternsResponses.pulses.toString())
@@ -5223,7 +5416,8 @@ class WealthGroupDialogFragment : DialogFragment(),
     fun populateLivestockAndPoultryContribution() {
         binding.apply {
             wgLivestockPoultryContribution.apply {
-                livestockContributionResponses = wealthGroupQuestionnaire.livestockContributionResponses
+                livestockContributionResponses =
+                    wealthGroupQuestionnaire.livestockContributionResponses
 
                 cattleCashPercentage.setText(livestockContributionResponses.cattle.incomePercentage.actualValue.toString())
                 cattleFoodPercentage.setText(livestockContributionResponses.cattle.consumptionPercentage.actualValue.toString())
@@ -5263,41 +5457,81 @@ class WealthGroupDialogFragment : DialogFragment(),
 
 
                 /* Ranking */
-                cattleIncomeRank.text = livestockContributionResponses.cattle.incomeRank.actualValue.toInt().toString()
-                cattleFoodRank.text = livestockContributionResponses.cattle.consumptionRank.actualValue.toInt().toString()
+                cattleIncomeRank.text =
+                    livestockContributionResponses.cattle.incomeRank.actualValue.toInt().toString()
+                cattleFoodRank.text =
+                    livestockContributionResponses.cattle.consumptionRank.actualValue.toInt()
+                        .toString()
 
-                dairyCattleIncomeRank.text = livestockContributionResponses.dairyCattle.incomeRank.actualValue.toInt().toString()
-                dairyCattleFoodRank.text = livestockContributionResponses.dairyCattle.consumptionRank.actualValue.toInt().toString()
+                dairyCattleIncomeRank.text =
+                    livestockContributionResponses.dairyCattle.incomeRank.actualValue.toInt()
+                        .toString()
+                dairyCattleFoodRank.text =
+                    livestockContributionResponses.dairyCattle.consumptionRank.actualValue.toInt()
+                        .toString()
 
-                goatsIncomeRank.text = livestockContributionResponses.goats.incomeRank.actualValue.toInt().toString()
-                goatsFoodRank.text = livestockContributionResponses.goats.consumptionRank.actualValue.toInt().toString()
+                goatsIncomeRank.text =
+                    livestockContributionResponses.goats.incomeRank.actualValue.toInt().toString()
+                goatsFoodRank.text =
+                    livestockContributionResponses.goats.consumptionRank.actualValue.toInt()
+                        .toString()
 
-                sheepCashRank.text = livestockContributionResponses.sheep.incomeRank.actualValue.toInt().toString()
-                sheepFoodRank.text = livestockContributionResponses.sheep.consumptionRank.actualValue.toInt().toString()
+                sheepCashRank.text =
+                    livestockContributionResponses.sheep.incomeRank.actualValue.toInt().toString()
+                sheepFoodRank.text =
+                    livestockContributionResponses.sheep.consumptionRank.actualValue.toInt()
+                        .toString()
 
-                donkeysCashRank.text = livestockContributionResponses.donkeys.incomeRank.actualValue.toInt().toString()
-                donkeysFoodRank.text = livestockContributionResponses.donkeys.consumptionRank.actualValue.toInt().toString()
+                donkeysCashRank.text =
+                    livestockContributionResponses.donkeys.incomeRank.actualValue.toInt().toString()
+                donkeysFoodRank.text =
+                    livestockContributionResponses.donkeys.consumptionRank.actualValue.toInt()
+                        .toString()
 
-                camelsCashRank.text = livestockContributionResponses.camels.incomeRank.actualValue.toInt().toString()
-                camelsFoodRank.text = livestockContributionResponses.camels.consumptionRank.actualValue.toInt().toString()
+                camelsCashRank.text =
+                    livestockContributionResponses.camels.incomeRank.actualValue.toInt().toString()
+                camelsFoodRank.text =
+                    livestockContributionResponses.camels.consumptionRank.actualValue.toInt()
+                        .toString()
 
-                pigscashRank.text = livestockContributionResponses.pigs.incomeRank.actualValue.toInt().toString()
-                pigsFoodrank.text = livestockContributionResponses.pigs.consumptionRank.actualValue.toInt().toString()
+                pigscashRank.text =
+                    livestockContributionResponses.pigs.incomeRank.actualValue.toInt().toString()
+                pigsFoodrank.text =
+                    livestockContributionResponses.pigs.consumptionRank.actualValue.toInt()
+                        .toString()
 
-                chickenCashRank.text = livestockContributionResponses.chicken.incomeRank.actualValue.toInt().toString()
-                chickenFoodRank.text = livestockContributionResponses.chicken.consumptionRank.actualValue.toInt().toString()
+                chickenCashRank.text =
+                    livestockContributionResponses.chicken.incomeRank.actualValue.toInt().toString()
+                chickenFoodRank.text =
+                    livestockContributionResponses.chicken.consumptionRank.actualValue.toInt()
+                        .toString()
 
-                improvedChickenCashRank.text = livestockContributionResponses.improvedChicken.incomeRank.actualValue.toInt().toString()
-                improvedChickenFoodRank.text = livestockContributionResponses.improvedChicken.consumptionRank.actualValue.toInt().toString()
+                improvedChickenCashRank.text =
+                    livestockContributionResponses.improvedChicken.incomeRank.actualValue.toInt()
+                        .toString()
+                improvedChickenFoodRank.text =
+                    livestockContributionResponses.improvedChicken.consumptionRank.actualValue.toInt()
+                        .toString()
 
-                ducksCashRank.text = livestockContributionResponses.ducks.incomeRank.actualValue.toInt().toString()
-                ducksFoodRank.text = livestockContributionResponses.ducks.consumptionRank.actualValue.toInt().toString()
+                ducksCashRank.text =
+                    livestockContributionResponses.ducks.incomeRank.actualValue.toInt().toString()
+                ducksFoodRank.text =
+                    livestockContributionResponses.ducks.consumptionRank.actualValue.toInt()
+                        .toString()
 
-                beeHivesCashRank.text = livestockContributionResponses.beeHives.incomeRank.actualValue.toInt().toString()
-                beeHivesFoodrank.text = livestockContributionResponses.beeHives.consumptionRank.actualValue.toInt().toString()
+                beeHivesCashRank.text =
+                    livestockContributionResponses.beeHives.incomeRank.actualValue.toInt()
+                        .toString()
+                beeHivesFoodrank.text =
+                    livestockContributionResponses.beeHives.consumptionRank.actualValue.toInt()
+                        .toString()
 
-                fishPondsCashRank.text = livestockContributionResponses.fishPonds.incomeRank.actualValue.toInt().toString()
-                fishPondsFoodRank.text = livestockContributionResponses.fishPonds.consumptionRank.actualValue.toInt().toString()
+                fishPondsCashRank.text =
+                    livestockContributionResponses.fishPonds.incomeRank.actualValue.toInt()
+                        .toString()
+                fishPondsFoodRank.text =
+                    livestockContributionResponses.fishPonds.consumptionRank.actualValue.toInt()
+                        .toString()
             }
         }
     }
@@ -5305,7 +5539,8 @@ class WealthGroupDialogFragment : DialogFragment(),
     fun populateLivestockAndPoultryOwnership() {
         binding.apply {
             wgLivestockPoultryNumbers.apply {
-                val livestockPoultryOwnershipResponses = wealthGroupQuestionnaire.livestockPoultryOwnershipResponses
+                val livestockPoultryOwnershipResponses =
+                    wealthGroupQuestionnaire.livestockPoultryOwnershipResponses
 
                 cattleNumbers.setText(livestockPoultryOwnershipResponses.cattle.toString())
                 dairyCattleNumbers.setText(livestockPoultryOwnershipResponses.dairyCattle.toString())
@@ -5326,26 +5561,8 @@ class WealthGroupDialogFragment : DialogFragment(),
     fun populateCropProduction() {
         binding.apply {
             cropProductionLayout.apply {
-                cropContributionResponseItems = wealthGroupQuestionnaire.cropContributionResponseItems
-                for (i in 0..cropContributionResponseItems.size - 1) {
-                    cropCashIncomeContributionRanks.clear()
-                    cropFoodConsumptionContributionRanks.clear()
-                    for (i in 0..cropContributionResponseItems.size - 1) {
-                        cropCashIncomeContributionRanks.add(
-                            RankResponseItem(
-                                i + 1,
-                                false
-                            )
-                        )
-                        cropFoodConsumptionContributionRanks.add(
-                            RankResponseItem(
-                                i + 1,
-                                false
-                            )
-                        )
-                    }
-
-                }
+                cropContributionResponseItems =
+                    wealthGroupQuestionnaire.cropContributionResponseItems
                 val cropContributionAdapter =
                     activity?.let { it1 ->
                         WgCropContributionAdapter(
@@ -5545,7 +5762,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                 AppStore.getInstance().newlySelectedCrops = ArrayList()
 
                 updatedCropProductionResponses.addAll(newlyAddedResponses)
-                wealthGroupQuestionnaire.cropContributionResponseItems = updatedCropProductionResponses
+                wealthGroupQuestionnaire.cropContributionResponseItems =
+                    updatedCropProductionResponses
                 cropContributionResponseItems = updatedCropProductionResponses
                 return updatedCropProductionResponses
             }
