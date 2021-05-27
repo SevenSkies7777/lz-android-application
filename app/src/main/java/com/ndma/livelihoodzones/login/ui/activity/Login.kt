@@ -76,8 +76,10 @@ class Login : AppCompatActivity() {
                         }
                         val loginResponseModel: LoginResponseModel? = resource.data
                         val responsesJson: String = gson.toJson(loginResponseModel?.geography)
+                        val sessionDetailsString: String = gson.toJson(loginResponseModel)
                         editor?.putString(Constants.GEOGRAPHY_OBJECT, responsesJson)
                         editor?.putString(Constants.EXISTING_ACCOUNT, "Existing account")
+                        editor?.putString(Constants.SESSION_DETAILS, sessionDetailsString)
                         editor?.commit()
 
                         val i = Intent(this@Login, MainActivity::class.java)

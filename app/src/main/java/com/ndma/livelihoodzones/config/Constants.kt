@@ -21,6 +21,8 @@ object Constants {
 
     val EXISTING_ACCOUNT = "EXISTING_ACCOUNT"
 
+    val SESSION_DETAILS = "SESSION_DETAILS"
+
     /* County level steps */
     const val LIVELIHOOD_ZONE_CHARACTERISTICS_STEP = 1
     const val ZONE_SUBLOCATION_ASSIGNMENT_STEP = 2

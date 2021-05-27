@@ -38,6 +38,7 @@ import com.ndma.livelihoodzones.config.Constants.WEALTH_GROUP_CHARACTERISTICS_ST
 import com.ndma.livelihoodzones.config.Constants.ZONE_SUBLOCATION_ASSIGNMENT_STEP
 import com.ndma.livelihoodzones.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.ndma.livelihoodzones.login.model.GeographyObject
+import com.ndma.livelihoodzones.login.model.LoginResponseModel
 import com.ndma.livelihoodzones.ui.county.adapters.*
 import com.ndma.livelihoodzones.ui.county.model.*
 import com.ndma.livelihoodzones.ui.county.responses.*
@@ -123,6 +124,8 @@ class CountyLevelFragment : DialogFragment(),
     val subLocationZoneAssignmentModelList: MutableList<SubLocationZoneAssignmentModel> =
         ArrayList()
 
+    var storedSessionDetails: LoginResponseModel? = null
+
 
     companion object {
 
@@ -151,6 +154,27 @@ class CountyLevelFragment : DialogFragment(),
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+        val geographyString =
+            sharedPreferences?.getString(Constants.GEOGRAPHY_OBJECT, null)
+        val storedSessionDetailsString = sharedPreferences?.getString(Constants.SESSION_DETAILS, null)
+        storedSessionDetails = gson.fromJson(
+            storedSessionDetailsString,
+            LoginResponseModel::class.java
+        )
+
+        geographyObject =
+            gson.fromJson(
+                geographyString,
+                GeographyObject::class.java
+            )
         arguments?.let {
             questionnaireId = it.getString(QUESTIONNAIRE_ID)
 
@@ -194,6 +218,10 @@ class CountyLevelFragment : DialogFragment(),
         defineViews()
 
         if (isAResumeQuestionnaire) {
+            storedSessionDetails?.let {
+                AppStore.getInstance().sessionDetails = it
+            }
+
             binding.countyConfiguration.root.visibility = View.GONE
             determineTheResumeStep()
         }
@@ -201,8 +229,11 @@ class CountyLevelFragment : DialogFragment(),
     }
 
     fun determineTheFurthestCoveredStep(steps: MutableList<Int>): Int {
-        steps.sort()
-        return steps.last()
+        if (steps.isNotEmpty()) {
+            steps.sort()
+            return steps.last()
+        }
+        return 2
     }
 
     private fun determineTheResumeStep() {
@@ -391,20 +422,6 @@ class CountyLevelFragment : DialogFragment(),
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun defineViews() {
-        val gson = Gson()
-        val sharedPreferences: SharedPreferences? =
-            context?.applicationContext?.getSharedPreferences(
-                "MyPref",
-                Context.MODE_PRIVATE
-            )
-        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
-        val geographyString =
-            sharedPreferences?.getString(Constants.GEOGRAPHY_OBJECT, null)
-        geographyObject =
-            gson.fromJson(
-                geographyString,
-                GeographyObject::class.java
-            )
         crops = geographyObject.crops
         ethnicGroups = geographyObject.ethnicGroups
         defineNavigation()

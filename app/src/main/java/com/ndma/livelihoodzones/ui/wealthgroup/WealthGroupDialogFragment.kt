@@ -34,6 +34,7 @@ import com.ndma.livelihoodzones.appStore.model.WealthGroupQuestionnaireListObjec
 import com.ndma.livelihoodzones.config.Constants
 import com.ndma.livelihoodzones.databinding.WealthGroupQuestionnaireLayoutBinding
 import com.ndma.livelihoodzones.login.model.GeographyObject
+import com.ndma.livelihoodzones.login.model.LoginResponseModel
 import com.ndma.livelihoodzones.ui.county.model.CropModel
 import com.ndma.livelihoodzones.ui.county.model.QuestionnaireSessionLocation
 import com.ndma.livelihoodzones.ui.home.HomeViewModel
@@ -63,6 +64,8 @@ class WealthGroupDialogFragment : DialogFragment(),
     var questionnaireId: String? = null
 
     var questionnaireName: String? = null
+
+    var storedSessionDetails: LoginResponseModel? = null
 
     var isAResumeQuestionnaire: Boolean = false
 
@@ -176,6 +179,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                 geographyString,
                 GeographyObject::class.java
             )
+        val storedSessionDetailsString =
+            sharedPreferences?.getString(Constants.SESSION_DETAILS, null)
+        storedSessionDetails = gson.fromJson(
+            storedSessionDetailsString,
+            LoginResponseModel::class.java
+        )
 
         arguments?.let {
             questionnaireId = it.getString(QUESTIONNAIRE_ID)
@@ -255,6 +264,10 @@ class WealthGroupDialogFragment : DialogFragment(),
             }
         }
         if (isAResumeQuestionnaire) {
+
+            storedSessionDetails?.let {
+                AppStore.getInstance().sessionDetails = it
+            }
             binding.wgIncomeAndFoodSources.root.visibility = View.GONE
             determineTheResumeStep()
         }
@@ -406,8 +419,11 @@ class WealthGroupDialogFragment : DialogFragment(),
     }
 
     fun determineTheFurthestCoveredStep(steps: MutableList<Int>): Int {
-        steps.sort()
-        return steps.last()
+        if (steps.isNotEmpty()) {
+            steps.sort()
+            return steps.last()
+        }
+        return 2
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -4283,7 +4299,10 @@ class WealthGroupDialogFragment : DialogFragment(),
         cropProductionResponseItems.set(position, responseItem)
     }
 
-    fun doesRankItemAlreadyExistInTheRankList(rankPosition: Int, rankList: MutableList<RankResponseItem>): Boolean {
+    fun doesRankItemAlreadyExistInTheRankList(
+        rankPosition: Int,
+        rankList: MutableList<RankResponseItem>
+    ): Boolean {
         for (currentRankItem in rankList) {
             if (currentRankItem.rankPosition == rankPosition) {
                 return true
@@ -4299,7 +4318,11 @@ class WealthGroupDialogFragment : DialogFragment(),
         rankNumberValue: Int
     ) {
         if (cropContributionEditTypeEnum == CropContributionEditTypeEnum.CROP_CASH_INCOME_CONTRIBUTION_RANK) {
-            if (!doesRankItemAlreadyExistInTheRankList(rankNumberValue, cropCashIncomeContributionRanks)) {
+            if (!doesRankItemAlreadyExistInTheRankList(
+                    rankNumberValue,
+                    cropCashIncomeContributionRanks
+                )
+            ) {
                 cropCashIncomeContributionRanks.add(
                     RankResponseItem(
                         rankNumberValue,
@@ -4312,7 +4335,11 @@ class WealthGroupDialogFragment : DialogFragment(),
         }
 
         if (cropContributionEditTypeEnum == CropContributionEditTypeEnum.CROP_FOOD_CONSUMPTION_CONTRIBUTION_RANK) {
-            if (!doesRankItemAlreadyExistInTheRankList(rankNumberValue, cropCashIncomeContributionRanks)) {
+            if (!doesRankItemAlreadyExistInTheRankList(
+                    rankNumberValue,
+                    cropCashIncomeContributionRanks
+                )
+            ) {
                 cropFoodConsumptionContributionRanks.add(
                     RankResponseItem(
                         rankNumberValue,
@@ -4325,7 +4352,7 @@ class WealthGroupDialogFragment : DialogFragment(),
             currentResponseItem.foodConsumptionRank.hasBeenSubmitted = false
         }
 
-        cropContributionResponseItems.set(position,currentResponseItem)
+        cropContributionResponseItems.set(position, currentResponseItem)
         binding.apply {
             cropProductionLayout.apply {
                 val cropContributionAdapter =
@@ -5813,7 +5840,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 for (i in 0..cropContributionResponseItems.size - 1) {
-                    if(!doesRankItemAlreadyExistInTheRankList(i + 1, extractedCashRankItems)) {
+                    if (!doesRankItemAlreadyExistInTheRankList(i + 1, extractedCashRankItems)) {
                         cropCashIncomeContributionRanks.add(
                             RankResponseItem(
                                 i + 1,
@@ -5822,7 +5849,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                         )
                     }
 
-                    if(!doesRankItemAlreadyExistInTheRankList(i + 1, extractedFoodRankItems)) {
+                    if (!doesRankItemAlreadyExistInTheRankList(i + 1, extractedFoodRankItems)) {
                         cropFoodConsumptionContributionRanks.add(
                             RankResponseItem(
                                 i + 1,
