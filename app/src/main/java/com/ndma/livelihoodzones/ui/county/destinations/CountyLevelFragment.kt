@@ -446,7 +446,7 @@ class CountyLevelFragment : DialogFragment(),
 
                             countyLevelQuestionnaire.selectedLivelihoodZone?.let {
                                 countyLevelQuestionnaire.questionnaireName =
-                                    AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
+                                    geographyObject.county.countyName + " " +
                                             it.livelihoodZoneName + " Livelihood Zone questionnaire"
                             }
 
@@ -2902,7 +2902,7 @@ class CountyLevelFragment : DialogFragment(),
             countyLevelQuestionnaire.longitude = longitude
             countyLevelQuestionnaire.questionnaireStartDate = Util.getNow()
             countyLevelQuestionnaire.questionnaireName =
-                AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
+                geographyObject.county.countyName + " " +
                         countyLevelQuestionnaire.selectedLivelihoodZone?.livelihoodZoneName + " Livelihood Zone questionnaire"
 
 
@@ -4694,10 +4694,10 @@ class CountyLevelFragment : DialogFragment(),
         binding.apply {
             lzSubLocationAssignment.apply {
 
-                countyLevelQuestionnaire.selectedLivelihoodZone?.let {
+                countyLevelQuestionnaire.selectedLivelihoodZone?.let { selectedLivelihoodZone ->
                     val subLocationLivelihoodZoneAssignment =
-                        geographyObject.sublocationsLivelihoodZoneAssignments.filter {
-                            it.livelihoodZoneId == it.livelihoodZoneId
+                        geographyObject.sublocationsLivelihoodZoneAssignments.filter { sublocationLivelihoodZoneAssignmentModel ->
+                            selectedLivelihoodZone.livelihoodZoneId == sublocationLivelihoodZoneAssignmentModel.livelihoodZoneId
                         }
 
                     subLocationZoneAssignmentModelList.clear()

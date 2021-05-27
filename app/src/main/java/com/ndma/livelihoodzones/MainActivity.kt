@@ -338,7 +338,7 @@ class MainActivity : AppCompatActivity(), SubCountyAdapter.SubCountyAdapterCallB
         }
 
         livelihoodZoneDropDown.setOnClickListener {
-            inflateLivelihoodZoneModal(geographyObject.livelihoodZones)
+            inflateLivelihoodZoneModal(geographyObject.currentUserAssignedCountyLivelihoodZones)
         }
 
         submitButton.setOnClickListener {

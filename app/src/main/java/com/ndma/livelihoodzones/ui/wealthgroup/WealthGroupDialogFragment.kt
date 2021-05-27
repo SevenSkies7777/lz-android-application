@@ -161,6 +161,22 @@ class WealthGroupDialogFragment : DialogFragment(),
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+        val geographyString =
+            sharedPreferences?.getString(Constants.GEOGRAPHY_OBJECT, null)
+        geographyObject =
+            gson.fromJson(
+                geographyString,
+                GeographyObject::class.java
+            )
+
         arguments?.let {
             questionnaireId = it.getString(QUESTIONNAIRE_ID)
 
@@ -186,8 +202,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                     this.questionnaireSessionLocation!!
                 wealthGroupQuestionnaire.questionnaireStartDate = Util.getNow()
                 wealthGroupQuestionnaire.questionnaireName =
-                    AppStore.getInstance().sessionDetails?.geography?.county?.countyName + " " +
-                            wealthGroupQuestionnaire.questionnaireGeography.selectedLivelihoodZone?.livelihoodZoneName + " Livelihood Zone " + wealthGroupQuestionnaire.questionnaireGeography.selectedWealthGroup?.wealthGroupName + " questionnaire"
+                    geographyObject.county.countyName + " " +
+                            wealthGroupQuestionnaire.questionnaireGeography.selectedLivelihoodZone?.livelihoodZoneName + " Livelihood Zone " + wealthGroupQuestionnaire.questionnaireGeography.selectedWealthGroup?.wealthGroupName + " wealth group " + questionnaireSessionLocation!!.selectedWgQuestionnaireType?.wgQuestionnaireTypeDescription
             } else {
                 wealthGroupQuestionnaire = questionnaireId?.let { it1 ->
                     retrieveASpecificWealthGroupQuestionnaire(
@@ -210,20 +226,6 @@ class WealthGroupDialogFragment : DialogFragment(),
             ViewModelProvider(this).get(HomeViewModel::class.java)
         binding = WealthGroupQuestionnaireLayoutBinding.inflate(inflater, container, false)
 
-        val gson = Gson()
-        val sharedPreferences: SharedPreferences? =
-            context?.applicationContext?.getSharedPreferences(
-                "MyPref",
-                Context.MODE_PRIVATE
-            )
-        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
-        val geographyString =
-            sharedPreferences?.getString(Constants.GEOGRAPHY_OBJECT, null)
-        geographyObject =
-            gson.fromJson(
-                geographyString,
-                GeographyObject::class.java
-            )
         crops = geographyObject.crops
         defineViews()
         return binding.root
