@@ -1953,195 +1953,603 @@ class WealthGroupDialogFragment : DialogFragment(),
                     )
                 }
                 cattleIncomeRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockCashIncomeContributionRanks,
-                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
-                        WgLivestockTypesEnum.CATTLE
-                    )
+                    if(livestockContributionResponses.cattle.incomeRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.cattle.incomeRank.actualValue.toInt(),
+                                livestockCashIncomeContributionRanks
+                            )
+                        ) {
+                            livestockCashIncomeContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.cattle.incomeRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        cattleIncomeRank.text = "Select rank..."
+                        livestockContributionResponses.cattle.incomeRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockCashIncomeContributionRanks,
+                            LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                            WgLivestockTypesEnum.CATTLE
+                        )
+                    }
                 }
 
                 cattleFoodRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockFoodConsumptionContributionRanks,
-                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
-                        WgLivestockTypesEnum.CATTLE
-                    )
+                    if(livestockContributionResponses.cattle.consumptionRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.cattle.consumptionRank.actualValue.toInt(),
+                                livestockFoodConsumptionContributionRanks
+                            )
+                        ) {
+                            livestockFoodConsumptionContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.cattle.consumptionRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        cattleFoodRank.text = "Select rank..."
+                        livestockContributionResponses.cattle.consumptionRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockFoodConsumptionContributionRanks,
+                            LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                            WgLivestockTypesEnum.CATTLE
+                        )
+                    }
                 }
 
                 dairyCattleIncomeRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockCashIncomeContributionRanks,
-                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
-                        WgLivestockTypesEnum.DAIRY_CATTLE
-                    )
+                    if(livestockContributionResponses.dairyCattle.incomeRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.dairyCattle.incomeRank.actualValue.toInt(),
+                                livestockCashIncomeContributionRanks
+                            )
+                        ) {
+                            livestockCashIncomeContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.dairyCattle.incomeRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        dairyCattleIncomeRank.text = "Select rank..."
+                        livestockContributionResponses.dairyCattle.incomeRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockCashIncomeContributionRanks,
+                            LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                            WgLivestockTypesEnum.DAIRY_CATTLE
+                        )
+                    }
                 }
 
                 dairyCattleFoodRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockFoodConsumptionContributionRanks,
-                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
-                        WgLivestockTypesEnum.DAIRY_CATTLE
-                    )
+                    if(livestockContributionResponses.dairyCattle.consumptionRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.dairyCattle.consumptionRank.actualValue.toInt(),
+                                livestockFoodConsumptionContributionRanks
+                            )
+                        ) {
+                            livestockFoodConsumptionContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.dairyCattle.consumptionRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        dairyCattleFoodRank.text = "Select rank..."
+                        livestockContributionResponses.dairyCattle.consumptionRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockFoodConsumptionContributionRanks,
+                            LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                            WgLivestockTypesEnum.DAIRY_CATTLE
+                        )
+                    }
                 }
 
                 goatsIncomeRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockCashIncomeContributionRanks,
-                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
-                        WgLivestockTypesEnum.GOATS
-                    )
+                    if(livestockContributionResponses.goats.incomeRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.goats.incomeRank.actualValue.toInt(),
+                                livestockCashIncomeContributionRanks
+                            )
+                        ) {
+                            livestockCashIncomeContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.goats.incomeRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        goatsIncomeRank.text = "Select rank..."
+                        livestockContributionResponses.goats.incomeRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockCashIncomeContributionRanks,
+                            LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                            WgLivestockTypesEnum.GOATS
+                        )
+                    }
                 }
 
                 goatsFoodRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockFoodConsumptionContributionRanks,
-                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
-                        WgLivestockTypesEnum.GOATS
-                    )
+                    if(livestockContributionResponses.goats.consumptionRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.goats.consumptionRank.actualValue.toInt(),
+                                livestockFoodConsumptionContributionRanks
+                            )
+                        ) {
+                            livestockFoodConsumptionContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.goats.consumptionRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        goatsFoodRank.text = "Select rank..."
+                        livestockContributionResponses.goats.consumptionRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockFoodConsumptionContributionRanks,
+                            LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                            WgLivestockTypesEnum.GOATS
+                        )
+                    }
                 }
 
                 sheepCashRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockCashIncomeContributionRanks,
-                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
-                        WgLivestockTypesEnum.SHEEP
-                    )
+                    if(livestockContributionResponses.sheep.incomeRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.sheep.incomeRank.actualValue.toInt(),
+                                livestockCashIncomeContributionRanks
+                            )
+                        ) {
+                            livestockCashIncomeContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.sheep.incomeRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        sheepCashRank.text = "Select rank..."
+                        livestockContributionResponses.sheep.incomeRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockCashIncomeContributionRanks,
+                            LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                            WgLivestockTypesEnum.SHEEP
+                        )
+                    }
                 }
 
                 sheepFoodRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockFoodConsumptionContributionRanks,
-                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
-                        WgLivestockTypesEnum.SHEEP
-                    )
+                    if(livestockContributionResponses.sheep.consumptionRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.sheep.consumptionRank.actualValue.toInt(),
+                                livestockFoodConsumptionContributionRanks
+                            )
+                        ) {
+                            livestockFoodConsumptionContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.sheep.consumptionRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        sheepFoodRank.text = "Select rank..."
+                        livestockContributionResponses.sheep.consumptionRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockFoodConsumptionContributionRanks,
+                            LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                            WgLivestockTypesEnum.SHEEP
+                        )
+                    }
                 }
 
                 donkeysCashRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockCashIncomeContributionRanks,
-                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
-                        WgLivestockTypesEnum.DONKEYS
-                    )
+                    if(livestockContributionResponses.donkeys.incomeRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.donkeys.incomeRank.actualValue.toInt(),
+                                livestockCashIncomeContributionRanks
+                            )
+                        ) {
+                            livestockCashIncomeContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.donkeys.incomeRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        donkeysCashRank.text = "Select rank..."
+                        livestockContributionResponses.donkeys.incomeRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockCashIncomeContributionRanks,
+                            LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                            WgLivestockTypesEnum.DONKEYS
+                        )
+                    }
                 }
 
                 donkeysFoodRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockFoodConsumptionContributionRanks,
-                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
-                        WgLivestockTypesEnum.DONKEYS
-                    )
+                    if(livestockContributionResponses.donkeys.consumptionRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.donkeys.consumptionRank.actualValue.toInt(),
+                                livestockFoodConsumptionContributionRanks
+                            )
+                        ) {
+                            livestockFoodConsumptionContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.donkeys.consumptionRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        donkeysFoodRank.text = "Select rank..."
+                        livestockContributionResponses.donkeys.consumptionRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockFoodConsumptionContributionRanks,
+                            LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                            WgLivestockTypesEnum.DONKEYS
+                        )
+                    }
                 }
 
                 pigscashRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockCashIncomeContributionRanks,
-                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
-                        WgLivestockTypesEnum.PIGS
-                    )
+                    if(livestockContributionResponses.pigs.incomeRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.pigs.incomeRank.actualValue.toInt(),
+                                livestockCashIncomeContributionRanks
+                            )
+                        ) {
+                            livestockCashIncomeContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.pigs.incomeRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        pigscashRank.text = "Select rank..."
+                        livestockContributionResponses.pigs.incomeRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockCashIncomeContributionRanks,
+                            LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                            WgLivestockTypesEnum.PIGS
+                        )
+                    }
                 }
 
                 pigsFoodrank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockFoodConsumptionContributionRanks,
-                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
-                        WgLivestockTypesEnum.PIGS
-                    )
+                    if(livestockContributionResponses.pigs.consumptionRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.pigs.consumptionRank.actualValue.toInt(),
+                                livestockFoodConsumptionContributionRanks
+                            )
+                        ) {
+                            livestockFoodConsumptionContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.pigs.consumptionRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        pigsFoodrank.text = "Select rank..."
+                        livestockContributionResponses.pigs.consumptionRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockFoodConsumptionContributionRanks,
+                            LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                            WgLivestockTypesEnum.PIGS
+                        )
+                    }
                 }
 
                 chickenCashRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockCashIncomeContributionRanks,
-                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
-                        WgLivestockTypesEnum.CHICKEN
-                    )
+                    if(livestockContributionResponses.chicken.incomeRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.chicken.incomeRank.actualValue.toInt(),
+                                livestockCashIncomeContributionRanks
+                            )
+                        ) {
+                            livestockCashIncomeContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.chicken.incomeRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        chickenCashRank.text = "Select rank..."
+                        livestockContributionResponses.chicken.incomeRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockCashIncomeContributionRanks,
+                            LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                            WgLivestockTypesEnum.CHICKEN
+                        )
+                    }
                 }
 
                 chickenFoodRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockFoodConsumptionContributionRanks,
-                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
-                        WgLivestockTypesEnum.CHICKEN
-                    )
+                    if(livestockContributionResponses.chicken.consumptionRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.chicken.consumptionRank.actualValue.toInt(),
+                                livestockFoodConsumptionContributionRanks
+                            )
+                        ) {
+                            livestockFoodConsumptionContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.chicken.consumptionRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        chickenFoodRank.text = "Select rank..."
+                        livestockContributionResponses.chicken.consumptionRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockFoodConsumptionContributionRanks,
+                            LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                            WgLivestockTypesEnum.CHICKEN
+                        )
+                    }
                 }
 
                 improvedChickenCashRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockCashIncomeContributionRanks,
-                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
-                        WgLivestockTypesEnum.IMPROVED_CHICKEN
-                    )
+                    if(livestockContributionResponses.improvedChicken.incomeRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.improvedChicken.incomeRank.actualValue.toInt(),
+                                livestockCashIncomeContributionRanks
+                            )
+                        ) {
+                            livestockCashIncomeContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.improvedChicken.incomeRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        improvedChickenCashRank.text = "Select rank..."
+                        livestockContributionResponses.improvedChicken.incomeRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockCashIncomeContributionRanks,
+                            LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                            WgLivestockTypesEnum.IMPROVED_CHICKEN
+                        )
+                    }
                 }
 
                 improvedChickenFoodRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockFoodConsumptionContributionRanks,
-                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
-                        WgLivestockTypesEnum.IMPROVED_CHICKEN
-                    )
+                    if(livestockContributionResponses.improvedChicken.consumptionRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.improvedChicken.consumptionRank.actualValue.toInt(),
+                                livestockFoodConsumptionContributionRanks
+                            )
+                        ) {
+                            livestockFoodConsumptionContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.improvedChicken.consumptionRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        improvedChickenFoodRank.text = "Select rank..."
+                        livestockContributionResponses.improvedChicken.consumptionRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockFoodConsumptionContributionRanks,
+                            LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                            WgLivestockTypesEnum.IMPROVED_CHICKEN
+                        )
+                    }
                 }
 
                 camelsCashRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockCashIncomeContributionRanks,
-                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
-                        WgLivestockTypesEnum.CAMELS
-                    )
+                    if(livestockContributionResponses.camels.incomeRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.camels.incomeRank.actualValue.toInt(),
+                                livestockCashIncomeContributionRanks
+                            )
+                        ) {
+                            livestockCashIncomeContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.camels.incomeRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        camelsCashRank.text = "Select rank..."
+                        livestockContributionResponses.camels.incomeRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockCashIncomeContributionRanks,
+                            LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                            WgLivestockTypesEnum.CAMELS
+                        )
+                    }
                 }
 
                 camelsFoodRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockFoodConsumptionContributionRanks,
-                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
-                        WgLivestockTypesEnum.CAMELS
-                    )
+                    if(livestockContributionResponses.camels.consumptionRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.camels.consumptionRank.actualValue.toInt(),
+                                livestockFoodConsumptionContributionRanks
+                            )
+                        ) {
+                            livestockFoodConsumptionContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.camels.consumptionRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        camelsFoodRank.text = "Select rank..."
+                        livestockContributionResponses.camels.consumptionRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockFoodConsumptionContributionRanks,
+                            LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                            WgLivestockTypesEnum.CAMELS
+                        )
+                    }
                 }
 
                 ducksCashRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockCashIncomeContributionRanks,
-                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
-                        WgLivestockTypesEnum.DUCKS
-                    )
+                    if(livestockContributionResponses.ducks.incomeRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.ducks.incomeRank.actualValue.toInt(),
+                                livestockCashIncomeContributionRanks
+                            )
+                        ) {
+                            livestockCashIncomeContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.ducks.incomeRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        ducksCashRank.text = "Select rank..."
+                        livestockContributionResponses.ducks.incomeRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockCashIncomeContributionRanks,
+                            LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                            WgLivestockTypesEnum.DUCKS
+                        )
+                    }
                 }
 
                 ducksFoodRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockFoodConsumptionContributionRanks,
-                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
-                        WgLivestockTypesEnum.DUCKS
-                    )
+                    if(livestockContributionResponses.ducks.consumptionRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.ducks.consumptionRank.actualValue.toInt(),
+                                livestockFoodConsumptionContributionRanks
+                            )
+                        ) {
+                            livestockFoodConsumptionContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.ducks.consumptionRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        ducksFoodRank.text = "Select rank..."
+                        livestockContributionResponses.ducks.consumptionRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockFoodConsumptionContributionRanks,
+                            LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                            WgLivestockTypesEnum.DUCKS
+                        )
+                    }
                 }
 
                 beeHivesCashRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockCashIncomeContributionRanks,
-                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
-                        WgLivestockTypesEnum.BEE_HIVES
-                    )
+                    if(livestockContributionResponses.beeHives.incomeRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.beeHives.incomeRank.actualValue.toInt(),
+                                livestockCashIncomeContributionRanks
+                            )
+                        ) {
+                            livestockCashIncomeContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.beeHives.incomeRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        beeHivesCashRank.text = "Select rank..."
+                        livestockContributionResponses.beeHives.incomeRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockCashIncomeContributionRanks,
+                            LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                            WgLivestockTypesEnum.BEE_HIVES
+                        )
+                    }
                 }
 
                 beeHivesFoodrank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockFoodConsumptionContributionRanks,
-                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
-                        WgLivestockTypesEnum.BEE_HIVES
-                    )
+                    if(livestockContributionResponses.beeHives.consumptionRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.beeHives.consumptionRank.actualValue.toInt(),
+                                livestockFoodConsumptionContributionRanks
+                            )
+                        ) {
+                            livestockFoodConsumptionContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.beeHives.consumptionRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        beeHivesFoodrank.text = "Select rank..."
+                        livestockContributionResponses.beeHives.consumptionRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockFoodConsumptionContributionRanks,
+                            LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                            WgLivestockTypesEnum.BEE_HIVES
+                        )
+                    }
                 }
 
                 fishPondsCashRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockCashIncomeContributionRanks,
-                        LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
-                        WgLivestockTypesEnum.FISH_POND
-                    )
+                    if(livestockContributionResponses.fishPonds.incomeRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.fishPonds.incomeRank.actualValue.toInt(),
+                                livestockCashIncomeContributionRanks
+                            )
+                        ) {
+                            livestockCashIncomeContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.fishPonds.incomeRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        fishPondsCashRank.text = "Select rank..."
+                        livestockContributionResponses.fishPonds.incomeRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockCashIncomeContributionRanks,
+                            LivestockContributionRankTypeEnum.CASH_CONTRIBUTION,
+                            WgLivestockTypesEnum.FISH_POND
+                        )
+                    }
                 }
 
                 fishPondsFoodRank.setOnClickListener {
-                    inflateLivestockContributionRankModal(
-                        livestockFoodConsumptionContributionRanks,
-                        LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
-                        WgLivestockTypesEnum.FISH_POND
-                    )
+                    if(livestockContributionResponses.fishPonds.consumptionRank.hasBeenSubmitted) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockContributionResponses.fishPonds.consumptionRank.actualValue.toInt(),
+                                livestockFoodConsumptionContributionRanks
+                            )
+                        ) {
+                            livestockFoodConsumptionContributionRanks.add(
+                                RankResponseItem(
+                                    livestockContributionResponses.fishPonds.consumptionRank.actualValue.toInt(),
+                                    false
+                                )
+                            )
+                        }
+                        fishPondsFoodRank.text = "Select rank..."
+                        livestockContributionResponses.fishPonds.consumptionRank.hasBeenSubmitted = false
+                    } else {
+                        inflateLivestockContributionRankModal(
+                            livestockFoodConsumptionContributionRanks,
+                            LivestockContributionRankTypeEnum.FOOD_CONSUMPTION_CONTRIBUTION,
+                            WgLivestockTypesEnum.FISH_POND
+                        )
+                    }
                 }
 
 

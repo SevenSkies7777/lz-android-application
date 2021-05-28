@@ -226,8 +226,8 @@
 
                 <TextView
                     android:id="@+id/cattleIncomeRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -270,8 +270,8 @@
 
                 <TextView
                     android:id="@+id/cattleFoodRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -343,8 +343,8 @@
 
                 <TextView
                     android:id="@+id/dairyCattleIncomeRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -387,8 +387,8 @@
 
                 <TextView
                     android:id="@+id/dairyCattleFoodRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -460,8 +460,8 @@
 
                 <TextView
                     android:id="@+id/goatsIncomeRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -504,8 +504,8 @@
 
                 <TextView
                     android:id="@+id/goatsFoodRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -577,8 +577,8 @@
 
                 <TextView
                     android:id="@+id/sheepCashRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -621,8 +621,8 @@
 
                 <TextView
                     android:id="@+id/sheepFoodRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -694,8 +694,8 @@
 
                 <TextView
                     android:id="@+id/donkeysCashRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -811,8 +811,8 @@
 
                 <TextView
                     android:id="@+id/camelsCashRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -856,8 +856,8 @@
 
                 <TextView
                     android:id="@+id/camelsFoodRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -929,8 +929,8 @@
 
                 <TextView
                     android:id="@+id/pigscashRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -973,8 +973,8 @@
 
                 <TextView
                     android:id="@+id/pigsFoodrank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -1046,8 +1046,8 @@
 
                 <TextView
                     android:id="@+id/chickenCashRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -1090,8 +1090,8 @@
 
                 <TextView
                     android:id="@+id/chickenFoodRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -1163,8 +1163,8 @@
 
                 <TextView
                     android:id="@+id/improvedChickenCashRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -1207,8 +1207,8 @@
 
                 <TextView
                     android:id="@+id/improvedChickenFoodRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -1280,8 +1280,8 @@
 
                 <TextView
                     android:id="@+id/ducksCashRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -1324,8 +1324,8 @@
 
                 <TextView
                     android:id="@+id/ducksFoodRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -1397,8 +1397,8 @@
 
                 <TextView
                     android:id="@+id/beeHivesCashRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -1441,8 +1441,8 @@
 
                 <TextView
                     android:id="@+id/beeHivesFoodrank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -1514,8 +1514,8 @@
 
                 <TextView
                     android:id="@+id/fishPondsCashRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -1558,8 +1558,8 @@
 
                 <TextView
                     android:id="@+id/fishPondsFoodRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
