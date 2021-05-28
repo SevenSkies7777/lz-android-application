@@ -44,7 +44,7 @@ class CountyLevelQuestionnaire(val uniqueId: String, var questionnaireName: Stri
 
     lateinit var questionnaireEndDate: String
 
-    lateinit var wealthGroupResponse: WealthGroupResponse
+    var wealthGroupResponse = WealthGroupResponse(0.0,0.0,0.0,0.0)
 
     var waterSourceResponses: WaterSourcesResponses? = null
 

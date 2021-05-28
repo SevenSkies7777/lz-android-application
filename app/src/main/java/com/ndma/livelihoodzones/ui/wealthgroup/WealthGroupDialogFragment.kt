@@ -5595,9 +5595,41 @@ class WealthGroupDialogFragment : DialogFragment(),
         )
         editor?.commit()
 
+        confirmDraftIsSaved()
+
         val intent = Intent()
         intent.action = Constants.QUESTIONNAIRE_COMPLETED
         activity?.applicationContext?.sendBroadcast(intent)
+    }
+
+
+    fun confirmDraftIsSaved() {
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.WEALTH_GROUP_LIST_OBJECT, null)
+        val questionnairesListObject: WealthGroupQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                WealthGroupQuestionnaireListObject::class.java
+            )
+
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == wealthGroupQuestionnaire.uniqueId
+        }
+
+        if (existingQuestionnaires.isEmpty()) {
+            saveQuestionnaireAsDraft()
+        } else {
+            return
+        }
     }
 
 

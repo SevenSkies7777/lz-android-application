@@ -323,7 +323,7 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeWealthGroupPopulationPercentages() {
         binding.apply {
-            populateWealthGroupPercentagesSection()
+            //populateWealthGroupPercentagesSection()
             locationAndPopulationLayout.root.visibility = View.VISIBLE
         }
     }
@@ -4631,9 +4631,36 @@ class CountyLevelFragment : DialogFragment(),
         )
         editor?.commit()
 
+        confirmDraftSaved()
+
         val intent = Intent()
         intent.action = QUESTIONNAIRE_COMPLETED
         activity?.applicationContext?.sendBroadcast(intent)
+    }
+
+    fun confirmDraftSaved() {
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null)
+        val questionnairesListObject: CountyLevelQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                CountyLevelQuestionnaireListObject::class.java
+            )
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == countyLevelQuestionnaire.uniqueId
+        }
+        if (existingQuestionnaires.isEmpty()) {
+            saveQuestionnaireAsDraft()
+        } else {
+            return
+        }
     }
 
 

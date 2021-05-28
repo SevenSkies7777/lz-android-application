@@ -229,6 +229,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
+                    android:gravity="center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
                     android:textColor="#000000"
@@ -272,6 +273,7 @@
                     android:id="@+id/cattleFoodRank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -345,6 +347,7 @@
                     android:id="@+id/dairyCattleIncomeRank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -389,6 +392,7 @@
                     android:id="@+id/dairyCattleFoodRank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -462,6 +466,7 @@
                     android:id="@+id/goatsIncomeRank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -506,6 +511,7 @@
                     android:id="@+id/goatsFoodRank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -579,6 +585,7 @@
                     android:id="@+id/sheepCashRank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -623,6 +630,7 @@
                     android:id="@+id/sheepFoodRank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -696,6 +704,7 @@
                     android:id="@+id/donkeysCashRank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -740,6 +749,7 @@
                     android:id="@+id/donkeysFoodRank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -812,6 +822,7 @@
                 <TextView
                     android:id="@+id/camelsCashRank"
                     android:layout_width="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
@@ -858,6 +869,7 @@
                     android:id="@+id/camelsFoodRank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
@@ -933,6 +945,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
+                    android:gravity="center_vertical"
                     android:text="Select rank..."
                     android:textColor="#000000"
                     android:textSize="16sp"/>
@@ -977,6 +990,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
+                    android:gravity="center_vertical"
                     android:text="Select rank..."
                     android:textColor="#000000"
                     android:textSize="16sp"/>
@@ -1050,6 +1064,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
+                    android:gravity="center_vertical"
                     android:text="Select rank..."
                     android:textColor="#000000"
                     android:textSize="16sp"/>
@@ -1094,6 +1109,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
+                    android:gravity="center_vertical"
                     android:text="Select rank..."
                     android:textColor="#000000"
                     android:textSize="16sp"/>
@@ -1167,6 +1183,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
+                    android:gravity="center_vertical"
                     android:text="Select rank..."
                     android:textColor="#000000"
                     android:textSize="16sp"/>
@@ -1211,6 +1228,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
+                    android:gravity="center_vertical"
                     android:text="Select rank..."
                     android:textColor="#000000"
                     android:textSize="16sp"/>
@@ -1285,6 +1303,7 @@
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
+                    android:gravity="center_vertical"
                     android:textColor="#000000"
                     android:textSize="16sp"/>
 
@@ -1329,6 +1348,7 @@
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
+                    android:gravity="center_vertical"
                     android:textColor="#000000"
                     android:textSize="16sp"/>
 
@@ -1402,6 +1422,7 @@
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
+                    android:gravity="center_vertical"
                     android:textColor="#000000"
                     android:textSize="16sp"/>
 
@@ -1446,6 +1467,7 @@
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
+                    android:gravity="center_vertical"
                     android:textColor="#000000"
                     android:textSize="16sp"/>
 
@@ -1519,6 +1541,7 @@
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
+                    android:gravity="center_vertical"
                     android:textColor="#000000"
                     android:textSize="16sp"/>
 
@@ -1563,6 +1586,7 @@
                     android:layout_gravity="start|center_vertical"
                     android:fontFamily="@font/lato_regular"
                     android:text="Select rank..."
+                    android:gravity="center_vertical"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
