@@ -4384,11 +4384,15 @@ class WealthGroupDialogFragment : DialogFragment(),
     ) {
 
         if (cropContributionEditTypeEnum == CropContributionEditTypeEnum.CROP_CASH_INCOME_CONTRIBUTION_RANK) {
-            cropCashIncomeContributionRanks.remove(selectedCashIncomeContributionRank)
+            if(selectedCashIncomeContributionRank?.rankPosition != 0) {
+                cropCashIncomeContributionRanks.remove(selectedCashIncomeContributionRank)
+            }
         }
 
         if (cropContributionEditTypeEnum == CropContributionEditTypeEnum.CROP_FOOD_CONSUMPTION_CONTRIBUTION_RANK) {
-            cropFoodConsumptionContributionRanks.remove(selectedFoodConsumptionContributionRank)
+            if(selectedFoodConsumptionContributionRank?.rankPosition != 0) {
+                cropFoodConsumptionContributionRanks.remove(selectedFoodConsumptionContributionRank)
+            }
         }
 
         cropContributionResponseItems.set(position, currentResponseItem)
@@ -5657,6 +5661,20 @@ class WealthGroupDialogFragment : DialogFragment(),
                     )
                 }
 
+                if (!doesRankItemAlreadyExistInTheRankList(0, cropCashIncomeContributionRanks)) {
+                    cropCashIncomeContributionRanks.add(RankResponseItem(
+                        0,
+                        false
+                    ))
+                }
+
+                if (!doesRankItemAlreadyExistInTheRankList(0, cropFoodConsumptionContributionRanks)) {
+                    cropFoodConsumptionContributionRanks.add(RankResponseItem(
+                        0,
+                        false
+                    ))
+                }
+
                 cropProductionLayout.apply {
 
 
@@ -5857,6 +5875,20 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         )
                     }
+                }
+
+                if (!doesRankItemAlreadyExistInTheRankList(0, cropCashIncomeContributionRanks)) {
+                    cropCashIncomeContributionRanks.add(RankResponseItem(
+                        0,
+                        false
+                    ))
+                }
+
+                if (!doesRankItemAlreadyExistInTheRankList(0, cropFoodConsumptionContributionRanks)) {
+                    cropFoodConsumptionContributionRanks.add(RankResponseItem(
+                        0,
+                        false
+                    ))
                 }
 
                 activity?.let { context ->
