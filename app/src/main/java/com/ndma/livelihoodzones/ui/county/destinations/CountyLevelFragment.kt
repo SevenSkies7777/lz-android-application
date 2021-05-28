@@ -1869,13 +1869,34 @@ class CountyLevelFragment : DialogFragment(),
                     lzHazards.root.visibility = View.GONE
                 }
 
+                if (!doesRankItemAlreadyExistInTheRankList(
+                        0,
+                        hazardsRanks
+                    )
+                ) {
+                    hazardsRanks.add(
+                        RankResponseItem(
+                            0,
+                            false
+                        )
+                    )
+                }
+
                 for (i in 0..23) {
                     hazardsRanks.add(RankResponseItem(i + 1, false))
                 }
 
 
                 animalRustlingRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.ANIMAL_RUSTLING)
+                    if (hazardResponses.animalRustling.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(hazardResponses.animalRustling.importanceRank,hazardsRanks)) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.animalRustling.importanceRank,false))
+                        }
+                        hazardResponses.animalRustling.importanceRank = -1
+                        animalRustlingRank.text = "Select ranking..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.ANIMAL_RUSTLING)
+                    }
                 }
 
                 banditryRank.setOnClickListener {
@@ -5380,6 +5401,18 @@ class CountyLevelFragment : DialogFragment(),
                 }
             }
         }
+    }
+
+    fun doesRankItemAlreadyExistInTheRankList(
+        rankPosition: Int,
+        rankList: MutableList<RankResponseItem>
+    ): Boolean {
+        for (currentRankItem in rankList) {
+            if (currentRankItem.rankPosition == rankPosition) {
+                return true
+            }
+        }
+        return false
     }
 
 }
