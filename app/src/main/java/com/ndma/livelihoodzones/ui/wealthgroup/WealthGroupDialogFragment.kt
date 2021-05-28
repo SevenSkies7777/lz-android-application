@@ -1917,6 +1917,33 @@ class WealthGroupDialogFragment : DialogFragment(),
             /*Livestock and poultry contribution navigation*/
             wgLivestockPoultryContribution.apply {
 
+
+                if (!doesRankItemAlreadyExistInTheRankList(
+                        0,
+                        livestockCashIncomeContributionRanks
+                    )
+                ) {
+                    livestockCashIncomeContributionRanks.add(
+                        RankResponseItem(
+                            0,
+                            false
+                        )
+                    )
+                }
+
+                if (!doesRankItemAlreadyExistInTheRankList(
+                        0,
+                        livestockFoodConsumptionContributionRanks
+                    )
+                ) {
+                    livestockFoodConsumptionContributionRanks.add(
+                        RankResponseItem(
+                            0,
+                            false
+                        )
+                    )
+                }
+
                 for (i in 0..11) {
                     livestockCashIncomeContributionRanks.add(
                         RankResponseItem(i + 1, false)
@@ -4384,13 +4411,13 @@ class WealthGroupDialogFragment : DialogFragment(),
     ) {
 
         if (cropContributionEditTypeEnum == CropContributionEditTypeEnum.CROP_CASH_INCOME_CONTRIBUTION_RANK) {
-            if(selectedCashIncomeContributionRank?.rankPosition != 0) {
+            if (selectedCashIncomeContributionRank?.rankPosition != 0) {
                 cropCashIncomeContributionRanks.remove(selectedCashIncomeContributionRank)
             }
         }
 
         if (cropContributionEditTypeEnum == CropContributionEditTypeEnum.CROP_FOOD_CONSUMPTION_CONTRIBUTION_RANK) {
-            if(selectedFoodConsumptionContributionRank?.rankPosition != 0) {
+            if (selectedFoodConsumptionContributionRank?.rankPosition != 0) {
                 cropFoodConsumptionContributionRanks.remove(selectedFoodConsumptionContributionRank)
             }
         }
@@ -4433,7 +4460,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.cattle.incomeRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.cattle.incomeRank.hasBeenSubmitted = true
-                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.cattleIncomeRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4441,7 +4470,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.cattle.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.cattle.consumptionRank.hasBeenSubmitted = true
-                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.cattleFoodRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4452,7 +4483,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.dairyCattle.incomeRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.dairyCattle.incomeRank.hasBeenSubmitted = true
-                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.dairyCattleIncomeRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4460,7 +4493,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.dairyCattle.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.dairyCattle.consumptionRank.hasBeenSubmitted = true
-                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.dairyCattleFoodRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4472,7 +4507,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.goats.incomeRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.goats.incomeRank.hasBeenSubmitted = true
-                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.goatsIncomeRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4480,7 +4517,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.goats.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.goats.consumptionRank.hasBeenSubmitted = true
-                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.goatsFoodRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4491,7 +4530,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.sheep.incomeRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.sheep.incomeRank.hasBeenSubmitted = true
-                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.sheepCashRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4499,7 +4540,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.sheep.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.sheep.consumptionRank.hasBeenSubmitted = true
-                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.sheepFoodRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4510,7 +4553,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.donkeys.incomeRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.donkeys.incomeRank.hasBeenSubmitted = true
-                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.donkeysCashRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4518,7 +4563,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.donkeys.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.donkeys.consumptionRank.hasBeenSubmitted = true
-                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.donkeysFoodRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4529,7 +4576,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.camels.incomeRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.camels.incomeRank.hasBeenSubmitted = true
-                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.camelsCashRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4537,7 +4586,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.camels.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.camels.consumptionRank.hasBeenSubmitted = true
-                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.camelsFoodRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4548,7 +4599,10 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.pigs.incomeRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.pigs.incomeRank.hasBeenSubmitted = true
-                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                }
+
                 binding.wgLivestockPoultryContribution.pigscashRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4556,7 +4610,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.pigs.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.pigs.consumptionRank.hasBeenSubmitted = true
-                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.pigsFoodrank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4567,7 +4623,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.chicken.incomeRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.chicken.incomeRank.hasBeenSubmitted = true
-                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.chickenCashRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4575,7 +4633,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.chicken.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.chicken.consumptionRank.hasBeenSubmitted = true
-                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.chickenFoodRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4586,7 +4646,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.improvedChicken.incomeRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.improvedChicken.incomeRank.hasBeenSubmitted = true
-                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.improvedChickenCashRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4595,7 +4657,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.improvedChicken.consumptionRank.hasBeenSubmitted =
                     true
-                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.improvedChickenFoodRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4606,7 +4670,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.ducks.incomeRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.ducks.incomeRank.hasBeenSubmitted = true
-                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.ducksCashRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4614,7 +4680,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.ducks.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.ducks.consumptionRank.hasBeenSubmitted = true
-                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.ducksFoodRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4625,7 +4693,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.beeHives.incomeRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.beeHives.incomeRank.hasBeenSubmitted = true
-                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.beeHivesCashRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4633,7 +4703,10 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.beeHives.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.beeHives.consumptionRank.hasBeenSubmitted = true
-                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                }
+
                 binding.wgLivestockPoultryContribution.beeHivesFoodrank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4644,7 +4717,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.fishPonds.incomeRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.fishPonds.incomeRank.hasBeenSubmitted = true
-                livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockCashIncomeContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.fishPondsCashRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -4652,7 +4727,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 livestockContributionResponses.fishPonds.consumptionRank.actualValue =
                     selectedRankItem.rankPosition.toDouble()
                 livestockContributionResponses.fishPonds.consumptionRank.hasBeenSubmitted = true
-                livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                if (selectedRankItem.rankPosition != 0) {
+                    livestockFoodConsumptionContributionRanks.remove(selectedRankItem)
+                }
                 binding.wgLivestockPoultryContribution.fishPondsFoodRank.text =
                     selectedRankItem.rankPosition.toString()
             }
@@ -5662,17 +5739,25 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 if (!doesRankItemAlreadyExistInTheRankList(0, cropCashIncomeContributionRanks)) {
-                    cropCashIncomeContributionRanks.add(RankResponseItem(
-                        0,
-                        false
-                    ))
+                    cropCashIncomeContributionRanks.add(
+                        RankResponseItem(
+                            0,
+                            false
+                        )
+                    )
                 }
 
-                if (!doesRankItemAlreadyExistInTheRankList(0, cropFoodConsumptionContributionRanks)) {
-                    cropFoodConsumptionContributionRanks.add(RankResponseItem(
+                if (!doesRankItemAlreadyExistInTheRankList(
                         0,
-                        false
-                    ))
+                        cropFoodConsumptionContributionRanks
+                    )
+                ) {
+                    cropFoodConsumptionContributionRanks.add(
+                        RankResponseItem(
+                            0,
+                            false
+                        )
+                    )
                 }
 
                 cropProductionLayout.apply {
@@ -5878,17 +5963,25 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 if (!doesRankItemAlreadyExistInTheRankList(0, cropCashIncomeContributionRanks)) {
-                    cropCashIncomeContributionRanks.add(RankResponseItem(
-                        0,
-                        false
-                    ))
+                    cropCashIncomeContributionRanks.add(
+                        RankResponseItem(
+                            0,
+                            false
+                        )
+                    )
                 }
 
-                if (!doesRankItemAlreadyExistInTheRankList(0, cropFoodConsumptionContributionRanks)) {
-                    cropFoodConsumptionContributionRanks.add(RankResponseItem(
+                if (!doesRankItemAlreadyExistInTheRankList(
                         0,
-                        false
-                    ))
+                        cropFoodConsumptionContributionRanks
+                    )
+                ) {
+                    cropFoodConsumptionContributionRanks.add(
+                        RankResponseItem(
+                            0,
+                            false
+                        )
+                    )
                 }
 
                 activity?.let { context ->
