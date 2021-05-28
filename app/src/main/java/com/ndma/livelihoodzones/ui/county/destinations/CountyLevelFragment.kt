@@ -175,6 +175,10 @@ class CountyLevelFragment : DialogFragment(),
                 geographyString,
                 GeographyObject::class.java
             )
+
+        storedSessionDetails?.let {
+            AppStore.getInstance().sessionDetails = it
+        }
         arguments?.let {
             questionnaireId = it.getString(QUESTIONNAIRE_ID)
 
@@ -218,10 +222,6 @@ class CountyLevelFragment : DialogFragment(),
         defineViews()
 
         if (isAResumeQuestionnaire) {
-            storedSessionDetails?.let {
-                AppStore.getInstance().sessionDetails = it
-            }
-
             binding.countyConfiguration.root.visibility = View.GONE
             determineTheResumeStep()
         }

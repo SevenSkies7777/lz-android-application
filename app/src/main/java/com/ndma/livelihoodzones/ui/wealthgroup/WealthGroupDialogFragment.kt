@@ -186,6 +186,10 @@ class WealthGroupDialogFragment : DialogFragment(),
             LoginResponseModel::class.java
         )
 
+        storedSessionDetails?.let {
+            AppStore.getInstance().sessionDetails = it
+        }
+
         arguments?.let {
             questionnaireId = it.getString(QUESTIONNAIRE_ID)
 
@@ -264,10 +268,6 @@ class WealthGroupDialogFragment : DialogFragment(),
             }
         }
         if (isAResumeQuestionnaire) {
-
-            storedSessionDetails?.let {
-                AppStore.getInstance().sessionDetails = it
-            }
             binding.wgIncomeAndFoodSources.root.visibility = View.GONE
             determineTheResumeStep()
         }
