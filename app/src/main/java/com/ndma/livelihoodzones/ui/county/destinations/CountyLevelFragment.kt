@@ -164,7 +164,8 @@ class CountyLevelFragment : DialogFragment(),
         val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
         val geographyString =
             sharedPreferences?.getString(Constants.GEOGRAPHY_OBJECT, null)
-        val storedSessionDetailsString = sharedPreferences?.getString(Constants.SESSION_DETAILS, null)
+        val storedSessionDetailsString =
+            sharedPreferences?.getString(Constants.SESSION_DETAILS, null)
         storedSessionDetails = gson.fromJson(
             storedSessionDetailsString,
             LoginResponseModel::class.java
@@ -205,6 +206,7 @@ class CountyLevelFragment : DialogFragment(),
                 )
             }!!
         }
+        updateCurrentQuestionnaireToStore()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -323,7 +325,6 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeWealthGroupPopulationPercentages() {
         binding.apply {
-            //populateWealthGroupPercentagesSection()
             locationAndPopulationLayout.root.visibility = View.VISIBLE
         }
     }
@@ -400,7 +401,6 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeSeasonsCalendar() {
         binding.apply {
-            populateSeasonsCalendar()
             lzSeasonsCalendar.root.visibility = View.VISIBLE
         }
     }
@@ -483,6 +483,7 @@ class CountyLevelFragment : DialogFragment(),
                             }
 
 
+                            updateCurrentQuestionnaireToStore()
                             lzSubLocationAssignment.root.visibility = View.VISIBLE
                             countyConfiguration.root.visibility = View.GONE
                         }
@@ -556,6 +557,7 @@ class CountyLevelFragment : DialogFragment(),
                             )
                         }
 
+                        updateCurrentQuestionnaireToStore()
                         countyLivelihoodZoneCharectaristics.root.visibility = View.GONE
                         lzSubLocationAssignment.root.visibility = View.VISIBLE
                     }
@@ -586,6 +588,7 @@ class CountyLevelFragment : DialogFragment(),
                         )
                     }
 
+                    updateCurrentQuestionnaireToStore()
                     lzSubLocationAssignment.root.visibility = View.GONE
                     wealthGroupCharectaristics.root.visibility = View.VISIBLE
                 }
@@ -824,6 +827,7 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.WEALTH_GROUP_PERCENTAGES_STEP)
                         }
 
+                        updateCurrentQuestionnaireToStore()
                         locationAndPopulationLayout.root.visibility = View.VISIBLE
                         wealthGroupCharectaristics.root.visibility = View.GONE
                     } else {
@@ -929,6 +933,7 @@ class CountyLevelFragment : DialogFragment(),
                                 countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.LZ_CROP_SELECTION_STEP)
                             }
 
+                            updateCurrentQuestionnaireToStore()
                             locationAndPopulationLayout.root.visibility = View.GONE
                             cropSelectionLayout.root.visibility = View.VISIBLE
 
@@ -963,10 +968,12 @@ class CountyLevelFragment : DialogFragment(),
                         if (determineTheFurthestCoveredStep(countyLevelQuestionnaire.questionnaireCoveredSteps) < Constants.LZ_CROP_PRODUCTION_STEP) {
                             prepareCropProductionResponseItems()
                         } else {
-                            updateCropProductionPage(processUpdatedCropProductionresponses(
-                                countyLevelQuestionnaire.selectedCrops,
-                                countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses
-                            ))
+                            updateCropProductionPage(
+                                processUpdatedCropProductionresponses(
+                                    countyLevelQuestionnaire.selectedCrops,
+                                    countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses
+                                )
+                            )
                         }
 
                         countyLevelQuestionnaire.lastQuestionnaireStep =
@@ -980,6 +987,7 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.LZ_CROP_PRODUCTION_STEP)
                         }
 
+                        updateCurrentQuestionnaireToStore()
                         cropProductionLayout.root.visibility = View.VISIBLE
                         cropSelectionLayout.root.visibility = View.GONE
 
@@ -1036,6 +1044,7 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.MAIN_SOURCES_OF_WATER_STEP)
                         }
 
+                        updateCurrentQuestionnaireToStore()
                         cropProductionLayout.root.visibility = View.GONE
                         mainWaterSource.root.visibility = View.VISIBLE
                     }
@@ -1439,6 +1448,7 @@ class CountyLevelFragment : DialogFragment(),
                                 countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.MARKETS_CONFIGURATION_STEP)
                             }
 
+                            updateCurrentQuestionnaireToStore()
                             mainWaterSource.root.visibility = View.GONE
                             marketGeographyConfiguration.root.visibility = View.VISIBLE
 
@@ -1483,6 +1493,7 @@ class CountyLevelFragment : DialogFragment(),
 
                     prepareMarketTransactionsResponses()
 
+                    updateCurrentQuestionnaireToStore()
                     lzMarketTransactions.root.visibility = View.VISIBLE
                     marketGeographyConfiguration.root.visibility = View.GONE
 
@@ -1578,6 +1589,7 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.ETHNIC_GROUP_SELECTION_STEP)
                     }
 
+                    updateCurrentQuestionnaireToStore()
                     ethnicGroupSelection.root.visibility = View.VISIBLE
                     lzMarketTransactions.root.visibility = View.GONE
                 }
@@ -1615,6 +1627,8 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.ETHNIC_GROUP_POPULATION_STEP)
                         }
 
+
+                        updateCurrentQuestionnaireToStore()
                         ethnicGroupSelection.root.visibility = View.GONE
                         ethnicGroupPopulation.root.visibility = View.VISIBLE
 
@@ -1673,6 +1687,7 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.HUNGER_PATTERNS_STEP)
                     }
 
+                    updateCurrentQuestionnaireToStore()
                     ethnicGroupPopulation.root.visibility = View.GONE
                     lzHungerPatterns.root.visibility = View.VISIBLE
                 }
@@ -1693,7 +1708,7 @@ class CountyLevelFragment : DialogFragment(),
                     override fun afterTextChanged(editable: Editable?) {
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            if(editable.toString().isNotEmpty()) {
+                            if (editable.toString().isNotEmpty()) {
                                 if (editable == etLongRainsHungerPeriod.editableText) {
                                     if (editable.toString().toDouble() > 10.0) {
                                         errorDialog?.isShowing?.let { isDialogShowing ->
@@ -1839,6 +1854,7 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.HAZARDS_STEP)
                         }
 
+                        updateCurrentQuestionnaireToStore()
                         lzHazards.root.visibility = View.VISIBLE
                         lzHungerPatterns.root.visibility = View.GONE
 
@@ -2161,6 +2177,7 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.SEASON_CALENDAR_STEP)
                         }
 
+                        updateCurrentQuestionnaireToStore()
                         lzSeasonsCalendar.root.visibility = View.VISIBLE
                         lzHazards.root.visibility = View.GONE
                     } else {
@@ -2742,6 +2759,7 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.LZ_COMPLETION_PAGE)
                         }
 
+                        updateCurrentQuestionnaireToStore()
                         lzSeasonsCalendar.root.visibility = View.GONE
                         lzCompletionPage.root.visibility = View.VISIBLE
                     }
@@ -2755,6 +2773,7 @@ class CountyLevelFragment : DialogFragment(),
                     countyLevelQuestionnaire.questionnaireEndDate = Util.getNow()
                     countyLevelQuestionnaire.questionnaireStatus =
                         QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
+                    updateCurrentQuestionnaireToStore()
                     val gson = Gson()
                     val sharedPreferences: SharedPreferences? =
                         context?.applicationContext?.getSharedPreferences(
@@ -3907,7 +3926,8 @@ class CountyLevelFragment : DialogFragment(),
             }
         currentMarketingTransactionItem.livestockTrade = isTradeHappening
         countyLevelQuestionnaire.marketTransactionItems.set(
-            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem), currentMarketingTransactionItem
+            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem),
+            currentMarketingTransactionItem
         )
 
 //        binding.apply {
@@ -3941,7 +3961,8 @@ class CountyLevelFragment : DialogFragment(),
             }
         currentMarketingTransactionItem.poultryTrade = isTradeHappening
         countyLevelQuestionnaire.marketTransactionItems.set(
-            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem), currentMarketingTransactionItem
+            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem),
+            currentMarketingTransactionItem
         )
 
 //        binding.apply {
@@ -3975,7 +3996,8 @@ class CountyLevelFragment : DialogFragment(),
             }
         currentMarketingTransactionItem.farmProduceTrade = isTradeHappening
         countyLevelQuestionnaire.marketTransactionItems.set(
-            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem), currentMarketingTransactionItem
+            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem),
+            currentMarketingTransactionItem
         )
 
 //        binding.apply {
@@ -4009,7 +4031,8 @@ class CountyLevelFragment : DialogFragment(),
             }
         currentMarketingTransactionItem.foodProduceRetail = isTradeHappening
         countyLevelQuestionnaire.marketTransactionItems.set(
-            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem), currentMarketingTransactionItem
+            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem),
+            currentMarketingTransactionItem
         )
 
 //        binding.apply {
@@ -4043,7 +4066,8 @@ class CountyLevelFragment : DialogFragment(),
             }
         currentMarketingTransactionItem.retailFarmInput = isTradeHappening
         countyLevelQuestionnaire.marketTransactionItems.set(
-            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem), currentMarketingTransactionItem
+            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem),
+            currentMarketingTransactionItem
         )
 
 //        binding.apply {
@@ -4077,7 +4101,8 @@ class CountyLevelFragment : DialogFragment(),
             }
         currentMarketingTransactionItem.labourExchange = isTradeHappening
         countyLevelQuestionnaire.marketTransactionItems.set(
-            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem), currentMarketingTransactionItem
+            countyLevelQuestionnaire.marketTransactionItems.indexOf(currentMarketingTransactionItem),
+            currentMarketingTransactionItem
         )
 
 //        binding.apply {
@@ -4657,10 +4682,64 @@ class CountyLevelFragment : DialogFragment(),
             it.uniqueId == countyLevelQuestionnaire.uniqueId
         }
         if (existingQuestionnaires.isEmpty()) {
-            saveQuestionnaireAsDraft()
+            AppStore.getInstance().currentCountyLevelQuestionnaire?.let {
+                saveQuestionnaireAsDraftFromStore(
+                    it
+                )
+            }
         } else {
+            AppStore.getInstance().currentCountyLevelQuestionnaire = null
             return
         }
+    }
+
+    fun saveQuestionnaireAsDraftFromStore(countyLevelQuestionnaire: CountyLevelQuestionnaire) {
+        countyLevelQuestionnaire.questionnaireStatus =
+            QuestionnaireStatus.DRAFT_QUESTIONNAIRE
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null)
+        val questionnairesListObject: CountyLevelQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                CountyLevelQuestionnaireListObject::class.java
+            )
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == countyLevelQuestionnaire.uniqueId
+        }
+        if (existingQuestionnaires.isEmpty()) {
+            questionnairesListObject.addQuestionnaire(countyLevelQuestionnaire)
+        } else {
+            val questionnairePosition =
+                questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0))
+            questionnairesListObject.updateQuestionnaire(
+                questionnairePosition,
+                countyLevelQuestionnaire
+            )
+        }
+
+        editor?.remove(Constants.QUESTIONNAIRES_LIST_OBJECT)
+
+        val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
+        editor?.putString(
+            Constants.QUESTIONNAIRES_LIST_OBJECT,
+            newQuestionnaireObjectString
+        )
+        editor?.commit()
+
+        confirmDraftSaved()
+
+        val intent = Intent()
+        intent.action = QUESTIONNAIRE_COMPLETED
+        activity?.applicationContext?.sendBroadcast(intent)
     }
 
 
@@ -5384,7 +5463,8 @@ class CountyLevelFragment : DialogFragment(),
                 AppStore.getInstance().newlySelectedCrops = ArrayList()
 
                 updatedCropProductionResponses.addAll(newlyAddedResponses)
-                countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses = updatedCropProductionResponses
+                countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses =
+                    updatedCropProductionResponses
                 cropProductionResponseItems = updatedCropProductionResponses
                 return updatedCropProductionResponses
             }
@@ -5407,6 +5487,10 @@ class CountyLevelFragment : DialogFragment(),
                 }
             }
         }
+    }
+
+    fun updateCurrentQuestionnaireToStore() {
+        AppStore.getInstance().currentCountyLevelQuestionnaire = countyLevelQuestionnaire
     }
 
 }

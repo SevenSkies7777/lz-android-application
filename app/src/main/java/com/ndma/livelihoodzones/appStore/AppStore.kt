@@ -9,6 +9,8 @@ class AppStore {
     var sessionDetails: LoginResponseModel? = null
     var countyLevelQuestionnairesList: MutableList<CountyLevelQuestionnaire> = ArrayList()
 
+    var currentCountyLevelQuestionnaire: CountyLevelQuestionnaire? = null
+
     var wealthGroupQuestionnaireList: MutableList<WealthGroupQuestionnaire> = ArrayList()
 
     var newlySelectedCrops: MutableList<CropModel> = ArrayList()
