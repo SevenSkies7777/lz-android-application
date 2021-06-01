@@ -11,6 +11,8 @@ class AppStore {
 
     var currentCountyLevelQuestionnaire: CountyLevelQuestionnaire? = null
 
+    var currentWealthGroupQuestionnaire: WealthGroupQuestionnaire? = null
+
     var wealthGroupQuestionnaireList: MutableList<WealthGroupQuestionnaire> = ArrayList()
 
     var newlySelectedCrops: MutableList<CropModel> = ArrayList()

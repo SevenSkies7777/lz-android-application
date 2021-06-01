@@ -1,11 +1,11 @@
 package com.ndma.livelihoodzones.ui.wealthgroup.responses
 
 class LivestockProductionIncomeConstraintsResponses() {
-    var lackOfPasture: Int = 0
-    var lackOfAnimalDrinkingWater: Int = 0
-    var lowYieldingAnimal: Int = 0
-    var costlyVeterinaryDrugs: Int = 0
-    var livestockPestsAndDiseases: Int = 0
-    var lackofMarket: Int = 0
-    var insecurity: Int = 0
+    var lackOfPasture: Int = -1
+    var lackOfAnimalDrinkingWater: Int = -1
+    var lowYieldingAnimal: Int = -1
+    var costlyVeterinaryDrugs: Int = -1
+    var livestockPestsAndDiseases: Int = -1
+    var lackofMarket: Int = -1
+    var insecurity: Int = -1
 }

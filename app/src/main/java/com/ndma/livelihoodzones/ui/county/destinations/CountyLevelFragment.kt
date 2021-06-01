@@ -4785,10 +4785,94 @@ class CountyLevelFragment : DialogFragment(),
         )
         editor?.commit()
 
+        confirmCompletedQuestionnaireIsUpdated()
+
         val intent = Intent()
         intent.action = QUESTIONNAIRE_COMPLETED
         activity?.applicationContext?.sendBroadcast(intent)
     }
+
+
+    fun confirmCompletedQuestionnaireIsUpdated() {
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null)
+        val questionnairesListObject: CountyLevelQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                CountyLevelQuestionnaireListObject::class.java
+            )
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == countyLevelQuestionnaire.uniqueId
+        }
+        if (existingQuestionnaires.isEmpty()) {
+            AppStore.getInstance().currentCountyLevelQuestionnaire?.let {
+                updateCompletedQuestionnaireFromStore(
+                    it
+                )
+            }
+        } else {
+            AppStore.getInstance().currentCountyLevelQuestionnaire = null
+            return
+        }
+    }
+
+
+    fun updateCompletedQuestionnaireFromStore(countyLevelQuestionnaire: CountyLevelQuestionnaire) {
+        countyLevelQuestionnaire.questionnaireStatus =
+            QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.QUESTIONNAIRES_LIST_OBJECT, null)
+        val questionnairesListObject: CountyLevelQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                CountyLevelQuestionnaireListObject::class.java
+            )
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == countyLevelQuestionnaire.uniqueId
+        }
+        if (existingQuestionnaires.isEmpty()) {
+            questionnairesListObject.addQuestionnaire(countyLevelQuestionnaire)
+        } else {
+            val questionnairePosition =
+                questionnairesListObject.questionnaireList.indexOf(existingQuestionnaires.get(0))
+            questionnairesListObject.updateQuestionnaire(
+                questionnairePosition,
+                countyLevelQuestionnaire
+            )
+        }
+
+        editor?.remove(Constants.QUESTIONNAIRES_LIST_OBJECT)
+
+        val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
+        editor?.putString(
+            Constants.QUESTIONNAIRES_LIST_OBJECT,
+            newQuestionnaireObjectString
+        )
+        editor?.commit()
+
+        confirmCompletedQuestionnaireIsUpdated()
+
+        val intent = Intent()
+        intent.action = QUESTIONNAIRE_COMPLETED
+        activity?.applicationContext?.sendBroadcast(intent)
+    }
+
 
     fun retrieveASpecificQuestionnaireFromStore(questionnaireId: String): CountyLevelQuestionnaire {
         val gson = Gson()

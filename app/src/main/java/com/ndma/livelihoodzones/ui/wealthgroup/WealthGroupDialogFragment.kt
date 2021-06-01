@@ -225,6 +225,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }!!
             }
         }
+        updateCurrentQuestionnaireToStore()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -810,6 +811,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                         ) {
                             wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP)
                         }
+
+                        updateCurrentQuestionnaireToStore()
 
                         wgIncomeAndFoodSources.root.visibility = View.GONE
                         wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
@@ -1682,6 +1685,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.WG_CROP_SELECTION_STEP)
                         }
 
+                        updateCurrentQuestionnaireToStore()
+
                         wgPercentFoodConsumptionIncome.root.visibility = View.GONE
                         cropSelectionLayout.root.visibility = View.VISIBLE
 
@@ -1732,6 +1737,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.WG_CROP_PRODUCTION_STEP)
                         }
 
+                        updateCurrentQuestionnaireToStore()
+
                         cropProductionLayout.root.visibility = View.VISIBLE
                         cropSelectionLayout.root.visibility = View.GONE
 
@@ -1768,6 +1775,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                         ) {
                             wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.LIVESTOCK_POULTRY_NUMBERS_STEP)
                         }
+
+                        updateCurrentQuestionnaireToStore()
                         cropProductionLayout.root.visibility = View.GONE
                         wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
                     } else if (isAnyCropContributionValueEmpty()) {
@@ -1906,6 +1915,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                         ) {
                             wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.LIVESTOCK_POULTRY_CONTRIBUTION_STEP)
                         }
+
+                        updateCurrentQuestionnaireToStore()
                         wgLivestockPoultryContribution.root.visibility = View.VISIBLE
                         wgLivestockPoultryNumbers.root.visibility = View.GONE
 
@@ -1953,7 +1964,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                     )
                 }
                 cattleIncomeRank.setOnClickListener {
-                    if(livestockContributionResponses.cattle.incomeRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.cattle.incomeRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.cattle.incomeRank.actualValue.toInt(),
                                 livestockCashIncomeContributionRanks
@@ -1978,7 +1989,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 cattleFoodRank.setOnClickListener {
-                    if(livestockContributionResponses.cattle.consumptionRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.cattle.consumptionRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.cattle.consumptionRank.actualValue.toInt(),
                                 livestockFoodConsumptionContributionRanks
@@ -1992,7 +2003,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         }
                         cattleFoodRank.text = "Select rank..."
-                        livestockContributionResponses.cattle.consumptionRank.hasBeenSubmitted = false
+                        livestockContributionResponses.cattle.consumptionRank.hasBeenSubmitted =
+                            false
                     } else {
                         inflateLivestockContributionRankModal(
                             livestockFoodConsumptionContributionRanks,
@@ -2003,7 +2015,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 dairyCattleIncomeRank.setOnClickListener {
-                    if(livestockContributionResponses.dairyCattle.incomeRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.dairyCattle.incomeRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.dairyCattle.incomeRank.actualValue.toInt(),
                                 livestockCashIncomeContributionRanks
@@ -2017,7 +2029,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         }
                         dairyCattleIncomeRank.text = "Select rank..."
-                        livestockContributionResponses.dairyCattle.incomeRank.hasBeenSubmitted = false
+                        livestockContributionResponses.dairyCattle.incomeRank.hasBeenSubmitted =
+                            false
                     } else {
                         inflateLivestockContributionRankModal(
                             livestockCashIncomeContributionRanks,
@@ -2028,7 +2041,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 dairyCattleFoodRank.setOnClickListener {
-                    if(livestockContributionResponses.dairyCattle.consumptionRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.dairyCattle.consumptionRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.dairyCattle.consumptionRank.actualValue.toInt(),
                                 livestockFoodConsumptionContributionRanks
@@ -2042,7 +2055,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         }
                         dairyCattleFoodRank.text = "Select rank..."
-                        livestockContributionResponses.dairyCattle.consumptionRank.hasBeenSubmitted = false
+                        livestockContributionResponses.dairyCattle.consumptionRank.hasBeenSubmitted =
+                            false
                     } else {
                         inflateLivestockContributionRankModal(
                             livestockFoodConsumptionContributionRanks,
@@ -2053,7 +2067,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 goatsIncomeRank.setOnClickListener {
-                    if(livestockContributionResponses.goats.incomeRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.goats.incomeRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.goats.incomeRank.actualValue.toInt(),
                                 livestockCashIncomeContributionRanks
@@ -2078,7 +2092,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 goatsFoodRank.setOnClickListener {
-                    if(livestockContributionResponses.goats.consumptionRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.goats.consumptionRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.goats.consumptionRank.actualValue.toInt(),
                                 livestockFoodConsumptionContributionRanks
@@ -2092,7 +2106,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         }
                         goatsFoodRank.text = "Select rank..."
-                        livestockContributionResponses.goats.consumptionRank.hasBeenSubmitted = false
+                        livestockContributionResponses.goats.consumptionRank.hasBeenSubmitted =
+                            false
                     } else {
                         inflateLivestockContributionRankModal(
                             livestockFoodConsumptionContributionRanks,
@@ -2103,7 +2118,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 sheepCashRank.setOnClickListener {
-                    if(livestockContributionResponses.sheep.incomeRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.sheep.incomeRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.sheep.incomeRank.actualValue.toInt(),
                                 livestockCashIncomeContributionRanks
@@ -2128,7 +2143,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 sheepFoodRank.setOnClickListener {
-                    if(livestockContributionResponses.sheep.consumptionRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.sheep.consumptionRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.sheep.consumptionRank.actualValue.toInt(),
                                 livestockFoodConsumptionContributionRanks
@@ -2142,7 +2157,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         }
                         sheepFoodRank.text = "Select rank..."
-                        livestockContributionResponses.sheep.consumptionRank.hasBeenSubmitted = false
+                        livestockContributionResponses.sheep.consumptionRank.hasBeenSubmitted =
+                            false
                     } else {
                         inflateLivestockContributionRankModal(
                             livestockFoodConsumptionContributionRanks,
@@ -2153,7 +2169,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 donkeysCashRank.setOnClickListener {
-                    if(livestockContributionResponses.donkeys.incomeRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.donkeys.incomeRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.donkeys.incomeRank.actualValue.toInt(),
                                 livestockCashIncomeContributionRanks
@@ -2178,7 +2194,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 donkeysFoodRank.setOnClickListener {
-                    if(livestockContributionResponses.donkeys.consumptionRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.donkeys.consumptionRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.donkeys.consumptionRank.actualValue.toInt(),
                                 livestockFoodConsumptionContributionRanks
@@ -2192,7 +2208,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         }
                         donkeysFoodRank.text = "Select rank..."
-                        livestockContributionResponses.donkeys.consumptionRank.hasBeenSubmitted = false
+                        livestockContributionResponses.donkeys.consumptionRank.hasBeenSubmitted =
+                            false
                     } else {
                         inflateLivestockContributionRankModal(
                             livestockFoodConsumptionContributionRanks,
@@ -2203,7 +2220,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 pigscashRank.setOnClickListener {
-                    if(livestockContributionResponses.pigs.incomeRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.pigs.incomeRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.pigs.incomeRank.actualValue.toInt(),
                                 livestockCashIncomeContributionRanks
@@ -2228,7 +2245,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 pigsFoodrank.setOnClickListener {
-                    if(livestockContributionResponses.pigs.consumptionRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.pigs.consumptionRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.pigs.consumptionRank.actualValue.toInt(),
                                 livestockFoodConsumptionContributionRanks
@@ -2253,7 +2270,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 chickenCashRank.setOnClickListener {
-                    if(livestockContributionResponses.chicken.incomeRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.chicken.incomeRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.chicken.incomeRank.actualValue.toInt(),
                                 livestockCashIncomeContributionRanks
@@ -2278,7 +2295,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 chickenFoodRank.setOnClickListener {
-                    if(livestockContributionResponses.chicken.consumptionRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.chicken.consumptionRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.chicken.consumptionRank.actualValue.toInt(),
                                 livestockFoodConsumptionContributionRanks
@@ -2292,7 +2309,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         }
                         chickenFoodRank.text = "Select rank..."
-                        livestockContributionResponses.chicken.consumptionRank.hasBeenSubmitted = false
+                        livestockContributionResponses.chicken.consumptionRank.hasBeenSubmitted =
+                            false
                     } else {
                         inflateLivestockContributionRankModal(
                             livestockFoodConsumptionContributionRanks,
@@ -2303,7 +2321,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 improvedChickenCashRank.setOnClickListener {
-                    if(livestockContributionResponses.improvedChicken.incomeRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.improvedChicken.incomeRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.improvedChicken.incomeRank.actualValue.toInt(),
                                 livestockCashIncomeContributionRanks
@@ -2317,7 +2335,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         }
                         improvedChickenCashRank.text = "Select rank..."
-                        livestockContributionResponses.improvedChicken.incomeRank.hasBeenSubmitted = false
+                        livestockContributionResponses.improvedChicken.incomeRank.hasBeenSubmitted =
+                            false
                     } else {
                         inflateLivestockContributionRankModal(
                             livestockCashIncomeContributionRanks,
@@ -2328,7 +2347,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 improvedChickenFoodRank.setOnClickListener {
-                    if(livestockContributionResponses.improvedChicken.consumptionRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.improvedChicken.consumptionRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.improvedChicken.consumptionRank.actualValue.toInt(),
                                 livestockFoodConsumptionContributionRanks
@@ -2342,7 +2361,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         }
                         improvedChickenFoodRank.text = "Select rank..."
-                        livestockContributionResponses.improvedChicken.consumptionRank.hasBeenSubmitted = false
+                        livestockContributionResponses.improvedChicken.consumptionRank.hasBeenSubmitted =
+                            false
                     } else {
                         inflateLivestockContributionRankModal(
                             livestockFoodConsumptionContributionRanks,
@@ -2353,7 +2373,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 camelsCashRank.setOnClickListener {
-                    if(livestockContributionResponses.camels.incomeRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.camels.incomeRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.camels.incomeRank.actualValue.toInt(),
                                 livestockCashIncomeContributionRanks
@@ -2378,7 +2398,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 camelsFoodRank.setOnClickListener {
-                    if(livestockContributionResponses.camels.consumptionRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.camels.consumptionRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.camels.consumptionRank.actualValue.toInt(),
                                 livestockFoodConsumptionContributionRanks
@@ -2392,7 +2412,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         }
                         camelsFoodRank.text = "Select rank..."
-                        livestockContributionResponses.camels.consumptionRank.hasBeenSubmitted = false
+                        livestockContributionResponses.camels.consumptionRank.hasBeenSubmitted =
+                            false
                     } else {
                         inflateLivestockContributionRankModal(
                             livestockFoodConsumptionContributionRanks,
@@ -2403,7 +2424,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 ducksCashRank.setOnClickListener {
-                    if(livestockContributionResponses.ducks.incomeRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.ducks.incomeRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.ducks.incomeRank.actualValue.toInt(),
                                 livestockCashIncomeContributionRanks
@@ -2428,7 +2449,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 ducksFoodRank.setOnClickListener {
-                    if(livestockContributionResponses.ducks.consumptionRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.ducks.consumptionRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.ducks.consumptionRank.actualValue.toInt(),
                                 livestockFoodConsumptionContributionRanks
@@ -2442,7 +2463,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         }
                         ducksFoodRank.text = "Select rank..."
-                        livestockContributionResponses.ducks.consumptionRank.hasBeenSubmitted = false
+                        livestockContributionResponses.ducks.consumptionRank.hasBeenSubmitted =
+                            false
                     } else {
                         inflateLivestockContributionRankModal(
                             livestockFoodConsumptionContributionRanks,
@@ -2453,7 +2475,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 beeHivesCashRank.setOnClickListener {
-                    if(livestockContributionResponses.beeHives.incomeRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.beeHives.incomeRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.beeHives.incomeRank.actualValue.toInt(),
                                 livestockCashIncomeContributionRanks
@@ -2478,7 +2500,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 beeHivesFoodrank.setOnClickListener {
-                    if(livestockContributionResponses.beeHives.consumptionRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.beeHives.consumptionRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.beeHives.consumptionRank.actualValue.toInt(),
                                 livestockFoodConsumptionContributionRanks
@@ -2492,7 +2514,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         }
                         beeHivesFoodrank.text = "Select rank..."
-                        livestockContributionResponses.beeHives.consumptionRank.hasBeenSubmitted = false
+                        livestockContributionResponses.beeHives.consumptionRank.hasBeenSubmitted =
+                            false
                     } else {
                         inflateLivestockContributionRankModal(
                             livestockFoodConsumptionContributionRanks,
@@ -2503,7 +2526,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 fishPondsCashRank.setOnClickListener {
-                    if(livestockContributionResponses.fishPonds.incomeRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.fishPonds.incomeRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.fishPonds.incomeRank.actualValue.toInt(),
                                 livestockCashIncomeContributionRanks
@@ -2528,7 +2551,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 fishPondsFoodRank.setOnClickListener {
-                    if(livestockContributionResponses.fishPonds.consumptionRank.hasBeenSubmitted) {
+                    if (livestockContributionResponses.fishPonds.consumptionRank.hasBeenSubmitted) {
                         if (!doesRankItemAlreadyExistInTheRankList(
                                 livestockContributionResponses.fishPonds.consumptionRank.actualValue.toInt(),
                                 livestockFoodConsumptionContributionRanks
@@ -2542,7 +2565,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         }
                         fishPondsFoodRank.text = "Select rank..."
-                        livestockContributionResponses.fishPonds.consumptionRank.hasBeenSubmitted = false
+                        livestockContributionResponses.fishPonds.consumptionRank.hasBeenSubmitted =
+                            false
                     } else {
                         inflateLivestockContributionRankModal(
                             livestockFoodConsumptionContributionRanks,
@@ -2689,6 +2713,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                             ) {
                                 wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.LABOUR_PATTERNS_STEP)
                             }
+
+                            updateCurrentQuestionnaireToStore()
 
                             wgLabourPatterns.root.visibility = View.VISIBLE
                             wgLivestockPoultryContribution.root.visibility = View.GONE
@@ -3153,6 +3179,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.EXPENDITURE_PATTERNS_STEP)
                             }
 
+                            updateCurrentQuestionnaireToStore()
+
                             wgExpenditurePatterns.root.visibility = View.VISIBLE
                             wgLabourPatterns.root.visibility = View.GONE
 
@@ -3588,6 +3616,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.MIGRATION_PATTERNS_STEP)
                             }
 
+                            updateCurrentQuestionnaireToStore()
+
                             wgMigrationPatterns.root.visibility = View.VISIBLE
                             wgExpenditurePatterns.root.visibility = View.GONE
 
@@ -3758,6 +3788,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.CONSTRAINTS_STEP)
                             }
 
+                            updateCurrentQuestionnaireToStore()
+
                             wgConstraints.root.visibility = View.VISIBLE
                             wgMigrationPatterns.root.visibility = View.GONE
 
@@ -3781,470 +3813,1082 @@ class WealthGroupDialogFragment : DialogFragment(),
                     wgConstraints.root.visibility = View.GONE
                 }
 
-                for (i in 0..4) {
-                    incomeSourceRanks.add(RankResponseItem(i + 1, false))
+                for (i in 0..5) {
+                    incomeSourceRanks.add(RankResponseItem(i, false))
                 }
                 for (i in 0..9) {
-                    incomeConsumptionRanks.add(RankResponseItem(i + 1, false))
+                    incomeConsumptionRanks.add(RankResponseItem(i, false))
                 }
                 for (i in 0..7) {
-                    livestockProductionRanks.add(RankResponseItem(i + 1, false))
+                    livestockProductionRanks.add(RankResponseItem(i, false))
                 }
                 for (i in 0..6) {
-                    fishingRanks.add(RankResponseItem(i + 1, false))
+                    fishingRanks.add(RankResponseItem(i, false))
                 }
                 for (i in 0..4) {
-                    naturalResourceRanks.add(RankResponseItem(i + 1, false))
+                    naturalResourceRanks.add(RankResponseItem(i, false))
                 }
                 for (i in 0..5) {
-                    smallEnterpriesRanks.add(RankResponseItem(i + 1, false))
+                    smallEnterpriesRanks.add(RankResponseItem(i, false))
                 }
 
                 labourLowEducation.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeSourceRanks,
-                        ConstraintsTypeEnum.IS_LOW_EDUCATION,
-                        ConstraintCategoryEnum.SOURCE_OF_INCOME
-                    )
+                    if (wagedLabourIncomeConstraintsResponses.lowEducation != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                wagedLabourIncomeConstraintsResponses.lowEducation,
+                                incomeSourceRanks
+                            )
+                        ) {
+
+                            incomeSourceRanks.add(RankResponseItem(wagedLabourIncomeConstraintsResponses.lowEducation, false))
+
+                        }
+
+                        labourLowEducation.text = "Select rank..."
+                        wagedLabourIncomeConstraintsResponses.lowEducation = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeSourceRanks,
+                            ConstraintsTypeEnum.IS_LOW_EDUCATION,
+                            ConstraintCategoryEnum.SOURCE_OF_INCOME
+                        )
+                    }
                 }
                 labourPoorHealth.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeSourceRanks,
-                        ConstraintsTypeEnum.IS_POOR_HEALTH,
-                        ConstraintCategoryEnum.SOURCE_OF_INCOME
-                    )
+                    if (wagedLabourIncomeConstraintsResponses.poorHealth != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                wagedLabourIncomeConstraintsResponses.poorHealth,
+                                incomeSourceRanks
+                            )
+                        ) {
+
+                            incomeSourceRanks.add(RankResponseItem(wagedLabourIncomeConstraintsResponses.poorHealth, false))
+
+                        }
+
+                        labourPoorHealth.text = "Select rank..."
+                        wagedLabourIncomeConstraintsResponses.poorHealth = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeSourceRanks,
+                            ConstraintsTypeEnum.IS_POOR_HEALTH,
+                            ConstraintCategoryEnum.SOURCE_OF_INCOME
+                        )
+                    }
                 }
                 labourFewJobs.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeSourceRanks,
-                        ConstraintsTypeEnum.IS_FEW_JOBS,
-                        ConstraintCategoryEnum.SOURCE_OF_INCOME
-                    )
+                    if (wagedLabourIncomeConstraintsResponses.fewJobs != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                wagedLabourIncomeConstraintsResponses.fewJobs,
+                                incomeSourceRanks
+                            )
+                        ) {
+
+                            incomeSourceRanks.add(RankResponseItem(wagedLabourIncomeConstraintsResponses.fewJobs, false))
+
+                        }
+
+                        labourFewJobs.text = "Select rank..."
+                        wagedLabourIncomeConstraintsResponses.fewJobs = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeSourceRanks,
+                            ConstraintsTypeEnum.IS_FEW_JOBS,
+                            ConstraintCategoryEnum.SOURCE_OF_INCOME
+                        )
+                    }
                 }
                 labourFarmTime.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeSourceRanks,
-                        ConstraintsTypeEnum.IS_TIME_ON_FARM,
-                        ConstraintCategoryEnum.SOURCE_OF_INCOME
-                    )
+                    if (wagedLabourIncomeConstraintsResponses.tooMuchFarmTime != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                wagedLabourIncomeConstraintsResponses.tooMuchFarmTime,
+                                incomeSourceRanks
+                            )
+                        ) {
+
+                            incomeSourceRanks.add(RankResponseItem(wagedLabourIncomeConstraintsResponses.tooMuchFarmTime, false))
+
+                        }
+
+                        labourFarmTime.text = "Select rank..."
+                        wagedLabourIncomeConstraintsResponses.tooMuchFarmTime = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeSourceRanks,
+                            ConstraintsTypeEnum.IS_TIME_ON_FARM,
+                            ConstraintCategoryEnum.SOURCE_OF_INCOME
+                        )
+                    }
                 }
                 labourLowWageRates.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeSourceRanks,
-                        ConstraintsTypeEnum.IS_LOW_WAGE_RATES,
-                        ConstraintCategoryEnum.SOURCE_OF_INCOME
-                    )
+                    if (wagedLabourIncomeConstraintsResponses.lowAverageWageRates != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                wagedLabourIncomeConstraintsResponses.lowAverageWageRates,
+                                incomeSourceRanks
+                            )
+                        ) {
+
+                            incomeSourceRanks.add(RankResponseItem(wagedLabourIncomeConstraintsResponses.lowAverageWageRates, false))
+
+                        }
+
+                        labourLowWageRates.text = "Select rank..."
+                        wagedLabourIncomeConstraintsResponses.lowAverageWageRates = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeSourceRanks,
+                            ConstraintsTypeEnum.IS_LOW_WAGE_RATES,
+                            ConstraintCategoryEnum.SOURCE_OF_INCOME
+                        )
+                    }
                 }
 
 
                 consumptionHoldings.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeConsumptionRanks,
-                        ConstraintsTypeEnum.IC_SMALL_LAND,
-                        ConstraintCategoryEnum.INCOME_CONSUMPTION
-                    )
+                    if (cropProductionIncomeConstraintsResponses.smallLandHoldings != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                cropProductionIncomeConstraintsResponses.smallLandHoldings,
+                                incomeConsumptionRanks
+                            )
+                        ) {
+
+                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.smallLandHoldings, false))
+
+                        }
+
+                        consumptionHoldings.text = "Select rank..."
+                        cropProductionIncomeConstraintsResponses.smallLandHoldings = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeConsumptionRanks,
+                            ConstraintsTypeEnum.IC_SMALL_LAND,
+                            ConstraintCategoryEnum.INCOME_CONSUMPTION
+                        )
+                    }
                 }
                 consumptionLackOfCredit.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeConsumptionRanks,
-                        ConstraintsTypeEnum.IC_LACK_OF_CREDIT,
-                        ConstraintCategoryEnum.INCOME_CONSUMPTION
-                    )
+                    if (cropProductionIncomeConstraintsResponses.lackOfCredit != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                cropProductionIncomeConstraintsResponses.lackOfCredit,
+                                incomeConsumptionRanks
+                            )
+                        ) {
+
+                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.lackOfCredit, false))
+
+                        }
+
+                        consumptionLackOfCredit.text = "Select rank..."
+                        cropProductionIncomeConstraintsResponses.lackOfCredit = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeConsumptionRanks,
+                            ConstraintsTypeEnum.IC_LACK_OF_CREDIT,
+                            ConstraintCategoryEnum.INCOME_CONSUMPTION
+                        )
+                    }
                 }
                 consumptionHighInputs.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeConsumptionRanks,
-                        ConstraintsTypeEnum.IC_HIGH_INPUT_COSTS,
-                        ConstraintCategoryEnum.INCOME_CONSUMPTION
-                    )
+                    if (cropProductionIncomeConstraintsResponses.highInputCost != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                cropProductionIncomeConstraintsResponses.highInputCost,
+                                incomeConsumptionRanks
+                            )
+                        ) {
+
+                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.highInputCost, false))
+
+                        }
+
+                        consumptionHighInputs.text = "Select rank..."
+                        cropProductionIncomeConstraintsResponses.highInputCost = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeConsumptionRanks,
+                            ConstraintsTypeEnum.IC_HIGH_INPUT_COSTS,
+                            ConstraintCategoryEnum.INCOME_CONSUMPTION
+                        )
+                    }
                 }
                 consumptionLowFertility.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeConsumptionRanks,
-                        ConstraintsTypeEnum.IC_LOW_LAND_FERTILITY,
-                        ConstraintCategoryEnum.INCOME_CONSUMPTION
-                    )
+                    if (cropProductionIncomeConstraintsResponses.lowLandFertility != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                cropProductionIncomeConstraintsResponses.lowLandFertility,
+                                incomeConsumptionRanks
+                            )
+                        ) {
+
+                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.lowLandFertility, false))
+
+                        }
+
+                        consumptionLowFertility.text = "Select rank..."
+                        cropProductionIncomeConstraintsResponses.lowLandFertility = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeConsumptionRanks,
+                            ConstraintsTypeEnum.IC_LOW_LAND_FERTILITY,
+                            ConstraintCategoryEnum.INCOME_CONSUMPTION
+                        )
+                    }
                 }
                 consumptionUnreliableWater.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeConsumptionRanks,
-                        ConstraintsTypeEnum.IC_UNRELIABLE_WATER,
-                        ConstraintCategoryEnum.INCOME_CONSUMPTION
-                    )
+                    if (cropProductionIncomeConstraintsResponses.lackOfReliableWater != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                cropProductionIncomeConstraintsResponses.lackOfReliableWater,
+                                incomeConsumptionRanks
+                            )
+                        ) {
+
+                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.lackOfReliableWater, false))
+
+                        }
+
+                        consumptionUnreliableWater.text = "Select rank..."
+                        cropProductionIncomeConstraintsResponses.lackOfReliableWater = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeConsumptionRanks,
+                            ConstraintsTypeEnum.IC_UNRELIABLE_WATER,
+                            ConstraintCategoryEnum.INCOME_CONSUMPTION
+                        )
+                    }
                 }
                 consumptionLowTechnicalSkills.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeConsumptionRanks,
-                        ConstraintsTypeEnum.IC_LOW_TECHNICAL_SKILLS,
-                        ConstraintCategoryEnum.INCOME_CONSUMPTION
-                    )
+                    if (cropProductionIncomeConstraintsResponses.lowTechnicalSkills != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                cropProductionIncomeConstraintsResponses.lowTechnicalSkills,
+                                incomeConsumptionRanks
+                            )
+                        ) {
+
+                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.lowTechnicalSkills, false))
+
+                        }
+
+                        consumptionLowTechnicalSkills.text = "Select rank..."
+                        cropProductionIncomeConstraintsResponses.lowTechnicalSkills = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeConsumptionRanks,
+                            ConstraintsTypeEnum.IC_LOW_TECHNICAL_SKILLS,
+                            ConstraintCategoryEnum.INCOME_CONSUMPTION
+                        )
+                    }
                 }
                 consumptionLowSeedQuality.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeConsumptionRanks,
-                        ConstraintsTypeEnum.IC_LOW_QUALITY_SEED,
-                        ConstraintCategoryEnum.INCOME_CONSUMPTION
-                    )
+                    if (cropProductionIncomeConstraintsResponses.lowQualitySeed != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                cropProductionIncomeConstraintsResponses.lowQualitySeed,
+                                incomeConsumptionRanks
+                            )
+                        ) {
+
+                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.lowQualitySeed, false))
+
+                        }
+
+                        consumptionLowSeedQuality.text = "Select rank..."
+                        cropProductionIncomeConstraintsResponses.lowQualitySeed = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeConsumptionRanks,
+                            ConstraintsTypeEnum.IC_LOW_QUALITY_SEED,
+                            ConstraintCategoryEnum.INCOME_CONSUMPTION
+                        )
+                    }
                 }
                 consumptionMarketAccess.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeConsumptionRanks,
-                        ConstraintsTypeEnum.IC_MARKET_ACCESS,
-                        ConstraintCategoryEnum.INCOME_CONSUMPTION
-                    )
+                    if (cropProductionIncomeConstraintsResponses.lackOfMarketAccess != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                cropProductionIncomeConstraintsResponses.lackOfMarketAccess,
+                                incomeConsumptionRanks
+                            )
+                        ) {
+
+                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.lackOfMarketAccess, false))
+
+                        }
+
+                        consumptionMarketAccess.text = "Select rank..."
+                        cropProductionIncomeConstraintsResponses.lackOfMarketAccess = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeConsumptionRanks,
+                            ConstraintsTypeEnum.IC_MARKET_ACCESS,
+                            ConstraintCategoryEnum.INCOME_CONSUMPTION
+                        )
+                    }
                 }
                 consumptionCropPests.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        incomeConsumptionRanks,
-                        ConstraintsTypeEnum.IC_CROP_PESTS_DISEASES,
-                        ConstraintCategoryEnum.INCOME_CONSUMPTION
-                    )
+                    if (cropProductionIncomeConstraintsResponses.endemicCropPests != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                cropProductionIncomeConstraintsResponses.endemicCropPests,
+                                incomeConsumptionRanks
+                            )
+                        ) {
+
+                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.endemicCropPests, false))
+
+                        }
+
+                        consumptionCropPests.text = "Select rank..."
+                        cropProductionIncomeConstraintsResponses.endemicCropPests = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            incomeConsumptionRanks,
+                            ConstraintsTypeEnum.IC_CROP_PESTS_DISEASES,
+                            ConstraintCategoryEnum.INCOME_CONSUMPTION
+                        )
+                    }
                 }
 
 
                 livestockProductionPasture.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        livestockProductionRanks,
-                        ConstraintsTypeEnum.LP_LACK_OF_PASTURE,
-                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
-                    )
+                    if (livestockProductionIncomeConstraintsResponses.lackOfPasture != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockProductionIncomeConstraintsResponses.lackOfPasture,
+                                livestockProductionRanks
+                            )
+                        ) {
+
+                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.lackOfPasture, false))
+
+                        }
+
+                        livestockProductionPasture.text = "Select rank..."
+                        livestockProductionIncomeConstraintsResponses.lackOfPasture = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            livestockProductionRanks,
+                            ConstraintsTypeEnum.LP_LACK_OF_PASTURE,
+                            ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                        )
+                    }
                 }
                 livestockProductionDrinkingWater.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        livestockProductionRanks,
-                        ConstraintsTypeEnum.LP_LACK_ANIMAL_DRINKING_WATER,
-                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
-                    )
+                    if (livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater,
+                                livestockProductionRanks
+                            )
+                        ) {
+
+                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater, false))
+
+                        }
+
+                        livestockProductionDrinkingWater.text = "Select rank..."
+                        livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            livestockProductionRanks,
+                            ConstraintsTypeEnum.LP_LACK_ANIMAL_DRINKING_WATER,
+                            ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                        )
+                    }
                 }
                 livestockProductionLowYieldingAnimal.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        livestockProductionRanks,
-                        ConstraintsTypeEnum.LP_LOW_YIELDING_ANIMALS,
-                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
-                    )
+                    if (livestockProductionIncomeConstraintsResponses.lowYieldingAnimal != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockProductionIncomeConstraintsResponses.lowYieldingAnimal,
+                                livestockProductionRanks
+                            )
+                        ) {
+
+                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.lowYieldingAnimal, false))
+
+                        }
+
+                        livestockProductionLowYieldingAnimal.text = "Select rank..."
+                        livestockProductionIncomeConstraintsResponses.lowYieldingAnimal = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            livestockProductionRanks,
+                            ConstraintsTypeEnum.LP_LOW_YIELDING_ANIMALS,
+                            ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                        )
+                    }
                 }
                 livestockProductionVeterinaryDrugs.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        livestockProductionRanks,
-                        ConstraintsTypeEnum.LP_COSTLY_VETERINARY_DRUGS,
-                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
-                    )
+                    if (livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs,
+                                livestockProductionRanks
+                            )
+                        ) {
+
+                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs, false))
+
+                        }
+
+                        livestockProductionVeterinaryDrugs.text = "Select rank..."
+                        livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            livestockProductionRanks,
+                            ConstraintsTypeEnum.LP_COSTLY_VETERINARY_DRUGS,
+                            ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                        )
+                    }
                 }
                 livestockProductionPests.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        livestockProductionRanks,
-                        ConstraintsTypeEnum.LP_LIVESTOCK_PESTS_DISEASES,
-                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
-                    )
+                    if (livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases,
+                                livestockProductionRanks
+                            )
+                        ) {
+
+                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases, false))
+
+                        }
+
+                        livestockProductionPests.text = "Select rank..."
+                        livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            livestockProductionRanks,
+                            ConstraintsTypeEnum.LP_LIVESTOCK_PESTS_DISEASES,
+                            ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                        )
+                    }
                 }
                 livestockProductionMarket.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        livestockProductionRanks,
-                        ConstraintsTypeEnum.LP_LACK_OF_MARKET,
-                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
-                    )
+                    if (livestockProductionIncomeConstraintsResponses.lackofMarket != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockProductionIncomeConstraintsResponses.lackofMarket,
+                                livestockProductionRanks
+                            )
+                        ) {
+
+                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.lackofMarket, false))
+
+                        }
+
+                        livestockProductionMarket.text = "Select rank..."
+                        livestockProductionIncomeConstraintsResponses.lackofMarket = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            livestockProductionRanks,
+                            ConstraintsTypeEnum.LP_LACK_OF_MARKET,
+                            ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                        )
+                    }
                 }
                 livestockProductionInsecurity.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        livestockProductionRanks,
-                        ConstraintsTypeEnum.LP_INSECURITY,
-                        ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
-                    )
+                    if (livestockProductionIncomeConstraintsResponses.insecurity != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                livestockProductionIncomeConstraintsResponses.insecurity,
+                                livestockProductionRanks
+                            )
+                        ) {
+
+                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.insecurity, false))
+
+                        }
+
+                        livestockProductionInsecurity.text = "Select rank..."
+                        livestockProductionIncomeConstraintsResponses.insecurity = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            livestockProductionRanks,
+                            ConstraintsTypeEnum.LP_INSECURITY,
+                            ConstraintCategoryEnum.LIVESTOCK_PRODUCTION
+                        )
+                    }
                 }
 
 
                 fishingLowStocks.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        fishingRanks,
-                        ConstraintsTypeEnum.F_LOW_FISH_STOCKS,
-                        ConstraintCategoryEnum.FISHING
-                    )
+                    if (fishingIncomeConstraintsResponses.lowFishStocks != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                fishingIncomeConstraintsResponses.lowFishStocks,
+                                fishingRanks
+                            )
+                        ) {
+
+                            fishingRanks.add(RankResponseItem(fishingIncomeConstraintsResponses.lowFishStocks, false))
+
+                        }
+
+                        fishingLowStocks.text = "Select rank..."
+                        fishingIncomeConstraintsResponses.lowFishStocks = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            fishingRanks,
+                            ConstraintsTypeEnum.F_LOW_FISH_STOCKS,
+                            ConstraintCategoryEnum.FISHING
+                        )
+                    }
                 }
                 fishingPoorMarket.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        fishingRanks,
-                        ConstraintsTypeEnum.F_POOR_MARKET,
-                        ConstraintCategoryEnum.FISHING
-                    )
+                    if (fishingIncomeConstraintsResponses.poorMarket != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                fishingIncomeConstraintsResponses.poorMarket,
+                                fishingRanks
+                            )
+                        ) {
+
+                            fishingRanks.add(RankResponseItem(fishingIncomeConstraintsResponses.poorMarket, false))
+
+                        }
+
+                        fishingPoorMarket.text = "Select rank..."
+                        fishingIncomeConstraintsResponses.poorMarket = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            fishingRanks,
+                            ConstraintsTypeEnum.F_POOR_MARKET,
+                            ConstraintCategoryEnum.FISHING
+                        )
+                    }
                 }
                 fishingLackOfEquipment.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        fishingRanks,
-                        ConstraintsTypeEnum.F_EQUIPMENT,
-                        ConstraintCategoryEnum.FISHING
-                    )
+                    if (fishingIncomeConstraintsResponses.lackOfEquipment != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                fishingIncomeConstraintsResponses.lackOfEquipment,
+                                fishingRanks
+                            )
+                        ) {
+
+                            fishingRanks.add(RankResponseItem(fishingIncomeConstraintsResponses.lackOfEquipment, false))
+
+                        }
+
+                        fishingLackOfEquipment.text = "Select rank..."
+                        fishingIncomeConstraintsResponses.lackOfEquipment = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            fishingRanks,
+                            ConstraintsTypeEnum.F_EQUIPMENT,
+                            ConstraintCategoryEnum.FISHING
+                        )
+                    }
                 }
                 fishingCompetition.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        fishingRanks,
-                        ConstraintsTypeEnum.F_COMPETITION,
-                        ConstraintCategoryEnum.FISHING
-                    )
+                    if (fishingIncomeConstraintsResponses.extremeCompetition != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                fishingIncomeConstraintsResponses.extremeCompetition,
+                                fishingRanks
+                            )
+                        ) {
+
+                            fishingRanks.add(RankResponseItem(fishingIncomeConstraintsResponses.extremeCompetition, false))
+
+                        }
+
+                        fishingCompetition.text = "Select rank..."
+                        fishingIncomeConstraintsResponses.extremeCompetition = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            fishingRanks,
+                            ConstraintsTypeEnum.F_COMPETITION,
+                            ConstraintCategoryEnum.FISHING
+                        )
+                    }
                 }
                 fishingLackOfExpertise.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        fishingRanks,
-                        ConstraintsTypeEnum.F_LACK_OF_EXPERTISE,
-                        ConstraintCategoryEnum.FISHING
-                    )
+                    if (fishingIncomeConstraintsResponses.lackOfExpertise != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                fishingIncomeConstraintsResponses.lackOfExpertise,
+                                fishingRanks
+                            )
+                        ) {
+
+                            fishingRanks.add(RankResponseItem(fishingIncomeConstraintsResponses.lackOfExpertise, false))
+
+                        }
+
+                        fishingLackOfExpertise.text = "Select rank..."
+                        fishingIncomeConstraintsResponses.lackOfExpertise = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            fishingRanks,
+                            ConstraintsTypeEnum.F_LACK_OF_EXPERTISE,
+                            ConstraintCategoryEnum.FISHING
+                        )
+                    }
                 }
                 fishingFishingRights.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        fishingRanks,
-                        ConstraintsTypeEnum.F_FISHING_RIGHTS,
-                        ConstraintCategoryEnum.FISHING
-                    )
+                    if (fishingIncomeConstraintsResponses.fishingRightsRestrictions != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                fishingIncomeConstraintsResponses.fishingRightsRestrictions,
+                                fishingRanks
+                            )
+                        ) {
+
+                            fishingRanks.add(RankResponseItem(fishingIncomeConstraintsResponses.fishingRightsRestrictions, false))
+
+                        }
+
+                        fishingFishingRights.text = "Select rank..."
+                        fishingIncomeConstraintsResponses.fishingRightsRestrictions = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            fishingRanks,
+                            ConstraintsTypeEnum.F_FISHING_RIGHTS,
+                            ConstraintCategoryEnum.FISHING
+                        )
+                    }
                 }
 
 
                 resourceDecline.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        naturalResourceRanks,
-                        ConstraintsTypeEnum.NR_DECLINING_RESOURCE,
-                        ConstraintCategoryEnum.NATURAL_RESOURCE
-                    )
+                    if (naturalResourceIncomeConstraintsResponses.decliningNaturalResources != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                naturalResourceIncomeConstraintsResponses.decliningNaturalResources,
+                                naturalResourceRanks
+                            )
+                        ) {
+
+                            naturalResourceRanks.add(RankResponseItem(naturalResourceIncomeConstraintsResponses.decliningNaturalResources, false))
+
+                        }
+
+                        resourceDecline.text = "Select rank..."
+                        naturalResourceIncomeConstraintsResponses.decliningNaturalResources = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            naturalResourceRanks,
+                            ConstraintsTypeEnum.NR_DECLINING_RESOURCE,
+                            ConstraintCategoryEnum.NATURAL_RESOURCE
+                        )
+                    }
                 }
                 resourcePopulationPressure.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        naturalResourceRanks,
-                        ConstraintsTypeEnum.NR_POPULATION_PRESSURE,
-                        ConstraintCategoryEnum.NATURAL_RESOURCE
-                    )
+                    if (naturalResourceIncomeConstraintsResponses.populationPressure != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                naturalResourceIncomeConstraintsResponses.populationPressure,
+                                naturalResourceRanks
+                            )
+                        ) {
+
+                            naturalResourceRanks.add(RankResponseItem(naturalResourceIncomeConstraintsResponses.populationPressure, false))
+
+                        }
+
+                        resourcePopulationPressure.text = "Select rank..."
+                        naturalResourceIncomeConstraintsResponses.populationPressure = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            naturalResourceRanks,
+                            ConstraintsTypeEnum.NR_POPULATION_PRESSURE,
+                            ConstraintCategoryEnum.NATURAL_RESOURCE
+                        )
+                    }
                 }
                 resourceRights.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        naturalResourceRanks,
-                        ConstraintsTypeEnum.NR_RIGHTS_RESTRICTIONS,
-                        ConstraintCategoryEnum.NATURAL_RESOURCE
-                    )
-                }
+                    if (naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights,
+                                naturalResourceRanks
+                            )
+                        ) {
+
+                            naturalResourceRanks.add(RankResponseItem(naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights, false))
+
+                        }
+
+                        resourceRights.text = "Select rank..."
+                        naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            naturalResourceRanks,
+                            ConstraintsTypeEnum.NR_RIGHTS_RESTRICTIONS,
+                            ConstraintCategoryEnum.NATURAL_RESOURCE
+                        )
+                    }
+                    }
                 resourceLowValue.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        naturalResourceRanks,
-                        ConstraintsTypeEnum.NR_LOW_VALUE,
-                        ConstraintCategoryEnum.NATURAL_RESOURCE
-                    )
+                    if (naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts,
+                                naturalResourceRanks
+                            )
+                        ) {
+
+                            naturalResourceRanks.add(RankResponseItem(naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts, false))
+
+                        }
+
+                        resourceLowValue.text = "Select rank..."
+                        naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            naturalResourceRanks,
+                            ConstraintsTypeEnum.NR_LOW_VALUE,
+                            ConstraintCategoryEnum.NATURAL_RESOURCE
+                        )
+                    }
                 }
 
 
                 enterpriseLackOfCapital.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        smallEnterpriesRanks,
-                        ConstraintsTypeEnum.SE_LACK_OF_CAPITAL,
-                        ConstraintCategoryEnum.SMALL_ENTERPRISE
-                    )
+                    if (smallEnterpriseIncomeConstraintsResponses.lackOfCapital != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                smallEnterpriseIncomeConstraintsResponses.lackOfCapital,
+                                smallEnterpriesRanks
+                            )
+                        ) {
+
+                            smallEnterpriesRanks.add(RankResponseItem(smallEnterpriseIncomeConstraintsResponses.lackOfCapital, false))
+
+                        }
+
+                        enterpriseLackOfCapital.text = "Select rank..."
+                        smallEnterpriseIncomeConstraintsResponses.lackOfCapital = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            smallEnterpriesRanks,
+                            ConstraintsTypeEnum.SE_LACK_OF_CAPITAL,
+                            ConstraintCategoryEnum.SMALL_ENTERPRISE
+                        )
+                    }
                 }
                 enterpriseRedTape.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        smallEnterpriesRanks,
-                        ConstraintsTypeEnum.SE_RED_TAPE,
-                        ConstraintCategoryEnum.SMALL_ENTERPRISE
-                    )
+                    if (smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape,
+                                smallEnterpriesRanks
+                            )
+                        ) {
+
+                            smallEnterpriesRanks.add(RankResponseItem(smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape, false))
+
+                        }
+
+                        enterpriseRedTape.text = "Select rank..."
+                        smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            smallEnterpriesRanks,
+                            ConstraintsTypeEnum.SE_RED_TAPE,
+                            ConstraintCategoryEnum.SMALL_ENTERPRISE
+                        )
+                    }
                 }
                 enterpriseTaxes.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        smallEnterpriesRanks,
-                        ConstraintsTypeEnum.SE_TAXES,
-                        ConstraintCategoryEnum.SMALL_ENTERPRISE
-                    )
+                    if (smallEnterpriseIncomeConstraintsResponses.tooManyTaxes != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                smallEnterpriseIncomeConstraintsResponses.tooManyTaxes,
+                                smallEnterpriesRanks
+                            )
+                        ) {
+
+                            smallEnterpriesRanks.add(RankResponseItem(smallEnterpriseIncomeConstraintsResponses.tooManyTaxes, false))
+
+                        }
+
+                        enterpriseTaxes.text = "Select rank..."
+                        smallEnterpriseIncomeConstraintsResponses.tooManyTaxes = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            smallEnterpriesRanks,
+                            ConstraintsTypeEnum.SE_TAXES,
+                            ConstraintCategoryEnum.SMALL_ENTERPRISE
+                        )
+                    }
                 }
                 enterpriseMarketAccess.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        smallEnterpriesRanks,
-                        ConstraintsTypeEnum.SE_MARKET_ACCESS,
-                        ConstraintCategoryEnum.SMALL_ENTERPRISE
-                    )
+                    if (smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket,
+                                smallEnterpriesRanks
+                            )
+                        ) {
+
+                            smallEnterpriesRanks.add(RankResponseItem(smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket, false))
+
+                        }
+
+                        enterpriseMarketAccess.text = "Select rank..."
+                        smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            smallEnterpriesRanks,
+                            ConstraintsTypeEnum.SE_MARKET_ACCESS,
+                            ConstraintCategoryEnum.SMALL_ENTERPRISE
+                        )
+                    }
                 }
                 enterpriseExpertise.setOnClickListener {
-                    inflateConstraintsRankModal(
-                        smallEnterpriesRanks,
-                        ConstraintsTypeEnum.SE_LACK_OF_EXPERTISE,
-                        ConstraintCategoryEnum.SMALL_ENTERPRISE
-                    )
+                    if (smallEnterpriseIncomeConstraintsResponses.lackOfExpertise != -1) {
+
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                smallEnterpriseIncomeConstraintsResponses.lackOfExpertise,
+                                smallEnterpriesRanks
+                            )
+                        ) {
+
+                            smallEnterpriesRanks.add(RankResponseItem(smallEnterpriseIncomeConstraintsResponses.lackOfExpertise, false))
+
+                        }
+
+                        enterpriseExpertise.text = "Select rank..."
+                        smallEnterpriseIncomeConstraintsResponses.lackOfExpertise = -1
+
+                    } else {
+                        inflateConstraintsRankModal(
+                            smallEnterpriesRanks,
+                            ConstraintsTypeEnum.SE_LACK_OF_EXPERTISE,
+                            ConstraintCategoryEnum.SMALL_ENTERPRISE
+                        )
+                    }
                 }
 
                 constraintsNextButton.setOnClickListener {
 
                     var hasNoValidationError: Boolean = true
 
-                    if (wagedLabourIncomeConstraintsResponses.lowEducation == 0) {
+                    if (wagedLabourIncomeConstraintsResponses.lowEducation == -1) {
                         hasNoValidationError = false
                         labourLowEducationCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (wagedLabourIncomeConstraintsResponses.poorHealth == 0) {
+                    if (wagedLabourIncomeConstraintsResponses.poorHealth == -1) {
                         hasNoValidationError = false
                         labourPoorHealthCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (wagedLabourIncomeConstraintsResponses.fewJobs == 0) {
+                    if (wagedLabourIncomeConstraintsResponses.fewJobs == -1) {
                         hasNoValidationError = false
                         labourFewJobsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (wagedLabourIncomeConstraintsResponses.tooMuchFarmTime == 0) {
+                    if (wagedLabourIncomeConstraintsResponses.tooMuchFarmTime == -1) {
                         hasNoValidationError = false
                         labourFarmTimeCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (wagedLabourIncomeConstraintsResponses.lowAverageWageRates == 0) {
+                    if (wagedLabourIncomeConstraintsResponses.lowAverageWageRates == -1) {
                         hasNoValidationError = false
                         labourLowWageRatesCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
 
-                    if (cropProductionIncomeConstraintsResponses.smallLandHoldings == 0) {
+                    if (cropProductionIncomeConstraintsResponses.smallLandHoldings == -1) {
                         hasNoValidationError = false
                         consumptionHoldingsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (cropProductionIncomeConstraintsResponses.lackOfCredit == 0) {
+                    if (cropProductionIncomeConstraintsResponses.lackOfCredit == -1) {
                         hasNoValidationError = false
                         consumptionLackOfCreditCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
 
-                    if (cropProductionIncomeConstraintsResponses.highInputCost == 0) {
+                    if (cropProductionIncomeConstraintsResponses.highInputCost == -1) {
                         hasNoValidationError = false
                         consumptionHighInputsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (cropProductionIncomeConstraintsResponses.lowLandFertility == 0) {
+                    if (cropProductionIncomeConstraintsResponses.lowLandFertility == -1) {
                         hasNoValidationError = false
                         consumptionLowFertilityCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (cropProductionIncomeConstraintsResponses.lackOfReliableWater == 0) {
+                    if (cropProductionIncomeConstraintsResponses.lackOfReliableWater == -1) {
                         hasNoValidationError = false
                         consumptionUnreliableWaterCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (cropProductionIncomeConstraintsResponses.lowTechnicalSkills == 0) {
+                    if (cropProductionIncomeConstraintsResponses.lowTechnicalSkills == -1) {
                         hasNoValidationError = false
                         consumptionLowTechnicalSkillsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (cropProductionIncomeConstraintsResponses.lowQualitySeed == 0) {
+                    if (cropProductionIncomeConstraintsResponses.lowQualitySeed == -1) {
                         hasNoValidationError = false
                         consumptionLowSeedQualityCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (cropProductionIncomeConstraintsResponses.lackOfMarketAccess == 0) {
+                    if (cropProductionIncomeConstraintsResponses.lackOfMarketAccess == -1) {
                         hasNoValidationError = false
                         consumptionMarketAccessCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (cropProductionIncomeConstraintsResponses.endemicCropPests == 0) {
+                    if (cropProductionIncomeConstraintsResponses.endemicCropPests == -1) {
                         hasNoValidationError = false
                         consumptionCropPestsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionIncomeConstraintsResponses.lackOfPasture == 0) {
+                    if (livestockProductionIncomeConstraintsResponses.lackOfPasture == -1) {
                         hasNoValidationError = false
                         livestockProductionPastureCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater == 0) {
+                    if (livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater == -1) {
                         hasNoValidationError = false
                         livestockProductionDrinkingWaterCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionIncomeConstraintsResponses.lowYieldingAnimal == 0) {
+                    if (livestockProductionIncomeConstraintsResponses.lowYieldingAnimal == -1) {
                         hasNoValidationError = false
                         livestockProductionLowYieldingAnimalCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs == 0) {
+                    if (livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs == -1) {
                         hasNoValidationError = false
                         livestockProductionVeterinaryDrugsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases == 0) {
+                    if (livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases == -1) {
                         hasNoValidationError = false
                         livestockProductionPestsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionIncomeConstraintsResponses.lackofMarket == 0) {
+                    if (livestockProductionIncomeConstraintsResponses.lackofMarket == -1) {
                         hasNoValidationError = false
                         livestockProductionMarketCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (livestockProductionIncomeConstraintsResponses.insecurity == 0) {
+                    if (livestockProductionIncomeConstraintsResponses.insecurity == -1) {
                         hasNoValidationError = false
                         livestockProductionInsecurityCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (fishingIncomeConstraintsResponses.lowFishStocks == 0) {
+                    if (fishingIncomeConstraintsResponses.lowFishStocks == -1) {
                         hasNoValidationError = false
                         fishingLowStocksCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (fishingIncomeConstraintsResponses.poorMarket == 0) {
+                    if (fishingIncomeConstraintsResponses.poorMarket == -1) {
                         hasNoValidationError = false
                         fishingPoorMarketCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (fishingIncomeConstraintsResponses.lackOfEquipment == 0) {
+                    if (fishingIncomeConstraintsResponses.lackOfEquipment == -1) {
                         hasNoValidationError = false
                         fishingLackOfEquipmentCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (fishingIncomeConstraintsResponses.extremeCompetition == 0) {
+                    if (fishingIncomeConstraintsResponses.extremeCompetition == -1) {
                         hasNoValidationError = false
                         fishingCompetitionCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (fishingIncomeConstraintsResponses.lackOfExpertise == 0) {
+                    if (fishingIncomeConstraintsResponses.lackOfExpertise == -1) {
                         hasNoValidationError = false
                         fishingLackOfExpertiseCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (fishingIncomeConstraintsResponses.fishingRightsRestrictions == 0) {
+                    if (fishingIncomeConstraintsResponses.fishingRightsRestrictions == -1) {
                         hasNoValidationError = false
                         fishingFishingRightsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (naturalResourceIncomeConstraintsResponses.decliningNaturalResources == 0) {
+                    if (naturalResourceIncomeConstraintsResponses.decliningNaturalResources == -1) {
                         hasNoValidationError = false
                         resourceDeclineCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (naturalResourceIncomeConstraintsResponses.populationPressure == 0) {
+                    if (naturalResourceIncomeConstraintsResponses.populationPressure == -1) {
                         hasNoValidationError = false
                         resourcePopulationPressureCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights == 0) {
+                    if (naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights == -1) {
                         hasNoValidationError = false
                         resourceRightsCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts == 0) {
+                    if (naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts == -1) {
                         hasNoValidationError = false
                         resourceLowValueCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (smallEnterpriseIncomeConstraintsResponses.lackOfCapital == 0) {
+                    if (smallEnterpriseIncomeConstraintsResponses.lackOfCapital == -1) {
                         hasNoValidationError = false
                         enterpriseLackOfCapitalCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape == 0) {
+                    if (smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape == -1) {
                         hasNoValidationError = false
                         enterpriseRedTapeCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (smallEnterpriseIncomeConstraintsResponses.tooManyTaxes == 0) {
+                    if (smallEnterpriseIncomeConstraintsResponses.tooManyTaxes == -1) {
                         hasNoValidationError = false
                         enterpriseTaxesCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket == 0) {
+                    if (smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket == -1) {
                         hasNoValidationError = false
                         enterpriseMarketAccessCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
-                    if (smallEnterpriseIncomeConstraintsResponses.lackOfExpertise == 0) {
+                    if (smallEnterpriseIncomeConstraintsResponses.lackOfExpertise == -1) {
                         hasNoValidationError = false
                         enterpriseExpertiseCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
@@ -4289,6 +4933,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                         ) {
                             wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.COPING_STRATEGIES_STEP)
                         }
+
+                        updateCurrentQuestionnaireToStore()
 
                         wgCopingStrategies.root.visibility = View.VISIBLE
                         wgConstraints.root.visibility = View.GONE
@@ -4410,6 +5056,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.FGD_PARTICIPANTS_STEP)
                             }
 
+
+                            updateCurrentQuestionnaireToStore()
                             fdgParticipants.root.visibility = View.VISIBLE
                             wgCopingStrategies.root.visibility = View.GONE
                         }
@@ -4478,6 +5126,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                         wealthGroupQuestionnaire.questionnaireCoveredSteps.add(Constants.WG_COMPLETION_PAGE)
                     }
 
+                    updateCurrentQuestionnaireToStore()
+
                     fdgParticipants.root.visibility = View.GONE
                     wgCompletionPage.root.visibility = View.VISIBLE
                 }
@@ -4491,6 +5141,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                     wealthGroupQuestionnaire.questionnaireStatus =
                         QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
                     wealthGroupQuestionnaire.questionnaireEndDate = Util.getNow()
+
+                    updateCurrentQuestionnaireToStore()
                     val gson = Gson()
                     val sharedPreferences: SharedPreferences? =
                         context?.applicationContext?.getSharedPreferences(
@@ -5259,7 +5911,9 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 if (constraintCategoryEnum == ConstraintCategoryEnum.SOURCE_OF_INCOME) {
 
-                    incomeSourceRanks.remove(selectedRankItem)
+                    if (selectedRankItem.rankPosition != 0) {
+                        incomeSourceRanks.remove(selectedRankItem)
+                    }
 
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IS_LOW_EDUCATION) {
                         wagedLabourIncomeConstraintsResponses.lowEducation =
@@ -5291,7 +5945,9 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 if (constraintCategoryEnum == ConstraintCategoryEnum.INCOME_CONSUMPTION) {
 
-                    incomeConsumptionRanks.remove(selectedRankItem)
+                    if (selectedRankItem.rankPosition != 0) {
+                        incomeConsumptionRanks.remove(selectedRankItem)
+                    }
 
                     if (constraintsTypeEnum == ConstraintsTypeEnum.IC_SMALL_LAND) {
                         cropProductionIncomeConstraintsResponses.smallLandHoldings =
@@ -5343,7 +5999,9 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 if (constraintCategoryEnum == ConstraintCategoryEnum.LIVESTOCK_PRODUCTION) {
 
-                    livestockProductionRanks.remove(selectedRankItem)
+                    if (selectedRankItem.rankPosition != 0) {
+                        livestockProductionRanks.remove(selectedRankItem)
+                    }
 
                     if (constraintsTypeEnum == ConstraintsTypeEnum.LP_LACK_OF_PASTURE) {
                         livestockProductionIncomeConstraintsResponses.lackOfPasture =
@@ -5390,7 +6048,9 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 if (constraintCategoryEnum == ConstraintCategoryEnum.FISHING) {
 
-                    fishingRanks.remove(selectedRankItem)
+                    if (selectedRankItem.rankPosition != 0) {
+                        fishingRanks.remove(selectedRankItem)
+                    }
 
                     if (constraintsTypeEnum == ConstraintsTypeEnum.F_LOW_FISH_STOCKS) {
                         fishingIncomeConstraintsResponses.lowFishStocks =
@@ -5426,7 +6086,9 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 if (constraintCategoryEnum == ConstraintCategoryEnum.NATURAL_RESOURCE) {
 
-                    naturalResourceRanks.remove(selectedRankItem)
+                    if (selectedRankItem.rankPosition != 0) {
+                        naturalResourceRanks.remove(selectedRankItem)
+                    }
 
                     if (constraintsTypeEnum == ConstraintsTypeEnum.NR_DECLINING_RESOURCE) {
                         naturalResourceIncomeConstraintsResponses.decliningNaturalResources =
@@ -5453,7 +6115,9 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 if (constraintCategoryEnum == ConstraintCategoryEnum.SMALL_ENTERPRISE) {
 
-                    smallEnterpriesRanks.remove(selectedRankItem)
+                    if (selectedRankItem.rankPosition != 0) {
+                        smallEnterpriesRanks.remove(selectedRankItem)
+                    }
 
                     if (constraintsTypeEnum == ConstraintsTypeEnum.SE_LACK_OF_CAPITAL) {
                         smallEnterpriseIncomeConstraintsResponses.lackOfCapital =
@@ -5626,10 +6290,64 @@ class WealthGroupDialogFragment : DialogFragment(),
         }
 
         if (existingQuestionnaires.isEmpty()) {
-            saveQuestionnaireAsDraft()
+            AppStore.getInstance().currentWealthGroupQuestionnaire?.let {
+                saveQuestionnaireAsDraftFromStore(
+                    it
+                )
+            }
         } else {
+            AppStore.getInstance().currentWealthGroupQuestionnaire = null
             return
         }
+    }
+
+
+    fun saveQuestionnaireAsDraftFromStore(wealthGroupQuestionnaire: WealthGroupQuestionnaire) {
+        wealthGroupQuestionnaire.questionnaireStatus = QuestionnaireStatus.DRAFT_QUESTIONNAIRE
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.WEALTH_GROUP_LIST_OBJECT, null)
+        val questionnairesListObject: WealthGroupQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                WealthGroupQuestionnaireListObject::class.java
+            )
+
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == wealthGroupQuestionnaire.uniqueId
+        }
+
+        if (existingQuestionnaires.isEmpty()) {
+            questionnairesListObject.addQuestionnaire(wealthGroupQuestionnaire)
+        } else {
+            questionnairesListObject.updateQuestionnaire(
+                questionnairesListObject.questionnaireList.indexOf(
+                    existingQuestionnaires.get(0)
+                ), wealthGroupQuestionnaire
+            )
+        }
+        editor?.remove(Constants.WEALTH_GROUP_LIST_OBJECT)
+
+        val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
+        editor?.putString(
+            Constants.WEALTH_GROUP_LIST_OBJECT,
+            newQuestionnaireObjectString
+        )
+        editor?.commit()
+
+        confirmDraftIsSaved()
+
+        val intent = Intent()
+        intent.action = Constants.QUESTIONNAIRE_COMPLETED
+        activity?.applicationContext?.sendBroadcast(intent)
     }
 
 
@@ -5674,6 +6392,93 @@ class WealthGroupDialogFragment : DialogFragment(),
             newQuestionnaireObjectString
         )
         editor?.commit()
+
+        confirmCompletedQuestionnaireIsUpdated()
+
+        val intent = Intent()
+        intent.action = Constants.QUESTIONNAIRE_COMPLETED
+        activity?.applicationContext?.sendBroadcast(intent)
+    }
+
+
+    fun confirmCompletedQuestionnaireIsUpdated() {
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.WEALTH_GROUP_LIST_OBJECT, null)
+        val questionnairesListObject: WealthGroupQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                WealthGroupQuestionnaireListObject::class.java
+            )
+
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == wealthGroupQuestionnaire.uniqueId
+        }
+
+        if (existingQuestionnaires.isEmpty()) {
+            AppStore.getInstance().currentWealthGroupQuestionnaire?.let {
+                updateCompletedQuestionnaireFromStore(
+                    it
+                )
+            }
+        } else {
+            AppStore.getInstance().currentWealthGroupQuestionnaire = null
+            return
+        }
+    }
+
+
+    fun updateCompletedQuestionnaireFromStore(wealthGroupQuestionnaire: WealthGroupQuestionnaire) {
+        wealthGroupQuestionnaire.questionnaireStatus =
+            QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+        val editor: SharedPreferences.Editor? = sharedPreferences?.edit()
+
+
+        val questionnairesListString =
+            sharedPreferences?.getString(Constants.WEALTH_GROUP_LIST_OBJECT, null)
+        val questionnairesListObject: WealthGroupQuestionnaireListObject =
+            gson.fromJson(
+                questionnairesListString,
+                WealthGroupQuestionnaireListObject::class.java
+            )
+
+        val existingQuestionnaires = questionnairesListObject.questionnaireList.filter {
+            it.uniqueId == wealthGroupQuestionnaire.uniqueId
+        }
+
+        if (existingQuestionnaires.isEmpty()) {
+            questionnairesListObject.addQuestionnaire(wealthGroupQuestionnaire)
+        } else {
+            questionnairesListObject.updateQuestionnaire(
+                questionnairesListObject.questionnaireList.indexOf(
+                    existingQuestionnaires.get(0)
+                ), wealthGroupQuestionnaire
+            )
+        }
+        editor?.remove(Constants.WEALTH_GROUP_LIST_OBJECT)
+
+        val newQuestionnaireObjectString: String = gson.toJson(questionnairesListObject)
+        editor?.putString(
+            Constants.WEALTH_GROUP_LIST_OBJECT,
+            newQuestionnaireObjectString
+        )
+        editor?.commit()
+
+        confirmCompletedQuestionnaireIsUpdated()
 
         val intent = Intent()
         intent.action = Constants.QUESTIONNAIRE_COMPLETED
@@ -6437,6 +7242,10 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
             }
         }
+    }
+
+    fun updateCurrentQuestionnaireToStore() {
+        AppStore.getInstance().currentWealthGroupQuestionnaire = wealthGroupQuestionnaire
     }
 
 }
