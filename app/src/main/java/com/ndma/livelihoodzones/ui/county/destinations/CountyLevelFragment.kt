@@ -910,6 +910,11 @@ class CountyLevelFragment : DialogFragment(),
                                 "Percentage error",
                                 "Total value is less than 100% by ${100 - totalEntry}"
                             )
+                        } else if (totalEntry > 100) {
+                            inflateErrorModal(
+                                "Percentage error",
+                                "Total value is greater than 100% by ${totalEntry - 100}"
+                            )
                         } else {
 
                             val wealthGroupResponse = WealthGroupResponse(
@@ -1885,105 +1890,394 @@ class CountyLevelFragment : DialogFragment(),
                     lzHazards.root.visibility = View.GONE
                 }
 
-                for (i in 0..23) {
-                    hazardsRanks.add(RankResponseItem(i + 1, false))
+                for (i in 0..24) {
+                    hazardsRanks.add(RankResponseItem(i, false))
                 }
 
 
                 animalRustlingRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.ANIMAL_RUSTLING)
+                    if (hazardResponses.animalRustling.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.animalRustling.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.animalRustling.importanceRank, false))
+                        }
+                        hazardResponses.animalRustling.importanceRank = -1
+                        animalRustlingRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.ANIMAL_RUSTLING)
+                    }
                 }
 
                 banditryRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.BANDITRY)
+                    if (hazardResponses.banditry.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.banditry.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.banditry.importanceRank, false))
+                        }
+                        hazardResponses.banditry.importanceRank = -1
+                        banditryRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.BANDITRY)
+                    }
                 }
 
                 terrorismRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.TERRORISM)
+                    if (hazardResponses.terrorism.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.terrorism.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.terrorism.importanceRank, false))
+                        }
+                        hazardResponses.terrorism.importanceRank = -1
+                        terrorismRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.TERRORISM)
+                    }
                 }
 
                 ethicConflictRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.ETHNIC_CONFLICT)
+                    if (hazardResponses.ethnicConflict.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.ethnicConflict.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.ethnicConflict.importanceRank, false))
+                        }
+                        hazardResponses.ethnicConflict.importanceRank = -1
+                        ethicConflictRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.ETHNIC_CONFLICT)
+                    }
                 }
 
                 politicalViolenceRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.POLITICAL_CONFLICT)
+                    if (hazardResponses.politicalViolence.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.politicalViolence.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.politicalViolence.importanceRank, false))
+                        }
+                        hazardResponses.politicalViolence.importanceRank = -1
+                        politicalViolenceRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.POLITICAL_CONFLICT)
+                    }
                 }
 
                 droughtRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.DROUGHT)
+                    if (hazardResponses.drought.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.drought.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.drought.importanceRank, false))
+                        }
+                        hazardResponses.drought.importanceRank = -1
+                        droughtRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.DROUGHT)
+                    }
                 }
 
                 pestAndDiseaseRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.LIVESTOCK_PESTS_DISEASES)
+                    if (hazardResponses.livestockPestsAndDiseases.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.livestockPestsAndDiseases.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.livestockPestsAndDiseases.importanceRank, false))
+                        }
+                        hazardResponses.livestockPestsAndDiseases.importanceRank = -1
+                        pestAndDiseaseRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.LIVESTOCK_PESTS_DISEASES)
+                    }
                 }
 
                 hailstormsOrFrostRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.HAILSTORMS)
+                    if (hazardResponses.hailstormsOrFrost.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.hailstormsOrFrost.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.hailstormsOrFrost.importanceRank, false))
+                        }
+                        hazardResponses.hailstormsOrFrost.importanceRank = -1
+                        hailstormsOrFrostRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.HAILSTORMS)
+                    }
+
                 }
 
                 floodingRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.FLOODING)
+                    if (hazardResponses.flooding.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.flooding.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.flooding.importanceRank, false))
+                        }
+                        hazardResponses.flooding.importanceRank = -1
+                        floodingRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.FLOODING)
+                    }
                 }
 
                 landslidesRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.LANDSLIDES)
+                    if (hazardResponses.landslides.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.landslides.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.landslides.importanceRank, false))
+                        }
+                        hazardResponses.landslides.importanceRank = -1
+                        landslidesRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.LANDSLIDES)
+                    }
                 }
 
                 windsOrCycloneRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.HIGH_WINDS)
+                    if (hazardResponses.highWindsOrCyclones.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.highWindsOrCyclones.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.highWindsOrCyclones.importanceRank, false))
+                        }
+                        hazardResponses.highWindsOrCyclones.importanceRank = -1
+                        windsOrCycloneRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.HIGH_WINDS)
+                    }
                 }
 
                 bushFiresRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.BUSH_FIRES)
+                    if (hazardResponses.bushFires.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.bushFires.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.bushFires.importanceRank, false))
+                        }
+                        hazardResponses.bushFires.importanceRank = -1
+                        bushFiresRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.BUSH_FIRES)
+                    }
                 }
 
                 cropPestsRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.CROP_PESTS)
+                    if (hazardResponses.cropPests.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.cropPests.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.cropPests.importanceRank, false))
+                        }
+                        hazardResponses.cropPests.importanceRank = -1
+                        cropPestsRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.CROP_PESTS)
+                    }
                 }
 
                 locustInvasionRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.LOCUST_INVASION)
+                    if (hazardResponses.locustInvasion.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.locustInvasion.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.locustInvasion.importanceRank, false))
+                        }
+                        hazardResponses.locustInvasion.importanceRank = -1
+                        locustInvasionRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.LOCUST_INVASION)
+                    }
                 }
 
                 cropDiseasesRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.CROP_DISEASES)
+                    if (hazardResponses.cropDiseases.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.cropDiseases.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.cropDiseases.importanceRank, false))
+                        }
+                        hazardResponses.cropDiseases.importanceRank = -1
+                        cropDiseasesRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.CROP_DISEASES)
+                    }
                 }
 
                 terminalIllnessRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.TERMINAL_ILLNESS)
+                    if (hazardResponses.terminalIllnesses.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.terminalIllnesses.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.terminalIllnesses.importanceRank, false))
+                        }
+                        hazardResponses.terminalIllnesses.importanceRank = -1
+                        terminalIllnessRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.TERMINAL_ILLNESS)
+                    }
                 }
 
                 malariaOutbreakRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.MALARIA)
+                    if (hazardResponses.malariaPowerOutBreak.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.malariaPowerOutBreak.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.malariaPowerOutBreak.importanceRank, false))
+                        }
+                        hazardResponses.malariaPowerOutBreak.importanceRank = -1
+                        malariaOutbreakRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.MALARIA)
+                    }
                 }
 
                 waterBorneDiseaseRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.WATERBORNE_DISEASES)
+                    if (hazardResponses.waterBornDiseases.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.waterBornDiseases.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.waterBornDiseases.importanceRank, false))
+                        }
+                        hazardResponses.waterBornDiseases.importanceRank = -1
+                        waterBorneDiseaseRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.WATERBORNE_DISEASES)
+                    }
                 }
 
                 humanWildlifeConflictRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.HUMAN_WILDLIFE_CONFLICT)
+                    if (hazardResponses.humanWildlifeConflict.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.humanWildlifeConflict.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.humanWildlifeConflict.importanceRank, false))
+                        }
+                        hazardResponses.humanWildlifeConflict.importanceRank = -1
+                        humanWildlifeConflictRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.HUMAN_WILDLIFE_CONFLICT)
+                    }
                 }
 
                 highFoodPriceRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.HIGH_FOOD_PRICES)
+                    if (hazardResponses.highFoodPrices.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.highFoodPrices.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.highFoodPrices.importanceRank, false))
+                        }
+                        hazardResponses.highFoodPrices.importanceRank = -1
+                        highFoodPriceRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.HIGH_FOOD_PRICES)
+                    }
                 }
 
                 foodShortageRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.FOOD_SHORTAGE)
+                    if (hazardResponses.marketFoodShortages.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.marketFoodShortages.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.marketFoodShortages.importanceRank, false))
+                        }
+                        hazardResponses.marketFoodShortages.importanceRank = -1
+                        foodShortageRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.FOOD_SHORTAGE)
+                    }
                 }
 
                 drinkingWaterShortageRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.DRINKING_WATER_SHORTAGE)
+                    if (hazardResponses.drinkingWaterShortages.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.drinkingWaterShortages.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.drinkingWaterShortages.importanceRank, false))
+                        }
+                        hazardResponses.drinkingWaterShortages.importanceRank = -1
+                        drinkingWaterShortageRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.DRINKING_WATER_SHORTAGE)
+                    }
                 }
 
                 invasivePlantsRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.INVASIVE_PLANTS)
+                    if (hazardResponses.invasivePlants.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.invasivePlants.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.invasivePlants.importanceRank, false))
+                        }
+                        hazardResponses.invasivePlants.importanceRank = -1
+                        invasivePlantsRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.INVASIVE_PLANTS)
+                    }
                 }
 
                 othersRank.setOnClickListener {
-                    inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.OTHERS)
+                    if (hazardResponses.others.importanceRank != -1) {
+                        if (!doesRankItemAlreadyExistInTheRankList(
+                                hazardResponses.others.importanceRank,
+                                hazardsRanks
+                            )
+                        ) {
+                            hazardsRanks.add(RankResponseItem(hazardResponses.others.importanceRank, false))
+                        }
+                        hazardResponses.others.importanceRank = -1
+                        othersRank.text = "Select rank..."
+                    } else {
+                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.OTHERS)
+                    }
                 }
 
 
@@ -2089,31 +2383,30 @@ class CountyLevelFragment : DialogFragment(),
                             .isNotEmpty() && drinkingWaterShortageNoOfYears.text.toString()
                             .isNotEmpty() && invasivePlantsNoOfYears.text.toString()
                             .isNotEmpty() && othersNoOfYears.text.toString()
-                            .isNotEmpty() && hazardResponses.animalRustling.importanceRank != 0
-                        && hazardResponses.banditry.importanceRank != 0
-                        && hazardResponses.terrorism.importanceRank != 0
-                        && hazardResponses.ethnicConflict.importanceRank != 0
-                        && hazardResponses.ethnicConflict.importanceRank != 0
-                        && hazardResponses.politicalViolence.importanceRank != 0
-                        && hazardResponses.drought.importanceRank != 0
-                        && hazardResponses.livestockPestsAndDiseases.importanceRank != 0
-                        && hazardResponses.hailstormsOrFrost.importanceRank != 0
-                        && hazardResponses.flooding.importanceRank != 0
-                        && hazardResponses.landslides.importanceRank != 0
-                        && hazardResponses.highWindsOrCyclones.importanceRank != 0
-                        && hazardResponses.bushFires.importanceRank != 0
-                        && hazardResponses.cropPests.importanceRank != 0
-                        && hazardResponses.locustInvasion.importanceRank != 0
-                        && hazardResponses.cropDiseases.importanceRank != 0
-                        && hazardResponses.terminalIllnesses.importanceRank != 0
-                        && hazardResponses.malariaPowerOutBreak.importanceRank != 0
-                        && hazardResponses.waterBornDiseases.importanceRank != 0
-                        && hazardResponses.humanWildlifeConflict.importanceRank != 0
-                        && hazardResponses.highFoodPrices.importanceRank != 0
-                        && hazardResponses.marketFoodShortages.importanceRank != 0
-                        && hazardResponses.drinkingWaterShortages.importanceRank != 0
-                        && hazardResponses.invasivePlants.importanceRank != 0
-                        && hazardResponses.others.importanceRank != 0
+                            .isNotEmpty() && hazardResponses.animalRustling.importanceRank != -1
+                        && hazardResponses.banditry.importanceRank != -1
+                        && hazardResponses.terrorism.importanceRank != -1
+                        && hazardResponses.ethnicConflict.importanceRank != -1
+                        && hazardResponses.politicalViolence.importanceRank != -1
+                        && hazardResponses.drought.importanceRank != -1
+                        && hazardResponses.livestockPestsAndDiseases.importanceRank != -1
+                        && hazardResponses.hailstormsOrFrost.importanceRank != -1
+                        && hazardResponses.flooding.importanceRank != -1
+                        && hazardResponses.landslides.importanceRank != -1
+                        && hazardResponses.highWindsOrCyclones.importanceRank != -1
+                        && hazardResponses.bushFires.importanceRank != -1
+                        && hazardResponses.cropPests.importanceRank != -1
+                        && hazardResponses.locustInvasion.importanceRank != -1
+                        && hazardResponses.cropDiseases.importanceRank != -1
+                        && hazardResponses.terminalIllnesses.importanceRank != -1
+                        && hazardResponses.malariaPowerOutBreak.importanceRank != -1
+                        && hazardResponses.waterBornDiseases.importanceRank != -1
+                        && hazardResponses.humanWildlifeConflict.importanceRank != -1
+                        && hazardResponses.highFoodPrices.importanceRank != -1
+                        && hazardResponses.marketFoodShortages.importanceRank != -1
+                        && hazardResponses.drinkingWaterShortages.importanceRank != -1
+                        && hazardResponses.invasivePlants.importanceRank != -1
+                        && hazardResponses.others.importanceRank != -1
                     ) {
                         hazardResponses.animalRustling.noExperiencedYears =
                             animalRustlingNoOfYears.text.toString().toDouble()
@@ -4466,7 +4759,9 @@ class CountyLevelFragment : DialogFragment(),
         position: Int,
         hazardTypeEnum: HazardTypeEnum
     ) {
-        hazardsRanks.remove(selectedRankItem)
+        if (selectedRankItem.rankPosition != 0) {
+            hazardsRanks.remove(selectedRankItem)
+        }
         binding.apply {
 
             lzHazards.apply {
@@ -5575,6 +5870,19 @@ class CountyLevelFragment : DialogFragment(),
 
     fun updateCurrentQuestionnaireToStore() {
         AppStore.getInstance().currentCountyLevelQuestionnaire = countyLevelQuestionnaire
+    }
+
+
+    fun doesRankItemAlreadyExistInTheRankList(
+        rankPosition: Int,
+        rankList: MutableList<RankResponseItem>
+    ): Boolean {
+        for (currentRankItem in rankList) {
+            if (currentRankItem.rankPosition == rankPosition) {
+                return true
+            }
+        }
+        return false
     }
 
 }
