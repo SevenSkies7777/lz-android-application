@@ -43,6 +43,7 @@ import com.ndma.livelihoodzones.ui.wealthgroup.adapters.*
 import com.ndma.livelihoodzones.ui.wealthgroup.model.ConstraintCategoryEnum
 import com.ndma.livelihoodzones.ui.wealthgroup.model.ConstraintsTypeEnum
 import com.ndma.livelihoodzones.ui.wealthgroup.model.FgdParticipantModel
+import com.ndma.livelihoodzones.ui.wealthgroup.model.FoodConsumptionEnum
 import com.ndma.livelihoodzones.ui.wealthgroup.responses.*
 import com.ndma.livelihoodzones.util.Util
 import kotlin.math.abs
@@ -81,7 +82,11 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     private var errorDialog: android.app.AlertDialog? = null
 
+    private var foodConsumptionNotApplicableDialog: android.app.AlertDialog? = null
+
     private var constraintsRankDialog: androidx.appcompat.app.AlertDialog? = null
+
+    var foodConsumptionHasNoPercentageError: Boolean = true
 
     private lateinit var homeViewModel: HomeViewModel
 
@@ -824,8 +829,6 @@ class WealthGroupDialogFragment : DialogFragment(),
 
             wgPercentFoodConsumptionIncome.apply {
 
-                var hasNoPercentageError: Boolean = true
-
                 val textWatcher = object : TextWatcher {
                     override fun afterTextChanged(editable: Editable?) {
                         Handler(Looper.getMainLooper()).postDelayed({
@@ -839,13 +842,38 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         maizeMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(maizeGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    maizeOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    maizeMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    maizeGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+
+                                    if (maizeOwnFarm.editableText.toString()
+                                            .isNotEmpty() && maizeMarket.editableText.toString()
+                                            .isNotEmpty() && maizeGift.editableText.toString()
+                                            .isNotEmpty() && maizeOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && maizeMarket.editableText.toString()
+                                            .toDouble() == 0.0 && maizeGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.MAIZE_AND_POSHO)
+
+                                    } else {
+                                        maizeOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        maizeMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        maizeGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     maizeOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -853,7 +881,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     maizeGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -867,13 +895,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         wheatMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(wheatGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    wheatOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    wheatMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    wheatGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (wheatOwnFarm.editableText.toString()
+                                            .isNotEmpty() && wheatMarket.editableText.toString()
+                                            .isNotEmpty() && wheatGift.editableText.toString()
+                                            .isNotEmpty() && wheatOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && wheatMarket.editableText.toString()
+                                            .toDouble() == 0.0 && wheatGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.WHEAT_BARLEY)
+
+                                    } else {
+                                        wheatOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        wheatMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        wheatGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     wheatOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -881,7 +933,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     wheatGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -896,13 +948,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         sorghumMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(sorghumGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    sorghumOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    sorghumMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    sorghumGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (sorghumOwnFarm.editableText.toString()
+                                            .isNotEmpty() && sorghumMarket.editableText.toString()
+                                            .isNotEmpty() && sorghumGift.editableText.toString()
+                                            .isNotEmpty() && sorghumOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && sorghumMarket.editableText.toString()
+                                            .toDouble() == 0.0 && sorghumGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.SORGHUM)
+
+                                    } else {
+                                        sorghumOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        sorghumMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        sorghumGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     sorghumOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -910,7 +986,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     sorghumGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -924,13 +1000,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         riceMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(riceGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    riceOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    riceMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    riceGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (riceOwnFarm.editableText.toString()
+                                            .isNotEmpty() && riceMarket.editableText.toString()
+                                            .isNotEmpty() && riceGift.editableText.toString()
+                                            .isNotEmpty() && riceOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && riceMarket.editableText.toString()
+                                            .toDouble() == 0.0 && riceGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.RICE_AND_PRODUCTS)
+
+                                    } else {
+                                        riceOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        riceMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        riceGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     riceOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -938,7 +1038,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     riceGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -953,13 +1053,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         beansMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(beansGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    beansOwnfarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    beansMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    beansGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (beansOwnfarm.editableText.toString()
+                                            .isNotEmpty() && beansMarket.editableText.toString()
+                                            .isNotEmpty() && beansGift.editableText.toString()
+                                            .isNotEmpty() && beansOwnfarm.editableText.toString()
+                                            .toDouble() == 0.0 && beansMarket.editableText.toString()
+                                            .toDouble() == 0.0 && beansGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.BEANS)
+
+                                    } else {
+                                        beansOwnfarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        beansMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        beansGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     beansOwnfarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -967,7 +1091,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     beansGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -982,13 +1106,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         pulsesMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(pulsesGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    pulsesOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    pulsesMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    pulsesGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (pulsesOwnFarm.editableText.toString()
+                                            .isNotEmpty() && pulsesMarket.editableText.toString()
+                                            .isNotEmpty() && pulsesGift.editableText.toString()
+                                            .isNotEmpty() && pulsesOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && pulsesMarket.editableText.toString()
+                                            .toDouble() == 0.0 && pulsesGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.OTHER_PULSES)
+
+                                    } else {
+                                        pulsesOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        pulsesMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        pulsesGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     pulsesOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -996,7 +1144,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     pulsesGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -1011,13 +1159,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         vegetablesMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(vegetablesGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    vegetablesOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    vegetablesMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    vegetablesGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (vegetablesOwnFarm.editableText.toString()
+                                            .isNotEmpty() && vegetablesMarket.editableText.toString()
+                                            .isNotEmpty() && vegetablesGift.editableText.toString()
+                                            .isNotEmpty() && vegetablesOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && vegetablesMarket.editableText.toString()
+                                            .toDouble() == 0.0 && vegetablesGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.VEGETABLES)
+
+                                    } else {
+                                        vegetablesOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        vegetablesMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        vegetablesGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     vegetablesOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -1025,7 +1197,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     vegetablesGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -1040,13 +1212,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         fruitsMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(fruitsGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    fruitsOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    fruitsMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    fruitsGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (fruitsOwnFarm.editableText.toString()
+                                            .isNotEmpty() && fruitsMarket.editableText.toString()
+                                            .isNotEmpty() && fruitsGift.editableText.toString()
+                                            .isNotEmpty() && fruitsOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && fruitsMarket.editableText.toString()
+                                            .toDouble() == 0.0 && fruitsGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.FRUITS_AND_BERRIES)
+
+                                    } else {
+                                        fruitsOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        fruitsMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        fruitsGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     fruitsOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -1054,7 +1250,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     fruitsGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -1069,13 +1265,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         whiteRootsMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(whiteRootsGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    whiteRootsOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    whiteRootsMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    whiteRootsGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (whiteRootsOwnFarm.editableText.toString()
+                                            .isNotEmpty() && whiteRootsMarket.editableText.toString()
+                                            .isNotEmpty() && whiteRootsGift.editableText.toString()
+                                            .isNotEmpty() && whiteRootsOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && whiteRootsMarket.editableText.toString()
+                                            .toDouble() == 0.0 && whiteRootsGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.WHITE_ROOTS_AND_TUBERS)
+
+                                    } else {
+                                        whiteRootsOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        whiteRootsMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        whiteRootsGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     whiteRootsOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -1083,7 +1303,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     whiteRootsGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -1098,13 +1318,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         meatMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(meatGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    meatOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    meatMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    meatGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (meatOwnFarm.editableText.toString()
+                                            .isNotEmpty() && meatMarket.editableText.toString()
+                                            .isNotEmpty() && meatGift.editableText.toString()
+                                            .isNotEmpty() && meatOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && meatMarket.editableText.toString()
+                                            .toDouble() == 0.0 && meatGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.MEAT)
+
+                                    } else {
+                                        meatOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        meatMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        meatGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     meatOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -1112,7 +1356,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     meatGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -1127,13 +1371,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         milkMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(milkGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    milkOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    milkMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    milkGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (milkOwnFarm.editableText.toString()
+                                            .isNotEmpty() && milkMarket.editableText.toString()
+                                            .isNotEmpty() && milkGift.editableText.toString()
+                                            .isNotEmpty() && milkOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && milkMarket.editableText.toString()
+                                            .toDouble() == 0.0 && milkGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.MILK_AND_DAIRY)
+
+                                    } else {
+                                        milkOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        milkMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        milkGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     milkOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -1141,7 +1409,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     milkGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -1156,13 +1424,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         fishOwnMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(fishGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    fishOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    fishOwnMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    fishGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (fishOwnFarm.editableText.toString()
+                                            .isNotEmpty() && fishOwnMarket.editableText.toString()
+                                            .isNotEmpty() && fishGift.editableText.toString()
+                                            .isNotEmpty() && fishOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && fishOwnMarket.editableText.toString()
+                                            .toDouble() == 0.0 && fishGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.FISH_AND_SEA_FOOD)
+
+                                    } else {
+                                        fishOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        fishOwnMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        fishGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     fishOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -1170,7 +1462,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     fishGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -1186,13 +1478,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         eggsMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(eggsGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    eggsOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    eggsMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    eggsGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (eggsOwnFarm.editableText.toString()
+                                            .isNotEmpty() && eggsMarket.editableText.toString()
+                                            .isNotEmpty() && eggsGift.editableText.toString()
+                                            .isNotEmpty() && eggsOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && eggsMarket.editableText.toString()
+                                            .toDouble() == 0.0 && eggsGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.EGGS)
+
+                                    } else {
+                                        eggsOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        eggsMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        eggsGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     eggsOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -1200,7 +1516,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     eggsGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -1216,13 +1532,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         cookingFatMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(cookingFatGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    cookingFatOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    cookingFatMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    cookingFatGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (cookingFatOwnFarm.editableText.toString()
+                                            .isNotEmpty() && cookingFatMarket.editableText.toString()
+                                            .isNotEmpty() && cookingFatGift.editableText.toString()
+                                            .isNotEmpty() && cookingFatOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && cookingFatMarket.editableText.toString()
+                                            .toDouble() == 0.0 && cookingFatGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.FATS_AND_OILS)
+
+                                    } else {
+                                        cookingFatOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        cookingFatMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        cookingFatGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     cookingFatOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -1230,7 +1570,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     cookingFatGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -1245,13 +1585,37 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         spicesMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(spicesGift.text.toString()).toDouble()
                                 if (totalPercentage != 100.0) {
-                                    spicesOwnFarmCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    spicesMarketCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    spicesGiftCell.background =
-                                        context?.resources?.getDrawable(R.drawable.error_cell, null)
-                                    hasNoPercentageError = false
+                                    if (spicesOwnFarm.editableText.toString()
+                                            .isNotEmpty() && spicesMarket.editableText.toString()
+                                            .isNotEmpty() && spicesGift.editableText.toString()
+                                            .isNotEmpty() && spicesOwnFarm.editableText.toString()
+                                            .toDouble() == 0.0 && spicesMarket.editableText.toString()
+                                            .toDouble() == 0.0 && spicesGift.editableText.toString()
+                                            .toDouble() == 0.0
+                                    ) {
+
+                                        if (foodConsumptionNotApplicableDialog?.isShowing ?: false)
+                                            return@postDelayed
+                                        inflateFoodConsumptionNotApplicableModal(FoodConsumptionEnum.SPICES)
+
+                                    } else {
+                                        spicesOwnFarmCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        spicesMarketCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        spicesGiftCell.background =
+                                            context?.resources?.getDrawable(
+                                                R.drawable.error_cell,
+                                                null
+                                            )
+                                        foodConsumptionHasNoPercentageError = false
+                                    }
                                 } else {
                                     spicesOwnFarmCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
@@ -1259,7 +1623,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
                                     spicesGiftCell.background =
                                         context?.resources?.getDrawable(R.drawable.cell_shape, null)
-                                    hasNoPercentageError = true
+                                    foodConsumptionHasNoPercentageError = true
                                 }
                             }
 
@@ -1575,7 +1939,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
 
-                    if (hasNoValidationError && hasNoPercentageError) {
+                    if (hasNoValidationError && foodConsumptionHasNoPercentageError) {
 
                         val foodConsumptionResponses = FoodConsumptionResponses()
 
@@ -3841,7 +4205,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeSourceRanks.add(RankResponseItem(wagedLabourIncomeConstraintsResponses.lowEducation, false))
+                            incomeSourceRanks.add(
+                                RankResponseItem(
+                                    wagedLabourIncomeConstraintsResponses.lowEducation,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -3865,7 +4234,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeSourceRanks.add(RankResponseItem(wagedLabourIncomeConstraintsResponses.poorHealth, false))
+                            incomeSourceRanks.add(
+                                RankResponseItem(
+                                    wagedLabourIncomeConstraintsResponses.poorHealth,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -3889,7 +4263,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeSourceRanks.add(RankResponseItem(wagedLabourIncomeConstraintsResponses.fewJobs, false))
+                            incomeSourceRanks.add(
+                                RankResponseItem(
+                                    wagedLabourIncomeConstraintsResponses.fewJobs,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -3913,7 +4292,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeSourceRanks.add(RankResponseItem(wagedLabourIncomeConstraintsResponses.tooMuchFarmTime, false))
+                            incomeSourceRanks.add(
+                                RankResponseItem(
+                                    wagedLabourIncomeConstraintsResponses.tooMuchFarmTime,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -3937,7 +4321,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeSourceRanks.add(RankResponseItem(wagedLabourIncomeConstraintsResponses.lowAverageWageRates, false))
+                            incomeSourceRanks.add(
+                                RankResponseItem(
+                                    wagedLabourIncomeConstraintsResponses.lowAverageWageRates,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -3963,7 +4352,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.smallLandHoldings, false))
+                            incomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    cropProductionIncomeConstraintsResponses.smallLandHoldings,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -3987,7 +4381,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.lackOfCredit, false))
+                            incomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    cropProductionIncomeConstraintsResponses.lackOfCredit,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4011,7 +4410,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.highInputCost, false))
+                            incomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    cropProductionIncomeConstraintsResponses.highInputCost,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4035,7 +4439,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.lowLandFertility, false))
+                            incomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    cropProductionIncomeConstraintsResponses.lowLandFertility,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4059,7 +4468,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.lackOfReliableWater, false))
+                            incomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    cropProductionIncomeConstraintsResponses.lackOfReliableWater,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4083,7 +4497,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.lowTechnicalSkills, false))
+                            incomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    cropProductionIncomeConstraintsResponses.lowTechnicalSkills,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4107,7 +4526,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.lowQualitySeed, false))
+                            incomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    cropProductionIncomeConstraintsResponses.lowQualitySeed,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4131,7 +4555,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.lackOfMarketAccess, false))
+                            incomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    cropProductionIncomeConstraintsResponses.lackOfMarketAccess,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4155,7 +4584,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            incomeConsumptionRanks.add(RankResponseItem(cropProductionIncomeConstraintsResponses.endemicCropPests, false))
+                            incomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    cropProductionIncomeConstraintsResponses.endemicCropPests,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4181,7 +4615,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.lackOfPasture, false))
+                            livestockProductionRanks.add(
+                                RankResponseItem(
+                                    livestockProductionIncomeConstraintsResponses.lackOfPasture,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4205,7 +4644,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater, false))
+                            livestockProductionRanks.add(
+                                RankResponseItem(
+                                    livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4229,7 +4673,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.lowYieldingAnimal, false))
+                            livestockProductionRanks.add(
+                                RankResponseItem(
+                                    livestockProductionIncomeConstraintsResponses.lowYieldingAnimal,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4253,7 +4702,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs, false))
+                            livestockProductionRanks.add(
+                                RankResponseItem(
+                                    livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4277,7 +4731,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases, false))
+                            livestockProductionRanks.add(
+                                RankResponseItem(
+                                    livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4301,7 +4760,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.lackofMarket, false))
+                            livestockProductionRanks.add(
+                                RankResponseItem(
+                                    livestockProductionIncomeConstraintsResponses.lackofMarket,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4325,7 +4789,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            livestockProductionRanks.add(RankResponseItem(livestockProductionIncomeConstraintsResponses.insecurity, false))
+                            livestockProductionRanks.add(
+                                RankResponseItem(
+                                    livestockProductionIncomeConstraintsResponses.insecurity,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4351,7 +4820,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            fishingRanks.add(RankResponseItem(fishingIncomeConstraintsResponses.lowFishStocks, false))
+                            fishingRanks.add(
+                                RankResponseItem(
+                                    fishingIncomeConstraintsResponses.lowFishStocks,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4375,7 +4849,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            fishingRanks.add(RankResponseItem(fishingIncomeConstraintsResponses.poorMarket, false))
+                            fishingRanks.add(
+                                RankResponseItem(
+                                    fishingIncomeConstraintsResponses.poorMarket,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4399,7 +4878,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            fishingRanks.add(RankResponseItem(fishingIncomeConstraintsResponses.lackOfEquipment, false))
+                            fishingRanks.add(
+                                RankResponseItem(
+                                    fishingIncomeConstraintsResponses.lackOfEquipment,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4423,7 +4907,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            fishingRanks.add(RankResponseItem(fishingIncomeConstraintsResponses.extremeCompetition, false))
+                            fishingRanks.add(
+                                RankResponseItem(
+                                    fishingIncomeConstraintsResponses.extremeCompetition,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4447,7 +4936,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            fishingRanks.add(RankResponseItem(fishingIncomeConstraintsResponses.lackOfExpertise, false))
+                            fishingRanks.add(
+                                RankResponseItem(
+                                    fishingIncomeConstraintsResponses.lackOfExpertise,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4471,7 +4965,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            fishingRanks.add(RankResponseItem(fishingIncomeConstraintsResponses.fishingRightsRestrictions, false))
+                            fishingRanks.add(
+                                RankResponseItem(
+                                    fishingIncomeConstraintsResponses.fishingRightsRestrictions,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4497,7 +4996,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            naturalResourceRanks.add(RankResponseItem(naturalResourceIncomeConstraintsResponses.decliningNaturalResources, false))
+                            naturalResourceRanks.add(
+                                RankResponseItem(
+                                    naturalResourceIncomeConstraintsResponses.decliningNaturalResources,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4521,7 +5025,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            naturalResourceRanks.add(RankResponseItem(naturalResourceIncomeConstraintsResponses.populationPressure, false))
+                            naturalResourceRanks.add(
+                                RankResponseItem(
+                                    naturalResourceIncomeConstraintsResponses.populationPressure,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4545,12 +5054,18 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            naturalResourceRanks.add(RankResponseItem(naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights, false))
+                            naturalResourceRanks.add(
+                                RankResponseItem(
+                                    naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights,
+                                    false
+                                )
+                            )
 
                         }
 
                         resourceRights.text = "Select rank..."
-                        naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights = -1
+                        naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights =
+                            -1
 
                     } else {
                         inflateConstraintsRankModal(
@@ -4559,7 +5074,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                             ConstraintCategoryEnum.NATURAL_RESOURCE
                         )
                     }
-                    }
+                }
                 resourceLowValue.setOnClickListener {
                     if (naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts != -1) {
 
@@ -4569,7 +5084,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            naturalResourceRanks.add(RankResponseItem(naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts, false))
+                            naturalResourceRanks.add(
+                                RankResponseItem(
+                                    naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4595,7 +5115,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            smallEnterpriesRanks.add(RankResponseItem(smallEnterpriseIncomeConstraintsResponses.lackOfCapital, false))
+                            smallEnterpriesRanks.add(
+                                RankResponseItem(
+                                    smallEnterpriseIncomeConstraintsResponses.lackOfCapital,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4619,7 +5144,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            smallEnterpriesRanks.add(RankResponseItem(smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape, false))
+                            smallEnterpriesRanks.add(
+                                RankResponseItem(
+                                    smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4643,7 +5173,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            smallEnterpriesRanks.add(RankResponseItem(smallEnterpriseIncomeConstraintsResponses.tooManyTaxes, false))
+                            smallEnterpriesRanks.add(
+                                RankResponseItem(
+                                    smallEnterpriseIncomeConstraintsResponses.tooManyTaxes,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4667,7 +5202,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            smallEnterpriesRanks.add(RankResponseItem(smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket, false))
+                            smallEnterpriesRanks.add(
+                                RankResponseItem(
+                                    smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -4691,7 +5231,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                             )
                         ) {
 
-                            smallEnterpriesRanks.add(RankResponseItem(smallEnterpriseIncomeConstraintsResponses.lackOfExpertise, false))
+                            smallEnterpriesRanks.add(
+                                RankResponseItem(
+                                    smallEnterpriseIncomeConstraintsResponses.lackOfExpertise,
+                                    false
+                                )
+                            )
 
                         }
 
@@ -5296,6 +5841,206 @@ class WealthGroupDialogFragment : DialogFragment(),
         builder.setCancelable(true)
         errorDialog = builder.create()
         (errorDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private fun inflateFoodConsumptionNotApplicableModal(foodConsumptionEnum: FoodConsumptionEnum) {
+        val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(
+            R.layout.consumption_not_applicable_modal_layout,
+            null
+        )
+        val close = v.findViewById<TextView>(R.id.close)
+        val confirmNotApplicable = v.findViewById<TextView>(R.id.confirmNotApplicable)
+        close.setOnClickListener {
+            (foodConsumptionNotApplicableDialog as android.app.AlertDialog).cancel()
+        }
+
+        confirmNotApplicable.setOnClickListener {
+            binding.apply {
+                wgPercentFoodConsumptionIncome.apply {
+                    if (foodConsumptionEnum == FoodConsumptionEnum.MAIZE_AND_POSHO) {
+
+                        maizeOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        maizeMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        maizeGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+
+
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.WHEAT_BARLEY) {
+                        wheatOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        wheatMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        wheatGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.SORGHUM) {
+                        sorghumOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        sorghumMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        sorghumGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.RICE_AND_PRODUCTS) {
+                        riceOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        riceMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        riceGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.BEANS) {
+                        beansOwnfarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        beansMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        beansGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.OTHER_PULSES) {
+                        pulsesOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        pulsesMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        pulsesGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.VEGETABLES) {
+                        vegetablesOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        vegetablesMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        vegetablesGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.FRUITS_AND_BERRIES) {
+                        fruitsOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        fruitsMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        fruitsGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.WHITE_ROOTS_AND_TUBERS) {
+                        whiteRootsOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        whiteRootsMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        whiteRootsGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.MEAT) {
+                        meatOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        meatMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        meatGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.MILK_AND_DAIRY) {
+                        milkOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        milkMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        milkGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.FISH_AND_SEA_FOOD) {
+                        fishOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        fishOwnMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        fishGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.EGGS) {
+                        eggsOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        eggsMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        eggsGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.FATS_AND_OILS) {
+                        cookingFatOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        cookingFatMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        cookingFatGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+
+                    if (foodConsumptionEnum == FoodConsumptionEnum.SPICES) {
+                        spicesOwnFarmCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        spicesMarketCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        spicesGiftCell.background =
+                            context?.resources?.getDrawable(R.drawable.cell_shape, null)
+                        foodConsumptionHasNoPercentageError = true
+                    }
+                }
+            }
+            (foodConsumptionNotApplicableDialog as android.app.AlertDialog).cancel()
+        }
+
+        openFoodConsumptionNotApplicableModal(v)
+    }
+
+    private fun openFoodConsumptionNotApplicableModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(activity)
+        builder.setView(v)
+        builder.setCancelable(true)
+        foodConsumptionNotApplicableDialog = builder.create()
+        (foodConsumptionNotApplicableDialog as android.app.AlertDialog).apply {
             setCancelable(true)
             setCanceledOnTouchOutside(true)
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
