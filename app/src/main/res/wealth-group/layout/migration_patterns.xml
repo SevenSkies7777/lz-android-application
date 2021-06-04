@@ -465,6 +465,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/migrationTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

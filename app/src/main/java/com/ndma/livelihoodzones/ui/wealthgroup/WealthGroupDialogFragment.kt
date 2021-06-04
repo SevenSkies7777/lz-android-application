@@ -841,6 +841,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(maizeOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         maizeMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(maizeGift.text.toString()).toDouble()
+                                maizeTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
 
                                     if (maizeOwnFarm.editableText.toString()
@@ -894,6 +895,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(wheatOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         wheatMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(wheatGift.text.toString()).toDouble()
+                                wheatTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (wheatOwnFarm.editableText.toString()
                                             .isNotEmpty() && wheatMarket.editableText.toString()
@@ -947,6 +949,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(sorghumOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         sorghumMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(sorghumGift.text.toString()).toDouble()
+                                sorghumTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (sorghumOwnFarm.editableText.toString()
                                             .isNotEmpty() && sorghumMarket.editableText.toString()
@@ -999,6 +1002,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(riceOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         riceMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(riceGift.text.toString()).toDouble()
+                                riceTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (riceOwnFarm.editableText.toString()
                                             .isNotEmpty() && riceMarket.editableText.toString()
@@ -1052,6 +1056,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(beansOwnfarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         beansMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(beansGift.text.toString()).toDouble()
+                                beansTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (beansOwnfarm.editableText.toString()
                                             .isNotEmpty() && beansMarket.editableText.toString()
@@ -1105,6 +1110,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(pulsesOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         pulsesMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(pulsesGift.text.toString()).toDouble()
+                                pulsesTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (pulsesOwnFarm.editableText.toString()
                                             .isNotEmpty() && pulsesMarket.editableText.toString()
@@ -1158,6 +1164,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(vegetablesOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         vegetablesMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(vegetablesGift.text.toString()).toDouble()
+                                vegetablesTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (vegetablesOwnFarm.editableText.toString()
                                             .isNotEmpty() && vegetablesMarket.editableText.toString()
@@ -1211,6 +1218,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(fruitsOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         fruitsMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(fruitsGift.text.toString()).toDouble()
+                                fruitsTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (fruitsOwnFarm.editableText.toString()
                                             .isNotEmpty() && fruitsMarket.editableText.toString()
@@ -1264,6 +1272,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(whiteRootsOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         whiteRootsMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(whiteRootsGift.text.toString()).toDouble()
+                                whiteRootsTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (whiteRootsOwnFarm.editableText.toString()
                                             .isNotEmpty() && whiteRootsMarket.editableText.toString()
@@ -1317,6 +1326,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(meatOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         meatMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(meatGift.text.toString()).toDouble()
+                                meatTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (meatOwnFarm.editableText.toString()
                                             .isNotEmpty() && meatMarket.editableText.toString()
@@ -1370,6 +1380,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(milkOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         milkMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(milkGift.text.toString()).toDouble()
+                                milkTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (milkOwnFarm.editableText.toString()
                                             .isNotEmpty() && milkMarket.editableText.toString()
@@ -1423,6 +1434,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(fishOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         fishOwnMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(fishGift.text.toString()).toDouble()
+                                fishTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (fishOwnFarm.editableText.toString()
                                             .isNotEmpty() && fishOwnMarket.editableText.toString()
@@ -1477,6 +1489,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(eggsOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         eggsMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(eggsGift.text.toString()).toDouble()
+                                eggsTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (eggsOwnFarm.editableText.toString()
                                             .isNotEmpty() && eggsMarket.editableText.toString()
@@ -1531,6 +1544,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(cookingFatOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         cookingFatMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(cookingFatGift.text.toString()).toDouble()
+                                fatsAndOilsTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (cookingFatOwnFarm.editableText.toString()
                                             .isNotEmpty() && cookingFatMarket.editableText.toString()
@@ -1584,6 +1598,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     returnZeroStringIfEmpty(spicesOwnFarm.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                         spicesMarket.text.toString()
                                     ).toDouble() + returnZeroStringIfEmpty(spicesGift.text.toString()).toDouble()
+                                spicesTotal.text = totalPercentage.toString()
                                 if (totalPercentage != 100.0) {
                                     if (spicesOwnFarm.editableText.toString()
                                             .isNotEmpty() && spicesMarket.editableText.toString()
@@ -4028,6 +4043,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     fullySettled.text.toString()
                                 ).toDouble() + returnZeroStringIfEmpty(internallyDisplaced.text.toString()).toDouble()
 
+                            migrationTotal.text = totalEntry.toString()
                             if (totalEntry > 100) {
                                 val excessValue = totalEntry - 100.0
                                 errorDialog?.isShowing?.let { isDialogShowing ->

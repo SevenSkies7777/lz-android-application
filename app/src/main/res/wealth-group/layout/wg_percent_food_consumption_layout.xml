@@ -249,6 +249,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/maizeTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -369,6 +370,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/wheatTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -489,6 +491,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/sorghumTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -609,6 +612,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/riceTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -729,6 +733,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/beansTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -849,6 +854,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/pulsesTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -969,6 +975,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/vegetablesTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1089,6 +1096,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/fruitsTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1209,6 +1217,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/whiteRootsTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1329,6 +1338,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/meatTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1449,6 +1459,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/milkTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1569,6 +1580,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/fishTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1689,6 +1701,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/eggsTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1809,6 +1822,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/fatsAndOilsTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1929,6 +1943,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/spicesTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
