@@ -142,6 +142,18 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"/>
 
+            <TextView
+                android:id="@+id/veryPoorAddField"
+                android:text="+"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_add_textfield_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"/>
+
 
             <TextView
                 android:id="@+id/veryPoorSubmitButton"
@@ -289,6 +301,18 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"/>
 
+            <TextView
+                android:id="@+id/poorAddField"
+                android:text="+"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_add_textfield_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"/>
+
 
             <TextView
                 android:id="@+id/poorSubmitButton"
@@ -435,6 +459,18 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"/>
 
+            <TextView
+                android:id="@+id/mediumAddField"
+                android:text="+"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_add_textfield_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"/>
+
 
             <TextView
                 android:id="@+id/mediumSubmitButton"
@@ -456,7 +492,7 @@
     </LinearLayout>
 
 
-    <!--    Poor Section-->
+    <!--    Better off Section-->
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -580,6 +616,18 @@
                 android:orientation="vertical"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"/>
+
+            <TextView
+                android:id="@+id/betterOffAddField"
+                android:text="+"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_add_textfield_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"/>
 
 
             <TextView

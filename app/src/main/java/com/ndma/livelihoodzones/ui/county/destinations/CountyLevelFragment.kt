@@ -599,6 +599,7 @@ class CountyLevelFragment : DialogFragment(),
 
                 val wealthGroupCharectaristicsResponses = WealthGroupCharectaristicsResponses()
 
+                var veryPoorIds = 1
                 xticsNumberSubmitButton.setOnClickListener {
                     if (noCharectaristics.text.toString().isNotEmpty()) {
 
@@ -607,10 +608,9 @@ class CountyLevelFragment : DialogFragment(),
                             editTextsList.add(EditText(requireContext()))
                         }
 
-                        var ids = 1
                         for (currentEditText in editTextsList) {
-                            currentEditText.setId(ids)
-                            currentEditText.hint = "$ids)"
+                            currentEditText.setId(veryPoorIds)
+                            currentEditText.hint = "$veryPoorIds)"
                             currentEditText.setLayoutParams(
                                 ViewGroup.LayoutParams(
                                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -618,13 +618,27 @@ class CountyLevelFragment : DialogFragment(),
                                 )
                             )
                             veryPoorList.addView(currentEditText)
-                            ids++
+                            veryPoorIds++
                         }
 
                         numberVeryPoorCharectaristics.visibility = View.GONE
                         veryPoorCharectaristicsList.visibility = View.VISIBLE
 
                     }
+                }
+
+                veryPoorAddField.setOnClickListener {
+                    val addedEditText = EditText(requireContext())
+                    addedEditText.setId(veryPoorIds)
+                    addedEditText.hint = "$veryPoorIds)"
+                    addedEditText.setLayoutParams(
+                        ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
+                    )
+                    veryPoorList.addView(addedEditText)
+                    veryPoorIds++
                 }
 
 
@@ -650,6 +664,7 @@ class CountyLevelFragment : DialogFragment(),
 
                 }
 
+                var poorIds = 1
 
                 poorXticsNumberSubmitButton.setOnClickListener {
                     if (poorNoCharectaristics.text.toString().isNotEmpty()) {
@@ -659,9 +674,9 @@ class CountyLevelFragment : DialogFragment(),
                             editTextsList.add(EditText(requireContext()))
                         }
 
-                        var ids = 1
+
                         for (currentEditText in editTextsList) {
-                            currentEditText.hint = "$ids)"
+                            currentEditText.hint = "$poorIds)"
                             currentEditText.setLayoutParams(
                                 ViewGroup.LayoutParams(
                                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -669,13 +684,27 @@ class CountyLevelFragment : DialogFragment(),
                                 )
                             )
                             poorList.addView(currentEditText)
-                            ids++
+                            poorIds++
                         }
 
                         numberPoorCharectaristics.visibility = View.GONE
                         poorCharectaristicsList.visibility = View.VISIBLE
 
                     }
+                }
+
+                poorAddField.setOnClickListener {
+                    val addedEditText = EditText(requireContext())
+                    addedEditText.setId(poorIds)
+                    addedEditText.hint = "$poorIds)"
+                    addedEditText.setLayoutParams(
+                        ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
+                    )
+                    poorList.addView(addedEditText)
+                    poorIds++
                 }
 
 
@@ -702,6 +731,8 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
 
+
+                var mediumIds = 1
                 mediumXticsNumberSubmitButton.setOnClickListener {
                     if (mediumNoCharectaristics.text.toString().isNotEmpty()) {
 
@@ -710,9 +741,9 @@ class CountyLevelFragment : DialogFragment(),
                             editTextsList.add(EditText(requireContext()))
                         }
 
-                        var ids = 1
+
                         for (currentEditText in editTextsList) {
-                            currentEditText.hint = "$ids)"
+                            currentEditText.hint = "$mediumIds)"
                             currentEditText.setLayoutParams(
                                 ViewGroup.LayoutParams(
                                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -720,13 +751,27 @@ class CountyLevelFragment : DialogFragment(),
                                 )
                             )
                             mediumList.addView(currentEditText)
-                            ids++
+                            mediumIds++
                         }
 
                         numberMediumCharectaristics.visibility = View.GONE
                         mediumCharectaristicsList.visibility = View.VISIBLE
 
                     }
+                }
+
+                mediumAddField.setOnClickListener {
+                    val addedEditText = EditText(requireContext())
+                    addedEditText.setId(mediumIds)
+                    addedEditText.hint = "$mediumIds)"
+                    addedEditText.setLayoutParams(
+                        ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
+                    )
+                    mediumList.addView(addedEditText)
+                    mediumIds++
                 }
 
 
@@ -753,6 +798,7 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
 
+                var betterOffIds = 1
                 betterOffXticsNumberSubmitButton.setOnClickListener {
                     if (betterOffNoCharectaristics.text.toString().isNotEmpty()) {
 
@@ -761,9 +807,8 @@ class CountyLevelFragment : DialogFragment(),
                             editTextsList.add(EditText(requireContext()))
                         }
 
-                        var ids = 1
                         for (currentEditText in editTextsList) {
-                            currentEditText.hint = "$ids)"
+                            currentEditText.hint = "$betterOffIds)"
                             currentEditText.setLayoutParams(
                                 ViewGroup.LayoutParams(
                                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -771,7 +816,7 @@ class CountyLevelFragment : DialogFragment(),
                                 )
                             )
                             betterOffList.addView(currentEditText)
-                            ids++
+                            betterOffIds++
                         }
 
                         numberBetterOffCharectaristics.visibility = View.GONE
@@ -779,6 +824,22 @@ class CountyLevelFragment : DialogFragment(),
 
                     }
                 }
+
+
+                betterOffAddField.setOnClickListener {
+                    val addedEditText = EditText(requireContext())
+                    addedEditText.setId(betterOffIds)
+                    addedEditText.hint = "$betterOffIds)"
+                    addedEditText.setLayoutParams(
+                        ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
+                    )
+                    betterOffList.addView(addedEditText)
+                    betterOffIds++
+                }
+
 
                 betterOffSubmitButton.setOnClickListener {
 
