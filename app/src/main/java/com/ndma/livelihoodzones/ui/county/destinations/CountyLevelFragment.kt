@@ -73,7 +73,7 @@ class CountyLevelFragment : DialogFragment(),
     CropProductionListAdapter.CropProductionListAdapterCallBack,
     TribesListViewAdapter.TribesListViewAdapterCallBack,
     HazardsRankingAdapter.HazardsRankingAdapterCallBack,
-    ZoneCharectaristicsAdapter.ZoneCharectaristicsAdapterCallBack {
+    ZoneCharectaristicsAdapter.ZoneCharectaristicsAdapterCallBack, MarketTradeAdapter.MarketTradeAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -1667,6 +1667,7 @@ class CountyLevelFragment : DialogFragment(),
             ethnicGroupSelection.apply {
 
                 tribeSelectionBackButton.setOnClickListener {
+                    populateMarketTransactionsResponses()
                     lzMarketTransactions.root.visibility = View.VISIBLE
                     ethnicGroupSelection.root.visibility = View.GONE
                 }
@@ -5372,7 +5373,7 @@ class CountyLevelFragment : DialogFragment(),
             countyLevelQuestionnaire.marketTransactionItems = marketTransactionItems
 
             val marketTransactionsAdapter =
-                MarketTransactionsAdapter(
+                MarketTradeAdapter(
                     marketTransactionItems,
                     this@CountyLevelFragment
                 )
@@ -5583,6 +5584,28 @@ class CountyLevelFragment : DialogFragment(),
                     tenNearestVillageOrTown.setText(it.nearestVillageOrTown)
                     tenSubCounty.text = it.subCountyModel.subCountyName
                 }
+            }
+        }
+    }
+
+
+    fun populateMarketTransactionsResponses() {
+        binding.apply {
+
+            val marketTransactionsAdapter =
+                MarketTradeAdapter(
+                    countyLevelQuestionnaire.marketTransactionItems,
+                    this@CountyLevelFragment
+                )
+            val gridLayoutManager = GridLayoutManager(activity, 1)
+
+            lzMarketTransactions.apply {
+
+                marketTransactionsList.layoutManager = gridLayoutManager
+                marketTransactionsList.hasFixedSize()
+                marketTransactionsList.adapter =
+                    marketTransactionsAdapter
+
             }
         }
     }
@@ -5944,6 +5967,13 @@ class CountyLevelFragment : DialogFragment(),
             }
         }
         return false
+    }
+
+    override fun onAMarketTradeUpdated(
+        marketTransactionsItem: MarketTransactionsItem,
+        position: Int
+    ) {
+        countyLevelQuestionnaire.marketTransactionItems.set(position,marketTransactionsItem)
     }
 
 }

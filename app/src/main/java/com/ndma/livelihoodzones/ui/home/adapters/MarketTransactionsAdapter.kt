@@ -34,23 +34,23 @@ class MarketTransactionsAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         var marketName: TextView = view.findViewById<TextView>(R.id.marketName)
-        var livestock: View = view.findViewById<TextView>(R.id.livestock)
-        var livestockTick: View = view.findViewById<TextView>(R.id.livestockTick)
+        var livestock: View = view.findViewById<View>(R.id.livestock)
+        var livestockTick: View = view.findViewById<View>(R.id.livestockTick)
 
-        var poultry: View = view.findViewById<TextView>(R.id.poultry)
-        var poultryTick: View = view.findViewById<TextView>(R.id.poultryTick)
+        var poultry: View = view.findViewById<View>(R.id.poultry)
+        var poultryTick: View = view.findViewById<View>(R.id.poultryTick)
 
-        var farmProduce: View = view.findViewById<TextView>(R.id.farmProduce)
-        var farmProduceTick: View = view.findViewById<TextView>(R.id.farmProduceTick)
+        var farmProduce: View = view.findViewById<View>(R.id.farmProduce)
+        var farmProduceTick: View = view.findViewById<View>(R.id.farmProduceTick)
 
-        var foodProduce: View = view.findViewById<TextView>(R.id.foodProduce)
-        var foodProduceTick: View = view.findViewById<TextView>(R.id.foodProduceTick)
+        var foodProduce: View = view.findViewById<View>(R.id.foodProduce)
+        var foodProduceTick: View = view.findViewById<View>(R.id.foodProduceTick)
 
-        var farmInputs: View = view.findViewById<TextView>(R.id.farmInputs)
-        var farmInputsTick: View = view.findViewById<TextView>(R.id.farmInputsTick)
+        var farmInputs: View = view.findViewById<View>(R.id.farmInputs)
+        var farmInputsTick: View = view.findViewById<View>(R.id.farmInputsTick)
 
-        var labourExchange: View = view.findViewById<TextView>(R.id.labourExchange)
-        var labourExchangeTick: View = view.findViewById<TextView>(R.id.labourExchangeTick)
+        var labourExchange: View = view.findViewById<View>(R.id.labourExchange)
+        var labourExchangeTick: View = view.findViewById<View>(R.id.labourExchangeTick)
 
     }
 
