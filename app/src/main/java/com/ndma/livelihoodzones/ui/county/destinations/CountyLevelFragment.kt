@@ -1147,6 +1147,7 @@ class CountyLevelFragment : DialogFragment(),
                                     othersWetSeason.text.toString()
                                 ).toDouble()
 
+                            wetSeasonTotal.text = totalEntry.toString()
 
                             if (totalEntry > 100) {
                                 errorDialog?.isShowing?.let { isDialogShowing ->
@@ -1216,6 +1217,7 @@ class CountyLevelFragment : DialogFragment(),
                                     othersDrySeason.text.toString()
                                 ).toDouble()
 
+                            drySeasonTotal.text = totalEntry.toString()
 
                             if (totalEntry > 100) {
                                 errorDialog?.isShowing?.let { isDialogShowing ->

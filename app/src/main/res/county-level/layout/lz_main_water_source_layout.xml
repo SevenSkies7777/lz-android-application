@@ -1130,7 +1130,8 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="100"
+                    android:id="@+id/wetSeasonTotal"
+                    android:text="0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
@@ -1150,7 +1151,8 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
-                    android:text="100"
+                    android:id="@+id/drySeasonTotal"
+                    android:text="0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"

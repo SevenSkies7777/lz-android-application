@@ -1258,6 +1258,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/womenTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1278,6 +1279,7 @@
                 android:background="@drawable/cell_shape">
 
                 <TextView
+                    android:id="@+id/menTotal"
                     android:text="100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -3116,6 +3116,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                                     inactivitymen.text.toString()
                                 ).toDouble()
 
+                            menTotal.text = menTotalEntry.toString()
+
                             if (menTotalEntry > 100) {
                                 val excessValue = menTotalEntry - 100.0
                                 errorDialog?.isShowing?.let { isDialogShowing ->
@@ -3192,6 +3194,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 ).toDouble() + returnZeroStringIfEmpty(beggingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                     inactivityWomen.text.toString()
                                 ).toDouble()
+
+                            womenTotal.text = womenTotalEntry.toString()
 
                             if (womenTotalEntry > 100) {
                                 val excessValue = womenTotalEntry - 100.0
