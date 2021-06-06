@@ -73,7 +73,8 @@ class CountyLevelFragment : DialogFragment(),
     CropProductionListAdapter.CropProductionListAdapterCallBack,
     TribesListViewAdapter.TribesListViewAdapterCallBack,
     HazardsRankingAdapter.HazardsRankingAdapterCallBack,
-    ZoneCharectaristicsAdapter.ZoneCharectaristicsAdapterCallBack, MarketTradeAdapter.MarketTradeAdapterCallBack {
+    ZoneCharectaristicsAdapter.ZoneCharectaristicsAdapterCallBack,
+    MarketTradeAdapter.MarketTradeAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -401,6 +402,10 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeSeasonsCalendar() {
         binding.apply {
+            countyLevelQuestionnaire.draft.draftLivelihoodZoneSeasonsResponses?.let {
+                countyLevelQuestionnaire.livelihoodZoneSeasonsResponses = it
+                populateSeasonsCalendar()
+            }
             lzSeasonsCalendar.root.visibility = View.VISIBLE
         }
     }
@@ -729,7 +734,6 @@ class CountyLevelFragment : DialogFragment(),
                     }
 
                 }
-
 
 
                 var mediumIds = 1
@@ -1966,7 +1970,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.animalRustling.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.animalRustling.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.animalRustling.importanceRank = -1
                         animalRustlingRank.text = "Select rank..."
@@ -1982,7 +1991,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.banditry.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.banditry.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.banditry.importanceRank = -1
                         banditryRank.text = "Select rank..."
@@ -1998,7 +2012,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.terrorism.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.terrorism.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.terrorism.importanceRank = -1
                         terrorismRank.text = "Select rank..."
@@ -2014,7 +2033,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.ethnicConflict.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.ethnicConflict.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.ethnicConflict.importanceRank = -1
                         ethicConflictRank.text = "Select rank..."
@@ -2030,7 +2054,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.politicalViolence.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.politicalViolence.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.politicalViolence.importanceRank = -1
                         politicalViolenceRank.text = "Select rank..."
@@ -2046,7 +2075,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.drought.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.drought.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.drought.importanceRank = -1
                         droughtRank.text = "Select rank..."
@@ -2062,12 +2096,20 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.livestockPestsAndDiseases.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.livestockPestsAndDiseases.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.livestockPestsAndDiseases.importanceRank = -1
                         pestAndDiseaseRank.text = "Select rank..."
                     } else {
-                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.LIVESTOCK_PESTS_DISEASES)
+                        inflateHazardsRankModal(
+                            hazardsRanks,
+                            HazardTypeEnum.LIVESTOCK_PESTS_DISEASES
+                        )
                     }
                 }
 
@@ -2078,7 +2120,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.hailstormsOrFrost.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.hailstormsOrFrost.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.hailstormsOrFrost.importanceRank = -1
                         hailstormsOrFrostRank.text = "Select rank..."
@@ -2095,7 +2142,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.flooding.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.flooding.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.flooding.importanceRank = -1
                         floodingRank.text = "Select rank..."
@@ -2111,7 +2163,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.landslides.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.landslides.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.landslides.importanceRank = -1
                         landslidesRank.text = "Select rank..."
@@ -2127,7 +2184,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.highWindsOrCyclones.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.highWindsOrCyclones.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.highWindsOrCyclones.importanceRank = -1
                         windsOrCycloneRank.text = "Select rank..."
@@ -2143,7 +2205,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.bushFires.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.bushFires.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.bushFires.importanceRank = -1
                         bushFiresRank.text = "Select rank..."
@@ -2159,7 +2226,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.cropPests.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.cropPests.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.cropPests.importanceRank = -1
                         cropPestsRank.text = "Select rank..."
@@ -2175,7 +2247,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.locustInvasion.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.locustInvasion.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.locustInvasion.importanceRank = -1
                         locustInvasionRank.text = "Select rank..."
@@ -2191,7 +2268,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.cropDiseases.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.cropDiseases.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.cropDiseases.importanceRank = -1
                         cropDiseasesRank.text = "Select rank..."
@@ -2207,7 +2289,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.terminalIllnesses.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.terminalIllnesses.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.terminalIllnesses.importanceRank = -1
                         terminalIllnessRank.text = "Select rank..."
@@ -2223,7 +2310,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.malariaPowerOutBreak.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.malariaPowerOutBreak.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.malariaPowerOutBreak.importanceRank = -1
                         malariaOutbreakRank.text = "Select rank..."
@@ -2239,7 +2331,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.waterBornDiseases.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.waterBornDiseases.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.waterBornDiseases.importanceRank = -1
                         waterBorneDiseaseRank.text = "Select rank..."
@@ -2255,12 +2352,20 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.humanWildlifeConflict.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.humanWildlifeConflict.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.humanWildlifeConflict.importanceRank = -1
                         humanWildlifeConflictRank.text = "Select rank..."
                     } else {
-                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.HUMAN_WILDLIFE_CONFLICT)
+                        inflateHazardsRankModal(
+                            hazardsRanks,
+                            HazardTypeEnum.HUMAN_WILDLIFE_CONFLICT
+                        )
                     }
                 }
 
@@ -2271,7 +2376,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.highFoodPrices.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.highFoodPrices.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.highFoodPrices.importanceRank = -1
                         highFoodPriceRank.text = "Select rank..."
@@ -2287,7 +2397,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.marketFoodShortages.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.marketFoodShortages.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.marketFoodShortages.importanceRank = -1
                         foodShortageRank.text = "Select rank..."
@@ -2303,12 +2418,20 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.drinkingWaterShortages.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.drinkingWaterShortages.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.drinkingWaterShortages.importanceRank = -1
                         drinkingWaterShortageRank.text = "Select rank..."
                     } else {
-                        inflateHazardsRankModal(hazardsRanks, HazardTypeEnum.DRINKING_WATER_SHORTAGE)
+                        inflateHazardsRankModal(
+                            hazardsRanks,
+                            HazardTypeEnum.DRINKING_WATER_SHORTAGE
+                        )
                     }
                 }
 
@@ -2319,7 +2442,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.invasivePlants.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.invasivePlants.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.invasivePlants.importanceRank = -1
                         invasivePlantsRank.text = "Select rank..."
@@ -2335,7 +2463,12 @@ class CountyLevelFragment : DialogFragment(),
                                 hazardsRanks
                             )
                         ) {
-                            hazardsRanks.add(RankResponseItem(hazardResponses.others.importanceRank, false))
+                            hazardsRanks.add(
+                                RankResponseItem(
+                                    hazardResponses.others.importanceRank,
+                                    false
+                                )
+                            )
                         }
                         hazardResponses.others.importanceRank = -1
                         othersRank.text = "Select rank..."
@@ -3108,6 +3241,8 @@ class CountyLevelFragment : DialogFragment(),
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.LZ_COMPLETION_PAGE
 
+                        countyLevelQuestionnaire.draft.draftLivelihoodZoneSeasonsResponses = null
+
                         if (!doesStepExist(
                                 Constants.LZ_COMPLETION_PAGE,
                                 countyLevelQuestionnaire.questionnaireCoveredSteps
@@ -3453,7 +3588,7 @@ class CountyLevelFragment : DialogFragment(),
         countyLevelQuestionnaire.livelihoodZoneEthnicGroups.add(selectedTribe)
     }
 
-    fun returnMonthInitialsString(months: MutableList<MonthsModel>): String {
+    fun returnMonthInitialsString(months: MutableList<MonthsModel>): String? {
         var monthsString = ""
         for (currentMonth in months) {
             monthsString = monthsString + " ${currentMonth.monthName.substring(
@@ -3461,7 +3596,7 @@ class CountyLevelFragment : DialogFragment(),
                 3
             )},"
         }
-        return monthsString
+        return if (monthsString.isNotEmpty()) monthsString else null
     }
 
     override fun onMonthSelected(
@@ -4960,6 +5095,11 @@ class CountyLevelFragment : DialogFragment(),
         if (countyLevelQuestionnaire.questionnaireStatus == QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
             updateCompletedQuestionnaire()
         }
+
+        if (countyLevelQuestionnaire.lastQuestionnaireStep ==
+                Constants.SEASON_CALENDAR_STEP) {
+            saveIncompleteUnvalidatedSeasonsCalendar()
+        }
     }
 
     override fun onStop() {
@@ -4969,6 +5109,11 @@ class CountyLevelFragment : DialogFragment(),
         }
         if (countyLevelQuestionnaire.questionnaireStatus == QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
             updateCompletedQuestionnaire()
+        }
+
+        if (countyLevelQuestionnaire.lastQuestionnaireStep ==
+            Constants.SEASON_CALENDAR_STEP) {
+            saveIncompleteUnvalidatedSeasonsCalendar()
         }
     }
 
@@ -5805,83 +5950,83 @@ class CountyLevelFragment : DialogFragment(),
             lzSeasonsCalendar.apply {
                 val seasonsResponse = countyLevelQuestionnaire.livelihoodZoneSeasonsResponses
                 lzSeasonsResponses = countyLevelQuestionnaire.livelihoodZoneSeasonsResponses
-                dryMonth.text = returnMonthInitialsString(seasonsResponse.dry)
-                longRainMonth.text = returnMonthInitialsString(seasonsResponse.longRains)
-                shortRainMonth.text = returnMonthInitialsString(seasonsResponse.shortRains)
+                dryMonth.text = returnMonthInitialsString(seasonsResponse.dry) ?: "Select month..."
+                longRainMonth.text = returnMonthInitialsString(seasonsResponse.longRains) ?: "Select month..."
+                shortRainMonth.text = returnMonthInitialsString(seasonsResponse.shortRains) ?: "Select month..."
 
-                landPrepMaize.text = returnMonthInitialsString(seasonsResponse.maizeLandPreparation)
+                landPrepMaize.text = returnMonthInitialsString(seasonsResponse.maizeLandPreparation) ?: "Select month..."
                 landPrepCassava.text =
-                    returnMonthInitialsString(seasonsResponse.cassavaLandPreparation)
-                landPrepRice.text = returnMonthInitialsString(seasonsResponse.riceLandPreparation)
+                    returnMonthInitialsString(seasonsResponse.cassavaLandPreparation) ?: "Select month..."
+                landPrepRice.text = returnMonthInitialsString(seasonsResponse.riceLandPreparation) ?: "Select month..."
                 landPrepSorghum.text =
-                    returnMonthInitialsString(seasonsResponse.sorghumLandPreparation)
+                    returnMonthInitialsString(seasonsResponse.sorghumLandPreparation) ?: "Select month..."
                 landPrepLegumes.text =
-                    returnMonthInitialsString(seasonsResponse.legumesLandPreparation)
+                    returnMonthInitialsString(seasonsResponse.legumesLandPreparation) ?: "Select month..."
 
-                plantingMaize.text = returnMonthInitialsString(seasonsResponse.maizePlanting)
-                plantingCassava.text = returnMonthInitialsString(seasonsResponse.cassavaPlanting)
-                plantingRice.text = returnMonthInitialsString(seasonsResponse.ricePlanting)
-                plantingSorghum.text = returnMonthInitialsString(seasonsResponse.sorghumPlanting)
-                plantingLegumes.text = returnMonthInitialsString(seasonsResponse.legumesPlanting)
+                plantingMaize.text = returnMonthInitialsString(seasonsResponse.maizePlanting) ?: "Select month..."
+                plantingCassava.text = returnMonthInitialsString(seasonsResponse.cassavaPlanting) ?: "Select month..."
+                plantingRice.text = returnMonthInitialsString(seasonsResponse.ricePlanting) ?: "Select month..."
+                plantingSorghum.text = returnMonthInitialsString(seasonsResponse.sorghumPlanting) ?: "Select month..."
+                plantingLegumes.text = returnMonthInitialsString(seasonsResponse.legumesPlanting) ?: "Select month..."
 
-                harvestingMaize.text = returnMonthInitialsString(seasonsResponse.maizeHarvesting)
+                harvestingMaize.text = returnMonthInitialsString(seasonsResponse.maizeHarvesting) ?: "Select month..."
                 harvestingCassava.text =
-                    returnMonthInitialsString(seasonsResponse.cassavaHarvesting)
-                harvestingRice.text = returnMonthInitialsString(seasonsResponse.riceHarvesting)
+                    returnMonthInitialsString(seasonsResponse.cassavaHarvesting) ?: "Select month..."
+                harvestingRice.text = returnMonthInitialsString(seasonsResponse.riceHarvesting) ?: "Select month..."
                 harvestingSorghum.text =
-                    returnMonthInitialsString(seasonsResponse.sorghumHarvesting)
+                    returnMonthInitialsString(seasonsResponse.sorghumHarvesting) ?: "Select month..."
                 harvestingLegumes.text =
-                    returnMonthInitialsString(seasonsResponse.legumesHarvesting)
+                    returnMonthInitialsString(seasonsResponse.legumesHarvesting) ?: "Select month..."
 
                 livestockInMigration.text =
-                    returnMonthInitialsString(seasonsResponse.livestockInMigration)
+                    returnMonthInitialsString(seasonsResponse.livestockInMigration) ?: "Select month..."
                 livestockOutMigration.text =
-                    returnMonthInitialsString(seasonsResponse.livestockOutMigration)
+                    returnMonthInitialsString(seasonsResponse.livestockOutMigration) ?: "Select month..."
 
-                milkHigh.text = returnMonthInitialsString(seasonsResponse.highMilkProduction)
-                milkLow.text = returnMonthInitialsString(seasonsResponse.lowMilkProduction)
-                calvingHigh.text = returnMonthInitialsString(seasonsResponse.highCalving)
-                calvingLow.text = returnMonthInitialsString(seasonsResponse.lowCalving)
-                kiddingHigh.text = returnMonthInitialsString(seasonsResponse.highKidding)
-                kiddingLow.text = returnMonthInitialsString(seasonsResponse.lowKidding)
-                foodPricesHigh.text = returnMonthInitialsString(seasonsResponse.highFoodPrices)
-                foodPricesMedium.text = returnMonthInitialsString(seasonsResponse.mediumFoodPrices)
-                foodPricesLow.text = returnMonthInitialsString(seasonsResponse.lowFoodPrices)
+                milkHigh.text = returnMonthInitialsString(seasonsResponse.highMilkProduction) ?: "Select month..."
+                milkLow.text = returnMonthInitialsString(seasonsResponse.lowMilkProduction) ?: "Select month..."
+                calvingHigh.text = returnMonthInitialsString(seasonsResponse.highCalving) ?: "Select month..."
+                calvingLow.text = returnMonthInitialsString(seasonsResponse.lowCalving) ?: "Select month..."
+                kiddingHigh.text = returnMonthInitialsString(seasonsResponse.highKidding) ?: "Select month..."
+                kiddingLow.text = returnMonthInitialsString(seasonsResponse.lowKidding) ?: "Select month..."
+                foodPricesHigh.text = returnMonthInitialsString(seasonsResponse.highFoodPrices) ?: "Select month..."
+                foodPricesMedium.text = returnMonthInitialsString(seasonsResponse.mediumFoodPrices) ?: "Select month..."
+                foodPricesLow.text = returnMonthInitialsString(seasonsResponse.lowFoodPrices) ?: "Select month..."
                 livestockPricesHigh.text =
-                    returnMonthInitialsString(seasonsResponse.highLivestockPrices)
+                    returnMonthInitialsString(seasonsResponse.highLivestockPrices) ?: "Select month..."
                 livestockPricesMedium.text =
-                    returnMonthInitialsString(seasonsResponse.mediumLivestockPrices)
+                    returnMonthInitialsString(seasonsResponse.mediumLivestockPrices) ?: "Select month..."
                 livestockPricesLow.text =
-                    returnMonthInitialsString(seasonsResponse.lowLivestockPrices)
+                    returnMonthInitialsString(seasonsResponse.lowLivestockPrices) ?: "Select month..."
                 casualLabourAvailabilityHigh.text =
-                    returnMonthInitialsString(seasonsResponse.highCasualLabourAvailability)
+                    returnMonthInitialsString(seasonsResponse.highCasualLabourAvailability) ?: "Select month..."
                 casualLabourAvailabilityLow.text =
-                    returnMonthInitialsString(seasonsResponse.lowCasualLabourAvailability)
+                    returnMonthInitialsString(seasonsResponse.lowCasualLabourAvailability) ?: "Select month..."
                 nonAgricCasualLabourAvailabilityHigh.text =
-                    returnMonthInitialsString(seasonsResponse.nonAgricHighCasualLabourAvailability)
+                    returnMonthInitialsString(seasonsResponse.nonAgricHighCasualLabourAvailability) ?: "Select month..."
                 nonAgricCasualLabourAvailabilityLow.text =
-                    returnMonthInitialsString(seasonsResponse.nonAgricLowCasualLabourAvailability)
+                    returnMonthInitialsString(seasonsResponse.nonAgricLowCasualLabourAvailability) ?: "Select month..."
                 casualLabourWagesHigh.text =
-                    returnMonthInitialsString(seasonsResponse.highCasualLabourWages)
+                    returnMonthInitialsString(seasonsResponse.highCasualLabourWages) ?: "Select month..."
                 casualLabourWagesLow.text =
-                    returnMonthInitialsString(seasonsResponse.lowCasualLabourWages)
-                remittancesHigh.text = returnMonthInitialsString(seasonsResponse.highRemittances)
-                remittancesLow.text = returnMonthInitialsString(seasonsResponse.lowRemittances)
-                fishingHigh.text = returnMonthInitialsString(seasonsResponse.highFish)
-                fishingLow.text = returnMonthInitialsString(seasonsResponse.lowFish)
-                marketAccessHigh.text = returnMonthInitialsString(seasonsResponse.highMarketAccess)
-                marketAccessLow.text = returnMonthInitialsString(seasonsResponse.lowMarketAccess)
-                marketAccessLow.text = returnMonthInitialsString(seasonsResponse.lowMarketAccess)
+                    returnMonthInitialsString(seasonsResponse.lowCasualLabourWages) ?: "Select month..."
+                remittancesHigh.text = returnMonthInitialsString(seasonsResponse.highRemittances) ?: "Select month..."
+                remittancesLow.text = returnMonthInitialsString(seasonsResponse.lowRemittances) ?: "Select month..."
+                fishingHigh.text = returnMonthInitialsString(seasonsResponse.highFish) ?: "Select month..."
+                fishingLow.text = returnMonthInitialsString(seasonsResponse.lowFish) ?: "Select month..."
+                marketAccessHigh.text = returnMonthInitialsString(seasonsResponse.highMarketAccess) ?: "Select month..."
+                marketAccessLow.text = returnMonthInitialsString(seasonsResponse.lowMarketAccess) ?: "Select month..."
+                marketAccessLow.text = returnMonthInitialsString(seasonsResponse.lowMarketAccess) ?: "Select month..."
                 diseaseOutbreakHigh.text =
-                    returnMonthInitialsString(seasonsResponse.highDiseaseOutbreak)
+                    returnMonthInitialsString(seasonsResponse.highDiseaseOutbreak) ?: "Select month..."
                 diseaseOutbreakLow.text =
-                    returnMonthInitialsString(seasonsResponse.lowDiseaseOutbreak)
-                waterStressMonth.text = returnMonthInitialsString(seasonsResponse.waterStress)
-                conflictRiskMonth.text = returnMonthInitialsString(seasonsResponse.conflictRisks)
-                ceremoniesMonth.text = returnMonthInitialsString(seasonsResponse.ceremonies)
-                leanSeasonsMonth.text = returnMonthInitialsString(seasonsResponse.leanSeasons)
+                    returnMonthInitialsString(seasonsResponse.lowDiseaseOutbreak) ?: "Select month..."
+                waterStressMonth.text = returnMonthInitialsString(seasonsResponse.waterStress) ?: "Select month..."
+                conflictRiskMonth.text = returnMonthInitialsString(seasonsResponse.conflictRisks) ?: "Select month..."
+                ceremoniesMonth.text = returnMonthInitialsString(seasonsResponse.ceremonies) ?: "Select month..."
+                leanSeasonsMonth.text = returnMonthInitialsString(seasonsResponse.leanSeasons) ?: "Select month..."
                 foodSecurityMonth.text =
-                    returnMonthInitialsString(seasonsResponse.foodSecurityAssessments)
+                    returnMonthInitialsString(seasonsResponse.foodSecurityAssessments) ?: "Select month..."
 
             }
         }
@@ -5975,7 +6120,168 @@ class CountyLevelFragment : DialogFragment(),
         marketTransactionsItem: MarketTransactionsItem,
         position: Int
     ) {
-        countyLevelQuestionnaire.marketTransactionItems.set(position,marketTransactionsItem)
+        countyLevelQuestionnaire.marketTransactionItems.set(position, marketTransactionsItem)
+    }
+
+    fun saveIncompleteUnvalidatedSeasonsCalendar() {
+        val draftSeasonsCalendar = LzSeasonsResponses()
+        if (lzSeasonsResponses.dry.isNotEmpty()) {
+            draftSeasonsCalendar.dry = lzSeasonsResponses.dry
+        }
+        if (lzSeasonsResponses.longRains.isNotEmpty()) {
+            draftSeasonsCalendar.longRains = lzSeasonsResponses.longRains
+        }
+        if (lzSeasonsResponses.shortRains.isNotEmpty()) {
+            draftSeasonsCalendar.shortRains = lzSeasonsResponses.shortRains
+        }
+        if (lzSeasonsResponses.maizeLandPreparation.isNotEmpty()) {
+            draftSeasonsCalendar.maizeLandPreparation = lzSeasonsResponses.maizeLandPreparation
+        }
+        if (lzSeasonsResponses.cassavaLandPreparation.isNotEmpty()) {
+            draftSeasonsCalendar.cassavaLandPreparation = lzSeasonsResponses.cassavaLandPreparation
+        }
+        if (lzSeasonsResponses.riceLandPreparation.isNotEmpty()) {
+            draftSeasonsCalendar.riceLandPreparation = lzSeasonsResponses.riceLandPreparation
+        }
+        if (lzSeasonsResponses.sorghumLandPreparation.isNotEmpty()) {
+            draftSeasonsCalendar.sorghumLandPreparation = lzSeasonsResponses.sorghumLandPreparation
+        }
+        if (lzSeasonsResponses.legumesLandPreparation.isNotEmpty()) {
+            draftSeasonsCalendar.legumesLandPreparation = lzSeasonsResponses.legumesLandPreparation
+        }
+        if (lzSeasonsResponses.maizePlanting.isNotEmpty()) {
+            draftSeasonsCalendar.maizePlanting = lzSeasonsResponses.maizePlanting
+        }
+        if (lzSeasonsResponses.ricePlanting.isNotEmpty()) {
+            draftSeasonsCalendar.ricePlanting = lzSeasonsResponses.ricePlanting
+        }
+        if (lzSeasonsResponses.sorghumPlanting.isNotEmpty()) {
+            draftSeasonsCalendar.sorghumPlanting = lzSeasonsResponses.sorghumPlanting
+        }
+        if (lzSeasonsResponses.legumesPlanting.isNotEmpty()) {
+            draftSeasonsCalendar.legumesPlanting = lzSeasonsResponses.legumesPlanting
+        }
+        if (lzSeasonsResponses.maizeHarvesting.isNotEmpty()) {
+            draftSeasonsCalendar.maizeHarvesting = lzSeasonsResponses.maizeHarvesting
+        }
+        if (lzSeasonsResponses.cassavaHarvesting.isNotEmpty()) {
+            draftSeasonsCalendar.cassavaHarvesting = lzSeasonsResponses.cassavaHarvesting
+        }
+        if (lzSeasonsResponses.riceHarvesting.isNotEmpty()) {
+            draftSeasonsCalendar.riceHarvesting = lzSeasonsResponses.riceHarvesting
+        }
+        if (lzSeasonsResponses.sorghumHarvesting.isNotEmpty()) {
+            draftSeasonsCalendar.sorghumHarvesting = lzSeasonsResponses.sorghumHarvesting
+        }
+        if (lzSeasonsResponses.legumesHarvesting.isNotEmpty()) {
+            draftSeasonsCalendar.legumesHarvesting = lzSeasonsResponses.legumesHarvesting
+        }
+        if (lzSeasonsResponses.livestockInMigration.isNotEmpty()) {
+            draftSeasonsCalendar.livestockInMigration = lzSeasonsResponses.livestockInMigration
+        }
+        if (lzSeasonsResponses.livestockOutMigration.isNotEmpty()) {
+            draftSeasonsCalendar.livestockOutMigration = lzSeasonsResponses.livestockOutMigration
+        }
+        if (lzSeasonsResponses.highMilkProduction.isNotEmpty()) {
+            draftSeasonsCalendar.highMilkProduction = lzSeasonsResponses.highMilkProduction
+        }
+        if (lzSeasonsResponses.lowMilkProduction.isNotEmpty()) {
+            draftSeasonsCalendar.lowMilkProduction = lzSeasonsResponses.lowMilkProduction
+        }
+        if (lzSeasonsResponses.highCalving.isNotEmpty()) {
+            draftSeasonsCalendar.highCalving = lzSeasonsResponses.highCalving
+        }
+        if (lzSeasonsResponses.lowCalving.isNotEmpty()) {
+            draftSeasonsCalendar.lowCalving = lzSeasonsResponses.lowCalving
+        }
+        if (lzSeasonsResponses.highKidding.isNotEmpty()) {
+            draftSeasonsCalendar.highKidding = lzSeasonsResponses.highKidding
+        }
+        if (lzSeasonsResponses.lowKidding.isNotEmpty()) {
+            draftSeasonsCalendar.lowKidding = lzSeasonsResponses.lowKidding
+        }
+        if (lzSeasonsResponses.highFoodPrices.isNotEmpty()) {
+            draftSeasonsCalendar.highFoodPrices = lzSeasonsResponses.highFoodPrices
+        }
+        if (lzSeasonsResponses.mediumFoodPrices.isNotEmpty()) {
+            draftSeasonsCalendar.mediumFoodPrices = lzSeasonsResponses.mediumFoodPrices
+        }
+        if (lzSeasonsResponses.lowFoodPrices.isNotEmpty()) {
+            draftSeasonsCalendar.lowFoodPrices = lzSeasonsResponses.lowFoodPrices
+        }
+        if (lzSeasonsResponses.highLivestockPrices.isNotEmpty()) {
+            draftSeasonsCalendar.highLivestockPrices = lzSeasonsResponses.highLivestockPrices
+        }
+        if (lzSeasonsResponses.mediumLivestockPrices.isNotEmpty()) {
+            draftSeasonsCalendar.mediumLivestockPrices = lzSeasonsResponses.mediumLivestockPrices
+        }
+        if (lzSeasonsResponses.lowLivestockPrices.isNotEmpty()) {
+            draftSeasonsCalendar.lowLivestockPrices = lzSeasonsResponses.lowLivestockPrices
+        }
+        if (lzSeasonsResponses.highCasualLabourAvailability.isNotEmpty()) {
+            draftSeasonsCalendar.highCasualLabourAvailability =
+                lzSeasonsResponses.highCasualLabourAvailability
+        }
+        if (lzSeasonsResponses.lowCasualLabourAvailability.isNotEmpty()) {
+            draftSeasonsCalendar.lowCasualLabourAvailability =
+                lzSeasonsResponses.lowCasualLabourAvailability
+        }
+        if (lzSeasonsResponses.nonAgricHighCasualLabourAvailability.isNotEmpty()) {
+            draftSeasonsCalendar.nonAgricHighCasualLabourAvailability =
+                lzSeasonsResponses.nonAgricHighCasualLabourAvailability
+        }
+        if (lzSeasonsResponses.nonAgricLowCasualLabourAvailability.isNotEmpty()) {
+            draftSeasonsCalendar.nonAgricLowCasualLabourAvailability =
+                lzSeasonsResponses.nonAgricLowCasualLabourAvailability
+        }
+        if (lzSeasonsResponses.highCasualLabourWages.isNotEmpty()) {
+            draftSeasonsCalendar.highCasualLabourWages = lzSeasonsResponses.highCasualLabourWages
+        }
+        if (lzSeasonsResponses.lowCasualLabourWages.isNotEmpty()) {
+            draftSeasonsCalendar.lowCasualLabourWages = lzSeasonsResponses.lowCasualLabourWages
+        }
+        if (lzSeasonsResponses.highRemittances.isNotEmpty()) {
+            draftSeasonsCalendar.highRemittances = lzSeasonsResponses.highRemittances
+        }
+        if (lzSeasonsResponses.lowRemittances.isNotEmpty()) {
+            draftSeasonsCalendar.lowRemittances = lzSeasonsResponses.lowRemittances
+        }
+        if (lzSeasonsResponses.highFish.isNotEmpty()) {
+            draftSeasonsCalendar.highFish = lzSeasonsResponses.highFish
+        }
+        if (lzSeasonsResponses.lowFish.isNotEmpty()) {
+            draftSeasonsCalendar.lowFish = lzSeasonsResponses.lowFish
+        }
+        if (lzSeasonsResponses.highMarketAccess.isNotEmpty()) {
+            draftSeasonsCalendar.highMarketAccess = lzSeasonsResponses.highMarketAccess
+        }
+        if (lzSeasonsResponses.lowMarketAccess.isNotEmpty()) {
+            draftSeasonsCalendar.lowMarketAccess = lzSeasonsResponses.lowMarketAccess
+        }
+        if (lzSeasonsResponses.highDiseaseOutbreak.isNotEmpty()) {
+            draftSeasonsCalendar.highDiseaseOutbreak = lzSeasonsResponses.highDiseaseOutbreak
+        }
+        if (lzSeasonsResponses.lowDiseaseOutbreak.isNotEmpty()) {
+            draftSeasonsCalendar.lowDiseaseOutbreak = lzSeasonsResponses.lowDiseaseOutbreak
+        }
+        if (lzSeasonsResponses.waterStress.isNotEmpty()) {
+            draftSeasonsCalendar.waterStress = lzSeasonsResponses.waterStress
+        }
+        if (lzSeasonsResponses.conflictRisks.isNotEmpty()) {
+            draftSeasonsCalendar.conflictRisks = lzSeasonsResponses.conflictRisks
+        }
+        if (lzSeasonsResponses.ceremonies.isNotEmpty()) {
+            draftSeasonsCalendar.ceremonies = lzSeasonsResponses.ceremonies
+        }
+        if (lzSeasonsResponses.leanSeasons.isNotEmpty()) {
+            draftSeasonsCalendar.leanSeasons = lzSeasonsResponses.leanSeasons
+        }
+        if (lzSeasonsResponses.foodSecurityAssessments.isNotEmpty()) {
+            draftSeasonsCalendar.foodSecurityAssessments =
+                lzSeasonsResponses.foodSecurityAssessments
+        }
+
+        countyLevelQuestionnaire.draft.draftLivelihoodZoneSeasonsResponses = lzSeasonsResponses
     }
 
 }
