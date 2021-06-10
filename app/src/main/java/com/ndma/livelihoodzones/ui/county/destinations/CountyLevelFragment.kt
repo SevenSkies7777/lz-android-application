@@ -6368,6 +6368,10 @@ class CountyLevelFragment : DialogFragment(),
         val submitButton = v.findViewById<TextView>(R.id.submitButton)
         val othersSpecifyDescription = v.findViewById<EditText>(R.id.othersSpecifyDescription)
 
+        val modalTitle = v.findViewById<TextView>(R.id.title)
+
+        modalTitle.text = "Briefly describe the other unmentioned hazards in this category"
+
         othersSpecifyDescription.setText(hazardResponses.others.extraDescription)
 
         submitButton.setOnClickListener {
