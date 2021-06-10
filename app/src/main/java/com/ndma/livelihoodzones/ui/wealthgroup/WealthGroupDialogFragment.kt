@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
@@ -16,6 +17,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -58,9 +60,13 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     private lateinit var wealthGroupViewModel: WealthGroupViewModel
 
+    private var incomeFoodSourcesOthersSpecifyDialog: android.app.AlertDialog? = null
+
     private lateinit var binding: WealthGroupQuestionnaireLayoutBinding
 
     private lateinit var wealthGroupQuestionnaire: WealthGroupQuestionnaire
+
+    var incomeAndFoodSourceResponses = IncomeAndFoodSourceResponses()
 
     var questionnaireId: String? = null
 
@@ -450,7 +456,12 @@ class WealthGroupDialogFragment : DialogFragment(),
 
             /*Income and food sources navigation*/
             wgIncomeAndFoodSources.apply {
-
+                val fontAwesome: Typeface =
+                    Typeface.createFromAsset(activity?.applicationContext?.getAssets(), "fontawesome-webfont.ttf")
+                otherEdit.setTypeface(fontAwesome)
+                otherEdit.setOnClickListener {
+                    inflateIncomeFoodSourcesOthersSpecifyModal()
+                }
                 val textWatcher = object : TextWatcher {
                     override fun afterTextChanged(editable: Editable?) {
                         Handler(Looper.getMainLooper()).postDelayed({
@@ -750,8 +761,6 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                     if (hasNoValidationError) {
 
-                        val incomeAndFoodSourceResponses = IncomeAndFoodSourceResponses()
-
                         incomeAndFoodSourceResponses.livestockProduction =
                             livestockProduction.text.toString().toDouble()
 
@@ -800,7 +809,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                         incomeAndFoodSourceResponses.sandHarvesting =
                             sandHarvesting.text.toString().toDouble()
 
-                        incomeAndFoodSourceResponses.other =
+                        incomeAndFoodSourceResponses.other.value =
                             other.text.toString().toDouble()
 
                         wealthGroupQuestionnaire.incomeAndFoodSourceResponses =
@@ -7271,7 +7280,7 @@ class WealthGroupDialogFragment : DialogFragment(),
     fun populateMainSourcesIncomeAndfood() {
         binding.apply {
             wgIncomeAndFoodSources.apply {
-                val incomeAndFoodSourceResponses =
+                incomeAndFoodSourceResponses =
                     wealthGroupQuestionnaire.incomeAndFoodSourceResponses
                 livestockProduction.setText(incomeAndFoodSourceResponses.livestockProduction.toString())
                 pastureFodderProduction.setText(incomeAndFoodSourceResponses.livestockProduction.toString())
@@ -7289,7 +7298,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 bodaboda.setText(incomeAndFoodSourceResponses.bodaboda.toString())
                 beeKeeping.setText(incomeAndFoodSourceResponses.beeKeeping.toString())
                 sandHarvesting.setText(incomeAndFoodSourceResponses.sandHarvesting.toString())
-                other.setText(incomeAndFoodSourceResponses.other.toString())
+                other.setText(incomeAndFoodSourceResponses.other.value.toString())
             }
         }
     }
@@ -8011,6 +8020,50 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     fun updateCurrentQuestionnaireToStore() {
         AppStore.getInstance().currentWealthGroupQuestionnaire = wealthGroupQuestionnaire
+    }
+
+    private fun inflateIncomeFoodSourcesOthersSpecifyModal() {
+        val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.water_sources_others_specify, null)
+
+        val modalTitle = v.findViewById<TextView>(R.id.title)
+
+        modalTitle.text = "Briefly describe the other sources of food and income in this category"
+
+        val submitButton = v.findViewById<TextView>(R.id.submitButton)
+        val othersSpecifyDescription = v.findViewById<EditText>(R.id.othersSpecifyDescription)
+
+        othersSpecifyDescription.setText(incomeAndFoodSourceResponses.other.description)
+
+        submitButton.setOnClickListener {
+            incomeAndFoodSourceResponses.other.description = othersSpecifyDescription.text.toString()
+            (incomeFoodSourcesOthersSpecifyDialog as android.app.AlertDialog).cancel()
+        }
+
+        openIncomeFoodSourcesOthersSpecifyModal(v)
+    }
+
+    private fun openIncomeFoodSourcesOthersSpecifyModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(activity)
+        builder.setView(v)
+        builder.setCancelable(true)
+        incomeFoodSourcesOthersSpecifyDialog = builder.create()
+        (incomeFoodSourcesOthersSpecifyDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
     }
 
 }

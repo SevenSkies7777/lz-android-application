@@ -1,5 +1,7 @@
 package com.ndma.livelihoodzones.ui.wealthgroup.responses
 
+import com.ndma.livelihoodzones.ui.model.ValueDescriptionPairModel
+
 class IncomeAndFoodSourceResponses() {
     var livestockProduction: Double = 0.0
     var pastureFodderProduction: Double = 0.0
@@ -17,5 +19,5 @@ class IncomeAndFoodSourceResponses() {
     var bodaboda: Double = 0.0
     var beeKeeping: Double = 0.0
     var sandHarvesting: Double = 0.0
-    var other: Double = 0.0
+    var other: ValueDescriptionPairModel = ValueDescriptionPairModel(0.0,"")
 }
