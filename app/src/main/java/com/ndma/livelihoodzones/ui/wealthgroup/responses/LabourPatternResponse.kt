@@ -16,5 +16,6 @@ class LabourPatternResponse() {
     lateinit var commercialSexWork: LabourPatternResponseItem
     lateinit var begging: LabourPatternResponseItem
     lateinit var inactivity: LabourPatternResponseItem
+    var others = LabourPatternResponseItem(0.0,0.0,"")
 
 }

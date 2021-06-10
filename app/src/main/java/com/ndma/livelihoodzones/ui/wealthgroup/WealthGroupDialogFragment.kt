@@ -62,11 +62,15 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     private var incomeFoodSourcesOthersSpecifyDialog: android.app.AlertDialog? = null
 
+    private var labourPatternsOthersSpecifyDialog: android.app.AlertDialog? = null
+
     private lateinit var binding: WealthGroupQuestionnaireLayoutBinding
 
     private lateinit var wealthGroupQuestionnaire: WealthGroupQuestionnaire
 
     var incomeAndFoodSourceResponses = IncomeAndFoodSourceResponses()
+
+    var labourPatternResponse = LabourPatternResponse()
 
     var questionnaireId: String? = null
 
@@ -457,7 +461,10 @@ class WealthGroupDialogFragment : DialogFragment(),
             /*Income and food sources navigation*/
             wgIncomeAndFoodSources.apply {
                 val fontAwesome: Typeface =
-                    Typeface.createFromAsset(activity?.applicationContext?.getAssets(), "fontawesome-webfont.ttf")
+                    Typeface.createFromAsset(
+                        activity?.applicationContext?.getAssets(),
+                        "fontawesome-webfont.ttf"
+                    )
                 otherEdit.setTypeface(fontAwesome)
                 otherEdit.setOnClickListener {
                     inflateIncomeFoodSourcesOthersSpecifyModal()
@@ -3116,6 +3123,13 @@ class WealthGroupDialogFragment : DialogFragment(),
             /*Labour patterns navigation */
             wgLabourPatterns.apply {
 
+                val fontAwesome: Typeface =
+                    Typeface.createFromAsset(activity?.applicationContext?.getAssets(), "fontawesome-webfont.ttf")
+                otherEdit.setTypeface(fontAwesome)
+                otherEdit.setOnClickListener {
+                    inflateLabourPatternsOthersSpecifyModal()
+                }
+
                 val mentTextWatcher = object : TextWatcher {
                     override fun afterTextChanged(editable: Editable?) {
                         Handler(Looper.getMainLooper()).postDelayed({
@@ -3433,6 +3447,16 @@ class WealthGroupDialogFragment : DialogFragment(),
                         inactivitymenCell.background =
                             context?.resources?.getDrawable(R.drawable.error_cell, null)
                     }
+                    if (othersWomen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        othersWomenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
+                    if (othersmen.text.toString().isEmpty()) {
+                        hasNoValidationError = false
+                        othersmenCell.background =
+                            context?.resources?.getDrawable(R.drawable.error_cell, null)
+                    }
 
 
                     if (hasNoValidationError) {
@@ -3455,6 +3479,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 sexWorkmen.text.toString()
                             ).toDouble() + returnZeroStringIfEmpty(beggingmen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 inactivitymen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(
+                                othersmen.text.toString()
                             ).toDouble()
 
 
@@ -3475,13 +3501,15 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 sexWorkWomen.text.toString()
                             ).toDouble() + returnZeroStringIfEmpty(beggingWomen.text.toString()).toDouble() + returnZeroStringIfEmpty(
                                 inactivityWomen.text.toString()
+                            ).toDouble() + returnZeroStringIfEmpty(
+                                othersWomen.text.toString()
                             ).toDouble()
 
 
 
                         if (menTotalEntry == 100.0 && womenTotalEntry == 100.0) {
 
-                            val labourPatternResponse = LabourPatternResponse()
+
                             labourPatternResponse.ownFarmCropProduction = LabourPatternResponseItem(
                                 ownFarmWomen.text.toString().toDouble(),
                                 ownFarmmen.text.toString().toDouble()
@@ -3557,6 +3585,10 @@ class WealthGroupDialogFragment : DialogFragment(),
                                 inactivityWomen.text.toString().toDouble(),
                                 inactivitymen.text.toString().toDouble()
                             )
+
+                            labourPatternResponse.others.men = othersmen.text.toString().toDouble()
+                            labourPatternResponse.others.women =
+                                othersWomen.text.toString().toDouble()
 
                             wealthGroupQuestionnaire.labourPatternResponses = labourPatternResponse
 
@@ -7506,7 +7538,7 @@ class WealthGroupDialogFragment : DialogFragment(),
     fun populateLabourPatterns() {
         binding.apply {
             wgLabourPatterns.apply {
-                val labourPatternResponse = wealthGroupQuestionnaire.labourPatternResponses
+                labourPatternResponse = wealthGroupQuestionnaire.labourPatternResponses
 
                 ownFarmWomen.setText(labourPatternResponse.ownFarmCropProduction.women.toString())
                 ownFarmmen.setText(labourPatternResponse.ownFarmCropProduction.men.toString())
@@ -7552,6 +7584,9 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 inactivityWomen.setText(labourPatternResponse.inactivity.women.toString())
                 inactivitymen.setText(labourPatternResponse.inactivity.men.toString())
+
+                othersWomen.setText(labourPatternResponse.others.women.toString())
+                othersmen.setText(labourPatternResponse.others.men.toString())
             }
         }
     }
@@ -8036,7 +8071,8 @@ class WealthGroupDialogFragment : DialogFragment(),
         othersSpecifyDescription.setText(incomeAndFoodSourceResponses.other.description)
 
         submitButton.setOnClickListener {
-            incomeAndFoodSourceResponses.other.description = othersSpecifyDescription.text.toString()
+            incomeAndFoodSourceResponses.other.description =
+                othersSpecifyDescription.text.toString()
             (incomeFoodSourcesOthersSpecifyDialog as android.app.AlertDialog).cancel()
         }
 
@@ -8054,6 +8090,51 @@ class WealthGroupDialogFragment : DialogFragment(),
         builder.setCancelable(true)
         incomeFoodSourcesOthersSpecifyDialog = builder.create()
         (incomeFoodSourcesOthersSpecifyDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
+    }
+
+    private fun inflateLabourPatternsOthersSpecifyModal() {
+        val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.water_sources_others_specify, null)
+
+        val modalTitle = v.findViewById<TextView>(R.id.title)
+
+        modalTitle.text = "Briefly describe the other activities not mentioned in this category"
+
+        val submitButton = v.findViewById<TextView>(R.id.submitButton)
+        val othersSpecifyDescription = v.findViewById<EditText>(R.id.othersSpecifyDescription)
+
+        othersSpecifyDescription.setText(labourPatternResponse.others.extraDescription)
+
+        submitButton.setOnClickListener {
+            labourPatternResponse.others.extraDescription =
+                othersSpecifyDescription.text.toString()
+            (labourPatternsOthersSpecifyDialog as android.app.AlertDialog).cancel()
+        }
+
+        openLabourPatternsOthersSpecifyModal(v)
+    }
+
+    private fun openLabourPatternsOthersSpecifyModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(activity)
+        builder.setView(v)
+        builder.setCancelable(true)
+        labourPatternsOthersSpecifyDialog = builder.create()
+        (labourPatternsOthersSpecifyDialog as android.app.AlertDialog).apply {
             setCancelable(true)
             setCanceledOnTouchOutside(true)
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

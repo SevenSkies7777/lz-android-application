@@ -1,3 +1,7 @@
 package com.ndma.livelihoodzones.ui.wealthgroup.responses
 
-data class LabourPatternResponseItem(val women: Double, val men: Double)
+data class LabourPatternResponseItem(
+    var women: Double,
+    var men: Double,
+    var extraDescription: String = ""
+)
