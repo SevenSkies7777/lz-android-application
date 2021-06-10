@@ -3,5 +3,7 @@ package com.ndma.livelihoodzones.ui.county.model
 data class SubLocationZoneAssignmentModel(
     val subLocationName: String,
     var livelihoodZoneId: Int,
-    var zoneName: String
+    var zoneName: String,
+    var hasBeenSelected: Boolean,
+    val assignmentId: Int
 )

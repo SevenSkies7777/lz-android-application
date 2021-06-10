@@ -75,13 +75,16 @@ class CountyLevelFragment : DialogFragment(),
     TribesListViewAdapter.TribesListViewAdapterCallBack,
     HazardsRankingAdapter.HazardsRankingAdapterCallBack,
     ZoneCharectaristicsAdapter.ZoneCharectaristicsAdapterCallBack,
-    MarketTradeAdapter.MarketTradeAdapterCallBack {
+    MarketTradeAdapter.MarketTradeAdapterCallBack,
+    SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
     private lateinit var binding: CountyLevelQuestionnaireLayoutBinding
 
     private lateinit var countyLevelQuestionnaire: CountyLevelQuestionnaire
+
+    var wealthGroupCharectaristicsResponses = WealthGroupCharectaristicsResponses()
 
     lateinit var geographyObject: GeographyObject
 
@@ -609,8 +612,6 @@ class CountyLevelFragment : DialogFragment(),
 
             wealthGroupCharectaristics.apply {
 
-                val wealthGroupCharectaristicsResponses = WealthGroupCharectaristicsResponses()
-
                 var veryPoorIds = 1
                 xticsNumberSubmitButton.setOnClickListener {
                     if (noCharectaristics.text.toString().isNotEmpty()) {
@@ -1022,6 +1023,7 @@ class CountyLevelFragment : DialogFragment(),
                     }
                 }
                 locationBackButton.setOnClickListener {
+                    populateWealthGroupCharacteristics()
                     locationAndPopulationLayout.root.visibility = View.GONE
                     wealthGroupCharectaristics.root.visibility = View.VISIBLE
                 }
@@ -3479,7 +3481,9 @@ class CountyLevelFragment : DialogFragment(),
                         SubLocationZoneAssignmentModel(
                             currentSubLocationLivelihoodZoneAssignment.subLocationName,
                             currentSubLocationLivelihoodZoneAssignment.livelihoodZoneId,
-                            currentSubLocationLivelihoodZoneAssignment.livelihoodZoneName
+                            currentSubLocationLivelihoodZoneAssignment.livelihoodZoneName,
+                            false,
+                            currentSubLocationLivelihoodZoneAssignment.lzSublocationLivelihoodZoneId
                         )
                     )
                 }
@@ -5132,7 +5136,8 @@ class CountyLevelFragment : DialogFragment(),
         }
 
         if (countyLevelQuestionnaire.lastQuestionnaireStep ==
-                Constants.SEASON_CALENDAR_STEP) {
+            Constants.SEASON_CALENDAR_STEP
+        ) {
             saveIncompleteUnvalidatedSeasonsCalendar()
         }
     }
@@ -5147,7 +5152,8 @@ class CountyLevelFragment : DialogFragment(),
         }
 
         if (countyLevelQuestionnaire.lastQuestionnaireStep ==
-            Constants.SEASON_CALENDAR_STEP) {
+            Constants.SEASON_CALENDAR_STEP
+        ) {
             saveIncompleteUnvalidatedSeasonsCalendar()
         }
     }
@@ -5453,16 +5459,22 @@ class CountyLevelFragment : DialogFragment(),
                             SubLocationZoneAssignmentModel(
                                 currentSubLocationLivelihoodZoneAssignment.subLocationName,
                                 currentSubLocationLivelihoodZoneAssignment.livelihoodZoneId,
-                                currentSubLocationLivelihoodZoneAssignment.livelihoodZoneName
+                                currentSubLocationLivelihoodZoneAssignment.livelihoodZoneName,
+                                false,
+                                currentSubLocationLivelihoodZoneAssignment.lzSublocationLivelihoodZoneId
                             )
                         )
                     }
                 }
 
+                countyLevelQuestionnaire.subLocationZoneAllocationList =
+                    subLocationZoneAssignmentModelList
+
                 val subLocationassignmentAdapter = activity?.let { it1 ->
                     SubLocationZoneAssignmentAdapter(
                         subLocationZoneAssignmentModelList,
-                        it1
+                        it1,
+                        this@CountyLevelFragment
                     )
                 }
 
@@ -5987,82 +5999,133 @@ class CountyLevelFragment : DialogFragment(),
                 val seasonsResponse = countyLevelQuestionnaire.livelihoodZoneSeasonsResponses
                 lzSeasonsResponses = countyLevelQuestionnaire.livelihoodZoneSeasonsResponses
                 dryMonth.text = returnMonthInitialsString(seasonsResponse.dry) ?: "Select month..."
-                longRainMonth.text = returnMonthInitialsString(seasonsResponse.longRains) ?: "Select month..."
-                shortRainMonth.text = returnMonthInitialsString(seasonsResponse.shortRains) ?: "Select month..."
+                longRainMonth.text =
+                    returnMonthInitialsString(seasonsResponse.longRains) ?: "Select month..."
+                shortRainMonth.text =
+                    returnMonthInitialsString(seasonsResponse.shortRains) ?: "Select month..."
 
-                landPrepMaize.text = returnMonthInitialsString(seasonsResponse.maizeLandPreparation) ?: "Select month..."
+                landPrepMaize.text = returnMonthInitialsString(seasonsResponse.maizeLandPreparation)
+                    ?: "Select month..."
                 landPrepCassava.text =
-                    returnMonthInitialsString(seasonsResponse.cassavaLandPreparation) ?: "Select month..."
-                landPrepRice.text = returnMonthInitialsString(seasonsResponse.riceLandPreparation) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.cassavaLandPreparation)
+                        ?: "Select month..."
+                landPrepRice.text = returnMonthInitialsString(seasonsResponse.riceLandPreparation)
+                    ?: "Select month..."
                 landPrepSorghum.text =
-                    returnMonthInitialsString(seasonsResponse.sorghumLandPreparation) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.sorghumLandPreparation)
+                        ?: "Select month..."
                 landPrepLegumes.text =
-                    returnMonthInitialsString(seasonsResponse.legumesLandPreparation) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.legumesLandPreparation)
+                        ?: "Select month..."
 
-                plantingMaize.text = returnMonthInitialsString(seasonsResponse.maizePlanting) ?: "Select month..."
-                plantingCassava.text = returnMonthInitialsString(seasonsResponse.cassavaPlanting) ?: "Select month..."
-                plantingRice.text = returnMonthInitialsString(seasonsResponse.ricePlanting) ?: "Select month..."
-                plantingSorghum.text = returnMonthInitialsString(seasonsResponse.sorghumPlanting) ?: "Select month..."
-                plantingLegumes.text = returnMonthInitialsString(seasonsResponse.legumesPlanting) ?: "Select month..."
+                plantingMaize.text =
+                    returnMonthInitialsString(seasonsResponse.maizePlanting) ?: "Select month..."
+                plantingCassava.text =
+                    returnMonthInitialsString(seasonsResponse.cassavaPlanting) ?: "Select month..."
+                plantingRice.text =
+                    returnMonthInitialsString(seasonsResponse.ricePlanting) ?: "Select month..."
+                plantingSorghum.text =
+                    returnMonthInitialsString(seasonsResponse.sorghumPlanting) ?: "Select month..."
+                plantingLegumes.text =
+                    returnMonthInitialsString(seasonsResponse.legumesPlanting) ?: "Select month..."
 
-                harvestingMaize.text = returnMonthInitialsString(seasonsResponse.maizeHarvesting) ?: "Select month..."
+                harvestingMaize.text =
+                    returnMonthInitialsString(seasonsResponse.maizeHarvesting) ?: "Select month..."
                 harvestingCassava.text =
-                    returnMonthInitialsString(seasonsResponse.cassavaHarvesting) ?: "Select month..."
-                harvestingRice.text = returnMonthInitialsString(seasonsResponse.riceHarvesting) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.cassavaHarvesting)
+                        ?: "Select month..."
+                harvestingRice.text =
+                    returnMonthInitialsString(seasonsResponse.riceHarvesting) ?: "Select month..."
                 harvestingSorghum.text =
-                    returnMonthInitialsString(seasonsResponse.sorghumHarvesting) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.sorghumHarvesting)
+                        ?: "Select month..."
                 harvestingLegumes.text =
-                    returnMonthInitialsString(seasonsResponse.legumesHarvesting) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.legumesHarvesting)
+                        ?: "Select month..."
 
                 livestockInMigration.text =
-                    returnMonthInitialsString(seasonsResponse.livestockInMigration) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.livestockInMigration)
+                        ?: "Select month..."
                 livestockOutMigration.text =
-                    returnMonthInitialsString(seasonsResponse.livestockOutMigration) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.livestockOutMigration)
+                        ?: "Select month..."
 
-                milkHigh.text = returnMonthInitialsString(seasonsResponse.highMilkProduction) ?: "Select month..."
-                milkLow.text = returnMonthInitialsString(seasonsResponse.lowMilkProduction) ?: "Select month..."
-                calvingHigh.text = returnMonthInitialsString(seasonsResponse.highCalving) ?: "Select month..."
-                calvingLow.text = returnMonthInitialsString(seasonsResponse.lowCalving) ?: "Select month..."
-                kiddingHigh.text = returnMonthInitialsString(seasonsResponse.highKidding) ?: "Select month..."
-                kiddingLow.text = returnMonthInitialsString(seasonsResponse.lowKidding) ?: "Select month..."
-                foodPricesHigh.text = returnMonthInitialsString(seasonsResponse.highFoodPrices) ?: "Select month..."
-                foodPricesMedium.text = returnMonthInitialsString(seasonsResponse.mediumFoodPrices) ?: "Select month..."
-                foodPricesLow.text = returnMonthInitialsString(seasonsResponse.lowFoodPrices) ?: "Select month..."
+                milkHigh.text = returnMonthInitialsString(seasonsResponse.highMilkProduction)
+                    ?: "Select month..."
+                milkLow.text = returnMonthInitialsString(seasonsResponse.lowMilkProduction)
+                    ?: "Select month..."
+                calvingHigh.text =
+                    returnMonthInitialsString(seasonsResponse.highCalving) ?: "Select month..."
+                calvingLow.text =
+                    returnMonthInitialsString(seasonsResponse.lowCalving) ?: "Select month..."
+                kiddingHigh.text =
+                    returnMonthInitialsString(seasonsResponse.highKidding) ?: "Select month..."
+                kiddingLow.text =
+                    returnMonthInitialsString(seasonsResponse.lowKidding) ?: "Select month..."
+                foodPricesHigh.text =
+                    returnMonthInitialsString(seasonsResponse.highFoodPrices) ?: "Select month..."
+                foodPricesMedium.text =
+                    returnMonthInitialsString(seasonsResponse.mediumFoodPrices) ?: "Select month..."
+                foodPricesLow.text =
+                    returnMonthInitialsString(seasonsResponse.lowFoodPrices) ?: "Select month..."
                 livestockPricesHigh.text =
-                    returnMonthInitialsString(seasonsResponse.highLivestockPrices) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.highLivestockPrices)
+                        ?: "Select month..."
                 livestockPricesMedium.text =
-                    returnMonthInitialsString(seasonsResponse.mediumLivestockPrices) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.mediumLivestockPrices)
+                        ?: "Select month..."
                 livestockPricesLow.text =
-                    returnMonthInitialsString(seasonsResponse.lowLivestockPrices) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.lowLivestockPrices)
+                        ?: "Select month..."
                 casualLabourAvailabilityHigh.text =
-                    returnMonthInitialsString(seasonsResponse.highCasualLabourAvailability) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.highCasualLabourAvailability)
+                        ?: "Select month..."
                 casualLabourAvailabilityLow.text =
-                    returnMonthInitialsString(seasonsResponse.lowCasualLabourAvailability) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.lowCasualLabourAvailability)
+                        ?: "Select month..."
                 nonAgricCasualLabourAvailabilityHigh.text =
-                    returnMonthInitialsString(seasonsResponse.nonAgricHighCasualLabourAvailability) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.nonAgricHighCasualLabourAvailability)
+                        ?: "Select month..."
                 nonAgricCasualLabourAvailabilityLow.text =
-                    returnMonthInitialsString(seasonsResponse.nonAgricLowCasualLabourAvailability) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.nonAgricLowCasualLabourAvailability)
+                        ?: "Select month..."
                 casualLabourWagesHigh.text =
-                    returnMonthInitialsString(seasonsResponse.highCasualLabourWages) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.highCasualLabourWages)
+                        ?: "Select month..."
                 casualLabourWagesLow.text =
-                    returnMonthInitialsString(seasonsResponse.lowCasualLabourWages) ?: "Select month..."
-                remittancesHigh.text = returnMonthInitialsString(seasonsResponse.highRemittances) ?: "Select month..."
-                remittancesLow.text = returnMonthInitialsString(seasonsResponse.lowRemittances) ?: "Select month..."
-                fishingHigh.text = returnMonthInitialsString(seasonsResponse.highFish) ?: "Select month..."
-                fishingLow.text = returnMonthInitialsString(seasonsResponse.lowFish) ?: "Select month..."
-                marketAccessHigh.text = returnMonthInitialsString(seasonsResponse.highMarketAccess) ?: "Select month..."
-                marketAccessLow.text = returnMonthInitialsString(seasonsResponse.lowMarketAccess) ?: "Select month..."
-                marketAccessLow.text = returnMonthInitialsString(seasonsResponse.lowMarketAccess) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.lowCasualLabourWages)
+                        ?: "Select month..."
+                remittancesHigh.text =
+                    returnMonthInitialsString(seasonsResponse.highRemittances) ?: "Select month..."
+                remittancesLow.text =
+                    returnMonthInitialsString(seasonsResponse.lowRemittances) ?: "Select month..."
+                fishingHigh.text =
+                    returnMonthInitialsString(seasonsResponse.highFish) ?: "Select month..."
+                fishingLow.text =
+                    returnMonthInitialsString(seasonsResponse.lowFish) ?: "Select month..."
+                marketAccessHigh.text =
+                    returnMonthInitialsString(seasonsResponse.highMarketAccess) ?: "Select month..."
+                marketAccessLow.text =
+                    returnMonthInitialsString(seasonsResponse.lowMarketAccess) ?: "Select month..."
+                marketAccessLow.text =
+                    returnMonthInitialsString(seasonsResponse.lowMarketAccess) ?: "Select month..."
                 diseaseOutbreakHigh.text =
-                    returnMonthInitialsString(seasonsResponse.highDiseaseOutbreak) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.highDiseaseOutbreak)
+                        ?: "Select month..."
                 diseaseOutbreakLow.text =
-                    returnMonthInitialsString(seasonsResponse.lowDiseaseOutbreak) ?: "Select month..."
-                waterStressMonth.text = returnMonthInitialsString(seasonsResponse.waterStress) ?: "Select month..."
-                conflictRiskMonth.text = returnMonthInitialsString(seasonsResponse.conflictRisks) ?: "Select month..."
-                ceremoniesMonth.text = returnMonthInitialsString(seasonsResponse.ceremonies) ?: "Select month..."
-                leanSeasonsMonth.text = returnMonthInitialsString(seasonsResponse.leanSeasons) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.lowDiseaseOutbreak)
+                        ?: "Select month..."
+                waterStressMonth.text =
+                    returnMonthInitialsString(seasonsResponse.waterStress) ?: "Select month..."
+                conflictRiskMonth.text =
+                    returnMonthInitialsString(seasonsResponse.conflictRisks) ?: "Select month..."
+                ceremoniesMonth.text =
+                    returnMonthInitialsString(seasonsResponse.ceremonies) ?: "Select month..."
+                leanSeasonsMonth.text =
+                    returnMonthInitialsString(seasonsResponse.leanSeasons) ?: "Select month..."
                 foodSecurityMonth.text =
-                    returnMonthInitialsString(seasonsResponse.foodSecurityAssessments) ?: "Select month..."
+                    returnMonthInitialsString(seasonsResponse.foodSecurityAssessments)
+                        ?: "Select month..."
 
             }
         }
@@ -6402,7 +6465,162 @@ class CountyLevelFragment : DialogFragment(),
                 height
             )
         }
+    }
 
+    fun populateWealthGroupCharacteristics() {
+        binding.apply {
+            wealthGroupCharectaristics.apply {
+
+                veryPoorList.removeAllViews()
+                poorList.removeAllViews()
+                mediumList.removeAllViews()
+                betterOffList.removeAllViews()
+                wealthGroupCharectaristicsResponses =
+                    countyLevelQuestionnaire.wealthGroupCharectariticsResponses
+                /* Populate very poor characteristics */
+                val veryPoorCharacteristics: MutableList<String> =
+                    wealthGroupCharectaristicsResponses.veryPoorCharectaristics
+
+                val editTextsList: MutableList<EditText> = ArrayList()
+                for (i in 0..veryPoorCharacteristics.size - 1) {
+                    val currentEditText = EditText(requireContext())
+                    currentEditText.setText(veryPoorCharacteristics.get(i))
+                    editTextsList.add(currentEditText)
+                }
+
+                for (currentEditText in editTextsList) {
+                    currentEditText.setId(Math.random().toInt())
+                    currentEditText.setLayoutParams(
+                        ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
+                    )
+                    veryPoorList.addView(currentEditText)
+                }
+
+                numberVeryPoorCharectaristics.visibility = View.GONE
+                veryPoorCharectaristicsList.visibility = View.VISIBLE
+
+
+                /* Populate poor characteristics */
+                val poorCharacteristics: MutableList<String> =
+                    wealthGroupCharectaristicsResponses.poorCharectaristics
+
+                val poorEditTextsList: MutableList<EditText> = ArrayList()
+                for (i in 0..poorCharacteristics.size - 1) {
+                    val currentEditText = EditText(requireContext())
+                    currentEditText.setText(poorCharacteristics.get(i))
+                    poorEditTextsList.add(currentEditText)
+                }
+
+                for (currentEditText in poorEditTextsList) {
+                    currentEditText.setId(Math.random().toInt())
+                    currentEditText.setLayoutParams(
+                        ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
+                    )
+                    poorList.addView(currentEditText)
+                }
+
+                numberPoorCharectaristics.visibility = View.GONE
+                poorCharectaristicsList.visibility = View.VISIBLE
+
+
+                /* Populate Medium characteristics */
+                val mediumCharacteristics: MutableList<String> =
+                    wealthGroupCharectaristicsResponses.mediumCharectaristics
+
+                val mediumEditTextsList: MutableList<EditText> = ArrayList()
+                for (i in 0..mediumCharacteristics.size - 1) {
+                    val currentEditText = EditText(requireContext())
+                    currentEditText.setText(mediumCharacteristics.get(i))
+                    mediumEditTextsList.add(currentEditText)
+                }
+
+                for (currentEditText in mediumEditTextsList) {
+                    currentEditText.setId(Math.random().toInt())
+                    currentEditText.setLayoutParams(
+                        ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
+                    )
+                    mediumList.addView(currentEditText)
+                }
+
+                numberMediumCharectaristics.visibility = View.GONE
+                mediumCharectaristicsList.visibility = View.VISIBLE
+
+
+                /* Populate Better Off characteristics */
+                val betterOffCharacteristics: MutableList<String> =
+                    wealthGroupCharectaristicsResponses.betterOffCharectaristics
+
+                val betterOffEditTextsList: MutableList<EditText> = ArrayList()
+                for (i in 0..betterOffCharacteristics.size - 1) {
+                    val currentEditText = EditText(requireContext())
+                    currentEditText.setText(betterOffCharacteristics.get(i))
+                    betterOffEditTextsList.add(currentEditText)
+                }
+
+                for (currentEditText in betterOffEditTextsList) {
+                    currentEditText.setId(Math.random().toInt())
+                    currentEditText.setLayoutParams(
+                        ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
+                    )
+                    betterOffList.addView(currentEditText)
+                }
+
+                numberBetterOffCharectaristics.visibility = View.GONE
+                betterOffCharectaristicsList.visibility = View.VISIBLE
+
+                veryPoorSection.visibility = View.VISIBLE
+                veryPoorIcon.visibility = View.GONE
+
+                poorSection.visibility = View.VISIBLE
+                poorIcon.visibility = View.GONE
+
+                mediumSection.visibility = View.VISIBLE
+                mediumIcon.visibility = View.GONE
+
+                betterOffSection.visibility = View.VISIBLE
+                betterOffIcon.visibility = View.GONE
+
+            }
+        }
+    }
+
+    override fun onLivelihoodZoneSublocationClicked(
+        selectedSubLocationZoneAssignment: SubLocationZoneAssignmentModel,
+        position: Int
+    ) {
+        binding.apply {
+            lzSubLocationAssignment.apply {
+
+                subLocationZoneAssignmentModelList.set(position, selectedSubLocationZoneAssignment)
+//                val subLocationassignmentAdapter = activity?.let { it1 ->
+//                    SubLocationZoneAssignmentAdapter(
+//                        subLocationZoneAssignmentModelList,
+//                        it1,
+//                        this@CountyLevelFragment
+//                    )
+//                }
+//
+//                val gridLayoutManager = GridLayoutManager(activity, 1)
+//                listRv.layoutManager = gridLayoutManager
+//                listRv.hasFixedSize()
+//                listRv.adapter =
+//                    subLocationassignmentAdapter
+
+
+            }
+        }
     }
 
 }
