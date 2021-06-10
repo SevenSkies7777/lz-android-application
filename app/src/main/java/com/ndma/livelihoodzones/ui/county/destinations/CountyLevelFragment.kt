@@ -96,6 +96,8 @@ class CountyLevelFragment : DialogFragment(),
 
     private var waterSourcesOthersSpecifyDialog: android.app.AlertDialog? = null
 
+    private var hazardsOthersSpecifyDialog: android.app.AlertDialog? = null
+
     private var seasonCalendarDialog: android.app.AlertDialog? = null
 
     private var hazardsRankingDialog: androidx.appcompat.app.AlertDialog? = null
@@ -1979,6 +1981,12 @@ class CountyLevelFragment : DialogFragment(),
 
             /*Hazards navigation*/
             lzHazards.apply {
+                val fontAwesome: Typeface =
+                    Typeface.createFromAsset(activity?.applicationContext?.getAssets(), "fontawesome-webfont.ttf")
+                otherEdit.setTypeface(fontAwesome)
+                otherEdit.setOnClickListener {
+                    inflateHazardsOthersSpecifyModal()
+                }
                 hazardBackButton.setOnClickListener {
                     populateHungerPatterns()
                     lzHungerPatterns.root.visibility = View.VISIBLE
@@ -6340,6 +6348,47 @@ class CountyLevelFragment : DialogFragment(),
         builder.setCancelable(true)
         waterSourcesOthersSpecifyDialog = builder.create()
         (waterSourcesOthersSpecifyDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
+    }
+
+
+    private fun inflateHazardsOthersSpecifyModal() {
+        val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.water_sources_others_specify, null)
+
+        val submitButton = v.findViewById<TextView>(R.id.submitButton)
+        val othersSpecifyDescription = v.findViewById<EditText>(R.id.othersSpecifyDescription)
+
+        othersSpecifyDescription.setText(hazardResponses.others.extraDescription)
+
+        submitButton.setOnClickListener {
+            hazardResponses.others.extraDescription = othersSpecifyDescription.text.toString()
+            (hazardsOthersSpecifyDialog as android.app.AlertDialog).cancel()
+        }
+
+        openHazardsOthersSpecifyModal(v)
+    }
+
+    private fun openHazardsOthersSpecifyModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(activity)
+        builder.setView(v)
+        builder.setCancelable(true)
+        hazardsOthersSpecifyDialog = builder.create()
+        (hazardsOthersSpecifyDialog as android.app.AlertDialog).apply {
             setCancelable(true)
             setCanceledOnTouchOutside(true)
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
