@@ -13,4 +13,5 @@
     <string name="ic_send">&#xf1d8;</string>
     <string name="ic_details">&#xf0f6;</string>
     <string name="ic_check">&#xf00c;</string>
+    <string name="ic_pencil">&#xf040;</string>
 </resources>

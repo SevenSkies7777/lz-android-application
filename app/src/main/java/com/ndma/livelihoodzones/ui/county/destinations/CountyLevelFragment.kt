@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
@@ -89,7 +90,11 @@ class CountyLevelFragment : DialogFragment(),
 
     private var livelihoodZoneAlertDialog: android.app.AlertDialog? = null
 
+    var waterSourceResponses = WaterSourcesResponses()
+
     private var errorDialog: android.app.AlertDialog? = null
+
+    private var waterSourcesOthersSpecifyDialog: android.app.AlertDialog? = null
 
     private var seasonCalendarDialog: android.app.AlertDialog? = null
 
@@ -1124,6 +1129,18 @@ class CountyLevelFragment : DialogFragment(),
 
             /*Water source navigation buttons*/
             mainWaterSource.apply {
+                val fontAwesome: Typeface =
+                    Typeface.createFromAsset(activity?.applicationContext?.getAssets(), "fontawesome-webfont.ttf")
+                otherEdit.setTypeface(fontAwesome)
+                otherEdit.setOnClickListener {
+                    inflateWaterSourcesOthersSpecifyModal()
+                }
+
+                waterSourceResponses.others = WaterDependenceResponseItem(
+                    0.0,
+                    0.0,
+                    ""
+                )
                 waterSourceBackButton.setOnClickListener {
                     populateCropProduction()
                     mainWaterSource.root.visibility = View.GONE
@@ -1440,72 +1457,82 @@ class CountyLevelFragment : DialogFragment(),
 
                         if (wetSeasonTotalEntry == 100.0 && drySeasonTotalEntry == 100.0) {
 
-                            val waterSourceResponses = WaterSourcesResponses()
                             waterSourceResponses.rivers = WaterDependenceResponseItem(
                                 returnZeroStringIfEmpty(riversWetSeason.text.toString()).toDouble(),
-                                returnZeroStringIfEmpty(riversDrySeason.text.toString()).toDouble()
+                                returnZeroStringIfEmpty(riversDrySeason.text.toString()).toDouble(),
+                                ""
                             )
 
                             waterSourceResponses.traditionalRiversWells =
                                 WaterDependenceResponseItem(
                                     returnZeroStringIfEmpty(traditionalRiversWellsWetSeason.text.toString()).toDouble(),
-                                    returnZeroStringIfEmpty(traditionalRiversWellsDrySeason.text.toString()).toDouble()
+                                    returnZeroStringIfEmpty(traditionalRiversWellsDrySeason.text.toString()).toDouble(),
+                                    ""
                                 )
 
                             waterSourceResponses.naturalPonds = WaterDependenceResponseItem(
                                 returnZeroStringIfEmpty(naturalPondsWetSeason.text.toString()).toDouble(),
-                                returnZeroStringIfEmpty(naturalPondsDrySeason.text.toString()).toDouble()
+                                returnZeroStringIfEmpty(naturalPondsDrySeason.text.toString()).toDouble(),
+                                ""
                             )
 
                             waterSourceResponses.pansAndDams = WaterDependenceResponseItem(
                                 returnZeroStringIfEmpty(pansAndDamsWetSeason.text.toString()).toDouble(),
-                                returnZeroStringIfEmpty(pansAndDamsDrySeason.text.toString()).toDouble()
+                                returnZeroStringIfEmpty(pansAndDamsDrySeason.text.toString()).toDouble(),
+                                ""
                             )
 
                             waterSourceResponses.shallowWells = WaterDependenceResponseItem(
                                 returnZeroStringIfEmpty(shallowWellsWetSeason.text.toString()).toDouble(),
-                                returnZeroStringIfEmpty(shallowWellsDrySeason.text.toString()).toDouble()
+                                returnZeroStringIfEmpty(shallowWellsDrySeason.text.toString()).toDouble(),
+                                ""
                             )
 
                             waterSourceResponses.boreholes = WaterDependenceResponseItem(
                                 returnZeroStringIfEmpty(boreHolesWetSeason.text.toString()).toDouble(),
-                                returnZeroStringIfEmpty(boreHolesDrySeason.text.toString()).toDouble()
+                                returnZeroStringIfEmpty(boreHolesDrySeason.text.toString()).toDouble(),
+                                ""
                             )
 
                             waterSourceResponses.springs = WaterDependenceResponseItem(
                                 returnZeroStringIfEmpty(springsWetSeason.text.toString()).toDouble(),
-                                returnZeroStringIfEmpty(springsDrySeason.text.toString()).toDouble()
+                                returnZeroStringIfEmpty(springsDrySeason.text.toString()).toDouble(),
+                                ""
                             )
 
                             waterSourceResponses.lakes = WaterDependenceResponseItem(
                                 returnZeroStringIfEmpty(lakesWetSeason.text.toString()).toDouble(),
-                                returnZeroStringIfEmpty(lakesDrySeason.text.toString()).toDouble()
+                                returnZeroStringIfEmpty(lakesDrySeason.text.toString()).toDouble(),
+                                ""
                             )
 
                             waterSourceResponses.rockCatchments = WaterDependenceResponseItem(
                                 returnZeroStringIfEmpty(rockCatchmentWetSeason.text.toString()).toDouble(),
-                                returnZeroStringIfEmpty(rockCatchmentDrySeason.text.toString()).toDouble()
+                                returnZeroStringIfEmpty(rockCatchmentDrySeason.text.toString()).toDouble(),
+                                ""
                             )
 
                             waterSourceResponses.pipedWater = WaterDependenceResponseItem(
                                 returnZeroStringIfEmpty(pipedWaterWetSeason.text.toString()).toDouble(),
-                                returnZeroStringIfEmpty(pipedWaterDrySeason.text.toString()).toDouble()
+                                returnZeroStringIfEmpty(pipedWaterDrySeason.text.toString()).toDouble(),
+                                ""
                             )
 
                             waterSourceResponses.waterTrucking = WaterDependenceResponseItem(
                                 returnZeroStringIfEmpty(waterTruckingWetSeason.text.toString()).toDouble(),
-                                returnZeroStringIfEmpty(waterTruckingDrySeason.text.toString()).toDouble()
+                                returnZeroStringIfEmpty(waterTruckingDrySeason.text.toString()).toDouble(),
+                                ""
                             )
 
                             waterSourceResponses.roofCatchments = WaterDependenceResponseItem(
                                 returnZeroStringIfEmpty(roofCatchmentWetSeason.text.toString()).toDouble(),
-                                returnZeroStringIfEmpty(roofCatchmentDrySeason.text.toString()).toDouble()
+                                returnZeroStringIfEmpty(roofCatchmentDrySeason.text.toString()).toDouble(),
+                                ""
                             )
 
-                            waterSourceResponses.others = WaterDependenceResponseItem(
-                                returnZeroStringIfEmpty(othersWetSeason.text.toString()).toDouble(),
-                                returnZeroStringIfEmpty(othersDrySeason.text.toString()).toDouble()
-                            )
+
+                            waterSourceResponses.others.wetSeasonPopulation = returnZeroStringIfEmpty(othersWetSeason.text.toString()).toDouble()
+                            waterSourceResponses.others.drySeasonPopulationResponse = returnZeroStringIfEmpty(othersDrySeason.text.toString()).toDouble()
 
                             countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
 
@@ -5613,6 +5640,7 @@ class CountyLevelFragment : DialogFragment(),
         binding.apply {
             mainWaterSource.apply {
                 countyLevelQuestionnaire.waterSourceResponses?.let {
+                    waterSourceResponses = it
                     riversWetSeason.setText(it.rivers.wetSeasonPopulation.toString())
                     riversDrySeason.setText(it.rivers.drySeasonPopulationResponse.toString())
 
@@ -6282,6 +6310,46 @@ class CountyLevelFragment : DialogFragment(),
         }
 
         countyLevelQuestionnaire.draft.draftLivelihoodZoneSeasonsResponses = lzSeasonsResponses
+    }
+
+    private fun inflateWaterSourcesOthersSpecifyModal() {
+        val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.water_sources_others_specify, null)
+
+        val submitButton = v.findViewById<TextView>(R.id.submitButton)
+        val othersSpecifyDescription = v.findViewById<EditText>(R.id.othersSpecifyDescription)
+
+        othersSpecifyDescription.setText(waterSourceResponses.others.extraDescription)
+
+        submitButton.setOnClickListener {
+            waterSourceResponses.others.extraDescription = othersSpecifyDescription.text.toString()
+            (waterSourcesOthersSpecifyDialog as android.app.AlertDialog).cancel()
+        }
+
+        openWaterSourcesOthersSpecifyModal(v)
+    }
+
+    private fun openWaterSourcesOthersSpecifyModal(v: View) {
+        val width =
+            (resources.displayMetrics.widthPixels * 0.75).toInt()
+        val height =
+            (resources.displayMetrics.heightPixels * 0.75).toInt()
+
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(activity)
+        builder.setView(v)
+        builder.setCancelable(true)
+        waterSourcesOthersSpecifyDialog = builder.create()
+        (waterSourcesOthersSpecifyDialog as android.app.AlertDialog).apply {
+            setCancelable(true)
+            setCanceledOnTouchOutside(true)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            show()
+            window?.setLayout(
+                width,
+                height
+            )
+        }
+
     }
 
 }
