@@ -132,7 +132,7 @@ class CountyLevelFragment : DialogFragment(),
 
     var hazardResponses = HazardResponses()
 
-    val subLocationZoneAssignmentModelList: MutableList<SubLocationZoneAssignmentModel> =
+    var subLocationZoneAssignmentModelList: MutableList<SubLocationZoneAssignmentModel> =
         ArrayList()
 
     var storedSessionDetails: LoginResponseModel? = null
@@ -590,6 +590,9 @@ class CountyLevelFragment : DialogFragment(),
 
                 lzAllocationNextButton.setOnClickListener {
 
+                    countyLevelQuestionnaire.subLocationZoneAllocationList =
+                        subLocationZoneAssignmentModelList
+
                     countyLevelQuestionnaire.lastQuestionnaireStep =
                         WEALTH_GROUP_CHARACTERISTICS_STEP
 
@@ -876,7 +879,7 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
                 wgCharectaristicsBackButton.setOnClickListener {
-                    prepareLivelihoodZoneSubLocationAssignmentRecyclerView()
+                    populateLivelihoodZoneSubLocationAssignmentRecyclerView()
                     lzSubLocationAssignment.root.visibility = View.VISIBLE
                     wealthGroupCharectaristics.root.visibility = View.GONE
                 }
@@ -1134,7 +1137,10 @@ class CountyLevelFragment : DialogFragment(),
             /*Water source navigation buttons*/
             mainWaterSource.apply {
                 val fontAwesome: Typeface =
-                    Typeface.createFromAsset(activity?.applicationContext?.getAssets(), "fontawesome-webfont.ttf")
+                    Typeface.createFromAsset(
+                        activity?.applicationContext?.getAssets(),
+                        "fontawesome-webfont.ttf"
+                    )
                 otherEdit.setTypeface(fontAwesome)
                 otherEdit.setOnClickListener {
                     inflateWaterSourcesOthersSpecifyModal()
@@ -1535,8 +1541,10 @@ class CountyLevelFragment : DialogFragment(),
                             )
 
 
-                            waterSourceResponses.others.wetSeasonPopulation = returnZeroStringIfEmpty(othersWetSeason.text.toString()).toDouble()
-                            waterSourceResponses.others.drySeasonPopulationResponse = returnZeroStringIfEmpty(othersDrySeason.text.toString()).toDouble()
+                            waterSourceResponses.others.wetSeasonPopulation =
+                                returnZeroStringIfEmpty(othersWetSeason.text.toString()).toDouble()
+                            waterSourceResponses.others.drySeasonPopulationResponse =
+                                returnZeroStringIfEmpty(othersDrySeason.text.toString()).toDouble()
 
                             countyLevelQuestionnaire.waterSourceResponses = waterSourceResponses
 
@@ -1984,7 +1992,10 @@ class CountyLevelFragment : DialogFragment(),
             /*Hazards navigation*/
             lzHazards.apply {
                 val fontAwesome: Typeface =
-                    Typeface.createFromAsset(activity?.applicationContext?.getAssets(), "fontawesome-webfont.ttf")
+                    Typeface.createFromAsset(
+                        activity?.applicationContext?.getAssets(),
+                        "fontawesome-webfont.ttf"
+                    )
                 otherEdit.setTypeface(fontAwesome)
                 otherEdit.setOnClickListener {
                     inflateHazardsOthersSpecifyModal()
@@ -5487,6 +5498,27 @@ class CountyLevelFragment : DialogFragment(),
         }
     }
 
+    fun populateLivelihoodZoneSubLocationAssignmentRecyclerView() {
+        binding.apply {
+            lzSubLocationAssignment.apply {
+                subLocationZoneAssignmentModelList = countyLevelQuestionnaire.subLocationZoneAllocationList
+                val subLocationassignmentAdapter = activity?.let { it1 ->
+                    SubLocationZoneAssignmentAdapter(
+                        countyLevelQuestionnaire.subLocationZoneAllocationList,
+                        it1,
+                        this@CountyLevelFragment
+                    )
+                }
+
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                listRv.layoutManager = gridLayoutManager
+                listRv.hasFixedSize()
+                listRv.adapter =
+                    subLocationassignmentAdapter
+            }
+        }
+    }
+
     fun prepareCropSelectionListView() {
         binding.apply {
             cropSelectionLayout.apply {
@@ -6604,19 +6636,20 @@ class CountyLevelFragment : DialogFragment(),
             lzSubLocationAssignment.apply {
 
                 subLocationZoneAssignmentModelList.set(position, selectedSubLocationZoneAssignment)
-//                val subLocationassignmentAdapter = activity?.let { it1 ->
-//                    SubLocationZoneAssignmentAdapter(
-//                        subLocationZoneAssignmentModelList,
-//                        it1,
-//                        this@CountyLevelFragment
-//                    )
-//                }
-//
-//                val gridLayoutManager = GridLayoutManager(activity, 1)
-//                listRv.layoutManager = gridLayoutManager
-//                listRv.hasFixedSize()
-//                listRv.adapter =
-//                    subLocationassignmentAdapter
+                val subLocationassignmentAdapter = activity?.let { it1 ->
+                    SubLocationZoneAssignmentAdapter(
+                        subLocationZoneAssignmentModelList,
+                        it1,
+                        this@CountyLevelFragment
+                    )
+                }
+
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                listRv.layoutManager = gridLayoutManager
+                listRv.hasFixedSize()
+                listRv.adapter =
+                    subLocationassignmentAdapter
+                listRv.scrollToPosition(position)
 
 
             }

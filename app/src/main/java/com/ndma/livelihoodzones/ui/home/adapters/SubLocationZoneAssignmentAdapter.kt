@@ -18,8 +18,6 @@ class SubLocationZoneAssignmentAdapter(
     val subLocationZoneAssignmentAdapterCallBack: SubLocationZoneAssignmentAdapterCallBack
 ) : RecyclerView.Adapter<SubLocationZoneAssignmentAdapter.ViewHolder>() {
 
-    lateinit var currentSubLocationZoneAssignmentModel: SubLocationZoneAssignmentModel
-
     interface SubLocationZoneAssignmentAdapterCallBack {
         fun onLivelihoodZoneSublocationClicked(
             selectedSubLocationZoneAssignment: SubLocationZoneAssignmentModel,
@@ -28,7 +26,7 @@ class SubLocationZoneAssignmentAdapter(
     }
 
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var subLocationName: TextView = view.findViewById<TextView>(R.id.subLocationName)
         var lzDropDown: TextView = view.findViewById<TextView>(R.id.lzDropDown)
 
@@ -46,7 +44,7 @@ class SubLocationZoneAssignmentAdapter(
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        currentSubLocationZoneAssignmentModel = subLocationZoneAssignmentList.get(position)
+        var currentSubLocationZoneAssignmentModel = subLocationZoneAssignmentList.get(position)
         viewHolder.setIsRecyclable(false)
         viewHolder.subLocationName.text =
             currentSubLocationZoneAssignmentModel.subLocationName

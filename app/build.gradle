@@ -14,8 +14,8 @@ android {
         applicationId "com.ndma.livelihoodzones"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 21
-        versionName "1.21"
+        versionCode 23
+        versionName "1.23"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
