@@ -3124,7 +3124,10 @@ class WealthGroupDialogFragment : DialogFragment(),
             wgLabourPatterns.apply {
 
                 val fontAwesome: Typeface =
-                    Typeface.createFromAsset(activity?.applicationContext?.getAssets(), "fontawesome-webfont.ttf")
+                    Typeface.createFromAsset(
+                        activity?.applicationContext?.getAssets(),
+                        "fontawesome-webfont.ttf"
+                    )
                 otherEdit.setTypeface(fontAwesome)
                 otherEdit.setOnClickListener {
                     inflateLabourPatternsOthersSpecifyModal()
@@ -6169,8 +6172,9 @@ class WealthGroupDialogFragment : DialogFragment(),
         }
         binding.apply {
             cropSelectionLayout.apply {
+                var adapter: CropSelectionListAdapter? = null
                 activity?.let { context ->
-                    val adapter =
+                    adapter =
                         CropSelectionListAdapter(
                             context,
                             R.layout.lz_selection_item,
@@ -6181,6 +6185,35 @@ class WealthGroupDialogFragment : DialogFragment(),
                     cropsList.adapter = adapter
                     cropsList.setSelection(position)
                 }
+
+                val textWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                        adapter?.getFilter()?.filter(etSearch.getText().toString())
+                    }
+                }
+
+                etSearch.addTextChangedListener(textWatcher)
+
             }
         }
     }
@@ -7294,8 +7327,9 @@ class WealthGroupDialogFragment : DialogFragment(),
     fun prepareCropSelectionListView() {
         binding.apply {
             cropSelectionLayout.apply {
+                var adapter: CropSelectionListAdapter? = null
                 activity?.let { context ->
-                    val adapter =
+                    adapter =
                         CropSelectionListAdapter(
                             context,
                             R.layout.lz_selection_item,
@@ -7305,6 +7339,34 @@ class WealthGroupDialogFragment : DialogFragment(),
                         )
                     cropsList.adapter = adapter
                 }
+
+                val textWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                        adapter?.getFilter()?.filter(etSearch.getText().toString())
+                    }
+                }
+
+                etSearch.addTextChangedListener(textWatcher)
             }
         }
     }
@@ -7840,6 +7902,7 @@ class WealthGroupDialogFragment : DialogFragment(),
     fun populateCropSelectionSection() {
         binding.apply {
             cropSelectionLayout.apply {
+                var adapter: CropSelectionListAdapter? = null
                 for (currentCrop in wealthGroupQuestionnaire.selectedCrops) {
                     val existingCrop = crops.first {
                         it.cropId == currentCrop.cropId
@@ -7847,7 +7910,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                     crops.set(crops.indexOf(existingCrop), currentCrop)
                 }
                 activity?.let { context ->
-                    val adapter =
+                    adapter =
                         CropSelectionListAdapter(
                             context,
                             R.layout.lz_selection_item,
@@ -7857,6 +7920,34 @@ class WealthGroupDialogFragment : DialogFragment(),
                         )
                     cropsList.adapter = adapter
                 }
+
+                val textWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                        adapter?.getFilter()?.filter(etSearch.getText().toString())
+                    }
+                }
+
+                etSearch.addTextChangedListener(textWatcher)
             }
         }
     }
