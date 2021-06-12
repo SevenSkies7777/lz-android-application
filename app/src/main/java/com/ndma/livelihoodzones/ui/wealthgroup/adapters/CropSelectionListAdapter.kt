@@ -5,10 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import com.ndma.livelihoodzones.R
 import com.ndma.livelihoodzones.appStore.AppStore
 import com.ndma.livelihoodzones.ui.county.model.CropModel
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CropSelectionListAdapter(
     context: Context,
@@ -17,7 +21,39 @@ class CropSelectionListAdapter(
     val cropSelectionListAdapterCallBack: CropSelectionListAdapterCallBack,
     val isThisCurrentPageResume: Boolean
 ) :
-    ArrayAdapter<CropModel>(context, resource, crops) {
+    ArrayAdapter<CropModel>(context, resource, crops), Filterable {
+
+    private var allCrops: MutableList<CropModel> = ArrayList(crops)
+    private var cropsList = crops
+    private val customFilter: Filter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence): FilterResults {
+            val filteredCrops: MutableList<CropModel> =
+                ArrayList<CropModel>()
+            if (constraint.toString().isEmpty()) {
+                filteredCrops.addAll(allCrops)
+            } else {
+                for (crop in allCrops) {
+                    if (crop.cropName.toLowerCase()
+                            .contains(constraint.toString().toLowerCase())
+                    ) {
+                        filteredCrops.add(crop)
+                    }
+                }
+            }
+            val filterResults = FilterResults()
+            filterResults.values = filteredCrops
+            return filterResults
+        }
+
+        override fun publishResults(
+            constraint: CharSequence,
+            results: FilterResults
+        ) {
+            cropsList.clear()
+            cropsList.addAll(results.values as Collection<CropModel>)
+            notifyDataSetChanged()
+        }
+    }
 
     interface CropSelectionListAdapterCallBack {
         fun onCropItemSelectedFromSelectionList(selectedCrop: CropModel, position: Int)
@@ -66,5 +102,9 @@ class CropSelectionListAdapter(
 
     override fun getCount(): Int {
         return crops.size
+    }
+
+    override fun getFilter(): Filter {
+        return customFilter
     }
 }

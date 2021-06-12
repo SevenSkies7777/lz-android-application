@@ -56,7 +56,6 @@ import com.ndma.livelihoodzones.ui.wealthgroup.responses.CropSeasonResponseItem
 import com.ndma.livelihoodzones.ui.wealthgroup.responses.WgCropProductionResponseItem
 import com.ndma.livelihoodzones.util.GpsTracker
 import com.ndma.livelihoodzones.util.Util
-import kotlinx.android.synthetic.main.top_bar.*
 
 
 class CountyLevelFragment : DialogFragment(),
@@ -4905,8 +4904,9 @@ class CountyLevelFragment : DialogFragment(),
         crops.set(position, selectedCrop)
         binding.apply {
             cropSelectionLayout.apply {
+                var adapter: CropSelectionListAdapter? = null
                 activity?.let { context ->
-                    val adapter =
+                    adapter =
                         CropSelectionListAdapter(
                             context,
                             R.layout.lz_selection_item,
@@ -4917,6 +4917,36 @@ class CountyLevelFragment : DialogFragment(),
                     cropsList.adapter = adapter
                     cropsList.setSelection(position)
                 }
+
+                val textWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                        adapter?.getFilter()?.filter(etSearch.getText().toString())
+                    }
+                }
+
+                etSearch.addTextChangedListener(textWatcher)
+
             }
         }
         if (selectedCrop.hasBeenSelected) {
@@ -5522,8 +5552,10 @@ class CountyLevelFragment : DialogFragment(),
     fun prepareCropSelectionListView() {
         binding.apply {
             cropSelectionLayout.apply {
+                var adapter: CropSelectionListAdapter? = null
+
                 activity?.let { context ->
-                    val adapter =
+                    adapter =
                         CropSelectionListAdapter(
                             context,
                             R.layout.lz_selection_item,
@@ -5533,6 +5565,35 @@ class CountyLevelFragment : DialogFragment(),
                         )
                     cropsList.adapter = adapter
                 }
+
+                val textWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                        adapter?.getFilter()?.filter(etSearch.getText().toString())
+                    }
+                }
+
+                etSearch.addTextChangedListener(textWatcher)
             }
         }
     }
@@ -5647,6 +5708,7 @@ class CountyLevelFragment : DialogFragment(),
     fun populateCropSelectionSection() {
         binding.apply {
             cropSelectionLayout.apply {
+                var adapter: CropSelectionListAdapter? = null
                 for (currentCrop in countyLevelQuestionnaire.selectedCrops) {
                     val existingCrop = crops.first {
                         it.cropId == currentCrop.cropId
@@ -5654,7 +5716,7 @@ class CountyLevelFragment : DialogFragment(),
                     crops.set(crops.indexOf(existingCrop), currentCrop)
                 }
                 activity?.let { context ->
-                    val adapter =
+                    adapter =
                         CropSelectionListAdapter(
                             context,
                             R.layout.lz_selection_item,
@@ -5664,6 +5726,37 @@ class CountyLevelFragment : DialogFragment(),
                         )
                     cropsList.adapter = adapter
                 }
+
+
+                val textWatcher = object : TextWatcher {
+                    override fun afterTextChanged(editable: Editable?) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+
+
+                        }, 1500)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                        adapter?.getFilter()?.filter(etSearch.getText().toString())
+                    }
+                }
+
+                etSearch.addTextChangedListener(textWatcher)
+
             }
         }
     }

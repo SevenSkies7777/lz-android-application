@@ -32,9 +32,31 @@
         android:layout_marginTop="27dp"
         android:gravity="start"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_edittext"
+        android:layout_marginTop="27dp">
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|center_vertical"
+            android:hint="Search..."
+            android:layout_gravity="center"
+            android:textColor="#000c37"
+            android:fontFamily="@font/lato_regular"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
 
     <ListView
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="16dp"
         android:id="@+id/cropsList"
         android:layout_width="match_parent"
         android:layout_height="600dp"
