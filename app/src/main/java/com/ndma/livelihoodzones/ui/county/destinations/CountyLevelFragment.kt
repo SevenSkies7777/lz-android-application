@@ -2741,6 +2741,35 @@ class CountyLevelFragment : DialogFragment(),
                 rvLandPreparation.adapter =
                     landPreparationSeasonsAdapter
 
+                val plantingSeasonsAdapter =
+                    activity?.let { context ->
+                        PlantingSeasonAdapter(
+                            context,
+                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
+                            geographyObject.months
+                        )
+                    }
+                val plantingGridLayoutManager = GridLayoutManager(activity, 1)
+                rvPlanting.layoutManager = plantingGridLayoutManager
+                rvPlanting.hasFixedSize()
+                rvPlanting.adapter =
+                    plantingSeasonsAdapter
+
+
+                val harvestingSeasonsAdapter =
+                    activity?.let { context ->
+                        HarvestingSeasonsAdapter(
+                            context,
+                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
+                            geographyObject.months
+                        )
+                    }
+                val harvestingGridLayoutManager = GridLayoutManager(activity, 1)
+                rvHarvesting.layoutManager = harvestingGridLayoutManager
+                rvHarvesting.hasFixedSize()
+                rvHarvesting.adapter =
+                    harvestingSeasonsAdapter
+
                 /* Seasons responses */
                 dryMonth.setOnClickListener {
                     inflateSeasonCalendarModal(

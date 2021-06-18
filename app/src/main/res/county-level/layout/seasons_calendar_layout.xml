@@ -546,6 +546,7 @@
         android:layout_weight="1"/>
 
     <TableLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp">
@@ -827,7 +828,28 @@
 
     </TableLayout>
 
+    <TextView
+        android:text="Planting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:lineHeight="24sp"
+        android:layout_marginTop="54dp"
+        android:gravity="start"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPlanting"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"/>
+
     <TableLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp">
@@ -1108,6 +1130,26 @@
         </TableRow>
 
     </TableLayout>
+
+    <TextView
+        android:text="Harvesting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:lineHeight="24sp"
+        android:layout_marginTop="54dp"
+        android:gravity="start"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvHarvesting"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"/>
 
 <!--    Livestock production-->
     <TextView
