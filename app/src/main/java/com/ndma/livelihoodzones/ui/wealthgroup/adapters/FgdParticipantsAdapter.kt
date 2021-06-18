@@ -32,6 +32,8 @@ class FgdParticipantsAdapter(
 
     private var consentDialog: androidx.appcompat.app.AlertDialog? = null
 
+    private var ageBandDialog: androidx.appcompat.app.AlertDialog? = null
+
     interface FgdParticipantsAdapterCallBack {
         fun onAParticipantUpdated(updatedParticipant: FgdParticipantModel, position: Int)
     }
@@ -42,9 +44,10 @@ class FgdParticipantsAdapter(
         var tvLevelOfEducation: TextView = view.findViewById<TextView>(R.id.levelOfEducation)
         var tvConsentToParticipate: TextView =
             view.findViewById<TextView>(R.id.consentToParticipate)
+        var tvSelectAgeBand: TextView =
+            view.findViewById<TextView>(R.id.tvSelectAgeBand)
 
         var etParticipantName: EditText = view.findViewById<EditText>(R.id.participantName)
-        var etAge: EditText = view.findViewById<EditText>(R.id.age)
 
     }
 
@@ -100,6 +103,7 @@ class FgdParticipantsAdapter(
                 if (currentParticipant.disability == 1) "Disabled" else "Not disabled"
             viewHolder.tvLevelOfEducation.text = returnEducationLevelString(currentParticipant)
             viewHolder.tvConsentToParticipate.text = if (currentParticipant.consentToParticipate == 1) "Consented" else  "Not consented"
+            viewHolder.tvSelectAgeBand.text = returnAgeBandString(currentParticipant.age)
         }
 
         viewHolder.tvGender.setOnClickListener {
@@ -115,6 +119,10 @@ class FgdParticipantsAdapter(
             inflateConsentModal(currentParticipant, position, viewHolder)
         }
 
+        viewHolder.tvSelectAgeBand.setOnClickListener {
+            inflateAgeBandModal(currentParticipant, position, viewHolder)
+        }
+
         viewHolder.etParticipantName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
                 Handler(Looper.getMainLooper()).postDelayed({
@@ -124,37 +132,7 @@ class FgdParticipantsAdapter(
                         position
                     )
 
-                }, 1500)
-            }
-
-            override fun beforeTextChanged(
-                s: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence?,
-                start: Int,
-                before: Int,
-                count: Int
-            ) {
-            }
-        })
-
-
-        viewHolder.etAge.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(editable: Editable?) {
-                Handler(Looper.getMainLooper()).postDelayed({
-                    currentParticipant.age = editable.toString().toDouble()
-                    fgdParticipantsAdapterCallBack.onAParticipantUpdated(
-                        currentParticipant,
-                        position
-                    )
-
-                }, 1500)
+                }, 1000)
             }
 
             override fun beforeTextChanged(
@@ -398,5 +376,92 @@ class FgdParticipantsAdapter(
         }
 
         return ""
+    }
+
+    fun returnAgeBandString(ageBandCode: Double): String {
+        if (ageBandCode == 1.0) {
+            return "18-24 years"
+        }
+        if (ageBandCode == 2.0) {
+            return "25-35 years"
+        }
+        if (ageBandCode == 3.0) {
+            return "36-49 years"
+        }
+        if (ageBandCode == 4.0) {
+            return "50-59 years"
+        }
+        if (ageBandCode == 5.0) {
+            return "60 and above years"
+        }
+        return ""
+    }
+
+    private fun inflateAgeBandModal(
+        updatedParticipant: FgdParticipantModel,
+        position: Int,
+        viewHolder: ViewHolder
+    ) {
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+        val v = (inflater as LayoutInflater).inflate(R.layout.age_band_layout, null)
+        val eighteenToTwentyFour = v.findViewById<TextView>(R.id.eighteenToTwentyFour)
+        val twentyFiveToThirtyFive = v.findViewById<TextView>(R.id.twentyFiveToThirtyFive)
+        val thirtySixToFourtyNine = v.findViewById<TextView>(R.id.thirtySixToFourtyNine)
+        val fiftyToFiftyNine = v.findViewById<TextView>(R.id.fiftyToFiftyNine)
+        val aboveSixtyYears = v.findViewById<TextView>(R.id.aboveSixtyYears)
+
+        eighteenToTwentyFour.setOnClickListener {
+            updatedParticipant.age = 1.0
+            viewHolder.tvSelectAgeBand.text = "18-24 years"
+            fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
+            (ageBandDialog as androidx.appcompat.app.AlertDialog).dismiss()
+        }
+        twentyFiveToThirtyFive.setOnClickListener {
+            updatedParticipant.age = 2.0
+            viewHolder.tvSelectAgeBand.text = "25-35 years"
+            fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
+            (ageBandDialog as androidx.appcompat.app.AlertDialog).dismiss()
+        }
+        thirtySixToFourtyNine.setOnClickListener {
+            updatedParticipant.age = 3.0
+            viewHolder.tvSelectAgeBand.text = "36-49 years"
+            fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
+            (ageBandDialog as androidx.appcompat.app.AlertDialog).dismiss()
+        }
+        fiftyToFiftyNine.setOnClickListener {
+            updatedParticipant.age = 4.0
+            viewHolder.tvSelectAgeBand.text = "50-59 years"
+            fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
+            (ageBandDialog as androidx.appcompat.app.AlertDialog).dismiss()
+        }
+        aboveSixtyYears.setOnClickListener {
+            updatedParticipant.age = 5.0
+            viewHolder.tvSelectAgeBand.text = "Above 60 years"
+            fgdParticipantsAdapterCallBack.onAParticipantUpdated(updatedParticipant, position)
+            (consentDialog as androidx.appcompat.app.AlertDialog).dismiss()
+        }
+
+        openAgeBandModal(v)
+    }
+
+    private fun openAgeBandModal(v: View) {
+        val builder: androidx.appcompat.app.AlertDialog.Builder =
+            androidx.appcompat.app.AlertDialog.Builder(context)
+        builder.setView(v)
+        builder.setCancelable(true)
+        ageBandDialog = builder.create()
+        (ageBandDialog as androidx.appcompat.app.AlertDialog).setCancelable(true)
+        (ageBandDialog as androidx.appcompat.app.AlertDialog).setCanceledOnTouchOutside(true)
+        (ageBandDialog as androidx.appcompat.app.AlertDialog).window?.setBackgroundDrawable(
+            ColorDrawable(
+                Color.TRANSPARENT
+            )
+        )
+        (ageBandDialog as androidx.appcompat.app.AlertDialog).show()
+        val window = (ageBandDialog as androidx.appcompat.app.AlertDialog).window
+        window?.setLayout(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
     }
 }

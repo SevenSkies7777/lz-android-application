@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:background="@drawable/bg_rounded_corner_modal"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/eighteenToTwentyFour"
+        android:text="18-24 years"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginTop="19dp"
+        android:layout_gravity="start|center_vertical"/>
+
+    <View
+        android:background="#DDE4E9"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/twentyFiveToThirtyFive"
+        android:text="25-35 years"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginTop="19dp"
+        android:layout_gravity="start|center_vertical"/>
+
+    <View
+        android:background="#DDE4E9"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/thirtySixToFourtyNine"
+        android:text="36-49 years"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginTop="19dp"
+        android:layout_gravity="start|center_vertical"/>
+
+    <View
+        android:background="#DDE4E9"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/fiftyToFiftyNine"
+        android:text="50-59 years"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginTop="19dp"
+        android:layout_gravity="start|center_vertical"/>
+
+    <View
+        android:background="#DDE4E9"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/aboveSixtyYears"
+        android:text="Above sixty years"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginTop="19dp"
+        android:layout_gravity="start|center_vertical"/>
+
+</LinearLayout>
