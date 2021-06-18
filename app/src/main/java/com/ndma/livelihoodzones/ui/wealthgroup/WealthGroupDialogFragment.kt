@@ -6190,8 +6190,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                     override fun afterTextChanged(editable: Editable?) {
                         Handler(Looper.getMainLooper()).postDelayed({
 
+                            adapter?.getFilter()?.filter(etSearch.getText().toString())
 
-                        }, 1500)
+                        }, 2000)
                     }
 
                     override fun beforeTextChanged(
@@ -6208,7 +6209,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                         before: Int,
                         count: Int
                     ) {
-                        adapter?.getFilter()?.filter(etSearch.getText().toString())
+
                     }
                 }
 
@@ -7344,8 +7345,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                     override fun afterTextChanged(editable: Editable?) {
                         Handler(Looper.getMainLooper()).postDelayed({
 
+                            adapter?.getFilter()?.filter(etSearch.getText().toString())
 
-                        }, 1500)
+                        }, 2000)
                     }
 
                     override fun beforeTextChanged(
@@ -7362,7 +7364,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                         before: Int,
                         count: Int
                     ) {
-                        adapter?.getFilter()?.filter(etSearch.getText().toString())
+
                     }
                 }
 
@@ -7925,8 +7927,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                     override fun afterTextChanged(editable: Editable?) {
                         Handler(Looper.getMainLooper()).postDelayed({
 
+                            adapter?.getFilter()?.filter(etSearch.getText().toString())
 
-                        }, 1500)
+                        }, 2000)
                     }
 
                     override fun beforeTextChanged(
@@ -7943,7 +7946,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                         before: Int,
                         count: Int
                     ) {
-                        adapter?.getFilter()?.filter(etSearch.getText().toString())
+
                     }
                 }
 
