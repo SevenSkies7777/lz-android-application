@@ -51,6 +51,7 @@ import com.ndma.livelihoodzones.ui.model.RankResponseItem
 import com.ndma.livelihoodzones.ui.wealthgroup.adapters.CropProductionListAdapter
 import com.ndma.livelihoodzones.ui.wealthgroup.adapters.CropSelectionListAdapter
 import com.ndma.livelihoodzones.ui.wealthgroup.adapters.TribesListViewAdapter
+import com.ndma.livelihoodzones.ui.wealthgroup.adapters.WgCropContributionAdapter
 import com.ndma.livelihoodzones.ui.wealthgroup.responses.CropProductionResponseValueModel
 import com.ndma.livelihoodzones.ui.wealthgroup.responses.CropSeasonResponseItem
 import com.ndma.livelihoodzones.ui.wealthgroup.responses.WgCropProductionResponseItem
@@ -2725,6 +2726,20 @@ class CountyLevelFragment : DialogFragment(),
 
 
             lzSeasonsCalendar.apply {
+
+                val landPreparationSeasonsAdapter =
+                    activity?.let { context ->
+                        LandPreparationSeasonAdapter(
+                            context,
+                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
+                            geographyObject.months
+                        )
+                    }
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                rvLandPreparation.layoutManager = gridLayoutManager
+                rvLandPreparation.hasFixedSize()
+                rvLandPreparation.adapter =
+                    landPreparationSeasonsAdapter
 
                 /* Seasons responses */
                 dryMonth.setOnClickListener {

@@ -242,7 +242,7 @@
 
 <!--    Crop production-->
     <TextView
-        android:text="Crop production"
+        android:text="Land preparation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_bold"
@@ -256,6 +256,7 @@
 
 
     <TableLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp">
@@ -536,6 +537,13 @@
         </TableRow>
 
     </TableLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLandPreparation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"/>
 
     <TableLayout
         android:layout_width="match_parent"
