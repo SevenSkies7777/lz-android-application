@@ -10,15 +10,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ndma.livelihoodzones.R
 import com.ndma.livelihoodzones.ui.county.model.MonthsModel
 import com.ndma.livelihoodzones.ui.county.model.SeasonsResponsesEnum
+import com.ndma.livelihoodzones.ui.wealthgroup.responses.WgCropProductionResponseItem
 
 class MonthsAdapter(
     private val monthsModelList: MutableList<MonthsModel>,
     val monthsAdapterCallBack: MonthsAdapter.MonthsAdapterCallBack,
-    val seasonsResponsesEnum: SeasonsResponsesEnum
+    val seasonsResponsesEnum: SeasonsResponsesEnum,
+    val cropResponseItem: WgCropProductionResponseItem? = null
 ) : RecyclerView.Adapter<MonthsAdapter.ViewHolder>() {
 
     interface MonthsAdapterCallBack {
-        fun onMonthSelected(selectedMonth: MonthsModel, seasonsResponsesEnum: SeasonsResponsesEnum)
+        fun onMonthSelected(selectedMonth: MonthsModel, seasonsResponsesEnum: SeasonsResponsesEnum,cropResponseItem: WgCropProductionResponseItem? = null)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -43,7 +45,7 @@ class MonthsAdapter(
             viewHolder.stroke.visibility = View.GONE
         }
         viewHolder.itemView.setOnClickListener {
-            monthsAdapterCallBack.onMonthSelected(monthsModelList.get(position),seasonsResponsesEnum)
+            monthsAdapterCallBack.onMonthSelected(monthsModelList.get(position),seasonsResponsesEnum,cropResponseItem)
             viewHolder.highlightIcon.visibility = if (viewHolder.highlightIcon.visibility == View.VISIBLE) View.GONE else View.VISIBLE
             viewHolder.uncheckedIcon.visibility = if (viewHolder.highlightIcon.visibility == View.VISIBLE) View.GONE else View.VISIBLE
         }

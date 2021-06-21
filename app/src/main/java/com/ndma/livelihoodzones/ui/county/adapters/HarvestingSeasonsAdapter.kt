@@ -26,7 +26,7 @@ class HarvestingSeasonsAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var cropName: TextView = view.findViewById<TextView>(R.id.cropName)
-        var selectRankText: TextView = view.findViewById<TextView>(R.id.selectRankText)
+        var selectMonths: TextView = view.findViewById<TextView>(R.id.selectMonths)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -41,7 +41,7 @@ class HarvestingSeasonsAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val currentCropResponseItem = cropResponseModelList.get(position)
         viewHolder.cropName.text = currentCropResponseItem.crop.cropName
-        viewHolder.selectRankText.setOnClickListener {
+        viewHolder.selectMonths.setOnClickListener {
             inflateSeasonCalendarModal(
                 months,
                 SeasonsResponsesEnum.DYNAMIC_LAND_PREPARATION
@@ -104,8 +104,8 @@ class HarvestingSeasonsAdapter(
 
     override fun onMonthSelected(
         selectedMonth: MonthsModel,
-        seasonsResponsesEnum: SeasonsResponsesEnum
+        seasonsResponsesEnum: SeasonsResponsesEnum,
+        cropResponseItem: WgCropProductionResponseItem?
     ) {
-
     }
 }

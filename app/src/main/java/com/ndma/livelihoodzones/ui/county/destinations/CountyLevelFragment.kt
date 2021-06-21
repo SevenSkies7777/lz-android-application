@@ -76,7 +76,8 @@ class CountyLevelFragment : DialogFragment(),
     HazardsRankingAdapter.HazardsRankingAdapterCallBack,
     ZoneCharectaristicsAdapter.ZoneCharectaristicsAdapterCallBack,
     MarketTradeAdapter.MarketTradeAdapterCallBack,
-    SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack {
+    SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack,
+    LandPreparationSeasonAdapter.LandPreparationSeasonAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -2732,7 +2733,8 @@ class CountyLevelFragment : DialogFragment(),
                         LandPreparationSeasonAdapter(
                             context,
                             countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
-                            geographyObject.months
+                            geographyObject.months,
+                            this@CountyLevelFragment
                         )
                     }
                 val gridLayoutManager = GridLayoutManager(activity, 1)
@@ -3694,7 +3696,8 @@ class CountyLevelFragment : DialogFragment(),
 
     override fun onMonthSelected(
         selectedMonth: MonthsModel,
-        seasonsResponsesEnum: SeasonsResponsesEnum
+        seasonsResponsesEnum: SeasonsResponsesEnum,
+        cropResponseItem: WgCropProductionResponseItem?
     ) {
 
         binding.apply {
@@ -5575,7 +5578,8 @@ class CountyLevelFragment : DialogFragment(),
     fun populateLivelihoodZoneSubLocationAssignmentRecyclerView() {
         binding.apply {
             lzSubLocationAssignment.apply {
-                subLocationZoneAssignmentModelList = countyLevelQuestionnaire.subLocationZoneAllocationList
+                subLocationZoneAssignmentModelList =
+                    countyLevelQuestionnaire.subLocationZoneAllocationList
                 val subLocationassignmentAdapter = activity?.let { it1 ->
                     SubLocationZoneAssignmentAdapter(
                         countyLevelQuestionnaire.subLocationZoneAllocationList,
@@ -6791,6 +6795,55 @@ class CountyLevelFragment : DialogFragment(),
 
             }
         }
+    }
+
+    override fun onLandPreparationMonthSelected(
+        cropResponse: WgCropProductionResponseItem,
+        selectedMonth: MonthsModel
+    ) {
+        binding.apply {
+            lzSeasonsCalendar.apply {
+
+                val storedCropResponse =
+                    countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses.first {
+                        it.crop.cropId == cropResponse.crop.cropId
+                    }
+
+                if (doesMonthAlreadyExist(
+                        storedCropResponse.landPreparationPeriod,
+                        selectedMonth
+                    )
+                ) {
+                    storedCropResponse.landPreparationPeriod.remove(selectedMonth)
+                } else {
+                    storedCropResponse.landPreparationPeriod.add(selectedMonth)
+                }
+
+                val landPreparationSeasonsAdapter =
+                    activity?.let { context ->
+                        LandPreparationSeasonAdapter(
+                            context,
+                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
+                            geographyObject.months,
+                            this@CountyLevelFragment
+                        )
+                    }
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                rvLandPreparation.layoutManager = gridLayoutManager
+                rvLandPreparation.hasFixedSize()
+                rvLandPreparation.adapter =
+                    landPreparationSeasonsAdapter
+            }
+        }
+    }
+
+    fun doesMonthAlreadyExist(
+        monthsList: MutableList<MonthsModel>,
+        selectedMonth: MonthsModel
+    ): Boolean {
+        return monthsList.filter {
+            it.monthId == selectedMonth.monthId
+        }.isNotEmpty()
     }
 
 }
