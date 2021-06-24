@@ -83,9 +83,7 @@ class CountyQuestionnaireAdapter(
         )
 
         viewHolder.itemView.setOnClickListener {
-            if (currentQuestionnaire.questionnaireStatus != QuestionnaireStatus.SUBMITTED_TO_BACKEND)  {
-                countyQuestionnaireAdapterCallBack.onDraftCountyLevelQuestionnaireClicked(currentQuestionnaire)
-            }
+            countyQuestionnaireAdapterCallBack.onDraftCountyLevelQuestionnaireClicked(currentQuestionnaire)
         }
     }
 
