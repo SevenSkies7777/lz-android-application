@@ -20,8 +20,14 @@ import com.ndma.livelihoodzones.ui.wealthgroup.responses.WgCropProductionRespons
 class PlantingSeasonAdapter(
     private val context: Context,
     private val cropResponseModelList: MutableList<WgCropProductionResponseItem>,
-    private val months: MutableList<MonthsModel>
+    private val months: MutableList<MonthsModel>,
+    private val plantingSeasonAdapterCallBack: PlantingSeasonAdapter.PlantingSeasonAdapterCallBack
 ) : RecyclerView.Adapter<PlantingSeasonAdapter.ViewHolder>(), MonthsAdapter.MonthsAdapterCallBack{
+
+    interface PlantingSeasonAdapterCallBack {
+        fun onPlantingMonthSelected(cropResponse: WgCropProductionResponseItem, selectedMonth: MonthsModel)
+    }
+
     private var seasonCalendarDialog: android.app.AlertDialog? = null
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -41,10 +47,16 @@ class PlantingSeasonAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val currentCropResponseItem = cropResponseModelList.get(position)
         viewHolder.cropName.text = currentCropResponseItem.crop.cropName
+        if(currentCropResponseItem.plantingPeriod.isNotEmpty()) {
+            viewHolder.selectMonths.text = returnMonthInitialsString(currentCropResponseItem.plantingPeriod)
+        } else {
+            viewHolder.selectMonths.text = "Select months..."
+        }
         viewHolder.selectMonths.setOnClickListener {
             inflateSeasonCalendarModal(
                 months,
-                SeasonsResponsesEnum.DYNAMIC_LAND_PREPARATION
+                SeasonsResponsesEnum.DYNAMIC_PLANTING,
+                currentCropResponseItem
             )
         }
     }
@@ -53,7 +65,8 @@ class PlantingSeasonAdapter(
 
     private fun inflateSeasonCalendarModal(
         months: MutableList<MonthsModel>,
-        seasonsResponsesEnum: SeasonsResponsesEnum
+        seasonsResponsesEnum: SeasonsResponsesEnum,
+        currentCropResponseItem: WgCropProductionResponseItem
     ) {
         val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
         val v = (inflater as LayoutInflater).inflate(R.layout.list_layout, null)
@@ -64,7 +77,8 @@ class PlantingSeasonAdapter(
         val monthsAdapter = MonthsAdapter(
             months,
             this,
-            seasonsResponsesEnum
+            seasonsResponsesEnum,
+            currentCropResponseItem
         )
 
         icClose.setOnClickListener {
@@ -107,6 +121,20 @@ class PlantingSeasonAdapter(
         seasonsResponsesEnum: SeasonsResponsesEnum,
         cropResponseItem: WgCropProductionResponseItem?
     ) {
+        cropResponseItem?.let {
+            plantingSeasonAdapterCallBack.onPlantingMonthSelected(
+                it,selectedMonth)
+        }
+    }
 
+    fun returnMonthInitialsString(months: MutableList<MonthsModel>): String? {
+        var monthsString = ""
+        for (currentMonth in months) {
+            monthsString = monthsString + " ${currentMonth.monthName.substring(
+                0,
+                3
+            )},"
+        }
+        return if (monthsString.isNotEmpty()) monthsString else null
     }
 }

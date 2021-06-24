@@ -77,7 +77,9 @@ class CountyLevelFragment : DialogFragment(),
     ZoneCharectaristicsAdapter.ZoneCharectaristicsAdapterCallBack,
     MarketTradeAdapter.MarketTradeAdapterCallBack,
     SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack,
-    LandPreparationSeasonAdapter.LandPreparationSeasonAdapterCallBack {
+    LandPreparationSeasonAdapter.LandPreparationSeasonAdapterCallBack,
+    PlantingSeasonAdapter.PlantingSeasonAdapterCallBack,
+    HarvestingSeasonsAdapter.HarvestingSeasonsAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -2716,6 +2718,8 @@ class CountyLevelFragment : DialogFragment(),
                             countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.SEASON_CALENDAR_STEP)
                         }
 
+                        prepareSeasonsCalendar()
+
                         updateCurrentQuestionnaireToStore()
                         lzSeasonsCalendar.root.visibility = View.VISIBLE
                         lzHazards.root.visibility = View.GONE
@@ -2728,49 +2732,7 @@ class CountyLevelFragment : DialogFragment(),
 
             lzSeasonsCalendar.apply {
 
-                val landPreparationSeasonsAdapter =
-                    activity?.let { context ->
-                        LandPreparationSeasonAdapter(
-                            context,
-                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
-                            geographyObject.months,
-                            this@CountyLevelFragment
-                        )
-                    }
-                val gridLayoutManager = GridLayoutManager(activity, 1)
-                rvLandPreparation.layoutManager = gridLayoutManager
-                rvLandPreparation.hasFixedSize()
-                rvLandPreparation.adapter =
-                    landPreparationSeasonsAdapter
-
-                val plantingSeasonsAdapter =
-                    activity?.let { context ->
-                        PlantingSeasonAdapter(
-                            context,
-                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
-                            geographyObject.months
-                        )
-                    }
-                val plantingGridLayoutManager = GridLayoutManager(activity, 1)
-                rvPlanting.layoutManager = plantingGridLayoutManager
-                rvPlanting.hasFixedSize()
-                rvPlanting.adapter =
-                    plantingSeasonsAdapter
-
-
-                val harvestingSeasonsAdapter =
-                    activity?.let { context ->
-                        HarvestingSeasonsAdapter(
-                            context,
-                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
-                            geographyObject.months
-                        )
-                    }
-                val harvestingGridLayoutManager = GridLayoutManager(activity, 1)
-                rvHarvesting.layoutManager = harvestingGridLayoutManager
-                rvHarvesting.hasFixedSize()
-                rvHarvesting.adapter =
-                    harvestingSeasonsAdapter
+                prepareSeasonsCalendar()
 
                 /* Seasons responses */
                 dryMonth.setOnClickListener {
@@ -3104,82 +3066,88 @@ class CountyLevelFragment : DialogFragment(),
                         inflateErrorModal("Data error", "Long rains season has no months selected")
                     } else if (lzSeasonsResponses.shortRains.isEmpty()) {
                         inflateErrorModal("Data error", "Short rains season has no months selected")
-                    } else if (lzSeasonsResponses.maizeLandPreparation.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Maize land preparation season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.cassavaLandPreparation.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Cassava land preparation season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.riceLandPreparation.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Rice land preparation season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.sorghumLandPreparation.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Sorghum land preparation season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.legumesLandPreparation.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Legumes land preparation season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.maizePlanting.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Maize planting season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.cassavaPlanting.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Cassava planting season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.ricePlanting.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Rice planting season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.sorghumPlanting.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Sorghum planting season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.legumesPlanting.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Legumes planting season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.maizeHarvesting.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Maize harvesting season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.cassavaHarvesting.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Cassava harvesting season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.riceHarvesting.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Rice harvesting season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.sorghumHarvesting.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Sorghum harvesting season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.legumesHarvesting.isEmpty()) {
-                        inflateErrorModal(
-                            "Data error",
-                            "Legumes harvesting season has no months selected"
-                        )
-                    } else if (lzSeasonsResponses.livestockInMigration.isEmpty()) {
+                    }
+
+
+//                    else if (lzSeasonsResponses.maizeLandPreparation.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Maize land preparation season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.cassavaLandPreparation.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Cassava land preparation season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.riceLandPreparation.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Rice land preparation season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.sorghumLandPreparation.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Sorghum land preparation season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.legumesLandPreparation.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Legumes land preparation season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.maizePlanting.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Maize planting season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.cassavaPlanting.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Cassava planting season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.ricePlanting.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Rice planting season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.sorghumPlanting.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Sorghum planting season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.legumesPlanting.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Legumes planting season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.maizeHarvesting.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Maize harvesting season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.cassavaHarvesting.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Cassava harvesting season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.riceHarvesting.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Rice harvesting season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.sorghumHarvesting.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Sorghum harvesting season has no months selected"
+//                        )
+//                    } else if (lzSeasonsResponses.legumesHarvesting.isEmpty()) {
+//                        inflateErrorModal(
+//                            "Data error",
+//                            "Legumes harvesting season has no months selected"
+//                        )
+//                    }
+
+
+                    else if (lzSeasonsResponses.livestockInMigration.isEmpty()) {
                         inflateErrorModal(
                             "Data error",
                             "Livestock in-migration season has no months selected"
@@ -6844,6 +6812,141 @@ class CountyLevelFragment : DialogFragment(),
         return monthsList.filter {
             it.monthId == selectedMonth.monthId
         }.isNotEmpty()
+    }
+
+
+    fun prepareSeasonsCalendar() {
+        binding.apply {
+            lzSeasonsCalendar.apply {
+
+                val landPreparationSeasonsAdapter =
+                    activity?.let { context ->
+                        LandPreparationSeasonAdapter(
+                            context,
+                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
+                            geographyObject.months,
+                            this@CountyLevelFragment
+                        )
+                    }
+                val gridLayoutManager = GridLayoutManager(activity, 1)
+                rvLandPreparation.layoutManager = gridLayoutManager
+                rvLandPreparation.hasFixedSize()
+                rvLandPreparation.adapter =
+                    landPreparationSeasonsAdapter
+
+                val plantingSeasonsAdapter =
+                    activity?.let { context ->
+                        PlantingSeasonAdapter(
+                            context,
+                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
+                            geographyObject.months,
+                            this@CountyLevelFragment
+                        )
+                    }
+                val plantingGridLayoutManager = GridLayoutManager(activity, 1)
+                rvPlanting.layoutManager = plantingGridLayoutManager
+                rvPlanting.hasFixedSize()
+                rvPlanting.adapter =
+                    plantingSeasonsAdapter
+
+
+                val harvestingSeasonsAdapter =
+                    activity?.let { context ->
+                        HarvestingSeasonsAdapter(
+                            context,
+                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
+                            geographyObject.months,
+                            this@CountyLevelFragment
+                        )
+                    }
+                val harvestingGridLayoutManager = GridLayoutManager(activity, 1)
+                rvHarvesting.layoutManager = harvestingGridLayoutManager
+                rvHarvesting.hasFixedSize()
+                rvHarvesting.adapter =
+                    harvestingSeasonsAdapter
+
+            }
+        }
+    }
+
+    override fun onPlantingMonthSelected(
+        cropResponse: WgCropProductionResponseItem,
+        selectedMonth: MonthsModel
+    ) {
+        binding.apply {
+            lzSeasonsCalendar.apply {
+
+                val storedCropResponse =
+                    countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses.first {
+                        it.crop.cropId == cropResponse.crop.cropId
+                    }
+
+                if (doesMonthAlreadyExist(
+                        storedCropResponse.plantingPeriod,
+                        selectedMonth
+                    )
+                ) {
+                    storedCropResponse.plantingPeriod.remove(selectedMonth)
+                } else {
+                    storedCropResponse.plantingPeriod.add(selectedMonth)
+                }
+
+                val plantingSeasonsAdapter =
+                    activity?.let { context ->
+                        PlantingSeasonAdapter(
+                            context,
+                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
+                            geographyObject.months,
+                            this@CountyLevelFragment
+                        )
+                    }
+                val plantingGridLayoutManager = GridLayoutManager(activity, 1)
+                rvPlanting.layoutManager = plantingGridLayoutManager
+                rvPlanting.hasFixedSize()
+                rvPlanting.adapter =
+                    plantingSeasonsAdapter
+            }
+        }
+    }
+
+    override fun onHarvestingMonthSelected(
+        cropResponse: WgCropProductionResponseItem,
+        selectedMonth: MonthsModel
+    ) {
+        binding.apply {
+            lzSeasonsCalendar.apply {
+
+                val storedCropResponse =
+                    countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses.first {
+                        it.crop.cropId == cropResponse.crop.cropId
+                    }
+
+                if (doesMonthAlreadyExist(
+                        storedCropResponse.harvestingPeriod,
+                        selectedMonth
+                    )
+                ) {
+                    storedCropResponse.harvestingPeriod.remove(selectedMonth)
+                } else {
+                    storedCropResponse.harvestingPeriod.add(selectedMonth)
+                }
+
+                val harvestingSeasonsAdapter =
+                    activity?.let { context ->
+                        HarvestingSeasonsAdapter(
+                            context,
+                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
+                            geographyObject.months,
+                            this@CountyLevelFragment
+                        )
+                    }
+                val harvestingGridLayoutManager = GridLayoutManager(activity, 1)
+                rvHarvesting.layoutManager = harvestingGridLayoutManager
+                rvHarvesting.hasFixedSize()
+                rvHarvesting.adapter =
+                    harvestingSeasonsAdapter
+            }
+        }
     }
 
 }
