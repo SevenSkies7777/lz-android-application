@@ -28,4 +28,5 @@ class WealthGroupQuestionnaire(val uniqueId: String, var questionnaireName: Stri
     var selectedCrops: MutableList<CropModel> = ArrayList()
     lateinit var copingStrategiesResponses: CopingStrategiesResponses
     var fdgParticipants: MutableList<FgdParticipantModel> = ArrayList()
+    var draft = WealthGroupDraft()
 }

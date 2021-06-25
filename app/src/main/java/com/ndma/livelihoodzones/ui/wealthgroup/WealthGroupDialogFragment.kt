@@ -347,6 +347,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     fun resumeMainIncomeandFoodSources() {
         binding.apply {
+            populateIncomeAndFoodSourcesDraft()
             wgIncomeAndFoodSources.root.visibility = View.VISIBLE
         }
     }
@@ -821,6 +822,8 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                         wealthGroupQuestionnaire.incomeAndFoodSourceResponses =
                             incomeAndFoodSourceResponses
+
+                        wealthGroupQuestionnaire.draft.incomeAndFoodSourceResponses = null
 
                         wealthGroupQuestionnaire.lastQuestionnaireStep =
                             Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP
@@ -7046,6 +7049,7 @@ class WealthGroupDialogFragment : DialogFragment(),
         if (wealthGroupQuestionnaire.questionnaireStatus == QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
             updateCompletedQuestionnaire()
         }
+        saveDrafts()
     }
 
     override fun onStop() {
@@ -7056,6 +7060,7 @@ class WealthGroupDialogFragment : DialogFragment(),
         if (wealthGroupQuestionnaire.questionnaireStatus == QuestionnaireStatus.COMPLETED_AWAITING_SUBMISSION) {
             updateCompletedQuestionnaire()
         }
+        saveDrafts()
     }
 
     fun saveQuestionnaireAsDraft() {
@@ -8239,6 +8244,209 @@ class WealthGroupDialogFragment : DialogFragment(),
             )
         }
 
+    }
+
+
+    /* DRAFTS *******************************************************************************************/
+
+    fun saveDrafts() {
+        if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP
+            )
+        ) {
+            saveIncomeAndFoodSourcesAsDraft()
+        }
+    }
+
+    fun saveIncomeAndFoodSourcesAsDraft() {
+        binding.apply {
+            wgIncomeAndFoodSources.apply {
+
+                val incomeAndFoodSourceResponses = IncomeAndFoodSourceResponses()
+
+                if (livestockProduction.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.livestockProduction =
+                        livestockProduction.text.toString().toDouble()
+                }
+
+                if (pastureFodderProduction.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.pastureFodderProduction =
+                        pastureFodderProduction.text.toString().toDouble()
+                }
+
+                if (poultryProduction.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.poultryProduction =
+                        poultryProduction.text.toString().toDouble()
+                }
+
+                if (cashCropProduction.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.cashCropProduction =
+                        cashCropProduction.text.toString().toDouble()
+                }
+
+                if (foodCropProduction.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.foodCropProduction =
+                        foodCropProduction.text.toString().toDouble()
+                }
+
+                if (casualOrWagedLabour.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.casualOrWagedLabour =
+                        casualOrWagedLabour.text.toString().toDouble()
+                }
+
+                if (formalWagedLabour.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.formalWagedLabour =
+                        formalWagedLabour.text.toString().toDouble()
+                }
+
+                if (fishing.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.fishing =
+                        fishing.text.toString().toDouble()
+                }
+
+                if (huntingAndGathering.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.huntingAndGathering =
+                        huntingAndGathering.text.toString().toDouble()
+                }
+
+                if (smallBusiness.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.smallBusiness =
+                        smallBusiness.text.toString().toDouble()
+                }
+
+                if (firewoodOrCharcoal.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.firewoodOrCharcoal =
+                        firewoodOrCharcoal.text.toString().toDouble()
+                }
+
+                if (pettyTrading.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.pettyTrading =
+                        pettyTrading.text.toString().toDouble()
+                }
+
+                if (remittance.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.remittance =
+                        remittance.text.toString().toDouble()
+                }
+
+                if (bodaboda.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.bodaboda =
+                        bodaboda.text.toString().toDouble()
+                }
+
+                if (beeKeeping.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.beeKeeping =
+                        beeKeeping.text.toString().toDouble()
+                }
+
+                if (sandHarvesting.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.sandHarvesting =
+                        sandHarvesting.text.toString().toDouble()
+                }
+
+                if (other.text.toString().isNotEmpty()) {
+                    incomeAndFoodSourceResponses.other.value =
+                        other.text.toString().toDouble()
+                }
+
+                incomeAndFoodSourceResponses.other.description =
+                    this@WealthGroupDialogFragment.incomeAndFoodSourceResponses.other.description
+
+                wealthGroupQuestionnaire.draft.incomeAndFoodSourceResponses =
+                    incomeAndFoodSourceResponses
+
+            }
+        }
+    }
+
+    fun populateIncomeAndFoodSourcesDraft() {
+        binding.apply {
+            wgIncomeAndFoodSources.apply {
+
+                wealthGroupQuestionnaire.draft.incomeAndFoodSourceResponses?.let {
+
+                    incomeAndFoodSourceResponses = it
+
+                    if (incomeAndFoodSourceResponses.livestockProduction != 0.0) {
+                        livestockProduction.setText(incomeAndFoodSourceResponses.livestockProduction.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.pastureFodderProduction != 0.0) {
+                        pastureFodderProduction.setText(incomeAndFoodSourceResponses.pastureFodderProduction.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.poultryProduction != 0.0) {
+                        poultryProduction.setText(incomeAndFoodSourceResponses.poultryProduction.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.cashCropProduction != 0.0) {
+                        cashCropProduction.setText(incomeAndFoodSourceResponses.cashCropProduction.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.foodCropProduction != 0.0) {
+                        foodCropProduction.setText(incomeAndFoodSourceResponses.foodCropProduction.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.casualOrWagedLabour != 0.0) {
+                        casualOrWagedLabour.setText(incomeAndFoodSourceResponses.casualOrWagedLabour.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.formalWagedLabour != 0.0) {
+                        formalWagedLabour.setText(incomeAndFoodSourceResponses.formalWagedLabour.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.fishing != 0.0) {
+                        fishing.setText(incomeAndFoodSourceResponses.fishing.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.huntingAndGathering != 0.0) {
+                        huntingAndGathering.setText(incomeAndFoodSourceResponses.huntingAndGathering.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.smallBusiness != 0.0) {
+                        smallBusiness.setText(incomeAndFoodSourceResponses.smallBusiness.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.firewoodOrCharcoal != 0.0) {
+                        firewoodOrCharcoal.setText(incomeAndFoodSourceResponses.firewoodOrCharcoal.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.pettyTrading != 0.0) {
+                        pettyTrading.setText(incomeAndFoodSourceResponses.pettyTrading.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.remittance != 0.0) {
+                        remittance.setText(incomeAndFoodSourceResponses.remittance.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.bodaboda != 0.0) {
+                        bodaboda.setText(incomeAndFoodSourceResponses.bodaboda.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.beeKeeping != 0.0) {
+                        beeKeeping.setText(incomeAndFoodSourceResponses.beeKeeping.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.sandHarvesting != 0.0) {
+                        sandHarvesting.setText(incomeAndFoodSourceResponses.sandHarvesting.toString())
+                    }
+
+                    if (incomeAndFoodSourceResponses.other.value != 0.0) {
+                        other.setText(incomeAndFoodSourceResponses.other.value.toString())
+                    }
+                }
+
+            }
+        }
+    }
+
+    fun hasUserGoneBeyondCurrentQuestionnaireStep(currentStep: Int): Boolean {
+        for (step in wealthGroupQuestionnaire.questionnaireCoveredSteps) {
+            if (step > currentStep) {
+                return true
+            }
+        }
+        return false
     }
 
 }
