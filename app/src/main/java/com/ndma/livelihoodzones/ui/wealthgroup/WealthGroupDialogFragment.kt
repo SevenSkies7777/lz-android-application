@@ -361,7 +361,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     fun resumeCropSelection() {
         binding.apply {
-            prepareCropSelectionListView()
+            populateCropSelectionSection()
             cropSelectionLayout.root.visibility = View.VISIBLE
         }
     }
