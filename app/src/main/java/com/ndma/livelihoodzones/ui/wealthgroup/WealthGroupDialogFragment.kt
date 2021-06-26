@@ -368,7 +368,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     fun resumeCropProduction() {
         binding.apply {
-            prepareCropProduction()
+            populateCropProduction()
             cropProductionLayout.root.visibility = View.VISIBLE
         }
     }
@@ -7811,6 +7811,59 @@ class WealthGroupDialogFragment : DialogFragment(),
             cropProductionLayout.apply {
                 cropContributionResponseItems =
                     wealthGroupQuestionnaire.cropContributionResponseItems
+
+                var usedCropCashIncomeContributionRanks: MutableList<RankResponseItem> = ArrayList()
+                var usedCropFoodConsumptionContributionRanks: MutableList<RankResponseItem> = ArrayList()
+
+                for (currentItem in cropContributionResponseItems) {
+                    if (currentItem.cashIncomeRank.actualValue != 0.0) {
+                        usedCropCashIncomeContributionRanks.add(RankResponseItem(currentItem.cashIncomeRank.actualValue.toInt(),false))
+                    }
+                    if (currentItem.foodConsumptionRank.actualValue != 0.0) {
+                        usedCropFoodConsumptionContributionRanks.add(RankResponseItem(currentItem.foodConsumptionRank.actualValue.toInt(),false))
+                    }
+                }
+
+                for (i in 0..cropContributionResponseItems.size - 1) {
+                    cropCashIncomeContributionRanks.add(
+                        RankResponseItem(
+                            i + 1,
+                            false
+                        )
+                    )
+                    cropFoodConsumptionContributionRanks.add(
+                        RankResponseItem(
+                            i + 1,
+                            false
+                        )
+                    )
+                }
+
+                if (!doesRankItemAlreadyExistInTheRankList(0, cropCashIncomeContributionRanks)) {
+                    cropCashIncomeContributionRanks.add(
+                        RankResponseItem(
+                            0,
+                            false
+                        )
+                    )
+                }
+
+                if (!doesRankItemAlreadyExistInTheRankList(
+                        0,
+                        cropFoodConsumptionContributionRanks
+                    )
+                ) {
+                    cropFoodConsumptionContributionRanks.add(
+                        RankResponseItem(
+                            0,
+                            false
+                        )
+                    )
+                }
+
+                cropCashIncomeContributionRanks.removeAll(usedCropCashIncomeContributionRanks)
+                cropFoodConsumptionContributionRanks.removeAll(usedCropFoodConsumptionContributionRanks)
+
                 val cropContributionAdapter =
                     activity?.let { it1 ->
                         WgCropContributionAdapter(
@@ -7903,6 +7956,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                     cropResponseList.adapter =
                         cropContributionAdapter
                 }
+
+                wealthGroupQuestionnaire.cropContributionResponseItems =
+                    cropContributionResponseItems
             }
         }
     }
