@@ -375,6 +375,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     fun resumeLivestockPoultryNumbers() {
         binding.apply {
+            populateDraftNoAnimals()
             wgLivestockPoultryNumbers.root.visibility = View.VISIBLE
         }
     }
@@ -7813,14 +7814,25 @@ class WealthGroupDialogFragment : DialogFragment(),
                     wealthGroupQuestionnaire.cropContributionResponseItems
 
                 var usedCropCashIncomeContributionRanks: MutableList<RankResponseItem> = ArrayList()
-                var usedCropFoodConsumptionContributionRanks: MutableList<RankResponseItem> = ArrayList()
+                var usedCropFoodConsumptionContributionRanks: MutableList<RankResponseItem> =
+                    ArrayList()
 
                 for (currentItem in cropContributionResponseItems) {
                     if (currentItem.cashIncomeRank.actualValue != 0.0) {
-                        usedCropCashIncomeContributionRanks.add(RankResponseItem(currentItem.cashIncomeRank.actualValue.toInt(),false))
+                        usedCropCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                currentItem.cashIncomeRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                     if (currentItem.foodConsumptionRank.actualValue != 0.0) {
-                        usedCropFoodConsumptionContributionRanks.add(RankResponseItem(currentItem.foodConsumptionRank.actualValue.toInt(),false))
+                        usedCropFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                currentItem.foodConsumptionRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                 }
 
@@ -7862,7 +7874,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 cropCashIncomeContributionRanks.removeAll(usedCropCashIncomeContributionRanks)
-                cropFoodConsumptionContributionRanks.removeAll(usedCropFoodConsumptionContributionRanks)
+                cropFoodConsumptionContributionRanks.removeAll(
+                    usedCropFoodConsumptionContributionRanks
+                )
 
                 val cropContributionAdapter =
                     activity?.let { it1 ->
@@ -8320,6 +8334,13 @@ class WealthGroupDialogFragment : DialogFragment(),
         ) {
             saveFoodConsumptionPercentageAsDraft()
         }
+
+        if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.LIVESTOCK_POULTRY_NUMBERS_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.LIVESTOCK_POULTRY_NUMBERS_STEP
+            )
+        ) {
+            saveNoAnimalsAsDraft()
+        }
     }
 
     fun saveIncomeAndFoodSourcesAsDraft() {
@@ -8520,40 +8541,50 @@ class WealthGroupDialogFragment : DialogFragment(),
                 val foodConsumptionResponses = FoodConsumptionResponses()
 
                 if (maizeOwnFarm.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.maizeAndPosho.ownFarm = maizeOwnFarm.text.toString().toDouble()
+                    foodConsumptionResponses.maizeAndPosho.ownFarm =
+                        maizeOwnFarm.text.toString().toDouble()
                 }
                 if (maizeMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.maizeAndPosho.marketFoodPurchase = maizeMarket.text.toString().toDouble()
+                    foodConsumptionResponses.maizeAndPosho.marketFoodPurchase =
+                        maizeMarket.text.toString().toDouble()
                 }
                 if (maizeGift.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.maizeAndPosho.gifts = maizeGift.text.toString().toDouble()
+                    foodConsumptionResponses.maizeAndPosho.gifts =
+                        maizeGift.text.toString().toDouble()
                 }
 
                 if (wheatOwnFarm.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.wheatOrBarley.ownFarm = wheatOwnFarm.text.toString().toDouble()
+                    foodConsumptionResponses.wheatOrBarley.ownFarm =
+                        wheatOwnFarm.text.toString().toDouble()
                 }
                 if (wheatMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.wheatOrBarley.marketFoodPurchase = wheatMarket.text.toString().toDouble()
+                    foodConsumptionResponses.wheatOrBarley.marketFoodPurchase =
+                        wheatMarket.text.toString().toDouble()
                 }
                 if (wheatGift.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.wheatOrBarley.gifts = wheatGift.text.toString().toDouble()
+                    foodConsumptionResponses.wheatOrBarley.gifts =
+                        wheatGift.text.toString().toDouble()
                 }
 
                 if (sorghumOwnFarm.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.sorghumOrMillet.ownFarm = sorghumOwnFarm.text.toString().toDouble()
+                    foodConsumptionResponses.sorghumOrMillet.ownFarm =
+                        sorghumOwnFarm.text.toString().toDouble()
                 }
                 if (sorghumMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.sorghumOrMillet.marketFoodPurchase = sorghumMarket.text.toString().toDouble()
+                    foodConsumptionResponses.sorghumOrMillet.marketFoodPurchase =
+                        sorghumMarket.text.toString().toDouble()
                 }
                 if (sorghumGift.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.sorghumOrMillet.gifts = sorghumGift.text.toString().toDouble()
+                    foodConsumptionResponses.sorghumOrMillet.gifts =
+                        sorghumGift.text.toString().toDouble()
                 }
 
                 if (riceOwnFarm.text.toString().isNotEmpty()) {
                     foodConsumptionResponses.rice.ownFarm = riceOwnFarm.text.toString().toDouble()
                 }
                 if (riceMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.rice.marketFoodPurchase = riceMarket.text.toString().toDouble()
+                    foodConsumptionResponses.rice.marketFoodPurchase =
+                        riceMarket.text.toString().toDouble()
                 }
                 if (riceGift.text.toString().isNotEmpty()) {
                     foodConsumptionResponses.rice.gifts = riceGift.text.toString().toDouble()
@@ -8563,57 +8594,69 @@ class WealthGroupDialogFragment : DialogFragment(),
                     foodConsumptionResponses.beans.ownFarm = beansOwnfarm.text.toString().toDouble()
                 }
                 if (beansMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.beans.marketFoodPurchase = beansMarket.text.toString().toDouble()
+                    foodConsumptionResponses.beans.marketFoodPurchase =
+                        beansMarket.text.toString().toDouble()
                 }
                 if (beansGift.text.toString().isNotEmpty()) {
                     foodConsumptionResponses.beans.gifts = beansGift.text.toString().toDouble()
                 }
 
                 if (pulsesOwnFarm.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.pulses.ownFarm = pulsesOwnFarm.text.toString().toDouble()
+                    foodConsumptionResponses.pulses.ownFarm =
+                        pulsesOwnFarm.text.toString().toDouble()
                 }
                 if (pulsesMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.pulses.marketFoodPurchase = pulsesMarket.text.toString().toDouble()
+                    foodConsumptionResponses.pulses.marketFoodPurchase =
+                        pulsesMarket.text.toString().toDouble()
                 }
                 if (pulsesGift.text.toString().isNotEmpty()) {
                     foodConsumptionResponses.pulses.gifts = pulsesGift.text.toString().toDouble()
                 }
 
                 if (vegetablesOwnFarm.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.vegetables.ownFarm = vegetablesOwnFarm.text.toString().toDouble()
+                    foodConsumptionResponses.vegetables.ownFarm =
+                        vegetablesOwnFarm.text.toString().toDouble()
                 }
                 if (vegetablesMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.vegetables.marketFoodPurchase = vegetablesMarket.text.toString().toDouble()
+                    foodConsumptionResponses.vegetables.marketFoodPurchase =
+                        vegetablesMarket.text.toString().toDouble()
                 }
                 if (vegetablesGift.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.vegetables.gifts = vegetablesGift.text.toString().toDouble()
+                    foodConsumptionResponses.vegetables.gifts =
+                        vegetablesGift.text.toString().toDouble()
                 }
 
                 if (fruitsOwnFarm.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.fruits.ownFarm = fruitsOwnFarm.text.toString().toDouble()
+                    foodConsumptionResponses.fruits.ownFarm =
+                        fruitsOwnFarm.text.toString().toDouble()
                 }
                 if (fruitsMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.fruits.marketFoodPurchase = fruitsMarket.text.toString().toDouble()
+                    foodConsumptionResponses.fruits.marketFoodPurchase =
+                        fruitsMarket.text.toString().toDouble()
                 }
                 if (fruitsGift.text.toString().isNotEmpty()) {
                     foodConsumptionResponses.fruits.gifts = fruitsGift.text.toString().toDouble()
                 }
 
                 if (whiteRootsOwnFarm.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.whiteRoots.ownFarm = whiteRootsOwnFarm.text.toString().toDouble()
+                    foodConsumptionResponses.whiteRoots.ownFarm =
+                        whiteRootsOwnFarm.text.toString().toDouble()
                 }
                 if (whiteRootsMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.whiteRoots.marketFoodPurchase = whiteRootsMarket.text.toString().toDouble()
+                    foodConsumptionResponses.whiteRoots.marketFoodPurchase =
+                        whiteRootsMarket.text.toString().toDouble()
                 }
                 if (whiteRootsGift.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.whiteRoots.gifts = whiteRootsGift.text.toString().toDouble()
+                    foodConsumptionResponses.whiteRoots.gifts =
+                        whiteRootsGift.text.toString().toDouble()
                 }
 
                 if (meatOwnFarm.text.toString().isNotEmpty()) {
                     foodConsumptionResponses.meat.ownFarm = meatOwnFarm.text.toString().toDouble()
                 }
                 if (meatMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.meat.marketFoodPurchase = meatMarket.text.toString().toDouble()
+                    foodConsumptionResponses.meat.marketFoodPurchase =
+                        meatMarket.text.toString().toDouble()
                 }
                 if (meatGift.text.toString().isNotEmpty()) {
                     foodConsumptionResponses.meat.gifts = meatGift.text.toString().toDouble()
@@ -8623,7 +8666,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                     foodConsumptionResponses.milk.ownFarm = milkOwnFarm.text.toString().toDouble()
                 }
                 if (milkMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.milk.marketFoodPurchase = milkMarket.text.toString().toDouble()
+                    foodConsumptionResponses.milk.marketFoodPurchase =
+                        milkMarket.text.toString().toDouble()
                 }
                 if (milkGift.text.toString().isNotEmpty()) {
                     foodConsumptionResponses.milk.gifts = milkGift.text.toString().toDouble()
@@ -8633,7 +8677,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                     foodConsumptionResponses.fish.ownFarm = fishOwnFarm.text.toString().toDouble()
                 }
                 if (fishOwnMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.fish.marketFoodPurchase = fishOwnMarket.text.toString().toDouble()
+                    foodConsumptionResponses.fish.marketFoodPurchase =
+                        fishOwnMarket.text.toString().toDouble()
                 }
                 if (fishGift.text.toString().isNotEmpty()) {
                     foodConsumptionResponses.fish.gifts = fishGift.text.toString().toDouble()
@@ -8643,27 +8688,33 @@ class WealthGroupDialogFragment : DialogFragment(),
                     foodConsumptionResponses.eggs.ownFarm = eggsOwnFarm.text.toString().toDouble()
                 }
                 if (eggsMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.eggs.marketFoodPurchase = eggsMarket.text.toString().toDouble()
+                    foodConsumptionResponses.eggs.marketFoodPurchase =
+                        eggsMarket.text.toString().toDouble()
                 }
                 if (eggsGift.text.toString().isNotEmpty()) {
                     foodConsumptionResponses.eggs.gifts = eggsGift.text.toString().toDouble()
                 }
 
                 if (cookingFatOwnFarm.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.cookingFats.ownFarm = cookingFatOwnFarm.text.toString().toDouble()
+                    foodConsumptionResponses.cookingFats.ownFarm =
+                        cookingFatOwnFarm.text.toString().toDouble()
                 }
                 if (cookingFatMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.cookingFats.marketFoodPurchase = cookingFatMarket.text.toString().toDouble()
+                    foodConsumptionResponses.cookingFats.marketFoodPurchase =
+                        cookingFatMarket.text.toString().toDouble()
                 }
                 if (cookingFatGift.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.cookingFats.gifts = cookingFatGift.text.toString().toDouble()
+                    foodConsumptionResponses.cookingFats.gifts =
+                        cookingFatGift.text.toString().toDouble()
                 }
 
                 if (spicesOwnFarm.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.spices.ownFarm = spicesOwnFarm.text.toString().toDouble()
+                    foodConsumptionResponses.spices.ownFarm =
+                        spicesOwnFarm.text.toString().toDouble()
                 }
                 if (spicesMarket.text.toString().isNotEmpty()) {
-                    foodConsumptionResponses.spices.marketFoodPurchase = spicesMarket.text.toString().toDouble()
+                    foodConsumptionResponses.spices.marketFoodPurchase =
+                        spicesMarket.text.toString().toDouble()
                 }
                 if (spicesGift.text.toString().isNotEmpty()) {
                     foodConsumptionResponses.spices.gifts = spicesGift.text.toString().toDouble()
@@ -8830,6 +8881,129 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.spices.gifts != 0.0) {
                         spicesGift.setText(it.spices.gifts.toString())
+                    }
+
+                }
+
+            }
+        }
+    }
+
+    fun saveNoAnimalsAsDraft() {
+        binding.apply {
+            wgLivestockPoultryNumbers.apply {
+
+                val livestockPoultryOwnershipResponses =
+                    LivestockPoultryOwnershipResponses()
+
+                if (cattleNumbers.text.toString().isNotEmpty()) {
+                    livestockPoultryOwnershipResponses.cattle =
+                        cattleNumbers.text.toString().toDouble()
+                }
+
+                if (dairyCattleNumbers.text.toString().isNotEmpty()) {
+                    livestockPoultryOwnershipResponses.dairyCattle =
+                        dairyCattleNumbers.text.toString().toDouble()
+                }
+
+                if (goatNumbers.text.toString().isNotEmpty()) {
+                    livestockPoultryOwnershipResponses.goats =
+                        goatNumbers.text.toString().toDouble()
+                }
+
+                if (sheepNumbers.text.toString().isNotEmpty()) {
+                    livestockPoultryOwnershipResponses.sheep =
+                        sheepNumbers.text.toString().toDouble()
+                }
+
+
+                if (donkeyNumbers.text.toString().isNotEmpty()) {
+                    livestockPoultryOwnershipResponses.donkeys =
+                        donkeyNumbers.text.toString().toDouble()
+                }
+
+                if (camelNumbers.text.toString().isNotEmpty()) {
+                    livestockPoultryOwnershipResponses.camels =
+                        camelNumbers.text.toString().toDouble()
+                }
+
+                if (pigNumbers.text.toString().isNotEmpty()) {
+                    livestockPoultryOwnershipResponses.pigs =
+                        pigNumbers.text.toString().toDouble()
+                }
+
+                if (chickenNumbers.text.toString().isNotEmpty()) {
+                    livestockPoultryOwnershipResponses.chicken =
+                        chickenNumbers.text.toString().toDouble()
+                }
+
+                if (improvedChickenNumbers.text.toString().isNotEmpty()) {
+                    livestockPoultryOwnershipResponses.improvedChicken =
+                        improvedChickenNumbers.text.toString().toDouble()
+                }
+
+                if (duckNumbers.text.toString().isNotEmpty()) {
+                    livestockPoultryOwnershipResponses.ducks =
+                        duckNumbers.text.toString().toDouble()
+                }
+
+                if (beeHiveNumbers.text.toString().isNotEmpty()) {
+                    livestockPoultryOwnershipResponses.beeHives =
+                        beeHiveNumbers.text.toString().toDouble()
+                }
+
+                if (fishPondNumbers.text.toString().isNotEmpty()) {
+                    livestockPoultryOwnershipResponses.fishPonds =
+                        fishPondNumbers.text.toString().toDouble()
+                }
+
+                wealthGroupQuestionnaire.draft.livestockPoultryOwnershipResponses =
+                    livestockPoultryOwnershipResponses
+            }
+        }
+    }
+
+    fun populateDraftNoAnimals() {
+        binding.apply {
+            wgLivestockPoultryNumbers.apply {
+
+                wealthGroupQuestionnaire.draft.livestockPoultryOwnershipResponses?.let {
+
+                    if (it.cattle != 0.0) {
+                        cattleNumbers.setText(it.cattle.toString())
+                    }
+                    if (it.dairyCattle != 0.0) {
+                        dairyCattleNumbers.setText(it.dairyCattle.toString())
+                    }
+                    if (it.goats != 0.0) {
+                        goatNumbers.setText(it.goats.toString())
+                    }
+                    if (it.sheep != 0.0) {
+                        sheepNumbers.setText(it.sheep.toString())
+                    }
+                    if (it.donkeys != 0.0) {
+                        donkeyNumbers.setText(it.donkeys.toString())
+                    }
+                    if (it.camels != 0.0) {
+                        camelNumbers.setText(it.camels.toString())
+                    }
+                    if (it.pigs != 0.0) {
+                        pigNumbers.setText(it.pigs.toString())
+                    }
+                    if (it.chicken != 0.0) {
+                        chickenNumbers.setText(it.chicken.toString())
+                    }
+                    if (it.improvedChicken != 0.0) {
+                        improvedChickenNumbers.setText(it.improvedChicken.toString())
+                    }
+                    if (it.ducks != 0.0) {
+                        duckNumbers.setText(it.ducks.toString())
+                    }
+                    if (it.beeHives != 0.0) {
+                        beeHiveNumbers.setText(it.beeHives.toString())
+                    }
+                    if (it.fishPonds != 0.0) {
+                        fishPondNumbers.setText(it.fishPonds.toString())
                     }
 
                 }
