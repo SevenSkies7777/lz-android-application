@@ -354,6 +354,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     fun resumeFoodConsumptionSourcePercentages() {
         binding.apply {
+            populateDraftFoodConsumptionPercentage()
             wgPercentFoodConsumptionIncome.root.visibility = View.VISIBLE
         }
     }
@@ -8256,6 +8257,13 @@ class WealthGroupDialogFragment : DialogFragment(),
         ) {
             saveIncomeAndFoodSourcesAsDraft()
         }
+
+        if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.FOOD_CONSUMPTION_SOURCE_PERCENTAGE_STEP
+            )
+        ) {
+            saveFoodConsumptionPercentageAsDraft()
+        }
     }
 
     fun saveIncomeAndFoodSourcesAsDraft() {
@@ -8447,6 +8455,331 @@ class WealthGroupDialogFragment : DialogFragment(),
             }
         }
         return false
+    }
+
+
+    fun saveFoodConsumptionPercentageAsDraft() {
+        binding.apply {
+            wgPercentFoodConsumptionIncome.apply {
+                val foodConsumptionResponses = FoodConsumptionResponses()
+
+                if (maizeOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.maizeAndPosho.ownFarm = maizeOwnFarm.text.toString().toDouble()
+                }
+                if (maizeMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.maizeAndPosho.marketFoodPurchase = maizeMarket.text.toString().toDouble()
+                }
+                if (maizeGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.maizeAndPosho.gifts = maizeGift.text.toString().toDouble()
+                }
+
+                if (wheatOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.wheatOrBarley.ownFarm = wheatOwnFarm.text.toString().toDouble()
+                }
+                if (wheatMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.wheatOrBarley.marketFoodPurchase = wheatMarket.text.toString().toDouble()
+                }
+                if (wheatGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.wheatOrBarley.gifts = wheatGift.text.toString().toDouble()
+                }
+
+                if (sorghumOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.sorghumOrMillet.ownFarm = sorghumOwnFarm.text.toString().toDouble()
+                }
+                if (sorghumMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.sorghumOrMillet.marketFoodPurchase = sorghumMarket.text.toString().toDouble()
+                }
+                if (sorghumGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.sorghumOrMillet.gifts = sorghumGift.text.toString().toDouble()
+                }
+
+                if (riceOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.rice.ownFarm = riceOwnFarm.text.toString().toDouble()
+                }
+                if (riceMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.rice.marketFoodPurchase = riceMarket.text.toString().toDouble()
+                }
+                if (riceGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.rice.gifts = riceGift.text.toString().toDouble()
+                }
+
+                if (beansOwnfarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.beans.ownFarm = beansOwnfarm.text.toString().toDouble()
+                }
+                if (beansMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.beans.marketFoodPurchase = beansMarket.text.toString().toDouble()
+                }
+                if (beansGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.beans.gifts = beansGift.text.toString().toDouble()
+                }
+
+                if (pulsesOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.pulses.ownFarm = pulsesOwnFarm.text.toString().toDouble()
+                }
+                if (pulsesMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.pulses.marketFoodPurchase = pulsesMarket.text.toString().toDouble()
+                }
+                if (pulsesGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.pulses.gifts = pulsesGift.text.toString().toDouble()
+                }
+
+                if (vegetablesOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.vegetables.ownFarm = vegetablesOwnFarm.text.toString().toDouble()
+                }
+                if (vegetablesMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.vegetables.marketFoodPurchase = vegetablesMarket.text.toString().toDouble()
+                }
+                if (vegetablesGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.vegetables.gifts = vegetablesGift.text.toString().toDouble()
+                }
+
+                if (fruitsOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.fruits.ownFarm = fruitsOwnFarm.text.toString().toDouble()
+                }
+                if (fruitsMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.fruits.marketFoodPurchase = fruitsMarket.text.toString().toDouble()
+                }
+                if (fruitsGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.fruits.gifts = fruitsGift.text.toString().toDouble()
+                }
+
+                if (whiteRootsOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.whiteRoots.ownFarm = whiteRootsOwnFarm.text.toString().toDouble()
+                }
+                if (whiteRootsMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.whiteRoots.marketFoodPurchase = whiteRootsMarket.text.toString().toDouble()
+                }
+                if (whiteRootsGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.whiteRoots.gifts = whiteRootsGift.text.toString().toDouble()
+                }
+
+                if (meatOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.meat.ownFarm = meatOwnFarm.text.toString().toDouble()
+                }
+                if (meatMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.meat.marketFoodPurchase = meatMarket.text.toString().toDouble()
+                }
+                if (meatGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.meat.gifts = meatGift.text.toString().toDouble()
+                }
+
+                if (milkOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.milk.ownFarm = milkOwnFarm.text.toString().toDouble()
+                }
+                if (milkMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.milk.marketFoodPurchase = milkMarket.text.toString().toDouble()
+                }
+                if (milkGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.milk.gifts = milkGift.text.toString().toDouble()
+                }
+
+                if (fishOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.fish.ownFarm = fishOwnFarm.text.toString().toDouble()
+                }
+                if (fishOwnMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.fish.marketFoodPurchase = fishOwnMarket.text.toString().toDouble()
+                }
+                if (fishGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.fish.gifts = fishGift.text.toString().toDouble()
+                }
+
+                if (eggsOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.eggs.ownFarm = eggsOwnFarm.text.toString().toDouble()
+                }
+                if (eggsMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.eggs.marketFoodPurchase = eggsMarket.text.toString().toDouble()
+                }
+                if (eggsGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.eggs.gifts = eggsGift.text.toString().toDouble()
+                }
+
+                if (cookingFatOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.cookingFats.ownFarm = cookingFatOwnFarm.text.toString().toDouble()
+                }
+                if (cookingFatMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.cookingFats.marketFoodPurchase = cookingFatMarket.text.toString().toDouble()
+                }
+                if (cookingFatGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.cookingFats.gifts = cookingFatGift.text.toString().toDouble()
+                }
+
+                if (spicesOwnFarm.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.spices.ownFarm = spicesOwnFarm.text.toString().toDouble()
+                }
+                if (spicesMarket.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.spices.marketFoodPurchase = spicesMarket.text.toString().toDouble()
+                }
+                if (spicesGift.text.toString().isNotEmpty()) {
+                    foodConsumptionResponses.spices.gifts = spicesGift.text.toString().toDouble()
+                }
+
+                wealthGroupQuestionnaire.draft.foodConsumptionResponses = foodConsumptionResponses
+
+            }
+        }
+    }
+
+    fun populateDraftFoodConsumptionPercentage() {
+        binding.apply {
+            wgPercentFoodConsumptionIncome.apply {
+
+                wealthGroupQuestionnaire.draft.foodConsumptionResponses?.let {
+
+
+                    if (it.maizeAndPosho.ownFarm != 0.0) {
+                        maizeOwnFarm.setText(it.maizeAndPosho.ownFarm.toString())
+                    }
+                    if (it.maizeAndPosho.marketFoodPurchase != 0.0) {
+                        maizeMarket.setText(it.maizeAndPosho.marketFoodPurchase.toString())
+                    }
+                    if (it.maizeAndPosho.gifts != 0.0) {
+                        maizeGift.setText(it.maizeAndPosho.gifts.toString())
+                    }
+
+                    if (it.wheatOrBarley.ownFarm != 0.0) {
+                        wheatOwnFarm.setText(it.wheatOrBarley.ownFarm.toString())
+                    }
+                    if (it.wheatOrBarley.marketFoodPurchase != 0.0) {
+                        wheatMarket.setText(it.wheatOrBarley.marketFoodPurchase.toString())
+                    }
+                    if (it.wheatOrBarley.gifts != 0.0) {
+                        wheatGift.setText(it.wheatOrBarley.gifts.toString())
+                    }
+
+                    if (it.sorghumOrMillet.ownFarm != 0.0) {
+                        sorghumOwnFarm.setText(it.sorghumOrMillet.ownFarm.toString())
+                    }
+                    if (it.sorghumOrMillet.marketFoodPurchase != 0.0) {
+                        sorghumMarket.setText(it.sorghumOrMillet.marketFoodPurchase.toString())
+                    }
+                    if (it.sorghumOrMillet.gifts != 0.0) {
+                        sorghumGift.setText(it.sorghumOrMillet.gifts.toString())
+                    }
+
+                    if (it.rice.ownFarm != 0.0) {
+                        riceOwnFarm.setText(it.rice.ownFarm.toString())
+                    }
+                    if (it.rice.marketFoodPurchase != 0.0) {
+                        riceMarket.setText(it.rice.marketFoodPurchase.toString())
+                    }
+                    if (it.rice.gifts != 0.0) {
+                        riceGift.setText(it.rice.gifts.toString())
+                    }
+
+                    if (it.beans.ownFarm != 0.0) {
+                        beansOwnfarm.setText(it.beans.ownFarm.toString())
+                    }
+                    if (it.beans.marketFoodPurchase != 0.0) {
+                        beansMarket.setText(it.beans.marketFoodPurchase.toString())
+                    }
+                    if (it.beans.gifts != 0.0) {
+                        beansGift.setText(it.beans.gifts.toString())
+                    }
+
+                    if (it.pulses.ownFarm != 0.0) {
+                        pulsesOwnFarm.setText(it.pulses.ownFarm.toString())
+                    }
+                    if (it.pulses.marketFoodPurchase != 0.0) {
+                        pulsesMarket.setText(it.pulses.marketFoodPurchase.toString())
+                    }
+                    if (it.pulses.gifts != 0.0) {
+                        pulsesGift.setText(it.pulses.gifts.toString())
+                    }
+
+                    if (it.vegetables.ownFarm != 0.0) {
+                        vegetablesOwnFarm.setText(it.vegetables.ownFarm.toString())
+                    }
+                    if (it.vegetables.marketFoodPurchase != 0.0) {
+                        vegetablesMarket.setText(it.vegetables.marketFoodPurchase.toString())
+                    }
+                    if (it.vegetables.gifts != 0.0) {
+                        vegetablesGift.setText(it.vegetables.gifts.toString())
+                    }
+
+                    if (it.fruits.ownFarm != 0.0) {
+                        fruitsOwnFarm.setText(it.fruits.ownFarm.toString())
+                    }
+                    if (it.fruits.marketFoodPurchase != 0.0) {
+                        fruitsMarket.setText(it.fruits.marketFoodPurchase.toString())
+                    }
+                    if (it.fruits.gifts != 0.0) {
+                        fruitsGift.setText(it.fruits.gifts.toString())
+                    }
+
+                    if (it.whiteRoots.ownFarm != 0.0) {
+                        whiteRootsOwnFarm.setText(it.whiteRoots.ownFarm.toString())
+                    }
+                    if (it.whiteRoots.marketFoodPurchase != 0.0) {
+                        whiteRootsMarket.setText(it.whiteRoots.marketFoodPurchase.toString())
+                    }
+                    if (it.whiteRoots.gifts != 0.0) {
+                        whiteRootsGift.setText(it.whiteRoots.gifts.toString())
+                    }
+
+                    if (it.meat.ownFarm != 0.0) {
+                        meatOwnFarm.setText(it.meat.ownFarm.toString())
+                    }
+                    if (it.meat.marketFoodPurchase != 0.0) {
+                        meatMarket.setText(it.meat.marketFoodPurchase.toString())
+                    }
+                    if (it.meat.gifts != 0.0) {
+                        meatGift.setText(it.meat.gifts.toString())
+                    }
+
+                    if (it.milk.ownFarm != 0.0) {
+                        milkOwnFarm.setText(it.milk.ownFarm.toString())
+                    }
+                    if (it.milk.marketFoodPurchase != 0.0) {
+                        milkMarket.setText(it.milk.marketFoodPurchase.toString())
+                    }
+                    if (it.milk.gifts != 0.0) {
+                        milkGift.setText(it.milk.gifts.toString())
+                    }
+
+                    if (it.fish.ownFarm != 0.0) {
+                        fishOwnFarm.setText(it.fish.ownFarm.toString())
+                    }
+                    if (it.fish.marketFoodPurchase != 0.0) {
+                        fishOwnMarket.setText(it.fish.marketFoodPurchase.toString())
+                    }
+                    if (it.fish.gifts != 0.0) {
+                        fishGift.setText(it.fish.gifts.toString())
+                    }
+
+                    if (it.eggs.ownFarm != 0.0) {
+                        eggsOwnFarm.setText(it.eggs.ownFarm.toString())
+                    }
+                    if (it.eggs.marketFoodPurchase != 0.0) {
+                        eggsMarket.setText(it.eggs.marketFoodPurchase.toString())
+                    }
+                    if (it.eggs.gifts != 0.0) {
+                        eggsGift.setText(it.eggs.gifts.toString())
+                    }
+
+                    if (it.cookingFats.ownFarm != 0.0) {
+                        cookingFatOwnFarm.setText(it.cookingFats.ownFarm.toString())
+                    }
+                    if (it.cookingFats.marketFoodPurchase != 0.0) {
+                        cookingFatMarket.setText(it.cookingFats.marketFoodPurchase.toString())
+                    }
+                    if (it.cookingFats.gifts != 0.0) {
+                        cookingFatGift.setText(it.cookingFats.gifts.toString())
+                    }
+
+                    if (it.spices.ownFarm != 0.0) {
+                        spicesOwnFarm.setText(it.spices.ownFarm.toString())
+                    }
+                    if (it.spices.marketFoodPurchase != 0.0) {
+                        spicesMarket.setText(it.spices.marketFoodPurchase.toString())
+                    }
+                    if (it.spices.gifts != 0.0) {
+                        spicesGift.setText(it.spices.gifts.toString())
+                    }
+
+                }
+
+            }
+        }
     }
 
 }
