@@ -382,6 +382,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     fun resumeLivestockPoultryContributions() {
         binding.apply {
+            populateDraftLivestockContribution()
             wgLivestockPoultryContribution.root.visibility = View.VISIBLE
         }
     }
@@ -8341,6 +8342,13 @@ class WealthGroupDialogFragment : DialogFragment(),
         ) {
             saveNoAnimalsAsDraft()
         }
+
+        if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.LIVESTOCK_POULTRY_CONTRIBUTION_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.LIVESTOCK_POULTRY_CONTRIBUTION_STEP
+            )
+        ) {
+            saveLivestockContributionAsDraft()
+        }
     }
 
     fun saveIncomeAndFoodSourcesAsDraft() {
@@ -9005,6 +9013,375 @@ class WealthGroupDialogFragment : DialogFragment(),
                     if (it.fishPonds != 0.0) {
                         fishPondNumbers.setText(it.fishPonds.toString())
                     }
+
+                }
+
+            }
+        }
+    }
+
+
+    fun saveLivestockContributionAsDraft() {
+        binding.apply {
+            wgLivestockPoultryContribution.apply {
+
+                val livestockContributionResponses = livestockContributionResponses
+
+                if (cattleCashPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.cattle.incomePercentage.actualValue =
+                        cattleCashPercentage.text.toString().toDouble()
+                }
+                if (cattleFoodPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.cattle.consumptionPercentage.actualValue =
+                        cattleFoodPercentage.text.toString().toDouble()
+                }
+
+                if (dairyCattleCashPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.dairyCattle.incomePercentage.actualValue =
+                        dairyCattleCashPercentage.text.toString().toDouble()
+                }
+                if (dairyCattleFoodPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.dairyCattle.consumptionPercentage.actualValue =
+                        dairyCattleFoodPercentage.text.toString().toDouble()
+                }
+
+                if (goatsIncomePercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.goats.incomePercentage.actualValue =
+                        goatsIncomePercentage.text.toString().toDouble()
+                }
+                if (goatsFoodPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.goats.consumptionPercentage.actualValue =
+                        goatsFoodPercentage.text.toString().toDouble()
+                }
+
+                if (sheepCashPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.sheep.incomePercentage.actualValue =
+                        sheepCashPercentage.text.toString().toDouble()
+                }
+                if (sheepFoodPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.sheep.consumptionPercentage.actualValue =
+                        sheepFoodPercentage.text.toString().toDouble()
+                }
+
+                if (donkeysCashPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.donkeys.incomePercentage.actualValue =
+                        donkeysCashPercentage.text.toString().toDouble()
+                }
+                if (donkeysFoodPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.donkeys.consumptionPercentage.actualValue =
+                        donkeysFoodPercentage.text.toString().toDouble()
+                }
+
+                if (pigsCashPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.pigs.incomePercentage.actualValue =
+                        pigsCashPercentage.text.toString().toDouble()
+                }
+                if (pigsFoodPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.pigs.consumptionPercentage.actualValue =
+                        pigsFoodPercentage.text.toString().toDouble()
+                }
+
+                if (chickenCashPaercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.chicken.incomePercentage.actualValue =
+                        chickenCashPaercentage.text.toString().toDouble()
+                }
+                if (chickenFoodPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.chicken.consumptionPercentage.actualValue =
+                        chickenFoodPercentage.text.toString().toDouble()
+                }
+
+                if (improvedChickenCashPaercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.improvedChicken.incomePercentage.actualValue =
+                        improvedChickenCashPaercentage.text.toString().toDouble()
+                }
+                if (improvedChickenFoodPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.improvedChicken.consumptionPercentage.actualValue =
+                        improvedChickenFoodPercentage.text.toString().toDouble()
+                }
+
+                if (camelsCashPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.camels.incomePercentage.actualValue =
+                        camelsCashPercentage.text.toString().toDouble()
+                }
+                if (camelsFoodPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.camels.consumptionPercentage.actualValue =
+                        camelsFoodPercentage.text.toString().toDouble()
+                }
+
+                if (duckscashPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.ducks.incomePercentage.actualValue =
+                        duckscashPercentage.text.toString().toDouble()
+                }
+                if (ducksFoodPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.ducks.consumptionPercentage.actualValue =
+                        ducksFoodPercentage.text.toString().toDouble()
+                }
+
+                if (beeHivesCashPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.beeHives.incomePercentage.actualValue =
+                        beeHivesCashPercentage.text.toString().toDouble()
+                }
+                if (beeHivesFoodPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.beeHives.consumptionPercentage.actualValue =
+                        beeHivesFoodPercentage.text.toString().toDouble()
+                }
+
+                if (fishPondscashPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.fishPonds.incomePercentage.actualValue =
+                        fishPondscashPercentage.text.toString().toDouble()
+                }
+                if (fishPondsFoodPercentage.text.toString().isNotEmpty()) {
+                    livestockContributionResponses.fishPonds.consumptionPercentage.actualValue =
+                        fishPondsFoodPercentage.text.toString().toDouble()
+                }
+
+                wealthGroupQuestionnaire.draft.livestockContributionResponses = livestockContributionResponses
+
+            }
+        }
+    }
+
+    fun populateDraftLivestockContribution() {
+        binding.apply {
+            wgLivestockPoultryContribution.apply {
+
+                wealthGroupQuestionnaire.draft.livestockContributionResponses?.let {
+
+                    livestockContributionResponses = it
+
+
+                    if (!doesRankItemAlreadyExistInTheRankList(
+                            0,
+                            livestockCashIncomeContributionRanks
+                        )
+                    ) {
+                        livestockCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                0,
+                                false
+                            )
+                        )
+                    }
+
+                    if (!doesRankItemAlreadyExistInTheRankList(
+                            0,
+                            livestockFoodConsumptionContributionRanks
+                        )
+                    ) {
+                        livestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                0,
+                                false
+                            )
+                        )
+                    }
+
+                    for (i in 0..11) {
+                        livestockCashIncomeContributionRanks.add(
+                            RankResponseItem(i + 1, false)
+                        )
+                        livestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(i + 1, false)
+                        )
+                    }
+
+                    val usedLivestockCashIncomeContributionRanks: MutableList<RankResponseItem> = ArrayList()
+                    val usedLivestockFoodConsumptionContributionRanks: MutableList<RankResponseItem> = ArrayList()
+
+
+                    if (it.cattle.incomePercentage.actualValue != 0.0) {
+                        cattleCashPercentage.setText(it.cattle.incomePercentage.actualValue.toString())
+                    }
+                    if (it.cattle.consumptionPercentage.actualValue != 0.0) {
+                        cattleFoodPercentage.setText(it.cattle.consumptionPercentage.actualValue.toString())
+                    }
+                    if (it.cattle.incomeRank.actualValue != 0.0) {
+                        cattleIncomeRank.setText(it.cattle.incomeRank.actualValue.toString())
+                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.cattle.incomeRank.actualValue.toInt(), false))
+                    }
+                    if (it.cattle.consumptionRank.actualValue != 0.0) {
+                        cattleFoodRank.setText(it.cattle.consumptionRank.actualValue.toString())
+                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.cattle.consumptionRank.actualValue.toInt(), false))
+                    }
+
+
+                    if (it.dairyCattle.incomePercentage.actualValue != 0.0) {
+                        dairyCattleCashPercentage.setText(it.dairyCattle.incomePercentage.actualValue.toString())
+                    }
+                    if (it.dairyCattle.consumptionPercentage.actualValue != 0.0) {
+                        dairyCattleFoodPercentage.setText(it.dairyCattle.consumptionPercentage.actualValue.toString())
+                    }
+                    if (it.dairyCattle.incomeRank.actualValue != 0.0) {
+                        dairyCattleIncomeRank.setText(it.dairyCattle.incomeRank.actualValue.toString())
+                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.dairyCattle.incomeRank.actualValue.toInt(), false))
+                    }
+                    if (it.dairyCattle.consumptionRank.actualValue != 0.0) {
+                        dairyCattleFoodRank.setText(it.dairyCattle.consumptionRank.actualValue.toString())
+                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.dairyCattle.consumptionRank.actualValue.toInt(), false))
+                    }
+
+
+                    if (it.goats.incomePercentage.actualValue != 0.0) {
+                        goatsIncomePercentage.setText(it.goats.incomePercentage.actualValue.toString())
+                    }
+                    if (it.goats.consumptionPercentage.actualValue != 0.0) {
+                        goatsFoodPercentage.setText(it.goats.consumptionPercentage.actualValue.toString())
+                    }
+                    if (it.goats.incomeRank.actualValue != 0.0) {
+                        goatsIncomeRank.setText(it.goats.incomeRank.actualValue.toString())
+                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.goats.incomeRank.actualValue.toInt(), false))
+                    }
+                    if (it.goats.consumptionRank.actualValue != 0.0) {
+                        goatsFoodRank.setText(it.goats.consumptionRank.actualValue.toString())
+                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.goats.consumptionRank.actualValue.toInt(), false))
+                    }
+
+
+                    if (it.sheep.incomePercentage.actualValue != 0.0) {
+                        sheepCashPercentage.setText(it.sheep.incomePercentage.actualValue.toString())
+                    }
+                    if (it.sheep.consumptionPercentage.actualValue != 0.0) {
+                        sheepFoodPercentage.setText(it.sheep.consumptionPercentage.actualValue.toString())
+                    }
+                    if (it.sheep.incomeRank.actualValue != 0.0) {
+                        sheepCashRank.setText(it.sheep.incomeRank.actualValue.toString())
+                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.sheep.incomeRank.actualValue.toInt(), false))
+                    }
+                    if (it.sheep.consumptionRank.actualValue != 0.0) {
+                        sheepFoodRank.setText(it.sheep.consumptionRank.actualValue.toString())
+                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.sheep.consumptionRank.actualValue.toInt(), false))
+                    }
+
+
+                    if (it.donkeys.incomePercentage.actualValue != 0.0) {
+                        donkeysCashPercentage.setText(it.donkeys.incomePercentage.actualValue.toString())
+                    }
+                    if (it.donkeys.consumptionPercentage.actualValue != 0.0) {
+                        donkeysFoodPercentage.setText(it.donkeys.consumptionPercentage.actualValue.toString())
+                    }
+                    if (it.donkeys.incomeRank.actualValue != 0.0) {
+                        donkeysCashRank.setText(it.donkeys.incomeRank.actualValue.toString())
+                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.donkeys.incomeRank.actualValue.toInt(), false))
+                    }
+                    if (it.donkeys.consumptionRank.actualValue != 0.0) {
+                        donkeysFoodRank.setText(it.donkeys.consumptionRank.actualValue.toString())
+                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.donkeys.consumptionRank.actualValue.toInt(), false))
+                    }
+
+
+                    if (it.pigs.incomePercentage.actualValue != 0.0) {
+                        pigsCashPercentage.setText(it.pigs.incomePercentage.actualValue.toString())
+                    }
+                    if (it.pigs.consumptionPercentage.actualValue != 0.0) {
+                        pigsFoodPercentage.setText(it.pigs.consumptionPercentage.actualValue.toString())
+                    }
+                    if (it.pigs.incomeRank.actualValue != 0.0) {
+                        pigscashRank.setText(it.pigs.incomeRank.actualValue.toString())
+                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.pigs.incomeRank.actualValue.toInt(), false))
+                    }
+                    if (it.pigs.consumptionRank.actualValue != 0.0) {
+                        pigsFoodrank.setText(it.pigs.consumptionRank.actualValue.toString())
+                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.pigs.consumptionRank.actualValue.toInt(), false))
+                    }
+
+
+                    if (it.chicken.incomePercentage.actualValue != 0.0) {
+                        chickenCashPaercentage.setText(it.chicken.incomePercentage.actualValue.toString())
+                    }
+                    if (it.chicken.consumptionPercentage.actualValue != 0.0) {
+                        chickenFoodPercentage.setText(it.chicken.consumptionPercentage.actualValue.toString())
+                    }
+                    if (it.chicken.incomeRank.actualValue != 0.0) {
+                        chickenCashRank.setText(it.chicken.incomeRank.actualValue.toString())
+                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.chicken.incomeRank.actualValue.toInt(), false))
+                    }
+                    if (it.chicken.consumptionRank.actualValue != 0.0) {
+                        chickenFoodRank.setText(it.chicken.consumptionRank.actualValue.toString())
+                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.chicken.consumptionRank.actualValue.toInt(), false))
+                    }
+
+
+                    if (it.improvedChicken.incomePercentage.actualValue != 0.0) {
+                        improvedChickenCashPaercentage.setText(it.improvedChicken.incomePercentage.actualValue.toString())
+                    }
+                    if (it.improvedChicken.consumptionPercentage.actualValue != 0.0) {
+                        improvedChickenFoodPercentage.setText(it.improvedChicken.consumptionPercentage.actualValue.toString())
+                    }
+                    if (it.improvedChicken.incomeRank.actualValue != 0.0) {
+                        improvedChickenCashRank.setText(it.improvedChicken.incomeRank.actualValue.toString())
+                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.improvedChicken.incomeRank.actualValue.toInt(), false))
+                    }
+                    if (it.improvedChicken.consumptionRank.actualValue != 0.0) {
+                        improvedChickenFoodRank.setText(it.improvedChicken.consumptionRank.actualValue.toString())
+                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.improvedChicken.consumptionRank.actualValue.toInt(), false))
+                    }
+
+
+                    if (it.camels.incomePercentage.actualValue != 0.0) {
+                        camelsCashPercentage.setText(it.camels.incomePercentage.actualValue.toString())
+                    }
+                    if (it.camels.consumptionPercentage.actualValue != 0.0) {
+                        camelsFoodPercentage.setText(it.camels.consumptionPercentage.actualValue.toString())
+                    }
+                    if (it.camels.incomeRank.actualValue != 0.0) {
+                        camelsCashRank.setText(it.camels.incomeRank.actualValue.toString())
+                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.camels.incomeRank.actualValue.toInt(), false))
+                    }
+                    if (it.camels.consumptionRank.actualValue != 0.0) {
+                        camelsFoodRank.setText(it.camels.consumptionRank.actualValue.toString())
+                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.camels.consumptionRank.actualValue.toInt(), false))
+                    }
+
+
+                    if (it.ducks.incomePercentage.actualValue != 0.0) {
+                        duckscashPercentage.setText(it.ducks.incomePercentage.actualValue.toString())
+                    }
+                    if (it.ducks.consumptionPercentage.actualValue != 0.0) {
+                        ducksFoodPercentage.setText(it.ducks.consumptionPercentage.actualValue.toString())
+                    }
+                    if (it.ducks.incomeRank.actualValue != 0.0) {
+                        ducksCashRank.setText(it.ducks.incomeRank.actualValue.toString())
+                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.ducks.incomeRank.actualValue.toInt(), false))
+                    }
+                    if (it.ducks.consumptionRank.actualValue != 0.0) {
+                        ducksFoodRank.setText(it.ducks.consumptionRank.actualValue.toString())
+                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.ducks.consumptionRank.actualValue.toInt(), false))
+                    }
+
+
+                    if (it.beeHives.incomePercentage.actualValue != 0.0) {
+                        beeHivesCashPercentage.setText(it.beeHives.incomePercentage.actualValue.toString())
+                    }
+                    if (it.beeHives.consumptionPercentage.actualValue != 0.0) {
+                        beeHivesFoodPercentage.setText(it.beeHives.consumptionPercentage.actualValue.toString())
+                    }
+                    if (it.beeHives.incomeRank.actualValue != 0.0) {
+                        beeHivesCashRank.setText(it.beeHives.incomeRank.actualValue.toString())
+                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.beeHives.incomeRank.actualValue.toInt(), false))
+                    }
+                    if (it.beeHives.consumptionRank.actualValue != 0.0) {
+                        beeHivesFoodrank.setText(it.beeHives.consumptionRank.actualValue.toString())
+                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.beeHives.consumptionRank.actualValue.toInt(), false))
+                    }
+
+
+                    if (it.fishPonds.incomePercentage.actualValue != 0.0) {
+                        fishPondscashPercentage.setText(it.fishPonds.incomePercentage.actualValue.toString())
+                    }
+                    if (it.fishPonds.consumptionPercentage.actualValue != 0.0) {
+                        fishPondsFoodPercentage.setText(it.fishPonds.consumptionPercentage.actualValue.toString())
+                    }
+                    if (it.fishPonds.incomeRank.actualValue != 0.0) {
+                        fishPondsCashRank.setText(it.fishPonds.incomeRank.actualValue.toString())
+                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.fishPonds.incomeRank.actualValue.toInt(), false))
+                    }
+                    if (it.fishPonds.consumptionRank.actualValue != 0.0) {
+                        fishPondsFoodRank.setText(it.fishPonds.consumptionRank.actualValue.toString())
+                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.fishPonds.consumptionRank.actualValue.toInt(), false))
+                    }
+
+                    livestockCashIncomeContributionRanks.removeAll(usedLivestockCashIncomeContributionRanks)
+                    livestockFoodConsumptionContributionRanks.removeAll(usedLivestockFoodConsumptionContributionRanks)
 
                 }
 
