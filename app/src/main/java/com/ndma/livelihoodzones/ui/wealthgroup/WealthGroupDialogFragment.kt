@@ -389,6 +389,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     fun resumeLabourPatterns() {
         binding.apply {
+            populateDraftLabourPatterns()
             wgLabourPatterns.root.visibility = View.VISIBLE
         }
     }
@@ -8349,6 +8350,13 @@ class WealthGroupDialogFragment : DialogFragment(),
         ) {
             saveLivestockContributionAsDraft()
         }
+
+        if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.LABOUR_PATTERNS_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.LABOUR_PATTERNS_STEP
+            )
+        ) {
+            saveLabourPatternsAsDraft()
+        }
     }
 
     fun saveIncomeAndFoodSourcesAsDraft() {
@@ -9382,6 +9390,257 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                     livestockCashIncomeContributionRanks.removeAll(usedLivestockCashIncomeContributionRanks)
                     livestockFoodConsumptionContributionRanks.removeAll(usedLivestockFoodConsumptionContributionRanks)
+
+                }
+
+            }
+        }
+    }
+
+
+    fun saveLabourPatternsAsDraft() {
+        binding.apply {
+            wgLabourPatterns.apply {
+
+                val labourPatternResponse = labourPatternResponse
+
+                if (ownFarmWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.ownFarmCropProduction.women = ownFarmWomen.text.toString().toDouble()
+                }
+                if (ownFarmmen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.ownFarmCropProduction.men = ownFarmmen.text.toString().toDouble()
+                }
+
+                if (livestockHusbandryWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.livestockHusbandry.women = livestockHusbandryWomen.text.toString().toDouble()
+                }
+                if (livestockHusbandrymen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.livestockHusbandry.men = livestockHusbandrymen.text.toString().toDouble()
+                }
+
+                if (transportServicesWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.transportServices.women = transportServicesWomen.text.toString().toDouble()
+                }
+                if (transportServicesMen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.transportServices.men = transportServicesMen.text.toString().toDouble()
+                }
+
+                if (wagedLabourWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.wagedLabourOnFarms.women = wagedLabourWomen.text.toString().toDouble()
+                }
+                if (wagedLabourmen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.wagedLabourOnFarms.men = wagedLabourmen.text.toString().toDouble()
+                }
+
+                if (lowSkilledNonFarmWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.lowSkilledNonFarmLabour.women = lowSkilledNonFarmWomen.text.toString().toDouble()
+                }
+                if (lowSkilledNonFarmmen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.lowSkilledNonFarmLabour.men = lowSkilledNonFarmmen.text.toString().toDouble()
+                }
+
+                if (skilledLabourWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.skilledLabour.women = skilledLabourWomen.text.toString().toDouble()
+                }
+                if (skilledLabourmen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.skilledLabour.men = skilledLabourmen.text.toString().toDouble()
+                }
+
+                if (formalEmploymentWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.formalEmployment.women = formalEmploymentWomen.text.toString().toDouble()
+                }
+                if (formalEmploymentmen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.formalEmployment.men = formalEmploymentmen.text.toString().toDouble()
+                }
+
+                if (huntingAndGatheringWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.huntingAndGathering.women = huntingAndGatheringWomen.text.toString().toDouble()
+                }
+                if (huntingAndGatheringmen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.huntingAndGathering.men = huntingAndGatheringmen.text.toString().toDouble()
+                }
+
+                if (fishingWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.fishing.women = fishingWomen.text.toString().toDouble()
+                }
+                if (fishingmen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.fishing.men = fishingmen.text.toString().toDouble()
+                }
+
+                if (tradingWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.trading.women = tradingWomen.text.toString().toDouble()
+                }
+                if (tradingmen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.trading.men = tradingmen.text.toString().toDouble()
+                }
+
+                if (domesticUnpaidWorkWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.domesticUnpaidWork.women = domesticUnpaidWorkWomen.text.toString().toDouble()
+                }
+                if (domesticUnpaidWorkmen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.domesticUnpaidWork.men = domesticUnpaidWorkmen.text.toString().toDouble()
+                }
+
+                if (leisureWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.leisure.women = leisureWomen.text.toString().toDouble()
+                }
+                if (leisuremen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.leisure.men = leisuremen.text.toString().toDouble()
+                }
+
+                if (sexWorkWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.commercialSexWork.women = sexWorkWomen.text.toString().toDouble()
+                }
+                if (sexWorkmen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.commercialSexWork.men = sexWorkmen.text.toString().toDouble()
+                }
+
+                if (beggingWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.begging.women = beggingWomen.text.toString().toDouble()
+                }
+                if (beggingmen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.begging.men = beggingmen.text.toString().toDouble()
+                }
+
+                if (inactivityWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.inactivity.women = inactivityWomen.text.toString().toDouble()
+                }
+                if (inactivitymen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.inactivity.men = inactivitymen.text.toString().toDouble()
+                }
+
+                if (othersWomen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.others.women = othersWomen.text.toString().toDouble()
+                }
+                if (othersmen.text.toString().isNotEmpty()) {
+                    labourPatternResponse.others.men = othersmen.text.toString().toDouble()
+                }
+
+                wealthGroupQuestionnaire.draft.labourPatternResponse = labourPatternResponse
+
+            }
+        }
+    }
+
+    fun populateDraftLabourPatterns() {
+        binding.apply {
+            wgLabourPatterns.apply {
+
+                wealthGroupQuestionnaire.draft.labourPatternResponse?.let {
+
+                    labourPatternResponse = it
+
+                    if (it.ownFarmCropProduction.women != 0.0) {
+                        ownFarmWomen.setText(it.ownFarmCropProduction.women.toString())
+                    }
+                    if (it.ownFarmCropProduction.men != 0.0) {
+                        ownFarmmen.setText(it.ownFarmCropProduction.men.toString())
+                    }
+
+                    if (it.livestockHusbandry.women != 0.0) {
+                        livestockHusbandryWomen.setText(it.livestockHusbandry.women.toString())
+                    }
+                    if (it.livestockHusbandry.men != 0.0) {
+                        livestockHusbandrymen.setText(it.livestockHusbandry.men.toString())
+                    }
+
+                    if (it.transportServices.women != 0.0) {
+                        transportServicesWomen.setText(it.transportServices.women.toString())
+                    }
+                    if (it.transportServices.men != 0.0) {
+                        transportServicesMen.setText(it.transportServices.men.toString())
+                    }
+
+                    if (it.wagedLabourOnFarms.women != 0.0) {
+                        wagedLabourWomen.setText(it.wagedLabourOnFarms.women.toString())
+                    }
+                    if (it.wagedLabourOnFarms.men != 0.0) {
+                        wagedLabourmen.setText(it.wagedLabourOnFarms.men.toString())
+                    }
+
+                    if (it.lowSkilledNonFarmLabour.women != 0.0) {
+                        lowSkilledNonFarmWomen.setText(it.lowSkilledNonFarmLabour.women.toString())
+                    }
+                    if (it.lowSkilledNonFarmLabour.men != 0.0) {
+                        lowSkilledNonFarmmen.setText(it.lowSkilledNonFarmLabour.men.toString())
+                    }
+
+                    if (it.skilledLabour.women != 0.0) {
+                        skilledLabourWomen.setText(it.skilledLabour.women.toString())
+                    }
+                    if (it.skilledLabour.men != 0.0) {
+                        skilledLabourmen.setText(it.skilledLabour.men.toString())
+                    }
+
+                    if (it.formalEmployment.women != 0.0) {
+                        formalEmploymentWomen.setText(it.formalEmployment.women.toString())
+                    }
+                    if (it.formalEmployment.men != 0.0) {
+                        formalEmploymentmen.setText(it.formalEmployment.men.toString())
+                    }
+
+                    if (it.huntingAndGathering.women != 0.0) {
+                        huntingAndGatheringWomen.setText(it.huntingAndGathering.women.toString())
+                    }
+                    if (it.huntingAndGathering.men != 0.0) {
+                        huntingAndGatheringmen.setText(it.huntingAndGathering.men.toString())
+                    }
+
+                    if (it.fishing.women != 0.0) {
+                        fishingWomen.setText(it.fishing.women.toString())
+                    }
+                    if (it.fishing.men != 0.0) {
+                        fishingmen.setText(it.fishing.men.toString())
+                    }
+
+                    if (it.trading.women != 0.0) {
+                        tradingWomen.setText(it.trading.women.toString())
+                    }
+                    if (it.trading.men != 0.0) {
+                        tradingmen.setText(it.trading.men.toString())
+                    }
+
+                    if (it.domesticUnpaidWork.women != 0.0) {
+                        domesticUnpaidWorkWomen.setText(it.domesticUnpaidWork.women.toString())
+                    }
+                    if (it.domesticUnpaidWork.men != 0.0) {
+                        domesticUnpaidWorkmen.setText(it.domesticUnpaidWork.men.toString())
+                    }
+
+                    if (it.leisure.women != 0.0) {
+                        leisureWomen.setText(it.leisure.women.toString())
+                    }
+                    if (it.leisure.men != 0.0) {
+                        leisuremen.setText(it.leisure.men.toString())
+                    }
+
+                    if (it.commercialSexWork.women != 0.0) {
+                        sexWorkWomen.setText(it.commercialSexWork.women.toString())
+                    }
+                    if (it.commercialSexWork.men != 0.0) {
+                        sexWorkmen.setText(it.commercialSexWork.men.toString())
+                    }
+
+                    if (it.begging.women != 0.0) {
+                        beggingWomen.setText(it.begging.women.toString())
+                    }
+                    if (it.begging.men != 0.0) {
+                        beggingmen.setText(it.begging.men.toString())
+                    }
+
+                    if (it.inactivity.women != 0.0) {
+                        inactivityWomen.setText(it.inactivity.women.toString())
+                    }
+                    if (it.inactivity.men != 0.0) {
+                        inactivitymen.setText(it.inactivity.men.toString())
+                    }
+
+                    if (it.others.women != 0.0) {
+                        othersWomen.setText(it.others.women.toString())
+                    }
+                    if (it.others.men != 0.0) {
+                        othersmen.setText(it.others.men.toString())
+                    }
 
                 }
 
