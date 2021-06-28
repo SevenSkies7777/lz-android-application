@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.gson.Gson
+import com.ndma.livelihoodzones.appStore.AppStore
 import com.ndma.livelihoodzones.appStore.model.CountyLevelQuestionnaire
 import com.ndma.livelihoodzones.appStore.model.CountyLevelQuestionnaireListObject
 import com.ndma.livelihoodzones.appStore.model.WealthGroupQuestionnaire
@@ -22,6 +23,8 @@ import com.ndma.livelihoodzones.config.Constants.RESUME_WEALTH_GROUP_QUESTIONNAI
 import com.ndma.livelihoodzones.config.Constants.RESUME_ZONAL_QUESTIONNAIRE
 import com.ndma.livelihoodzones.databinding.CountyLevelQuestionnaireLayoutBinding
 import com.ndma.livelihoodzones.databinding.FragmentHomeBinding
+import com.ndma.livelihoodzones.login.model.GeographyObject
+import com.ndma.livelihoodzones.login.model.LoginResponseModel
 import com.ndma.livelihoodzones.services.model.Status
 import com.ndma.livelihoodzones.ui.home.adapters.CountyQuestionnaireAdapter
 import com.ndma.livelihoodzones.ui.home.adapters.WealthGroupQuestionnaireAdapter
@@ -35,6 +38,8 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
     private lateinit var binding: FragmentHomeBinding
 
     var broadCastReceiver: BroadcastReceiver? = null
+
+    var storedSessionDetails: LoginResponseModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +55,24 @@ class HomeFragment : Fragment(), CountyQuestionnaireAdapter.CountyQuestionnaireA
         val filter = IntentFilter()
         filter.addAction(QUESTIONNAIRE_COMPLETED)
         activity?.applicationContext?.registerReceiver(broadCastReceiver, filter)
+
+        val gson = Gson()
+        val sharedPreferences: SharedPreferences? =
+            context?.applicationContext?.getSharedPreferences(
+                "MyPref",
+                Context.MODE_PRIVATE
+            )
+
+        val storedSessionDetailsString =
+            sharedPreferences?.getString(Constants.SESSION_DETAILS, null)
+        storedSessionDetails = gson.fromJson(
+            storedSessionDetailsString,
+            LoginResponseModel::class.java
+        )
+
+        storedSessionDetails?.let {
+            AppStore.getInstance().sessionDetails = it
+        }
     }
 
 

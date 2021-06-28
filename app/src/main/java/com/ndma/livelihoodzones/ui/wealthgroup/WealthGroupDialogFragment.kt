@@ -316,7 +316,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                 resumeExpenditurePatterns()
             }
             Constants.MIGRATION_PATTERNS_STEP -> {
-                resumeExpenditurePatterns()
+                resumeMigrationPatterns()
             }
             Constants.CONSTRAINTS_STEP -> {
                 resumeConstraints()
@@ -396,6 +396,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     fun resumeExpenditurePatterns() {
         binding.apply {
+            populateDraftExpenditurePatterns()
             wgExpenditurePatterns.root.visibility = View.VISIBLE
         }
     }
@@ -8357,6 +8358,15 @@ class WealthGroupDialogFragment : DialogFragment(),
         ) {
             saveLabourPatternsAsDraft()
         }
+
+        if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.EXPENDITURE_PATTERNS_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.EXPENDITURE_PATTERNS_STEP
+            )
+        ) {
+            saveExpenditurePatternsAsDraft()
+        }
+
+
     }
 
     fun saveIncomeAndFoodSourcesAsDraft() {
@@ -9640,6 +9650,211 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.others.men != 0.0) {
                         othersmen.setText(it.others.men.toString())
+                    }
+
+                }
+
+            }
+        }
+    }
+
+
+    fun saveExpenditurePatternsAsDraft() {
+        binding.apply {
+            wgExpenditurePatterns.apply {
+
+                val expenditurePatternsResponses = ExpenditurePatternsResponses()
+
+                if (maizeAndMaizeFlour.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.maizeAndMaizeFlour = maizeAndMaizeFlour.text.toString().toDouble()
+                }
+                if (otherCereals.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.otherCereals = otherCereals.text.toString().toDouble()
+                }
+                if (pulses.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.pulses = pulses.text.toString().toDouble()
+                }
+                if (rootsAndTubers.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.rootsAndTubers = rootsAndTubers.text.toString().toDouble()
+                }
+                if (vegetablesAndFruits.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.vegetablesAndFruits = vegetablesAndFruits.text.toString().toDouble()
+                }
+                if (fishandseaFood.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.fishandSeaFood = fishandseaFood.text.toString().toDouble()
+                }
+                if (meat.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.meat = meat.text.toString().toDouble()
+                }
+                if (milk.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.milk = milk.text.toString().toDouble()
+                }
+                if (eggs.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.eggs = eggs.text.toString().toDouble()
+                }
+                if (oilAndFats.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.oilsAndFats = oilAndFats.text.toString().toDouble()
+                }
+                if (otherFoods.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.otherFoods = otherFoods.text.toString().toDouble()
+                }
+
+
+                if (schoolFees.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.schoolFees = schoolFees.text.toString().toDouble()
+                }
+                if (drugsAndMedicalCare.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.drugsAndMedicalCare = drugsAndMedicalCare.text.toString().toDouble()
+                }
+                if (clothingAndBeautyProducts.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.clothingAndBeautyProducts = clothingAndBeautyProducts.text.toString().toDouble()
+                }
+                if (houseRent.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.houseRent = houseRent.text.toString().toDouble()
+                }
+                if (communicationExpense.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.communicationExpenses = communicationExpense.text.toString().toDouble()
+                }
+                if (farmInputs.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.farmInputs = farmInputs.text.toString().toDouble()
+                }
+                if (livestockDrugs.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.livestockDrugs = livestockDrugs.text.toString().toDouble()
+                }
+                if (waterPurchase.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.waterPurchase = waterPurchase.text.toString().toDouble()
+                }
+                if (soaps.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.soaps = soaps.text.toString().toDouble()
+                }
+                if (farrmLabour.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.farmLabour = farrmLabour.text.toString().toDouble()
+                }
+                if (travelRelatedExpense.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.travelRelatedExpenses = travelRelatedExpense.text.toString().toDouble()
+                }
+                if (entertainment.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.leisureAndEntertainment = entertainment.text.toString().toDouble()
+                }
+                if (electricityBill.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.electricityBills = electricityBill.text.toString().toDouble()
+                }
+                if (socialObligation.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.socialObligation = socialObligation.text.toString().toDouble()
+                }
+                if (millingCost.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.millingCosts = millingCost.text.toString().toDouble()
+                }
+                if (cookingFuel.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.cookingFuel = cookingFuel.text.toString().toDouble()
+                }
+                if (savingsAndInvestment.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.savingsAndInvestments = savingsAndInvestment.text.toString().toDouble()
+                }
+                if (loanRepayments.text.toString().isNotEmpty()) {
+                    expenditurePatternsResponses.loanRepayments = loanRepayments.text.toString().toDouble()
+                }
+
+                wealthGroupQuestionnaire.draft.expenditurePatternsResponses = expenditurePatternsResponses
+
+            }
+        }
+    }
+
+    fun populateDraftExpenditurePatterns() {
+        binding.apply {
+            wgExpenditurePatterns.apply {
+
+                wealthGroupQuestionnaire.draft.expenditurePatternsResponses?.let {
+
+                    if (it.maizeAndMaizeFlour != 0.0) {
+                        maizeAndMaizeFlour.setText(it.maizeAndMaizeFlour.toString())
+                    }
+                    if (it.otherCereals != 0.0) {
+                        otherCereals.setText(it.otherCereals.toString())
+                    }
+                    if (it.pulses != 0.0) {
+                        pulses.setText(it.pulses.toString())
+                    }
+                    if (it.rootsAndTubers != 0.0) {
+                        rootsAndTubers.setText(it.rootsAndTubers.toString())
+                    }
+                    if (it.vegetablesAndFruits != 0.0) {
+                        vegetablesAndFruits.setText(it.vegetablesAndFruits.toString())
+                    }
+                    if (it.fishandSeaFood != 0.0) {
+                        fishandseaFood.setText(it.fishandSeaFood.toString())
+                    }
+                    if (it.meat != 0.0) {
+                        meat.setText(it.meat.toString())
+                    }
+                    if (it.milk != 0.0) {
+                        milk.setText(it.milk.toString())
+                    }
+                    if (it.eggs != 0.0) {
+                        eggs.setText(it.eggs.toString())
+                    }
+                    if (it.oilsAndFats != 0.0) {
+                        oilAndFats.setText(it.oilsAndFats.toString())
+                    }
+                    if (it.otherFoods != 0.0) {
+                        otherFoods.setText(it.otherFoods.toString())
+                    }
+
+
+                    if (it.schoolFees != 0.0) {
+                        schoolFees.setText(it.schoolFees.toString())
+                    }
+                    if (it.drugsAndMedicalCare != 0.0) {
+                        drugsAndMedicalCare.setText(it.drugsAndMedicalCare.toString())
+                    }
+                    if (it.clothingAndBeautyProducts != 0.0) {
+                        clothingAndBeautyProducts.setText(it.clothingAndBeautyProducts.toString())
+                    }
+                    if (it.houseRent != 0.0) {
+                        houseRent.setText(it.houseRent.toString())
+                    }
+                    if (it.communicationExpenses != 0.0) {
+                        communicationExpense.setText(it.communicationExpenses.toString())
+                    }
+                    if (it.farmInputs != 0.0) {
+                        farmInputs.setText(it.farmInputs.toString())
+                    }
+                    if (it.livestockDrugs != 0.0) {
+                        livestockDrugs.setText(it.livestockDrugs.toString())
+                    }
+                    if (it.waterPurchase != 0.0) {
+                        waterPurchase.setText(it.waterPurchase.toString())
+                    }
+                    if (it.soaps != 0.0) {
+                        soaps.setText(it.soaps.toString())
+                    }
+                    if (it.farmLabour != 0.0) {
+                        farrmLabour.setText(it.farmLabour.toString())
+                    }
+                    if (it.travelRelatedExpenses != 0.0) {
+                        travelRelatedExpense.setText(it.travelRelatedExpenses.toString())
+                    }
+                    if (it.leisureAndEntertainment != 0.0) {
+                        entertainment.setText(it.leisureAndEntertainment.toString())
+                    }
+                    if (it.electricityBills != 0.0) {
+                        electricityBill.setText(it.electricityBills.toString())
+                    }
+                    if (it.socialObligation != 0.0) {
+                        socialObligation.setText(it.socialObligation.toString())
+                    }
+                    if (it.millingCosts != 0.0) {
+                        millingCost.setText(it.millingCosts.toString())
+                    }
+                    if (it.cookingFuel != 0.0) {
+                        cookingFuel.setText(it.cookingFuel.toString())
+                    }
+                    if (it.savingsAndInvestments != 0.0) {
+                        savingsAndInvestment.setText(it.savingsAndInvestments.toString())
+                    }
+                    if (it.loanRepayments != 0.0) {
+                        loanRepayments.setText(it.loanRepayments.toString())
                     }
 
                 }
