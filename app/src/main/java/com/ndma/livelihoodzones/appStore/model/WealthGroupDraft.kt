@@ -14,4 +14,6 @@ class WealthGroupDraft {
     var labourPatternResponse: LabourPatternResponse? = null
 
     var expenditurePatternsResponses: ExpenditurePatternsResponses? = null
+
+    var migrationPatternResponses: MigrationPatternResponses? = null
 }

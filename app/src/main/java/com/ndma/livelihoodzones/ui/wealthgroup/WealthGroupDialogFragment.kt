@@ -403,6 +403,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     fun resumeMigrationPatterns() {
         binding.apply {
+            populateDraftMigrationPatterns()
             wgMigrationPatterns.root.visibility = View.VISIBLE
         }
     }
@@ -8366,6 +8367,13 @@ class WealthGroupDialogFragment : DialogFragment(),
             saveExpenditurePatternsAsDraft()
         }
 
+        if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.MIGRATION_PATTERNS_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.MIGRATION_PATTERNS_STEP
+            )
+        ) {
+            saveMigrationPatternsAsDraft()
+        }
+
 
     }
 
@@ -9153,7 +9161,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                         fishPondsFoodPercentage.text.toString().toDouble()
                 }
 
-                wealthGroupQuestionnaire.draft.livestockContributionResponses = livestockContributionResponses
+                wealthGroupQuestionnaire.draft.livestockContributionResponses =
+                    livestockContributionResponses
 
             }
         }
@@ -9203,8 +9212,10 @@ class WealthGroupDialogFragment : DialogFragment(),
                         )
                     }
 
-                    val usedLivestockCashIncomeContributionRanks: MutableList<RankResponseItem> = ArrayList()
-                    val usedLivestockFoodConsumptionContributionRanks: MutableList<RankResponseItem> = ArrayList()
+                    val usedLivestockCashIncomeContributionRanks: MutableList<RankResponseItem> =
+                        ArrayList()
+                    val usedLivestockFoodConsumptionContributionRanks: MutableList<RankResponseItem> =
+                        ArrayList()
 
 
                     if (it.cattle.incomePercentage.actualValue != 0.0) {
@@ -9215,11 +9226,21 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.cattle.incomeRank.actualValue != 0.0) {
                         cattleIncomeRank.setText(it.cattle.incomeRank.actualValue.toString())
-                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.cattle.incomeRank.actualValue.toInt(), false))
+                        usedLivestockCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                it.cattle.incomeRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                     if (it.cattle.consumptionRank.actualValue != 0.0) {
                         cattleFoodRank.setText(it.cattle.consumptionRank.actualValue.toString())
-                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.cattle.consumptionRank.actualValue.toInt(), false))
+                        usedLivestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                it.cattle.consumptionRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
 
 
@@ -9231,11 +9252,21 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.dairyCattle.incomeRank.actualValue != 0.0) {
                         dairyCattleIncomeRank.setText(it.dairyCattle.incomeRank.actualValue.toString())
-                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.dairyCattle.incomeRank.actualValue.toInt(), false))
+                        usedLivestockCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                it.dairyCattle.incomeRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                     if (it.dairyCattle.consumptionRank.actualValue != 0.0) {
                         dairyCattleFoodRank.setText(it.dairyCattle.consumptionRank.actualValue.toString())
-                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.dairyCattle.consumptionRank.actualValue.toInt(), false))
+                        usedLivestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                it.dairyCattle.consumptionRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
 
 
@@ -9247,11 +9278,21 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.goats.incomeRank.actualValue != 0.0) {
                         goatsIncomeRank.setText(it.goats.incomeRank.actualValue.toString())
-                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.goats.incomeRank.actualValue.toInt(), false))
+                        usedLivestockCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                it.goats.incomeRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                     if (it.goats.consumptionRank.actualValue != 0.0) {
                         goatsFoodRank.setText(it.goats.consumptionRank.actualValue.toString())
-                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.goats.consumptionRank.actualValue.toInt(), false))
+                        usedLivestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                it.goats.consumptionRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
 
 
@@ -9263,11 +9304,21 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.sheep.incomeRank.actualValue != 0.0) {
                         sheepCashRank.setText(it.sheep.incomeRank.actualValue.toString())
-                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.sheep.incomeRank.actualValue.toInt(), false))
+                        usedLivestockCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                it.sheep.incomeRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                     if (it.sheep.consumptionRank.actualValue != 0.0) {
                         sheepFoodRank.setText(it.sheep.consumptionRank.actualValue.toString())
-                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.sheep.consumptionRank.actualValue.toInt(), false))
+                        usedLivestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                it.sheep.consumptionRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
 
 
@@ -9279,11 +9330,21 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.donkeys.incomeRank.actualValue != 0.0) {
                         donkeysCashRank.setText(it.donkeys.incomeRank.actualValue.toString())
-                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.donkeys.incomeRank.actualValue.toInt(), false))
+                        usedLivestockCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                it.donkeys.incomeRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                     if (it.donkeys.consumptionRank.actualValue != 0.0) {
                         donkeysFoodRank.setText(it.donkeys.consumptionRank.actualValue.toString())
-                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.donkeys.consumptionRank.actualValue.toInt(), false))
+                        usedLivestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                it.donkeys.consumptionRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
 
 
@@ -9295,11 +9356,21 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.pigs.incomeRank.actualValue != 0.0) {
                         pigscashRank.setText(it.pigs.incomeRank.actualValue.toString())
-                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.pigs.incomeRank.actualValue.toInt(), false))
+                        usedLivestockCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                it.pigs.incomeRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                     if (it.pigs.consumptionRank.actualValue != 0.0) {
                         pigsFoodrank.setText(it.pigs.consumptionRank.actualValue.toString())
-                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.pigs.consumptionRank.actualValue.toInt(), false))
+                        usedLivestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                it.pigs.consumptionRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
 
 
@@ -9311,11 +9382,21 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.chicken.incomeRank.actualValue != 0.0) {
                         chickenCashRank.setText(it.chicken.incomeRank.actualValue.toString())
-                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.chicken.incomeRank.actualValue.toInt(), false))
+                        usedLivestockCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                it.chicken.incomeRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                     if (it.chicken.consumptionRank.actualValue != 0.0) {
                         chickenFoodRank.setText(it.chicken.consumptionRank.actualValue.toString())
-                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.chicken.consumptionRank.actualValue.toInt(), false))
+                        usedLivestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                it.chicken.consumptionRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
 
 
@@ -9327,11 +9408,21 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.improvedChicken.incomeRank.actualValue != 0.0) {
                         improvedChickenCashRank.setText(it.improvedChicken.incomeRank.actualValue.toString())
-                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.improvedChicken.incomeRank.actualValue.toInt(), false))
+                        usedLivestockCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                it.improvedChicken.incomeRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                     if (it.improvedChicken.consumptionRank.actualValue != 0.0) {
                         improvedChickenFoodRank.setText(it.improvedChicken.consumptionRank.actualValue.toString())
-                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.improvedChicken.consumptionRank.actualValue.toInt(), false))
+                        usedLivestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                it.improvedChicken.consumptionRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
 
 
@@ -9343,11 +9434,21 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.camels.incomeRank.actualValue != 0.0) {
                         camelsCashRank.setText(it.camels.incomeRank.actualValue.toString())
-                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.camels.incomeRank.actualValue.toInt(), false))
+                        usedLivestockCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                it.camels.incomeRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                     if (it.camels.consumptionRank.actualValue != 0.0) {
                         camelsFoodRank.setText(it.camels.consumptionRank.actualValue.toString())
-                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.camels.consumptionRank.actualValue.toInt(), false))
+                        usedLivestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                it.camels.consumptionRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
 
 
@@ -9359,11 +9460,21 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.ducks.incomeRank.actualValue != 0.0) {
                         ducksCashRank.setText(it.ducks.incomeRank.actualValue.toString())
-                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.ducks.incomeRank.actualValue.toInt(), false))
+                        usedLivestockCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                it.ducks.incomeRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                     if (it.ducks.consumptionRank.actualValue != 0.0) {
                         ducksFoodRank.setText(it.ducks.consumptionRank.actualValue.toString())
-                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.ducks.consumptionRank.actualValue.toInt(), false))
+                        usedLivestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                it.ducks.consumptionRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
 
 
@@ -9375,11 +9486,21 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.beeHives.incomeRank.actualValue != 0.0) {
                         beeHivesCashRank.setText(it.beeHives.incomeRank.actualValue.toString())
-                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.beeHives.incomeRank.actualValue.toInt(), false))
+                        usedLivestockCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                it.beeHives.incomeRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                     if (it.beeHives.consumptionRank.actualValue != 0.0) {
                         beeHivesFoodrank.setText(it.beeHives.consumptionRank.actualValue.toString())
-                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.beeHives.consumptionRank.actualValue.toInt(), false))
+                        usedLivestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                it.beeHives.consumptionRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
 
 
@@ -9391,15 +9512,29 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.fishPonds.incomeRank.actualValue != 0.0) {
                         fishPondsCashRank.setText(it.fishPonds.incomeRank.actualValue.toString())
-                        usedLivestockCashIncomeContributionRanks.add(RankResponseItem(it.fishPonds.incomeRank.actualValue.toInt(), false))
+                        usedLivestockCashIncomeContributionRanks.add(
+                            RankResponseItem(
+                                it.fishPonds.incomeRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
                     if (it.fishPonds.consumptionRank.actualValue != 0.0) {
                         fishPondsFoodRank.setText(it.fishPonds.consumptionRank.actualValue.toString())
-                        usedLivestockFoodConsumptionContributionRanks.add(RankResponseItem(it.fishPonds.consumptionRank.actualValue.toInt(), false))
+                        usedLivestockFoodConsumptionContributionRanks.add(
+                            RankResponseItem(
+                                it.fishPonds.consumptionRank.actualValue.toInt(),
+                                false
+                            )
+                        )
                     }
 
-                    livestockCashIncomeContributionRanks.removeAll(usedLivestockCashIncomeContributionRanks)
-                    livestockFoodConsumptionContributionRanks.removeAll(usedLivestockFoodConsumptionContributionRanks)
+                    livestockCashIncomeContributionRanks.removeAll(
+                        usedLivestockCashIncomeContributionRanks
+                    )
+                    livestockFoodConsumptionContributionRanks.removeAll(
+                        usedLivestockFoodConsumptionContributionRanks
+                    )
 
                 }
 
@@ -9415,59 +9550,75 @@ class WealthGroupDialogFragment : DialogFragment(),
                 val labourPatternResponse = labourPatternResponse
 
                 if (ownFarmWomen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.ownFarmCropProduction.women = ownFarmWomen.text.toString().toDouble()
+                    labourPatternResponse.ownFarmCropProduction.women =
+                        ownFarmWomen.text.toString().toDouble()
                 }
                 if (ownFarmmen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.ownFarmCropProduction.men = ownFarmmen.text.toString().toDouble()
+                    labourPatternResponse.ownFarmCropProduction.men =
+                        ownFarmmen.text.toString().toDouble()
                 }
 
                 if (livestockHusbandryWomen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.livestockHusbandry.women = livestockHusbandryWomen.text.toString().toDouble()
+                    labourPatternResponse.livestockHusbandry.women =
+                        livestockHusbandryWomen.text.toString().toDouble()
                 }
                 if (livestockHusbandrymen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.livestockHusbandry.men = livestockHusbandrymen.text.toString().toDouble()
+                    labourPatternResponse.livestockHusbandry.men =
+                        livestockHusbandrymen.text.toString().toDouble()
                 }
 
                 if (transportServicesWomen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.transportServices.women = transportServicesWomen.text.toString().toDouble()
+                    labourPatternResponse.transportServices.women =
+                        transportServicesWomen.text.toString().toDouble()
                 }
                 if (transportServicesMen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.transportServices.men = transportServicesMen.text.toString().toDouble()
+                    labourPatternResponse.transportServices.men =
+                        transportServicesMen.text.toString().toDouble()
                 }
 
                 if (wagedLabourWomen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.wagedLabourOnFarms.women = wagedLabourWomen.text.toString().toDouble()
+                    labourPatternResponse.wagedLabourOnFarms.women =
+                        wagedLabourWomen.text.toString().toDouble()
                 }
                 if (wagedLabourmen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.wagedLabourOnFarms.men = wagedLabourmen.text.toString().toDouble()
+                    labourPatternResponse.wagedLabourOnFarms.men =
+                        wagedLabourmen.text.toString().toDouble()
                 }
 
                 if (lowSkilledNonFarmWomen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.lowSkilledNonFarmLabour.women = lowSkilledNonFarmWomen.text.toString().toDouble()
+                    labourPatternResponse.lowSkilledNonFarmLabour.women =
+                        lowSkilledNonFarmWomen.text.toString().toDouble()
                 }
                 if (lowSkilledNonFarmmen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.lowSkilledNonFarmLabour.men = lowSkilledNonFarmmen.text.toString().toDouble()
+                    labourPatternResponse.lowSkilledNonFarmLabour.men =
+                        lowSkilledNonFarmmen.text.toString().toDouble()
                 }
 
                 if (skilledLabourWomen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.skilledLabour.women = skilledLabourWomen.text.toString().toDouble()
+                    labourPatternResponse.skilledLabour.women =
+                        skilledLabourWomen.text.toString().toDouble()
                 }
                 if (skilledLabourmen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.skilledLabour.men = skilledLabourmen.text.toString().toDouble()
+                    labourPatternResponse.skilledLabour.men =
+                        skilledLabourmen.text.toString().toDouble()
                 }
 
                 if (formalEmploymentWomen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.formalEmployment.women = formalEmploymentWomen.text.toString().toDouble()
+                    labourPatternResponse.formalEmployment.women =
+                        formalEmploymentWomen.text.toString().toDouble()
                 }
                 if (formalEmploymentmen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.formalEmployment.men = formalEmploymentmen.text.toString().toDouble()
+                    labourPatternResponse.formalEmployment.men =
+                        formalEmploymentmen.text.toString().toDouble()
                 }
 
                 if (huntingAndGatheringWomen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.huntingAndGathering.women = huntingAndGatheringWomen.text.toString().toDouble()
+                    labourPatternResponse.huntingAndGathering.women =
+                        huntingAndGatheringWomen.text.toString().toDouble()
                 }
                 if (huntingAndGatheringmen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.huntingAndGathering.men = huntingAndGatheringmen.text.toString().toDouble()
+                    labourPatternResponse.huntingAndGathering.men =
+                        huntingAndGatheringmen.text.toString().toDouble()
                 }
 
                 if (fishingWomen.text.toString().isNotEmpty()) {
@@ -9485,10 +9636,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 if (domesticUnpaidWorkWomen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.domesticUnpaidWork.women = domesticUnpaidWorkWomen.text.toString().toDouble()
+                    labourPatternResponse.domesticUnpaidWork.women =
+                        domesticUnpaidWorkWomen.text.toString().toDouble()
                 }
                 if (domesticUnpaidWorkmen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.domesticUnpaidWork.men = domesticUnpaidWorkmen.text.toString().toDouble()
+                    labourPatternResponse.domesticUnpaidWork.men =
+                        domesticUnpaidWorkmen.text.toString().toDouble()
                 }
 
                 if (leisureWomen.text.toString().isNotEmpty()) {
@@ -9499,10 +9652,12 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 if (sexWorkWomen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.commercialSexWork.women = sexWorkWomen.text.toString().toDouble()
+                    labourPatternResponse.commercialSexWork.women =
+                        sexWorkWomen.text.toString().toDouble()
                 }
                 if (sexWorkmen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.commercialSexWork.men = sexWorkmen.text.toString().toDouble()
+                    labourPatternResponse.commercialSexWork.men =
+                        sexWorkmen.text.toString().toDouble()
                 }
 
                 if (beggingWomen.text.toString().isNotEmpty()) {
@@ -9513,7 +9668,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
 
                 if (inactivityWomen.text.toString().isNotEmpty()) {
-                    labourPatternResponse.inactivity.women = inactivityWomen.text.toString().toDouble()
+                    labourPatternResponse.inactivity.women =
+                        inactivityWomen.text.toString().toDouble()
                 }
                 if (inactivitymen.text.toString().isNotEmpty()) {
                     labourPatternResponse.inactivity.men = inactivitymen.text.toString().toDouble()
@@ -9666,22 +9822,27 @@ class WealthGroupDialogFragment : DialogFragment(),
                 val expenditurePatternsResponses = ExpenditurePatternsResponses()
 
                 if (maizeAndMaizeFlour.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.maizeAndMaizeFlour = maizeAndMaizeFlour.text.toString().toDouble()
+                    expenditurePatternsResponses.maizeAndMaizeFlour =
+                        maizeAndMaizeFlour.text.toString().toDouble()
                 }
                 if (otherCereals.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.otherCereals = otherCereals.text.toString().toDouble()
+                    expenditurePatternsResponses.otherCereals =
+                        otherCereals.text.toString().toDouble()
                 }
                 if (pulses.text.toString().isNotEmpty()) {
                     expenditurePatternsResponses.pulses = pulses.text.toString().toDouble()
                 }
                 if (rootsAndTubers.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.rootsAndTubers = rootsAndTubers.text.toString().toDouble()
+                    expenditurePatternsResponses.rootsAndTubers =
+                        rootsAndTubers.text.toString().toDouble()
                 }
                 if (vegetablesAndFruits.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.vegetablesAndFruits = vegetablesAndFruits.text.toString().toDouble()
+                    expenditurePatternsResponses.vegetablesAndFruits =
+                        vegetablesAndFruits.text.toString().toDouble()
                 }
                 if (fishandseaFood.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.fishandSeaFood = fishandseaFood.text.toString().toDouble()
+                    expenditurePatternsResponses.fishandSeaFood =
+                        fishandseaFood.text.toString().toDouble()
                 }
                 if (meat.text.toString().isNotEmpty()) {
                     expenditurePatternsResponses.meat = meat.text.toString().toDouble()
@@ -9704,25 +9865,30 @@ class WealthGroupDialogFragment : DialogFragment(),
                     expenditurePatternsResponses.schoolFees = schoolFees.text.toString().toDouble()
                 }
                 if (drugsAndMedicalCare.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.drugsAndMedicalCare = drugsAndMedicalCare.text.toString().toDouble()
+                    expenditurePatternsResponses.drugsAndMedicalCare =
+                        drugsAndMedicalCare.text.toString().toDouble()
                 }
                 if (clothingAndBeautyProducts.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.clothingAndBeautyProducts = clothingAndBeautyProducts.text.toString().toDouble()
+                    expenditurePatternsResponses.clothingAndBeautyProducts =
+                        clothingAndBeautyProducts.text.toString().toDouble()
                 }
                 if (houseRent.text.toString().isNotEmpty()) {
                     expenditurePatternsResponses.houseRent = houseRent.text.toString().toDouble()
                 }
                 if (communicationExpense.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.communicationExpenses = communicationExpense.text.toString().toDouble()
+                    expenditurePatternsResponses.communicationExpenses =
+                        communicationExpense.text.toString().toDouble()
                 }
                 if (farmInputs.text.toString().isNotEmpty()) {
                     expenditurePatternsResponses.farmInputs = farmInputs.text.toString().toDouble()
                 }
                 if (livestockDrugs.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.livestockDrugs = livestockDrugs.text.toString().toDouble()
+                    expenditurePatternsResponses.livestockDrugs =
+                        livestockDrugs.text.toString().toDouble()
                 }
                 if (waterPurchase.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.waterPurchase = waterPurchase.text.toString().toDouble()
+                    expenditurePatternsResponses.waterPurchase =
+                        waterPurchase.text.toString().toDouble()
                 }
                 if (soaps.text.toString().isNotEmpty()) {
                     expenditurePatternsResponses.soaps = soaps.text.toString().toDouble()
@@ -9731,31 +9897,40 @@ class WealthGroupDialogFragment : DialogFragment(),
                     expenditurePatternsResponses.farmLabour = farrmLabour.text.toString().toDouble()
                 }
                 if (travelRelatedExpense.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.travelRelatedExpenses = travelRelatedExpense.text.toString().toDouble()
+                    expenditurePatternsResponses.travelRelatedExpenses =
+                        travelRelatedExpense.text.toString().toDouble()
                 }
                 if (entertainment.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.leisureAndEntertainment = entertainment.text.toString().toDouble()
+                    expenditurePatternsResponses.leisureAndEntertainment =
+                        entertainment.text.toString().toDouble()
                 }
                 if (electricityBill.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.electricityBills = electricityBill.text.toString().toDouble()
+                    expenditurePatternsResponses.electricityBills =
+                        electricityBill.text.toString().toDouble()
                 }
                 if (socialObligation.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.socialObligation = socialObligation.text.toString().toDouble()
+                    expenditurePatternsResponses.socialObligation =
+                        socialObligation.text.toString().toDouble()
                 }
                 if (millingCost.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.millingCosts = millingCost.text.toString().toDouble()
+                    expenditurePatternsResponses.millingCosts =
+                        millingCost.text.toString().toDouble()
                 }
                 if (cookingFuel.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.cookingFuel = cookingFuel.text.toString().toDouble()
+                    expenditurePatternsResponses.cookingFuel =
+                        cookingFuel.text.toString().toDouble()
                 }
                 if (savingsAndInvestment.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.savingsAndInvestments = savingsAndInvestment.text.toString().toDouble()
+                    expenditurePatternsResponses.savingsAndInvestments =
+                        savingsAndInvestment.text.toString().toDouble()
                 }
                 if (loanRepayments.text.toString().isNotEmpty()) {
-                    expenditurePatternsResponses.loanRepayments = loanRepayments.text.toString().toDouble()
+                    expenditurePatternsResponses.loanRepayments =
+                        loanRepayments.text.toString().toDouble()
                 }
 
-                wealthGroupQuestionnaire.draft.expenditurePatternsResponses = expenditurePatternsResponses
+                wealthGroupQuestionnaire.draft.expenditurePatternsResponses =
+                    expenditurePatternsResponses
 
             }
         }
@@ -9855,6 +10030,82 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
                     if (it.loanRepayments != 0.0) {
                         loanRepayments.setText(it.loanRepayments.toString())
+                    }
+
+                }
+
+            }
+        }
+    }
+
+    fun saveMigrationPatternsAsDraft() {
+        binding.apply {
+            wgMigrationPatterns.apply {
+
+                val migrationPatternResponses = MigrationPatternResponses()
+
+                if (fullyNomadic.text.toString().isNotEmpty()) {
+                    migrationPatternResponses.fullyNomadic =
+                        fullyNomadic.text.toString().toDouble()
+                }
+                if (semiNomadic.text.toString().isNotEmpty()) {
+                    migrationPatternResponses.semiNomadic =
+                        semiNomadic.text.toString().toDouble()
+                }
+                if (occasionalNomadic.text.toString().isNotEmpty()) {
+                    migrationPatternResponses.occasionalNomadic =
+                        occasionalNomadic.text.toString().toDouble()
+                }
+                if (outMigrantLabour.text.toString().isNotEmpty()) {
+                    migrationPatternResponses.outMigrantLabour =
+                        outMigrantLabour.text.toString().toDouble()
+                }
+                if (inMigrantLabour.text.toString().isNotEmpty()) {
+                    migrationPatternResponses.inMigrantLabour =
+                        inMigrantLabour.text.toString().toDouble()
+                }
+                if (fullySettled.text.toString().isNotEmpty()) {
+                    migrationPatternResponses.fullysettled =
+                        fullySettled.text.toString().toDouble()
+                }
+                if (internallyDisplaced.text.toString().isNotEmpty()) {
+                    migrationPatternResponses.internallyDisplaced =
+                        internallyDisplaced.text.toString().toDouble()
+                }
+
+                wealthGroupQuestionnaire.draft.migrationPatternResponses = migrationPatternResponses
+
+            }
+        }
+    }
+
+
+    fun populateDraftMigrationPatterns() {
+        binding.apply {
+            wgMigrationPatterns.apply {
+
+                wealthGroupQuestionnaire.draft.migrationPatternResponses?.let {
+
+                    if (it.fullyNomadic != 0.0) {
+                        fullyNomadic.setText(it.fullyNomadic.toString())
+                    }
+                    if (it.semiNomadic != 0.0) {
+                        semiNomadic.setText(it.semiNomadic.toString())
+                    }
+                    if (it.occasionalNomadic != 0.0) {
+                        occasionalNomadic.setText(it.occasionalNomadic.toString())
+                    }
+                    if (it.outMigrantLabour != 0.0) {
+                        outMigrantLabour.setText(it.outMigrantLabour.toString())
+                    }
+                    if (it.inMigrantLabour != 0.0) {
+                        inMigrantLabour.setText(it.inMigrantLabour.toString())
+                    }
+                    if (it.fullysettled != 0.0) {
+                        fullySettled.setText(it.fullysettled.toString())
+                    }
+                    if (it.internallyDisplaced != 0.0) {
+                        internallyDisplaced.setText(it.internallyDisplaced.toString())
                     }
 
                 }
