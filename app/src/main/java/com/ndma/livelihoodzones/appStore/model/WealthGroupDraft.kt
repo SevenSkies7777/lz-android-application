@@ -1,5 +1,6 @@
 package com.ndma.livelihoodzones.appStore.model
 
+import com.ndma.livelihoodzones.ui.wealthgroup.model.FgdParticipantModel
 import com.ndma.livelihoodzones.ui.wealthgroup.responses.*
 
 class WealthGroupDraft {
@@ -18,4 +19,8 @@ class WealthGroupDraft {
     var migrationPatternResponses: MigrationPatternResponses? = null
 
     var constraintResponses: ConstraintsResponses? = null
+
+    var copingStrategiesResponses: CopingStrategiesResponses? = null
+
+    var fdgParticipantsModelList: MutableList<FgdParticipantModel> = ArrayList()
 }

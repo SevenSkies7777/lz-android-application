@@ -417,12 +417,16 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     fun resumeCopingStrategies() {
         binding.apply {
+            populateDraftCopingStrategies()
             wgCopingStrategies.root.visibility = View.VISIBLE
         }
     }
 
     fun resumeFgdParticipants() {
         binding.apply {
+            if (wealthGroupQuestionnaire.draft.fdgParticipantsModelList.isNotEmpty()) {
+                populateFgdParticipants()
+            }
             fdgParticipants.root.visibility = View.VISIBLE
         }
     }
@@ -7415,9 +7419,12 @@ class WealthGroupDialogFragment : DialogFragment(),
         binding.apply {
             fdgParticipants.apply {
                 fdgParticipantsModelList = wealthGroupQuestionnaire.fdgParticipants
+                if (fdgParticipantsModelList.isEmpty()) {
+                    fdgParticipantsModelList = wealthGroupQuestionnaire.draft.fdgParticipantsModelList
+                }
                 val fgdParticipantAdapter = activity?.let { it1 ->
                     FgdParticipantsAdapter(
-                        wealthGroupQuestionnaire.fdgParticipants, this@WealthGroupDialogFragment,
+                        fdgParticipantsModelList, this@WealthGroupDialogFragment,
                         it1,
                         true
                     )
@@ -8382,6 +8389,19 @@ class WealthGroupDialogFragment : DialogFragment(),
             saveConstraintsAsDraft()
         }
 
+        if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.COPING_STRATEGIES_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.COPING_STRATEGIES_STEP
+            )
+        ) {
+            saveCopingStrategiesAsDraft()
+        }
+
+        if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.FGD_PARTICIPANTS_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.FGD_PARTICIPANTS_STEP
+            )
+        ) {
+            saveFgdParticipantsAsDraft()
+        }
 
     }
 
@@ -10643,6 +10663,152 @@ class WealthGroupDialogFragment : DialogFragment(),
                 }
             }
         }
+    }
+
+
+    fun saveCopingStrategiesAsDraft() {
+        binding.apply {
+            wgCopingStrategies.apply {
+
+                val copingStrategiesResponses = CopingStrategiesResponses()
+
+                val consumptionBasedStrategies = ConsumptionBasedStrategies()
+                val livelihoodBasedStrategies = LivelihoodBasedStrategies()
+
+                if (lessExpensiveFood.text.toString().isNotEmpty()) {
+                    consumptionBasedStrategies.lessExpensiveFood =
+                        lessExpensiveFood.text.toString().toDouble()
+                }
+                if (reducedFoodQuantity.text.toString().isNotEmpty()) {
+                    consumptionBasedStrategies.reducedAdultFoodQuantity =
+                        reducedFoodQuantity.text.toString().toDouble()
+                }
+                if (borrowedFood.text.toString().isNotEmpty()) {
+                    consumptionBasedStrategies.borrowedFood =
+                        borrowedFood.text.toString().toDouble()
+                }
+                if (reducedNoMealsPerDay.text.toString().isNotEmpty()) {
+                    consumptionBasedStrategies.reducedMealsPerDay =
+                        reducedNoMealsPerDay.text.toString().toDouble()
+                }
+                if (reducedMealPortionSize.text.toString().isNotEmpty()) {
+                    consumptionBasedStrategies.reducedMealPortionSize =
+                        reducedMealPortionSize.text.toString().toDouble()
+                }
+
+
+                if (soldHouseHoldAssets.text.toString().isNotEmpty()) {
+                    livelihoodBasedStrategies.soldHouseHoldAssets =
+                        soldHouseHoldAssets.text.toString().toInt()
+                }
+                if (reducedNonFoodExpenses.text.toString().isNotEmpty()) {
+                    livelihoodBasedStrategies.reducedNonFoodExpense =
+                        reducedNonFoodExpenses.text.toString().toInt()
+                }
+                if (soldProductiveAssets.text.toString().isNotEmpty()) {
+                    livelihoodBasedStrategies.soldProductiveAssets =
+                        soldProductiveAssets.text.toString().toInt()
+                }
+                if (spentSavings.text.toString().isNotEmpty()) {
+                    livelihoodBasedStrategies.spentSavings =
+                        spentSavings.text.toString().toInt()
+                }
+                if (borrowedMoneyFromLender.text.toString().isNotEmpty()) {
+                    livelihoodBasedStrategies.borrowedMoneyFromLender =
+                        borrowedMoneyFromLender.text.toString().toInt()
+                }
+                if (soldHouseOrLand.text.toString().isNotEmpty()) {
+                    livelihoodBasedStrategies.soldHouseOrLand =
+                        soldHouseOrLand.text.toString().toInt()
+                }
+                if (withdrewSchoolChildren.text.toString().isNotEmpty()) {
+                    livelihoodBasedStrategies.withdrewSchoolChildren =
+                        withdrewSchoolChildren.text.toString().toInt()
+                }
+                if (soldFemaleAnimals.text.toString().isNotEmpty()) {
+                    livelihoodBasedStrategies.soldFemaleAnimals =
+                        soldFemaleAnimals.text.toString().toInt()
+                }
+                if (begging.text.toString().isNotEmpty()) {
+                    livelihoodBasedStrategies.begging =
+                        begging.text.toString().toInt()
+                }
+                if (soldMoreAnimals.text.toString().isNotEmpty()) {
+                    livelihoodBasedStrategies.soldMoreAnimals =
+                        soldMoreAnimals.text.toString().toInt()
+                }
+
+                copingStrategiesResponses.consumptionBasedStrategies = consumptionBasedStrategies
+                copingStrategiesResponses.livelihoodBasedStrategies = livelihoodBasedStrategies
+
+                wealthGroupQuestionnaire.draft.copingStrategiesResponses = copingStrategiesResponses
+
+            }
+        }
+    }
+
+
+    fun populateDraftCopingStrategies() {
+        binding.apply {
+            wgCopingStrategies.apply {
+
+                wealthGroupQuestionnaire.draft.copingStrategiesResponses?.let {
+
+                    if (it.consumptionBasedStrategies.lessExpensiveFood != 0.0) {
+                        lessExpensiveFood.setText(it.consumptionBasedStrategies.lessExpensiveFood.toString())
+                    }
+                    if (it.consumptionBasedStrategies.reducedAdultFoodQuantity != 0.0) {
+                        reducedFoodQuantity.setText(it.consumptionBasedStrategies.reducedAdultFoodQuantity.toString())
+                    }
+                    if (it.consumptionBasedStrategies.borrowedFood != 0.0) {
+                        borrowedFood.setText(it.consumptionBasedStrategies.borrowedFood.toString())
+                    }
+                    if (it.consumptionBasedStrategies.reducedMealsPerDay != 0.0) {
+                        reducedNoMealsPerDay.setText(it.consumptionBasedStrategies.reducedMealsPerDay.toString())
+                    }
+                    if (it.consumptionBasedStrategies.reducedMealPortionSize != 0.0) {
+                        reducedMealPortionSize.setText(it.consumptionBasedStrategies.reducedMealPortionSize.toString())
+                    }
+
+                    if (it.livelihoodBasedStrategies.soldHouseHoldAssets != 0) {
+                        soldHouseHoldAssets.setText(it.livelihoodBasedStrategies.soldHouseHoldAssets.toString())
+                    }
+                    if (it.livelihoodBasedStrategies.reducedNonFoodExpense != 0) {
+                        reducedNonFoodExpenses.setText(it.livelihoodBasedStrategies.reducedNonFoodExpense.toString())
+                    }
+                    if (it.livelihoodBasedStrategies.soldProductiveAssets != 0) {
+                        soldProductiveAssets.setText(it.livelihoodBasedStrategies.soldProductiveAssets.toString())
+                    }
+                    if (it.livelihoodBasedStrategies.spentSavings != 0) {
+                        spentSavings.setText(it.livelihoodBasedStrategies.spentSavings.toString())
+                    }
+                    if (it.livelihoodBasedStrategies.borrowedMoneyFromLender != 0) {
+                        borrowedMoneyFromLender.setText(it.livelihoodBasedStrategies.borrowedMoneyFromLender.toString())
+                    }
+                    if (it.livelihoodBasedStrategies.soldHouseOrLand != 0) {
+                        soldHouseOrLand.setText(it.livelihoodBasedStrategies.soldHouseOrLand.toString())
+                    }
+                    if (it.livelihoodBasedStrategies.withdrewSchoolChildren != 0) {
+                        withdrewSchoolChildren.setText(it.livelihoodBasedStrategies.withdrewSchoolChildren.toString())
+                    }
+                    if (it.livelihoodBasedStrategies.soldFemaleAnimals != 0) {
+                        soldFemaleAnimals.setText(it.livelihoodBasedStrategies.soldFemaleAnimals.toString())
+                    }
+                    if (it.livelihoodBasedStrategies.begging != 0) {
+                        begging.setText(it.livelihoodBasedStrategies.begging.toString())
+                    }
+                    if (it.livelihoodBasedStrategies.soldMoreAnimals != 0) {
+                        soldMoreAnimals.setText(it.livelihoodBasedStrategies.soldMoreAnimals.toString())
+                    }
+
+                }
+
+            }
+        }
+    }
+
+    fun saveFgdParticipantsAsDraft() {
+        wealthGroupQuestionnaire.draft.fdgParticipantsModelList = fdgParticipantsModelList
     }
 
 }

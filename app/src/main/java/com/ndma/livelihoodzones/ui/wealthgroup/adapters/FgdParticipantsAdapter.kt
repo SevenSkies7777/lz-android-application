@@ -104,6 +104,25 @@ class FgdParticipantsAdapter(
             viewHolder.tvLevelOfEducation.text = returnEducationLevelString(currentParticipant)
             viewHolder.tvConsentToParticipate.text = if (currentParticipant.consentToParticipate == 1) "Consented" else  "Not consented"
             viewHolder.tvSelectAgeBand.text = returnAgeBandString(currentParticipant.age)
+
+            if (currentParticipant.gender == 0) {
+                viewHolder.tvGender.text = "Select gender..."
+            }
+            if (currentParticipant.disability == 0) {
+                viewHolder.tvDisability.text = "Has any disability..."
+            }
+            if (currentParticipant.disability == 0) {
+                viewHolder.tvDisability.text = "Disability?..."
+            }
+            if (currentParticipant.levelOfEducation == 0) {
+                viewHolder.tvLevelOfEducation.text = "Level of education..."
+            }
+            if (currentParticipant.consentToParticipate == 0) {
+                viewHolder.tvConsentToParticipate.text = "Consent to participate..."
+            }
+            if (currentParticipant.age == 0.0) {
+                viewHolder.tvSelectAgeBand.text = "Select age band..."
+            }
         }
 
         viewHolder.tvGender.setOnClickListener {
