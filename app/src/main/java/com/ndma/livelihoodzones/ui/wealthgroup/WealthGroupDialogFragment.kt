@@ -410,6 +410,7 @@ class WealthGroupDialogFragment : DialogFragment(),
 
     fun resumeConstraints() {
         binding.apply {
+            populateDraftConstraints()
             wgConstraints.root.visibility = View.VISIBLE
         }
     }
@@ -8374,6 +8375,13 @@ class WealthGroupDialogFragment : DialogFragment(),
             saveMigrationPatternsAsDraft()
         }
 
+        if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.CONSTRAINTS_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.CONSTRAINTS_STEP
+            )
+        ) {
+            saveConstraintsAsDraft()
+        }
+
 
     }
 
@@ -10110,6 +10118,529 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 }
 
+            }
+        }
+    }
+
+    fun saveConstraintsAsDraft() {
+        binding.apply {
+            wgConstraints.apply {
+
+                constraintResponses.wagedLabourIncomeConstraintsResponses =
+                    wagedLabourIncomeConstraintsResponses
+
+
+                constraintResponses.cropProductionIncomeConstraintsResponses =
+                    cropProductionIncomeConstraintsResponses
+
+
+                constraintResponses.livestockProductionIncomeConstraintsResponses =
+                    livestockProductionIncomeConstraintsResponses
+
+
+                constraintResponses.fishingIncomeConstraintsResponses =
+                    fishingIncomeConstraintsResponses
+
+
+                constraintResponses.naturalResourceIncomeConstraintsResponses =
+                    naturalResourceIncomeConstraintsResponses
+
+
+                constraintResponses.smallEnterpriseIncomeConstraintsResponses =
+                    smallEnterpriseIncomeConstraintsResponses
+
+                wealthGroupQuestionnaire.draft.constraintResponses = constraintResponses
+
+
+            }
+        }
+    }
+
+    fun populateDraftConstraints() {
+        binding.apply {
+            wgConstraints.apply {
+
+                wealthGroupQuestionnaire.draft.constraintResponses?.let {
+
+                    wagedLabourIncomeConstraintsResponses = it.wagedLabourIncomeConstraintsResponses
+                    cropProductionIncomeConstraintsResponses = it.cropProductionIncomeConstraintsResponses
+                    livestockProductionIncomeConstraintsResponses = it.livestockProductionIncomeConstraintsResponses
+                    fishingIncomeConstraintsResponses = it.fishingIncomeConstraintsResponses
+                    naturalResourceIncomeConstraintsResponses = it.naturalResourceIncomeConstraintsResponses
+                    smallEnterpriseIncomeConstraintsResponses = it.smallEnterpriseIncomeConstraintsResponses
+                    constraintResponses = it
+
+                    val usedIncomeSourceRanks: MutableList<RankResponseItem> = ArrayList()
+                    val usedIncomeConsumptionRanks: MutableList<RankResponseItem> = ArrayList()
+                    val usedLivestockProductionRanks: MutableList<RankResponseItem> = ArrayList()
+                    val usedFishingRanks: MutableList<RankResponseItem> = ArrayList()
+                    val usedNaturalResourceRanks: MutableList<RankResponseItem> = ArrayList()
+                    val usedSmallEnterpriesRanks: MutableList<RankResponseItem> = ArrayList()
+
+                    if (it.wagedLabourIncomeConstraintsResponses.lowEducation != -1) {
+                        labourLowEducation.setText(it.wagedLabourIncomeConstraintsResponses.lowEducation.toString())
+                        if (it.wagedLabourIncomeConstraintsResponses.lowEducation != 0) {
+                            usedIncomeSourceRanks.add(
+                                RankResponseItem(
+                                    it.wagedLabourIncomeConstraintsResponses.lowEducation,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.wagedLabourIncomeConstraintsResponses.poorHealth != -1) {
+                        labourPoorHealth.setText(it.wagedLabourIncomeConstraintsResponses.poorHealth.toString())
+                        if (it.wagedLabourIncomeConstraintsResponses.poorHealth != 0) {
+                            usedIncomeSourceRanks.add(
+                                RankResponseItem(
+                                    it.wagedLabourIncomeConstraintsResponses.poorHealth,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.wagedLabourIncomeConstraintsResponses.fewJobs != -1) {
+                        labourFewJobs.setText(it.wagedLabourIncomeConstraintsResponses.fewJobs.toString())
+                        if (it.wagedLabourIncomeConstraintsResponses.fewJobs != 0) {
+                            usedIncomeSourceRanks.add(
+                                RankResponseItem(
+                                    it.wagedLabourIncomeConstraintsResponses.fewJobs,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.wagedLabourIncomeConstraintsResponses.tooMuchFarmTime != -1) {
+                        labourFarmTime.setText(it.wagedLabourIncomeConstraintsResponses.tooMuchFarmTime.toString())
+                        if (it.wagedLabourIncomeConstraintsResponses.tooMuchFarmTime != 0) {
+                            usedIncomeSourceRanks.add(
+                                RankResponseItem(
+                                    it.wagedLabourIncomeConstraintsResponses.tooMuchFarmTime,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.wagedLabourIncomeConstraintsResponses.lowAverageWageRates != -1) {
+                        labourLowWageRates.setText(it.wagedLabourIncomeConstraintsResponses.lowAverageWageRates.toString())
+                        if (it.wagedLabourIncomeConstraintsResponses.lowAverageWageRates != 0) {
+                            usedIncomeSourceRanks.add(
+                                RankResponseItem(
+                                    it.wagedLabourIncomeConstraintsResponses.lowAverageWageRates,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    incomeSourceRanks.removeAll(usedIncomeSourceRanks)
+
+
+                    //Income consumption ranks
+
+                    if (it.cropProductionIncomeConstraintsResponses.smallLandHoldings != -1) {
+                        consumptionHoldings.setText(it.cropProductionIncomeConstraintsResponses.smallLandHoldings.toString())
+                        if (it.cropProductionIncomeConstraintsResponses.smallLandHoldings != 0) {
+                            usedIncomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    it.cropProductionIncomeConstraintsResponses.smallLandHoldings,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.cropProductionIncomeConstraintsResponses.lackOfCredit != -1) {
+                        consumptionLackOfCredit.setText(it.cropProductionIncomeConstraintsResponses.lackOfCredit.toString())
+                        if (it.cropProductionIncomeConstraintsResponses.lackOfCredit != 0) {
+                            usedIncomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    it.cropProductionIncomeConstraintsResponses.lackOfCredit,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.cropProductionIncomeConstraintsResponses.highInputCost != -1) {
+                        consumptionHighInputs.setText(it.cropProductionIncomeConstraintsResponses.highInputCost.toString())
+                        if (it.cropProductionIncomeConstraintsResponses.highInputCost != 0) {
+                            usedIncomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    it.cropProductionIncomeConstraintsResponses.highInputCost,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.cropProductionIncomeConstraintsResponses.lowLandFertility != -1) {
+                        consumptionLowFertility.setText(it.cropProductionIncomeConstraintsResponses.lowLandFertility.toString())
+                        if (it.cropProductionIncomeConstraintsResponses.lowLandFertility != 0) {
+                            usedIncomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    it.cropProductionIncomeConstraintsResponses.lowLandFertility,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.cropProductionIncomeConstraintsResponses.lackOfReliableWater != -1) {
+                        consumptionUnreliableWater.setText(it.cropProductionIncomeConstraintsResponses.lackOfReliableWater.toString())
+                        if (it.cropProductionIncomeConstraintsResponses.lackOfReliableWater != 0) {
+                            usedIncomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    it.cropProductionIncomeConstraintsResponses.lackOfReliableWater,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.cropProductionIncomeConstraintsResponses.lowTechnicalSkills != -1) {
+                        consumptionLowTechnicalSkills.setText(it.cropProductionIncomeConstraintsResponses.lowTechnicalSkills.toString())
+                        if (it.cropProductionIncomeConstraintsResponses.lowTechnicalSkills != 0) {
+                            usedIncomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    it.cropProductionIncomeConstraintsResponses.lowTechnicalSkills,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.cropProductionIncomeConstraintsResponses.lowQualitySeed != -1) {
+                        consumptionLowSeedQuality.setText(it.cropProductionIncomeConstraintsResponses.lowQualitySeed.toString())
+                        if (it.cropProductionIncomeConstraintsResponses.lowQualitySeed != 0) {
+                            usedIncomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    it.cropProductionIncomeConstraintsResponses.lowQualitySeed,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.cropProductionIncomeConstraintsResponses.lackOfMarketAccess != -1) {
+                        consumptionMarketAccess.setText(it.cropProductionIncomeConstraintsResponses.lackOfMarketAccess.toString())
+                        if (it.cropProductionIncomeConstraintsResponses.lackOfMarketAccess != 0) {
+                            usedIncomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    it.cropProductionIncomeConstraintsResponses.lackOfMarketAccess,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.cropProductionIncomeConstraintsResponses.endemicCropPests != -1) {
+                        consumptionCropPests.setText(it.cropProductionIncomeConstraintsResponses.endemicCropPests.toString())
+                        if (it.cropProductionIncomeConstraintsResponses.endemicCropPests != 0) {
+                            usedIncomeConsumptionRanks.add(
+                                RankResponseItem(
+                                    it.cropProductionIncomeConstraintsResponses.endemicCropPests,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    incomeConsumptionRanks.removeAll(usedIncomeConsumptionRanks)
+
+
+                    //Livestock production
+
+                    if (it.livestockProductionIncomeConstraintsResponses.lackOfPasture != -1) {
+                        livestockProductionPasture.setText(it.livestockProductionIncomeConstraintsResponses.lackOfPasture.toString())
+                        if (it.livestockProductionIncomeConstraintsResponses.lackOfPasture != 0) {
+                            usedLivestockProductionRanks.add(
+                                RankResponseItem(
+                                    it.livestockProductionIncomeConstraintsResponses.lackOfPasture,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater != -1) {
+                        livestockProductionDrinkingWater.setText(it.livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater.toString())
+                        if (it.livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater != 0) {
+                            usedLivestockProductionRanks.add(
+                                RankResponseItem(
+                                    it.livestockProductionIncomeConstraintsResponses.lackOfAnimalDrinkingWater,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.livestockProductionIncomeConstraintsResponses.lowYieldingAnimal != -1) {
+                        livestockProductionLowYieldingAnimal.setText(it.livestockProductionIncomeConstraintsResponses.lowYieldingAnimal.toString())
+                        if (it.livestockProductionIncomeConstraintsResponses.lowYieldingAnimal != 0) {
+                            usedLivestockProductionRanks.add(
+                                RankResponseItem(
+                                    it.livestockProductionIncomeConstraintsResponses.lowYieldingAnimal,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs != -1) {
+                        livestockProductionVeterinaryDrugs.setText(it.livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs.toString())
+                        if (it.livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs != 0) {
+                            usedLivestockProductionRanks.add(
+                                RankResponseItem(
+                                    it.livestockProductionIncomeConstraintsResponses.costlyVeterinaryDrugs,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases != -1) {
+                        livestockProductionPests.setText(it.livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases.toString())
+                        if (it.livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases != 0) {
+                            usedLivestockProductionRanks.add(
+                                RankResponseItem(
+                                    it.livestockProductionIncomeConstraintsResponses.livestockPestsAndDiseases,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.livestockProductionIncomeConstraintsResponses.lackofMarket != -1) {
+                        livestockProductionMarket.setText(it.livestockProductionIncomeConstraintsResponses.lackofMarket.toString())
+                        if (it.livestockProductionIncomeConstraintsResponses.lackofMarket != 0) {
+                            usedLivestockProductionRanks.add(
+                                RankResponseItem(
+                                    it.livestockProductionIncomeConstraintsResponses.lackofMarket,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.livestockProductionIncomeConstraintsResponses.insecurity != -1) {
+                        livestockProductionInsecurity.setText(it.livestockProductionIncomeConstraintsResponses.insecurity.toString())
+                        if (it.livestockProductionIncomeConstraintsResponses.insecurity != 0) {
+                            usedLivestockProductionRanks.add(
+                                RankResponseItem(
+                                    it.livestockProductionIncomeConstraintsResponses.insecurity,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+
+                    livestockProductionRanks.removeAll(usedLivestockProductionRanks)
+
+                    //Fishing constraints
+
+
+                    if (it.fishingIncomeConstraintsResponses.lowFishStocks != -1) {
+                        fishingLowStocks.setText(it.fishingIncomeConstraintsResponses.lowFishStocks.toString())
+                        if (it.fishingIncomeConstraintsResponses.lowFishStocks != 0) {
+                            usedFishingRanks.add(
+                                RankResponseItem(
+                                    it.fishingIncomeConstraintsResponses.lowFishStocks,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.fishingIncomeConstraintsResponses.poorMarket != -1) {
+                        fishingPoorMarket.setText(it.fishingIncomeConstraintsResponses.poorMarket.toString())
+                        if (it.fishingIncomeConstraintsResponses.poorMarket != 0) {
+                            usedFishingRanks.add(
+                                RankResponseItem(
+                                    it.fishingIncomeConstraintsResponses.poorMarket,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.fishingIncomeConstraintsResponses.lackOfEquipment != -1) {
+                        fishingLackOfEquipment.setText(it.fishingIncomeConstraintsResponses.lackOfEquipment.toString())
+                        if (it.fishingIncomeConstraintsResponses.lackOfEquipment != 0) {
+                            usedFishingRanks.add(
+                                RankResponseItem(
+                                    it.fishingIncomeConstraintsResponses.lackOfEquipment,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.fishingIncomeConstraintsResponses.extremeCompetition != -1) {
+                        fishingCompetition.setText(it.fishingIncomeConstraintsResponses.extremeCompetition.toString())
+                        if (it.fishingIncomeConstraintsResponses.extremeCompetition != 0) {
+                            usedFishingRanks.add(
+                                RankResponseItem(
+                                    it.fishingIncomeConstraintsResponses.extremeCompetition,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.fishingIncomeConstraintsResponses.lackOfExpertise != -1) {
+                        fishingLackOfExpertise.setText(it.fishingIncomeConstraintsResponses.lackOfExpertise.toString())
+                        if (it.fishingIncomeConstraintsResponses.lackOfExpertise != 0) {
+                            usedFishingRanks.add(
+                                RankResponseItem(
+                                    it.fishingIncomeConstraintsResponses.lackOfExpertise,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.fishingIncomeConstraintsResponses.fishingRightsRestrictions != -1) {
+                        fishingFishingRights.setText(it.fishingIncomeConstraintsResponses.fishingRightsRestrictions.toString())
+                        if (it.fishingIncomeConstraintsResponses.fishingRightsRestrictions != 0) {
+                            usedFishingRanks.add(
+                                RankResponseItem(
+                                    it.fishingIncomeConstraintsResponses.fishingRightsRestrictions,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    fishingRanks.removeAll(usedFishingRanks)
+
+
+                    //Natural resources constraint
+
+                    if (it.naturalResourceIncomeConstraintsResponses.decliningNaturalResources != -1) {
+                        resourceDecline.setText(it.naturalResourceIncomeConstraintsResponses.decliningNaturalResources.toString())
+                        if (it.naturalResourceIncomeConstraintsResponses.decliningNaturalResources != 0) {
+                            usedNaturalResourceRanks.add(
+                                RankResponseItem(
+                                    it.naturalResourceIncomeConstraintsResponses.decliningNaturalResources,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.naturalResourceIncomeConstraintsResponses.populationPressure != -1) {
+                        resourcePopulationPressure.setText(it.naturalResourceIncomeConstraintsResponses.populationPressure.toString())
+                        if (it.naturalResourceIncomeConstraintsResponses.populationPressure != 0) {
+                            usedNaturalResourceRanks.add(
+                                RankResponseItem(
+                                    it.naturalResourceIncomeConstraintsResponses.populationPressure,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights != -1) {
+                        resourceRights.setText(it.naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights.toString())
+                        if (it.naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights != 0) {
+                            usedNaturalResourceRanks.add(
+                                RankResponseItem(
+                                    it.naturalResourceIncomeConstraintsResponses.naturalresourceExploitationRights,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts != -1) {
+                        resourceLowValue.setText(it.naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts.toString())
+                        if (it.naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts != 0) {
+                            usedNaturalResourceRanks.add(
+                                RankResponseItem(
+                                    it.naturalResourceIncomeConstraintsResponses.lowValueNrBasedProducts,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    naturalResourceRanks.removeAll(usedNaturalResourceRanks)
+
+
+                    //Small enterprise constraints
+
+
+                    if (it.smallEnterpriseIncomeConstraintsResponses.lackOfCapital != -1) {
+                        enterpriseLackOfCapital.setText(it.smallEnterpriseIncomeConstraintsResponses.lackOfCapital.toString())
+                        if (it.smallEnterpriseIncomeConstraintsResponses.lackOfCapital != 0) {
+                            usedSmallEnterpriesRanks.add(
+                                RankResponseItem(
+                                    it.smallEnterpriseIncomeConstraintsResponses.lackOfCapital,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape != -1) {
+                        enterpriseRedTape.setText(it.smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape.toString())
+                        if (it.smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape != 0) {
+                            usedSmallEnterpriesRanks.add(
+                                RankResponseItem(
+                                    it.smallEnterpriseIncomeConstraintsResponses.tooMuchRedTape,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.smallEnterpriseIncomeConstraintsResponses.tooManyTaxes != -1) {
+                        enterpriseTaxes.setText(it.smallEnterpriseIncomeConstraintsResponses.tooManyTaxes.toString())
+                        if (it.smallEnterpriseIncomeConstraintsResponses.tooManyTaxes != 0) {
+                            usedSmallEnterpriesRanks.add(
+                                RankResponseItem(
+                                    it.smallEnterpriseIncomeConstraintsResponses.tooManyTaxes,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket != -1) {
+                        enterpriseMarketAccess.setText(it.smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket.toString())
+                        if (it.smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket != 0) {
+                            usedSmallEnterpriesRanks.add(
+                                RankResponseItem(
+                                    it.smallEnterpriseIncomeConstraintsResponses.lackOfAccessToMarket,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+                    if (it.smallEnterpriseIncomeConstraintsResponses.lackOfExpertise != -1) {
+                        enterpriseExpertise.setText(it.smallEnterpriseIncomeConstraintsResponses.lackOfExpertise.toString())
+                        if (it.smallEnterpriseIncomeConstraintsResponses.lackOfExpertise != 0) {
+                            usedSmallEnterpriesRanks.add(
+                                RankResponseItem(
+                                    it.smallEnterpriseIncomeConstraintsResponses.lackOfExpertise,
+                                    false
+                                )
+                            )
+                        }
+                    }
+
+
+                    smallEnterpriesRanks.removeAll(usedSmallEnterpriesRanks)
+
+
+                }
             }
         }
     }
