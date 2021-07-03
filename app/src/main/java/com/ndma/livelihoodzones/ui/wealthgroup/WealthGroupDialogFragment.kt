@@ -656,6 +656,89 @@ class WealthGroupDialogFragment : DialogFragment(),
                     wgIncomeAndFoodSources.root.isVisible = true
                 }
 
+                cNode.setOnClickListener {
+                    clearAllViews()
+                    populateCropSelectionSection()
+                    activity?.let {
+                        cNode.background =
+                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                    }
+                    cropSelectionLayout.root.isVisible = true
+                }
+
+                dNode.setOnClickListener {
+                    clearAllViews()
+                    populateLivestockAndPoultryOwnership()
+                    activity?.let {
+                        dNode.background =
+                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                    }
+                    wgLivestockPoultryNumbers.root.isVisible = true
+                }
+
+
+                eNode.setOnClickListener {
+                    clearAllViews()
+                    populateLabourPatterns()
+                    activity?.let {
+                        eNode.background =
+                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                    }
+                    wgLabourPatterns.root.isVisible = true
+                }
+
+                fNode.setOnClickListener {
+                    clearAllViews()
+                    populateExpenditurePatterns()
+                    activity?.let {
+                        fNode.background =
+                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                    }
+                    wgExpenditurePatterns.root.isVisible = true
+                }
+
+                gNode.setOnClickListener {
+                    clearAllViews()
+                    populateSettlementAndMigration()
+                    activity?.let {
+                        gNode.background =
+                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                    }
+                    wgMigrationPatterns.root.isVisible = true
+                }
+
+                hNode.setOnClickListener {
+                    clearAllViews()
+                    populateConstraints()
+                    activity?.let {
+                        hNode.background =
+                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                    }
+                    wgConstraints.root.isVisible = true
+                }
+
+
+                iNode.setOnClickListener {
+                    clearAllViews()
+                    populateCopingStrategies()
+                    activity?.let {
+                        iNode.background =
+                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                    }
+                    wgCopingStrategies.root.isVisible = true
+                }
+
+
+                jNode.setOnClickListener {
+                    clearAllViews()
+                    populateFgdParticipants()
+                    activity?.let {
+                        jNode.background =
+                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                    }
+                    fdgParticipants.root.isVisible = true
+                }
+
             }
 
             /*Income and food sources navigation*/
