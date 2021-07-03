@@ -648,7 +648,17 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 bNode.setOnClickListener {
                     clearAllViews()
-                    populateMainSourcesIncomeAndfood()
+                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP
+                        )
+                    ) {
+                        populateMainSourcesIncomeAndfood()
+                    } else {
+                        wealthGroupQuestionnaire.draft.incomeAndFoodSourceResponses?.let {
+                            populateIncomeAndFoodSourcesDraft()
+                        }
+                    }
+
                     activity?.let {
                         bNode.background =
                             it.resources.getDrawable(R.drawable.bg_current_page_node, null)
@@ -658,7 +668,15 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 cNode.setOnClickListener {
                     clearAllViews()
-                    populateCropSelectionSection()
+
+                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.WG_CROP_SELECTION_STEP
+                        )
+                    ) {
+                        populateCropSelectionSection()
+                    } else {
+                        prepareCropSelectionListView()
+                    }
                     activity?.let {
                         cNode.background =
                             it.resources.getDrawable(R.drawable.bg_current_page_node, null)
@@ -668,7 +686,17 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 dNode.setOnClickListener {
                     clearAllViews()
-                    populateLivestockAndPoultryOwnership()
+                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.LIVESTOCK_POULTRY_NUMBERS_STEP
+                        )
+                    ) {
+                        populateLivestockAndPoultryOwnership()
+                    } else {
+                        wealthGroupQuestionnaire.draft.livestockPoultryOwnershipResponses?.let {
+                            populateDraftNoAnimals()
+                        }
+                    }
+
                     activity?.let {
                         dNode.background =
                             it.resources.getDrawable(R.drawable.bg_current_page_node, null)
@@ -679,7 +707,17 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 eNode.setOnClickListener {
                     clearAllViews()
-                    populateLabourPatterns()
+                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.LABOUR_PATTERNS_STEP
+                        )
+                    ) {
+                        populateLabourPatterns()
+                    } else {
+                        wealthGroupQuestionnaire.draft.labourPatternResponse?.let {
+                            populateDraftLabourPatterns()
+                        }
+                    }
+
                     activity?.let {
                         eNode.background =
                             it.resources.getDrawable(R.drawable.bg_current_page_node, null)
@@ -689,7 +727,17 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 fNode.setOnClickListener {
                     clearAllViews()
-                    populateExpenditurePatterns()
+                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.EXPENDITURE_PATTERNS_STEP
+                        )
+                    ) {
+                        populateExpenditurePatterns()
+                    } else {
+                        wealthGroupQuestionnaire.draft.expenditurePatternsResponses?.let {
+                            populateDraftExpenditurePatterns()
+                        }
+                    }
+
                     activity?.let {
                         fNode.background =
                             it.resources.getDrawable(R.drawable.bg_current_page_node, null)
@@ -699,7 +747,17 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 gNode.setOnClickListener {
                     clearAllViews()
-                    populateSettlementAndMigration()
+                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.MIGRATION_PATTERNS_STEP
+                        )
+                    ) {
+                        populateSettlementAndMigration()
+                    } else {
+                        wealthGroupQuestionnaire.draft.migrationPatternResponses?.let {
+                            populateDraftMigrationPatterns()
+                        }
+                    }
+
                     activity?.let {
                         gNode.background =
                             it.resources.getDrawable(R.drawable.bg_current_page_node, null)
@@ -709,7 +767,17 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 hNode.setOnClickListener {
                     clearAllViews()
-                    populateConstraints()
+                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.CONSTRAINTS_STEP
+                        )
+                    ) {
+                        populateConstraints()
+                    } else {
+                        wealthGroupQuestionnaire.draft.constraintResponses?.let {
+                            populateDraftConstraints()
+                        }
+                    }
+
                     activity?.let {
                         hNode.background =
                             it.resources.getDrawable(R.drawable.bg_current_page_node, null)
@@ -720,7 +788,17 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 iNode.setOnClickListener {
                     clearAllViews()
-                    populateCopingStrategies()
+                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.COPING_STRATEGIES_STEP
+                        )
+                    ) {
+                        populateCopingStrategies()
+                    } else {
+                        wealthGroupQuestionnaire.draft.copingStrategiesResponses?.let {
+                            populateDraftCopingStrategies()
+                        }
+                    }
+
                     activity?.let {
                         iNode.background =
                             it.resources.getDrawable(R.drawable.bg_current_page_node, null)
@@ -731,7 +809,13 @@ class WealthGroupDialogFragment : DialogFragment(),
 
                 jNode.setOnClickListener {
                     clearAllViews()
-                    populateFgdParticipants()
+                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.FGD_PARTICIPANTS_STEP
+                        )
+                    ) {
+                        populateFgdParticipants()
+                    }
+
                     activity?.let {
                         jNode.background =
                             it.resources.getDrawable(R.drawable.bg_current_page_node, null)
