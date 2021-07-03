@@ -11,4 +11,5 @@
     <color name="red_shade">#f8e0df</color>
     <color name="blue_shade">#5803A9F4</color>
     <color name="ready_status">#0091ff</color>
+    <color name="clickable_nav_bar_node">#FF3F51B5</color>
 </resources>

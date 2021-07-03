@@ -454,6 +454,177 @@ class WealthGroupDialogFragment : DialogFragment(),
         return 2
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    fun clearAllViews() {
+        binding.apply {
+            wgIncomeAndFoodSources.root.isVisible = false
+            wgPercentFoodConsumptionIncome.root.isVisible = false
+            cropSelectionLayout.root.isVisible = false
+            cropProductionLayout.root.isVisible = false
+            wgLivestockPoultryNumbers.root.isVisible = false
+            wgLivestockPoultryContribution.root.isVisible = false
+            wgLabourPatterns.root.isVisible = false
+            wgExpenditurePatterns.root.isVisible = false
+            wgMigrationPatterns.root.isVisible = false
+            wgConstraints.root.isVisible = false
+            wgCopingStrategies.root.isVisible = false
+            fdgParticipants.root.isVisible = false
+            wgCompletionPage.root.isVisible = false
+        }
+        resetTopNavNodesColourCodes()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    fun resetTopNavNodesColourCodes() {
+        binding.apply {
+            topNavBar.apply {
+                activity?.let {
+
+                    //B
+                    bNode.background =
+                        it.resources.getDrawable(R.drawable.bg_already_visited_top_nav_node, null)
+
+
+                    //C
+                    if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.WG_CROP_SELECTION_STEP || hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.WG_CROP_SELECTION_STEP
+                        )
+                    ) {
+                        cNode.background = it.resources.getDrawable(
+                            R.drawable.bg_already_visited_top_nav_node,
+                            null
+                        )
+                        cNode.setTextColor(it.resources.getColor(R.color.white,null))
+                    } else {
+                        cNode.background =
+                            it.resources.getDrawable(R.drawable.bg_not_visited_top_nav_node, null)
+                        cNode.setTextColor(it.resources.getColor(R.color.black,null))
+                    }
+
+
+                    //D
+                    if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.LIVESTOCK_POULTRY_NUMBERS_STEP || hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.LIVESTOCK_POULTRY_NUMBERS_STEP
+                        )
+                    ) {
+                        dNode.background = it.resources.getDrawable(
+                            R.drawable.bg_already_visited_top_nav_node,
+                            null
+                        )
+                        dNode.setTextColor(it.resources.getColor(R.color.white,null))
+                    } else {
+                        dNode.background =
+                            it.resources.getDrawable(R.drawable.bg_not_visited_top_nav_node, null)
+                        dNode.setTextColor(it.resources.getColor(R.color.black,null))
+                    }
+
+
+                    //E
+                    if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.LABOUR_PATTERNS_STEP || hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.LABOUR_PATTERNS_STEP
+                        )
+                    ) {
+                        eNode.background = it.resources.getDrawable(
+                            R.drawable.bg_already_visited_top_nav_node,
+                            null
+                        )
+                        eNode.setTextColor(it.resources.getColor(R.color.white,null))
+                    } else {
+                        eNode.background =
+                            it.resources.getDrawable(R.drawable.bg_not_visited_top_nav_node, null)
+                        eNode.setTextColor(it.resources.getColor(R.color.black,null))
+                    }
+
+
+                    //F
+                    if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.EXPENDITURE_PATTERNS_STEP || hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.EXPENDITURE_PATTERNS_STEP
+                        )
+                    ) {
+                        fNode.background = it.resources.getDrawable(
+                            R.drawable.bg_already_visited_top_nav_node,
+                            null
+                        )
+                        fNode.setTextColor(it.resources.getColor(R.color.white,null))
+                    } else {
+                        fNode.background =
+                            it.resources.getDrawable(R.drawable.bg_not_visited_top_nav_node, null)
+                        fNode.setTextColor(it.resources.getColor(R.color.black,null))
+                    }
+
+
+                    //G
+                    if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.MIGRATION_PATTERNS_STEP || hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.MIGRATION_PATTERNS_STEP
+                        )
+                    ) {
+                        gNode.background = it.resources.getDrawable(
+                            R.drawable.bg_already_visited_top_nav_node,
+                            null
+                        )
+                        gNode.setTextColor(it.resources.getColor(R.color.white,null))
+                    } else {
+                        gNode.background =
+                            it.resources.getDrawable(R.drawable.bg_not_visited_top_nav_node, null)
+                        gNode.setTextColor(it.resources.getColor(R.color.black,null))
+                    }
+
+
+                    //H
+                    if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.CONSTRAINTS_STEP || hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.CONSTRAINTS_STEP
+                        )
+                    ) {
+                        hNode.background = it.resources.getDrawable(
+                            R.drawable.bg_already_visited_top_nav_node,
+                            null
+                        )
+                        hNode.setTextColor(it.resources.getColor(R.color.white,null))
+                    } else {
+                        hNode.background =
+                            it.resources.getDrawable(R.drawable.bg_not_visited_top_nav_node, null)
+                        hNode.setTextColor(it.resources.getColor(R.color.black,null))
+                    }
+
+
+                    //I
+                    if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.COPING_STRATEGIES_STEP || hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.COPING_STRATEGIES_STEP
+                        )
+                    ) {
+                        iNode.background = it.resources.getDrawable(
+                            R.drawable.bg_already_visited_top_nav_node,
+                            null
+                        )
+                        iNode.setTextColor(it.resources.getColor(R.color.white,null))
+                    } else {
+                        iNode.background =
+                            it.resources.getDrawable(R.drawable.bg_not_visited_top_nav_node, null)
+                        iNode.setTextColor(it.resources.getColor(R.color.black,null))
+                    }
+
+
+                    //J
+                    if (wealthGroupQuestionnaire.lastQuestionnaireStep == Constants.FGD_PARTICIPANTS_STEP || hasUserGoneBeyondCurrentQuestionnaireStep(
+                            Constants.FGD_PARTICIPANTS_STEP
+                        )
+                    ) {
+                        jNode.background = it.resources.getDrawable(
+                            R.drawable.bg_already_visited_top_nav_node,
+                            null
+                        )
+                        jNode.setTextColor(it.resources.getColor(R.color.white,null))
+                    } else {
+                        jNode.background =
+                            it.resources.getDrawable(R.drawable.bg_not_visited_top_nav_node, null)
+                        jNode.setTextColor(it.resources.getColor(R.color.black,null))
+                    }
+
+                }
+            }
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun defineNavigation() {
         if (!isAResumeQuestionnaire) {
@@ -468,7 +639,24 @@ class WealthGroupDialogFragment : DialogFragment(),
             }
         }
 
+        resetTopNavNodesColourCodes()
+
         binding.apply {
+
+
+            topNavBar.apply {
+
+                bNode.setOnClickListener {
+                    clearAllViews()
+                    populateMainSourcesIncomeAndfood()
+                    activity?.let {
+                        bNode.background =
+                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                    }
+                    wgIncomeAndFoodSources.root.isVisible = true
+                }
+
+            }
 
             /*Income and food sources navigation*/
             wgIncomeAndFoodSources.apply {
@@ -7420,7 +7608,8 @@ class WealthGroupDialogFragment : DialogFragment(),
             fdgParticipants.apply {
                 fdgParticipantsModelList = wealthGroupQuestionnaire.fdgParticipants
                 if (fdgParticipantsModelList.isEmpty()) {
-                    fdgParticipantsModelList = wealthGroupQuestionnaire.draft.fdgParticipantsModelList
+                    fdgParticipantsModelList =
+                        wealthGroupQuestionnaire.draft.fdgParticipantsModelList
                 }
                 val fgdParticipantAdapter = activity?.let { it1 ->
                     FgdParticipantsAdapter(
@@ -10183,11 +10372,15 @@ class WealthGroupDialogFragment : DialogFragment(),
                 wealthGroupQuestionnaire.draft.constraintResponses?.let {
 
                     wagedLabourIncomeConstraintsResponses = it.wagedLabourIncomeConstraintsResponses
-                    cropProductionIncomeConstraintsResponses = it.cropProductionIncomeConstraintsResponses
-                    livestockProductionIncomeConstraintsResponses = it.livestockProductionIncomeConstraintsResponses
+                    cropProductionIncomeConstraintsResponses =
+                        it.cropProductionIncomeConstraintsResponses
+                    livestockProductionIncomeConstraintsResponses =
+                        it.livestockProductionIncomeConstraintsResponses
                     fishingIncomeConstraintsResponses = it.fishingIncomeConstraintsResponses
-                    naturalResourceIncomeConstraintsResponses = it.naturalResourceIncomeConstraintsResponses
-                    smallEnterpriseIncomeConstraintsResponses = it.smallEnterpriseIncomeConstraintsResponses
+                    naturalResourceIncomeConstraintsResponses =
+                        it.naturalResourceIncomeConstraintsResponses
+                    smallEnterpriseIncomeConstraintsResponses =
+                        it.smallEnterpriseIncomeConstraintsResponses
                     constraintResponses = it
 
                     val usedIncomeSourceRanks: MutableList<RankResponseItem> = ArrayList()
