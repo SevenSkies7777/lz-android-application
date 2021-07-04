@@ -289,6 +289,12 @@ class WealthGroupDialogFragment : DialogFragment(),
         }
     }
 
+    fun currentSectionHasNotBeenReachedOrPassed(currentStep: Int): Boolean {
+        return wealthGroupQuestionnaire.lastQuestionnaireStep != currentStep && !hasUserGoneBeyondCurrentQuestionnaireStep(
+            currentStep
+        )
+    }
+
     fun determineTheResumeStep() {
         when (determineTheFurthestCoveredStep(wealthGroupQuestionnaire.questionnaireCoveredSteps)) {
             Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP -> {
@@ -717,180 +723,198 @@ class WealthGroupDialogFragment : DialogFragment(),
             topNavBar.apply {
 
                 bNode.setOnClickListener {
-                    clearAllViews()
-                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
-                            Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP
-                        )
-                    ) {
-                        populateMainSourcesIncomeAndfood()
-                    } else {
-                        wealthGroupQuestionnaire.draft.incomeAndFoodSourceResponses?.let {
-                            populateIncomeAndFoodSourcesDraft()
+                    if (!currentSectionHasNotBeenReachedOrPassed(Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP)) {
+                        clearAllViews()
+                        if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                                Constants.MAIN_INCOME_AND_FOOD_SOURCE_STEP
+                            )
+                        ) {
+                            populateMainSourcesIncomeAndfood()
+                        } else {
+                            wealthGroupQuestionnaire.draft.incomeAndFoodSourceResponses?.let {
+                                populateIncomeAndFoodSourcesDraft()
+                            }
                         }
-                    }
 
-                    activity?.let {
-                        bNode.background =
-                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        activity?.let {
+                            bNode.background =
+                                it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        }
+                        wgIncomeAndFoodSources.root.isVisible = true
                     }
-                    wgIncomeAndFoodSources.root.isVisible = true
                 }
 
                 cNode.setOnClickListener {
-                    clearAllViews()
+                    if (!currentSectionHasNotBeenReachedOrPassed(Constants.WG_CROP_SELECTION_STEP)) {
+                        clearAllViews()
 
-                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
-                            Constants.WG_CROP_SELECTION_STEP
-                        )
-                    ) {
-                        populateCropSelectionSection()
-                    } else {
-                        prepareCropSelectionListView()
+                        if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                                Constants.WG_CROP_SELECTION_STEP
+                            )
+                        ) {
+                            populateCropSelectionSection()
+                        } else {
+                            prepareCropSelectionListView()
+                        }
+                        activity?.let {
+                            cNode.background =
+                                it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        }
+                        cropSelectionLayout.root.isVisible = true
                     }
-                    activity?.let {
-                        cNode.background =
-                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
-                    }
-                    cropSelectionLayout.root.isVisible = true
                 }
 
                 dNode.setOnClickListener {
-                    clearAllViews()
-                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
-                            Constants.LIVESTOCK_POULTRY_NUMBERS_STEP
-                        )
-                    ) {
-                        populateLivestockAndPoultryOwnership()
-                    } else {
-                        wealthGroupQuestionnaire.draft.livestockPoultryOwnershipResponses?.let {
-                            populateDraftNoAnimals()
+                    if (!currentSectionHasNotBeenReachedOrPassed(Constants.LIVESTOCK_POULTRY_NUMBERS_STEP)) {
+                        clearAllViews()
+                        if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                                Constants.LIVESTOCK_POULTRY_NUMBERS_STEP
+                            )
+                        ) {
+                            populateLivestockAndPoultryOwnership()
+                        } else {
+                            wealthGroupQuestionnaire.draft.livestockPoultryOwnershipResponses?.let {
+                                populateDraftNoAnimals()
+                            }
                         }
-                    }
 
-                    activity?.let {
-                        dNode.background =
-                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        activity?.let {
+                            dNode.background =
+                                it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        }
+                        wgLivestockPoultryNumbers.root.isVisible = true
                     }
-                    wgLivestockPoultryNumbers.root.isVisible = true
                 }
 
 
                 eNode.setOnClickListener {
-                    clearAllViews()
-                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
-                            Constants.LABOUR_PATTERNS_STEP
-                        )
-                    ) {
-                        populateLabourPatterns()
-                    } else {
-                        wealthGroupQuestionnaire.draft.labourPatternResponse?.let {
-                            populateDraftLabourPatterns()
+                    if (!currentSectionHasNotBeenReachedOrPassed(Constants.LABOUR_PATTERNS_STEP)) {
+                        clearAllViews()
+                        if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                                Constants.LABOUR_PATTERNS_STEP
+                            )
+                        ) {
+                            populateLabourPatterns()
+                        } else {
+                            wealthGroupQuestionnaire.draft.labourPatternResponse?.let {
+                                populateDraftLabourPatterns()
+                            }
                         }
-                    }
 
-                    activity?.let {
-                        eNode.background =
-                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        activity?.let {
+                            eNode.background =
+                                it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        }
+                        wgLabourPatterns.root.isVisible = true
                     }
-                    wgLabourPatterns.root.isVisible = true
                 }
 
                 fNode.setOnClickListener {
-                    clearAllViews()
-                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
-                            Constants.EXPENDITURE_PATTERNS_STEP
-                        )
-                    ) {
-                        populateExpenditurePatterns()
-                    } else {
-                        wealthGroupQuestionnaire.draft.expenditurePatternsResponses?.let {
-                            populateDraftExpenditurePatterns()
+                    if (!currentSectionHasNotBeenReachedOrPassed(Constants.EXPENDITURE_PATTERNS_STEP)) {
+                        clearAllViews()
+                        if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                                Constants.EXPENDITURE_PATTERNS_STEP
+                            )
+                        ) {
+                            populateExpenditurePatterns()
+                        } else {
+                            wealthGroupQuestionnaire.draft.expenditurePatternsResponses?.let {
+                                populateDraftExpenditurePatterns()
+                            }
                         }
-                    }
 
-                    activity?.let {
-                        fNode.background =
-                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        activity?.let {
+                            fNode.background =
+                                it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        }
+                        wgExpenditurePatterns.root.isVisible = true
                     }
-                    wgExpenditurePatterns.root.isVisible = true
                 }
 
                 gNode.setOnClickListener {
-                    clearAllViews()
-                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
-                            Constants.MIGRATION_PATTERNS_STEP
-                        )
-                    ) {
-                        populateSettlementAndMigration()
-                    } else {
-                        wealthGroupQuestionnaire.draft.migrationPatternResponses?.let {
-                            populateDraftMigrationPatterns()
+                    if (!currentSectionHasNotBeenReachedOrPassed(Constants.MIGRATION_PATTERNS_STEP)) {
+                        clearAllViews()
+                        if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                                Constants.MIGRATION_PATTERNS_STEP
+                            )
+                        ) {
+                            populateSettlementAndMigration()
+                        } else {
+                            wealthGroupQuestionnaire.draft.migrationPatternResponses?.let {
+                                populateDraftMigrationPatterns()
+                            }
                         }
-                    }
 
-                    activity?.let {
-                        gNode.background =
-                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        activity?.let {
+                            gNode.background =
+                                it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        }
+                        wgMigrationPatterns.root.isVisible = true
                     }
-                    wgMigrationPatterns.root.isVisible = true
                 }
 
                 hNode.setOnClickListener {
-                    clearAllViews()
-                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
-                            Constants.CONSTRAINTS_STEP
-                        )
-                    ) {
-                        populateConstraints()
-                    } else {
-                        wealthGroupQuestionnaire.draft.constraintResponses?.let {
-                            populateDraftConstraints()
+                    if (!currentSectionHasNotBeenReachedOrPassed(Constants.CONSTRAINTS_STEP)) {
+                        clearAllViews()
+                        if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                                Constants.CONSTRAINTS_STEP
+                            )
+                        ) {
+                            populateConstraints()
+                        } else {
+                            wealthGroupQuestionnaire.draft.constraintResponses?.let {
+                                populateDraftConstraints()
+                            }
                         }
-                    }
 
-                    activity?.let {
-                        hNode.background =
-                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        activity?.let {
+                            hNode.background =
+                                it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        }
+                        wgConstraints.root.isVisible = true
                     }
-                    wgConstraints.root.isVisible = true
                 }
 
 
                 iNode.setOnClickListener {
-                    clearAllViews()
-                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
-                            Constants.COPING_STRATEGIES_STEP
-                        )
-                    ) {
-                        populateCopingStrategies()
-                    } else {
-                        wealthGroupQuestionnaire.draft.copingStrategiesResponses?.let {
-                            populateDraftCopingStrategies()
+                    if (!currentSectionHasNotBeenReachedOrPassed(Constants.COPING_STRATEGIES_STEP)) {
+                        clearAllViews()
+                        if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                                Constants.COPING_STRATEGIES_STEP
+                            )
+                        ) {
+                            populateCopingStrategies()
+                        } else {
+                            wealthGroupQuestionnaire.draft.copingStrategiesResponses?.let {
+                                populateDraftCopingStrategies()
+                            }
                         }
-                    }
 
-                    activity?.let {
-                        iNode.background =
-                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        activity?.let {
+                            iNode.background =
+                                it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        }
+                        wgCopingStrategies.root.isVisible = true
                     }
-                    wgCopingStrategies.root.isVisible = true
                 }
 
 
                 jNode.setOnClickListener {
-                    clearAllViews()
-                    if (hasUserGoneBeyondCurrentQuestionnaireStep(
-                            Constants.FGD_PARTICIPANTS_STEP
-                        )
-                    ) {
-                        populateFgdParticipants()
-                    }
+                    if (!currentSectionHasNotBeenReachedOrPassed(Constants.FGD_PARTICIPANTS_STEP)) {
+                        clearAllViews()
+                        if (hasUserGoneBeyondCurrentQuestionnaireStep(
+                                Constants.FGD_PARTICIPANTS_STEP
+                            )
+                        ) {
+                            populateFgdParticipants()
+                        }
 
-                    activity?.let {
-                        jNode.background =
-                            it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        activity?.let {
+                            jNode.background =
+                                it.resources.getDrawable(R.drawable.bg_current_page_node, null)
+                        }
+                        fdgParticipants.root.isVisible = true
                     }
-                    fdgParticipants.root.isVisible = true
                 }
 
             }
@@ -6299,7 +6323,9 @@ class WealthGroupDialogFragment : DialogFragment(),
                             updateCurrentQuestionnaireToStore()
 
                             if (hasUserGoneBeyondCurrentQuestionnaireStep(Constants.COPING_STRATEGIES_STEP)) {
-                                populateFgdParticipants()
+                                if (wealthGroupQuestionnaire.fdgParticipants.isNotEmpty() || wealthGroupQuestionnaire.draft.fdgParticipantsModelList.isNotEmpty()) {
+                                    populateFgdParticipants()
+                                }
                             }
                             clearAllViews()
                             activity?.let {
@@ -6383,6 +6409,8 @@ class WealthGroupDialogFragment : DialogFragment(),
                     }
 
                     updateCurrentQuestionnaireToStore()
+
+                    wealthGroupQuestionnaire.draft.fdgParticipantsModelList = ArrayList()
 
                     fdgParticipants.root.visibility = View.GONE
                     wgCompletionPage.root.visibility = View.VISIBLE
