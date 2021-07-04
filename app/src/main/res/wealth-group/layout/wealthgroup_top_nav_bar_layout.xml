@@ -7,8 +7,14 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:layout_weight="1">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/bNode"
@@ -22,13 +28,26 @@
             android:text="B"
             android:gravity="center"/>
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:layout_weight="1">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
 
         <TextView
             android:id="@+id/cNode"
@@ -42,13 +61,26 @@
             android:text="C"
             android:gravity="center"/>
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:layout_weight="1">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
 
         <TextView
             android:id="@+id/dNode"
@@ -62,13 +94,26 @@
             android:text="D"
             android:gravity="center"/>
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:layout_weight="1">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
 
         <TextView
             android:id="@+id/eNode"
@@ -82,13 +127,26 @@
             android:text="E"
             android:gravity="center"/>
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:layout_weight="1">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
 
         <TextView
             android:id="@+id/fNode"
@@ -102,13 +160,26 @@
             android:text="F"
             android:gravity="center"/>
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:layout_weight="1">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
 
         <TextView
             android:id="@+id/gNode"
@@ -122,13 +193,26 @@
             android:text="G"
             android:gravity="center"/>
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:layout_weight="1">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
 
         <TextView
             android:id="@+id/hNode"
@@ -142,13 +226,26 @@
             android:text="H"
             android:gravity="center"/>
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:layout_weight="1">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
 
         <TextView
             android:id="@+id/iNode"
@@ -162,13 +259,26 @@
             android:text="I"
             android:gravity="center"/>
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:layout_weight="1">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#dedede"/>
 
         <TextView
             android:id="@+id/jNode"
@@ -181,6 +291,11 @@
             android:textSize="18sp"
             android:text="J"
             android:gravity="center"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
 
     </LinearLayout>
 
