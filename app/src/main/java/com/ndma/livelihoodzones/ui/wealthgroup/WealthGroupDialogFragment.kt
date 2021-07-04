@@ -534,7 +534,8 @@ class WealthGroupDialogFragment : DialogFragment(),
         resetTopNavNodesColourCodes()
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+
+    @RequiresApi(Build.VERSION_CODES.M)
     fun resetTopNavNodesColourCodes() {
         binding.apply {
             topNavBar.apply {
@@ -2581,12 +2582,17 @@ class WealthGroupDialogFragment : DialogFragment(),
                         if (determineTheFurthestCoveredStep(wealthGroupQuestionnaire.questionnaireCoveredSteps) < Constants.WG_CROP_PRODUCTION_STEP) {
                             prepareCropProduction()
                         } else {
-                            updateCropProductionPage(
-                                processUpdatedCropProductionresponses(
-                                    wealthGroupQuestionnaire.selectedCrops,
-                                    wealthGroupQuestionnaire.cropContributionResponseItems
+
+                            if (AppStore.getInstance().newlySelectedCrops.isEmpty()) {
+                                populateCropProduction()
+                            } else {
+                                updateCropProductionPage(
+                                    processUpdatedCropProductionresponses(
+                                        wealthGroupQuestionnaire.selectedCrops,
+                                        wealthGroupQuestionnaire.cropContributionResponseItems
+                                    )
                                 )
-                            )
+                            }
                         }
 
                         wealthGroupQuestionnaire.lastQuestionnaireStep =
@@ -4646,7 +4652,7 @@ class WealthGroupDialogFragment : DialogFragment(),
                     populateExpenditurePatterns()
                     clearAllViews()
                     activity?.let {
-                        topNavBar.gNode.background =
+                        topNavBar.fNode.background =
                             it.resources.getDrawable(R.drawable.bg_current_page_node, null)
                     }
                     wgExpenditurePatterns.root.visibility = View.VISIBLE
