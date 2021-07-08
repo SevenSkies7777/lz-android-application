@@ -24,14 +24,14 @@ class ZonalCropProductionAdapter(
     val context: Context,
     val resource: Int,
     val responseItems: MutableList<WgCropProductionResponseItem>,
-    val cropProductionListAdapterCallBack: CropProductionListAdapter.CropProductionListAdapterCallBack,
+    val zonalCropProductionAdapterCallBack: ZonalCropProductionAdapter.ZonalCropProductionAdapterCallBack,
     val isAResume: Boolean
 ) : RecyclerView.Adapter<ZonalCropProductionAdapter.ViewHolder>() {
 
     private var errorDialog: android.app.AlertDialog? = null
 
-    interface CropProductionListAdapterCallBack {
-        fun onCropProductionResponseItemSubmited(
+    interface ZonalCropProductionAdapterCallBack {
+        fun onZoneLevelCropProductionResponseItemSubmited(
             responseItem: WgCropProductionResponseItem,
             position: Int
         )
@@ -61,7 +61,7 @@ class ZonalCropProductionAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.simple_list_item_layout, viewGroup, false)
+            .inflate(R.layout.crop_cultivation_item, viewGroup, false)
 
         return ViewHolder(view)
     }
@@ -159,12 +159,12 @@ class ZonalCropProductionAdapter(
                         }
                     }
 
-                    cropProductionListAdapterCallBack.onCropProductionResponseItemSubmited(
+                    zonalCropProductionAdapterCallBack.onZoneLevelCropProductionResponseItemSubmited(
                         currentResponseItem,
                         position
                     )
 
-                }, 1000)
+                }, 500)
             }
 
             override fun beforeTextChanged(
