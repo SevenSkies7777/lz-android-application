@@ -10,5 +10,6 @@ enum class MarketCountySelectionEnum {
     MARKET_SEVEN,
     MARKET_EIGHT,
     MARKET_NINE,
-    MARKET_TEN
+    MARKET_TEN,
+    DYNAMIC
 }

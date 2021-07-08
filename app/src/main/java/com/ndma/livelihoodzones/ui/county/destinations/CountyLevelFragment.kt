@@ -23,6 +23,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -79,7 +80,8 @@ class CountyLevelFragment : DialogFragment(),
     SubLocationZoneAssignmentAdapter.SubLocationZoneAssignmentAdapterCallBack,
     LandPreparationSeasonAdapter.LandPreparationSeasonAdapterCallBack,
     PlantingSeasonAdapter.PlantingSeasonAdapterCallBack,
-    HarvestingSeasonsAdapter.HarvestingSeasonsAdapterCallBack {
+    HarvestingSeasonsAdapter.HarvestingSeasonsAdapterCallBack,
+    MarketConfigurationAdapter.MarketConfigurationAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -376,7 +378,12 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeMarkets() {
         binding.apply {
-            marketGeographyConfiguration.root.visibility = View.VISIBLE
+            lzMarketConfiguration.apply {
+                if (countyLevelQuestionnaire.marketTransactionItems.isNotEmpty()) {
+                    populateMarketConfiguration()
+                }
+            }
+            lzMarketConfiguration.root.visibility = View.VISIBLE
         }
     }
 
@@ -1564,7 +1571,7 @@ class CountyLevelFragment : DialogFragment(),
 
                             updateCurrentQuestionnaireToStore()
                             mainWaterSource.root.visibility = View.GONE
-                            marketGeographyConfiguration.root.visibility = View.VISIBLE
+                            lzMarketConfiguration.root.visibility = View.VISIBLE
 
                         } else if (wetSeasonTotalEntry < 100) {
                             inflateErrorModal(
@@ -1583,12 +1590,102 @@ class CountyLevelFragment : DialogFragment(),
             }
 
 
-            /* Market serving the livelihoodzone */
+            //New market configuration
+            lzMarketConfiguration.apply {
+
+
+                submitButton.setOnClickListener {
+                    if (noMarkets.text.toString().isNotEmpty()) {
+                        var numberOfMarkets = noMarkets.text.toString().toInt()
+
+                        for (counter in 0..numberOfMarkets - 1) {
+                            countyLevelQuestionnaire.marketTransactionItems.add(
+                                MarketTransactionsItem(
+                                    counter.toString(),
+                                    "",
+                                    false,
+                                    false,
+                                    false,
+                                    false,
+                                    false,
+                                    false
+                                )
+                            )
+                        }
+
+                        populateMarketConfiguration()
+                        numberMarketsWrapper.isVisible = false
+                        marketList.isVisible = true
+                        marketConfigurationPrompt.text =
+                            "ii) Enter the details of the markets serving the livelihood zone"
+                    } else {
+                        inflateErrorModal("Number of markets", "The number of markets is required")
+                    }
+                }
+
+                marketConfigBackButton.setOnClickListener {
+                    populateMainSourcesOfWater()
+                    mainWaterSource.root.visibility = View.VISIBLE
+                    lzMarketConfiguration.root.visibility = View.GONE
+                }
+
+                marketConfigNextButton.setOnClickListener {
+
+                    val incompleteMarketTransactionItems: MutableList<MarketTransactionsItem> =
+                        ArrayList()
+                    val allMarketTransactionItems: MutableList<MarketTransactionsItem> =
+                        ArrayList()
+                    allMarketTransactionItems.addAll(countyLevelQuestionnaire.marketTransactionItems)
+                    for (currentItem in countyLevelQuestionnaire.marketTransactionItems) {
+                        if (isAMarketTransactionItemIncomplete(currentItem)) {
+                            incompleteMarketTransactionItems.add(currentItem)
+                        }
+                    }
+
+                    countyLevelQuestionnaire.marketTransactionItems.removeAll(
+                        incompleteMarketTransactionItems
+                    )
+
+                    if (countyLevelQuestionnaire.marketTransactionItems.isEmpty()) {
+                        inflateErrorModal(
+                            "Missing or incomplete market details",
+                            "Kindly fill out a market or the incomplete market details"
+                        )
+                        countyLevelQuestionnaire.marketTransactionItems.addAll(allMarketTransactionItems)
+
+                        populateMarketConfiguration()
+                    } else {
+                        countyLevelQuestionnaire.lastQuestionnaireStep =
+                            Constants.MARKETS_TRANSACTIONS_STEP
+
+                        if (!doesStepExist(
+                                Constants.MARKETS_TRANSACTIONS_STEP,
+                                countyLevelQuestionnaire.questionnaireCoveredSteps
+                            )
+                        ) {
+                            countyLevelQuestionnaire.questionnaireCoveredSteps.add(Constants.MARKETS_TRANSACTIONS_STEP)
+                        }
+
+                        prepareMarketTransactionsResponses()
+
+                        updateCurrentQuestionnaireToStore()
+                        lzMarketTransactions.root.visibility = View.VISIBLE
+                        lzMarketConfiguration.root.visibility = View.GONE
+                    }
+
+                }
+
+            }
+
+
+            //THIS BLOCK OF CODE IS NO LONGER IN USE
+
+            /************************************************************************************************************************************************************************************/
             marketGeographyConfiguration.apply {
 
                 marketGeographyBackButton.setOnClickListener {
                     populateMainSourcesOfWater()
-                    mainWaterSource.root.visibility = View.VISIBLE
+                    lzMarketConfiguration.root.visibility = View.VISIBLE
                     marketGeographyConfiguration.root.visibility = View.GONE
                 }
 
@@ -1679,12 +1776,17 @@ class CountyLevelFragment : DialogFragment(),
             }
 
 
+            //THIS BLOCK OF CODE IS NO LONGER IN USE
+
+            /*******************************************************************************************************************************************************/
+
+
             /* Market transactions navigation */
             lzMarketTransactions.apply {
 
                 marketTransactionBackButton.setOnClickListener {
                     populateMarketConfiguration()
-                    marketGeographyConfiguration.root.visibility = View.VISIBLE
+                    lzMarketConfiguration.root.visibility = View.VISIBLE
                     lzMarketTransactions.root.visibility = View.GONE
                 }
 
@@ -3590,7 +3692,10 @@ class CountyLevelFragment : DialogFragment(),
         val marketSubCountySelectionAdapter = MarketSubCountySelectionAdapter(
             subCounties,
             this,
-            marketSubCountySelectionEnum
+            marketSubCountySelectionEnum,
+            null,
+            null,
+            null
         )
         val gridLayoutManager = GridLayoutManager(activity, 1)
         listRecyclerView.layoutManager = gridLayoutManager
@@ -4345,7 +4450,10 @@ class CountyLevelFragment : DialogFragment(),
 
     override fun onMarketSubCountyItemClicked(
         selectedSubCounty: SubCountyModel,
-        marketCountySelectionEnum: MarketCountySelectionEnum
+        marketCountySelectionEnum: MarketCountySelectionEnum,
+        marketTransactionsItem: MarketTransactionsItem,
+        marketTransactionArrayPosition: Int,
+        subcountyNameTextView: TextView?
     ) {
 
         binding.apply {
@@ -5655,29 +5763,10 @@ class CountyLevelFragment : DialogFragment(),
 
     fun prepareMarketTransactionsResponses() {
         binding.apply {
-            val marketTransactionItems: MutableList<MarketTransactionsItem> = ArrayList()
-
-
-            for (currentDefinedMarket in countyLevelQuestionnaire.definedMarkets) {
-                marketTransactionItems.add(
-                    MarketTransactionsItem(
-                        currentDefinedMarket.marketUniqueId,
-                        currentDefinedMarket.marketName,
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        false
-                    )
-                )
-            }
-
-            countyLevelQuestionnaire.marketTransactionItems = marketTransactionItems
 
             val marketTransactionsAdapter =
                 MarketTradeAdapter(
-                    marketTransactionItems,
+                    countyLevelQuestionnaire.marketTransactionItems,
                     this@CountyLevelFragment
                 )
             val gridLayoutManager = GridLayoutManager(activity, 1)
@@ -5848,78 +5937,29 @@ class CountyLevelFragment : DialogFragment(),
 
     fun populateMarketConfiguration() {
         binding.apply {
-            marketGeographyConfiguration.apply {
-                val definedMarkets = countyLevelQuestionnaire.definedMarkets
+            lzMarketConfiguration.apply {
 
-                val oneMarket = returnMarketFromMarketId("1")
-                oneMarket?.let {
-                    oneMarketName.setText(it.marketName)
-                    oneNearestVillageOrTown.setText(it.nearestVillageOrTown)
-                    oneSubCounty.text = it.subCountyModel.subCountyName
-                }
+                marketConfigurationPrompt.text =
+                    "ii) Enter the details of the markets serving the livelihood zone"
+                numberMarketsWrapper.isVisible = false
+                marketList.isVisible = true
+                marketsBottomButtons.isVisible = true
 
-                val twoMarket = returnMarketFromMarketId("2")
-                twoMarket?.let {
-                    twoMarketName.setText(it.marketName)
-                    twoNearestVillageOrTown.setText(it.nearestVillageOrTown)
-                    twoSubCounty.text = it.subCountyModel.subCountyName
-                }
+                val marketConfigurationAdapter =
+                    activity?.let { context ->
+                        MarketConfigurationAdapter(
+                            context,
+                            countyLevelQuestionnaire.marketTransactionItems,
+                            this@CountyLevelFragment,
+                            geographyObject.subCounties
+                        )
+                    }
+                val harvestingGridLayoutManager = GridLayoutManager(activity, 1)
+                marketList.layoutManager = harvestingGridLayoutManager
+                marketList.hasFixedSize()
+                marketList.adapter =
+                    marketConfigurationAdapter
 
-                val threeMarket = returnMarketFromMarketId("3")
-                threeMarket?.let {
-                    threeMarketName.setText(it.marketName)
-                    threeNearestVillageOrTown.setText(it.nearestVillageOrTown)
-                    threeSubCounty.text = it.subCountyModel.subCountyName
-                }
-
-                val fourMarket = returnMarketFromMarketId("4")
-                fourMarket?.let {
-                    fourMarketName.setText(it.marketName)
-                    fourNearestVillageOrTown.setText(it.nearestVillageOrTown)
-                    fourSubCounty.text = it.subCountyModel.subCountyName
-                }
-
-                val fiveMarket = returnMarketFromMarketId("5")
-                fiveMarket?.let {
-                    fiveMarketName.setText(it.marketName)
-                    fiveNearestVillageOrTown.setText(it.nearestVillageOrTown)
-                    fiveSubCounty.text = it.subCountyModel.subCountyName
-                }
-
-                val sixMarket = returnMarketFromMarketId("6")
-                sixMarket?.let {
-                    sixMarketName.setText(it.marketName)
-                    sixNearestVillageOrTown.setText(it.nearestVillageOrTown)
-                    sixSubCounty.text = it.subCountyModel.subCountyName
-                }
-
-                val sevenMarket = returnMarketFromMarketId("7")
-                sevenMarket?.let {
-                    sevenMarketName.setText(it.marketName)
-                    sevenNearestVillageOrTown.setText(it.nearestVillageOrTown)
-                    sevenSubCounty.text = it.subCountyModel.subCountyName
-                }
-
-                val eightMarket = returnMarketFromMarketId("8")
-                eightMarket?.let {
-                    eightMarketName.setText(it.marketName)
-                    eightNearestVillageOrTown.setText(it.nearestVillageOrTown)
-                    eightSubCounty.text = it.subCountyModel.subCountyName
-                }
-
-                val nineMarket = returnMarketFromMarketId("9")
-                nineMarket?.let {
-                    nineMarketName.setText(it.marketName)
-                    nineNearestVillageOrTown.setText(it.nearestVillageOrTown)
-                    nineSubCounty.text = it.subCountyModel.subCountyName
-                }
-
-                val tenMarket = returnMarketFromMarketId("10")
-                tenMarket?.let {
-                    tenMarketName.setText(it.marketName)
-                    tenNearestVillageOrTown.setText(it.nearestVillageOrTown)
-                    tenSubCounty.text = it.subCountyModel.subCountyName
-                }
             }
         }
     }
@@ -6947,6 +6987,18 @@ class CountyLevelFragment : DialogFragment(),
                     harvestingSeasonsAdapter
             }
         }
+    }
+
+
+    override fun onAMarketTransactionItemEdited(
+        marketTransactionsItem: MarketTransactionsItem,
+        position: Int
+    ) {
+        countyLevelQuestionnaire.marketTransactionItems.set(position, marketTransactionsItem)
+    }
+
+    fun isAMarketTransactionItemIncomplete(marketTransactionItem: MarketTransactionsItem): Boolean {
+        return marketTransactionItem.marketName.isEmpty() || marketTransactionItem.nearestVillageOrTownName.isNullOrEmpty() || marketTransactionItem.subCounty == null
     }
 
 }

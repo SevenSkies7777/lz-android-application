@@ -9,16 +9,26 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.ndma.livelihoodzones.R
 import com.ndma.livelihoodzones.ui.county.model.MarketCountySelectionEnum
+import com.ndma.livelihoodzones.ui.county.model.MarketTransactionsItem
 import com.ndma.livelihoodzones.ui.county.model.SubCountyModel
 
 class MarketSubCountySelectionAdapter(
     private val subCountyModelList: MutableList<SubCountyModel>,
     val marketSubCountySelectionAdapterCallBack: MarketSubCountySelectionAdapter.MarketSubCountySelectionAdapterCallBack,
-    val marketCountySelectionEnum: MarketCountySelectionEnum
+    val marketCountySelectionEnum: MarketCountySelectionEnum,
+    val marketTransactionsItem: MarketTransactionsItem?,
+    val marketTransactionArrayPosition: Int?,
+    val subcountyNameTextView: TextView?
 ) : RecyclerView.Adapter<MarketSubCountySelectionAdapter.ViewHolder>() {
 
     interface MarketSubCountySelectionAdapterCallBack {
-        fun onMarketSubCountyItemClicked(selectedSubCounty: SubCountyModel, marketCountySelectionEnum: MarketCountySelectionEnum)
+        fun onMarketSubCountyItemClicked(
+            selectedSubCounty: SubCountyModel,
+            marketCountySelectionEnum: MarketCountySelectionEnum,
+            marketTransactionsItem: MarketTransactionsItem,
+            marketTransactionArrayPosition: Int,
+            subcountyNameTextView: TextView?
+        )
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -42,7 +52,23 @@ class MarketSubCountySelectionAdapter(
             viewHolder.stroke.visibility = View.GONE
         }
         viewHolder.itemView.setOnClickListener {
-            marketSubCountySelectionAdapterCallBack.onMarketSubCountyItemClicked(subCountyModelList.get(position), marketCountySelectionEnum)
+
+            marketTransactionsItem?.let { marketItem ->
+                marketTransactionArrayPosition?.let { arrayPosition ->
+                    subcountyNameTextView?.let { subcountyTextView ->
+                        marketSubCountySelectionAdapterCallBack.onMarketSubCountyItemClicked(
+                            subCountyModelList.get(
+                                position
+                            ),
+                            marketCountySelectionEnum,
+                            marketItem,
+                            arrayPosition,
+                            subcountyTextView
+                        )
+                    }
+                }
+            }
+
         }
     }
 
