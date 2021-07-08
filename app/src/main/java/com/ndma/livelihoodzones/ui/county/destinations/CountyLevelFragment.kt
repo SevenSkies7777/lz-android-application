@@ -81,7 +81,7 @@ class CountyLevelFragment : DialogFragment(),
     LandPreparationSeasonAdapter.LandPreparationSeasonAdapterCallBack,
     PlantingSeasonAdapter.PlantingSeasonAdapterCallBack,
     HarvestingSeasonsAdapter.HarvestingSeasonsAdapterCallBack,
-    MarketConfigurationAdapter.MarketConfigurationAdapterCallBack {
+    MarketConfigurationAdapter.MarketConfigurationAdapterCallBack, ZonalCropProductionAdapter.ZonalCropProductionAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -1104,17 +1104,6 @@ class CountyLevelFragment : DialogFragment(),
                 cropProductionNextButton.setOnClickListener {
 
                     if (isAnyCropProductionFieldEmpty()) {
-//                        activity?.let { context ->
-//                            val adapter =
-//                                CropProductionListAdapter(
-//                                    context,
-//                                    R.layout.lz_crop_production_item,
-//                                    cropProductionResponseItems,
-//                                    this@CountyLevelFragment,
-//                                    false
-//                                )
-//                            cropsList.adapter = adapter
-//                        }
                         inflateErrorModal("Missing Data", "Kindly fill out all the fields")
                     } else if (doesCropProductionHavePercentageErrors()) {
                         inflateErrorModal(
@@ -5748,14 +5737,18 @@ class CountyLevelFragment : DialogFragment(),
             cropProductionLayout.apply {
                 activity?.let { context ->
                     val adapter =
-                        CropProductionListAdapter(
+                        ZonalCropProductionAdapter(
                             context,
                             R.layout.lz_crop_production_item,
                             cropProductionResponseItems,
                             this@CountyLevelFragment,
                             false
                         )
-                    cropsList.adapter = adapter
+                    val gridLayoutManager = GridLayoutManager(activity, 1)
+                    cropProductionRvList.layoutManager = gridLayoutManager
+                    cropProductionRvList.hasFixedSize()
+                    cropProductionRvList.adapter =
+                        adapter
                 }
             }
         }
@@ -5873,14 +5866,18 @@ class CountyLevelFragment : DialogFragment(),
             cropProductionLayout.apply {
                 activity?.let { context ->
                     val adapter =
-                        CropProductionListAdapter(
+                        ZonalCropProductionAdapter(
                             context,
                             R.layout.lz_crop_production_item,
-                            countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses,
+                            cropProductionResponseItems,
                             this@CountyLevelFragment,
                             true
                         )
-                    cropsList.adapter = adapter
+                    val gridLayoutManager = GridLayoutManager(activity, 1)
+                    cropProductionRvList.layoutManager = gridLayoutManager
+                    cropProductionRvList.hasFixedSize()
+                    cropProductionRvList.adapter =
+                        adapter
                 }
             }
         }
@@ -6366,14 +6363,18 @@ class CountyLevelFragment : DialogFragment(),
             cropProductionLayout.apply {
                 activity?.let { context ->
                     val adapter =
-                        CropProductionListAdapter(
+                        ZonalCropProductionAdapter(
                             context,
                             R.layout.lz_crop_production_item,
-                            responses,
+                            cropProductionResponseItems,
                             this@CountyLevelFragment,
                             true
                         )
-                    cropsList.adapter = adapter
+                    val gridLayoutManager = GridLayoutManager(activity, 1)
+                    cropProductionRvList.layoutManager = gridLayoutManager
+                    cropProductionRvList.hasFixedSize()
+                    cropProductionRvList.adapter =
+                        adapter
                 }
             }
         }
@@ -6999,6 +7000,13 @@ class CountyLevelFragment : DialogFragment(),
 
     fun isAMarketTransactionItemIncomplete(marketTransactionItem: MarketTransactionsItem): Boolean {
         return marketTransactionItem.marketName.isEmpty() || marketTransactionItem.nearestVillageOrTownName.isNullOrEmpty() || marketTransactionItem.subCounty == null
+    }
+
+    override fun onZoneLevelCropProductionResponseItemSubmited(
+        responseItem: WgCropProductionResponseItem,
+        position: Int
+    ) {
+        cropProductionResponseItems.set(position, responseItem)
     }
 
 }
