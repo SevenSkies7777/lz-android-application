@@ -1,9 +1,6 @@
 package com.ndma.livelihoodzones.appStore.model
 
-import com.ndma.livelihoodzones.ui.county.responses.LzCropProductionResponses
-import com.ndma.livelihoodzones.ui.county.responses.LzSeasonsResponses
-import com.ndma.livelihoodzones.ui.county.responses.WaterSourcesResponses
-import com.ndma.livelihoodzones.ui.county.responses.WealthGroupResponse
+import com.ndma.livelihoodzones.ui.county.responses.*
 
 class CountyLevelDraft {
     var draftLivelihoodZoneSeasonsResponses: LzSeasonsResponses? = null
@@ -13,4 +10,6 @@ class CountyLevelDraft {
     var lzCropProductionResponses: LzCropProductionResponses? =  null
 
     var waterSourceResponses: WaterSourcesResponses? = null
+
+    var hungerPatternsResponses: HungerPatternsResponses? = null
 }

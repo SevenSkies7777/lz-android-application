@@ -406,6 +406,7 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeHungerPatterns() {
         binding.apply {
+            populateDraftHungerPatterns()
             lzHungerPatterns.root.visibility = View.VISIBLE
         }
     }
@@ -7043,6 +7044,13 @@ class CountyLevelFragment : DialogFragment(),
             saveMainWaterSourcesAsDraft()
         }
 
+        if (countyLevelQuestionnaire.lastQuestionnaireStep == Constants.HUNGER_PATTERNS_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.HUNGER_PATTERNS_STEP
+            )
+        ) {
+            saveHungerPatternsAsDraft()
+        }
+
     }
 
     fun hasUserGoneBeyondCurrentQuestionnaireStep(currentStep: Int): Boolean {
@@ -7320,6 +7328,55 @@ class CountyLevelFragment : DialogFragment(),
                         othersDrySeason.setText(it.others.drySeasonPopulationResponse.toString())
                     }
 
+                }
+
+            }
+        }
+    }
+
+    fun saveHungerPatternsAsDraft() {
+        binding.apply {
+            lzHungerPatterns.apply {
+
+                var hungerPatternsResponses = HungerPatternsResponses(0.0,0.0,0.0,0.0)
+
+                if (etLongRainsHungerPeriod.text.toString().isNotEmpty()) {
+                    hungerPatternsResponses.longRainsPeriod = etLongRainsHungerPeriod.text.toString().toDouble()
+                }
+                if (etEndLongBeginShortRainsHungerPeriod.text.toString().isNotEmpty()) {
+                    hungerPatternsResponses.endLongBeginShort = etEndLongBeginShortRainsHungerPeriod.text.toString().toDouble()
+                }
+                if (etShortRainsHungerPeriod.text.toString().isNotEmpty()) {
+                    hungerPatternsResponses.shortRainsPeriod = etShortRainsHungerPeriod.text.toString().toDouble()
+                }
+                if (etEndShortBeginLongRainsHungerPeriod.text.toString().isNotEmpty()) {
+                    hungerPatternsResponses.endShortBeginLong = etEndShortBeginLongRainsHungerPeriod.text.toString().toDouble()
+                }
+
+                countyLevelQuestionnaire.draft.hungerPatternsResponses = hungerPatternsResponses
+
+            }
+        }
+    }
+
+    fun populateDraftHungerPatterns() {
+        binding.apply {
+            lzHungerPatterns.apply {
+
+                countyLevelQuestionnaire.draft.hungerPatternsResponses?.let {
+
+                    if (it.longRainsPeriod != 0.0) {
+                        etLongRainsHungerPeriod.setText(it.longRainsPeriod.toString())
+                    }
+                    if (it.endLongBeginShort != 0.0) {
+                        etEndLongBeginShortRainsHungerPeriod.setText(it.endLongBeginShort.toString())
+                    }
+                    if (it.shortRainsPeriod != 0.0) {
+                        etShortRainsHungerPeriod.setText(it.shortRainsPeriod.toString())
+                    }
+                    if (it.endShortBeginLong != 0.0) {
+                        etEndShortBeginLongRainsHungerPeriod.setText(it.endShortBeginLong.toString())
+                    }
                 }
 
             }

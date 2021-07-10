@@ -49,7 +49,7 @@ class CountyLevelQuestionnaire(val uniqueId: String, var questionnaireName: Stri
 
     var waterSourceResponses: WaterSourcesResponses? = null
 
-    lateinit var hungerPatternsResponses: HungerPatternsResponses
+    var hungerPatternsResponses = HungerPatternsResponses(0.0,0.0,0.0,0.0)
 
     lateinit var hazardResponses: HazardResponses
 
