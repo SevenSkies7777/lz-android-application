@@ -360,11 +360,7 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeCropProduction() {
         binding.apply {
-            if (countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses.isEmpty()) {
-                prepareCropProductionResponseItems()
-            } else {
-                populateCropProduction()
-            }
+            populateCropProduction()
             cropProductionLayout.root.visibility = View.VISIBLE
         }
     }
@@ -1015,6 +1011,8 @@ class CountyLevelFragment : DialogFragment(),
 
                             prepareCropSelectionListView()
 
+                            countyLevelQuestionnaire.draft.wealthGroupResponse = null
+
                             countyLevelQuestionnaire.lastQuestionnaireStep =
                                 Constants.LZ_CROP_SELECTION_STEP
 
@@ -1058,10 +1056,10 @@ class CountyLevelFragment : DialogFragment(),
                 cropSelectionNextButton.setOnClickListener {
 
                     if (countyLevelQuestionnaire.selectedCrops.isNotEmpty()) {
-
                         if (determineTheFurthestCoveredStep(countyLevelQuestionnaire.questionnaireCoveredSteps) < Constants.LZ_CROP_PRODUCTION_STEP) {
                             prepareCropProductionResponseItems()
                         } else {
+                            System.out.println()
                             updateCropProductionPage(
                                 processUpdatedCropProductionresponses(
                                     countyLevelQuestionnaire.selectedCrops,
@@ -1118,6 +1116,8 @@ class CountyLevelFragment : DialogFragment(),
                             cropProductionResponseItems
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.MAIN_SOURCES_OF_WATER_STEP
+
+                        countyLevelQuestionnaire.draft.lzCropProductionResponses = null
 
                         if (!doesStepExist(
                                 Constants.MAIN_SOURCES_OF_WATER_STEP,
@@ -5748,6 +5748,8 @@ class CountyLevelFragment : DialogFragment(),
                 }
             }
         }
+
+        countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses = cropProductionResponseItems
     }
 
     fun prepareMarketTransactionsResponses() {
@@ -5858,6 +5860,11 @@ class CountyLevelFragment : DialogFragment(),
     fun populateCropProduction() {
         cropProductionResponseItems =
             countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses
+        if (cropProductionResponseItems.isEmpty()) {
+            countyLevelQuestionnaire.draft.lzCropProductionResponses?.let {
+                cropProductionResponseItems = it.cropProductionResponses
+            }
+        }
         binding.apply {
             cropProductionLayout.apply {
                 activity?.let { context ->
@@ -6362,7 +6369,7 @@ class CountyLevelFragment : DialogFragment(),
                         ZonalCropProductionAdapter(
                             context,
                             R.layout.lz_crop_production_item,
-                            cropProductionResponseItems,
+                            responses,
                             this@CountyLevelFragment,
                             true
                         )
@@ -7022,6 +7029,13 @@ class CountyLevelFragment : DialogFragment(),
         ) {
             saveWealthGroupPopulationDistributionAsDraft()
         }
+
+        if (countyLevelQuestionnaire.lastQuestionnaireStep == Constants.LZ_CROP_PRODUCTION_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.LZ_CROP_PRODUCTION_STEP
+            )
+        ) {
+            saveCropProductionAsDraft()
+        }
     }
 
     fun hasUserGoneBeyondCurrentQuestionnaireStep(currentStep: Int): Boolean {
@@ -7037,10 +7051,11 @@ class CountyLevelFragment : DialogFragment(),
         binding.apply {
             locationAndPopulationLayout.apply {
 
-                val wealthGroupResponse = WealthGroupResponse(0.0,0.0,0.0,0.0)
+                val wealthGroupResponse = WealthGroupResponse(0.0, 0.0, 0.0, 0.0)
 
                 if (etVerPoorResponse.text.toString().isNotEmpty()) {
-                    wealthGroupResponse.verPoorResponse = etVerPoorResponse.text.toString().toDouble()
+                    wealthGroupResponse.verPoorResponse =
+                        etVerPoorResponse.text.toString().toDouble()
                 }
 
                 if (etPoorResponse.text.toString().isNotEmpty()) {
@@ -7052,7 +7067,8 @@ class CountyLevelFragment : DialogFragment(),
                 }
 
                 if (etBetterOffResponse.text.toString().isNotEmpty()) {
-                    wealthGroupResponse.betterOfResponse = etBetterOffResponse.text.toString().toDouble()
+                    wealthGroupResponse.betterOfResponse =
+                        etBetterOffResponse.text.toString().toDouble()
                 }
 
                 countyLevelQuestionnaire.draft.wealthGroupResponse = wealthGroupResponse
@@ -7087,6 +7103,12 @@ class CountyLevelFragment : DialogFragment(),
 
             }
         }
+    }
+
+    fun saveCropProductionAsDraft() {
+        var lzCropProductionResponses = LzCropProductionResponses()
+        lzCropProductionResponses.cropProductionResponses = cropProductionResponseItems
+        countyLevelQuestionnaire.draft.lzCropProductionResponses = lzCropProductionResponses
     }
 
 }

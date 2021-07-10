@@ -72,15 +72,15 @@ class ZonalCropProductionAdapter(
         viewHolder.cropName.text = currentResponseItem.crop.cropName
 
         if (isAResume) {
-            viewHolder.shortRainsRainfedCultivatedAreaPercentage.setText(currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.value.toString())
-            viewHolder.shortRainsRainfedAverageYieldPerHa.setText(currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.value.toString())
-            viewHolder.shortRainsIrrigatedCultivatedArea.setText(currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.value.toString())
-            viewHolder.shortRainsIrrigatedAverageYieldPerHa.setText(currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.value.toString())
+            viewHolder.shortRainsRainfedCultivatedAreaPercentage.setText(returnStringDoubleOrEmptyString(currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage.value))
+            viewHolder.shortRainsRainfedAverageYieldPerHa.setText(returnStringDoubleOrEmptyString(currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa.value))
+            viewHolder.shortRainsIrrigatedCultivatedArea.setText(returnStringDoubleOrEmptyString(currentResponseItem.shortRainsSeason.irrigatedCultivatedArea.value))
+            viewHolder.shortRainsIrrigatedAverageYieldPerHa.setText(returnStringDoubleOrEmptyString(currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa.value))
 
-            viewHolder.longRainsRainfedCultivatedAreaPercentage.setText(currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.value.toString())
-            viewHolder.longRainsRainfedAverageYieldPerHa.setText(currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.value.toString())
-            viewHolder.longRainsIrrigatedCultivatedArea.setText(currentResponseItem.longRainsSeason.irrigatedCultivatedArea.value.toString())
-            viewHolder.longRainsIrrigatedAverageYieldPerHa.setText(currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.value.toString())
+            viewHolder.longRainsRainfedCultivatedAreaPercentage.setText(returnStringDoubleOrEmptyString(currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage.value))
+            viewHolder.longRainsRainfedAverageYieldPerHa.setText(returnStringDoubleOrEmptyString(currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa.value))
+            viewHolder.longRainsIrrigatedCultivatedArea.setText(returnStringDoubleOrEmptyString(currentResponseItem.longRainsSeason.irrigatedCultivatedArea.value))
+            viewHolder.longRainsIrrigatedAverageYieldPerHa.setText(returnStringDoubleOrEmptyString(currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa.value))
         }
 
 
@@ -89,7 +89,9 @@ class ZonalCropProductionAdapter(
                 Handler(Looper.getMainLooper()).postDelayed({
 
                     if (editable == viewHolder.shortRainsRainfedCultivatedAreaPercentage.editableText) {
-                        if (viewHolder.shortRainsRainfedCultivatedAreaPercentage.text.toString().trim().isNotEmpty()) {
+                        if (viewHolder.shortRainsRainfedCultivatedAreaPercentage.text.toString()
+                                .trim().isNotEmpty()
+                        ) {
                             currentResponseItem.shortRainsSeason.rainfedCultivatedAreaPercentage =
                                 CropProductionResponseValueModel(
                                     viewHolder.shortRainsRainfedCultivatedAreaPercentage.text.toString()
@@ -99,26 +101,35 @@ class ZonalCropProductionAdapter(
                         }
                     }
                     if (editable == viewHolder.shortRainsRainfedAverageYieldPerHa.editableText) {
-                        if (viewHolder.shortRainsRainfedAverageYieldPerHa.text.toString().trim().isNotEmpty()) {
+                        if (viewHolder.shortRainsRainfedAverageYieldPerHa.text.toString().trim()
+                                .isNotEmpty()
+                        ) {
                             currentResponseItem.shortRainsSeason.rainfedAverageYieldPerHa =
                                 CropProductionResponseValueModel(
-                                    viewHolder.shortRainsRainfedAverageYieldPerHa.text.toString().toDouble(), true
+                                    viewHolder.shortRainsRainfedAverageYieldPerHa.text.toString()
+                                        .toDouble(), true
                                 )
                         }
                     }
                     if (editable == viewHolder.shortRainsIrrigatedCultivatedArea.editableText) {
-                        if (viewHolder.shortRainsIrrigatedCultivatedArea.text.toString().trim().isNotEmpty()) {
+                        if (viewHolder.shortRainsIrrigatedCultivatedArea.text.toString().trim()
+                                .isNotEmpty()
+                        ) {
                             currentResponseItem.shortRainsSeason.irrigatedCultivatedArea =
                                 CropProductionResponseValueModel(
-                                    viewHolder.shortRainsIrrigatedCultivatedArea.text.toString().toDouble(), true
+                                    viewHolder.shortRainsIrrigatedCultivatedArea.text.toString()
+                                        .toDouble(), true
                                 )
                         }
                     }
                     if (editable == viewHolder.shortRainsIrrigatedAverageYieldPerHa.editableText) {
-                        if (viewHolder.shortRainsIrrigatedAverageYieldPerHa.text.toString().trim().isNotEmpty()) {
+                        if (viewHolder.shortRainsIrrigatedAverageYieldPerHa.text.toString().trim()
+                                .isNotEmpty()
+                        ) {
                             currentResponseItem.shortRainsSeason.irrigatedAverageYieldPerHa =
                                 CropProductionResponseValueModel(
-                                    viewHolder.shortRainsIrrigatedAverageYieldPerHa.text.toString().toDouble(),
+                                    viewHolder.shortRainsIrrigatedAverageYieldPerHa.text.toString()
+                                        .toDouble(),
                                     true
                                 )
                         }
@@ -126,35 +137,47 @@ class ZonalCropProductionAdapter(
 
 
                     if (editable == viewHolder.longRainsRainfedCultivatedAreaPercentage.editableText) {
-                        if (viewHolder.longRainsRainfedCultivatedAreaPercentage.text.toString().trim().isNotEmpty()) {
+                        if (viewHolder.longRainsRainfedCultivatedAreaPercentage.text.toString()
+                                .trim().isNotEmpty()
+                        ) {
                             currentResponseItem.longRainsSeason.rainfedCultivatedAreaPercentage =
                                 CropProductionResponseValueModel(
-                                    viewHolder.longRainsRainfedCultivatedAreaPercentage.text.toString().toDouble(),
+                                    viewHolder.longRainsRainfedCultivatedAreaPercentage.text.toString()
+                                        .toDouble(),
                                     true
                                 )
                         }
                     }
                     if (editable == viewHolder.longRainsRainfedAverageYieldPerHa.editableText) {
-                        if (viewHolder.longRainsRainfedAverageYieldPerHa.text.toString().trim().isNotEmpty()) {
+                        if (viewHolder.longRainsRainfedAverageYieldPerHa.text.toString().trim()
+                                .isNotEmpty()
+                        ) {
                             currentResponseItem.longRainsSeason.rainfedAverageYieldPerHa =
                                 CropProductionResponseValueModel(
-                                    viewHolder.longRainsRainfedAverageYieldPerHa.text.toString().toDouble(), true
+                                    viewHolder.longRainsRainfedAverageYieldPerHa.text.toString()
+                                        .toDouble(), true
                                 )
                         }
                     }
                     if (editable == viewHolder.longRainsIrrigatedCultivatedArea.editableText) {
-                        if (viewHolder.longRainsIrrigatedCultivatedArea.text.toString().trim().isNotEmpty()) {
+                        if (viewHolder.longRainsIrrigatedCultivatedArea.text.toString().trim()
+                                .isNotEmpty()
+                        ) {
                             currentResponseItem.longRainsSeason.irrigatedCultivatedArea =
                                 CropProductionResponseValueModel(
-                                    viewHolder.longRainsIrrigatedCultivatedArea.text.toString().toDouble(), true
+                                    viewHolder.longRainsIrrigatedCultivatedArea.text.toString()
+                                        .toDouble(), true
                                 )
                         }
                     }
                     if (editable == viewHolder.longRainsIrrigatedAverageYieldPerHa.editableText) {
-                        if (viewHolder.longRainsIrrigatedAverageYieldPerHa.text.toString().trim().isNotEmpty()) {
+                        if (viewHolder.longRainsIrrigatedAverageYieldPerHa.text.toString().trim()
+                                .isNotEmpty()
+                        ) {
                             currentResponseItem.longRainsSeason.irrigatedAverageYieldPerHa =
                                 CropProductionResponseValueModel(
-                                    viewHolder.longRainsIrrigatedAverageYieldPerHa.text.toString().toDouble(), true
+                                    viewHolder.longRainsIrrigatedAverageYieldPerHa.text.toString()
+                                        .toDouble(), true
                                 )
                         }
                     }
@@ -238,6 +261,13 @@ class ZonalCropProductionAdapter(
             )
         }
 
+    }
+
+    fun returnStringDoubleOrEmptyString(value: Double): String {
+        if (value != 0.0) {
+            return value.toString()
+        }
+        return ""
     }
 
 }
