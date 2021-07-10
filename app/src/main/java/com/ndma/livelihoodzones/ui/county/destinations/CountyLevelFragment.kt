@@ -392,14 +392,14 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeEthnicGroupSelection() {
         binding.apply {
-            prepareEthnicGroupsSelectionlistView()
+            populateEthnicGroupSelection()
             ethnicGroupSelection.root.visibility = View.VISIBLE
         }
     }
 
     fun resumeEthnicGroupPopulation() {
         binding.apply {
-            prepareEthnicGroupPopulation()
+            populateEthnicGroupPopulation()
             ethnicGroupPopulation.root.visibility = View.VISIBLE
         }
     }
@@ -6020,7 +6020,7 @@ class CountyLevelFragment : DialogFragment(),
     fun prepareEthnicGroupPopulation() {
         binding.apply {
             ethnicGroupPopulation.apply {
-                for (currentEthnicGroup: EthnicGroupModel in countyLevelQuestionnaire.livelihoodZoneEthnicGroups) {
+                for (currentEthnicGroup in countyLevelQuestionnaire.livelihoodZoneEthnicGroups) {
                     ethnicGroupResponseList.add(
                         EthnicityResponseItem(
                             currentEthnicGroup,
@@ -6038,6 +6038,7 @@ class CountyLevelFragment : DialogFragment(),
                     ethnicityTable.adapter =
                         ethnicPopulationAdapter
                 }
+                countyLevelQuestionnaire.ethnicGroupResponseList = ethnicGroupResponseList
             }
         }
     }
