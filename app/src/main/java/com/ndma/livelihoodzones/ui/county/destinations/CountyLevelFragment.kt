@@ -368,9 +368,7 @@ class CountyLevelFragment : DialogFragment(),
     fun resumeSourcesOfWater() {
         binding.apply {
             mainWaterSource.root.visibility = View.VISIBLE
-            if (countyLevelQuestionnaire.waterSourceResponses != null) {
-                populateMainSourcesOfWater()
-            }
+            populateDraftMainWaterSources()
         }
     }
 
@@ -7036,6 +7034,14 @@ class CountyLevelFragment : DialogFragment(),
         ) {
             saveCropProductionAsDraft()
         }
+
+        if (countyLevelQuestionnaire.lastQuestionnaireStep == Constants.MAIN_SOURCES_OF_WATER_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.MAIN_SOURCES_OF_WATER_STEP
+            )
+        ) {
+            saveMainWaterSourcesAsDraft()
+        }
+
     }
 
     fun hasUserGoneBeyondCurrentQuestionnaireStep(currentStep: Int): Boolean {
@@ -7109,6 +7115,214 @@ class CountyLevelFragment : DialogFragment(),
         var lzCropProductionResponses = LzCropProductionResponses()
         lzCropProductionResponses.cropProductionResponses = cropProductionResponseItems
         countyLevelQuestionnaire.draft.lzCropProductionResponses = lzCropProductionResponses
+    }
+
+    fun saveMainWaterSourcesAsDraft() {
+        binding.apply {
+            mainWaterSource.apply {
+
+                val waterSourcesResponses = waterSourceResponses
+
+                if (riversWetSeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.rivers.wetSeasonPopulation = riversWetSeason.text.toString().toDouble()
+                }
+                if (riversDrySeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.rivers.drySeasonPopulationResponse = riversDrySeason.text.toString().toDouble()
+                }
+
+                if (traditionalRiversWellsWetSeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.traditionalRiversWells.wetSeasonPopulation = traditionalRiversWellsWetSeason.text.toString().toDouble()
+                }
+                if (traditionalRiversWellsDrySeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.traditionalRiversWells.drySeasonPopulationResponse = traditionalRiversWellsDrySeason.text.toString().toDouble()
+                }
+
+                if (naturalPondsWetSeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.naturalPonds.wetSeasonPopulation = naturalPondsWetSeason.text.toString().toDouble()
+                }
+                if (naturalPondsDrySeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.naturalPonds.drySeasonPopulationResponse = naturalPondsDrySeason.text.toString().toDouble()
+                }
+
+                if (pansAndDamsWetSeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.pansAndDams.wetSeasonPopulation = pansAndDamsWetSeason.text.toString().toDouble()
+                }
+                if (pansAndDamsDrySeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.pansAndDams.drySeasonPopulationResponse = pansAndDamsDrySeason.text.toString().toDouble()
+                }
+
+                if (shallowWellsWetSeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.shallowWells.wetSeasonPopulation = shallowWellsWetSeason.text.toString().toDouble()
+                }
+                if (shallowWellsDrySeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.shallowWells.drySeasonPopulationResponse = shallowWellsDrySeason.text.toString().toDouble()
+                }
+
+                if (boreHolesWetSeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.boreholes.wetSeasonPopulation = boreHolesWetSeason.text.toString().toDouble()
+                }
+                if (boreHolesDrySeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.boreholes.drySeasonPopulationResponse = boreHolesDrySeason.text.toString().toDouble()
+                }
+
+                if (springsWetSeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.springs.wetSeasonPopulation = springsWetSeason.text.toString().toDouble()
+                }
+                if (springsDrySeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.springs.drySeasonPopulationResponse = springsDrySeason.text.toString().toDouble()
+                }
+
+                if (lakesWetSeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.lakes.wetSeasonPopulation = lakesWetSeason.text.toString().toDouble()
+                }
+                if (lakesDrySeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.lakes.drySeasonPopulationResponse = lakesDrySeason.text.toString().toDouble()
+                }
+
+                if (rockCatchmentWetSeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.rockCatchments.wetSeasonPopulation = rockCatchmentWetSeason.text.toString().toDouble()
+                }
+                if (rockCatchmentDrySeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.rockCatchments.drySeasonPopulationResponse = rockCatchmentDrySeason.text.toString().toDouble()
+                }
+
+                if (pipedWaterWetSeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.pipedWater.wetSeasonPopulation = pipedWaterWetSeason.text.toString().toDouble()
+                }
+                if (pipedWaterDrySeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.pipedWater.drySeasonPopulationResponse = pipedWaterDrySeason.text.toString().toDouble()
+                }
+
+                if (waterTruckingWetSeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.waterTrucking.wetSeasonPopulation = waterTruckingWetSeason.text.toString().toDouble()
+                }
+                if (waterTruckingDrySeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.waterTrucking.drySeasonPopulationResponse = waterTruckingDrySeason.text.toString().toDouble()
+                }
+
+                if (roofCatchmentWetSeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.roofCatchments.wetSeasonPopulation = roofCatchmentWetSeason.text.toString().toDouble()
+                }
+                if (roofCatchmentDrySeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.roofCatchments.drySeasonPopulationResponse = roofCatchmentDrySeason.text.toString().toDouble()
+                }
+
+                if (othersWetSeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.others.wetSeasonPopulation = othersWetSeason.text.toString().toDouble()
+                }
+                if (othersDrySeason.text.toString().isNotEmpty()) {
+                    waterSourcesResponses.others.drySeasonPopulationResponse = othersDrySeason.text.toString().toDouble()
+                }
+
+                countyLevelQuestionnaire.draft.waterSourceResponses = waterSourcesResponses
+
+            }
+        }
+    }
+
+    fun populateDraftMainWaterSources() {
+        binding.apply {
+            mainWaterSource.apply {
+
+                countyLevelQuestionnaire.draft.waterSourceResponses?.let {
+
+                    this@CountyLevelFragment.waterSourceResponses = it
+
+                    if (it.rivers.wetSeasonPopulation != 0.0) {
+                        riversWetSeason.setText(it.rivers.wetSeasonPopulation.toString())
+                    }
+                    if (it.rivers.drySeasonPopulationResponse != 0.0) {
+                        riversDrySeason.setText(it.rivers.drySeasonPopulationResponse.toString())
+                    }
+
+                    if (it.traditionalRiversWells.wetSeasonPopulation != 0.0) {
+                        traditionalRiversWellsWetSeason.setText(it.traditionalRiversWells.wetSeasonPopulation.toString())
+                    }
+                    if (it.traditionalRiversWells.drySeasonPopulationResponse != 0.0) {
+                        traditionalRiversWellsDrySeason.setText(it.traditionalRiversWells.drySeasonPopulationResponse.toString())
+                    }
+
+                    if (it.naturalPonds.wetSeasonPopulation != 0.0) {
+                        naturalPondsWetSeason.setText(it.naturalPonds.wetSeasonPopulation.toString())
+                    }
+                    if (it.naturalPonds.drySeasonPopulationResponse != 0.0) {
+                        naturalPondsDrySeason.setText(it.naturalPonds.drySeasonPopulationResponse.toString())
+                    }
+
+                    if (it.pansAndDams.wetSeasonPopulation != 0.0) {
+                        pansAndDamsWetSeason.setText(it.pansAndDams.wetSeasonPopulation.toString())
+                    }
+                    if (it.pansAndDams.drySeasonPopulationResponse != 0.0) {
+                        pansAndDamsDrySeason.setText(it.pansAndDams.drySeasonPopulationResponse.toString())
+                    }
+
+                    if (it.shallowWells.wetSeasonPopulation != 0.0) {
+                        shallowWellsWetSeason.setText(it.shallowWells.wetSeasonPopulation.toString())
+                    }
+                    if (it.shallowWells.drySeasonPopulationResponse != 0.0) {
+                        shallowWellsDrySeason.setText(it.shallowWells.drySeasonPopulationResponse.toString())
+                    }
+
+                    if (it.boreholes.wetSeasonPopulation != 0.0) {
+                        boreHolesWetSeason.setText(it.boreholes.wetSeasonPopulation.toString())
+                    }
+                    if (it.boreholes.drySeasonPopulationResponse != 0.0) {
+                        boreHolesDrySeason.setText(it.boreholes.drySeasonPopulationResponse.toString())
+                    }
+
+                    if (it.springs.wetSeasonPopulation != 0.0) {
+                        springsWetSeason.setText(it.springs.wetSeasonPopulation.toString())
+                    }
+                    if (it.springs.drySeasonPopulationResponse != 0.0) {
+                        springsDrySeason.setText(it.springs.drySeasonPopulationResponse.toString())
+                    }
+
+                    if (it.lakes.wetSeasonPopulation != 0.0) {
+                        lakesWetSeason.setText(it.lakes.wetSeasonPopulation.toString())
+                    }
+                    if (it.lakes.drySeasonPopulationResponse != 0.0) {
+                        lakesDrySeason.setText(it.lakes.drySeasonPopulationResponse.toString())
+                    }
+
+                    if (it.rockCatchments.wetSeasonPopulation != 0.0) {
+                        rockCatchmentWetSeason.setText(it.rockCatchments.wetSeasonPopulation.toString())
+                    }
+                    if (it.rockCatchments.drySeasonPopulationResponse != 0.0) {
+                        rockCatchmentDrySeason.setText(it.rockCatchments.drySeasonPopulationResponse.toString())
+                    }
+
+                    if (it.pipedWater.wetSeasonPopulation != 0.0) {
+                        pipedWaterWetSeason.setText(it.pipedWater.wetSeasonPopulation.toString())
+                    }
+                    if (it.pipedWater.drySeasonPopulationResponse != 0.0) {
+                        pipedWaterDrySeason.setText(it.pipedWater.drySeasonPopulationResponse.toString())
+                    }
+
+                    if (it.waterTrucking.wetSeasonPopulation != 0.0) {
+                        waterTruckingWetSeason.setText(it.waterTrucking.wetSeasonPopulation.toString())
+                    }
+                    if (it.waterTrucking.drySeasonPopulationResponse != 0.0) {
+                        waterTruckingDrySeason.setText(it.waterTrucking.drySeasonPopulationResponse.toString())
+                    }
+
+                    if (it.roofCatchments.wetSeasonPopulation != 0.0) {
+                        roofCatchmentWetSeason.setText(it.roofCatchments.wetSeasonPopulation.toString())
+                    }
+                    if (it.roofCatchments.drySeasonPopulationResponse != 0.0) {
+                        roofCatchmentDrySeason.setText(it.roofCatchments.drySeasonPopulationResponse.toString())
+                    }
+
+                    if (it.others.wetSeasonPopulation != 0.0) {
+                        othersWetSeason.setText(it.others.wetSeasonPopulation.toString())
+                    }
+                    if (it.others.drySeasonPopulationResponse != 0.0) {
+                        othersDrySeason.setText(it.others.drySeasonPopulationResponse.toString())
+                    }
+
+                }
+
+            }
+        }
     }
 
 }

@@ -1,17 +1,17 @@
 package com.ndma.livelihoodzones.ui.county.responses
 
 class WaterSourcesResponses() {
-    lateinit var rivers: WaterDependenceResponseItem
-    lateinit var traditionalRiversWells: WaterDependenceResponseItem
-    lateinit var naturalPonds: WaterDependenceResponseItem
-    lateinit var pansAndDams: WaterDependenceResponseItem
-    lateinit var shallowWells: WaterDependenceResponseItem
-    lateinit var boreholes: WaterDependenceResponseItem
-    lateinit var springs: WaterDependenceResponseItem
-    lateinit var lakes: WaterDependenceResponseItem
-    lateinit var rockCatchments: WaterDependenceResponseItem
-    lateinit var pipedWater: WaterDependenceResponseItem
-    lateinit var waterTrucking: WaterDependenceResponseItem
-    lateinit var roofCatchments: WaterDependenceResponseItem
-    lateinit var others: WaterDependenceResponseItem
+    var rivers = WaterDependenceResponseItem(0.0,0.0,"")
+    var traditionalRiversWells = WaterDependenceResponseItem(0.0,0.0,"")
+    var naturalPonds = WaterDependenceResponseItem(0.0,0.0,"")
+    var pansAndDams = WaterDependenceResponseItem(0.0,0.0,"")
+    var shallowWells = WaterDependenceResponseItem(0.0,0.0,"")
+    var boreholes = WaterDependenceResponseItem(0.0,0.0,"")
+    var springs = WaterDependenceResponseItem(0.0,0.0,"")
+    var lakes = WaterDependenceResponseItem(0.0,0.0,"")
+    var rockCatchments = WaterDependenceResponseItem(0.0,0.0,"")
+    var pipedWater = WaterDependenceResponseItem(0.0,0.0,"")
+    var waterTrucking = WaterDependenceResponseItem(0.0,0.0,"")
+    var roofCatchments = WaterDependenceResponseItem(0.0,0.0,"")
+    var others = WaterDependenceResponseItem(0.0,0.0,"")
 }
