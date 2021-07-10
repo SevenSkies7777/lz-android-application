@@ -81,7 +81,8 @@ class CountyLevelFragment : DialogFragment(),
     LandPreparationSeasonAdapter.LandPreparationSeasonAdapterCallBack,
     PlantingSeasonAdapter.PlantingSeasonAdapterCallBack,
     HarvestingSeasonsAdapter.HarvestingSeasonsAdapterCallBack,
-    MarketConfigurationAdapter.MarketConfigurationAdapterCallBack, ZonalCropProductionAdapter.ZonalCropProductionAdapterCallBack {
+    MarketConfigurationAdapter.MarketConfigurationAdapterCallBack,
+    ZonalCropProductionAdapter.ZonalCropProductionAdapterCallBack {
 
     private lateinit var countyLevelViewModel: CountyLevelViewModel
 
@@ -325,7 +326,7 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeZoneSublocationAssignment() {
         binding.apply {
-            prepareLivelihoodZoneSubLocationAssignmentRecyclerView()
+            populateLivelihoodZoneSubLocationAssignmentRecyclerView()
             lzSubLocationAssignment.root.visibility = View.VISIBLE
         }
     }
@@ -341,6 +342,7 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeWealthGroupPopulationPercentages() {
         binding.apply {
+            populateDraftWealthGroupPopulationDistribution()
             locationAndPopulationLayout.root.visibility = View.VISIBLE
         }
     }
@@ -1640,7 +1642,9 @@ class CountyLevelFragment : DialogFragment(),
                             "Missing or incomplete market details",
                             "Kindly fill out a market or the incomplete market details"
                         )
-                        countyLevelQuestionnaire.marketTransactionItems.addAll(allMarketTransactionItems)
+                        countyLevelQuestionnaire.marketTransactionItems.addAll(
+                            allMarketTransactionItems
+                        )
 
                         populateMarketConfiguration()
                     } else {
@@ -5288,11 +5292,7 @@ class CountyLevelFragment : DialogFragment(),
             updateCompletedQuestionnaire()
         }
 
-        if (countyLevelQuestionnaire.lastQuestionnaireStep ==
-            Constants.SEASON_CALENDAR_STEP
-        ) {
-            saveIncompleteUnvalidatedSeasonsCalendar()
-        }
+        saveDrafts()
     }
 
     override fun onStop() {
@@ -5304,11 +5304,7 @@ class CountyLevelFragment : DialogFragment(),
             updateCompletedQuestionnaire()
         }
 
-        if (countyLevelQuestionnaire.lastQuestionnaireStep ==
-            Constants.SEASON_CALENDAR_STEP
-        ) {
-            saveIncompleteUnvalidatedSeasonsCalendar()
-        }
+        saveDrafts()
     }
 
 
@@ -6404,7 +6400,7 @@ class CountyLevelFragment : DialogFragment(),
         countyLevelQuestionnaire.marketTransactionItems.set(position, marketTransactionsItem)
     }
 
-    fun saveIncompleteUnvalidatedSeasonsCalendar() {
+    fun saveSeasonsCalendarAsDraft() {
         val draftSeasonsCalendar = LzSeasonsResponses()
         if (lzSeasonsResponses.dry.isNotEmpty()) {
             draftSeasonsCalendar.dry = lzSeasonsResponses.dry
@@ -7007,6 +7003,90 @@ class CountyLevelFragment : DialogFragment(),
         position: Int
     ) {
         cropProductionResponseItems.set(position, responseItem)
+    }
+
+
+    /* DRAFTS *************************************************************************************************************************************************************************************/
+
+    fun saveDrafts() {
+        if (countyLevelQuestionnaire.lastQuestionnaireStep == Constants.SEASON_CALENDAR_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.SEASON_CALENDAR_STEP
+            )
+        ) {
+            saveSeasonsCalendarAsDraft()
+        }
+
+        if (countyLevelQuestionnaire.lastQuestionnaireStep == Constants.WEALTH_GROUP_PERCENTAGES_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.WEALTH_GROUP_PERCENTAGES_STEP
+            )
+        ) {
+            saveWealthGroupPopulationDistributionAsDraft()
+        }
+    }
+
+    fun hasUserGoneBeyondCurrentQuestionnaireStep(currentStep: Int): Boolean {
+        for (step in countyLevelQuestionnaire.questionnaireCoveredSteps) {
+            if (step > currentStep) {
+                return true
+            }
+        }
+        return false
+    }
+
+    fun saveWealthGroupPopulationDistributionAsDraft() {
+        binding.apply {
+            locationAndPopulationLayout.apply {
+
+                val wealthGroupResponse = WealthGroupResponse(0.0,0.0,0.0,0.0)
+
+                if (etVerPoorResponse.text.toString().isNotEmpty()) {
+                    wealthGroupResponse.verPoorResponse = etVerPoorResponse.text.toString().toDouble()
+                }
+
+                if (etPoorResponse.text.toString().isNotEmpty()) {
+                    wealthGroupResponse.poorResponse = etPoorResponse.text.toString().toDouble()
+                }
+
+                if (etMediumResponse.text.toString().isNotEmpty()) {
+                    wealthGroupResponse.mediumResponse = etMediumResponse.text.toString().toDouble()
+                }
+
+                if (etBetterOffResponse.text.toString().isNotEmpty()) {
+                    wealthGroupResponse.betterOfResponse = etBetterOffResponse.text.toString().toDouble()
+                }
+
+                countyLevelQuestionnaire.draft.wealthGroupResponse = wealthGroupResponse
+
+            }
+        }
+    }
+
+    fun populateDraftWealthGroupPopulationDistribution() {
+        binding.apply {
+            locationAndPopulationLayout.apply {
+
+                countyLevelQuestionnaire.draft.wealthGroupResponse?.let {
+
+                    if (it.verPoorResponse != 0.0) {
+                        etVerPoorResponse.setText(it.verPoorResponse.toString())
+                    }
+
+                    if (it.poorResponse != 0.0) {
+                        etPoorResponse.setText(it.poorResponse.toString())
+                    }
+
+                    if (it.mediumResponse != 0.0) {
+                        etMediumResponse.setText(it.mediumResponse.toString())
+                    }
+
+                    if (it.betterOfResponse != 0.0) {
+                        etBetterOffResponse.setText(it.betterOfResponse.toString())
+                    }
+
+                }
+
+            }
+        }
     }
 
 }
