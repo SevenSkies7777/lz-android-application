@@ -413,6 +413,7 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeHazards() {
         binding.apply {
+            populateDraftHarzards()
             lzHazards.root.visibility = View.VISIBLE
         }
     }
@@ -5748,7 +5749,8 @@ class CountyLevelFragment : DialogFragment(),
             }
         }
 
-        countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses = cropProductionResponseItems
+        countyLevelQuestionnaire.lzCropProductionResponses.cropProductionResponses =
+            cropProductionResponseItems
     }
 
     fun prepareMarketTransactionsResponses() {
@@ -7051,6 +7053,14 @@ class CountyLevelFragment : DialogFragment(),
             saveHungerPatternsAsDraft()
         }
 
+        if (countyLevelQuestionnaire.lastQuestionnaireStep == Constants.HAZARDS_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.HAZARDS_STEP
+            )
+        ) {
+            saveHazardsAsDraft()
+        }
+
+
     }
 
     fun hasUserGoneBeyondCurrentQuestionnaireStep(currentStep: Int): Boolean {
@@ -7133,94 +7143,120 @@ class CountyLevelFragment : DialogFragment(),
                 val waterSourcesResponses = waterSourceResponses
 
                 if (riversWetSeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.rivers.wetSeasonPopulation = riversWetSeason.text.toString().toDouble()
+                    waterSourcesResponses.rivers.wetSeasonPopulation =
+                        riversWetSeason.text.toString().toDouble()
                 }
                 if (riversDrySeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.rivers.drySeasonPopulationResponse = riversDrySeason.text.toString().toDouble()
+                    waterSourcesResponses.rivers.drySeasonPopulationResponse =
+                        riversDrySeason.text.toString().toDouble()
                 }
 
                 if (traditionalRiversWellsWetSeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.traditionalRiversWells.wetSeasonPopulation = traditionalRiversWellsWetSeason.text.toString().toDouble()
+                    waterSourcesResponses.traditionalRiversWells.wetSeasonPopulation =
+                        traditionalRiversWellsWetSeason.text.toString().toDouble()
                 }
                 if (traditionalRiversWellsDrySeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.traditionalRiversWells.drySeasonPopulationResponse = traditionalRiversWellsDrySeason.text.toString().toDouble()
+                    waterSourcesResponses.traditionalRiversWells.drySeasonPopulationResponse =
+                        traditionalRiversWellsDrySeason.text.toString().toDouble()
                 }
 
                 if (naturalPondsWetSeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.naturalPonds.wetSeasonPopulation = naturalPondsWetSeason.text.toString().toDouble()
+                    waterSourcesResponses.naturalPonds.wetSeasonPopulation =
+                        naturalPondsWetSeason.text.toString().toDouble()
                 }
                 if (naturalPondsDrySeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.naturalPonds.drySeasonPopulationResponse = naturalPondsDrySeason.text.toString().toDouble()
+                    waterSourcesResponses.naturalPonds.drySeasonPopulationResponse =
+                        naturalPondsDrySeason.text.toString().toDouble()
                 }
 
                 if (pansAndDamsWetSeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.pansAndDams.wetSeasonPopulation = pansAndDamsWetSeason.text.toString().toDouble()
+                    waterSourcesResponses.pansAndDams.wetSeasonPopulation =
+                        pansAndDamsWetSeason.text.toString().toDouble()
                 }
                 if (pansAndDamsDrySeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.pansAndDams.drySeasonPopulationResponse = pansAndDamsDrySeason.text.toString().toDouble()
+                    waterSourcesResponses.pansAndDams.drySeasonPopulationResponse =
+                        pansAndDamsDrySeason.text.toString().toDouble()
                 }
 
                 if (shallowWellsWetSeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.shallowWells.wetSeasonPopulation = shallowWellsWetSeason.text.toString().toDouble()
+                    waterSourcesResponses.shallowWells.wetSeasonPopulation =
+                        shallowWellsWetSeason.text.toString().toDouble()
                 }
                 if (shallowWellsDrySeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.shallowWells.drySeasonPopulationResponse = shallowWellsDrySeason.text.toString().toDouble()
+                    waterSourcesResponses.shallowWells.drySeasonPopulationResponse =
+                        shallowWellsDrySeason.text.toString().toDouble()
                 }
 
                 if (boreHolesWetSeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.boreholes.wetSeasonPopulation = boreHolesWetSeason.text.toString().toDouble()
+                    waterSourcesResponses.boreholes.wetSeasonPopulation =
+                        boreHolesWetSeason.text.toString().toDouble()
                 }
                 if (boreHolesDrySeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.boreholes.drySeasonPopulationResponse = boreHolesDrySeason.text.toString().toDouble()
+                    waterSourcesResponses.boreholes.drySeasonPopulationResponse =
+                        boreHolesDrySeason.text.toString().toDouble()
                 }
 
                 if (springsWetSeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.springs.wetSeasonPopulation = springsWetSeason.text.toString().toDouble()
+                    waterSourcesResponses.springs.wetSeasonPopulation =
+                        springsWetSeason.text.toString().toDouble()
                 }
                 if (springsDrySeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.springs.drySeasonPopulationResponse = springsDrySeason.text.toString().toDouble()
+                    waterSourcesResponses.springs.drySeasonPopulationResponse =
+                        springsDrySeason.text.toString().toDouble()
                 }
 
                 if (lakesWetSeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.lakes.wetSeasonPopulation = lakesWetSeason.text.toString().toDouble()
+                    waterSourcesResponses.lakes.wetSeasonPopulation =
+                        lakesWetSeason.text.toString().toDouble()
                 }
                 if (lakesDrySeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.lakes.drySeasonPopulationResponse = lakesDrySeason.text.toString().toDouble()
+                    waterSourcesResponses.lakes.drySeasonPopulationResponse =
+                        lakesDrySeason.text.toString().toDouble()
                 }
 
                 if (rockCatchmentWetSeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.rockCatchments.wetSeasonPopulation = rockCatchmentWetSeason.text.toString().toDouble()
+                    waterSourcesResponses.rockCatchments.wetSeasonPopulation =
+                        rockCatchmentWetSeason.text.toString().toDouble()
                 }
                 if (rockCatchmentDrySeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.rockCatchments.drySeasonPopulationResponse = rockCatchmentDrySeason.text.toString().toDouble()
+                    waterSourcesResponses.rockCatchments.drySeasonPopulationResponse =
+                        rockCatchmentDrySeason.text.toString().toDouble()
                 }
 
                 if (pipedWaterWetSeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.pipedWater.wetSeasonPopulation = pipedWaterWetSeason.text.toString().toDouble()
+                    waterSourcesResponses.pipedWater.wetSeasonPopulation =
+                        pipedWaterWetSeason.text.toString().toDouble()
                 }
                 if (pipedWaterDrySeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.pipedWater.drySeasonPopulationResponse = pipedWaterDrySeason.text.toString().toDouble()
+                    waterSourcesResponses.pipedWater.drySeasonPopulationResponse =
+                        pipedWaterDrySeason.text.toString().toDouble()
                 }
 
                 if (waterTruckingWetSeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.waterTrucking.wetSeasonPopulation = waterTruckingWetSeason.text.toString().toDouble()
+                    waterSourcesResponses.waterTrucking.wetSeasonPopulation =
+                        waterTruckingWetSeason.text.toString().toDouble()
                 }
                 if (waterTruckingDrySeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.waterTrucking.drySeasonPopulationResponse = waterTruckingDrySeason.text.toString().toDouble()
+                    waterSourcesResponses.waterTrucking.drySeasonPopulationResponse =
+                        waterTruckingDrySeason.text.toString().toDouble()
                 }
 
                 if (roofCatchmentWetSeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.roofCatchments.wetSeasonPopulation = roofCatchmentWetSeason.text.toString().toDouble()
+                    waterSourcesResponses.roofCatchments.wetSeasonPopulation =
+                        roofCatchmentWetSeason.text.toString().toDouble()
                 }
                 if (roofCatchmentDrySeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.roofCatchments.drySeasonPopulationResponse = roofCatchmentDrySeason.text.toString().toDouble()
+                    waterSourcesResponses.roofCatchments.drySeasonPopulationResponse =
+                        roofCatchmentDrySeason.text.toString().toDouble()
                 }
 
                 if (othersWetSeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.others.wetSeasonPopulation = othersWetSeason.text.toString().toDouble()
+                    waterSourcesResponses.others.wetSeasonPopulation =
+                        othersWetSeason.text.toString().toDouble()
                 }
                 if (othersDrySeason.text.toString().isNotEmpty()) {
-                    waterSourcesResponses.others.drySeasonPopulationResponse = othersDrySeason.text.toString().toDouble()
+                    waterSourcesResponses.others.drySeasonPopulationResponse =
+                        othersDrySeason.text.toString().toDouble()
                 }
 
                 countyLevelQuestionnaire.draft.waterSourceResponses = waterSourcesResponses
@@ -7338,19 +7374,23 @@ class CountyLevelFragment : DialogFragment(),
         binding.apply {
             lzHungerPatterns.apply {
 
-                var hungerPatternsResponses = HungerPatternsResponses(0.0,0.0,0.0,0.0)
+                var hungerPatternsResponses = HungerPatternsResponses(0.0, 0.0, 0.0, 0.0)
 
                 if (etLongRainsHungerPeriod.text.toString().isNotEmpty()) {
-                    hungerPatternsResponses.longRainsPeriod = etLongRainsHungerPeriod.text.toString().toDouble()
+                    hungerPatternsResponses.longRainsPeriod =
+                        etLongRainsHungerPeriod.text.toString().toDouble()
                 }
                 if (etEndLongBeginShortRainsHungerPeriod.text.toString().isNotEmpty()) {
-                    hungerPatternsResponses.endLongBeginShort = etEndLongBeginShortRainsHungerPeriod.text.toString().toDouble()
+                    hungerPatternsResponses.endLongBeginShort =
+                        etEndLongBeginShortRainsHungerPeriod.text.toString().toDouble()
                 }
                 if (etShortRainsHungerPeriod.text.toString().isNotEmpty()) {
-                    hungerPatternsResponses.shortRainsPeriod = etShortRainsHungerPeriod.text.toString().toDouble()
+                    hungerPatternsResponses.shortRainsPeriod =
+                        etShortRainsHungerPeriod.text.toString().toDouble()
                 }
                 if (etEndShortBeginLongRainsHungerPeriod.text.toString().isNotEmpty()) {
-                    hungerPatternsResponses.endShortBeginLong = etEndShortBeginLongRainsHungerPeriod.text.toString().toDouble()
+                    hungerPatternsResponses.endShortBeginLong =
+                        etEndShortBeginLongRainsHungerPeriod.text.toString().toDouble()
                 }
 
                 countyLevelQuestionnaire.draft.hungerPatternsResponses = hungerPatternsResponses
@@ -7379,6 +7419,316 @@ class CountyLevelFragment : DialogFragment(),
                     }
                 }
 
+            }
+        }
+    }
+
+    fun saveHazardsAsDraft() {
+        binding.apply {
+            lzHazards.apply {
+
+                val hazardResponse = this@CountyLevelFragment.hazardResponses
+
+                if (animalRustlingNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.animalRustling.noExperiencedYears =
+                        animalRustlingNoOfYears.text.toString().toDouble()
+                }
+                if (banditryNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.banditry.noExperiencedYears =
+                        banditryNoOfYears.text.toString().toDouble()
+                }
+                if (terrorismNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.terrorism.noExperiencedYears =
+                        terrorismNoOfYears.text.toString().toDouble()
+                }
+                if (ethicConflictNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.ethnicConflict.noExperiencedYears =
+                        ethicConflictNoOfYears.text.toString().toDouble()
+                }
+                if (politicalViolenceNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.politicalViolence.noExperiencedYears =
+                        politicalViolenceNoOfYears.text.toString().toDouble()
+                }
+                if (droughtNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.drought.noExperiencedYears =
+                        droughtNoOfYears.text.toString().toDouble()
+                }
+                if (pestAndDiseaseNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.livestockPestsAndDiseases.noExperiencedYears =
+                        pestAndDiseaseNoOfYears.text.toString().toDouble()
+                }
+                if (hailstormsOrFrostNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.hailstormsOrFrost.noExperiencedYears =
+                        hailstormsOrFrostNoOfYears.text.toString().toDouble()
+                }
+                if (floodingNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.flooding.noExperiencedYears =
+                        floodingNoOfYears.text.toString().toDouble()
+                }
+                if (landslidesNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.landslides.noExperiencedYears =
+                        landslidesNoOfYears.text.toString().toDouble()
+                }
+                if (windsOrCycloneNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.highWindsOrCyclones.noExperiencedYears =
+                        windsOrCycloneNoOfYears.text.toString().toDouble()
+                }
+                if (bushFiresNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.bushFires.noExperiencedYears =
+                        bushFiresNoOfYears.text.toString().toDouble()
+                }
+                if (cropPestsNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.cropPests.noExperiencedYears =
+                        cropPestsNoOfYears.text.toString().toDouble()
+                }
+                if (locustInvasionNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.locustInvasion.noExperiencedYears =
+                        locustInvasionNoOfYears.text.toString().toDouble()
+                }
+                if (cropDiseasesNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.cropDiseases.noExperiencedYears =
+                        cropDiseasesNoOfYears.text.toString().toDouble()
+                }
+                if (terminalIllnessNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.terminalIllnesses.noExperiencedYears =
+                        terminalIllnessNoOfYears.text.toString().toDouble()
+                }
+                if (malariaOutbreakNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.malariaPowerOutBreak.noExperiencedYears =
+                        malariaOutbreakNoOfYears.text.toString().toDouble()
+                }
+                if (waterBorneDiseaseNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.waterBornDiseases.noExperiencedYears =
+                        waterBorneDiseaseNoOfYears.text.toString().toDouble()
+                }
+                if (humanWildlifeConflictNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.humanWildlifeConflict.noExperiencedYears =
+                        humanWildlifeConflictNoOfYears.text.toString().toDouble()
+                }
+                if (highFoodPriceNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.highFoodPrices.noExperiencedYears =
+                        highFoodPriceNoOfYears.text.toString().toDouble()
+                }
+                if (foodShortageNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.marketFoodShortages.noExperiencedYears =
+                        foodShortageNoOfYears.text.toString().toDouble()
+                }
+                if (drinkingWaterShortageNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.drinkingWaterShortages.noExperiencedYears =
+                        drinkingWaterShortageNoOfYears.text.toString().toDouble()
+                }
+                if (invasivePlantsNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.invasivePlants.noExperiencedYears =
+                        invasivePlantsNoOfYears.text.toString().toDouble()
+                }
+                if (othersNoOfYears.text.toString().isNotEmpty()) {
+                    hazardResponse.others.noExperiencedYears =
+                        othersNoOfYears.text.toString().toDouble()
+                }
+
+                countyLevelQuestionnaire.draft.hazardResponses = hazardResponse
+
+            }
+        }
+    }
+
+    fun populateDraftHarzards() {
+        binding.apply {
+            lzHazards.apply {
+
+                countyLevelQuestionnaire.draft.hazardResponses?.let {
+
+                    val hazardResponses = it
+                    this@CountyLevelFragment.hazardResponses = it
+
+                    if (hazardResponses.animalRustling.noExperiencedYears != 0.0) {
+                        animalRustlingNoOfYears.setText(hazardResponses.animalRustling.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.banditry.noExperiencedYears != 0.0) {
+                        banditryNoOfYears.setText(hazardResponses.banditry.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.terrorism.noExperiencedYears != 0.0) {
+                        terrorismNoOfYears.setText(hazardResponses.terrorism.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.ethnicConflict.noExperiencedYears != 0.0) {
+                        ethicConflictNoOfYears.setText(hazardResponses.ethnicConflict.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.politicalViolence.noExperiencedYears != 0.0) {
+                        politicalViolenceNoOfYears.setText(hazardResponses.politicalViolence.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.drought.noExperiencedYears != 0.0) {
+                        droughtNoOfYears.setText(hazardResponses.drought.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.livestockPestsAndDiseases.noExperiencedYears != 0.0) {
+                        pestAndDiseaseNoOfYears.setText(hazardResponses.livestockPestsAndDiseases.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.hailstormsOrFrost.noExperiencedYears != 0.0) {
+                        hailstormsOrFrostNoOfYears.setText(hazardResponses.hailstormsOrFrost.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.flooding.noExperiencedYears != 0.0) {
+                        floodingNoOfYears.setText(hazardResponses.flooding.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.landslides.noExperiencedYears != 0.0) {
+                        landslidesNoOfYears.setText(hazardResponses.landslides.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.highWindsOrCyclones.noExperiencedYears != 0.0) {
+                        windsOrCycloneNoOfYears.setText(hazardResponses.highWindsOrCyclones.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.bushFires.noExperiencedYears != 0.0) {
+                        bushFiresNoOfYears.setText(hazardResponses.bushFires.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.cropPests.noExperiencedYears != 0.0) {
+                        cropPestsNoOfYears.setText(hazardResponses.cropPests.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.locustInvasion.noExperiencedYears != 0.0) {
+                        locustInvasionNoOfYears.setText(hazardResponses.locustInvasion.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.cropDiseases.noExperiencedYears != 0.0) {
+                        cropDiseasesNoOfYears.setText(hazardResponses.cropDiseases.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.terminalIllnesses.noExperiencedYears != 0.0) {
+                        terminalIllnessNoOfYears.setText(hazardResponses.terminalIllnesses.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.malariaPowerOutBreak.noExperiencedYears != 0.0) {
+                        malariaOutbreakNoOfYears.setText(hazardResponses.malariaPowerOutBreak.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.waterBornDiseases.noExperiencedYears != 0.0) {
+                        waterBorneDiseaseNoOfYears.setText(hazardResponses.waterBornDiseases.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.humanWildlifeConflict.noExperiencedYears != 0.0) {
+                        humanWildlifeConflictNoOfYears.setText(hazardResponses.humanWildlifeConflict.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.highFoodPrices.noExperiencedYears != 0.0) {
+                        highFoodPriceNoOfYears.setText(hazardResponses.highFoodPrices.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.marketFoodShortages.noExperiencedYears != 0.0) {
+                        foodShortageNoOfYears.setText(hazardResponses.marketFoodShortages.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.drinkingWaterShortages.noExperiencedYears != 0.0) {
+                        drinkingWaterShortageNoOfYears.setText(hazardResponses.drinkingWaterShortages.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.invasivePlants.noExperiencedYears != 0.0) {
+                        invasivePlantsNoOfYears.setText(hazardResponses.invasivePlants.noExperiencedYears.toString())
+                    }
+
+                    if (hazardResponses.others.noExperiencedYears != 0.0) {
+                        othersNoOfYears.setText(hazardResponses.others.noExperiencedYears.toString())
+                    }
+
+
+
+                    if (hazardResponses.animalRustling.importanceRank != -1) {
+                        animalRustlingRank.text =
+                            hazardResponses.animalRustling.importanceRank.toString()
+                    }
+                    if (hazardResponses.banditry.importanceRank != -1) {
+                        banditryRank.text = hazardResponses.banditry.importanceRank.toString()
+                    }
+                    if (hazardResponses.terrorism.importanceRank != -1) {
+                        terrorismRank.text = hazardResponses.terrorism.importanceRank.toString()
+                    }
+                    if (hazardResponses.ethnicConflict.importanceRank != -1) {
+                        ethicConflictRank.text =
+                            hazardResponses.ethnicConflict.importanceRank.toString()
+                    }
+                    if (hazardResponses.politicalViolence.importanceRank != -1) {
+                        politicalViolenceRank.text =
+                            hazardResponses.politicalViolence.importanceRank.toString()
+                    }
+                    if (hazardResponses.drought.importanceRank != -1) {
+                        droughtRank.text = hazardResponses.drought.importanceRank.toString()
+                    }
+                    if (hazardResponses.livestockPestsAndDiseases.importanceRank != -1) {
+                        pestAndDiseaseRank.text =
+                            hazardResponses.livestockPestsAndDiseases.importanceRank.toString()
+                    }
+                    if (hazardResponses.hailstormsOrFrost.importanceRank != -1) {
+                        hailstormsOrFrostRank.text =
+                            hazardResponses.hailstormsOrFrost.importanceRank.toString()
+                    }
+                    if (hazardResponses.flooding.importanceRank != -1) {
+                        floodingRank.text = hazardResponses.flooding.importanceRank.toString()
+                    }
+                    if (hazardResponses.landslides.importanceRank != -1) {
+                        landslidesRank.text = hazardResponses.landslides.importanceRank.toString()
+                    }
+                    if (hazardResponses.highWindsOrCyclones.importanceRank != -1) {
+                        windsOrCycloneRank.text =
+                            hazardResponses.highWindsOrCyclones.importanceRank.toString()
+                    }
+                    if (hazardResponses.bushFires.importanceRank != -1) {
+                        bushFiresRank.text = hazardResponses.bushFires.importanceRank.toString()
+                    }
+                    if (hazardResponses.cropPests.importanceRank != -1) {
+                        cropPestsRank.text = hazardResponses.cropPests.importanceRank.toString()
+                    }
+                    if (hazardResponses.locustInvasion.importanceRank != -1) {
+                        locustInvasionRank.text =
+                            hazardResponses.locustInvasion.importanceRank.toString()
+                    }
+                    if (hazardResponses.cropDiseases.importanceRank != -1) {
+                        cropDiseasesRank.text =
+                            hazardResponses.cropDiseases.importanceRank.toString()
+                    }
+                    if (hazardResponses.terminalIllnesses.importanceRank != -1) {
+                        terminalIllnessRank.text =
+                            hazardResponses.terminalIllnesses.importanceRank.toString()
+                    }
+                    if (hazardResponses.malariaPowerOutBreak.importanceRank != -1) {
+                        malariaOutbreakRank.text =
+                            hazardResponses.malariaPowerOutBreak.importanceRank.toString()
+                    }
+                    if (hazardResponses.waterBornDiseases.importanceRank != -1) {
+                        waterBorneDiseaseRank.text =
+                            hazardResponses.waterBornDiseases.importanceRank.toString()
+                    }
+                    if (hazardResponses.humanWildlifeConflict.importanceRank != -1) {
+                        humanWildlifeConflictRank.text =
+                            hazardResponses.humanWildlifeConflict.importanceRank.toString()
+                    }
+                    if (hazardResponses.highFoodPrices.importanceRank != -1) {
+                        highFoodPriceRank.text =
+                            hazardResponses.highFoodPrices.importanceRank.toString()
+                    }
+                    if (hazardResponses.marketFoodShortages.importanceRank != -1) {
+                        foodShortageRank.text =
+                            hazardResponses.marketFoodShortages.importanceRank.toString()
+                    }
+                    if (hazardResponses.drinkingWaterShortages.importanceRank != -1) {
+                        drinkingWaterShortageRank.text =
+                            hazardResponses.drinkingWaterShortages.importanceRank.toString()
+                    }
+                    if (hazardResponses.invasivePlants.importanceRank != -1) {
+                        invasivePlantsRank.text =
+                            hazardResponses.invasivePlants.importanceRank.toString()
+                    }
+                    if (hazardResponses.others.importanceRank != -1) {
+                        othersRank.text = hazardResponses.others.importanceRank.toString()
+                    }
+
+                }
             }
         }
     }

@@ -12,4 +12,6 @@ class CountyLevelDraft {
     var waterSourceResponses: WaterSourcesResponses? = null
 
     var hungerPatternsResponses: HungerPatternsResponses? = null
+
+    var hazardResponses: HazardResponses? = null
 }
