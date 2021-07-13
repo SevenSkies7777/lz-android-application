@@ -18,7 +18,7 @@ class CountyLevelQuestionnaire(val uniqueId: String, var questionnaireName: Stri
 
     var countyLivelihoodZones: MutableList<LivelihoodZoneModel> = ArrayList()
 
-    lateinit var wealthGroupCharectariticsResponses: WealthGroupCharectaristicsResponses
+    var wealthGroupCharectariticsResponses = WealthGroupCharectaristicsResponses()
 
     var livelihoodZoneCrops: MutableList<CropModel> = ArrayList()
 

@@ -14,4 +14,6 @@ class CountyLevelDraft {
     var hungerPatternsResponses: HungerPatternsResponses? = null
 
     var hazardResponses: HazardResponses? = null
+
+    var wealthGroupCharectariticsResponses: WealthGroupCharectaristicsResponses? = null
 }

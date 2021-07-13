@@ -333,6 +333,7 @@ class CountyLevelFragment : DialogFragment(),
 
     fun resumeZoneWealthGroupCharectaristics() {
         binding.apply {
+            populateWealthGroupCharacteristics()
             wealthGroupCharectaristics.root.visibility = View.VISIBLE
             wealthGroupCharectaristics.apply {
 
@@ -902,6 +903,8 @@ class CountyLevelFragment : DialogFragment(),
 
                         countyLevelQuestionnaire.lastQuestionnaireStep =
                             Constants.WEALTH_GROUP_PERCENTAGES_STEP
+
+                        countyLevelQuestionnaire.draft.wealthGroupCharectariticsResponses = null
 
                         if (!doesStepExist(
                                 Constants.WEALTH_GROUP_PERCENTAGES_STEP,
@@ -6662,8 +6665,15 @@ class CountyLevelFragment : DialogFragment(),
                 poorList.removeAllViews()
                 mediumList.removeAllViews()
                 betterOffList.removeAllViews()
+
                 wealthGroupCharectaristicsResponses =
                     countyLevelQuestionnaire.wealthGroupCharectariticsResponses
+
+                if (wealthGroupCharectaristicsResponses != null && wealthGroupCharectaristicsResponses.veryPoorCharectaristics.isEmpty() && wealthGroupCharectaristicsResponses.poorCharectaristics.isEmpty() && wealthGroupCharectaristicsResponses.mediumCharectaristics.isEmpty() && wealthGroupCharectaristicsResponses.betterOffCharectaristics.isEmpty()) {
+                    countyLevelQuestionnaire.draft.wealthGroupCharectariticsResponses?.let {
+                        wealthGroupCharectaristicsResponses = it
+                    }
+                }
                 /* Populate very poor characteristics */
                 val veryPoorCharacteristics: MutableList<String> =
                     wealthGroupCharectaristicsResponses.veryPoorCharectaristics
@@ -7060,6 +7070,12 @@ class CountyLevelFragment : DialogFragment(),
             saveHazardsAsDraft()
         }
 
+        if (countyLevelQuestionnaire.lastQuestionnaireStep == Constants.WEALTH_GROUP_CHARACTERISTICS_STEP && !hasUserGoneBeyondCurrentQuestionnaireStep(
+                Constants.WEALTH_GROUP_CHARACTERISTICS_STEP
+            )
+        ) {
+            saveWealthGroupCharacteristicsAsDraft()
+        }
 
     }
 
@@ -7729,6 +7745,54 @@ class CountyLevelFragment : DialogFragment(),
                     }
 
                 }
+            }
+        }
+    }
+
+    fun saveWealthGroupCharacteristicsAsDraft() {
+        binding.apply {
+            wealthGroupCharectaristics.apply {
+
+                val wealthGroupCharectaristicsResponses = WealthGroupCharectaristicsResponses()
+
+                for (currentEditText in veryPoorList.children) {
+                    val currentString = (currentEditText as EditText).text.toString()
+                    if (currentString.trim().isNotEmpty()) {
+                        wealthGroupCharectaristicsResponses.veryPoorCharectaristics.add(
+                            currentString
+                        )
+                    }
+                }
+
+                for (currentEditText in poorList.children) {
+                    val currentString = (currentEditText as EditText).text.toString()
+                    if (currentString.trim().isNotEmpty()) {
+                        wealthGroupCharectaristicsResponses.poorCharectaristics.add(
+                            currentString
+                        )
+                    }
+                }
+
+                for (currentEditText in mediumList.children) {
+                    val currentString = (currentEditText as EditText).text.toString()
+                    if (currentString.trim().isNotEmpty()) {
+                        wealthGroupCharectaristicsResponses.mediumCharectaristics.add(
+                            currentString
+                        )
+                    }
+                }
+
+                for (currentEditText in betterOffList.children) {
+                    val currentString = (currentEditText as EditText).text.toString()
+                    if (currentString.trim().isNotEmpty()) {
+                        wealthGroupCharectaristicsResponses.betterOffCharectaristics.add(
+                            currentString
+                        )
+                    }
+                }
+
+                countyLevelQuestionnaire.draft.wealthGroupCharectariticsResponses =
+                    wealthGroupCharectaristicsResponses
             }
         }
     }
